@@ -2,7 +2,7 @@
 
 Optimization Script by 1 click.  
 Last tested on Windows 10 2004 64bit.  
-Personally used by me :)  
+Personally used by me on Win 10 21H1 :)  
 
 ## What it does 
 
