@@ -15,7 +15,7 @@ Personally used by me :)
 <li>Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
 <li>SmartScreen Filter for Store Apps: Disable</li>  
 <li>Let websites provide locally...</li>  
-<li><li>Send Microsoft info about how I write to help us improve typing and writing in the future</li>  
+<li>Send Microsoft info about how I write to help us improve typing and writing in the future</li>  
 <li>Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)</li>  
 <li>Prevents sending contacts to MS (so Cortana can compare speech etc samples)</li>  
 <li>Microsoft Edge settings</li>  
