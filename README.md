@@ -4,6 +4,8 @@ Optimization Script by 1 click.
 Last tested on Windows 10 2004 64bit.  
 Personally used by me on Win 10 21H1 :)  
 
+It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw  
+
 ## What it does 
 
 **Every part of .bat script has a comment.**
