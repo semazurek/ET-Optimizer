@@ -25,10 +25,10 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>WiFi Sense: HotSpot Sharing: Disable</li>  
 <li>WiFi Sense: Shared HotSpot Auto-Connect: Disable</li>  
 <li>Change Windows Updates to "Notify to schedule restart"</li>  
-<li>Disable P2P Update downlods outside of local network</li>  
+<li>Disable P2P Update downloads outside of local network</li>  
 <li>Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for</li>   
 <li>Disable MRU lists (jump lists) of XAML apps in Start Menu</li>   
-<li>Windows Explorer to start on This PC instead of Quick Access </li>  
+<li>Windows Explorer on start on This PC instead of Quick Access </li>  
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
 <li>3DBuilder</li>  
