@@ -208,6 +208,10 @@ TASKKILL /F /IM explorer.exe
 ping localhost -n 1 > nul
 start explorer.exe
 
+REM - Setting power option to high for best performance
+powercfg -setactive scheme_min
+EXIT
+
 REM - Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE
 EXIT.
 
