@@ -101,7 +101,7 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>WindowsMaps</li>  
 <li>Sway</li>  
 <li>CommsPhone</li>  
-<li>onnectivityStore</li>  
+<li>ConnectivityStore</li>  
 <li>Microsoft.Messaging</li>  
 <li>Twitter</li>  
 <li>Drawboard PDF</li>  
