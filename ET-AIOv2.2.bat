@@ -188,9 +188,21 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 REM - Disable Transparency in taskbar, menu start etc (Build1006+ not sure work need reboot)
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f
 
-REM - Disable windows, menu Start animations.
+REM - Disable windows animations, menu Start animations.
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects /v VisualFXSetting  /t REG_DWORD /d 3 /f 
+
 REG ADD "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012078010000000 /f
 REG ADD "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f
+
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax /v DefaultApplied  /t REG_DWORD /d 0 /f 
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation /v DefaultApplied  /t REG_DWORD /d 0 /f 
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations /v DefaultApplied  /t REG_DWORD /d 0 /f 
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation /v DefaultApplied  /t REG_DWORD /d 0 /f 
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimation /v DefaultApplied  /t REG_DWORD /d 0 /f 
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation /v DefaultApplied  /t REG_DWORD /d 0 /f 
+
+REM - Disable Edge WebWidget 
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v WebWidgetAllowed /t REG_DWORD /d 0 /f
 
 REM - Uninstall OneDrive 
 echo Unistalling OneDrive
