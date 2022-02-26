@@ -112,6 +112,3 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Uninstall OneDrive </li>  
 <li>Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE needed to delete EXIT line.</li>  
 </ul>
-| Tabele        | są                  | fajne |
-| ------------- |:-------------------:| -----:|
-| kol 3 jest    | wyrównana do prawej | $1600 |
