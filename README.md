@@ -1,6 +1,5 @@
 # ET Optimization Script
-
-<img src="https://user-images.githubusercontent.com/85984736/155862483-f744fd0b-828b-412c-b733-6c15bf68ab54.png" style="transform: scale(-1)" />
+![image](https://user-images.githubusercontent.com/85984736/155862589-48ee5537-9388-40bd-bfb8-351d45754130.png)
 
 Optimization & Privacy fix script by 1 click.  
 Last tested/updated on Windows 10 Home 21H2  & Windows 11 Enterprise 21H2 
