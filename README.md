@@ -112,4 +112,6 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE needed to delete EXIT line.</li>  
 </ul>
 
+<p align="center">
 ![ET](https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png)
+</p>
