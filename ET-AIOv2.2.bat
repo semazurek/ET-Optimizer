@@ -22,7 +22,7 @@ sc config SCPolicySvc start= demand
 sc config RemoteAccess start= disabled
 sc config fax start= disabled
 sc config XblGameSave start= demand
-sc config wuauserv start= demand
+sc config wuauserv start= demandau
 sc config PhoneSvc start= demand
 sc config lmhosts start= demand
 sc config gupdate start= demand
@@ -106,6 +106,7 @@ cls
 REM Remove Bloatware Apps (Preinstalled)
 echo Removing Bloatware Apps (Preinstalled)
 PowerShell -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage *Automate* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Appconnector* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Microsoft3DViewer* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *MicrosoftPowerBIForWindows* | Remove-AppxPackage"
@@ -190,9 +191,6 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v Ena
 REM - Disable windows, menu Start animations.
 REG ADD "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012078010000000 /f
 REG ADD "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f
-
-REM - Disable Action Center (taskbar notification center)
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\Current\Version\ImmersiveShell" /v UseActionCenterExperience /t REG_DWORD /d 0 /f
 
 REM - Uninstall OneDrive 
 echo Unistalling OneDrive
