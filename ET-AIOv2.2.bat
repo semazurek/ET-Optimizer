@@ -355,7 +355,7 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\T
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f 
 
 REM - Disable Edge WebWidget 
-REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge /v WebWidgetAllowed /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v WebWidgetAllowed /t REG_DWORD /d 0 /f
 
 REM - Uninstall OneDrive 
 echo Unistalling OneDrive
