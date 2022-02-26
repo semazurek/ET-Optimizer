@@ -93,7 +93,6 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>MicrosoftOfficeHub</li>  
 <li>OneNote</li>  
 <li>WindowsPhone</li>  
-<li>photos</li>  
 <li>SkypeApp</li>  
 <li>solit</li>  
 <li>windowscommunicationsapps</li>  
