@@ -1,8 +1,7 @@
 # EasyTool-Batch-Win10
 
 Optimization Script by 1 click.  
-Last tested on Windows 10 21H2 (X64)
-Personally used by me on Win 10 21H1
+Last tested on Windows 10 Home 21H2  & Windows 11 21H2 
 
 It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw  
 
