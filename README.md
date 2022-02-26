@@ -105,7 +105,7 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Drawboard PDF</li>  
 </ul>
 <li>Show file extensions in Explorer</li>  
-<li>Disable Transparency in taskbar, menu start etc (Build1006+ not sure work need reboot)</li>  
+<li>Disable Transparency in taskbar, menu start etc. </li>  
 <li>Disable Edge Web Widget</li>
 <li>Disable windows, menu Start animations.</li>  
 <li>Uninstall OneDrive </li>  
