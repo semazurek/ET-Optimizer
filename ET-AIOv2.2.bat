@@ -6,7 +6,7 @@ pause > nul
 exit.
 
 :Start
-
+title E.T. ver 2.2
 REM Disable Some Service 
 
 sc config DiagTrack start= disabled
@@ -106,83 +106,236 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 
 cls
 
+goto Skiper
+
 REM Remove Bloatware Apps (Preinstalled)
-echo Removing Bloatware Apps (Preinstalled)
+echo Removing Bloatware Apps (Preinstalled)  [1/75]
 PowerShell -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [2/75]
+
 PowerShell -Command "Get-AppxPackage *Automate* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [3/75]
+
 PowerShell -Command "Get-AppxPackage *Appconnector* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [4/75]
+
 PowerShell -Command "Get-AppxPackage *Microsoft3DViewer* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [5/75]
+
 PowerShell -Command "Get-AppxPackage *MicrosoftPowerBIForWindows* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [6/75]
+
 PowerShell -Command "Get-AppxPackage *Print3D* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [7/75]
+
 PowerShell -Command "Get-AppxPackage *XboxApp* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [8/75]
+
 PowerShell -Command "Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [9/75]
+
 PowerShell -Command "Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [10/75]
+
 PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [11/75]
+
 PowerShell -Command "Get-AppxPackage *GetHelp* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [12/75]
+
 PowerShell -Command "Get-AppxPackage *WindowsFeedbackHub* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [13/75]
+
 PowerShell -Command "Get-AppxPackage *BingFoodAndDrink* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [14/75]
+
 PowerShell -Command "Get-AppxPackage *BingHealthAndFitness* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [15/75]
+
 PowerShell -Command "Get-AppxPackage *BingTravel* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [16/75]
+
 PowerShell -Command "Get-AppxPackage *WindowsReadingList* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [17/75]
+
 PowerShell -Command "Get-AppxPackage *MixedReality.Portal* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [18/75]
+
 PowerShell -Command "Get-AppxPackage *ScreenSketch* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [19/75]
+
 PowerShell -Command "Get-AppxPackage *YourPhone* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [20/75]
+
 PowerShell -Command "Get-AppxPackage *PicsArt-PhotoStudio* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [21/75]
+
 PowerShell -Command "Get-AppxPackage *EclipseManager* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [22/75]
+
 PowerShell -Command "Get-AppxPackage *Netflix* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [23/75]
+
 PowerShell -Command "Get-AppxPackage *PolarrPhotoEditorAcademicEdition* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [24/75]
+
 PowerShell -Command "Get-AppxPackage *Wunderlist* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [25/75]
+
 PowerShell -Command "Get-AppxPackage *LinkedInforWindows* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [26/75]
+
 PowerShell -Command "Get-AppxPackage *AutodeskSketchBook* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [27/75]
+
 PowerShell -Command "Get-AppxPackage *Twitter* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [28/75]
+
 PowerShell -Command "Get-AppxPackage *DisneyMagicKingdoms* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [29/75]
+
 PowerShell -Command "Get-AppxPackage *MarchofEmpires* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [30/75]
+
 PowerShell -Command "Get-AppxPackage *ActiproSoftwareLLC* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [31/75]
+
 PowerShell -Command "Get-AppxPackage *Plex* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [32/75]
+
 PowerShell -Command "Get-AppxPackage *iHeartRadio* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [33/75]
+
 PowerShell -Command "Get-AppxPackage *FarmVille2CountryEscape* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [34/75]
+
 PowerShell -Command "Get-AppxPackage *Duolingo* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [35/75]
+
 PowerShell -Command "Get-AppxPackage *CyberLinkMediaSuiteEssentials* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [36/75]
+
 PowerShell -Command "Get-AppxPackage *DolbyAccess* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [37/75]
+
 PowerShell -Command "Get-AppxPackage *DrawboardPDF* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [38/75]
+
 PowerShell -Command "Get-AppxPackage *Facebook* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [39/75]
+
 PowerShell -Command "Get-AppxPackage *FitbitCoach* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [40/75]
+
 PowerShell -Command "Get-AppxPackage *Flipboard* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [41/75]
+
 PowerShell -Command "Get-AppxPackage *Asphalt8Airborne* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [42/75]
+
 PowerShell -Command "Get-AppxPackage *Keeper* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [43/75]
+
 PowerShell -Command "Get-AppxPackage *BingNews* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [44/75]
+
 PowerShell -Command "Get-AppxPackage *COOKINGFEVER* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [45/75]
+
 PowerShell -Command "Get-AppxPackage *PandoraMediaInc* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [46/75]
+
 PowerShell -Command "Get-AppxPackage *CaesarsSlotsFreeCasino* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [47/75]
+
 PowerShell -Command "Get-AppxPackage *Shazam* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [48/75]
+
 PowerShell -Command "Get-AppxPackage *SpotifyMusic* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [49/75]
+
 PowerShell -Command "Get-AppxPackage *PhototasticCollage* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [50/75]
+
 PowerShell -Command "Get-AppxPackage *TuneInRadio* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [51/75]
+
 PowerShell -Command "Get-AppxPackage *WinZipUniversal* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [52/75]
+
 PowerShell -Command "Get-AppxPackage *XING* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [53/75]
+
 PowerShell -Command "Get-AppxPackage *RoyalRevolt2* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [54/75]
+
 PowerShell -Command "Get-AppxPackage *CandyCrushSodaSaga* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [55/75]
+
 PowerShell -Command "Get-AppxPackage *BubbleWitch3Saga* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [56/75]
+
 PowerShell -Command "Get-AppxPackage *CandyCrushSaga* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [57/75]
+
 PowerShell -Command "Get-AppxPackage *Getstarted* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [58/75]
+
 PowerShell -Command "Get-AppxPackage *WindowsAlarms* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [59/75]
+
 PowerShell -Command "Get-AppxPackage *bing* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [60/75]
+
 PowerShell -Command "Get-AppxPackage *MicrosoftOfficeHub* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [61/75]
+
 PowerShell -Command "Get-AppxPackage *OneNote* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [62/75]
+
 PowerShell -Command "Get-AppxPackage *WindowsPhone* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [63/75]
+
 PowerShell -Command "Get-AppxPackage *SkypeApp* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [64/75]
+
 PowerShell -Command "Get-AppxPackage *solit* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [65/75]
+
 PowerShell -Command "Get-AppxPackage *windowscommunicationsapps* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [66/75]
+
 PowerShell -Command "Get-AppxPackage *zune* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [67/75]
+
 PowerShell -Command "Get-AppxPackage *WindowsMaps* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [68/75]
+
 PowerShell -Command "Get-AppxPackage *Sway* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [69/75]
+
 PowerShell -Command "Get-AppxPackage *CommsPhone* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [70/75]
+
 PowerShell -Command "Get-AppxPackage *ConnectivityStore* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [71/75]
+
 PowerShell -Command "Get-AppxPackage *Microsoft.Messaging* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [72/75]
+
 PowerShell -Command "Get-AppxPackage *Facebook* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [73/75]
+
 PowerShell -Command "Get-AppxPackage *Twitter* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [74/75]
+
 PowerShell -Command "Get-AppxPackage *Drawboard PDF* | Remove-AppxPackage"
+ echo Removing Bloatware Apps (Preinstalled)  [75/75]
+
 PowerShell -Command "Get-AppxPackage *Hotspot* | Remove-AppxPackage"
+
+
+:Skiper
 
 cls
 
@@ -191,7 +344,7 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 
 REM - Disable Transparency in taskbar, menu start etc
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WIndows\CurrentVersion\Explorer\Advanced /v UseOLEDTaskbarTransparency /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\WIndows\CurrentVersion\Explorer\Advanced" /v UseOLEDTaskbarTransparency /t REG_DWORD /d 1 /f
 
 REM - Disable windows animations, menu Start animations.
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects /v VisualFXSetting  /t REG_DWORD /d 3 /f 
