@@ -1,4 +1,4 @@
-# EasyTool-Batch-Win10
+# EasyTool (Script)  
 
 Optimization Script by 1 click.  
 Last tested on Windows 10 Home 21H2  & Windows 11 Enterprise 21H2 
