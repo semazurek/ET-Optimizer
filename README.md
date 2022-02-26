@@ -31,7 +31,8 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Windows Explorer on start on This PC instead of Quick Access </li>  
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
-<li>3DBuilder</li>  <li>Appconnector</li>  
+<li>3DBuilder</li>  
+<li>Appconnector</li>  
 <li>Microsoft3DViewer</li>  
 <li>MicrosoftPowerBIForWindows</li>  
 <li>Print3D</li>  
