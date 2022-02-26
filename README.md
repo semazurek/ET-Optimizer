@@ -32,6 +32,9 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Windows Explorer on start on This PC instead of Quick Access </li>  
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
+  | Tabele        | są                  | fajne |
+| ------------- |:-------------------:| -----:|
+| kol 3 jest    | wyrównana do prawej | $1600 |
 <li>3DBuilder</li>  
 <li>Appconnector</li>  
 <li>Microsoft3DViewer</li>  
