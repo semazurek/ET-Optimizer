@@ -1,5 +1,4 @@
 # ET Optimization Script
-![image](https://user-images.githubusercontent.com/85984736/155862589-48ee5537-9388-40bd-bfb8-351d45754130.png)
 
 Optimization & Privacy fix script by 1 click.  
 Last tested/updated on Windows 10 Home 21H2  & Windows 11 Enterprise 21H2 
