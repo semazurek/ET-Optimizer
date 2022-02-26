@@ -218,9 +218,6 @@ rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S >NUL 2>&1
 rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S >NUL 2>&1
 reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
 reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
-TASKKILL /F /IM explorer.exe
-ping localhost -n 1 > nul
-start explorer.exe
 
 REM - Setting power option to high for best performance
 powercfg -setactive scheme_min
