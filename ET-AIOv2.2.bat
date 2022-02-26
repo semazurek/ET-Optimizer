@@ -179,6 +179,7 @@ PowerShell -Command "Get-AppxPackage *Microsoft.Messaging* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Facebook* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Twitter* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *Drawboard PDF* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage *Hotspot* | Remove-AppxPackage"
 
 cls
 
