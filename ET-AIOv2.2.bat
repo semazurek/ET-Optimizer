@@ -106,8 +106,6 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 
 cls
 
-goto Skiper
-
 REM Remove Bloatware Apps (Preinstalled)
 echo Removing Bloatware Apps (Preinstalled)  [1/75]
 PowerShell -Command "Get-AppxPackage *3DBuilder* | Remove-AppxPackage"
@@ -333,9 +331,6 @@ PowerShell -Command "Get-AppxPackage *Drawboard PDF* | Remove-AppxPackage"
  echo Removing Bloatware Apps (Preinstalled)  [75/75]
 
 PowerShell -Command "Get-AppxPackage *Hotspot* | Remove-AppxPackage"
-
-
-:Skiper
 
 cls
 
