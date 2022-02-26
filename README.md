@@ -1,6 +1,6 @@
-# EasyTool (Script)  
+# ET (Script)  
 
-Optimization Script by 1 click.  
+Optimization + Privacy fix script by 1 click.  
 Last tested on Windows 10 Home 21H2  & Windows 11 Enterprise 21H2 
 
 It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw  
