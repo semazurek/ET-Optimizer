@@ -108,7 +108,6 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Show file extensions in Explorer</li>  
 <li>Disable Transparency in taskbar, menu start etc (Build1006+ not sure work need reboot)</li>  
 <li>Disable windows, menu Start animations.</li>  
-<li>Disable Action Center (taskbar notification center)</li>  
 <li>Uninstall OneDrive </li>  
 <li>Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE needed to delete EXIT line.</li>  
 </ul>
