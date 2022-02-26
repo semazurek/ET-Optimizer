@@ -31,9 +31,6 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Disable MRU lists (jump lists) of XAML apps in Start Menu</li>   
 <li>Windows Explorer on start on This PC instead of Quick Access </li>  
 <li>Remove Bloatware Apps (Preinstalled)</li>  
-| Tabele        | są                  | fajne |
-| ------------- |:-------------------:| -----:|
-| kol 3 jest    | wyrównana do prawej | $1600 |
 <ul>
 <li>3DBuilder</li>  
 <li>Appconnector</li>  
@@ -115,3 +112,6 @@ It's continuation of GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw
 <li>Uninstall OneDrive </li>  
 <li>Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE needed to delete EXIT line.</li>  
 </ul>
+| Tabele        | są                  | fajne |
+| ------------- |:-------------------:| -----:|
+| kol 3 jest    | wyrównana do prawej | $1600 |
