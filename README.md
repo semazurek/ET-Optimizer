@@ -115,6 +115,3 @@ It's continuation of EasyTool GUI project: https://www.youtube.com/watch?v=SZLV0
 <p align="center">
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
 </p>
-
-![image](https://user-images.githubusercontent.com/85984736/155862662-3d2614d7-d701-447c-9889-86b902049f9b.png)
-
