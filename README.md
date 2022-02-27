@@ -10,7 +10,7 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 **Every part of .bat script has a comment.**
 
 <ul>
-<li>Disable Some Service</li>  
+<li>Unnecessary services set to disabled/manual mode</li>  
 <li>Disable SCHEDULED TASKS tweaks </li>  
 <li>Remove Telemetry & Data Collection </li>  
 <li>Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
