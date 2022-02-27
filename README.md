@@ -11,7 +11,7 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 
 <ul>
 <li>Show file extensions in Explorer</li>  
-<li>Disable Transparency in taskbar, menu start etc. <- WORKING TO MAKE IT WORK</li>  
+<li>Disable Transparency in taskbar, menu start etc. // Working on it</li>  
 <li>Disable Edge Web Widget</li>
 <li>Disable windows, menu Start animations.</li>  
 <li>Uninstall OneDrive </li>  
