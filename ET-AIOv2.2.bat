@@ -373,6 +373,12 @@ REM - Setting power option to high for best performance
 powercfg -setactive scheme_min
 EXIT
 
+REM - Enable All (Logical) Cores (Boot Advanced Options)
+wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
+if %errorlevel%==1 exit.
+set /P NOLP=<NumLogicalCores.txt
+bcdedit /set {current} numproc %NOLP%
+
 REM - Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE
 EXIT.
 
