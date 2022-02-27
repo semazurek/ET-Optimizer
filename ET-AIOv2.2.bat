@@ -30,24 +30,16 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\T
 REM - Disable Edge WebWidget 
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v WebWidgetAllowed /t REG_DWORD /d 0 /f
 
-REM - Uninstall OneDrive 
-echo Unistalling OneDrive
-start /wait "" "%SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
-rd C:\OneDriveTemp /Q /S >NUL 2>&1
-rd "%USERPROFILE%\OneDrive" /Q /S >NUL 2>&1
-rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S >NUL 2>&1
-rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S >NUL 2>&1
-reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
-reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
-
 REM - Setting power option to high for best performance
 powercfg -setactive scheme_min
-EXIT
 
 REM - Enable All (Logical) Cores (Boot Advanced Options)
 wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
 set /P NOLP=<NumLogicalCores.txt
 bcdedit /set {current} numproc %NOLP%
+
+REM - Disable Hibernate/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
+powercfg -hibernate off
 
 REM Disable Some Service 
 
@@ -373,6 +365,16 @@ PowerShell -Command "Get-AppxPackage *Drawboard PDF* | Remove-AppxPackage"
  echo Removing Bloatware Apps (Preinstalled)  [75/75]
 
 PowerShell -Command "Get-AppxPackage *Hotspot* | Remove-AppxPackage"
+
+REM - Uninstall OneDrive 
+echo Unistalling OneDrive
+start /wait "" "%SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
+rd C:\OneDriveTemp /Q /S >NUL 2>&1
+rd "%USERPROFILE%\OneDrive" /Q /S >NUL 2>&1
+rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S >NUL 2>&1
+rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S >NUL 2>&1
+reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
+reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
 
 cls
 
