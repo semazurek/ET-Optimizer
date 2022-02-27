@@ -1,4 +1,4 @@
-# ET Optimization Script
+# ET All in One
 
 Optimization & Privacy fix script by 1 click.  
 Last tested/updated on Windows 10 Home 21H2  & Windows 11 Enterprise 21H2 
