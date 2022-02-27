@@ -13,7 +13,7 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 <li>Unnecessary services set to disabled/manual mode: </li>  
  <ul>
    <li>DiagTrack</li>  
-   <li>diagnosticshub.standardcollector.service</li>
+   <li>diagnosticshub.standardcollector.service - his service collects real time ETW events and processes them</li>
    <li>dmwappushservice</li>
    <li>RemoteRegistry</li>
    <li>SamSs</li>
