@@ -1,4 +1,5 @@
-# ET All in One Script
+#![image](https://user-images.githubusercontent.com/85984736/155877862-47568ce5-b477-46fe-a44b-9a09f54be7bf.png)
+ ET All in One Script
 
 Performance optimization, privacy fix and debloat script by 1 click.  
 Last tested/updated on:
