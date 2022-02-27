@@ -129,6 +129,7 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 <li>Disable Edge Web Widget</li>
 <li>Disable windows, menu Start animations.</li>  
 <li>Uninstall OneDrive </li>  
+<li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 <li>Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE needed to delete EXIT line.</li>  
 </ul>
 
