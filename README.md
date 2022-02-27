@@ -1,4 +1,4 @@
-# ET All in One Script
+# <img src="https://user-images.githubusercontent.com/85984736/155877991-aecdd4da-c94c-485c-bdb5-fa48c53a2128.png" width="50%"/> ET All in One Script
 
 Performance optimization, privacy fix and debloat script by 1 click.  
 Last tested/updated on:
@@ -139,5 +139,3 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 <p align="center">
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
 </p>
-
-![pngwing com](https://user-images.githubusercontent.com/85984736/155877991-aecdd4da-c94c-485c-bdb5-fa48c53a2128.png)
