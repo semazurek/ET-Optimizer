@@ -42,10 +42,10 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
  </ul>
 <li>Disable SCHEDULED TASKS tweaks </li>  
 <li>Remove Telemetry & Data Collection </li>  
-<li>Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
+<li>Disable Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
 <li>SmartScreen Filter for Store Apps: Disable</li>  
 <li>Let websites provide locally...</li>  
-<li>Send Microsoft info about how I write to help us improve typing and writing in the future</li>  
+<li>Disable: Send Microsoft info about how I write to help us improve typing and writing in the future</li>  
 <li>Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)</li>  
 <li>Prevents sending contacts to MS (so Cortana can compare speech etc samples)</li>  
 <li>Microsoft Edge settings</li>  
