@@ -139,3 +139,4 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 <p align="center">
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
 </p>
+![image](https://user-images.githubusercontent.com/85984736/155877907-c3f1d4e9-a65e-4a24-9935-e9abc13dae66.png)
