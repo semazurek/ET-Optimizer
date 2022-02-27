@@ -10,7 +10,27 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 **Every part of .bat script has a comment.**
 
 <ul>
-<li>Unnecessary services set to disabled/manual mode</li>  
+<li>Unnecessary services set to disabled/manual mode: </li>  
+ <ul>
+   <li>DiagTrack</li>  
+   <li>diagnosticshub.standardcollector.service</li>
+   <li>dmwappushservice</li>
+   <li>RemoteRegistry</li>
+   <li>SamSs</li>
+   <li>SCardSvr</li>
+   <li>XboxNetApiSvc</li>
+   <li>TapiSrv</li>
+   <li>seclogon</li>
+   <li>SCPolicySvc</li>
+   <li>RemoteAccess</li>
+   <li>fax</li>
+   <li>XblGameSave</li>
+   <li>wuauserv</li>
+   <li>PhoneSvc</li>
+   <li>lmhosts</li>
+   <li>gupdate</li>
+   <li>WerSvc</li>
+ </ul>
 <li>Disable SCHEDULED TASKS tweaks </li>  
 <li>Remove Telemetry & Data Collection </li>  
 <li>Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
