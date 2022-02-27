@@ -8,7 +8,7 @@ Last tested/updated on:
 <li>Windows 10 Home 21H2</li>
 <li>Windows 11 Enterprise 21H2</li>
 </ul>
-Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One"> ET </a> 
+Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One"> ET-All-in-One-master.zip </a> 
  
 It's continuation of abandoned GUI project (2017):
 
