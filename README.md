@@ -1,5 +1,6 @@
-# <img src="https://user-images.githubusercontent.com/85984736/155877991-aecdd4da-c94c-485c-bdb5-fa48c53a2128.png" width="50%"/> ET All in One Script
+# ET All in One Script
 
+<img src="https://user-images.githubusercontent.com/85984736/155877991-aecdd4da-c94c-485c-bdb5-fa48c53a2128.png" width="50%"/> 
 Performance optimization, privacy fix and debloat script by 1 click.  
 Last tested/updated on:
 <ul>
