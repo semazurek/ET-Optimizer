@@ -41,6 +41,10 @@ bcdedit /set {current} numproc %NOLP%
 REM - Disable Hibernate/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
 powercfg -hibernate off
 
+REM - Turn Off Background Apps
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled  /t REG_DWORD /d 1 /f
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f
+
 REM Disable Some Service 
 
 sc config DiagTrack start= disabled
