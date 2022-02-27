@@ -1,8 +1,7 @@
 # ET All in One Script
 
 Performance optimization, privacy fix and debloat script by 1 click.  
-Last tested/updated on:
-<li>Windows 10 Home 21H2</li>
+Last tested/updated on:<li>Windows 10 Home 21H2</li>
 <li>Windows 11 Enterprise 21H2</li>
 
 It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw  
