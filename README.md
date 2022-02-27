@@ -8,7 +8,8 @@ Last tested/updated on:
 <li>Windows 10 Home 21H2</li>
 <li>Windows 11 Enterprise 21H2</li>
  </ul>
-It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw  
+It's continuation of abandoned GUI project (2017):
+https://www.youtube.com/watch?v=SZLV0DbMyHw  
 
 ## What it does 
 
