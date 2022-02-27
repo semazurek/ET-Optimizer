@@ -378,15 +378,4 @@ wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.tx
 set /P NOLP=<NumLogicalCores.txt
 bcdedit /set {current} numproc %NOLP%
 
-REM - Optimizing Windows by forcing L2 and L3 CPU cache usage. EXPERT MODE
 EXIT.
-
-wmic cpu get L2CacheSize | findstr /r "[0-9][0-9]" > L2CacheSize.txt
-if %errorlevel%==1 exit.
-set /P L2CS=<L2CacheSize.txt
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v SecondLevelDataCache /t REG_DWORD /f /d %L2CS%
-:L3CS
-wmic cpu get L3CacheSize | findstr /r "[0-9][0-9]" > L3CacheSize.txt
-if %errorlevel%==1 exit.
-set /P L3CS=<L3CacheSize.txt
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v ThirdLevelDataCache /t REG_DWORD /f /d %L3CS%
