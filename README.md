@@ -11,7 +11,6 @@ Last tested/updated on:
 Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One"> ET-All-in-One-master.zip </a> 
  
 It's continuation of abandoned GUI project (2017):
-
 https://www.youtube.com/watch?v=SZLV0DbMyHw  
 </br>
 
