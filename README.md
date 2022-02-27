@@ -10,6 +10,12 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 **Every part of .bat script has a comment.**
 
 <ul>
+<li>Show file extensions in Explorer</li>  
+<li>Disable Transparency in taskbar, menu start etc. </li>  
+<li>Disable Edge Web Widget</li>
+<li>Disable windows, menu Start animations.</li>  
+<li>Uninstall OneDrive </li>  
+<li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 <li>Unnecessary services set to disabled/manual mode: </li>  
  <ul>
    <li>DiagTrack</li>  
@@ -124,12 +130,6 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 <li>Twitter</li>  
 <li>Drawboard PDF</li>  
 </ul>
-<li>Show file extensions in Explorer</li>  
-<li>Disable Transparency in taskbar, menu start etc. </li>  
-<li>Disable Edge Web Widget</li>
-<li>Disable windows, menu Start animations.</li>  
-<li>Uninstall OneDrive </li>  
-<li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 </ul>
 
 <p align="center">
