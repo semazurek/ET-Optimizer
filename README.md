@@ -1,5 +1,6 @@
 # ET All in One Script
-<div align="left">
+
+ <img align="left" src="https://user-images.githubusercontent.com/85984736/155877991-aecdd4da-c94c-485c-bdb5-fa48c53a2128.png" width="200"/> 
 Performance optimization, privacy fix and debloat script by 1 click.  
 Last tested/updated on:
 <ul>
@@ -7,8 +8,6 @@ Last tested/updated on:
 <li>Windows 11 Enterprise 21H2</li>
  </ul>
 It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV0DbMyHw  
- <img src="https://user-images.githubusercontent.com/85984736/155877991-aecdd4da-c94c-485c-bdb5-fa48c53a2128.png" width="200" style= "float:right"/> 
-</div>
 
 ## What it does 
 
