@@ -19,6 +19,7 @@ It's continuation of abandoned GUI project: https://www.youtube.com/watch?v=SZLV
 <li>Uninstall OneDrive </li>  
 <li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 <li>Disable Hibernate/Fast startup. "C:\hiberfil.sys" - 4/10 RAM & incrase battery life of laptops</li>
+<li>Turn Off Background Apps</li>
 <li>Unnecessary services set to disabled/manual mode: </li>  
  <ul>
    <li>DiagTrack</li>  
