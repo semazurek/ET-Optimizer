@@ -96,7 +96,6 @@ https://youtu.be/SZLV0DbMyHw
 <li>Wunderlist</li>  
 <li>LinkedInforWindows</li>  
 <li>AutodeskSketchBook</li>  
-<li>Twitter</li>  
 <li>DisneyMagicKingdoms</li>  
 <li>MarchofEmpires</li>  
 <li>ActiproSoftwareLLC</li>  
@@ -140,7 +139,6 @@ https://youtu.be/SZLV0DbMyHw
 <li>Sway</li>  
 <li>CommsPhone</li>  
 <li>ConnectivityStore</li>  
-<li>Microsoft.Messaging</li>  
 <li>Twitter</li>  
 <li>Drawboard PDF</li>  
 </ul>
