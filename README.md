@@ -65,6 +65,9 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable News and Interests on Taskbar</li>
 <li>Disable MRU lists (jump lists) of XAML apps in Start Menu</li>   
 <li>Windows Explorer on start on This PC instead of Quick Access </li>  
+<li>Disable Get Even More Out of Windows Screen /Win10</li>
+<li>Disable automatically installing suggested apps /Win10</li>
+<li>Disable Start Menu Ads/Suggestions /Win10</li>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
 <li>3DBuilder</li>  
