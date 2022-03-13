@@ -68,6 +68,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
 <li>3DBuilder</li>  
+<li>Automate</li>
 <li>Appconnector</li>  
 <li>Microsoft3DViewer</li>  
 <li>MicrosoftPowerBIForWindows</li>  
