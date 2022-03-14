@@ -27,6 +27,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Hibernate/Fast startup = Free RAM & incrase battery life of laptops</li>
 <li>Turn Off Background Apps</li>
  
+ 
 <li>Unnecessary services set to disabled/manual mode: </li>  
  <ul>
    <li>Collecting data</li>  
@@ -56,6 +57,7 @@ https://youtu.be/SZLV0DbMyHw
    <li>Microsoft Retail Demo experience (shop demo videos)</li>
  </ul>
  
+ 
 <li>Disable SCHEDULED TASKS tweaks </li>  
 <li>Remove Telemetry & Data Collection </li>  
 <li>Disable Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
@@ -77,6 +79,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Get Even More Out of Windows Screen /Win10</li>
 <li>Disable automatically installing suggested apps /Win10</li>
 <li>Disable Start Menu Ads/Suggestions /Win10</li>
+ 
  
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
