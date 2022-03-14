@@ -26,8 +26,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 <li>Disable Hibernate/Fast startup = Free RAM & incrase battery life of laptops</li>
 <li>Turn Off Background Apps</li>
- 
- 
+</br></br>
 <li>Unnecessary services set to disabled/manual mode: </li>  
  <ul>
    <li>Collecting data</li>  
