@@ -55,8 +55,7 @@ https://youtu.be/SZLV0DbMyHw
    <li>WalletService</li>
    <li>Microsoft Retail Demo experience (shop demo videos)</li>
  </ul>
- 
- 
+</br>
 <li>Disable SCHEDULED TASKS tweaks </li>  
 <li>Remove Telemetry & Data Collection </li>  
 <li>Disable Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
@@ -78,8 +77,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Get Even More Out of Windows Screen /Win10</li>
 <li>Disable automatically installing suggested apps /Win10</li>
 <li>Disable Start Menu Ads/Suggestions /Win10</li>
- 
- 
+</br>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
 <li>3DBuilder</li>  
