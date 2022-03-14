@@ -246,6 +246,17 @@ rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S >NUL 2>&1
 reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
 reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
 
+REM - AdAway default blocklist - ads blocking via hosts file
+echo Setting AdAway blocklist to hosts
+PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt"
+copy C:\Windows\System32\Drivers\etc\hosts C:\Windows\System32\Drivers\etc\hosts-copy
+copy hosts.txt C:\Windows\System32\Drivers\etc\hosts
+
 cls
+
+echo Everything has been done :)
+
+REM Clean Manager - autoclean involve
+cleanmgr /autoclean
 
 EXIT.
