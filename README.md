@@ -26,27 +26,36 @@ https://youtu.be/SZLV0DbMyHw
 <li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 <li>Disable Hibernate/Fast startup = Free RAM & incrase battery life of laptops</li>
 <li>Turn Off Background Apps</li>
+ 
 <li>Unnecessary services set to disabled/manual mode: </li>  
  <ul>
-   <li>DiagTrack</li>  
-   <li>diagnosticshub.standardcollector.service</li>
-   <li>dmwappushservice</li>
-   <li>RemoteRegistry</li>
-   <li>SamSs</li>
-   <li>SCardSvr</li>
-   <li>XboxNetApiSvc</li>
-   <li>TapiSrv</li>
-   <li>seclogon</li>
-   <li>SCPolicySvc</li>
-   <li>RemoteAccess</li>
-   <li>fax</li>
-   <li>XblGameSave</li>
-   <li>wuauserv</li>
-   <li>PhoneSvc</li>
-   <li>lmhosts</li>
-   <li>gupdate</li>
-   <li>WerSvc</li>
+   <li>Collecting data</li>  
+   <li>Remote Registry</li>
+   <li>Remote Access</li>
+   <li>Security Accounts Manager (manuall)</li>
+   <li>Telephony</li>
+   <li>Secondary Logon</li>
+   <li>Smart Card</li>
+   <li>Smart Card Removal Policy Service</li>
+   <li>FAX</li>
+   <li>Xbox Live Auth Manager</li>
+   <li>Xbox Live Networking Service</li>
+   <li>Xbox Live Game Save Service</li>
+   <li>Windows Update (manuall)</li>
+   <li>Telephony state on the device service</li>
+   <li>TCP/IP NetBIOS Helper</li>
+   <li>IP Helper</li>
+   <li>Google Update Service</li>
+   <li>Windows Reporting Service</li>
+   <li>Nvidia Telemetry collector</li>
+   <li>Gigabyte Adjust Service (EasyTune)</li>
+   <li>Adobe Updater Service</li>
+   <li>Corel License Validation Service</li>
+   <li>Geolocation services</li>
+   <li>WalletService</li>
+   <li>Microsoft Retail Demo experience (shop demo videos)</li>
  </ul>
+ 
 <li>Disable SCHEDULED TASKS tweaks </li>  
 <li>Remove Telemetry & Data Collection </li>  
 <li>Disable Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
@@ -68,6 +77,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Get Even More Out of Windows Screen /Win10</li>
 <li>Disable automatically installing suggested apps /Win10</li>
 <li>Disable Start Menu Ads/Suggestions /Win10</li>
+ 
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
 <li>3DBuilder</li>  
@@ -134,7 +144,6 @@ https://youtu.be/SZLV0DbMyHw
 <li>SkypeApp</li>  
 <li>solit</li>  
 <li>windowscommunicationsapps</li>  
-<li>zune</li>  
 <li>WindowsMaps</li>  
 <li>Sway</li>  
 <li>CommsPhone</li>  
