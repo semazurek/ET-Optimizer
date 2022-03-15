@@ -44,8 +44,8 @@ https://youtu.be/SZLV0DbMyHw
    <li>Xbox Live Game Save Service</li>
    <li>Windows Update (manuall)</li>
    <li>Telephony state on the device service</li>
-   <li>TCP/IP NetBIOS Helper</li>
-   <li>IP Helper</li>
+   <li>TCP/IP NetBIOS Helper (manuall)</li>
+   <li>IP Helper (manuall)</li>
    <li>Google Update Service</li>
    <li>Windows Reporting Service</li>
    <li>Nvidia Telemetry collector</li>
