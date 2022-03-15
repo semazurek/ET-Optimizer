@@ -102,6 +102,7 @@ sc config iphlpsvc start=demand
 
 REM Google Update service
 sc config gupdate start= demand
+cs config gupdatem start= demand
 
 REM Windows Reporting Service
 sc config WerSvc start= disabled
@@ -127,6 +128,8 @@ sc config WalletService start=disabled
 
 REM Microsoft Retail Demo experience (shop demo videos)
 sc config RetailDemo start=disabled
+
+
 
 cls
 
