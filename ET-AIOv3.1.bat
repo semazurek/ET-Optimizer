@@ -98,7 +98,7 @@ REM TCP/IP NetBIOS Helper
 sc config lmhosts start= demand
 
 REM IP Helper
-sc config iphlpsvc start=disabled
+sc config iphlpsvc start=demand
 
 REM Google Update service
 sc config gupdate start= demand
