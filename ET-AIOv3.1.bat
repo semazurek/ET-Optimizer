@@ -111,7 +111,7 @@ REM Nvidia Telemetry collector
 sc config NvTelemetryContainer start= disabled
 
 REM Gigabyte Adjust Service (EasyTune)
-sc config gadjservice start=disabled
+sc config gadjservice start= disabled
 
 REM Adobe Updater Service
 sc config AdobeARMservice start= disabled
@@ -124,12 +124,16 @@ sc config lfsvc start= disabled
 sc config wlidsvc start= disabled
 
 REM WalletService
-sc config WalletService start=disabled
+sc config WalletService start= disabled
 
 REM Microsoft Retail Demo experience (shop demo videos)
-sc config RetailDemo start=disabled
+sc config RetailDemo start= disabled
 
+REM Management of payments and Near Field Communication (NFC)
+sc config SEMgrSvc start= disabled
 
+REM Executes diagnostic actions for troubleshooting support
+SC config diagsvc start= disabled
 
 cls
 
@@ -225,16 +229,21 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 REM Disable Allowing Suggested Apps In WindowsInk Workspace
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f
 
+REM Turning Off Windows Game Bar/DVR
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f
+
+
 cls
 
 setlocal enabledelayedexpansion
 
 REM Remove Bloatware Apps (Preinstalled)
-set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp XboxGamingOverlay XboxGameOverlay XboxSpeechToTextOverlay GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager Netflix PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF Facebook FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam SpotifyMusic PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot
+set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp XboxGamingOverlay XboxGameOverlay XboxSpeechToTextOverlay GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager Netflix PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF Facebook FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam SpotifyMusic PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable
 set /a counter=1
 (for %%a in (%listofbloatware%) do ( 
 	cls
-   echo Removing Bloatware Apps [!counter!/69]
+   echo Removing Bloatware Apps [!counter!/70]
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
    set /a counter+=1
 ))
