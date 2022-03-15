@@ -55,6 +55,8 @@ https://youtu.be/SZLV0DbMyHw
    <li>Geolocation services</li>
    <li>WalletService</li>
    <li>Microsoft Retail Demo experience (shop demo videos)</li>
+   <li>Management of payments and Near Field Communication (NFC)</li>
+  <li>Diagnostic actions for troubleshooting support</li>
  </ul>
 </br>
 <li>Disable SCHEDULED TASKS tweaks </li>  
@@ -78,6 +80,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Get Even More Out of Windows Screen /Win10</li>
 <li>Disable automatically installing suggested apps /Win10</li>
 <li>Disable Start Menu Ads/Suggestions /Win10</li>
+<li>Turning Off Windows Game Bar/DVR</li>
 </br>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
@@ -151,6 +154,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>ConnectivityStore</li>  
 <li>Twitter</li>  
 <li>Drawboard PDF</li>  
+<li>Sketchable</li>
 </ul>
 </ul>
 
