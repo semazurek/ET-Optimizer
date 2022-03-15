@@ -23,7 +23,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Edge Web Widget</li>
 <li>Disable windows, menu Start animations.</li>  
 <li>Uninstall OneDrive </li>  
-<li>Ads blocking via hosts file (Adguard git)</li>
+<li>Ads blocking via hosts file (AdAway git)</li>
 <li>Enable All (Logical) Cores (Boot Advanced Options)</li>
 <li>Disable Hibernate/Fast startup = Free RAM & incrase battery life of laptops</li>
 <li>Turn Off Background Apps</li>
