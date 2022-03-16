@@ -155,6 +155,12 @@ https://youtu.be/SZLV0DbMyHw
 <li>Twitter</li>  
 <li>Drawboard PDF</li>  
 <li>Sketchable</li>
+ <li>Clipchamp</li>
+ <li>Prime Videos</li>
+ <li>TikTok</li>
+ <li>Instagram</li>
+ <li>WhatsApp</li>
+ <li>ToDo</li>
 </ul>
 </ul>
 
