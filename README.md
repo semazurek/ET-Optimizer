@@ -145,8 +145,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>MicrosoftOfficeHub</li>  
 <li>OneNote</li>  
 <li>WindowsPhone</li>  
-<li>SkypeApp</li>  
-<li>solit</li>  
+<li>SkypeApp</li> 
 <li>windowscommunicationsapps</li>  
 <li>WindowsMaps</li>  
 <li>Sway</li>  
