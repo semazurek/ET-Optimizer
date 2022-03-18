@@ -57,6 +57,7 @@ https://youtu.be/SZLV0DbMyHw
    <li>Microsoft Retail Demo experience (shop demo videos)</li>
    <li>Management of payments and Near Field Communication (NFC)</li>
   <li>Diagnostic actions for troubleshooting support</li>
+  <li>Alljoyn Router Service</li>
  </ul>
 </br>
 <li>Disable SCHEDULED TASKS tweaks </li>  
