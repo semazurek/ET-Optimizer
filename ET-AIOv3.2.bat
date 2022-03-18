@@ -133,7 +133,10 @@ REM Management of payments and Near Field Communication (NFC)
 sc config SEMgrSvc start= disabled
 
 REM Executes diagnostic actions for troubleshooting support
-SC config diagsvc start= disabled
+sc config diagsvc start= disabled
+
+REM Alljoyn Router Service
+sc config AJRouter start= disabled
 
 cls
 
