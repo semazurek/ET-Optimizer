@@ -141,8 +141,6 @@ sc config AJRouter start= disabled
 REM Background Intelligent Transfer Service
 sc config BITS start= disabled
 
-cls
-
 REM SCHEDULED TASKS tweaks 
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
@@ -159,6 +157,8 @@ schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disabl
 schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable
 
+cls
+
 REM Remove Telemetry & Data Collection 
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
@@ -170,7 +170,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelem
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" /v "Start" /t REG_DWORD /d 0 /f
 
-cls
 
 REM Settings -> Privacy -> General -> Let apps use my advertising ID...
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f
@@ -196,8 +195,6 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" 
 REM - Handwriting recognition personalization
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitInkCollection /t REG_DWORD /d 1 /f
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitTextCollection /t REG_DWORD /d 1 /f
-
-cls
 
 REM - Microsoft Edge settings
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" /v DoNotTrack /t REG_DWORD /d 1 /f
