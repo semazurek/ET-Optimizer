@@ -78,7 +78,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>WiFi Sense: Shared HotSpot Auto-Connect: Disable</li>  
 <li>Change Windows Updates to "Notify to schedule restart"</li>  
 <li>Disable P2P Update downloads outside of local network</li>  
-<li>Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for</li>   
+<li>Hide the search box from taskbar.</li>   
 <li>Disable News and Interests on Taskbar</li>
 <li>Disable MRU lists (jump lists) of XAML apps in Start Menu</li>   
 <li>Windows Explorer on start on This PC instead of Quick Access </li>  
