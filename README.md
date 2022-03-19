@@ -58,6 +58,7 @@ https://youtu.be/SZLV0DbMyHw
    <li>Management of payments and Near Field Communication (NFC)</li>
   <li>Diagnostic actions for troubleshooting support</li>
   <li>Alljoyn Router Service</li>
+  <li>Background Intelligent Transfer Service</li>
  </ul>
 </br>
 <li>Disable SCHEDULED TASKS tweaks </li>  
@@ -81,7 +82,9 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Get Even More Out of Windows Screen /Win10</li>
 <li>Disable automatically installing suggested apps /Win10</li>
 <li>Disable Start Menu Ads/Suggestions /Win10</li>
+<li>Setting Lower Shutdown time</li>
 <li>Turning Off Windows Game Bar/DVR</li>
+<li>Removing Windows Game Bar</li>
 </br>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
