@@ -59,6 +59,9 @@ https://youtu.be/SZLV0DbMyHw
   <li>Diagnostic actions for troubleshooting support</li>
   <li>Alljoyn Router Service</li>
   <li>Background Intelligent Transfer Service</li>
+ <li>Microsoft Edge Update Service (manuall)</li>
+ <li>Downloaded Windows Maps Manager (manuall)</li>
+ <li>PunkBuster (Game anti-cheat EA) (manuall)</li>
  </ul>
 </br>
 <li>Disable SCHEDULED TASKS tweaks </li>  
