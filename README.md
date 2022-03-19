@@ -92,9 +92,6 @@ https://youtu.be/SZLV0DbMyHw
 <li>MicrosoftPowerBIForWindows</li>  
 <li>Print3D</li>  
 <li>XboxApp</li>  
-<li>XboxGamingOverlay</li>  
-<li>XboxGameOverlay</li>  
-<li>XboxSpeechToTextOverlay</li>  
 <li>GetHelp</li>  
 <li>WindowsFeedbackHub</li>  
 <li>BingFoodAndDrink</li>  
