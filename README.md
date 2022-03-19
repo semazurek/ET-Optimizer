@@ -86,7 +86,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Turning Off Windows Game Bar/DVR</li>
 <li>Remove Windows Game Bar</li>
 <li>Disabling Process Mitigation</li>
-<li>leaning Temporary Files</li>
+<li>Cleaning Temporary Files</li>
 </br>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
