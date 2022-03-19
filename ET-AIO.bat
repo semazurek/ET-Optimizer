@@ -141,6 +141,15 @@ sc config AJRouter start= disabled
 REM Background Intelligent Transfer Service
 sc config BITS start= disabled
 
+REM Microsoft Edge Update Service (manuall)
+sc config edgeupdate start= demand
+
+REM Downloaded Windows Maps Manager (manuall)
+sc config MapsBroker start= demand
+
+REM PunkBuster (Game anti-cheat EA) (manuall)
+sc config PnkBstrA start= demand
+
 REM SCHEDULED TASKS tweaks 
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
