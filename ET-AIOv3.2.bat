@@ -102,7 +102,7 @@ sc config iphlpsvc start=demand
 
 REM Google Update service
 sc config gupdate start= demand
-cs config gupdatem start= demand
+sc config gupdatem start= demand
 
 REM Windows Reporting Service
 sc config WerSvc start= disabled
