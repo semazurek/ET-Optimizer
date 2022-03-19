@@ -85,7 +85,7 @@ https://youtu.be/SZLV0DbMyHw
 <li>Setting Lower Shutdown time</li>
 <li>Turning Off Windows Game Bar/DVR</li>
 <li>Remove Windows Game Bar</li>
-<li>Disabling Process Mitigation</li>
+<li>Disable Process Mitigation</li>
 <li>Cleaning Temporary Files</li>
 </br>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
