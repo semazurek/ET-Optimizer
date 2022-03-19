@@ -84,7 +84,9 @@ https://youtu.be/SZLV0DbMyHw
 <li>Disable Start Menu Ads/Suggestions /Win10</li>
 <li>Setting Lower Shutdown time</li>
 <li>Turning Off Windows Game Bar/DVR</li>
-<li>Removing Windows Game Bar</li>
+<li>Remove Windows Game Bar</li>
+<li>Disabling Process Mitigation</li>
+<li>leaning Temporary Files</li>
 </br>
 <li>Remove Bloatware Apps (Preinstalled)</li>  
 <ul>
