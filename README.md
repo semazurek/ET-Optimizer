@@ -29,7 +29,7 @@ System RAM usage:
 <ul>
 <li>Windows 10: 1.9 GB
 <li>Windows 11: 1.8 GB
-<li>Windows 8.1: 900 MB
+<li>Windows 8.1: >1 GB
 </ul>
 
 ## What it does 
