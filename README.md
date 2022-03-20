@@ -26,6 +26,7 @@ It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI projec
 </p>
 Tested with installed all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).
 
+
 System RAM usage:
 <ul>
 <li>Windows 10: 1.9 GB
