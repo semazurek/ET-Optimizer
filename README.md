@@ -12,8 +12,7 @@ Last tested/updated on:
 Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One" target="_blank"> ET-All-in-One-master.zip </a> 
 Donate link: <a href="https://paypal.me/rikey" target="_blank">PayPal</a>
  
-It's continuation of abandoned GUI project (2017):
-https://youtu.be/SZLV0DbMyHw 
+It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a>
 </br>
 
 ## What it does 
