@@ -29,7 +29,7 @@ System RAM usage:
 <ul>
 <li>Windows 10: 1.9 GB
 <li>Windows 11: 1.8 GB
-<li>Windows 8.1: >1 GB
+<li>Windows 8.1: <1 GB
 </ul>
 
 ## What it does 
@@ -186,7 +186,7 @@ System RAM usage:
  <li>ToDo</li>
 </ul>
 </br>
-<li>Disable unnecessary applications at startup</li>
+<li>Disable unnecessary applications at startup:</li>
 <ul>
  <li>Java Update Checker x64</li>
  <li>Mini Partition Tool Wizard Updater</li>
