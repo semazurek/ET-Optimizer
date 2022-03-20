@@ -185,6 +185,14 @@ System RAM usage:
  <li>WhatsApp</li>
  <li>ToDo</li>
 </ul>
+<li>Disable unnecessary applications at startup</li>
+<ul>
+ <li>Java Update Checker x64</li>
+ <li>Mini Partition Tool Wizard Updater</li>
+ <li>Teams Machine Installer</li>
+ <li>Cisco Meeting Daemon</li>
+ <li>Adobe Reader Speed Launcher</li>
+</ul>
 </ul>
 
 <p align="center">
