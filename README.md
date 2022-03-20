@@ -22,7 +22,7 @@ It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI projec
 <img align="right" src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
 
 Benchmark with installed all updates/drivers, java, winrar, office16, redisturable c++.
-
+</br>
 ## What it does 
 
 **Every part of .bat script has a comment.**
