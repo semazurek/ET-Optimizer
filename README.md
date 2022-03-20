@@ -185,6 +185,7 @@ System RAM usage:
  <li>WhatsApp</li>
  <li>ToDo</li>
 </ul>
+</br>
 <li>Disable unnecessary applications at startup</li>
 <ul>
  <li>Java Update Checker x64</li>
