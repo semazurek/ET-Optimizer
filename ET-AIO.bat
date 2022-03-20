@@ -355,6 +355,6 @@ cls
 
 echo Done.
 
-mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",48,""E.T. ver 3.7"":close")
+mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",64,""E.T. ver 3.7"":close")
 
 EXIT.
