@@ -21,7 +21,7 @@ exit.
 
 :Start
 cls
-title E.T. ver 3.6
+title E.T. ver 3.7
 
 REM - Show file extensions in Explorer
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f
@@ -323,6 +323,25 @@ powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP,
 
 cls
 
+REM Disabling unnecessary applications at startup
+
+REM Java Update Checker x64
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f
+
+REM Mini Partition Tool Wizard Updater
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MTPW" /f
+
+REM Teams Machine Installer
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f
+
+REM Cisco Meeting Daemon
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CiscoMeetingDaemon" /f
+
+REM Adobe Reader Speed Launcher
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f
+
+cls
+
 REM - Cleaning 
 if exist hosts.txt del hosts.txt
 if exist NumLogicalCores.txt del NumLogicalCores.txt
@@ -334,8 +353,8 @@ Del /S /F /Q %Windir%\Temp
 
 cls
 
-echo Everything has been done :)
+echo Done.
 
-pause > nul
+mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",48,""E.T. ver 3.7"":close")
 
 EXIT.
