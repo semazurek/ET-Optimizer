@@ -6,7 +6,7 @@ Performance optimization, privacy fix and debloat script by 1 click.
 Last tested/updated on:
 <ul>
 <li>Windows 10 Home 21H2</li>
-<li>Windows 11 Enterprise 21H2</li>
+<li>Windows 11 Ent 21H2</li>
 <li>Windows 8.1 Build 9600</li>
 </ul> 
 </br>
