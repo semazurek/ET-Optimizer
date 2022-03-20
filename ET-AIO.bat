@@ -1,13 +1,27 @@
 @echo off
 
 NET SESSION >nul 2>&1
-IF %ERRORLEVEL% == 0 goto Start
+IF %ERRORLEVEL% == 0 goto CheckVer
 echo. Run the program as an Administrator.
+REM Checks if it is running as administrator if not quit
 pause > nul
 exit.
 
+:CheckVer
+ver | findstr 10.0
+if %errorlevel%==0 goto Start
+ver | findstr 11.0
+if %errorlevel%==0 goto Start
+ver | findstr 6.3
+if %errorlevel%==0 goto Start
+echo Unsupported version of the system
+pause > nul
+exit.
+
+
 :Start
-title E.T. ver 3.5
+cls
+title E.T. ver 3.6
 
 REM - Show file extensions in Explorer
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f
