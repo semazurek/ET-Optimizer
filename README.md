@@ -7,7 +7,7 @@ Last tested/updated on:
 <ul>
 <li>Windows 10 Home 21H2</li>
 <li>Windows 11 Ent 21H2</li>
-<li>Windows 8.1 Build 9600</li>
+<li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
 Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One" target="_blank"> ET-All-in-One-master.zip </a> 
