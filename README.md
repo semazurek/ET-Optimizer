@@ -193,6 +193,7 @@ System RAM usage:
  <li>Teams Machine Installer</li>
  <li>Cisco Meeting Daemon</li>
  <li>Adobe Reader Speed Launcher</li>
+ <li>CCleaner Smart Cleaning/Monitor</li>
 </ul>
 </ul>
 
