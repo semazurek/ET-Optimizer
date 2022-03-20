@@ -25,7 +25,8 @@ It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI projec
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
 </p>
 Tested with installed all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
-<ul>System RAM usage:
+System RAM usage:
+<ul>
 <li>Windows 10: 1.9 GB
 <li>Windows 11: 1.8 GB
 <li>Windows 8.1: 900 MB
