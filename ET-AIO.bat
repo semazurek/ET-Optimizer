@@ -317,7 +317,6 @@ REM - TEMP/Prefetch Cleaning
 echo Cleaning Temporary Files
 Del /S /F /Q %temp%
 Del /S /F /Q %Windir%\Temp
-Del /S /F /Q C:\WINDOWS\Prefetch
 
 cls
 
