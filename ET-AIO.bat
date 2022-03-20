@@ -336,7 +336,6 @@ cls
 
 echo Everything has been done :)
 
-REM Clean Manager - autoclean involve
-cleanmgr /autoclean
+pause > nul
 
 EXIT.
