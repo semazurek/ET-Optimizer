@@ -201,6 +201,11 @@ System RAM usage:
  <li>Microsoft Edge Update</li>
  <li>BitTorrent Bleep</li>
  <li>Skype</li>
+ <li>Adobe Update Startup Utility</li>
+ <li>iTunes Helper</li>
+ <li>CyberLink Update Utility</li>
+ <li>MSI Live Update</li>
+ <li>Wondershare Helper Compact</li>
 </ul>
 </ul>
 
