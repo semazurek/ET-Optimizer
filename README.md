@@ -199,6 +199,8 @@ System RAM usage:
  <li>Microsoft Teams Update</li>
  <li>Google Update</li>
  <li>Microsoft Edge Update</li>
+ <li>BitTorrent Bleep</li>
+ <li>Skype</li>
 </ul>
 </ul>
 
