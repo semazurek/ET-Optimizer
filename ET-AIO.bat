@@ -3,9 +3,9 @@
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto CheckVer
 echo. Run the program as an Administrator.
+mshta.exe vbscript:Execute("msgbox ""Run the program as an Administrator."",16,""E.T. ver 3.7"":close")
 REM Checks if it is running as administrator if not quit
-pause > nul
-exit.
+exit
 
 :CheckVer
 ver | findstr 10.0
@@ -15,8 +15,8 @@ if %errorlevel%==0 goto Start
 ver | findstr 6.3
 if %errorlevel%==0 goto Start
 echo Unsupported version of the system
-pause > nul
-exit.
+mshta.exe vbscript:Execute("msgbox ""Unsupported version of the system"",16,""E.T. ver 3.7"":close")
+exit
 
 
 :Start
@@ -360,4 +360,4 @@ echo Done.
 
 mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",64,""E.T. ver 3.7"":close")
 
-EXIT.
+exit
