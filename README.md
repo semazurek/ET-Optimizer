@@ -197,6 +197,8 @@ System RAM usage:
  <li>Spotify Web Helper</li>
  <li>Gaijin.Net Updater</li>
  <li>Microsoft Teams Update</li>
+ <li>Google Update</li>
+ <li>Microsoft Edge Update</li>
 </ul>
 </ul>
 
