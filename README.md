@@ -194,6 +194,9 @@ System RAM usage:
  <li>Cisco Meeting Daemon</li>
  <li>Adobe Reader Speed Launcher</li>
  <li>CCleaner Smart Cleaning/Monitor</li>
+ <li>Spotify Web Helper</li>
+ <li>Gaijin.Net Updater</li>
+ <li>Microsoft Teams Update</li>
 </ul>
 </ul>
 
