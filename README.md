@@ -203,6 +203,7 @@ System RAM usage:
  <li>CyberLink Update Utility</li>
  <li>MSI Live Update</li>
  <li>Wondershare Helper Compact</li>
+ <li>Cisco AnyConnect Secure Mobility Agent</li>
 </ul>
 </ul>
 
