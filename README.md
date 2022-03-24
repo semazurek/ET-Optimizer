@@ -2,6 +2,7 @@
 
 <a href="#"><img src="https://img.shields.io/badge/RELEASE-v3.8-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/windows%20terminal-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
+<a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/Windows%2010/11-0078D6?style=for-the-badge&logo=windows&logoColor=white"></a>
 <a href="https://paypal.me/rikey"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
 
