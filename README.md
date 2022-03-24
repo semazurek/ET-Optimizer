@@ -36,71 +36,71 @@ System RAM (After ET Usage):
 </br>
  <table style="width: 100%">
   <tr>
-    <td><li>Set showing file extensions in Explorer</li>  </td>
-    <td><li>Disable location sensor</li>  </td>
+    <td>Set showing file extensions in Explorer  </td>
+    <td>Disable location sensor  </td>
   </tr>
   <tr>
-   <td><li>Disable Edge Web Widget</li></td>
-   <td><li>WiFi: HotSpot Sharing: Disable</li></td>
+   <td>Disable Edge Web Widget</td>
+   <td>WiFi: HotSpot Sharing: Disable</td>
   </tr>
   <tr>
-   <td><li>Disable windows, menu Start animations.</li></td>
-   <td><li>WiFi: Shared HotSpot Auto-Connect: Disable</li></td>
+   <td>Disable windows, menu Start animations.</td>
+   <td>WiFi: Shared HotSpot Auto-Connect: Disable</td>
   </tr>
   <tr>
-   <td><li>Uninstall OneDrive </li></td>
-   <td><li>Windows Updates to "Notify to schedule restart"</li></td>
+   <td>Uninstall OneDrive </td>
+   <td>Windows Updates to "Notify to schedule restart"</td>
   </tr>
   <tr>
-   <td><li>Ads blocking via hosts file (AdAway git)</li></td>
-   <td><li>Disable P2P Update downloads outside of local network</li></td>
+   <td>Ads blocking via hosts file (AdAway git)</td>
+   <td>Disable P2P Update downloads outside of local network</td>
   </tr>
   <tr>
-   <td><li>Enable All (Logical) Cores (Boot Advanced Options)</li></td>
-   <td><li>Hide the search box from taskbar.</li></td>
+   <td>Enable All (Logical) Cores (Boot Advanced Options)</td>
+   <td>Hide the search box from taskbar.</td>
   </tr>
   <tr>
-   <td><li>Disable Hibernation</li></td>
-   <td><li>Disable News and Interests on Taskbar</li></td>
+   <td>Disable Hibernation</td>
+   <td>Disable News and Interests on Taskbar</td>
   </tr>
   <tr>
-   <td><li>Turn Off Background Apps</li></td>
-   <td><li>Disable MRU lists (jump lists) of XAML apps</li></td>
+   <td>Turn Off Background Apps</td>
+   <td>Disable MRU lists (jump lists) of XAML apps</td>
   </tr>
   <tr>
-   <td><li>Disable SCHEDULED TASKS tweaks </li></td>
-   <td><li>Windows Explorer on start on This PC</li></td>
+   <td>Disable SCHEDULED TASKS tweaks </td>
+   <td>Windows Explorer on start on This PC</td>
   </tr>
   <tr>
-   <td><li>Remove Telemetry & Data Collection </li></td>
-   <td><li>Disable Get Even More Out of Windows Screen</li></td>
+   <td>Remove Telemetry & Data Collection </td>
+   <td>Disable Get Even More Out of Windows Screen</td>
   </tr>
   <tr>
-   <td><li>Disable Let apps use my advertising ID...</li></td>
-   <td><li>Disable automatically installing suggested apps</li></td>
+   <td>Disable Let apps use my advertising ID...</td>
+   <td>Disable automatically installing suggested apps</td>
   </tr>
   <tr>
-   <td><li>SmartScreen Filter for Store Apps: Disable</li></td>
-   <td><li>Disable Start Menu Ads/Suggestions</li></td>
+   <td>SmartScreen Filter for Store Apps: Disable</td>
+   <td>Disable Start Menu Ads/Suggestions</td>
   </tr>
   <tr>
-   <td><li>Let websites provide locally...</li></td>
-   <td><li>Setting shorter shutdown time</li></td>
+   <td>Let websites provide locally...</td>
+   <td>Setting shorter shutdown time</td>
   </tr>
   <tr>
-   <td><li>Disable: Send Microsoft info about how I write</li></td>
-   <td><li>Turning Off Windows Game Bar/DVR</li></td>
+   <td>Disable: Send Microsoft info about how I write</td>
+   <td>Turning Off Windows Game Bar/DVR</td>
   </tr>
   <tr>
-   <td><li>Prevents sending speech, typing samples to MS</li></td>
-   <td><li>Prevents sending contacts to MS</li></td>
+   <td>Prevents sending speech, typing samples to MS</td>
+   <td>Prevents sending contacts to MS</td>
   </tr>
   <tr>
-   <td><li>Microsoft Edge privacy settings</li></td>
-   <td><li>Remove Windows Game Bar</li></td>
+   <td>Microsoft Edge privacy settings</td>
+   <td>Remove Windows Game Bar</td>
   </tr>
   <tr>
-   <td><li>Disable Process Mitigation</li></td>
+   <td>Disable Process Mitigation</td>
    <td></td>
   </tr>
 </table>
