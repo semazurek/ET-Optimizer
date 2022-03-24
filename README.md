@@ -96,7 +96,7 @@ System RAM (After ET Usage):
    <td><li>Prevents sending contacts to MS</li></td>
   </tr>
   <tr>
-   <td><li>Microsoft Edge settings</li></td>
+   <td><li>Microsoft Edge privacy settings</li></td>
    <td><li>Remove Windows Game Bar</li></td>
   </tr>
   <tr>
