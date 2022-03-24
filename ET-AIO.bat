@@ -1,9 +1,12 @@
 @echo off
 
+set version=E.T. ver 3.8
+title %version%
+
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto CheckVer
 echo. Run the program as an Administrator.
-mshta.exe vbscript:Execute("msgbox ""Run the program as an Administrator."",16,""E.T. ver 3.7"":close")
+mshta.exe vbscript:Execute("msgbox ""Run the program as an Administrator."",16,""%version%"":close")
 REM Checks if it is running as administrator if not quit
 exit
 
@@ -15,13 +18,11 @@ if %errorlevel%==0 goto Start
 ver | findstr 6.3
 if %errorlevel%==0 goto Start
 echo Unsupported version of the system
-mshta.exe vbscript:Execute("msgbox ""Unsupported version of the system"",16,""E.T. ver 3.7"":close")
+mshta.exe vbscript:Execute("msgbox ""Unsupported version of the system"",16,""%version%"":close")
 exit
-
 
 :Start
 cls
-title E.T. ver 3.7
 
 REM - Show file extensions in Explorer
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f
@@ -53,7 +54,7 @@ wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.tx
 set /P NOLP=<NumLogicalCores.txt
 bcdedit /set {current} numproc %NOLP%
 
-REM - Disable Hibernate/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
+REM - Disable Hibernation/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
 powercfg -hibernate off
 
 REM - Turn Off Background Apps
@@ -61,108 +62,6 @@ REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundA
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f
 
 cls
-
-REM Disable Some Service:
-
-REM Collecting data 
-sc config DiagTrack start= disabled
-sc config diagnosticshub.standardcollector.service start= disabled
-sc config dmwappushservice start= disabled
-
-REM Remote Registry
-sc config RemoteRegistry start= disabled
-
-REM Remote Access 
-sc config RemoteAccess start= disabled
-
-REM Security Accounts Manager = manuall
-sc config SamSs start= demand
-
-REM Telephony
-sc config TapiSrv start= demand
-
-REM Secondary Logon
-sc config seclogon start= demand
-
-REM Smart Card
-sc config SCardSvr start= disabled
-
-REM Smart Card Removal Policy Service
-sc config SCPolicySvc start= disabled
-
-REM FAX
-sc config fax start= disabled
-
-REM Xbox Live Auth Manager
-sc config XblAuthManager start=disabled
-
-REM Xbox Live Networking Service
-sc config XboxNetApiSvc start= disabled
-
-REM Xbox Live Game Save Service 
-sc config XblGameSave start= disabled
-
-REM Windows Update demand/manuall
-sc config wuauserv start= demand
-
-REM Telephony state on the device.
-sc config PhoneSvc start= demand
-
-REM TCP/IP NetBIOS Helper
-sc config lmhosts start= demand
-
-REM IP Helper
-sc config iphlpsvc start=demand
-
-REM Google Update service
-sc config gupdate start= demand
-sc config gupdatem start= demand
-
-REM Windows Reporting Service
-sc config WerSvc start= disabled
-
-REM Nvidia Telemetry collector
-sc config NvTelemetryContainer start= disabled
-
-REM Gigabyte Adjust Service (EasyTune)
-sc config gadjservice start= disabled
-
-REM Adobe Updater Service
-sc config AdobeARMservice start= disabled
-
-REM Corel License Validation Service
-sc config PSI_SVC_2 start=disabled
-
-REM Geolocation services
-sc config lfsvc start= disabled
-sc config wlidsvc start= disabled
-
-REM WalletService
-sc config WalletService start= disabled
-
-REM Microsoft Retail Demo experience (shop demo videos)
-sc config RetailDemo start= disabled
-
-REM Management of payments and Near Field Communication (NFC)
-sc config SEMgrSvc start= disabled
-
-REM Executes diagnostic actions for troubleshooting support
-sc config diagsvc start= disabled
-
-REM Alljoyn Router Service
-sc config AJRouter start= disabled
-
-REM Background Intelligent Transfer Service
-sc config BITS start= disabled
-
-REM Microsoft Edge Update Service (manuall)
-sc config edgeupdate start= demand
-
-REM Downloaded Windows Maps Manager (manuall)
-sc config MapsBroker start= demand
-
-REM PunkBuster (Game anti-cheat EA) (manuall)
-sc config PnkBstrA start= demand
 
 REM SCHEDULED TASKS tweaks 
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable
@@ -284,12 +183,38 @@ cls
 
 setlocal enabledelayedexpansion
 
+REM Disable Some Service:
+
+REM Disable
+set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax XblAuthManager XboxNetApiSvc XblGameSave WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc wlidsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter BITS
+set /a counter=1
+(for %%a in (%toDisable%) do ( 
+   cls
+   echo Setting Services to: Disable Mode [!counter!/24]
+   sc config %%a start= disabled
+   set /a counter+=1
+))
+
+ping localhost -n 2 > nul
+
+REM Manuall
+set toManuall=SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate MapsBroker PnkBstrA
+set /a counter=1
+(for %%a in (%toManuall%) do ( 
+   cls
+   echo Setting Services to: Manuall Mode [!counter!/12]
+   sc config %%a start= demand
+   set /a counter+=1
+))
+
+ping localhost -n 2 > nul
+
 REM Remove Bloatware Apps (Preinstalled)
 set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager Netflix PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF Facebook FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam SpotifyMusic PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok Instagram WhatsApp ToDo
 set /a counter=1
 (for %%a in (%listofbloatware%) do ( 
 	cls
-   echo Removing Bloatware Apps [!counter!/73]
+   echo Scanning for Bloatware Apps [!counter!/73]
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
    set /a counter+=1
 ))
@@ -399,6 +324,6 @@ cls
 
 echo Done.
 
-mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",64,""E.T. ver 3.7"":close")
+mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",64,""%version%"":close")
 
 exit
