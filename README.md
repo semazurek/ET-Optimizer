@@ -1,5 +1,10 @@
 # ET All in One Script
 
+<a href="#"><img src="https://img.shields.io/badge/RELEASE-v3.8-blue?style=for-the-badge&"></a>
+<a href="#"><img src="https://img.shields.io/badge/windows%20terminal-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
+<a href="#"><img src="https://img.shields.io/badge/Windows%2010/11-0078D6?style=for-the-badge&logo=windows&logoColor=white"></a>
+<a href="https://paypal.me/rikey"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
+
  <img align="left" src="https://user-images.githubusercontent.com/85984736/155878549-829f33b3-a3fa-4172-8d88-6bbae77c1341.png" width="130"/> 
 Performance optimization, privacy fix and debloat script by 1 click. 
 
@@ -11,7 +16,6 @@ Last tested/updated on:
 </ul> 
 </br>
 Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One" target="_blank"> ET-All-in-One-master.zip </a> 
-Donate link: <a href="https://paypal.me/rikey" target="_blank">PayPal</a>
  
 It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a>
 </br>
