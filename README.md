@@ -128,8 +128,8 @@ System RAM (After ET Usage):
 | Corel License Validation Service | `PSI_SVC_2`  | Disabled |
 | Geolocation services | `lfsvc` `wlidsvc`  | Disabled |
 | WalletService | `WalletService`  | Disabled |
-| Microsoft Retail Demo experience (store demo videos) | `RetailDemo`  | Disabled |
-| Management of payments and Near Field Communication (NFC) | `SEMgrSvc`  | Disabled |
+| Microsoft Retail Demo experience | `RetailDemo`  | Disabled |
+| Management of payments and NFC | `SEMgrSvc`  | Disabled |
 | Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
 | Alljoyn Router Service | `AJRouter`  | Disabled |
 | Background Intelligent Transfer Service | `BITS`  | Disabled |
