@@ -22,7 +22,7 @@ It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI projec
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
 </p>
 Tested with installed all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
-System RAM usage:
+System RAM (After ET Usage):
 <ul>
 <li>Windows 10: 1.9 GB
 <li>Windows 11: 1.8 GB
@@ -31,181 +31,135 @@ System RAM usage:
 
 ## What it does 
 
-**Every part of .bat script has a comment.**
+**Each part of the ET Script has a comment and can be edited freely.**
 
-<ul>
-<li>Show file extensions in Explorer</li>  
-<li>Disable Edge Web Widget</li>
-<li>Disable windows, menu Start animations.</li>  
-<li>Uninstall OneDrive </li>  
-<li>Ads blocking via hosts file (AdAway git)</li>
-<li>Enable All (Logical) Cores (Boot Advanced Options)</li>
-<li>Disable Hibernate/Fast startup = Free RAM & incrase battery life of laptops</li>
-<li>Turn Off Background Apps</li>
 </br>
-<li>Unnecessary services set to disabled/manual mode: </li>  
- <ul>
-   <li>Collecting data</li>  
-   <li>Remote Registry</li>
-   <li>Remote Access</li>
-   <li>Security Accounts Manager (manuall)</li>
-   <li>Telephony</li>
-   <li>Secondary Logon</li>
-   <li>Smart Card</li>
-   <li>Smart Card Removal Policy Service</li>
-   <li>FAX</li>
-   <li>Xbox Live Auth Manager</li>
-   <li>Xbox Live Networking Service</li>
-   <li>Xbox Live Game Save Service</li>
-   <li>Windows Update (manuall)</li>
-   <li>Telephony state on the device service</li>
-   <li>TCP/IP NetBIOS Helper (manuall)</li>
-   <li>IP Helper (manuall)</li>
-   <li>Google Update Service</li>
-   <li>Windows Reporting Service</li>
-   <li>Nvidia Telemetry collector</li>
-   <li>Gigabyte Adjust Service (EasyTune)</li>
-   <li>Adobe Updater Service</li>
-   <li>Corel License Validation Service</li>
-   <li>Geolocation services</li>
-   <li>WalletService</li>
-   <li>Microsoft Retail Demo experience (shop demo videos)</li>
-   <li>Management of payments and Near Field Communication (NFC)</li>
-  <li>Diagnostic actions for troubleshooting support</li>
-  <li>Alljoyn Router Service</li>
-  <li>Background Intelligent Transfer Service</li>
- <li>Microsoft Edge Update Service (manuall)</li>
- <li>Downloaded Windows Maps Manager (manuall)</li>
- <li>PunkBuster (Game anti-cheat EA) (manuall)</li>
- </ul>
+ <table style="width: 100%">
+  <tr>
+    <td><li>Set showing file extensions in Explorer</li>  </td>
+    <td><li>Disable location sensor</li>  </td>
+  </tr>
+  <tr>
+   <td><li>Disable Edge Web Widget</li></td>
+   <td><li>WiFi: HotSpot Sharing: Disable</li></td>
+  </tr>
+  <tr>
+   <td><li>Disable windows, menu Start animations.</li></td>
+   <td><li>WiFi: Shared HotSpot Auto-Connect: Disable</li></td>
+  </tr>
+  <tr>
+   <td><li>Uninstall OneDrive </li></td>
+   <td><li>Windows Updates to "Notify to schedule restart"</li></td>
+  </tr>
+  <tr>
+   <td><li>Ads blocking via hosts file (AdAway git)</li></td>
+   <td><li>Disable P2P Update downloads outside of local network</li></td>
+  </tr>
+  <tr>
+   <td><li>Enable All (Logical) Cores (Boot Advanced Options)</li></td>
+   <td><li>Hide the search box from taskbar.</li></td>
+  </tr>
+  <tr>
+   <td><li>Disable Hibernation</li></td>
+   <td><li>Disable News and Interests on Taskbar</li></td>
+  </tr>
+  <tr>
+   <td><li>Turn Off Background Apps</li></td>
+   <td><li>Disable MRU lists (jump lists) of XAML apps</li></td>
+  </tr>
+  <tr>
+   <td><li>Disable SCHEDULED TASKS tweaks </li></td>
+   <td><li>Windows Explorer on start on This PC</li></td>
+  </tr>
+  <tr>
+   <td><li>Remove Telemetry & Data Collection </li></td>
+   <td><li>Disable Get Even More Out of Windows Screen</li></td>
+  </tr>
+  <tr>
+   <td><li>Disable Let apps use my advertising ID...</li></td>
+   <td><li>Disable automatically installing suggested apps</li></td>
+  </tr>
+  <tr>
+   <td><li>SmartScreen Filter for Store Apps: Disable</li></td>
+   <td><li>Disable Start Menu Ads/Suggestions</li></td>
+  </tr>
+  <tr>
+   <td><li>Let websites provide locally...</li></td>
+   <td><li>Setting shorter shutdown time</li></td>
+  </tr>
+  <tr>
+   <td><li>Disable: Send Microsoft info about how I write</li></td>
+   <td><li>Turning Off Windows Game Bar/DVR</li></td>
+  </tr>
+  <tr>
+   <td><li>Prevents sending speech, typing samples to MS</li></td>
+   <td><li>Prevents sending contacts to MS</li></td>
+  </tr>
+  <tr>
+   <td><li>Microsoft Edge settings</li></td>
+   <td><li>Remove Windows Game Bar</li></td>
+  </tr>
+  <tr>
+   <td><li>Disable Process Mitigation</li></td>
+   <td></td>
+  </tr>
+</table>
 </br>
-<li>Disable SCHEDULED TASKS tweaks </li>  
-<li>Remove Telemetry & Data Collection </li>  
-<li>Disable Settings -> Privacy -> General -> Let apps use my advertising ID...</li>  
-<li>SmartScreen Filter for Store Apps: Disable</li>  
-<li>Let websites provide locally...</li>  
-<li>Disable: Send Microsoft info about how I write to help us improve typing and writing in the future</li>  
-<li>Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)</li>  
-<li>Prevents sending contacts to MS (so Cortana can compare speech etc samples)</li>  
-<li>Microsoft Edge settings</li>  
-<li>Disable location sensor</li>  
-<li>WiFi Sense: HotSpot Sharing: Disable</li>  
-<li>WiFi Sense: Shared HotSpot Auto-Connect: Disable</li>  
-<li>Change Windows Updates to "Notify to schedule restart"</li>  
-<li>Disable P2P Update downloads outside of local network</li>  
-<li>Hide the search box from taskbar.</li>   
-<li>Disable News and Interests on Taskbar</li>
-<li>Disable MRU lists (jump lists) of XAML apps in Start Menu</li>   
-<li>Windows Explorer on start on This PC instead of Quick Access </li>  
-<li>Disable Get Even More Out of Windows Screen /Win10</li>
-<li>Disable automatically installing suggested apps /Win10</li>
-<li>Disable Start Menu Ads/Suggestions /Win10</li>
-<li>Setting Lower Shutdown time</li>
-<li>Turning Off Windows Game Bar/DVR</li>
-<li>Remove Windows Game Bar</li>
-<li>Disable Process Mitigation</li>
-<li>Cleaning Temporary Files</li>
+<li>Unnecessary services set to disabled/manuall mode: </li>  
+
+  </br>
+
+
+| Display name  | Service name  | Mode |
+| ------------- | ------------- | ---- |
+| Collecting data  | `DiagTrack` `diagnosticshub` `dmwappushservice`  | Disabled |
+| Remote Registry  | `Remote Registry`  | Disabled |
+| Remote Access | `Remote Access`  | Disabled |
+| Smart Card | `SCardSvr`  | Disabled |
+| Smart Card Removal Policy Service | `SCPolicySvc`  | Disabled |
+| Fax | `Fax`  | Disabled |
+| Xbox Live Auth Manager | `XblAuthManager`  | Disabled |
+| Xbox Live Networking Service | `XboxNetApiSvc`  | Disabled |
+| Xbox Live Game Save Service | `XblGameSave`  | Disabled |
+| Windows Reporting Service | `WerSvc`  | Disabled |
+| Nvidia Telemetry collector | `NvTelemetryContainer`  | Disabled |
+| Gigabyte Adjust Service (EasyTune) | `gadjservice`  | Disabled |
+| Adobe Updater Service | `AdobeARMservice`  | Disabled |
+| Corel License Validation Service | `PSI_SVC_2`  | Disabled |
+| Geolocation services | `lfsvc` `wlidsvc`  | Disabled |
+| WalletService | `WalletService`  | Disabled |
+| Microsoft Retail Demo experience (store demo videos) | `RetailDemo`  | Disabled |
+| Management of payments and Near Field Communication (NFC) | `SEMgrSvc`  | Disabled |
+| Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
+| Alljoyn Router Service | `AJRouter`  | Disabled |
+| Background Intelligent Transfer Service | `BITS`  | Disabled |
+| Security Accounts Manager | `SamSs` | Manuall |  
+| Telephony | `TapiSrv` | Manuall |  
+| Secondary Logon | `seclogon` | Manuall | 
+| Windows Update | `wuauserv`| Manuall | 
+| Telephony state on the device | `PhoneSvc` | Manuall | 
+| TCP/IP NetBIOS Helper | `lmhosts` | Manuall | 
+| IP Helper | `iphlpsvc` | Manuall | 
+| Google Update service | `gupdate` `gupdatem` | Manuall | 
+| Microsoft Edge Update Service | `edgeupdate` | Manuall | 
+| Downloaded Windows Maps Manager | `MapsBroker` | Manuall | 
+| PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manuall |  
+
 </br>
-<li>Remove Bloatware Apps (Preinstalled)</li>  
-<ul>
-<li>3DBuilder</li>  
-<li>Automate</li>
-<li>Appconnector</li>  
-<li>Microsoft3DViewer</li>  
-<li>MicrosoftPowerBIForWindows</li>  
-<li>Print3D</li>  
-<li>XboxApp</li>  
-<li>GetHelp</li>  
-<li>WindowsFeedbackHub</li>  
-<li>BingFoodAndDrink</li>  
-<li>BingHealthAndFitness</li>  
-<li>BingTravel</li>  
-<li>WindowsReadingList</li>  
-<li>MixedReality.Portal</li>  
-<li>ScreenSketch</li>  
-<li>YourPhone</li>  
-<li>PicsArt-PhotoStudio</li>  
-<li>EclipseManager</li>  
-<li>Netflix</li>  
-<li>PolarrPhotoEditorAcademicEdition</li>  
-<li>Wunderlist</li>  
-<li>LinkedInforWindows</li>  
-<li>AutodeskSketchBook</li>  
-<li>DisneyMagicKingdoms</li>  
-<li>MarchofEmpires</li>  
-<li>ActiproSoftwareLLC</li>  
-<li>Plex</li>  
-<li>iHeartRadio</li>  
-<li>FarmVille2CountryEscape</li>  
-<li>Duolingo</li>  
-<li>CyberLinkMediaSuiteEssentials</li>  
-<li>DolbyAccess</li>  
-<li>DrawboardPDF</li>  
-<li>Facebook</li>  
-<li>FitbitCoach</li>  
-<li>Flipboard</li>  
-<li>Asphalt8Airborne</li>  
-<li>Keeper</li>  
-<li>BingNews</li>  
-<li>COOKINGFEVER</li>  
-<li>PandoraMediaInc</li>  
-<li>CaesarsSlotsFreeCasino</li>  
-<li>Shazam</li>  
-<li>SpotifyMusic</li>  
-<li>PhototasticCollage</li>  
-<li>TuneInRadio</li>  
-<li>WinZipUniversal</li>  
-<li>XING</li>  
-<li>RoyalRevolt2</li>  
-<li>CandyCrushSodaSaga</li>  
-<li>BubbleWitch3Saga</li>  
-<li>CandyCrushSaga</li>  
-<li>Getstarted</li>  
-<li>WindowsAlarms</li>  
-<li>bing</li>  
-<li>MicrosoftOfficeHub</li>  
-<li>OneNote</li>  
-<li>WindowsPhone</li>  
-<li>SkypeApp</li> 
-<li>windowscommunicationsapps</li>  
-<li>WindowsMaps</li>  
-<li>Sway</li>  
-<li>CommsPhone</li>  
-<li>ConnectivityStore</li>  
-<li>Twitter</li>  
-<li>Drawboard PDF</li>  
-<li>Sketchable</li>
- <li>Clipchamp</li>
- <li>Prime Videos</li>
- <li>TikTok</li>
- <li>Instagram</li>
- <li>WhatsApp</li>
- <li>ToDo</li>
+<li>Remove Bloatware Apps (Preinstalled):</li>  
+<ul></br>
+
+`3DBuilder` `Automate` `Appconnector` `Microsoft3DViewer` `MicrosoftPowerBIForWindows` `Print3D` `XboxApp` `GetHelp` `WindowsFeedbackHub` `BingFoodAndDrink` `BingHealthAndFitness` `BingTravel` `WindowsReadingList` `MixedReality.Portal` `ScreenSketch` `YourPhone` `PicsArt-PhotoStudio` `EclipseManager` `Netflix` `PolarrPhotoEditorAcademicEdition` `Wunderlist` `LinkedInforWindows` `AutodeskSketchBook` `DisneyMagicKingdoms` `MarchofEmpires` `ActiproSoftwareLLC` `Plex` `iHeartRadio` `FarmVille2CountryEscape` `Duolingo` `CyberLinkMediaSuiteEssentials` `DolbyAccess` `DrawboardPDF` `Facebook` `FitbitCoach` `Flipboard` `Asphalt8Airborne`   `Keeper` `BingNews` `COOKINGFEVER` `PandoraMediaInc` `CaesarsSlotsFreeCasino` `Shazam` `SpotifyMusic` `PhototasticCollage` `TuneInRadio` `WinZipUniversal` `XING` `RoyalRevolt2` `CandyCrushSodaSaga` `BubbleWitch3Saga` `CandyCrushSaga` `Getstarted` `WindowsAlarms` `bing` `MicrosoftOfficeHub` `OneNote` `WindowsPhone` `SkypeApp`  `windowscommunicationsapps` `WindowsMaps` `Sway` `CommsPhone` `ConnectivityStore` `Twitter` `Drawboard PDF` `Sketchable` `Clipchamp` `Prime Videos` `TikTok`  `Instagram` `WhatsApp` `ToDo`
+ 
 </ul>
 </br>
-<li>Disable unnecessary applications at startup:</li>
-<ul>
- <li>Java Update Checker x64</li>
- <li>Mini Partition Tool Wizard Updater</li>
- <li>Teams Machine Installer</li>
- <li>Cisco Meeting Daemon</li>
- <li>Adobe Reader Speed Launcher</li>
- <li>CCleaner Smart Cleaning/Monitor</li>
- <li>Spotify Web Helper</li>
- <li>Gaijin.Net Updater</li>
- <li>Microsoft Teams Update</li>
- <li>Google Update</li>
- <li>Microsoft Edge Update</li>
- <li>BitTorrent Bleep</li>
- <li>Skype</li>
- <li>Adobe Update Startup Utility</li>
- <li>iTunes Helper</li>
- <li>CyberLink Update Utility</li>
- <li>MSI Live Update</li>
- <li>Wondershare Helper Compact</li>
- <li>Cisco AnyConnect Secure Mobility Agent</li>
+<li>Disable Unnecessary StartUp Applications:</li>
+<ul></br>
+
+ `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent`
+ 
 </ul>
-</ul>
+</ul></br>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
