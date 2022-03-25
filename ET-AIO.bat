@@ -1,6 +1,6 @@
 @echo off
 
-set version=E.T. ver 3.8
+set version=E.T. ver 3.9
 title %version%
 
 NET SESSION >nul 2>&1
@@ -78,6 +78,7 @@ schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable
 schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable
+
 
 cls
 
@@ -174,10 +175,13 @@ REM Turning Off Windows Game Bar/DVR
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f
 
-REM Removing Windows Game Bar
+REM Removing Windows Game Bar 
 PowerShell -Command "Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage"
+
+REM Disable Sticky Keys prompt
+reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f
 
 cls
 
@@ -218,6 +222,18 @@ set /a counter=1
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
    set /a counter+=1
 ))
+
+REM Disables several unnecessary components
+set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer WCF-Services45 MSRDC-Infrastructure
+set /a counter=1
+(for %%a in (%components%) do ( 
+	cls
+   echo Disable unnecessary component [!counter!/5]
+   PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart "
+   set /a counter+=1
+))
+
+cls
 
 REM - Uninstall OneDrive 
 if not exist %USERPROFILE%\OneDrive goto Next
