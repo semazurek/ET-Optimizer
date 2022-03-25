@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="#"><img src="https://img.shields.io/badge/RELEASE-v3.8-blue?style=for-the-badge&"></a>
+<a href="#"><img src="https://img.shields.io/badge/RELEASE-v3.9-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -105,7 +105,7 @@ System RAM (After ET Usage):
   </tr>
   <tr>
    <td>Disable Process Mitigation</td>
-   <td></td>
+   <td>Disable Sticky Keys prompt</td>
   </tr>
 </table>
 </br>
@@ -164,6 +164,13 @@ System RAM (After ET Usage):
  
 </ul>
 </ul></br>
+<li>Disables unnecessary components:</li>
+<ul></br>
+
+`Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer` `WCF-Services45` `MSRDC-Infrastructure`
+
+</ul>
+</br>
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
