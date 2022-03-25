@@ -19,6 +19,9 @@ Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https:/
  
 It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a>
 </br>
+
+<a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160145781-1c0cff7f-5cf9-4289-8436-8bdf0deeff30.png" width="50px"></a>
+
 ## Benchmark
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
