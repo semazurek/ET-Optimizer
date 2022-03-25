@@ -1,4 +1,4 @@
-# ET All in One Script
+# ET AllinOne Optimization Script
 
 <a href="#"><img src="https://img.shields.io/badge/RELEASE-v3.8-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
