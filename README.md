@@ -15,7 +15,7 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One" target="_blank"> ET-All-in-One-master.zip </a> 
+Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One/blob/master/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
 It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a>
 </br>
