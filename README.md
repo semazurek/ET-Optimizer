@@ -6,7 +6,7 @@
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
 
  <img align="left" src="https://user-images.githubusercontent.com/85984736/155878549-829f33b3-a3fa-4172-8d88-6bbae77c1341.png" width="130"/> 
-Performance optimization, privacy fix and debloat script by 1 click. 
+Performance optimization, privacy fix and debloating with 1 click. 
 
 Last tested/updated on:
 <ul>
@@ -17,7 +17,7 @@ Last tested/updated on:
 </br>
 Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One/blob/master/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
-It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a>
+This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160145781-1c0cff7f-5cf9-4289-8436-8bdf0deeff30.png" width="50px"></a>
@@ -28,7 +28,7 @@ It's continuation of abandoned <a href="https://youtu.be/SZLV0DbMyHw">GUI projec
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
 </p>
-Tested with installed all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
+Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
 System RAM (After ET Usage):
 <ul>
 <li>Windows 10: 1.9 GB
