@@ -178,7 +178,6 @@ Zużycie RAMu (Po zastosowaniu skryptu):
 `Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer` `WCF-Services45` `MSRDC-Infrastructure`
 
 </ul>
-</br>
 
 *<p align="center">Skrypt posiada funkcje przywracania do poprzednich ustawień.</p>*
 <p align="center">
