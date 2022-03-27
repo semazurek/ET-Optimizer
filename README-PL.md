@@ -143,7 +143,7 @@ Zużycie RAMu (Po zastosowaniu skryptu):
 | Menedżer płatności i funkcji NFC/SE | `SEMgrSvc`  | Wyłączony |
 | Standardowa usługa kolektora centrum diagnostycznego firmy Microsoft | `diagsvc`  | Wyłączony |
 | Usługa routera AllJoyn | `AJRouter`  | Wyłączony |
-| Usługa inteligentnego transferu w tle | `BITS`  | Wyłączony |
+| Usługa inteligentnego transferu w tle | `BITS`  | Ręczny |
 | Menedżer kont zabezpieczeń | `SamSs` | Ręczny |  
 | Telefonia | `TapiSrv` | Ręczny |  
 | Logowanie pomocnicze | `seclogon` | Ręczny | 
