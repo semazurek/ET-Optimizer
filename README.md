@@ -33,6 +33,10 @@ System RAM (After ET Usage):
 <ul>
  <li>Windows 10: 1/4 GB</li>
 </ul>
+System RAM (Before ET Usage):
+<ul>
+ <li>Windows 10: 1.5/4 GB</li>
+</ul>
 
 ## What it does 
 
