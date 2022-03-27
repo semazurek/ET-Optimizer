@@ -157,7 +157,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 | Usługa Microsoft Edge Update | `edgeupdate` | Ręczny | 
 | Menedżer pobranych map | `MapsBroker` | Ręczny | 
 | Usługa PunkBuster (Anty-Cheat od EA) | `PnkBstrA` | Ręczny |  
-| Usługa Brave Update | `brave` `bravem` | Manuall |
+| Usługa Brave Update | `brave` `bravem` | Ręczny |
 
 </br>
 <li>Usuwanie Bloatware (Preinstalowanych):</li>  
