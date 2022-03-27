@@ -110,6 +110,10 @@ Zużycie RAMu (Po zastosowaniu skryptu):
    <td>Wyłączenie Process Mitigation</td>
    <td>Wyłączenie monitu klawisze trwałe</td>
   </tr>
+ <tr>
+  <td>Wyłączenie historii aktywności</td>
+  <td></td>
+ </tr>
 </table>
 </br>
 <li>Niepotrzebne usługi ustawione na tryb wyłączony/ręczny: </li>  
