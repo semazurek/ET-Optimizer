@@ -217,6 +217,9 @@ reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t
 REM Disable Activity History
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f
 
+REM Disable Automatic Updates for Microsoft Store apps
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f
+
 cls
 
 setlocal enabledelayedexpansion
@@ -224,11 +227,11 @@ setlocal enabledelayedexpansion
 REM Disable Some Service:
 
 REM Disable
-set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax XblAuthManager XboxNetApiSvc XblGameSave WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc wlidsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter BITS
+set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax XblAuthManager XboxNetApiSvc XblGameSave WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc wlidsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
 set /a counter=1
 (for %%a in (%toDisable%) do ( 
    cls
-   echo Setting Services to: Disable Mode [!counter!/24]
+   echo Setting Services to: Disable Mode [!counter!/23]
    sc config %%a start= disabled
    set /a counter+=1
 ))
@@ -236,11 +239,11 @@ set /a counter=1
 ping localhost -n 2 > nul
 
 REM Manuall
-set toManuall=SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate MapsBroker PnkBstrA brave bravem
+set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate MapsBroker PnkBstrA brave bravem
 set /a counter=1
 (for %%a in (%toManuall%) do ( 
    cls
-   echo Setting Services to: Manuall Mode [!counter!/14]
+   echo Setting Services to: Manuall Mode [!counter!/15]
    sc config %%a start= demand
    set /a counter+=1
 ))
