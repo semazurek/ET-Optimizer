@@ -31,9 +31,7 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
 System RAM (After ET Usage):
 <ul>
-<li>Windows 10: 1.9 GB
-<li>Windows 11: 1.8 GB
-<li>Windows 8.1: <1 GB
+ <li>Windows 10: 1/4 GB</li>
 </ul>
 
 ## What it does 
