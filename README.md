@@ -151,6 +151,7 @@ System RAM (After ET Usage):
 | Microsoft Edge Update Service | `edgeupdate` | Manuall | 
 | Downloaded Windows Maps Manager | `MapsBroker` | Manuall | 
 | PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manuall |  
+| Brave Update service | `brave` `bravem` | Manuall |
 
 </br>
 <li>Remove Bloatware Apps (Preinstalled):</li>  
