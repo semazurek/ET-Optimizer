@@ -64,6 +64,8 @@ if %choice%==7 goto NoRestore
 goto FirstTime
 
 :YesRestore
+vssadmin delete shadows /All /Quiet
+cls
 powershell.exe -Command "Enable-ComputerRestore -Drive %systemdrive%"
 powershell.exe -ExecutionPolicy Bypass -Command "Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS""
 cls
