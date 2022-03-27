@@ -178,7 +178,6 @@ System RAM (After ET Usage):
 `Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer` `WCF-Services45` `MSRDC-Infrastructure`
 
 </ul>
-</br>
 
 *<p align="center">The script has a function to restore to the previous settings.</p>*
 <p align="center">
