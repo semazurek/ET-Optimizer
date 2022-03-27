@@ -143,7 +143,7 @@ System RAM (After ET Usage):
 | Management of payments and NFC | `SEMgrSvc`  | Disabled |
 | Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
 | Alljoyn Router Service | `AJRouter`  | Disabled |
-| Background Intelligent Transfer Service | `BITS`  | Disabled |
+| Background Intelligent Transfer Service | `BITS`  | Manuall |
 | Security Accounts Manager | `SamSs` | Manuall |  
 | Telephony | `TapiSrv` | Manuall |  
 | Secondary Logon | `seclogon` | Manuall | 
