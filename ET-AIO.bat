@@ -84,6 +84,7 @@ if %choice%==7 goto Start
 goto OnceAgain
 
 :BackUp
+del %programdata%\ET-dump.log
 cls
 rstrui.exe
 
