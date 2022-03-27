@@ -112,7 +112,7 @@ System RAM (After ET Usage):
   </tr>
   <tr>
   <td>Disable Activity History</td>
-  <td></td>
+  <td>Disable Automatic Updates for Microsoft Store apps</td>
  </tr>
 </table>
 </br>
