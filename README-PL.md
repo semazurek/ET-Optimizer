@@ -112,7 +112,7 @@ Zużycie RAMu (Po zastosowaniu skryptu):
   </tr>
  <tr>
   <td>Wyłączenie historii aktywności</td>
-  <td></td>
+  <td>Wyłącz automatyczne aktualizacje dla aplikacji z MS Store</td>
  </tr>
 </table>
 </br>
