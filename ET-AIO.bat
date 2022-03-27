@@ -185,6 +185,11 @@ REM Disable Get Even More Out of Windows Screen /W10
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f
 
 REM Disable automatically installing suggested apps /W10
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f
 
 REM Disable Start Menu Ads/Suggestions /W10
@@ -262,10 +267,16 @@ set /a counter=1
 cls
 
 REM - Uninstall OneDrive 
-if not exist %USERPROFILE%\OneDrive goto Next
-if not exist %LOCALAPPDATA%\Microsoft\OneDrive goto Next
+if exist %USERPROFILE%\OneDrive goto RemoveOneDrive
+if exist "%PROGRAMDATA%\Microsoft OneDrive" goto RemoveOneDrive
+
+goto Next
+
+:RemoveOneDrive
+taskkill.exe /F /IM "OneDrive.exe" > nul
 echo Unistalling OneDrive
-start /wait "" "%SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
+if exist %SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE start /wait "" "%SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
+if exist %SYSTEMROOT%\System32\OneDriveSetup.exe start /wait "" "%SYSTEMROOT%\System32\OneDriveSetup.exe" /UNINSTALL
 rd C:\OneDriveTemp /Q /S >NUL 2>&1
 rd "%USERPROFILE%\OneDrive" /Q /S >NUL 2>&1
 rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S >NUL 2>&1
