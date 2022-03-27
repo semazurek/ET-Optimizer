@@ -35,7 +35,7 @@ Zużycie RAMu (Po zastosowaniu skryptu):
 </ul>
 Zużycie RAMu (Przed zastosowaniem skryptu):
 <ul>
- <li>Windows 10: 1.5/4 GB</li>
+ <li>Windows 10: 1.6/4 GB</li>
 </ul>
 
 ## Co robi skrypt
