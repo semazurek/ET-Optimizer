@@ -233,11 +233,11 @@ set /a counter=1
 ping localhost -n 2 > nul
 
 REM Manuall
-set toManuall=SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate MapsBroker PnkBstrA
+set toManuall=SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate MapsBroker PnkBstrA brave bravem
 set /a counter=1
 (for %%a in (%toManuall%) do ( 
    cls
-   echo Setting Services to: Manuall Mode [!counter!/12]
+   echo Setting Services to: Manuall Mode [!counter!/14]
    sc config %%a start= demand
    set /a counter+=1
 ))
