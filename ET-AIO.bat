@@ -26,25 +26,65 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
     
-set version=E.T. ver 3.9
+set version=E.T. ver 4.0
 title %version%
 
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto CheckVer
-echo. Run the program as an Administrator.
-mshta.exe vbscript:Execute("msgbox ""Run the program as an Administrator."",16,""%version%"":close")
+echo. Run the script as an Administrator.
+powershell (New-Object -ComObject Wscript.Shell).Popup("""Run the script as an Administrator.""",0,"""%version%""",0x10)
 REM Checks if it is running as administrator if not quit
 exit
 
 :CheckVer
 ver | findstr 10.0
-if %errorlevel%==0 goto Start
+if %errorlevel%==0 goto RestorePoint
 ver | findstr 11.0
-if %errorlevel%==0 goto Start
+if %errorlevel%==0 goto RestorePoint
 ver | findstr 6.3
-if %errorlevel%==0 goto Start
+if %errorlevel%==0 goto RestorePoint
 echo Unsupported version of the system
 mshta.exe vbscript:Execute("msgbox ""Unsupported version of the system"",16,""%version%"":close")
+powershell (New-Object -ComObject Wscript.Shell).Popup("""Unsupported version of the system""",0,"""%version%""",0x10)
+
+exit
+
+:RestorePoint
+cls
+if not exist %programdata%\ET-dump.log goto FirstTime
+if exist %programdata%\ET-dump.log goto OnceAgain
+
+:FirstTime
+echo [ET] %time% - %date% > %programdata%\ET-dump.log
+powershell (New-Object -ComObject Wscript.Shell).Popup("""Do you want to create a restore point?""",0,"""%version%""",0x4 + 0x20) > status.log
+set /P choice=<status.log
+if exist status.log del status.log
+if %choice%==6 goto YesRestore
+if %choice%==7 goto NoRestore
+goto FirstTime
+
+:YesRestore
+powershell.exe -Command "Enable-ComputerRestore -Drive %systemdrive%"
+powershell.exe -ExecutionPolicy Bypass -Command "Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS""
+cls
+goto Start
+
+:NoRestore
+del %programdata%\ET-dump.log
+goto Start
+
+:OnceAgain
+powershell (New-Object -ComObject Wscript.Shell).Popup("""Do you want to restore the previous settings?""",0,"""%version%""",0x4 + 0x20) > status.log
+set /P choice=<status.log
+if exist status.log del status.log
+if %choice%==6 goto BackUp
+if %choice%==7 goto Start
+goto OnceAgain
+
+:BackUp
+cls
+rstrui.exe
+
 exit
 
 :Start
@@ -79,6 +119,7 @@ REM - Enable All (Logical) Cores (Boot Advanced Options)
 wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
 set /P NOLP=<NumLogicalCores.txt
 bcdedit /set {current} numproc %NOLP%
+if exist NumLogicalCores.txt del NumLogicalCores.txt
 
 REM - Disable Hibernation/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
 powercfg -hibernate off
@@ -297,6 +338,7 @@ echo Setting Ad blocking via hosts file
 PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt"
 if not exist C:\Windows\System32\Drivers\etc\hosts-copy-et copy C:\Windows\System32\Drivers\etc\hosts C:\Windows\System32\Drivers\etc\hosts-copy-et
 copy hosts.txt C:\Windows\System32\Drivers\etc\hosts
+if exist hosts.txt del hosts.txt
 
 cls
 
@@ -370,10 +412,6 @@ reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVer
 
 cls
 
-REM - Cleaning 
-if exist hosts.txt del hosts.txt
-if exist NumLogicalCores.txt del NumLogicalCores.txt
-
 REM - TEMP/Prefetch Cleaning
 echo Cleaning Temporary Files
 Del /S /F /Q %temp%
@@ -383,6 +421,6 @@ cls
 
 echo Done.
 
-mshta.exe vbscript:Execute("msgbox ""Everything has been done :) Reboot is recommended."",64,""%version%"":close")
+powershell (New-Object -ComObject Wscript.Shell).Popup("""Everything has been done :) Reboot is recommended.""",0,"""%version%""",0x40)
 
 exit
