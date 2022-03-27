@@ -110,6 +110,10 @@ System RAM (After ET Usage):
    <td>Disable Process Mitigation</td>
    <td>Disable Sticky Keys prompt</td>
   </tr>
+  <tr>
+  <td>Disable Activity History</td>
+  <td></td>
+ </tr>
 </table>
 </br>
 <li>Unnecessary services set to disabled/manuall mode: </li>  
