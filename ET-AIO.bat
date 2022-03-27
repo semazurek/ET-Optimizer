@@ -214,6 +214,9 @@ PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPack
 REM Disable Sticky Keys prompt
 reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f
 
+REM Disable Activity History
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f
+
 cls
 
 setlocal enabledelayedexpansion
