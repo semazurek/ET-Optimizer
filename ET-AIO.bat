@@ -145,10 +145,15 @@ schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable
 schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable
 schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable
+schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable
+schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable
 schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable
-
+schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable
+schtasks /Change /TN "NerverCenterUpdate" /Disable
+schtasks /Change /TN "Opera scheduled Autoupdate 1648482218" /Disable
+schtasks /Change /TN "NerveCenterUpdate" /Disable
 
 cls
 
@@ -274,21 +279,22 @@ REM Disable
 set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax XblAuthManager XboxNetApiSvc XblGameSave WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc wlidsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
 set /a counter=1
 (for %%a in (%toDisable%) do ( 
+   sc config %%a start= disabled
    cls
    echo Setting Services to: Disable Mode [!counter!/23]
-   sc config %%a start= disabled
    set /a counter+=1
 ))
 
 ping localhost -n 2 > nul
 
 REM Manuall
-set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate MapsBroker PnkBstrA brave bravem
+set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem
 set /a counter=1
 (for %%a in (%toManuall%) do ( 
-   cls
-   echo Setting Services to: Manuall Mode [!counter!/15]
    sc config %%a start= demand
+   cls
+   echo Setting Services to: Manuall Mode [!counter!/16]
+
    set /a counter+=1
 ))
 
