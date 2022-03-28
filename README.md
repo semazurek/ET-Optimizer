@@ -155,7 +155,7 @@ System RAM (Before ET Usage):
 | TCP/IP NetBIOS Helper | `lmhosts` | Manuall | 
 | IP Helper | `iphlpsvc` | Manuall | 
 | Google Update service | `gupdate` `gupdatem` | Manuall | 
-| Microsoft Edge Update Service | `edgeupdate` | Manuall | 
+| Microsoft Edge Update Service | `edgeupdate` `edgeupdatem` | Manuall | 
 | Downloaded Windows Maps Manager | `MapsBroker` | Manuall | 
 | PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manuall |  
 | Brave Update service | `brave` `bravem` | Manuall |
