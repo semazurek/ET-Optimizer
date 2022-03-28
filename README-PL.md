@@ -154,7 +154,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 | Pomoc TCP/IP NetBIOS | `lmhosts` | Ręczny | 
 | Pomoc IP | `iphlpsvc` | Ręczny | 
 | Usługa Google Update | `gupdate` `gupdatem` | Ręczny | 
-| Usługa Microsoft Edge Update | `edgeupdate` | Ręczny | 
+| Usługa Microsoft Edge Update | `edgeupdate` `edgeupdatem` | Ręczny | 
 | Menedżer pobranych map | `MapsBroker` | Ręczny | 
 | Usługa PunkBuster (Anty-Cheat od EA) | `PnkBstrA` | Ręczny |  
 | Usługa Brave Update | `brave` `bravem` | Ręczny |
