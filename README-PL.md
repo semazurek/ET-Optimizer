@@ -158,6 +158,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 | Menedżer pobranych map | `MapsBroker` | Ręczny | 
 | Usługa PunkBuster (Anty-Cheat od EA) | `PnkBstrA` | Ręczny |  
 | Usługa Brave Update | `brave` `bravem` | Ręczny |
+| Usługa ASUS Update | `asus` `asusm` | Ręczny |
 
 </br>
 <li>Usuwanie Bloatware (Preinstalowanych):</li>  
@@ -170,7 +171,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 <li>Wyłączanie niepotrzebnych aplikacji startowowych:</li>
 <ul></br>
 
- `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent`
+ `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent` `Wargaming.net Game Center` `Skype for Desktop` `Gog Galaxy` `Epic Games Launcher` `Origin` `Steam` `Opera Browser Assistant`
  
 </ul>
 </ul></br>
