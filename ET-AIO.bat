@@ -145,14 +145,18 @@ schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable
 schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable
 schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable
-schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable
-schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable
+schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable
+schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable
 schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable
 schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable
 schtasks /Change /TN "NerverCenterUpdate" /Disable
-schtasks /Change /TN "Opera scheduled Autoupdate 1648482218" /Disable
+schtasks /Change /TN "Adobe Acrobat Update Task" /Disable
+schtasks /Change /TN "AMDLinkUpdate" /Disable
+schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable
+schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable
+schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable
 
 cls
 
@@ -287,12 +291,12 @@ set /a counter=1
 ping localhost -n 2 > nul
 
 REM Manuall
-set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem
+set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem asus asusm
 set /a counter=1
 (for %%a in (%toManuall%) do ( 
    sc config %%a start= demand
    cls
-   echo Setting Services to: Manuall Mode [!counter!/16]
+   echo Setting Services to: Manuall Mode [!counter!/18]
 
    set /a counter+=1
 ))
@@ -418,9 +422,30 @@ reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVer
 REM Cisco AnyConnect Secure Mobility Agent
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f
 
+REM Opera Browser Assistant (Update/Tray)
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Opera Browser Assistant" /f
+
+REM Steam Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /f
+
+REM Origin Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EADM" /f
+
+REM Epic Games Launcher Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EpicGamesLauncher" /f
+
+REM Gog Galaxy Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "GogGalaxy" /f
+
+REM Skype for Desktop Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for Desktop" /f
+
+REM Wargaming.net Game Center
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f
+
 cls
 
-REM - TEMP/Prefetch Cleaning
+REM - TEMP Cleaning
 echo Cleaning Temporary Files
 Del /S /F /Q %temp%
 Del /S /F /Q %Windir%\Temp
