@@ -1,4 +1,4 @@
-# ET All-in-One Optimization Script
+# ET All-in-One Skrypt Optymalizacyjny
 
 <a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.0-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
@@ -159,6 +159,7 @@ System RAM (Before ET Usage):
 | Downloaded Windows Maps Manager | `MapsBroker` | Manuall | 
 | PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manuall |  
 | Brave Update service | `brave` `bravem` | Manuall |
+| ASUS Update service | `asus` `asusm` | Manuall |
 
 </br>
 <li>Remove Bloatware Apps (Preinstalled):</li>  
@@ -171,7 +172,7 @@ System RAM (Before ET Usage):
 <li>Disable Unnecessary StartUp Applications:</li>
 <ul></br>
 
- `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent`
+ `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent` `Wargaming.net Game Center` `Skype for Desktop` `Gog Galaxy` `Epic Games Launcher` `Origin` `Steam` `Opera Browser Assistant`
  
 </ul>
 </ul></br>
