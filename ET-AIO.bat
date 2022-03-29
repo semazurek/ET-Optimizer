@@ -153,7 +153,6 @@ schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Dis
 schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable
 schtasks /Change /TN "NerverCenterUpdate" /Disable
 schtasks /Change /TN "Opera scheduled Autoupdate 1648482218" /Disable
-schtasks /Change /TN "NerveCenterUpdate" /Disable
 
 cls
 
