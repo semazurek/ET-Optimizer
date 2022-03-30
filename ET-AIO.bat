@@ -1,5 +1,8 @@
 @echo off
 
+REM #############################################################################################################################################
+REM DO NOT TOUCH THIS PART INSIDE (PLEASE)
+
 REM Check for admin permissions
     IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
 >nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
@@ -26,27 +29,39 @@ if '%errorlevel%' NEQ '0' (
     pushd "%CD%"
     CD /D "%~dp0"
     
-set version=E.T. ver 4.0
+REM Check system language
+set English=en-GB
+set Polish=pl-PL
+FOR /F "tokens=3" %%a IN ('reg query "HKCU\Control Panel\Desktop" /v PreferredUILanguages ^| find "PreferredUILanguages"') DO set lang=%%a
+
+set version=E.T. ver 4.1
 title %version%
 
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto CheckVer
 echo. Run the script as an Administrator.
-powershell (New-Object -ComObject Wscript.Shell).Popup("""Run the script as an Administrator.""",0,"""%version%""",0x10)
+set announcement=Run the script as an Administrator.
+if %lang%==%Polish% set announcement=Uruchom skrypt jako Administrator.
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
 REM Checks if it is running as administrator if not quit
 exit
 
 :CheckVer
 ver | findstr 10.0
-if %errorlevel%==0 goto RestorePoint
+if %errorlevel%==0 set ThisOS=10
 ver | findstr 11.0
-if %errorlevel%==0 goto RestorePoint
+if %errorlevel%==0 set ThisOS=11
 ver | findstr 6.3
-if %errorlevel%==0 goto RestorePoint
-echo Unsupported version of the system
-mshta.exe vbscript:Execute("msgbox ""Unsupported version of the system"",16,""%version%"":close")
-powershell (New-Object -ComObject Wscript.Shell).Popup("""Unsupported version of the system""",0,"""%version%""",0x10)
+if %errorlevel%==0 set ThisOS=81
 
+if %ThisOS%==10 goto RestorePoint
+if %ThisOS%==11 goto RestorePoint
+if %ThisOS%==81 goto RestorePoint
+
+echo Unsupported version of the system
+set announcement=Unsupported version of the system
+if %lang%==%Polish% set announcement=Nie wspierana wersja systemu
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
 exit
 
 :RestorePoint
@@ -56,7 +71,9 @@ if exist %programdata%\ET-dump.log goto OnceAgain
 
 :FirstTime
 echo [ET] %time% - %date% > %programdata%\ET-dump.log
-powershell (New-Object -ComObject Wscript.Shell).Popup("""Do you want to create a restore point?""",0,"""%version%""",0x4 + 0x20) > status.log
+set announcement=Do you want to create a restore point?
+if %lang%==%Polish% set announcement=Czy chcesz utworzyc punkt przywracania?
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20) > status.log
 set /P choice=<status.log
 if exist status.log del status.log
 if %choice%==6 goto YesRestore
@@ -76,7 +93,9 @@ del %programdata%\ET-dump.log
 goto Start
 
 :OnceAgain
-powershell (New-Object -ComObject Wscript.Shell).Popup("""Do you want to restore the previous settings?""",0,"""%version%""",0x4 + 0x20) > status.log
+set announcement=Do you want to restore the previous settings?
+if %lang%==%Polish% set announcement=Czy chcesz przywrocic poprzednie ustawienia?
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20) > status.log
 set /P choice=<status.log
 if exist status.log del status.log
 if %choice%==6 goto BackUp
@@ -87,8 +106,13 @@ goto OnceAgain
 del %programdata%\ET-dump.log
 cls
 rstrui.exe
-
 exit
+
+REM DO NOT TOUCH THIS PART INSIDE (PLEASE)
+REM #############################################################################################################################################
+
+
+REM HERE YOU CAN DO ANYTHING YOU WANT:
 
 :Start
 cls
@@ -145,8 +169,8 @@ schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable
 schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable
 schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable
-schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable
-schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable
+schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable
+schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable
 schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable
@@ -233,6 +257,11 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 REM Windows Explorer to start on This PC instead of Quick Access 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f
 
+REM Setting Lower Shutdown time
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
+
+if %ThisOS%==81 goto Skip4Win8
+
 REM Disable Get Even More Out of Windows Screen /W10
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f
 
@@ -251,9 +280,6 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 REM Disable Allowing Suggested Apps In WindowsInk Workspace
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f
 
-REM Setting Lower Shutdown time
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
-
 REM Turning Off Windows Game Bar/DVR
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f
 reg add "HKEY_CURRENT_USER\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f
@@ -262,6 +288,8 @@ REM Removing Windows Game Bar
 PowerShell -Command "Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage"
+
+:Skip4Win8
 
 REM Disable Sticky Keys prompt
 reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f
@@ -287,7 +315,6 @@ set /a counter=1
    echo Setting Services to: Disable Mode [!counter!/23]
    set /a counter+=1
 ))
-
 ping localhost -n 2 > nul
 
 REM Manuall
@@ -300,7 +327,6 @@ set /a counter=1
 
    set /a counter+=1
 ))
-
 ping localhost -n 2 > nul
 
 REM Remove Bloatware Apps (Preinstalled)
@@ -452,8 +478,8 @@ Del /S /F /Q %Windir%\Temp
 
 cls
 
-echo Done.
-
-powershell (New-Object -ComObject Wscript.Shell).Popup("""Everything has been done :) Reboot is recommended.""",0,"""%version%""",0x40)
+set announcement=Everything has been done. Reboot is recommended.
+if %lang%==%Polish% set announcement=Wszystko zostalo zrobione. Uruchomienie ponowne zalecane.
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40)
 
 exit
