@@ -21,6 +21,8 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
+<a href="#"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
+<a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-UA.md"><img src="https://user-images.githubusercontent.com/85984736/161204314-94a2c5cf-7585-422a-a22d-b677488b4bc9.png" width="50px" style="border: 1px solid black"></a>
 
 ## Benchmark
 <p align="center">
