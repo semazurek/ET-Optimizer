@@ -28,17 +28,6 @@ if '%errorlevel%' NEQ '0' (
 :gotAdmin
     pushd "%CD%"
     CD /D "%~dp0"
-    
-REM Check system language
-
-set Polish=pl-PL
-set German=de-DE
-set Czech=cs-CZ
-set Ukrainian=uk-UA
-
-FOR /F "tokens=3" %%a IN ('reg query "HKCU\Control Panel\Desktop" /v PreferredUILanguages ^| find "PreferredUILanguages"') DO set lang=%%a
-
-REM set lang=en-GB
 
 set version=E.T. ver 4.1
 title %version%
@@ -48,9 +37,6 @@ IF %ERRORLEVEL% == 0 goto CheckVer
 echo. Run the script as an Administrator.
 set announcement=Run the script as an Administrator.
 
-if %lang%==%Polish% set announcement=Uruchom skrypt jako Administrator.
-if %lang%==%German% set announcement=Fuhren Sie das Skript als Administrator aus.
-if %lang%==%Czech% set announcement=Spust'te skript jako spravce.
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
 REM Checks if it is running as administrator if not quit
 exit
@@ -71,9 +57,6 @@ if %ThisOS%==81 goto RestorePoint
 echo Unsupported version of the system
 set announcement=Unsupported version of the system
 
-if %lang%==%Polish% set announcement=Nie wspierana wersja systemu
-if %lang%==%German% set announcement=Nicht unterstutzte Version des Systems
-if %lang%==%Czech% set announcement=Nepodporovana verze systemu
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
 exit
 
@@ -87,9 +70,6 @@ if exist %programdata%\ET-dump.log goto OnceAgain
 echo [ET] %time% - %date% > %programdata%\ET-dump.log
 set announcement=Do you want to create a restore point?
 
-if %lang%==%Polish% set announcement=Czy chcesz utworzyc punkt przywracania?
-if %lang%==%German% set announcement=Mochten Sie einen Wiederherstellungspunkt erstellen?
-if %lang%==%Czech% set announcement=Chcete vytvorit bod obnoveni?
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20) > status.log
 set /P choice=<status.log
 if exist status.log del status.log
@@ -112,9 +92,6 @@ goto Start
 :OnceAgain
 set announcement=Do you want to restore the previous settings?
 
-if %lang%==%Polish% set announcement=Czy chcesz przywrocic poprzednie ustawienia?
-if %lang%==%German% set announcement=Mochten Sie die vorherigen Einstellungen wiederherstellen?
-if %lang%==%Czech% set announcement=Chcete obnovit peedchozi nastaveni?
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20) > status.log
 set /P choice=<status.log
 if exist status.log del status.log
@@ -500,9 +477,6 @@ cls
 
 set announcement=Everything has been done. Reboot is recommended.
 
-if %lang%==%Polish% set announcement=Wszystko zostalo zrobione. Uruchom ponownie komputer.
-if %lang%==%German% set announcement=Alles ist erledigt. Neustart wird empfohlen.
-if %lang%==%Czech% set announcement=Vsechno uz bylo hotovo. Doporucuje se restartovat.
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40)
 
 exit
