@@ -1,6 +1,6 @@
 # ET All-in-One Skrypt Optymalizacyjny
 
-<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.1-blue?style=for-the-badge&"></a>
+<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.2-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -21,8 +21,6 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
-<a href="#"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
-<a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-UA.md"><img src="https://user-images.githubusercontent.com/85984736/161204314-94a2c5cf-7585-422a-a22d-b677488b4bc9.png" width="50px" style="border: 1px solid black"></a>
 
 ## Benchmark
 <p align="center">
@@ -118,6 +116,34 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
   <td>Wyłączenie historii aktywności</td>
   <td>Wyłącz automatyczne aktualizacje dla aplikacji z MS Store</td>
  </tr>
+  <tr>
+	<td>Disable Boot screen Animation</td>
+	<td>Disable windows logo on startup</td>
+ </tr>
+  <tr>
+	<td>Ustawienie dual boot czas na 3sek</td>
+	<td>Wyłącz windows insider experiments</td>
+ </tr>
+   <tr>
+	<td>Wyłącz śledzenie uruchamiania aplikacji</td>
+	<td>Wyłącz raporty dotyczące korzystania z odtwarzacza Windows Media Player</td>
+ </tr>
+    <tr>
+	<td>Wyłącz mozilla telemetry</td>
+	<td>Wyłącz raporty o złośliwym oprogramowaniu (defender)</td>
+ </tr>
+   <tr>
+	<td>Wyłącz dane diagnostyczne złośliwego oprogramowania (defender)</td>
+	<td>Wyłącz ustawienie zastępowania dla raportowania do MS MAPS</td>
+ </tr>
+   <tr>
+	<td>Wyłącz raportowanie spynet Defender</td>
+	<td>Nie wysyłaj próbek złośliwego oprogramowania do dalszej analizy</td>
+ </tr>
+   <tr>
+	<td>Wyłącz dławienie-powerthrottling (Intel 6gen i nowsze)</td>
+	<td></td>
+ </tr>
 </table>
 </br>
 <li>Niepotrzebne usługi ustawione na tryb wyłączony/ręczny: </li>  
@@ -161,6 +187,8 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 | Usługa PunkBuster (Anty-Cheat od EA) | `PnkBstrA` | Ręczny |  
 | Usługa Brave Update | `brave` `bravem` | Ręczny |
 | Usługa ASUS Update | `asus` `asusm` | Ręczny |
+| Usługa Adobe Update | `adobeupdateservice` | Ręczny |
+| Usługa Adobe FlashPlayer | `adobeflashplayerupdatesvc` | Ręczny |
 
 </br>
 <li>Usuwanie Bloatware (Preinstalowanych):</li>  
