@@ -531,15 +531,15 @@ del %AppData%\Battle.net\Logs /F /Q /S 2>nul
 del %AppData%\Battle.net\Errors /F /Q /S 2>nul
 
 del %AppData%\vstelemetry 2>nul
-del %LocalAppData%\Microsoft\VSApplicationInsights 2>nul
-del %ProgramData%\Microsoft\VSApplicationInsights 2>nul
-del %Temp%\Microsoft\VSApplicationInsights 2>nul
-del %Temp%\VSFaultInfo 2>nul
-del %Temp%\VSFeedbackPerfWatsonData 2>nul
-del %Temp%\VSFeedbackVSRTCLogs 2>nul
-del %Temp%\VSRemoteControl 2>nul
-del %Temp%\VSTelem 2>nul
-del %Temp%\VSTelem.Out 2>nul
+del %LocalAppData%\Microsoft\VSApplicationInsights /F /Q /S 2>nul
+del %ProgramData%\Microsoft\VSApplicationInsights  /F /Q /S  2>nul
+del %Temp%\Microsoft\VSApplicationInsights  /F /Q /S 2>nul
+del %Temp%\VSFaultInfo  /F /Q /S 2>nul
+del %Temp%\VSFeedbackPerfWatsonData  /F /Q /S 2>nul
+del %Temp%\VSFeedbackVSRTCLogs  /F /Q /S 2>nul
+del %Temp%\VSRemoteControl  /F /Q /S 2>nul
+del %Temp%\VSTelem /F /Q /S 2>nul
+del %Temp%\VSTelem.Out /F /Q /S 2>nul
 
 cls
 
