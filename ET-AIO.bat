@@ -34,9 +34,9 @@ title %version%
 
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto CheckVer
-echo. Run the script as an Administrator.
-set announcement=Run the script as an Administrator.
 
+set announcement=Run the script as an Administrator.
+echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
 REM Checks if it is running as administrator if not quit
 exit
@@ -54,9 +54,8 @@ if %ThisOS%==10 goto RestorePoint
 if %ThisOS%==11 goto RestorePoint
 if %ThisOS%==81 goto RestorePoint
 
-echo Unsupported version of the system
 set announcement=Unsupported version of the system
-
+echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
 exit
 
@@ -476,7 +475,7 @@ Del /S /F /Q %Windir%\Temp
 cls
 
 set announcement=Everything has been done. Reboot is recommended.
-
+echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40)
 
 exit
