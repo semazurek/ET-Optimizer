@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.1-blue?style=for-the-badge&"></a>
+<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.2-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -20,9 +20,7 @@ Download link: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https:/
 This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
 </br>
 
-<a href="#"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
-<a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-UA.md"><img src="https://user-images.githubusercontent.com/85984736/161204314-94a2c5cf-7585-422a-a22d-b677488b4bc9.png" width="50px" style="border: 1px solid black"></a>
 
 
 ## Benchmark
@@ -119,6 +117,34 @@ System RAM (Before ET Usage):
   <td>Disable Activity History</td>
   <td>Disable Automatic Updates for Microsoft Store apps</td>
  </tr>
+ <tr>
+	<td>Disable Boot screen Animation</td>
+	<td>Disable windows logo on startup</td>
+ </tr>
+  <tr>
+	<td>Set dual boot timeout 3sec</td>
+	<td>Disable windows insider experiments</td>
+ </tr>
+   <tr>
+	<td>Disable app launch tracking</td>
+	<td>Disable windows media player usage reports</td>
+ </tr>
+    <tr>
+	<td>Disable mozilla telemetry</td>
+	<td>Disable watson malware reports</td>
+ </tr>
+   <tr>
+	<td>Disable malware diagnostic data </td>
+	<td>Disable  setting override for reporting to Microsoft MAPS</td>
+ </tr>
+   <tr>
+	<td>Disable spynet Defender reporting</td>
+	<td>Do not send malware samples for further analysis</td>
+ </tr>
+   <tr>
+	<td>Disable powerthrottling (Intel 6gen and higher)</td>
+	<td></td>
+ </tr>
 </table>
 </br>
 <li>Unnecessary services set to disabled/manuall mode: </li>  
@@ -162,6 +188,8 @@ System RAM (Before ET Usage):
 | PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manuall |  
 | Brave Update service | `brave` `bravem` | Manuall |
 | ASUS Update service | `asus` `asusm` | Manuall |
+| Adobe Update Service | `adobeupdateservice` | Manuall |
+| Adobe FlashPlayer Service | `adobeflashplayerupdatesvc` | Manuall |
 
 </br>
 <li>Remove Bloatware Apps (Preinstalled):</li>  
