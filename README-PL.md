@@ -15,7 +15,7 @@ Ostatnio testowane/aktualizowane na:
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
 </ul> 
 </br>
-Pobierz: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One/blob/master/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.2/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
 Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu z GUI (2017)</a>
 </br>
