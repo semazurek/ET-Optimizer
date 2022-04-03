@@ -1,6 +1,6 @@
 # ET All-in-One Скрипт оптимізації
 
-<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.1-blue?style=for-the-badge&"></a>
+<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.2-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -15,15 +15,12 @@
 <li>Windows 8.1 Build 9600 (Часткова підтримка)</li>
 </ul> 
 </br>
-завантажити: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One/blob/master/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Pobierz: <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/semazurek/ET-All-in-One/blob/master/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
 Це продовження занедбаного <a href="https://youtu.be/SZLV0DbMyHw">проекту GUI (2017)</a>
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
-<a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
-<a href="#"><img src="https://user-images.githubusercontent.com/85984736/161204314-94a2c5cf-7585-422a-a22d-b677488b4bc9.png" width="50px" style="border: 1px solid black"></a>
-
 
 ## Тест
 <p align="center">
@@ -119,6 +116,34 @@
   <td>Вимкніть історію активності</td>
   <td>Вимкніть автоматичне оновлення програм із MS Store</td>
  </tr>
+  <tr>
+	<td>Вимкніть анімацію екрана завантаження</td>
+	<td>Вимкніть логотип Windows під час запуску</td>
+ </tr>
+  <tr>
+	<td>Встановити час очікування подвійного завантаження 3 секунди</td>
+	<td>Вимкніть інсайдерські експерименти Windows</td>
+ </tr>
+   <tr>
+	<td>Вимкнути відстеження запуску програми</td>
+	<td>Вимкнути звіти про використання Windows Media Player</td>
+ </tr>
+    <tr>
+	<td>Вимкніть телеметрію mozilla</td>
+	<td>Вимкніть звіти про шкідливе програмне забезпечення Watson</td>
+ </tr>
+   <tr>
+	<td>Вимкніть діагностичні дані зловмисного програмного забезпечення</td>
+	<td>Вимкнути заміну налаштувань для звітування в Microsoft MAPS</td>
+ </tr>
+   <tr>
+	<td>Вимкнути звіти Spynet Defender</td>
+	<td>Не надсилайте зразки шкідливих програм для подальшого аналізу</td>
+ </tr>
+   <tr>
+	<td>Вимкнути регулювання потужності (Intel 6gen і вище)</td>
+	<td></td>
+ </tr>
 </table>
 </br>
 <li>Непотрібні служби вимкнено/ручний режим:</li>  
@@ -162,6 +187,8 @@
 | PunkBuster (Анти-чіт від EA) | `PnkBstrA` | Manuall |  
 | Brave Update | `brave` `bravem` | Manuall |
 | ASUS Update | `asus` `asusm` | Manuall |
+| Adobe Update Service | `adobeupdateservice` | Manuall |
+| Adobe FlashPlayer Service | `adobeflashplayerupdatesvc` | Manuall |
 
 </br>
 <li>Видалення непотрібних додатків (попередньо встановлені):</li>  
