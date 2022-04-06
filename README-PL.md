@@ -22,7 +22,7 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
-## Test Wydajności
+## Test wydajności
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
@@ -117,8 +117,8 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
   <td>Wyłącz automatyczne aktualizacje dla aplikacji z MS Store</td>
  </tr>
   <tr>
-	<td>Disable Boot screen Animation</td>
-	<td>Disable windows logo on startup</td>
+	<td>Wyłącz animacje ekranu bootowania</td>
+	<td>Wyłącz windows logo przy uruchamianiu</td>
  </tr>
   <tr>
 	<td>Ustawienie dual boot czas na 3sek</td>
