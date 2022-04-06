@@ -547,6 +547,10 @@ del %Temp%\VSTelem.Out /F /Q /S 2>nul
 
 cls
 
+:: Cleaning Disk
+cleanmgr /autoclean
+start CCleaner.exe /AUTO
+
 set announcement=Everything has been done. Reboot is recommended.
 echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40)
