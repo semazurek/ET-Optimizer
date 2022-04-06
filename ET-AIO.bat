@@ -549,7 +549,8 @@ cls
 
 :: Cleaning Disk
 cleanmgr /autoclean
-start CCleaner.exe /AUTO
+if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
+if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
 
 set announcement=Everything has been done. Reboot is recommended.
 echo %announcement%
