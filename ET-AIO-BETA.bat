@@ -443,7 +443,7 @@ reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1F
 ::  Ads blocking via hosts file (AdAway)
 echo + [Setting] Ad blocking via hosts file
 PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt"
-if not exist C:\Windows\System32\Drivers\etc\hosts-copy-et copy C:\Windows\System32\Drivers\etc\hosts C:\Windows\System32\Drivers\etc\hosts-copy-et
+if not exist C:\Windows\System32\Drivers\etc\hosts-copy-et copy C:\Windows\System32\Drivers\etc\hosts C:\Windows\System32\Drivers\etc\hosts-copy-et >nul 2>nul
 copy hosts.txt C:\Windows\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
 
@@ -571,6 +571,7 @@ if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
 if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
 
 set announcement=Everything has been done. Reboot is recommended.
+echo ------------------------------------------------
 echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40) >nul 2>nul
 
