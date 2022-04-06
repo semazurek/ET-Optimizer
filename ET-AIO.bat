@@ -548,7 +548,9 @@ del %Temp%\VSTelem.Out /F /Q /S 2>nul
 cls
 
 :: Cleaning Disk
+echo Running CleanMgr
 cleanmgr /autoclean
+echo Checking for CCleaner
 if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
 if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
 
