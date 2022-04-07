@@ -535,9 +535,15 @@ reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for De
 :: Wargaming.net Game Center
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f >nul 2>nul
 
-::  TEMP/Logs/Cache Cleaning
+::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
+Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
+Del /S /F /Q %windir%\Prefetch >nul 2>nul
+
+:: Reseting Windows Store Cache
+WSReset.exe
+taskkill /f /im WinStore.App.exe >nul 2>nul
 
 del %AppData%\Origin\Telemetry /F /Q /S >nul 2>nul
 del %AppData%\Origin\Logs /F /Q /S >nul 2>nul
@@ -563,18 +569,21 @@ del %Temp%\VSRemoteControl  /F /Q /S >nul 2>nul
 del %Temp%\VSTelem /F /Q /S >nul 2>nul
 del %Temp%\VSTelem.Out /F /Q /S >nul 2>nul
 
-:: Cleaning Disk
+:: Cleaning Disk - cleanmgr
 echo ~ [Run] CleanMgr
 start cleanmgr.exe /autoclean
 
 if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
 if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
 
-set announcement=Everything has been done. Reboot is recommended.
 echo ------------------------------------------------
+PowerShell -Command "[Console]::Beep(523, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 300); Start-Sleep -Milliseconds 150; [Console]::Beep(415, 300); Start-Sleep -Milliseconds 150; [Console]::Beep(466, 300); Start-Sleep -Milliseconds 150; [Console]::Beep(523, 300); Start-Sleep -Milliseconds 25; [Console]::Beep(466, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 900)"
+
+set announcement=Everything has been done. Reboot is recommended.
 echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40) >nul 2>nul
 
-set announcement=The second run of the script will allow you to restore the all settings.
+set announcement=Second run of the script will allow you to restore all settings.
+echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40) >nul 2>nul
 exit
