@@ -563,11 +563,15 @@ del %Temp%\VSTelem /F /Q /S >nul 2>nul
 del %Temp%\VSTelem.Out /F /Q /S >nul 2>nul
 
 :: Cleaning Disk - cleanmgr
-echo ~ [Run] CleanMgr
+echo ~ [Run] CleanMgr - auto
 start cleanmgr.exe /autoclean
 
-if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
-if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
+if not exist "%programfiles%\CCleaner\CCleaner.exe" goto NoCC
+if not exist "%programfiles%\CCleaner\CCleaner64.exe" goto NoCC
+echo ~ [Run] CCleaner - auto
+start CCleaner.exe /AUTO
+
+:NoCC
 
 :: Disables several unnecessary components
 echo # [Disable] Several unnecessary components
