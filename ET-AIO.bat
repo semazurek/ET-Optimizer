@@ -420,26 +420,6 @@ set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftP
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
 ))
 
-::  Uninstall OneDrive 
-if exist %USERPROFILE%\OneDrive goto RemoveOneDrive
-if exist "%PROGRAMDATA%\Microsoft OneDrive" goto RemoveOneDrive
-
-goto Next
-
-:RemoveOneDrive
-taskkill.exe /F /IM "OneDrive.exe" > nul
-echo - [Remove] OneDrive
-if exist %SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE start /wait "" "%SYSTEMROOT%\SYSWOW64\ONEDRIVESETUP.EXE" /UNINSTALL
-if exist %SYSTEMROOT%\System32\OneDriveSetup.exe start /wait "" "%SYSTEMROOT%\System32\OneDriveSetup.exe" /UNINSTALL
-rd C:\OneDriveTemp /Q /S >NUL 2>&1
-rd "%USERPROFILE%\OneDrive" /Q /S >NUL 2>&1
-rd "%LOCALAPPDATA%\Microsoft\OneDrive" /Q /S >NUL 2>&1
-rd "%PROGRAMDATA%\Microsoft OneDrive" /Q /S >NUL 2>&1
-reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
-reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\ShellFolder" /f /v Attributes /t REG_DWORD /d 0 >NUL 2>&1
-
-:Next
-
 ::  Disabling Process Mitigation
 :: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
 echo # [Disable] Process Mitigation
