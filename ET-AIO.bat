@@ -577,7 +577,7 @@ if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
 if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
 
 echo ------------------------------------------------
-PowerShell -Command "[Console]::Beep(523, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 300); Start-Sleep -Milliseconds 150; [Console]::Beep(415, 300); Start-Sleep -Milliseconds 150; [Console]::Beep(466, 300); Start-Sleep -Milliseconds 150; [Console]::Beep(523, 300); Start-Sleep -Milliseconds 25; [Console]::Beep(466, 150); Start-Sleep -Milliseconds 25; [Console]::Beep(523, 900)"
+PowerShell -Command "[System.Console]::Beep(392,500); [System.Console]::Beep(440,500); [System.Console]::Beep(349.2,500); [System.Console]::Beep(174.6,700); [System.Console]::Beep(261.6,800)"
 
 set announcement=Everything has been done. Reboot is recommended.
 echo %announcement%
