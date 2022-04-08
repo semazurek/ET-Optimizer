@@ -57,7 +57,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
    <td>WiFi: Współdzielony HotSpot Auto-Connect: Wyłącz</td>
   </tr>
   <tr>
-   <td>Odinstaluj aplikację OneDrive </td>
+   <td>Wyłączenie dławienia-powerthrottling (Intel 6gen i nowsze)</td>
    <td>Aktualizacje systemu Windows do "Powiadomienie o zaplanowanym ponownym uruchomieniu".</td>
   </tr>
   <tr>
@@ -139,10 +139,6 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
    <tr>
 	<td>Wyłącz raportowanie spynet Defender</td>
 	<td>Nie wysyłaj próbek złośliwego oprogramowania do dalszej analizy</td>
- </tr>
-   <tr>
-	<td>Wyłącz dławienie-powerthrottling (Intel 6gen i nowsze)</td>
-	<td></td>
  </tr>
 </table>
 </br>
