@@ -420,13 +420,6 @@ set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftP
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
 ))
 
-:: Disables several unnecessary components
-echo # [Disable] Several unnecessary components
-set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer WCF-Services45 MSRDC-Infrastructure
-(for %%a in (%components%) do ( 
-   PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
-))
-
 ::  Uninstall OneDrive 
 if exist %USERPROFILE%\OneDrive goto RemoveOneDrive
 if exist "%PROGRAMDATA%\Microsoft OneDrive" goto RemoveOneDrive
@@ -575,6 +568,13 @@ start cleanmgr.exe /autoclean
 
 if exist "%programfiles%\CCleaner\CCleaner.exe" start CCleaner.exe /AUTO
 if exist "%programfiles%\CCleaner\CCleaner64.exe" start CCleaner.exe /AUTO
+
+:: Disables several unnecessary components
+echo # [Disable] Several unnecessary components
+set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer WCF-Services45 MSRDC-Infrastructure
+(for %%a in (%components%) do ( 
+   PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
+))
 
 echo ------------------------------------------------
 PowerShell -Command "[System.Console]::Beep(392,500); [System.Console]::Beep(440,500); [System.Console]::Beep(349.2,500); [System.Console]::Beep(174.6,700); [System.Console]::Beep(261.6,800)"
