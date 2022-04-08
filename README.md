@@ -58,7 +58,7 @@ System RAM (Before ET Usage):
    <td>WiFi: Shared HotSpot Auto-Connect: Disable</td>
   </tr>
   <tr>
-   <td>Uninstall OneDrive </td>
+   <td>Disable powerthrottling (Intel 6gen and higher)</td>
    <td>Windows Updates to "Notify to schedule restart"</td>
   </tr>
   <tr>
@@ -140,10 +140,6 @@ System RAM (Before ET Usage):
    <tr>
 	<td>Disable spynet Defender reporting</td>
 	<td>Do not send malware samples for further analysis</td>
- </tr>
-   <tr>
-	<td>Disable powerthrottling (Intel 6gen and higher)</td>
-	<td></td>
  </tr>
 </table>
 </br>
