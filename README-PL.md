@@ -163,7 +163,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 | Gigabyte Adjust Service (EasyTune) | `gadjservice`  | Wyłączony |
 | Usługa Adobe Updater | `AdobeARMservice`  | Wyłączony |
 | Usługa Corel License Validation | `PSI_SVC_2`  | Wyłączony |
-| Usługi geolokalizacyjne | `lfsvc` `wlidsvc`  | Wyłączony |
+| Usługi geolokalizacyjne | `lfsvc` | Wyłączony |
 | Usługa portfela | `WalletService`  | Wyłączony |
 | Usługa trybu pokazowego | `RetailDemo`  | Wyłączony |
 | Menedżer płatności i funkcji NFC/SE | `SEMgrSvc`  | Wyłączony |
