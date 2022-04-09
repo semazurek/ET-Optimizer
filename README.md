@@ -170,6 +170,7 @@ System RAM (Before ET Usage):
 | Management of payments and NFC | `SEMgrSvc`  | Disabled |
 | Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
 | Alljoyn Router Service | `AJRouter`  | Disabled |
+| Windows Search | `WSearch`  | Manuall |
 | Background Intelligent Transfer Service | `BITS`  | Manuall |
 | Security Accounts Manager | `SamSs` | Manuall |  
 | Telephony | `TapiSrv` | Manuall |  
