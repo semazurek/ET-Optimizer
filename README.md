@@ -164,7 +164,7 @@ System RAM (Before ET Usage):
 | Gigabyte Adjust Service (EasyTune) | `gadjservice`  | Disabled |
 | Adobe Updater Service | `AdobeARMservice`  | Disabled |
 | Corel License Validation Service | `PSI_SVC_2`  | Disabled |
-| Geolocation services | `lfsvc` `wlidsvc`  | Disabled |
+| Geolocation service | `lfsvc` | Disabled |
 | WalletService | `WalletService`  | Disabled |
 | Microsoft Retail Demo experience | `RetailDemo`  | Disabled |
 | Management of payments and NFC | `SEMgrSvc`  | Disabled |
