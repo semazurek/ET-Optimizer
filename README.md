@@ -205,7 +205,7 @@ System RAM (Before ET Usage):
 <li>Disables unnecessary components:</li>
 <ul></br>
 
-`Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer` `WCF-Services45`
+`Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer`
 
 </ul>
 
