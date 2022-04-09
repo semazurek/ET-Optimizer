@@ -39,7 +39,7 @@ IF %ERRORLEVEL% == 0 goto CheckVer
 
 set announcement=Run the script as an Administrator.
 echo %announcement%
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10 + 4096)
 :: Checks if it is running as administrator if not quit
 exit
 
@@ -58,7 +58,7 @@ if %ThisOS%==81 goto RestorePoint
 
 set announcement=Unsupported version of the system
 echo %announcement%
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10)
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10 + 4096)
 exit
 
 :: BackUp/Restore Point
@@ -71,7 +71,7 @@ if exist %programdata%\ET-dump.log goto OnceAgain
 echo [ET] %time% - %date% > %programdata%\ET-dump.log
 set announcement=Do you want to create a restore point?
 
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20) > status.log
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > status.log
 set /P choice=<status.log
 if exist status.log del status.log
 if %choice%==6 goto YesRestore
@@ -93,7 +93,7 @@ goto Start
 :OnceAgain
 set announcement=Do you want to restore the previous settings?
 
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20) > status.log
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > status.log
 set /P choice=<status.log
 if exist status.log del status.log
 if %choice%==6 goto BackUp
@@ -303,6 +303,10 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Ad
 :: Setting Lower Shutdown time
 echo + [Setting] Lower Shutdown time
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f >nul 2>nul
+
+:: Remove Old Device Drivers
+echo - [Remove] Old Device Drivers
+SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 
 if %ThisOS%==81 goto Skip4Win8
 
@@ -582,9 +586,9 @@ PowerShell -Command "[System.Console]::Beep(392,500); [System.Console]::Beep(440
 
 set announcement=Everything has been done. Reboot is recommended.
 echo %announcement%
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40) >nul 2>nul
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
 
 set announcement=Second run of the script will allow you to restore all settings.
 echo %announcement%
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40) >nul 2>nul
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
 exit
