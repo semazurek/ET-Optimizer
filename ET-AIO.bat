@@ -377,7 +377,7 @@ PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPack
 
 ::  Ads blocking via hosts file (AdAway)
 echo + [Setting] Ad blocking via hosts file
-PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt"
+PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt" >nul 2>nul
 if not exist C:\Windows\System32\Drivers\etc\hosts-copy-et copy C:\Windows\System32\Drivers\etc\hosts C:\Windows\System32\Drivers\etc\hosts-copy-et >nul 2>nul
 copy hosts.txt C:\Windows\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
