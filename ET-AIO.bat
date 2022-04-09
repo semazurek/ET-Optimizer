@@ -514,10 +514,6 @@ Del /S /F /Q %Windir%\Temp >nul 2>nul
 Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
 Del /S /F /Q %windir%\Prefetch >nul 2>nul
 
-:: Reseting Windows Store Cache
-WSReset.exe
-taskkill /f /im WinStore.App.exe >nul 2>nul
-
 del %AppData%\Origin\Telemetry /F /Q /S >nul 2>nul
 del %AppData%\Origin\Logs /F /Q /S >nul 2>nul
 del %AppData%\Origin\NucleusCache /F /Q /S >nul 2>nul
