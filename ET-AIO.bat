@@ -539,6 +539,26 @@ del %Temp%\VSRemoteControl  /F /Q /S >nul 2>nul
 del %Temp%\VSTelem /F /Q /S >nul 2>nul
 del %Temp%\VSTelem.Out /F /Q /S >nul 2>nul
 
+del %localappdata%\EpicGamesLauncher\Saved\Logs /F /Q /S >nul 2>nul
+del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >nul 2>nul
+
+Set "SExe="
+Set "SPth="
+For /F "Tokens=1,2*" %%A In ('Reg Query HKCU\SOFTWARE\Valve\Steam') Do (
+    If "%%A" Equ "SteamExe" Set "SExe=%%C"
+    If "%%A" Equ "SteamPath" Set "SPth=%%C")
+If Not Defined SExe goto NoSteam
+
+del /f /s /q "C:\%SPth%\appcache\httpcache\*.log.txt"
+del /f /s /q "C:\%SPth%\appcache\httpcache\*.log"
+del /f /s /q "C:\%SPth%\appcache\httpcache\*.mdmp"
+del /f /s /q "C:\%SPth%\appcache\librarycache\*"
+del %localappdata%\Steam\htmlcache\Code Cache /F /Q /S >nul 2>nul
+del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >nul 2>nul
+del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
+
+:NoSteam
+
 :: Cleaning Disk - cleanmgr
 echo ~ [Run] CleanMgr - auto
 start cleanmgr.exe /autoclean
