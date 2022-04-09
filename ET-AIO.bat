@@ -514,11 +514,14 @@ reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for De
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f >nul 2>nul
 
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
+echo - [Clean] Temp
 Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
+echo - [Clean] Windows Update downloads
 Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
+echo - [Clean] Prefetch
 Del /S /F /Q %windir%\Prefetch >nul 2>nul
-
+echo - [Clean] Cache/Logs
 del %AppData%\Origin\Telemetry /F /Q /S >nul 2>nul
 del %AppData%\Origin\Logs /F /Q /S >nul 2>nul
 del %AppData%\Origin\NucleusCache /F /Q /S >nul 2>nul
@@ -552,7 +555,7 @@ For /F "Tokens=1,2*" %%A In ('Reg Query HKCU\SOFTWARE\Valve\Steam') Do (
     If "%%A" Equ "SteamExe" Set "SExe=%%C"
     If "%%A" Equ "SteamPath" Set "SPth=%%C")
 If Not Defined SExe goto NoSteam
-
+echo - [Clean] Steam Cache/Logs
 del /f /s /q "C:\%SPth%\appcache\httpcache\*.log.txt" >nul 2>nul
 del /f /s /q "C:\%SPth%\appcache\httpcache\*.log" >nul 2>nul
 del /f /s /q "C:\%SPth%\appcache\httpcache\*.mdmp" >nul 2>nul
