@@ -204,7 +204,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 <li>Wyłączanie niepotrzebnych składników:</li>
 <ul></br>
 
-`Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer` `WCF-Services45`
+`Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer`
 
 </ul>
 
