@@ -409,7 +409,7 @@ set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservic
 
 :: Manuall
 echo + [Setting] Services to: Manuall Mode
-set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem asus asusm adobeupdateservice adobeflashplayerupdatesvc
+set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem asus asusm adobeupdateservice adobeflashplayerupdatesvc WSearch
 (for %%a in (%toManuall%) do ( 
    sc config %%a start= demand >nul 2>nul
 ))
