@@ -551,8 +551,8 @@ start CCleaner.exe /AUTO
 :NoCC
 
 :: Disables several unnecessary components
-echo # [Disable] Several unnecessary components
-set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer WCF-Services45 MSRDC-Infrastructure
+echo # [Disable] Unnecessary components
+set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer
 (for %%a in (%components%) do ( 
    PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
 ))
