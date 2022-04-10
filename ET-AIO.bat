@@ -555,7 +555,6 @@ For /F "Tokens=1,2*" %%A In ('Reg Query HKCU\SOFTWARE\Valve\Steam') Do (
     If "%%A" Equ "SteamExe" Set "SExe=%%C"
     If "%%A" Equ "SteamPath" Set "SPth=%%C")
 If Not Defined SExe goto NoSteam
-echo - [Clean] Steam Cache/Logs
 del /f /s /q "C:\%SPth%\appcache\httpcache\*.log.txt" >nul 2>nul
 del /f /s /q "C:\%SPth%\appcache\httpcache\*.log" >nul 2>nul
 del /f /s /q "C:\%SPth%\appcache\httpcache\*.mdmp" >nul 2>nul
