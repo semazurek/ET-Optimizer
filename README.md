@@ -15,7 +15,7 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.2/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.3/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
 This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
 </br>
