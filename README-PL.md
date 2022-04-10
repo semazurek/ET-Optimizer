@@ -1,6 +1,6 @@
 # ET All-in-One Skrypt Optymalizacyjny
 
-<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.2-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.3-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -129,7 +129,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 	<td>Wyłącz raporty dotyczące korzystania z odtwarzacza Windows Media Player</td>
  </tr>
     <tr>
-	<td>Wyłącz mozilla telemetry</td>
+	<td>Wyłącz Mozilla telemetry</td>
 	<td>Wyłącz raporty o złośliwym oprogramowaniu (defender)</td>
  </tr>
    <tr>
@@ -139,6 +139,14 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
    <tr>
 	<td>Wyłącz raportowanie spynet Defender</td>
 	<td>Nie wysyłaj próbek złośliwego oprogramowania do dalszej analizy</td>
+ </tr>
+    <tr>
+	<td>Usuwanie starych sterowników urządzeń</td>
+	<td>Wyłącz Skype telemetry</td>
+ </tr>
+ <tr>
+	<td>Wyłącz PowerShell telemetry</td>
+	<td></td>
  </tr>
 </table>
 </br>
