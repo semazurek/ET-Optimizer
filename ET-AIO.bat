@@ -31,8 +31,11 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 :: Created by Rikey
-set version=E.T. ver 4.2
+set version=E.T. ver 4.3
 title %version%
+
+set /a counter=1
+set /a alltodo=63
 
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto CheckVer
@@ -43,7 +46,7 @@ powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,""
 :: Checks if it is running as administrator if not quit
 exit
 
-:: Checking version of Windows (10, 11 = 10 8.1 = 6.3)
+:: Checking version of Windows (10 = 10/11, 6.3 = 8/8.1, 11 = Test )
 :CheckVer
 ver | findstr 10.0
 if %errorlevel%==0 set ThisOS=10
@@ -116,14 +119,15 @@ exit
 cls
 
 ::  Show file extensions in Explorer
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Show file extensions in Explorer
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable Transparency in taskbar, menu start etc
-echo # [Disable] Transparency in taskbar, menu start etc
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable windows animations, menu Start animations.
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Windows animations, menu Start animations.
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting  /t REG_DWORD /d 3 /f >nul 2>nul
 
@@ -137,15 +141,18 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\M
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
 
-::  Disable Edge WebWidget 
+::  Disable Edge WebWidget
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Edge WebWidget 
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v WebWidgetAllowed /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Setting power option to high for best performance
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Power option to high for best performance
 powercfg -setactive scheme_min
 
 ::  Enable All (Logical) Cores (Boot Advanced Options)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Enable All (Logical) Cores (Boot Advanced Options)
 wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
 set /P NOLP=<NumLogicalCores.txt
@@ -153,48 +160,59 @@ bcdedit /set {current} numproc %NOLP% >nul 2>nul
 if exist NumLogicalCores.txt del NumLogicalCores.txt
 
 :: Disable Boot screen Animation
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Boot screen Animation
 bcdedit /set bootux disabled >nul 2>nul
 
 :: Disable windows logo on startup
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Windows logo on startup
 bcdedit /set quietboot yes >nul 2>nul
 
 :: Dual boot timeout 3sec
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Dual boot timeout 3sec
 bcdedit /set timeout 3 >nul 2>nul
 
 :: Disable Hibernation/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Hibernation/Fast startup in Windows
 powercfg -hibernate off
 
 :: Disable windows insider experiments
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Windows Insider experiments
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System" /v "AllowExperimentation" /t REG_DWORD /d "0" /f >nul 2>nul
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowExperimentation" /v "value" /t "REG_DWORD" /d "0" /f >nul 2>nul
 
 :: Disable app launch tracking
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] App launch tracking
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /d "0" /t REG_DWORD /f >nul 2>nul
 
 :: Disable windows media player usage reports
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Windows media player usage reports
 reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f >nul 2>nul
 
 :: Disable mozilla telemetry
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Mozilla telemetry
 reg add HKLM\SOFTWARE\Policies\Mozilla\Firefox /v "DisableTelemetry" /t REG_DWORD /d "2" /f >nul 2>nul
 
 :: Disable powerthrottling (Intel 6gen and higher)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Powerthrottling (Intel 6gen and higher)
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul 2>nul
 
 :: Turn Off Background Apps
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Turn Off Background Apps
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled  /t REG_DWORD /d 1 /f >nul 2>nul
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: SCHEDULED TASKS tweaks (Updates, Telemetry etc)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] SCHEDULED TASKS tweaks (Updates, Telemetry etc)
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable >nul 2>nul
@@ -222,8 +240,11 @@ schtasks /Change /TN "AMDLinkUpdate" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable >nul 2>nul
+schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable >nul 2>nul
+schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable >nul 2>nul
 
 :: Remove Telemetry & Data Collection 
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Telemetry/Data Collection 
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f >nul 2>nul
@@ -240,28 +261,48 @@ reg add "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-L
 reg add "HKLM\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /t REG_DWORD /d 4 /f >nul 2>nul
 reg add "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /v "Start" /t REG_DWORD /d 4 /f >nul 2>nul
 
+:: Disable PowerShell Telemetry
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] PowerShell Telemetry
+setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul 2>nul
+
+:: Disable Skype Telemetry
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Skype Telemetry
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "TraceLevelThreshold" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype" /v "EnableTracing" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "EnableTracing" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype" /v "WPPFilePath" /t REG_SZ /d "%%SYSTEMDRIVE%%\TEMP\Tracing\WPPMedia" /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "WPPFilePath" /t REG_SZ /d "%%SYSTEMDRIVE%%\TEMP\WPPMedia" /f >nul 2>nul
+
 :: Settings -> Privacy -> General -> Let apps use my advertising ID...
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Let apps use my advertising ID
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  SmartScreen Filter for Store Apps: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] SmartScreen Filter for Store Apps
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Let websites provide locally...
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Let websites provide locally
 reg add "HKCU\Control Panel\International\User Profile" /v HttpAcceptLanguageOptOut /t REG_DWORD /d 1 /f >nul 2>nul
 
 ::  Send Microsoft info about how I write to help us improve typing and writing in the future
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Send Microsoft info about how I write
 reg add "HKCU\SOFTWARE\Microsoft\Input\TIPC" /v Enabled /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Handwriting recognition personalization
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Handwriting recognition personalization
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitInkCollection /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitTextCollection /t REG_DWORD /d 1 /f >nul 2>nul
 
 ::  Microsoft Edge settings
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Microsoft Edge settings for privacy
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" /v DoNotTrack /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\User\Default\SearchScopes" /v ShowSearchSuggestionsGlobal /t REG_DWORD /d 0 /f >nul 2>nul
@@ -269,89 +310,110 @@ reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Current
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v EnabledV9 /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable location sensor
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Location sensor
 reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v SensorPermissionState /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: WiFi Sense: HotSpot Sharing: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] WiFi Sense: HotSpot Sharing
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v value /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: WiFi Sense: Shared HotSpot Auto-Connect: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] WiFi Sense: Shared HotSpot Auto-Connect
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v value /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Change Windows Updates to "Notify to schedule restart"
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Windows Updates to "Notify to schedule restart"
 reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_DWORD /d 1 /f >nul 2>nul
 
 :: Disable P2P Update downlods outside of local network
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] P2P Update downlods outside of local network
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable News and Interests on Taskbar
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] News and Interests on Taskbar
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f >nul 2>nul
 
-:: Disable MRU lists (jump lists) of XAML apps in Start Menu 
+:: Disable MRU lists (jump lists) of XAML apps in Start Menu
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul 
 echo # [Disable] MRU lists (jump lists) of XAML apps in Start Menu 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Windows Explorer to start on This PC instead of Quick Access 
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Windows Explorer to start on This PC instead of Quick Access 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f >nul 2>nul
 
 :: Setting Lower Shutdown time
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Lower Shutdown time
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f >nul 2>nul
 
 :: Remove Old Device Drivers
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Remove] Old Device Drivers
 SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 
 if %ThisOS%==81 goto Skip4Win8
 
 :: Disable watson malware reports
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Watson malware reports
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericReports" /t REG_DWORD /d "2" /f >nul 2>nul
 
 :: Disable malware diagnostic data 
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Malware diagnostic data 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "2" /f >nul 2>nul
 
 :: Disable  setting override for reporting to Microsoft MAPS
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Setting override for reporting to Microsoft MAPS
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "LocalSettingOverrideSpynetReporting" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable spynet Defender reporting
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Spynet Defender reporting
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpynetReporting" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Do not send malware samples for further analysis
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Do not send malware samples for further analysis
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f >nul 2>nul
 
 ::  Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for 
 :: 0 = hide completely, 1 = show only icon, 2 = show long search box
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Hide the search box from taskbar.
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f >nul 2>nul
 
 ::  Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Sending speech, inking and typing samples to MS
 reg add "HKCU\SOFTWARE\Microsoft\Personalization\Settings" /v AcceptedPrivacyPolicy /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Prevents sending contacts to MS (so Cortana can compare speech etc samples)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Sending contacts to MS
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v HarvestContacts /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Immobilise Cortana 
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Cortana 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Get Even More Out of Windows Screen /W10
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Get Even More Out of Windows Screen
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable automatically installing suggested apps /W10
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Automatically installing suggested apps
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f >nul 2>nul
@@ -361,49 +423,58 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeli
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Start Menu Ads/Suggestions /W10
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Start Menu Ads/Suggestions
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Allowing Suggested Apps In WindowsInk Workspace
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Allowing Suggested Apps In WindowsInk Workspace
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Turning Off Windows Game Bar/DVR
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Windows Game Bar/DVR
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Removing Windows Game Bar 
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Remove] Windows Game Bar 
 PowerShell -Command "Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage"
 
 ::  Ads blocking via hosts file (AdAway)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Ad blocking via hosts file
 PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt" >nul 2>nul
-if not exist C:\Windows\System32\Drivers\etc\hosts-copy-et copy C:\Windows\System32\Drivers\etc\hosts C:\Windows\System32\Drivers\etc\hosts-copy-et >nul 2>nul
-copy hosts.txt C:\Windows\System32\Drivers\etc\hosts >nul 2>nul
+if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\Drivers\etc\hosts %windir%\System32\Drivers\etc\hosts-copy-et >nul 2>nul
+copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
 
 :Skip4Win8
 
 :: Disable Sticky Keys prompt
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Sticky Keys prompt
 reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f >nul 2>nul
 
 :: Disable Activity History
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Activity History
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Automatic Updates for Microsoft Store apps
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Automatic Updates for Microsoft Store apps
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f >nul 2>nul
 
 :: Disable Some Service:
 
 :: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Services to: Disable Mode
 set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax XblAuthManager XboxNetApiSvc XblGameSave WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
 (for %%a in (%toDisable%) do ( 
@@ -412,6 +483,7 @@ set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservic
 ))
 
 :: Manuall
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Services to: Manuall Mode
 set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem asus asusm adobeupdateservice adobeflashplayerupdatesvc WSearch
 (for %%a in (%toManuall%) do ( 
@@ -419,6 +491,7 @@ set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gup
 ))
 
 :: Remove Bloatware Apps (Preinstalled)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Remove] Bloatware Apps
 set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager Netflix PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF Facebook FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam SpotifyMusic PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok Instagram WhatsApp ToDo Teams
 (for %%a in (%listofbloatware%) do ( 
@@ -427,10 +500,12 @@ set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftP
 
 ::  Disabling Process Mitigation
 :: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Process Mitigation
 powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess >nul 2>nul
 
 :: Disabling unnecessary applications at startup
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Unnecessary applications at startup
 
 :: Java Update Checker x64
@@ -514,11 +589,16 @@ reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for De
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f >nul 2>nul
 
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Clean] Temp
 Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
+
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Clean] Windows Update downloads
 Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
+
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Clean] Prefetch/Cache/Logs
 Del /S /F /Q %windir%\Prefetch >nul 2>nul
 
@@ -566,17 +646,17 @@ del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
 :NoSteam
 
 :: Cleaning Disk - cleanmgr
-echo ~ [Run] CleanMgr - auto
 start cleanmgr.exe /autoclean
 
+:: Cleaning Disk - CCleaner
 if not exist "%programfiles%\CCleaner\CCleaner.exe" goto NoCC
 if not exist "%programfiles%\CCleaner\CCleaner64.exe" goto NoCC
-echo ~ [Run] CCleaner - auto
 start CCleaner.exe /AUTO
 
 :NoCC
 
 :: Disables several unnecessary components
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Unnecessary components
 set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer
 (for %%a in (%components%) do ( 
