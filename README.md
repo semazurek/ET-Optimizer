@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="#"><img src="https://img.shields.io/badge/RELEASE-v4.2-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.3-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -140,6 +140,14 @@ System RAM (Before ET Usage):
    <tr>
 	<td>Disable spynet Defender reporting</td>
 	<td>Do not send malware samples for further analysis</td>
+ </tr>
+     <tr>
+	<td>Remove Old Device Drivers</td>
+	<td>Disable Skype Telemetry</td>
+ </tr>
+ <tr>
+	<td>Disable PowerShell Telemetry</td>
+	<td></td>
  </tr>
 </table>
 </br>
