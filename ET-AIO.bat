@@ -519,9 +519,9 @@ Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
 echo - [Clean] Windows Update downloads
 Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
-echo - [Clean] Prefetch
+echo - [Clean] Prefetch/Cache/Logs
 Del /S /F /Q %windir%\Prefetch >nul 2>nul
-echo - [Clean] Cache/Logs
+
 del %AppData%\Origin\Telemetry /F /Q /S >nul 2>nul
 del %AppData%\Origin\Logs /F /Q /S >nul 2>nul
 del %AppData%\Origin\NucleusCache /F /Q /S >nul 2>nul
