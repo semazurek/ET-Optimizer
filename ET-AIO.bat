@@ -629,16 +629,6 @@ del %Temp%\VSTelem.Out /F /Q /S >nul 2>nul
 del %localappdata%\EpicGamesLauncher\Saved\Logs /F /Q /S >nul 2>nul
 del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >nul 2>nul
 
-Set "SExe="
-Set "SPth="
-For /F "Tokens=1,2*" %%A In ('Reg Query HKCU\SOFTWARE\Valve\Steam') Do (
-    If "%%A" Equ "SteamExe" Set "SExe=%%C"
-    If "%%A" Equ "SteamPath" Set "SPth=%%C")
-If Not Defined SExe goto NoSteam
-del /f /s /q "C:\%SPth%\appcache\httpcache\*.log.txt" >nul 2>nul
-del /f /s /q "C:\%SPth%\appcache\httpcache\*.log" >nul 2>nul
-del /f /s /q "C:\%SPth%\appcache\httpcache\*.mdmp" >nul 2>nul
-del /f /s /q "C:\%SPth%\appcache\librarycache\*" >nul 2>nul
 del %localappdata%\Steam\htmlcache\Code Cache /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
