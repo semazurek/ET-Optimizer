@@ -112,6 +112,7 @@ exit
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
 :: #############################################################################################################################################
 
+
 :: HERE YOU CAN DO ANYTHING YOU WANT:
 
 :Start
@@ -358,7 +359,7 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Remove] Old Device Drivers
 SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 
-if %ThisOS%==81 goto Skip4Win8
+:: if %ThisOS%==81 goto Skip4Win8
 
 :: Disable watson malware reports
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -453,7 +454,7 @@ if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\
 copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
 
-:Skip4Win8
+::Skip4Win8
 
 :: Disable Sticky Keys prompt
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
