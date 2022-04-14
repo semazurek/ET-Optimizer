@@ -46,17 +46,14 @@ powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,""
 :: Checks if it is running as administrator if not quit
 exit
 
-:: Checking version of Windows (10 = 10/11, 6.3 = 8/8.1, 11 = Test )
+:: Checking version of Windows
 :CheckVer
-ver | findstr 10.0
+systeminfo | findstr "Windows" | findstr "Name" | findstr "10 11" >nul 2>nul
 if %errorlevel%==0 set ThisOS=10
-ver | findstr 11.0
-if %errorlevel%==0 set ThisOS=11
-ver | findstr 6.3
+systeminfo | findstr "Windows" | findstr "Name" | findstr "8" >nul 2>nul
 if %errorlevel%==0 set ThisOS=81
 
 if %ThisOS%==10 goto RestorePoint
-if %ThisOS%==11 goto RestorePoint
 if %ThisOS%==81 goto RestorePoint
 
 set announcement=Unsupported version of the system
@@ -359,7 +356,7 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Remove] Old Device Drivers
 SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 
-:: if %ThisOS%==81 goto Skip4Win8
+if %ThisOS%==81 goto Skip4Win8
 
 :: Disable watson malware reports
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -454,7 +451,7 @@ if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\
 copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
 
-::Skip4Win8
+:Skip4Win8
 
 :: Disable Sticky Keys prompt
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
