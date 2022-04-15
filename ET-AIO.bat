@@ -597,6 +597,8 @@ reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Googl
 :: Microsoft Edge Installer (Update)
 reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Microsoft Edge" /f >nul 2>nul
 
+:: Discord Update
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /f >nul 2>nul
 
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
