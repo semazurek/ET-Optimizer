@@ -446,7 +446,7 @@ PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPack
 ::  Ads blocking via hosts file (AdAway)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Ad blocking via hosts file
-PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -o hosts.txt" >nul 2>nul
+PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -OutFile hosts.txt" >nul 2>nul
 if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\Drivers\etc\hosts %windir%\System32\Drivers\etc\hosts-copy-et >nul 2>nul
 copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
@@ -584,6 +584,19 @@ reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for De
 
 :: Wargaming.net Game Center
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f >nul 2>nul
+
+:: uTorrent Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ut" /f >nul 2>nul
+
+:: Lync - Skype for Business Autorun
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Lync" /f >nul 2>nul
+
+:: Google Chrome Installer (Update)
+reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Google Chrome" /f >nul 2>nul
+
+:: Microsoft Edge Installer (Update)
+reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Microsoft Edge" /f >nul 2>nul
+
 
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
