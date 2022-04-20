@@ -1,5 +1,4 @@
 @echo off
-mode con cols=80 lines=20
 
 :: #############################################################################################################################################
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
@@ -31,14 +30,15 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 :: Created by Rikey
-set version=E.T. ver 4.3
+set version=E.T. ver 4.4
 title %version%
 
 set /a counter=1
-set /a alltodo=63
+set /a alltodo=0
+:: alltodo all 63
 
 NET SESSION >nul 2>&1
-IF %ERRORLEVEL% == 0 goto CheckVer
+IF %ERRORLEVEL% == 0 goto GUIChoice
 
 set announcement=Run the script as an Administrator.
 echo %announcement%
@@ -46,20 +46,24 @@ powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,""
 :: Checks if it is running as administrator if not quit
 exit
 
-:: Checking version of Windows
-:CheckVer
-systeminfo | findstr "Windows" | findstr "Name" | findstr "10 11" >nul 2>nul
-if %errorlevel%==0 set ThisOS=10
-systeminfo | findstr "Windows" | findstr "Name" | findstr "8" >nul 2>nul
-if %errorlevel%==0 set ThisOS=81
+:: GUI Windows Form
+:GUIChoice
+:: Cleaning help files
+del %programdata%\*.lbool >nul 2>nul
 
-if %ThisOS%==10 goto RestorePoint
-if %ThisOS%==81 goto RestorePoint
+Powershell -Command "[reflection.assembly]::LoadWithPartialName( 'System.Windows.Forms'); [reflection.assembly]::loadwithpartialname('System.Drawing'); function do_start { If ($chck1.Checked -eq 1) {echo True > %programdata%\etvisualtweaks.lbool}; If ($chck2.Checked -eq 1) {echo True > %programdata%\etperformancetweaks.lbool}; If ($chck3.Checked -eq 1) {echo True > %programdata%\ettelemetry.lbool}; If ($chck4.Checked -eq 1) {echo True > %programdata%\etwindowsgamebar.lbool}; If ($chck5.Checked -eq 1) {echo True > %programdata%\etservices.lbool}; If ($chck6.Checked -eq 1) {echo True > %programdata%\etbloatware.lbool}; If ($chck7.Checked -eq 1) {echo True > %programdata%\etstartup.lbool}; If ($chck8.Checked -eq 1) {echo True > %programdata%\etcleaning.lbool}; If ($chck9.Checked -eq 1) {echo True > %programdata%\etadblock.lbool}; $form.close()}; $form= New-Object Windows.Forms.Form; $form.Size = New-Object System.Drawing.Size(400,350); $form.StartPosition = 'CenterScreen'; $form.FormBorderStyle = 'FixedDialog'; $form.Text = '%version%'; $form.AutoSizeMode = 'GrowAndShrink'; $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen; $form.MinimizeBox = $false; $form.MaximizeBox = $false; $Font = New-Object System.Drawing.Font('Arial',12,[System.Drawing.FontStyle]::Regular); $form.Font = $font; $B_close = New-Object Windows.Forms.Button; $B_close.text = 'Start'; $B_close.Location = New-Object Drawing.Point 150,270; $B_close.add_click({do_start}); $form.controls.add($B_close); $label2 = New-Object Windows.Forms.Label; $label2.Location = New-Object Drawing.Point 10,10; $label2.Size = New-Object Drawing.Point 350,25; $label2.text = 'Select improvements to execute:'; $label2.Font = New-Object System.Drawing.Font('Arial',12,[System.Drawing.FontStyle]::Bold); $form.controls.add($label2); $chck1 = New-Object Windows.Forms.Checkbox; $chck1.Location = New-Object Drawing.Point 20,35; $chck1.Size = New-Object Drawing.Point 350,25; $chck1.Text = 'Enable Visual Tweaks'; $chck1.TabIndex = 0; $chck1.Checked = $true; $form.controls.add($chck1); $chck2 = New-Object Windows.Forms.Checkbox; $chck2.Location = New-Object Drawing.Point 20,60; $chck2.Size = New-Object Drawing.Point 350,25; $chck2.Text = 'Enable Performance Tweaks'; $chck2.TabIndex = 1; $chck2.Checked = $true; $form.controls.add($chck2); $chck3 = New-Object Windows.Forms.Checkbox; $chck3.Location = New-Object Drawing.Point 20,85; $chck3.Size = New-Object Drawing.Point 350,25; $chck3.Text = 'Disable Data Collection/Telemetry'; $chck3.TabIndex = 2; $chck3.Checked = $true; $form.controls.add($chck3); $chck4 = New-Object Windows.Forms.Checkbox; $chck4.Location = New-Object Drawing.Point 20,110; $chck4.Size = New-Object Drawing.Point 350,25; $chck4.Text = 'Remove Windows Game Bar/DVR'; $chck4.TabIndex = 3; $chck4.Checked = $true; $form.controls.add($chck4); $chck5 = New-Object Windows.Forms.Checkbox; $chck5.Location = New-Object Drawing.Point 20,135; $chck5.Size = New-Object Drawing.Point 350,25; $chck5.Text = 'Enable Services Tweaks'; $chck5.TabIndex = 4; $chck5.Checked = $true; $form.controls.add($chck5); $chck6 = New-Object Windows.Forms.Checkbox; $chck6.Location = New-Object Drawing.Point 20,160; $chck6.Size = New-Object Drawing.Point 350,25; $chck6.Text = 'Remove Bloatware (Preinstalled)'; $chck6.TabIndex = 5; $chck6.Checked = $true; $form.controls.add($chck6); $chck7 = New-Object Windows.Forms.Checkbox; $chck7.Location = New-Object Drawing.Point 20,185; $chck7.Size = New-Object Drawing.Point 350,25; $chck7.Text = 'Disable Unnecessary Startup Apps'; $chck7.TabIndex = 6; $chck7.Checked = $true; $form.controls.add($chck7); $chck8 = New-Object Windows.Forms.Checkbox; $chck8.Location = New-Object Drawing.Point 20,210; $chck8.Size = New-Object Drawing.Point 350,25; $chck8.Text = 'Clean Temp/Logs/Cache/Prefetch/Updates'; $chck8.TabIndex = 7; $chck8.Checked = $true; $form.controls.add($chck8); $chck9 = New-Object Windows.Forms.Checkbox; $chck9.Location = New-Object Drawing.Point 20,235; $chck9.Size = New-Object Drawing.Point 350,25; $chck9.Text = 'Enable Lite-Adblock (AdAway)'; $chck9.TabIndex = 8; $chck9.Checked = $false; $form.controls.add($chck9); $form.TopMost = $true; $form.ShowDialog(); ">nul 2>nul
 
-set announcement=Unsupported version of the system
-echo %announcement%
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10 + 4096)
-exit
+if not exist %programdata%\*.lbool exit.
+
+if exist %programdata%\etadblock.lbool set /a alltodo+=1
+if exist %programdata%\etcleaning.lbool set /a alltodo+=3
+if exist %programdata%\etstartup.lbool set /a alltodo+=1
+if exist %programdata%\etbloatware.lbool set /a alltodo+=1
+if exist %programdata%\etservices.lbool set /a alltodo+=2
+if exist %programdata%\etwindowsgamebar.lbool set /a alltodo+=2
+if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
+if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=28
+if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=8
 
 :: BackUp/Restore Point
 :RestorePoint
@@ -71,9 +75,9 @@ if exist %programdata%\ET-dump.log goto OnceAgain
 echo [ET] %time% - %date% > %programdata%\ET-dump.log
 set announcement=Do you want to create a restore point?
 
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > status.log
-set /P choice=<status.log
-if exist status.log del status.log
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > %temp%\status.log
+set /P choice=<%temp%\status.log
+if exist %temp%\status.log del %temp%\status.log
 if %choice%==6 goto YesRestore
 if %choice%==7 goto NoRestore
 goto FirstTime
@@ -93,15 +97,15 @@ goto Start
 :OnceAgain
 set announcement=Do you want to restore the previous settings?
 
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > status.log
-set /P choice=<status.log
+powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > %temp%\status.log
+set /P choice=<%temp%\status.log
 if exist status.log del status.log
 if %choice%==6 goto BackUp
 if %choice%==7 goto Start
 goto OnceAgain
 
 :BackUp
-del %programdata%\ET-dump.log
+del %programdata%\ET-dump.log >nul 2>nul
 cls
 rstrui.exe
 exit
@@ -115,7 +119,11 @@ exit
 :Start
 cls
 
-::  Show file extensions in Explorer
+if not exist %programdata%\etvisualtweaks.lbool goto SkipVisualTweaks
+
+:VisualTweaks
+
+:: Show file extensions in Explorer
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Show file extensions in Explorer
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f >nul 2>nul
@@ -169,6 +177,14 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Windows logo on startup
 bcdedit /set quietboot yes >nul 2>nul
 
+del %programdata%\etvisualtweaks.lbool >nul 2>nul
+
+:SkipVisualTweaks
+
+if not exist %programdata%\etperformancetweaks.lbool goto SkipPerformanceTweaks
+
+:PerformanceTweaks
+
 ::  Disable Edge WebWidget
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Edge WebWidget 
@@ -208,16 +224,6 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] App launch tracking
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /d "0" /t REG_DWORD /f >nul 2>nul
 
-:: Disable windows media player usage reports
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows media player usage reports
-reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f >nul 2>nul
-
-:: Disable mozilla telemetry
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Mozilla telemetry
-reg add HKLM\SOFTWARE\Policies\Mozilla\Firefox /v "DisableTelemetry" /t REG_DWORD /d "2" /f >nul 2>nul
-
 :: Disable powerthrottling (Intel 6gen and higher)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Powerthrottling (Intel 6gen and higher)
@@ -228,6 +234,122 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Turn Off Background Apps
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled  /t REG_DWORD /d 1 /f >nul 2>nul
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disable Sticky Keys prompt
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Sticky Keys prompt
+reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f >nul 2>nul
+
+:: Disable Activity History
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Activity History
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disable Automatic Updates for Microsoft Store apps
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Automatic Updates for Microsoft Store apps
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f >nul 2>nul
+
+::  SmartScreen Filter for Store Apps: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] SmartScreen Filter for Store Apps
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f >nul 2>nul
+
+::  Let websites provide locally...
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Let websites provide locally
+reg add "HKCU\Control Panel\International\User Profile" /v HttpAcceptLanguageOptOut /t REG_DWORD /d 1 /f >nul 2>nul
+
+::  Microsoft Edge settings
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Microsoft Edge settings for privacy
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" /v DoNotTrack /t REG_DWORD /d 1 /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\User\Default\SearchScopes" /v ShowSearchSuggestionsGlobal /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead" /v FPEnabled /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v EnabledV9 /t REG_DWORD /d 0 /f >nul 2>nul
+
+::  Disable location sensor
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Location sensor
+reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v SensorPermissionState /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: WiFi Sense: HotSpot Sharing: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] WiFi Sense: HotSpot Sharing
+reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v value /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: WiFi Sense: Shared HotSpot Auto-Connect: Disable
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] WiFi Sense: Shared HotSpot Auto-Connect
+reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v value /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Change Windows Updates to "Notify to schedule restart"
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Windows Updates to "Notify to schedule restart"
+reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_DWORD /d 1 /f >nul 2>nul
+
+:: Disable P2P Update downloads outside of local network
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] P2P Update downlods outside of local network
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Setting Lower Shutdown time
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Lower Shutdown time
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f >nul 2>nul
+
+:: Remove Old Device Drivers
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo - [Remove] Old Device Drivers
+SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
+
+:: Disable Get Even More Out of Windows Screen /W10
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Get Even More Out of Windows Screen
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disable automatically installing suggested apps /W10
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Automatically installing suggested apps
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disable Start Menu Ads/Suggestions /W10
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Start Menu Ads/Suggestions
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disable Allowing Suggested Apps In WindowsInk Workspace
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Allowing Suggested Apps In WindowsInk Workspace
+reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disables several unnecessary components
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Unnecessary components
+set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer
+(for %%a in (%components%) do ( 
+   PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
+))
+
+::  Disabling Process Mitigation
+:: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Process Mitigation
+powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess >nul 2>nul
+
+del %programdata%\etperformancetweaks.lbool >nul 2>nul
+
+:SkipPerformanceTweaks
+
+if not exist %programdata%\ettelemetry.lbool goto SkipTelemetry
+
+:Telemetry
 
 :: SCHEDULED TASKS tweaks (Updates, Telemetry etc)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -293,20 +415,20 @@ reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "EnableTra
 reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype" /v "WPPFilePath" /t REG_SZ /d "%%SYSTEMDRIVE%%\TEMP\Tracing\WPPMedia" /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "WPPFilePath" /t REG_SZ /d "%%SYSTEMDRIVE%%\TEMP\WPPMedia" /f >nul 2>nul
 
+:: Disable windows media player usage reports
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Windows media player usage reports
+reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f >nul 2>nul
+
+:: Disable mozilla telemetry
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Mozilla telemetry
+reg add HKLM\SOFTWARE\Policies\Mozilla\Firefox /v "DisableTelemetry" /t REG_DWORD /d "2" /f >nul 2>nul
+
 :: Settings -> Privacy -> General -> Let apps use my advertising ID...
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Let apps use my advertising ID
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>nul
-
-::  SmartScreen Filter for Store Apps: Disable
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] SmartScreen Filter for Store Apps
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f >nul 2>nul
-
-::  Let websites provide locally...
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Let websites provide locally
-reg add "HKCU\Control Panel\International\User Profile" /v HttpAcceptLanguageOptOut /t REG_DWORD /d 1 /f >nul 2>nul
 
 ::  Send Microsoft info about how I write to help us improve typing and writing in the future
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -318,51 +440,6 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Handwriting recognition personalization
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitInkCollection /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitTextCollection /t REG_DWORD /d 1 /f >nul 2>nul
-
-::  Microsoft Edge settings
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Microsoft Edge settings for privacy
-reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" /v DoNotTrack /t REG_DWORD /d 1 /f >nul 2>nul
-reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\User\Default\SearchScopes" /v ShowSearchSuggestionsGlobal /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead" /v FPEnabled /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v EnabledV9 /t REG_DWORD /d 0 /f >nul 2>nul
-
-::  Disable location sensor
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Location sensor
-reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v SensorPermissionState /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: WiFi Sense: HotSpot Sharing: Disable
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] WiFi Sense: HotSpot Sharing
-reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v value /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: WiFi Sense: Shared HotSpot Auto-Connect: Disable
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] WiFi Sense: Shared HotSpot Auto-Connect
-reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v value /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Change Windows Updates to "Notify to schedule restart"
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Windows Updates to "Notify to schedule restart"
-reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_DWORD /d 1 /f >nul 2>nul
-
-:: Disable P2P Update downloads outside of local network
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] P2P Update downlods outside of local network
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Setting Lower Shutdown time
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Lower Shutdown time
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f >nul 2>nul
-
-:: Remove Old Device Drivers
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Remove] Old Device Drivers
-SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
-
-if %ThisOS%==81 goto Skip4Win8
 
 :: Disable watson malware reports
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -404,31 +481,13 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Cortana 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f >nul 2>nul
 
-:: Disable Get Even More Out of Windows Screen /W10
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Get Even More Out of Windows Screen
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+del %programdata%\ettelemetry.lbool >nul 2>nul
 
-:: Disable automatically installing suggested apps /W10
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Automatically installing suggested apps
-reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f >nul 2>nul
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+:SkipTelemetry
 
-:: Disable Start Menu Ads/Suggestions /W10
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Start Menu Ads/Suggestions
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>nul
+if not exist %programdata%\etwindowsgamebar.lbool goto SkipWindowsGameBar
 
-:: Disable Allowing Suggested Apps In WindowsInk Workspace
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Allowing Suggested Apps In WindowsInk Workspace
-reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f >nul 2>nul
+:WindowsGameBar
 
 :: Turning Off Windows Game Bar/DVR
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -443,6 +502,14 @@ PowerShell -Command "Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage"
 
+del %programdata%\etwindowsgamebar.lbool >nul 2>nul
+
+:SkipWindowsGameBar
+
+if not exist %programdata%\etadblock.lbool goto SkipAdblock
+
+:Adblock
+
 ::  Ads blocking via hosts file (AdAway)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Ad blocking via hosts file
@@ -451,24 +518,15 @@ if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\
 copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
 if exist hosts.txt del hosts.txt
 
-:Skip4Win8
+del %programdata%\etadblock.lbool >nul 2>nul
 
-:: Disable Sticky Keys prompt
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Sticky Keys prompt
-reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f >nul 2>nul
-
-:: Disable Activity History
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Activity History
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Disable Automatic Updates for Microsoft Store apps
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Automatic Updates for Microsoft Store apps
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f >nul 2>nul
+:SkipAdblock
 
 :: Disable Some Service:
+
+if not exist %programdata%\etservices.lbool goto SkipServices
+
+:Services
 
 :: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -487,6 +545,14 @@ set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gup
    sc config %%a start= demand >nul 2>nul
 ))
 
+del %programdata%\etservices.lbool >nul 2>nul
+
+:SkipServices
+
+if not exist %programdata%\etbloatware.lbool goto SkipBloatware
+
+:Bloatware
+
 :: Remove Bloatware Apps (Preinstalled)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Remove] Bloatware Apps
@@ -495,11 +561,13 @@ set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftP
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
 ))
 
-::  Disabling Process Mitigation
-:: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Process Mitigation
-powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess >nul 2>nul
+del %programdata%\etbloatware.lbool >nul 2>nul
+
+:SkipBloatware
+
+if not exist %programdata%\etstartup.lbool goto SkipStartUp
+
+:StartUp
 
 :: Disabling unnecessary applications at startup
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -600,6 +668,14 @@ reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Micro
 :: Discord Update
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /f >nul 2>nul
 
+del %programdata%\etstartup.lbool >nul 2>nul
+
+:SkipStartUp
+
+if not exist %programdata%\etcleaning.lbool goto SkipCleaning
+
+:Cleaning
+
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo - [Clean] Temp
@@ -655,22 +731,13 @@ start CCleaner.exe /AUTO
 
 :NoCC
 
-:: Disables several unnecessary components
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Unnecessary components
-set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer
-(for %%a in (%components%) do ( 
-   PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
-))
+del %programdata%\etcleaning.lbool >nul 2>nul
+
+:SkipCleaning
 
 echo ------------------------------------------------
-PowerShell -Command "[System.Console]::Beep(392,500); [System.Console]::Beep(440,500); [System.Console]::Beep(349.2,500); [System.Console]::Beep(174.6,700); [System.Console]::Beep(261.6,800)"
 
 set announcement=Everything has been done. Reboot is recommended.
-echo %announcement%
-powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
-
-set announcement=Second run of the script will allow you to restore all settings.
 echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
 exit
