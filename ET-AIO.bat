@@ -138,6 +138,37 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\M
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
 
+:: Disable News and Interests on Taskbar
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] News and Interests on Taskbar
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f >nul 2>nul
+
+:: Disable MRU lists (jump lists) of XAML apps in Start Menu
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul 
+echo # [Disable] MRU lists (jump lists) of XAML apps in Start Menu 
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f >nul 2>nul
+
+::  Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for 
+:: 0 = hide completely, 1 = show only icon, 2 = show long search box
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Hide the search box from taskbar.
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f >nul 2>nul
+
+:: Windows Explorer to start on This PC instead of Quick Access 
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Windows Explorer to start on This PC instead of Quick Access 
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f >nul 2>nul
+
+:: Disable Boot screen Animation
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Boot screen Animation
+bcdedit /set bootux disabled >nul 2>nul
+
+:: Disable windows logo on startup
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Windows logo on startup
+bcdedit /set quietboot yes >nul 2>nul
+
 ::  Disable Edge WebWidget
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Edge WebWidget 
@@ -155,16 +186,6 @@ wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.tx
 set /P NOLP=<NumLogicalCores.txt
 bcdedit /set {current} numproc %NOLP% >nul 2>nul
 if exist NumLogicalCores.txt del NumLogicalCores.txt
-
-:: Disable Boot screen Animation
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Boot screen Animation
-bcdedit /set bootux disabled >nul 2>nul
-
-:: Disable windows logo on startup
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows logo on startup
-bcdedit /set quietboot yes >nul 2>nul
 
 :: Dual boot timeout 3sec
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -326,25 +347,10 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Windows Updates to "Notify to schedule restart"
 reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_DWORD /d 1 /f >nul 2>nul
 
-:: Disable P2P Update downlods outside of local network
+:: Disable P2P Update downloads outside of local network
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] P2P Update downlods outside of local network
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Disable News and Interests on Taskbar
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] News and Interests on Taskbar
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Disable MRU lists (jump lists) of XAML apps in Start Menu
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul 
-echo # [Disable] MRU lists (jump lists) of XAML apps in Start Menu 
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Windows Explorer to start on This PC instead of Quick Access 
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Windows Explorer to start on This PC instead of Quick Access 
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f >nul 2>nul
 
 :: Setting Lower Shutdown time
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -382,12 +388,6 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpynetRep
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Do not send malware samples for further analysis
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f >nul 2>nul
-
-::  Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for 
-:: 0 = hide completely, 1 = show only icon, 2 = show long search box
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Hide the search box from taskbar.
-reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f >nul 2>nul
 
 ::  Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -644,8 +644,6 @@ del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\Code Cache /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
-
-:NoSteam
 
 :: Cleaning Disk - cleanmgr
 start cleanmgr.exe /autoclean
