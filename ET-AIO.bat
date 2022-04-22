@@ -648,6 +648,9 @@ reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Micro
 :: Discord Update
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /f >nul 2>nul
 
+:: Ubisoft Game Launcher
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Ubisoft Game Launcher" /f >nul 2>nul
+
 del %programdata%\etstartup.lbool >nul 2>nul
 
 :SkipStartUp
