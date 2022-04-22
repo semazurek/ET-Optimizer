@@ -1,6 +1,6 @@
 # ET All-in-One Skrypt Optymalizacyjny
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.4-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.5-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -146,7 +146,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
  </tr>
  <tr>
 	<td>Wyłącz PowerShell telemetry</td>
-	<td></td>
+	<td>Usuwanie OneDrive</td>
  </tr>
 </table>
 </br>
