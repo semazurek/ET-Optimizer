@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.4-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.5-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -82,7 +82,7 @@ System RAM (Before ET Usage):
    <td>Windows Explorer on start on This PC</td>
   </tr>
   <tr>
-   <td>Remove Telemetry & Data Collection </td>
+   <td>Disable Telemetry & Data Collection </td>
    <td>Disable Get Even More Out of Windows Screen</td>
   </tr>
   <tr>
@@ -147,7 +147,7 @@ System RAM (Before ET Usage):
  </tr>
  <tr>
 	<td>Disable PowerShell Telemetry</td>
-	<td></td>
+	<td>Remove OneDrive</td>
  </tr>
 </table>
 </br>
