@@ -35,7 +35,7 @@ title %version%
 
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 64
+:: alltodo all 65
 
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto GUIChoice
@@ -62,7 +62,7 @@ if exist %programdata%\etbloatware.lbool set /a alltodo+=1
 if exist %programdata%\etservices.lbool set /a alltodo+=2
 if exist %programdata%\etwindowsgamebar.lbool set /a alltodo+=2
 if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
-if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=28
+if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=29
 if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=8
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 
@@ -321,6 +321,13 @@ set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Feature
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo # [Disable] Process Mitigation
 powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess >nul 2>nul
+
+:: Defragmenting the File Indexing Service database file
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Defragment Database Indexing Service File 
+net stop wsearch >nul 2>nul
+esentutl /d C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb >nul 2>nul
+net start wsearch >nul 2>nul
 
 del %programdata%\etperformancetweaks.lbool >nul 2>nul
 
@@ -702,6 +709,16 @@ del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\Code Cache /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >nul 2>nul
 del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
+
+del %localappdata%\Yarn\Cache /F /Q /S >nul 2>nul
+
+del %appdata%\Microsoft\Teams\Cache /F /Q /S >nul 2>nul
+
+del %programdata%\GOG.com\Galaxy\webcache /F /Q /S >nul 2>nul
+
+del %programdata%\GOG.com\Galaxy\logs /F /Q /S >nul 2>nul
+
+del /f /s /q %systemroot%\System32\DriverStore\FileRepository\*.* >nul 2>nul
 
 :: Cleaning Disk - cleanmgr
 start cleanmgr.exe /autoclean
