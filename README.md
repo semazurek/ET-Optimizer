@@ -149,6 +149,10 @@ System RAM (Before ET Usage):
 	<td>Disable PowerShell Telemetry</td>
 	<td>Remove OneDrive</td>
  </tr>
+<tr>
+	<td>Defragment Database Indexing Service File</td>
+	<td></td>
+</tr>	
 </table>
 </br>
 <li>Unnecessary services set to disabled/manuall mode: </li>  
