@@ -148,6 +148,10 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
 	<td>Wyłącz PowerShell telemetry</td>
 	<td>Usuwanie OneDrive</td>
  </tr>
+<tr>
+	<td>Defragmentacja pliku usługi indeksowania windows</td>
+	<td></td>
+</tr>	
 </table>
 </br>
 <li>Niepotrzebne usługi ustawione na tryb wyłączony/ręczny: </li>  
