@@ -63,7 +63,7 @@ if exist %programdata%\etservices.lbool set /a alltodo+=2
 if exist %programdata%\etwindowsgamebar.lbool set /a alltodo+=2
 if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
 if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=29
-if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=8
+if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=6
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 
 :: BackUp/Restore Point First Time Run Asking
@@ -145,16 +145,6 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTas
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Windows Explorer to start on This PC instead of Quick Access 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f >nul 2>nul
-
-:: Disable Boot screen Animation
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Boot screen Animation
-bcdedit /set bootux disabled >nul 2>nul
-
-:: Disable windows logo on startup
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows logo on startup
-bcdedit /set quietboot yes >nul 2>nul
 
 del %programdata%\etvisualtweaks.lbool >nul 2>nul
 
@@ -539,13 +529,19 @@ if not exist %programdata%\etbloatware.lbool goto SkipBloatware
 
 :Bloatware
 
-:: Remove Bloatware Apps (Preinstalled)
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+setlocal enabledelayedexpansion
+
+:: Remove Bloatware Apps (Preinstalled) 68 apps
 echo - [Remove] Bloatware Apps
+
 set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok ToDo
 (for %%a in (%listofbloatware%) do ( 
+	set /a insidecount+=1 >nul 2>nul
+	title %version% [%counter%/%alltodo%] [!insidecount!/68]
    PowerShell -Command "Get-AppxPackage *%%a* | Remove-AppxPackage"
 ))
+
+set /a counter+=1 >nul 2>nul
 
 del %programdata%\etbloatware.lbool >nul 2>nul
 
