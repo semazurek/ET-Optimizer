@@ -117,10 +117,6 @@ System RAM (Before ET Usage):
   <td>Disable Activity History</td>
   <td>Disable Automatic Updates for Microsoft Store apps</td>
  </tr>
- <tr>
-	<td>Disable Boot screen Animation</td>
-	<td>Disable windows logo on startup</td>
- </tr>
   <tr>
 	<td>Set dual boot timeout 3sec</td>
 	<td>Disable windows insider experiments</td>
