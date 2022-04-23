@@ -720,6 +720,8 @@ del %programdata%\GOG.com\Galaxy\logs /F /Q /S >nul 2>nul
 
 del /f /s /q %systemroot%\System32\DriverStore\FileRepository\*.* >nul 2>nul
 
+del %localappdata%\Microsoft\Windows\WebCache /F /Q /S >nul 2>nul
+
 :: Cleaning Disk - cleanmgr
 start cleanmgr.exe /autoclean
 
