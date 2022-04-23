@@ -117,10 +117,6 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
   <td>Wyłącz automatyczne aktualizacje dla aplikacji z MS Store</td>
  </tr>
   <tr>
-	<td>Wyłącz animacje ekranu bootowania</td>
-	<td>Wyłącz windows logo przy uruchamianiu</td>
- </tr>
-  <tr>
 	<td>Ustawienie dual boot czas na 3sek</td>
 	<td>Wyłącz windows insider experiments</td>
  </tr>
