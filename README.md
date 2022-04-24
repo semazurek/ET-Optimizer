@@ -147,7 +147,7 @@ System RAM (Before ET Usage):
  </tr>
 <tr>
 	<td>Defragment Database Indexing Service File</td>
-	<td></td>
+	<td>Disable transparent in taskbar/menu start</td>
 </tr>	
 </table>
 </br>
