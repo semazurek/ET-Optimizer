@@ -35,7 +35,7 @@ title %version%
 
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 65
+:: alltodo all 64
 
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto GUIChoice
@@ -64,7 +64,7 @@ if exist %programdata%\etservices.lbool set /a alltodo+=2
 if exist %programdata%\etwindowsgamebar.lbool set /a alltodo+=2
 if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
 if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=29
-if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=6
+if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=7
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 
 :: BackUp/Restore Point First Time Run Asking
@@ -109,7 +109,10 @@ echo + [Setting] Show file extensions in Explorer
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable Transparency in taskbar, menu start etc
-reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v EnableTransparency /t REG_DWORD /d 0 /f >nul 2>nul
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Disable Transparency in taskbar/menu start
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable windows animations, menu Start animations.
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
