@@ -749,6 +749,10 @@ rd "%LocalAppData%\Microsoft\OneDrive" /Q /S 1>NUL 2>NUL
 rd "%ProgramData%\Microsoft OneDrive" /Q /S 1>NUL 2>NUL
 rd "%systemdrive%\OneDriveTemp" /Q /S 1>NUL 2>NUL
 
+::Remove OneDrive leftovers in explorer left side panel
+reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >nul 2>nul
+
 del %programdata%\etonedrive.lbool >nul 2>nul
 
 :SkipOneDrive
