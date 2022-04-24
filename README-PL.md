@@ -146,7 +146,7 @@ Zużycie RAMu (Przed zastosowaniem skryptu):
  </tr>
 <tr>
 	<td>Defragmentacja pliku usługi indeksowania windows</td>
-	<td></td>
+	<td>Wyłącz przezroczystość w menu start i pasku zadań</td>
 </tr>	
 </table>
 </br>
