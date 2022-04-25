@@ -717,8 +717,6 @@ del %appdata%\Microsoft\Teams\Cache /F /Q /S >nul 2>nul
 del %programdata%\GOG.com\Galaxy\webcache /F /Q /S >nul 2>nul
 del %programdata%\GOG.com\Galaxy\logs /F /Q /S >nul 2>nul
 
-del /f /s /q %systemroot%\System32\DriverStore\FileRepository\*.* >nul 2>nul
-
 del %localappdata%\Microsoft\Windows\WebCache /F /Q /S >nul 2>nul
 
 :: Cleaning Disk - cleanmgr
