@@ -27,6 +27,9 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/168447771-56978e33-a3f8-4c91-8fa2-5db8198e8014.png" width="400">
+
+<img src="https://user-images.githubusercontent.com/85984736/168447777-3508c678-2a6c-4a5e-922e-d3a37d72f72f.png" width="400">
 </p>
 Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (1:35 czas działania)</br></br>
 Zużycie RAMu (Po zastosowaniu skryptu):
