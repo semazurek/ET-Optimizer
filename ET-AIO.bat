@@ -37,8 +37,21 @@ set /a counter=1
 set /a alltodo=0
 :: alltodo all 64
 
+::First Admin Check
 NET SESSION >nul 2>&1
 IF %ERRORLEVEL% == 0 goto GUIChoice
+
+::Second Admin Check (old)
+    IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
+>nul 2>&1 "%SYSTEMROOT%\SysWOW64\cacls.exe" "%SYSTEMROOT%\SysWOW64\config\system"
+) ELSE (
+>nul 2>&1 "%SYSTEMROOT%\system32\cacls.exe" "%SYSTEMROOT%\system32\config\system"
+)
+
+if '%errorlevel%' NEQ '0' (
+    echo Requesting administrative privileges...
+    goto UACPrompt
+) else ( goto GUIChoice )
 
 set announcement=Run the script as an Administrator.
 echo %announcement%
