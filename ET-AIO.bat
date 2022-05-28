@@ -290,6 +290,9 @@ echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 
 echo $form.ShowDialog^(^);
 )>GUI.ps1
 
+::Force PS authorization for scripts
+Powershell -Command "set-executionpolicy remotesigned"
+cls
 echo Selection window has been initiated
 Powershell -Command ".\GUI.ps1 %version%" >nul 2>nul
 
