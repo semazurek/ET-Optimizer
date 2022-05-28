@@ -38,7 +38,7 @@ System RAM Usage (After ET):
  <li>Windows 10: 1/4 GB</li>
  <li>Windows 11: 1.4/4 GB</li>
 </ul>
-System RAM Usage(Before ET):
+System RAM Usage (Before ET):
 <ul>
  <li>Windows 10: 1.6/4 GB</li>
  <li>Windows 11: 2/4 GB</li>
