@@ -30,12 +30,15 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 :: Created by Rikey
-set version=E.T. ver 4.5
+:: https://github.com/semazurek/ET-All-in-One-Optimizer
+:: https://www.paypal.com/paypalme/rikey
+
+set version=E.T. ver 4.6
 title %version%
 
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 64
+:: alltodo all 66
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -49,8 +52,8 @@ IF %ERRORLEVEL% == 0 goto GUIChoice
 )
 
 if '%errorlevel%' NEQ '0' (
-    echo Requesting administrative privileges...
-    goto UACPrompt
+   echo Requesting administrative privileges...
+   goto UACPrompt
 ) else ( goto GUIChoice )
 
 set announcement=Run the script as an Administrator.
@@ -59,12 +62,236 @@ powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,""
 :: Checks if it is running as administrator if not quit
 exit
 
-:: GUI Windows Form
+:: GUI Window Form
 :GUIChoice
 :: Cleaning help files
 del %programdata%\*.lbool >nul 2>nul
+if exist GUI.ps1 del GUI.ps1 >nul 2>nul
 
-Powershell -Command "[reflection.assembly]::LoadWithPartialName( 'System.Windows.Forms'); [reflection.assembly]::loadwithpartialname('System.Drawing'); function do_start { If ($chck1.Checked -eq 1) {echo True > %programdata%\etvisualtweaks.lbool}; If ($chck2.Checked -eq 1) {echo True > %programdata%\etperformancetweaks.lbool}; If ($chck3.Checked -eq 1) {echo True > %programdata%\ettelemetry.lbool}; If ($chck4.Checked -eq 1) {echo True > %programdata%\etwindowsgamebar.lbool}; If ($chck5.Checked -eq 1) {echo True > %programdata%\etservices.lbool}; If ($chck6.Checked -eq 1) {echo True > %programdata%\etbloatware.lbool}; If ($chck7.Checked -eq 1) {echo True > %programdata%\etstartup.lbool}; If ($chck8.Checked -eq 1) {echo True > %programdata%\etcleaning.lbool}; If ($chck9.Checked -eq 1) {echo True > %programdata%\etadblock.lbool}; If ($chck10.Checked -eq 1) {echo True > %programdata%\etonedrive.lbool}; $form.close()}; $form= New-Object Windows.Forms.Form; $form.Size = New-Object System.Drawing.Size(350,395); $form.StartPosition = 'CenterScreen'; $form.FormBorderStyle = 'FixedDialog'; $form.Text = '%version%'; $form.AutoSizeMode = 'GrowAndShrink'; $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen; $form.MinimizeBox = $false; $form.MaximizeBox = $false; $Font = New-Object System.Drawing.Font('Arial',11,[System.Drawing.FontStyle]::Regular); $form.Font = $font; $B_close = New-Object Windows.Forms.Button; $B_close.text = 'Start'; $B_close.Location = New-Object Drawing.Point 130,315; $B_close.add_click({do_start}); $form.controls.add($B_close); $label2 = New-Object Windows.Forms.Label; $label2.Location = New-Object Drawing.Point 10,32; $label2.Size = New-Object Drawing.Point 320,25; $label2.text = 'Select improvements to execute:'; $label2.Font = New-Object System.Drawing.Font('Arial',11,[System.Drawing.FontStyle]::Bold); $form.controls.add($label2); $chck1 = New-Object Windows.Forms.Checkbox; $chck1.Location = New-Object Drawing.Point 20,55; $chck1.Size = New-Object Drawing.Point 320,25; $chck1.Text = 'Enable Visual Tweaks'; $chck1.TabIndex = 0; $chck1.Checked = $true; $form.controls.add($chck1); $chck2 = New-Object Windows.Forms.Checkbox; $chck2.Location = New-Object Drawing.Point 20,80; $chck2.Size = New-Object Drawing.Point 320,25; $chck2.Text = 'Enable Performance Tweaks'; $chck2.TabIndex = 1; $chck2.Checked = $true; $form.controls.add($chck2); $chck3 = New-Object Windows.Forms.Checkbox; $chck3.Location = New-Object Drawing.Point 20,105; $chck3.Size = New-Object Drawing.Point 320,25; $chck3.Text = 'Disable Data Collection/Telemetry'; $chck3.TabIndex = 2; $chck3.Checked = $true; $form.controls.add($chck3); $chck4 = New-Object Windows.Forms.Checkbox; $chck4.Location = New-Object Drawing.Point 20,130; $chck4.Size = New-Object Drawing.Point 320,25; $chck4.Text = 'Remove Windows Game Bar/DVR'; $chck4.TabIndex = 3; $chck4.Checked = $true; $form.controls.add($chck4); $chck5 = New-Object Windows.Forms.Checkbox; $chck5.Location = New-Object Drawing.Point 20,155; $chck5.Size = New-Object Drawing.Point 320,25; $chck5.Text = 'Enable Services Tweaks'; $chck5.TabIndex = 4; $chck5.Checked = $true; $form.controls.add($chck5); $chck6 = New-Object Windows.Forms.Checkbox; $chck6.Location = New-Object Drawing.Point 20,180; $chck6.Size = New-Object Drawing.Point 320,25; $chck6.Text = 'Remove Bloatware (Preinstalled)'; $chck6.TabIndex = 5; $chck6.Checked = $true; $form.controls.add($chck6); $chck7 = New-Object Windows.Forms.Checkbox; $chck7.Location = New-Object Drawing.Point 20,205; $chck7.Size = New-Object Drawing.Point 320,25; $chck7.Text = 'Disable Unnecessary Startup Apps'; $chck7.TabIndex = 6; $chck7.Checked = $true; $form.controls.add($chck7); $chck8 = New-Object Windows.Forms.Checkbox; $chck8.Location = New-Object Drawing.Point 20,230; $chck8.Size = New-Object Drawing.Point 320,25; $chck8.Text = 'Clean Temp/Cache/Prefetch/Updates'; $chck8.TabIndex = 7; $chck8.Checked = $true; $form.controls.add($chck8); $chck9 = New-Object Windows.Forms.Checkbox; $chck9.Location = New-Object Drawing.Point 20,255; $chck9.Size = New-Object Drawing.Point 320,25; $chck9.Text = 'Enable Lite-Adblock (AdAway)'; $chck9.TabIndex = 8; $chck9.Checked = $false; $form.controls.add($chck9); $chck10 = New-Object Windows.Forms.Checkbox; $chck10.Location = New-Object Drawing.Point 20,280; $chck10.Size = New-Object Drawing.Point 320,25; $chck10.Text = 'Remove Microsoft OneDrive'; $chck10.TabIndex = 9; $chck10.Checked = $false; $form.controls.add($chck10); function About {$aboutForm = New-Object System.Windows.Forms.Form; $aboutFormExit = New-Object System.Windows.Forms.Button; $aboutFormImage = New-Object System.Windows.Forms.PictureBox; $aboutFormNameLabel = New-Object System.Windows.Forms.Label; $aboutFormText = New-Object System.Windows.Forms.Label; $aboutFormText2 = New-Object System.Windows.Forms.Label; $aboutForm.MinimizeBox = $false; $aboutForm.MaximizeBox = $false; $aboutForm.TopMost = $true; $aboutForm.AutoSizeMode = 'GrowAndShrink'; $aboutForm.FormBorderStyle = 'FixedDialog'; $aboutForm.AcceptButton = $aboutFormExit; $aboutForm.CancelButton = $aboutFormExit; $aboutForm.ClientSize = '350, 110'; $aboutForm.ControlBox = $false; $aboutForm.ShowInTaskBar = $false; $aboutForm.StartPosition = 'CenterParent'; $aboutForm.Text = 'About'; $aboutForm.Add_Load($aboutForm_Load); $aboutFormNameLabel.Font = New-Object Drawing.Font('Arial', 9, [System.Drawing.FontStyle]::Bold); $aboutFormNameLabel.Location = '110, 10'; $aboutFormNameLabel.Size = '200, 18'; $aboutFormNameLabel.Text = '       E.T. All in One'; $aboutForm.Controls.Add($aboutFormNameLabel); $aboutFormText.Location = '100, 30'; $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; $aboutForm.Controls.Add($aboutFormText); $aboutFormText2.Location = '100, 50'; $aboutFormText2.Size = '300, 20'; $aboutFormText2.Text = '      GitHub.com/semazurek'; $aboutForm.Controls.Add($aboutFormText2); $aboutFormExit.Location = '135, 75'; $aboutFormExit.Text = 'OK'; $aboutForm.Controls.Add($aboutFormExit); [void]$aboutForm.ShowDialog()}; function addMenuItem { param([ref]$ParentItem, [string]$ItemName='', [string]$ItemText='', [scriptblock]$ScriptBlock=$null ) [System.Windows.Forms.ToolStripMenuItem]$private:menuItem=` New-Object System.Windows.Forms.ToolStripMenuItem; $private:menuItem.Name =$ItemName; $private:menuItem.Text =$ItemText; if ($ScriptBlock -ne $null) { $private:menuItem.add_Click(([System.EventHandler]$handler=` $ScriptBlock));}; if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Value).Items.Add($private:menuItem);} return $private:menuItem; }; function Backup{vssadmin delete shadows /All /Quiet; powershell.exe -Command 'Enable-ComputerRestore -Drive %systemdrive%'; powershell.exe -ExecutionPolicy Bypass -Command 'Checkpoint-Computer -Description 'ET-RestorePoint' -RestorePointType 'MODIFY_SETTINGS''; powershell (New-Object -ComObject Wscript.Shell).Popup('''Backup has been created.''',0,'''%version%''',0x40 + 4096); echo [ET] %time% - %date% > %programdata%\ET-dump.log}; [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); [scriptblock]$exit= {$form.Close()}; [scriptblock]$backup= {Backup}; [scriptblock]$restore= {rstrui.exe}; [scriptblock]$about= {About}; (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Backup' -ScriptBlock $backup); (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Restore' -ScriptBlock $restore); (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about); (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit); $form.ShowDialog();">nul 2>nul
+:: PowerShell Window.Forms Code exported into .ps1
+(
+echo $versionPS=$args[0]+' '+$args[1]+' '+$args[2];
+echo [reflection.assembly]::LoadWithPartialName^( 'System.Windows.Forms'^); 
+echo [reflection.assembly]::loadwithpartialname^('System.Drawing'^); 
+
+echo function do_start { 
+echo If ^($chck1.Checked -eq 1^) {echo True ^> $Env:programdata\etvisualtweaks.lbool}; 
+echo If ^($chck2.Checked -eq 1^) {echo True ^> $Env:programdata\etperformancetweaks.lbool}; 
+echo If ^($chck3.Checked -eq 1^) {echo True ^> $Env:programdata\ettelemetry.lbool}; 
+echo If ^($chck4.Checked -eq 1^) {echo True ^> $Env:programdata\etwindowsgamebar.lbool}; 
+echo If ^($chck5.Checked -eq 1^) {echo True ^> $Env:programdata\etservices.lbool}; 
+echo If ^($chck6.Checked -eq 1^) {echo True ^> $Env:programdata\etbloatware.lbool}; 
+echo If ^($chck7.Checked -eq 1^) {echo True ^> $Env:programdata\etstartup.lbool}; 
+echo If ^($chck8.Checked -eq 1^) {echo True ^> $Env:programdata\etcleaning.lbool}; 
+echo If ^($chck9.Checked -eq 1^) {echo True ^> $Env:programdata\etadblock.lbool}; 
+echo If ^($chck10.Checked -eq 1^) {echo True ^> $Env:programdata\etonedrive.lbool}; 
+echo If ^($chck11.Checked -eq 1^) {echo True ^> $Env:programdata\etxbxservices.lbool}; 
+echo If ^($chck12.Checked -eq 1^) {echo True ^> $Env:programdata\etdnsone.lbool}; 
+echo $form.close^(^)
+echo }; 
+echo $form= New-Object Windows.Forms.Form; 
+echo $form.Size = New-Object System.Drawing.Size^(350,440^); 
+echo $form.StartPosition = 'CenterScreen'; 
+echo $form.FormBorderStyle = 'FixedDialog'; 
+echo $form.Text = $versionPS; 
+echo $form.AutoSizeMode = 'GrowAndShrink'; 
+echo $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen; 
+echo $form.MinimizeBox = $false; 
+echo $form.MaximizeBox = $false; 
+echo $Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Regular^); 
+echo $form.Font = $font; 
+
+echo $B_close = New-Object Windows.Forms.Button; 
+echo $B_close.text = 'Start'; 
+echo $B_close.Location = New-Object Drawing.Point 170,365; 
+echo $B_close.Size = New-Object Drawing.Point 100,25;
+echo $B_close.add_click^({do_start}^); $form.controls.add^($B_close^); 
+
+echo $B_checkall = New-Object Windows.Forms.Button; 
+echo $B_checkall.text = 'Select All'; 
+echo $B_checkall.Location = New-Object Drawing.Point 60,365; 
+echo $B_checkall.Size = New-Object Drawing.Point 100,25;
+echo $B_checkall.add_click^({
+echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; 
+echo $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; $chck11.Checked = $true; $chck12.Checked = $true; 
+echo $B_checkall.Visible = $false;
+echo $B_uncheckall.Visible = $true;
+echo }^); 
+echo $form.controls.add^($B_checkall^);
+
+echo $B_uncheckall = New-Object Windows.Forms.Button; 
+echo $B_uncheckall.text = 'Unselect All'; 
+echo $B_uncheckall.Location = New-Object Drawing.Point 60,365; 
+echo $B_uncheckall.Size = New-Object Drawing.Point 100,25;
+echo $B_uncheckall.add_click^({
+echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; 
+echo $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; $chck11.Checked = $false; $chck12.Checked = $false; 
+echo $B_checkall.Visible = $true;
+echo $B_uncheckall.Visible = $false;
+echo }^); 
+echo $form.controls.add^($B_uncheckall^);
+
+echo $B_uncheckall.Visible = $false;
+echo $label2 = New-Object Windows.Forms.Label; 
+echo $label2.Location = New-Object Drawing.Point 10,32; 
+echo $label2.Size = New-Object Drawing.Point 270,25; 
+echo $label2.text = 'Select improvements to execute:'; 
+echo $label2.Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Bold^); 
+echo $form.controls.add^($label2^); 
+
+echo $chck1 = New-Object Windows.Forms.Checkbox; 
+echo $chck1.Location = New-Object Drawing.Point 20,55; 
+echo $chck1.Size = New-Object Drawing.Point 270,25; 
+echo $chck1.Text = 'Enable Visual Tweaks'; 
+echo $chck1.TabIndex = 0; 
+echo $chck1.Checked = $true; 
+echo $form.controls.add^($chck1^); 
+
+echo $chck2 = New-Object Windows.Forms.Checkbox; 
+echo $chck2.Location = New-Object Drawing.Point 20,80; 
+echo $chck2.Size = New-Object Drawing.Point 270,25; 
+echo $chck2.Text = 'Enable Performance Tweaks'; 
+echo $chck2.TabIndex = 1; 
+echo $chck2.Checked = $true; 
+echo $form.controls.add^($chck2^); 
+
+echo $chck3 = New-Object Windows.Forms.Checkbox; 
+echo $chck3.Location = New-Object Drawing.Point 20,105; 
+echo $chck3.Size = New-Object Drawing.Point 270,25; 
+echo $chck3.Text = 'Disable Data Collection/Telemetry'; 
+echo $chck3.TabIndex = 2; 
+echo $chck3.Checked = $true; 
+echo $form.controls.add^($chck3^); 
+
+echo $chck4 = New-Object Windows.Forms.Checkbox; 
+echo $chck4.Location = New-Object Drawing.Point 20,130; 
+echo $chck4.Size = New-Object Drawing.Point 270,25; 
+echo $chck4.Text = 'Remove Windows Game Bar/DVR'; 
+echo $chck4.TabIndex = 3; 
+echo $chck4.Checked = $true; 
+echo $form.controls.add^($chck4^); 
+
+echo $chck5 = New-Object Windows.Forms.Checkbox; 
+echo $chck5.Location = New-Object Drawing.Point 20,155; 
+echo $chck5.Size = New-Object Drawing.Point 270,25; 
+echo $chck5.Text = 'Enable Services Tweaks'; 
+echo $chck5.TabIndex = 4; 
+echo $chck5.Checked = $true; 
+echo $form.controls.add^($chck5^); 
+
+echo $chck6 = New-Object Windows.Forms.Checkbox; 
+echo $chck6.Location = New-Object Drawing.Point 20,180; 
+echo $chck6.Size = New-Object Drawing.Point 270,25; 
+echo $chck6.Text = 'Remove Bloatware ^(Preinstalled^)'; 
+echo $chck6.TabIndex = 5; 
+echo $chck6.Checked = $true; 
+echo $form.controls.add^($chck6^); 
+
+echo $chck7 = New-Object Windows.Forms.Checkbox; 
+echo $chck7.Location = New-Object Drawing.Point 20,205; 
+echo $chck7.Size = New-Object Drawing.Point 270,25; 
+echo $chck7.Text = 'Disable Unnecessary Startup Apps'; 
+echo $chck7.TabIndex = 6; 
+echo $chck7.Checked = $true; 
+echo $form.controls.add^($chck7^); 
+
+echo $chck8 = New-Object Windows.Forms.Checkbox; 
+echo $chck8.Location = New-Object Drawing.Point 20,230; 
+echo $chck8.Size = New-Object Drawing.Point 275,25; 
+echo $chck8.Text = 'Clean Temp/Cache/Prefetch/Updates'; 
+echo $chck8.TabIndex = 7; 
+echo $chck8.Checked = $true; 
+echo $form.controls.add^($chck8^); 
+
+echo $chck9 = New-Object Windows.Forms.Checkbox; 
+echo $chck9.Location = New-Object Drawing.Point 20,255; 
+echo $chck9.Size = New-Object Drawing.Point 270,25; 
+echo $chck9.Text = 'Enable Lite-Adblock ^(AdAway^)'; 
+echo $chck9.TabIndex = 8; 
+echo $chck9.Checked = $false; 
+echo $form.controls.add^($chck9^); 
+
+echo $chck10 = New-Object Windows.Forms.Checkbox; 
+echo $chck10.Location = New-Object Drawing.Point 20,280; 
+echo $chck10.Size = New-Object Drawing.Point 270,25; 
+echo $chck10.Text = 'Remove Microsoft OneDrive'; 
+echo $chck10.TabIndex = 9; 
+echo $chck10.Checked = $false; 
+echo $form.controls.add^($chck10^); 
+
+echo $chck11 = New-Object Windows.Forms.Checkbox; 
+echo $chck11.Location = New-Object Drawing.Point 20,305; 
+echo $chck11.Size = New-Object Drawing.Point 270,25; 
+echo $chck11.Text = 'Disable Xbox Services'; 
+echo $chck11.TabIndex = 10; 
+echo $chck11.Checked = $false; 
+echo $form.controls.add^($chck11^); 
+
+
+echo $chck12 = New-Object Windows.Forms.Checkbox; 
+echo $chck12.Location = New-Object Drawing.Point 20,330; 
+echo $chck12.Size = New-Object Drawing.Point 270,25; 
+echo $chck12.Text = 'Enable Fast/Secure DNS ^(1.1.1.1^)'; 
+echo $chck12.TabIndex = 11; 
+echo $chck12.Checked = $false; 
+echo $form.controls.add^($chck12^); 
+
+
+echo function About {
+echo $aboutForm = New-Object System.Windows.Forms.Form; 
+echo $aboutFormExit = New-Object System.Windows.Forms.Button; 
+echo $aboutFormImage = New-Object System.Windows.Forms.PictureBox; 
+echo $aboutFormNameLabel = New-Object System.Windows.Forms.Label; 
+echo $aboutFormText = New-Object System.Windows.Forms.Label; 
+echo $aboutFormText2 = New-Object System.Windows.Forms.Label; 
+echo $aboutForm.MinimizeBox = $false; 
+echo $aboutForm.MaximizeBox = $false; 
+echo $aboutForm.TopMost = $true; 
+echo $aboutForm.AutoSizeMode = 'GrowAndShrink'; 
+echo $aboutForm.FormBorderStyle = 'FixedDialog'; 
+echo $aboutForm.AcceptButton = $aboutFormExit; 
+echo $aboutForm.CancelButton = $aboutFormExit; 
+echo $aboutForm.ClientSize = '350, 110'; 
+echo $aboutForm.ControlBox = $false; 
+echo $aboutForm.ShowInTaskBar = $false; 
+echo $aboutForm.StartPosition = 'CenterParent'; 
+echo $aboutForm.Text = 'About'; $aboutForm.Add_Load^($aboutForm_Load^); 
+echo $aboutFormNameLabel.Font = New-Object Drawing.Font^('Arial', 9, [System.Drawing.FontStyle]::Bold^); 
+echo $aboutFormNameLabel.Location = '110, 10'; 
+echo $aboutFormNameLabel.Size = '200, 18'; 
+echo $aboutFormNameLabel.Text = '       E.T. All in One'; 
+echo $aboutForm.Controls.Add^($aboutFormNameLabel^); 
+echo $aboutFormText.Location = '100, 30'; 
+echo $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
+echo $aboutForm.Controls.Add^($aboutFormText^); 
+echo $aboutFormText2.Location = '100, 50'; 
+echo $aboutFormText2.Size = '300, 20'; 
+echo $aboutFormText2.Text = '      GitHub.com/semazurek'; 
+echo $aboutForm.Controls.Add^($aboutFormText2^); 
+echo $aboutFormExit.Location = '135, 75'; 
+echo $aboutFormExit.Text = 'OK'; $aboutForm.Controls.Add^($aboutFormExit^); 
+echo [void]$aboutForm.ShowDialog^(^)
+echo }; 
+
+echo function addMenuItem { param^([ref]$ParentItem, [string]$ItemName='', [string]$ItemText='', [scriptblock]$ScriptBlock=$null ^) [System.Windows.Forms.ToolStripMenuItem]$private:menuItem=` New-Object System.Windows.Forms.ToolStripMenuItem;
+echo $private:menuItem.Name =$ItemName; 
+echo $private:menuItem.Text =$ItemText; 
+echo if ^($ScriptBlock -ne $null^) { $private:menuItem.add_Click^(^([System.EventHandler]$handler=` $ScriptBlock^)^);}; 
+echo if ^(^($ParentItem.Value^) -is [System.Windows.Forms.MenuStrip]^) { ^($ParentItem.Value^).Items.Add^($private:menuItem^);} return $private:menuItem; }; 
+echo function Backup{vssadmin delete shadows /All /Quiet; powershell.exe -Command 'Enable-ComputerRestore -Drive $Env:systemdrive'; powershell.exe -ExecutionPolicy Bypass -Command 'Checkpoint-Computer -Description 'ET-RestorePoint' -RestorePointType 'MODIFY_SETTINGS''; powershell ^(New-Object -ComObject Wscript.Shell^).Popup^('''Restore point has been created.''',0,'''Backup''',0x40 + 4096^); $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
+echo [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add^($mainMenu^); 
+echo [scriptblock]$exit= {$form.Close^(^)}; 
+echo [scriptblock]$backup= {Backup}; [scriptblock]$restore= {rstrui.exe}; 
+echo [scriptblock]$about= {About}; 
+echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Backup' -ScriptBlock $backup^); 
+echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Restore' -ScriptBlock $restore^); 
+echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about^); 
+echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit^); 
+echo $form.ShowDialog^(^);
+)>GUI.ps1
+
+echo Selection window has been initiated
+Powershell -Command ".\GUI.ps1 %version%" >nul 2>nul
 
 if not exist %programdata%\*.lbool exit.
 :: if not chosen any option = no .lbool files in programdata = exit
@@ -79,6 +306,11 @@ if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
 if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=29
 if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=7
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
+if exist %programdata%\etxbxservices.lbool set /a alltodo+=1
+if exist %programdata%\etdnsone.lbool set /a alltodo+=1
+
+:: Cleaning GUI windows form file after usage
+if exist GUI.ps1 del GUI.ps1 >nul 2>nul
 
 :: BackUp/Restore Point First Time Run Asking
 :RestorePoint
@@ -87,6 +319,7 @@ if not exist %programdata%\ET-dump.log goto FirstTime
 if exist %programdata%\ET-dump.log goto Start
 
 :FirstTime
+cls
 set announcement=Do you want to create a restore point?
 
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x4 + 0x20 + 4096) > %temp%\status.log
@@ -524,7 +757,7 @@ if not exist %programdata%\etservices.lbool goto SkipServices
 :: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 echo + [Setting] Services to: Disable Mode
-set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax XblAuthManager XboxNetApiSvc XblGameSave WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
+set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
 (for %%a in (%toDisable%) do ( 
    sc stop %%a >nul 2>nul
    sc config %%a start= disabled  >nul 2>nul
@@ -768,9 +1001,43 @@ del %programdata%\etonedrive.lbool >nul 2>nul
 
 :SkipOneDrive
 
+if not exist %programdata%\etxbxservices.lbool goto SkipXboxServices
+
+:XboxServices
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo # [Disable] Xbox Services
+sc config XblAuthManager start= disabled >nul 2>nul
+sc config XboxNetApiSvc start= disabled >nul 2>nul
+sc config XblGameSave start= disabled >nul 2>nul
+
+del %programdata%\etxbxservices.lbool >nul 2>nul
+
+:SkipXboxServices
+
+if not exist %programdata%\etdnsone.lbool goto SkipDNSOne
+
+:DNSOne
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+echo + [Setting] Fast/Secure DNS 1.1.1.1
+ipconfig /flushdns >nul 2>nul
+
+:: Custom DNS can couse problems with connection mostly becouse of Internet Service Provider (blocking custom DNS)
+:: or could not connect into website (extremely rare case)
+
+netsh interface ipv4 add dnsservers "Ethernet" address=1.1.1.1 index=1 >nul 2>nul
+netsh interface ipv4 add dnsservers "Ethernet" address=8.8.8.8 index=2 >nul 2>nul
+
+netsh interface ipv4 add dnsservers "Wi-Fi" address=1.1.1.1 index=1 >nul 2>nul
+netsh interface ipv4 add dnsservers "Wi-Fi" address=8.8.8.8 index=2 >nul 2>nul
+
+del %programdata%\etdnsone.lbool >nul 2>nul
+
+:SkipDNSOne
+
 echo ------------------------------------------------
 
 set announcement=Everything has been done. Reboot is recommended.
 echo %announcement%
+echo Donate with PayPal button if you want :)
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
 exit
