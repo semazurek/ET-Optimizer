@@ -32,13 +32,15 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 <img src="https://user-images.githubusercontent.com/85984736/170831508-cb95908b-6067-4286-a5b6-f79580323d3d.png" width="400">
 </p>
 Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (1:35 czas działania)</br></br>
-Zużycie RAMu (Po zastosowaniu skryptu):
+Zużycie RAMu przez system (Po zastosowaniu skryptu):
 <ul>
  <li>Windows 10: 1/4 GB</li>
+ <li>Windows 11: 1.4/4 GB</li>
 </ul>
-Zużycie RAMu (Przed zastosowaniem skryptu):
+Zużycie RAMu przez system (Przed zastosowaniem skryptu):
 <ul>
  <li>Windows 10: 1.6/4 GB</li>
+ <li>Windows 11: 2/4 GB</li>
 </ul>
 
 ## Co robi skrypt
