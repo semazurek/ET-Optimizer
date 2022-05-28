@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.5-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.6-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -15,7 +15,7 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.5/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.6/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
 This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
 </br>
@@ -28,9 +28,9 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
-<img src="https://user-images.githubusercontent.com/85984736/168447771-56978e33-a3f8-4c91-8fa2-5db8198e8014.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/170831344-54b368e5-8c3f-454c-a00b-17a1b1976624.png" width="400">
 
-<img src="https://user-images.githubusercontent.com/85984736/168447777-3508c678-2a6c-4a5e-922e-d3a37d72f72f.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/170831508-cb95908b-6067-4286-a5b6-f79580323d3d.png" width="400">
 </p>
 Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
 System RAM (After ET Usage):
@@ -151,6 +151,10 @@ System RAM (Before ET Usage):
 <tr>
 	<td>Defragment Database Indexing Service File</td>
 	<td>Disable transparency in taskbar/menu start</td>
+</tr>
+<tr>
+	<td>Enable Fast/Secure DNS (1.1.1.1)</td>
+	<td></td>
 </tr>	
 </table>
 </br>
