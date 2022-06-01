@@ -240,7 +240,6 @@ echo $form.controls.add^($chck12^);
 echo function About {
 echo $aboutForm = New-Object System.Windows.Forms.Form; 
 echo $aboutFormExit = New-Object System.Windows.Forms.Button; 
-echo $aboutFormImage = New-Object System.Windows.Forms.PictureBox; 
 echo $aboutFormNameLabel = New-Object System.Windows.Forms.Label; 
 echo $aboutFormText = New-Object System.Windows.Forms.Label; 
 echo $aboutFormText2 = New-Object System.Windows.Forms.Label; 
@@ -255,7 +254,8 @@ echo $aboutForm.ClientSize = '350, 110';
 echo $aboutForm.ControlBox = $false; 
 echo $aboutForm.ShowInTaskBar = $false; 
 echo $aboutForm.StartPosition = 'CenterParent'; 
-echo $aboutForm.Text = 'About'; $aboutForm.Add_Load^($aboutForm_Load^); 
+echo $aboutForm.Text = 'About'; 
+echo $aboutForm.Add_Load^($aboutForm_Load^); 
 echo $aboutFormNameLabel.Font = New-Object Drawing.Font^('Arial', 9, [System.Drawing.FontStyle]::Bold^); 
 echo $aboutFormNameLabel.Location = '110, 10'; 
 echo $aboutFormNameLabel.Size = '200, 18'; 
@@ -265,12 +265,102 @@ echo $aboutFormText.Location = '100, 30';
 echo $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
 echo $aboutForm.Controls.Add^($aboutFormText^); 
 echo $aboutFormText2.Location = '100, 50'; 
-echo $aboutFormText2.Size = '300, 20'; 
+echo $aboutFormText2.Size = '300, 20';  
 echo $aboutFormText2.Text = '      GitHub.com/semazurek'; 
 echo $aboutForm.Controls.Add^($aboutFormText2^); 
-echo $aboutFormExit.Location = '135, 75'; 
-echo $aboutFormExit.Text = 'OK'; $aboutForm.Controls.Add^($aboutFormExit^); 
+echo $aboutFormExit.Location = '138, 75'; 
+echo $aboutFormExit.Text = 'OK'; 
+echo $aboutForm.Controls.Add^($aboutFormExit^); 
 echo [void]$aboutForm.ShowDialog^(^)
+echo }; 
+
+echo function Extras {
+echo $extraForm = New-Object System.Windows.Forms.Form; 
+echo $extraFormB1 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB2 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB3 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB4 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB5 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB6 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB7 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB8 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB9 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB10 = New-Object System.Windows.Forms.Button; 
+echo $extraForm.MinimizeBox = $false; 
+echo $extraForm.MaximizeBox = $false; 
+echo $extraForm.TopMost = $true; 
+echo $extraForm.AutoSizeMode = 'GrowAndShrink'; 
+echo $extraForm.FormBorderStyle = 'FixedDialog'; 
+echo $extraForm.AcceptButton = $extraFormExit; 
+echo $extraForm.CancelButton = $extraFormExit; 
+echo $extraForm.ClientSize = '200, 330'; 
+echo $extraForm.ShowInTaskBar = $false; 
+
+echo $extraForm.Location = ^(30,30^);
+echo $extraForm.Text = 'Extras'; 
+echo $extraForm.Font = $font;
+
+echo $extraFormB1.Location = '25, 15'; 
+echo $extraFormB1.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB1.Text = 'Disk Defragmenter'; 
+echo $extraFormB1.add_click^({dfrgui.exe}^);
+echo $extraForm.Controls.Add^($extraFormB1^); 
+
+echo $extraFormB2.Location = '25, 45'; 
+echo $extraFormB2.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB2.Text = 'Cleanmgr'; 
+echo $extraFormB2.add_click^({cleanmgr.exe}^);
+echo $extraForm.Controls.Add^($extraFormB2^); 
+
+echo $extraFormB3.Location = '25, 75'; 
+echo $extraFormB3.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB3.Text = 'Msconfig'; 
+echo $extraFormB3.add_click^({msconfig}^);
+echo $extraForm.Controls.Add^($extraFormB3^); 
+
+echo $extraFormB4.Location = '25, 105'; 
+echo $extraFormB4.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB4.Text = 'Control Panel'; 
+echo $extraFormB4.add_click^({control.exe}^);
+echo $extraForm.Controls.Add^($extraFormB4^); 
+
+echo $extraFormB5.Location = '25, 135'; 
+echo $extraFormB5.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB5.Text = 'Device Manager'; 
+echo $extraFormB5.add_click^({devmgmt.msc}^);
+echo $extraForm.Controls.Add^($extraFormB5^); 
+
+echo $extraFormB6.Location = '25, 165'; 
+echo $extraFormB6.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB6.Text = 'UAC Settings'; 
+echo $extraFormB6.add_click^({UserAccountControlSettings.exe}^);
+echo $extraForm.Controls.Add^($extraFormB6^); 
+
+echo $extraFormB7.Location = '25, 195'; 
+echo $extraFormB7.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB7.Text = 'Msinfo32'; 
+echo $extraFormB7.add_click^({msinfo32}^);
+echo $extraForm.Controls.Add^($extraFormB7^); 
+
+echo $extraFormB8.Location = '25, 225'; 
+echo $extraFormB8.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB8.Text = 'Services'; 
+echo $extraFormB8.add_click^({services.msc}^);
+echo $extraForm.Controls.Add^($extraFormB8^); 
+
+echo $extraFormB9.Location = '25, 255'; 
+echo $extraFormB9.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB9.Text = 'Remote Desktop'; 
+echo $extraFormB9.add_click^({mstsc}^);
+echo $extraForm.Controls.Add^($extraFormB9^); 
+
+echo $extraFormB10.Location = '25, 285'; 
+echo $extraFormB10.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB10.Text = 'Event Viewer'; 
+echo $extraFormB10.add_click^({eventvwr.msc}^);
+echo $extraForm.Controls.Add^($extraFormB10^); 
+
+echo [void]$extraForm.ShowDialog^(^)
 echo }; 
 
 echo function addMenuItem { param^([ref]$ParentItem, [string]$ItemName='', [string]$ItemText='', [scriptblock]$ScriptBlock=$null ^) [System.Windows.Forms.ToolStripMenuItem]$private:menuItem=` New-Object System.Windows.Forms.ToolStripMenuItem;
@@ -281,11 +371,14 @@ echo if ^(^($ParentItem.Value^) -is [System.Windows.Forms.MenuStrip]^) { ^($Pare
 echo function Backup{vssadmin delete shadows /All /Quiet; powershell.exe -Command 'Enable-ComputerRestore -Drive $Env:systemdrive'; powershell.exe -ExecutionPolicy Bypass -Command 'Checkpoint-Computer -Description 'ET-RestorePoint' -RestorePointType 'MODIFY_SETTINGS''; powershell ^(New-Object -ComObject Wscript.Shell^).Popup^('''Restore point has been created.''',0,'''Backup''',0x40 + 4096^); $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
 echo [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add^($mainMenu^); 
 echo [scriptblock]$exit= {$form.Close^(^)}; 
-echo [scriptblock]$backup= {Backup}; [scriptblock]$restore= {rstrui.exe}; 
+echo [scriptblock]$backup= {Backup}; 
+echo [scriptblock]$restore= {rstrui.exe}; 
 echo [scriptblock]$about= {About}; 
+echo [scriptblock]$extras= {Extras}; 
 echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Backup' -ScriptBlock $backup^); 
 echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Restore' -ScriptBlock $restore^); 
-echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about^); 
+echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Extras' -ScriptBlock $extras^);
+echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about^);  
 echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit^); 
 echo $form.ShowDialog^(^);
 )>GUI.ps1
