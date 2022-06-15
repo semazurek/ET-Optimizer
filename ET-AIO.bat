@@ -447,18 +447,18 @@ if not exist %programdata%\etvisualtweaks.lbool goto SkipVisualTweaks
 
 :: Show file extensions in Explorer
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Show file extensions in Explorer
+powershell -Command "Write-Host ' [Setting] Show file extensions in Explorer ' -F blue -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable Transparency in taskbar, menu start etc
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Disable Transparency in taskbar/menu start
+powershell -Command "Write-Host ' [Setting] Disable Transparency in taskbar/menu start ' -F blue -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Disable windows animations, menu Start animations.
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows animations, menu Start animations.
+powershell -Command "Write-Host ' [Disable] Windows animations, menu Start animations ' -F darkgray -B black"
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting  /t REG_DWORD /d 3 /f >nul 2>nul
 
 REG ADD "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012078010000000 /f >nul 2>nul
@@ -473,23 +473,23 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\T
 
 :: Disable News and Interests on Taskbar
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] News and Interests on Taskbar
+powershell -Command "Write-Host ' [Disable] News and Interests on Taskbar ' -F darkgray -B black"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable MRU lists (jump lists) of XAML apps in Start Menu
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul 
-echo # [Disable] MRU lists (jump lists) of XAML apps in Start Menu 
+powershell -Command "Write-Host ' [Disable] MRU lists (jump lists) of XAML apps in Start Menu ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for 
 :: 0 = hide completely, 1 = show only icon, 2 = show long search box
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Hide the search box from taskbar.
+powershell -Command "Write-Host ' [Setting] Hide the search box from taskbar. ' -F blue -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f >nul 2>nul
 
 :: Windows Explorer to start on This PC instead of Quick Access 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Windows Explorer to start on This PC instead of Quick Access 
+powershell -Command "Write-Host ' [Setting] Windows Explorer to start on This PC instead of Quick Access ' -F blue -B black" 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f >nul 2>nul
 
 del %programdata%\etvisualtweaks.lbool >nul 2>nul
@@ -502,17 +502,17 @@ if not exist %programdata%\etperformancetweaks.lbool goto SkipPerformanceTweaks
 
 ::  Disable Edge WebWidget
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Edge WebWidget 
+powershell -Command "Write-Host ' [Disable] Edge WebWidget ' -F darkgray -B black"
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v WebWidgetAllowed /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Setting power option to high for best performance
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Power option to high for best performance
+powershell -Command "Write-Host ' [Setting] Power option to high for best performance ' -F blue -B black"
 powercfg -setactive scheme_min
 
 ::  Enable All (Logical) Cores (Boot Advanced Options)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Enable All (Logical) Cores (Boot Advanced Options)
+powershell -Command "Write-Host ' [Setting] Enable All (Logical) Cores (Boot Advanced Options) ' -F blue -B black"
 wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
 set /P NOLP=<NumLogicalCores.txt
 bcdedit /set {current} numproc %NOLP% >nul 2>nul
@@ -520,64 +520,64 @@ if exist NumLogicalCores.txt del NumLogicalCores.txt
 
 :: Dual boot timeout 3sec
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Dual boot timeout 3sec
+powershell -Command "Write-Host ' [Setting] Dual boot timeout 3sec ' -F blue -B black"
 bcdedit /set timeout 3 >nul 2>nul
 
 :: Disable Hibernation/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Hibernation/Fast startup in Windows
+powershell -Command "Write-Host ' [Disable] Hibernation/Fast startup in Windows ' -F darkgray -B black"
 powercfg -hibernate off
 
 :: Disable windows insider experiments
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows Insider experiments
+powershell -Command "Write-Host ' [Disable] Windows Insider experiments ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System" /v "AllowExperimentation" /t REG_DWORD /d "0" /f >nul 2>nul
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowExperimentation" /v "value" /t "REG_DWORD" /d "0" /f >nul 2>nul
 
 :: Disable app launch tracking
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] App launch tracking
+powershell -Command "Write-Host ' [Disable] App launch tracking ' -F darkgray -B black"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /d "0" /t REG_DWORD /f >nul 2>nul
 
 :: Disable powerthrottling (Intel 6gen and higher)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Powerthrottling (Intel 6gen and higher)
+powershell -Command "Write-Host ' [Disable] Powerthrottling (Intel 6gen and higher) ' -F darkgray -B black"
 reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f >nul 2>nul
 
 :: Turn Off Background Apps
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Turn Off Background Apps
+powershell -Command "Write-Host ' [Setting] Turn Off Background Apps ' -F blue -B black"
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled  /t REG_DWORD /d 1 /f >nul 2>nul
 REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Sticky Keys prompt
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Sticky Keys prompt
+powershell -Command "Write-Host ' [Disable] Sticky Keys prompt ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f >nul 2>nul
 
 :: Disable Activity History
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Activity History
+powershell -Command "Write-Host ' [Disable] Activity History ' -F darkgray -B black"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Automatic Updates for Microsoft Store apps
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Automatic Updates for Microsoft Store apps
+powershell -Command "Write-Host ' [Disable] Automatic Updates for Microsoft Store apps ' -F darkgray -B black"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f >nul 2>nul
 
 ::  SmartScreen Filter for Store Apps: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] SmartScreen Filter for Store Apps
+powershell -Command "Write-Host ' [Disable] SmartScreen Filter for Store Apps ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Let websites provide locally...
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Let websites provide locally
+powershell -Command "Write-Host ' [Setting] Let websites provide locally ' -F blue -B black"
 reg add "HKCU\Control Panel\International\User Profile" /v HttpAcceptLanguageOptOut /t REG_DWORD /d 1 /f >nul 2>nul
 
 ::  Microsoft Edge settings
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Microsoft Edge settings for privacy
+powershell -Command "Write-Host ' [Setting] Microsoft Edge settings for privacy ' -F blue -B black"
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" /v DoNotTrack /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\User\Default\SearchScopes" /v ShowSearchSuggestionsGlobal /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead" /v FPEnabled /t REG_DWORD /d 0 /f >nul 2>nul
@@ -585,47 +585,47 @@ reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Current
 
 ::  Disable location sensor
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Location sensor
+powershell -Command "Write-Host ' [Disable] Location sensor ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v SensorPermissionState /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: WiFi Sense: HotSpot Sharing: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] WiFi Sense: HotSpot Sharing
+powershell -Command "Write-Host ' [Disable] WiFi Sense: HotSpot Sharing ' -F darkgray -B black"
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v value /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: WiFi Sense: Shared HotSpot Auto-Connect: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] WiFi Sense: Shared HotSpot Auto-Connect
+powershell -Command "Write-Host ' [Disable] WiFi Sense: Shared HotSpot Auto-Connect ' -F darkgray -B black"
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v value /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Change Windows Updates to "Notify to schedule restart"
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Windows Updates to "Notify to schedule restart"
+powershell -Command "Write-Host ' [Setting] Windows Updates to Notify to schedule restart ' -F blue -B black"
 reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_DWORD /d 1 /f >nul 2>nul
 
 :: Disable P2P Update downloads outside of local network
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] P2P Update downlods outside of local network
+powershell -Command "Write-Host ' [Disable] P2P Update downlods outside of local network ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Setting Lower Shutdown time
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Lower Shutdown time
+powershell -Command "Write-Host ' [Setting] Lower Shutdown time ' -F blue -B black"
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f >nul 2>nul
 
 :: Remove Old Device Drivers
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Remove] Old Device Drivers
+powershell -Command "Write-Host ' [Remove] Old Device Drivers ' -F red -B black"
 SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 
 :: Disable Get Even More Out of Windows Screen /W10
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Get Even More Out of Windows Screen
+powershell -Command "Write-Host ' [Disable] Get Even More Out of Windows Screen ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable automatically installing suggested apps /W10
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Automatically installing suggested apps
+powershell -Command "Write-Host ' [Disable] Automatically installing suggested apps ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
@@ -635,18 +635,18 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeli
 
 :: Disable Start Menu Ads/Suggestions /W10
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Start Menu Ads/Suggestions
+powershell -Command "Write-Host ' [Disable] Start Menu Ads/Suggestions ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Allowing Suggested Apps In WindowsInk Workspace
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Allowing Suggested Apps In WindowsInk Workspace
+powershell -Command "Write-Host ' [Disable] Allowing Suggested Apps In WindowsInk Workspace ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disables several unnecessary components
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Unnecessary components
+powershell -Command "Write-Host ' [Disable] Unnecessary components ' -F darkgray -B black"
 set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Features Xps-Foundation-Xps-Viewer
 (for %%a in (%components%) do ( 
    PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
@@ -655,12 +655,12 @@ set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Feature
 ::  Disabling Process Mitigation
 :: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Process Mitigation
+powershell -Command "Write-Host ' [Disable] Process Mitigation ' -F darkgray -B black"
 powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess >nul 2>nul
 
 :: Defragmenting the File Indexing Service database file
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Defragment Database Indexing Service File 
+powershell -Command "Write-Host ' [Setting] Defragment Database Indexing Service File ' -F blue -B black" 
 net stop wsearch >nul 2>nul
 esentutl /d C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb >nul 2>nul
 net start wsearch >nul 2>nul
@@ -675,7 +675,7 @@ if not exist %programdata%\ettelemetry.lbool goto SkipTelemetry
 
 :: SCHEDULED TASKS tweaks (Updates, Telemetry etc)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] SCHEDULED TASKS tweaks (Updates, Telemetry etc)
+powershell -Command "Write-Host ' [Disable] SCHEDULED TASKS tweaks (Updates, Telemetry etc) ' -F darkgray -B black"
 schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable >nul 2>nul
@@ -707,7 +707,7 @@ schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable >nul 2>nul
 
 :: Remove Telemetry & Data Collection 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Telemetry/Data Collection 
+powershell -Command "Write-Host ' [Disable] Telemetry/Data Collection ' -F darkgray -B black" 
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f >nul 2>nul
@@ -725,12 +725,12 @@ reg add "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /v "Start" /t REG_DWORD /
 
 :: Disable PowerShell Telemetry
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] PowerShell Telemetry
+powershell -Command "Write-Host ' [Disable] PowerShell Telemetry ' -F darkgray -B black"
 setx POWERSHELL_TELEMETRY_OPTOUT 1 >nul 2>nul
 
 :: Disable Skype Telemetry
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Skype Telemetry
+powershell -Command "Write-Host ' [Disable] Skype Telemetry ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "TraceLevelThreshold" /t REG_DWORD /d "0" /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype" /v "EnableTracing" /t REG_DWORD /d "0" /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "EnableTracing" /t REG_DWORD /d "0" /f >nul 2>nul
@@ -739,68 +739,68 @@ reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "WPPFilePa
 
 :: Disable windows media player usage reports
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows media player usage reports
+powershell -Command "Write-Host ' [Disable] Windows media player usage reports ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f >nul 2>nul
 
 :: Disable mozilla telemetry
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Mozilla telemetry
+powershell -Command "Write-Host ' [Disable] Mozilla telemetry ' -F darkgray -B black"
 reg add HKLM\SOFTWARE\Policies\Mozilla\Firefox /v "DisableTelemetry" /t REG_DWORD /d "2" /f >nul 2>nul
 
 :: Settings -> Privacy -> General -> Let apps use my advertising ID...
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Let apps use my advertising ID
+powershell -Command "Write-Host ' [Disable] Let apps use my advertising ID ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Send Microsoft info about how I write to help us improve typing and writing in the future
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Send Microsoft info about how I write
+powershell -Command "Write-Host ' [Disable] Send Microsoft info about how I write ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Input\TIPC" /v Enabled /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Handwriting recognition personalization
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Handwriting recognition personalization
+powershell -Command "Write-Host ' [Disable] Handwriting recognition personalization ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitInkCollection /t REG_DWORD /d 1 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitTextCollection /t REG_DWORD /d 1 /f >nul 2>nul
 
 :: Disable watson malware reports
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Watson malware reports
+powershell -Command "Write-Host ' [Disable] Watson malware reports ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericReports" /t REG_DWORD /d "2" /f >nul 2>nul
 
 :: Disable malware diagnostic data 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Malware diagnostic data 
+powershell -Command "Write-Host ' [Disable] Malware diagnostic data ' -F darkgray -B black" 
 reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "2" /f >nul 2>nul
 
 :: Disable  setting override for reporting to Microsoft MAPS
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Setting override for reporting to Microsoft MAPS
+powershell -Command "Write-Host ' [Disable] Setting override for reporting to Microsoft MAPS ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "LocalSettingOverrideSpynetReporting" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable spynet Defender reporting
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Spynet Defender reporting
+powershell -Command "Write-Host ' [Disable] Spynet Defender reporting ' -F darkgray -B black"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpynetReporting" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Do not send malware samples for further analysis
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Do not send malware samples for further analysis
+powershell -Command "Write-Host ' [Setting] Do not send malware samples for further analysis ' -F blue -B black"
 reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f >nul 2>nul
 
 ::  Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Sending speech, inking and typing samples to MS
+powershell -Command "Write-Host ' [Disable] Sending speech, inking and typing samples to MS ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Personalization\Settings" /v AcceptedPrivacyPolicy /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Prevents sending contacts to MS (so Cortana can compare speech etc samples)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Sending contacts to MS
+powershell -Command "Write-Host ' [Disable] Sending contacts to MS ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v HarvestContacts /t REG_DWORD /d 0 /f >nul 2>nul
 
 ::  Immobilise Cortana 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Cortana 
+powershell -Command "Write-Host ' [Disable] Cortana ' -F darkgray -B black"
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f >nul 2>nul
 
 del %programdata%\ettelemetry.lbool >nul 2>nul
@@ -813,13 +813,13 @@ if not exist %programdata%\etwindowsgamebar.lbool goto SkipWindowsGameBar
 
 :: Turning Off Windows Game Bar/DVR
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Windows Game Bar/DVR
+powershell -Command "Write-Host ' [Disable] Windows Game Bar/DVR ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Removing Windows Game Bar 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Remove] Windows Game Bar 
+powershell -Command "Write-Host ' [Remove] Windows Game Bar ' -F red -B black"
 PowerShell -Command "Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage"
 PowerShell -Command "Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage"
@@ -834,7 +834,7 @@ if not exist %programdata%\etadblock.lbool goto SkipAdblock
 
 ::  Ads blocking via hosts file (AdAway)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Ad blocking via hosts file
+powershell -Command "Write-Host ' [Setting] Ad blocking via hosts file ' -F blue -B black"
 PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -OutFile hosts.txt" >nul 2>nul
 if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\Drivers\etc\hosts %windir%\System32\Drivers\etc\hosts-copy-et >nul 2>nul
 copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
@@ -852,7 +852,7 @@ if not exist %programdata%\etservices.lbool goto SkipServices
 
 :: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Services to: Disable Mode
+powershell -Command "Write-Host ' [Setting] Services to: Disable Mode ' -F blue -B black"
 set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
 (for %%a in (%toDisable%) do ( 
    sc stop %%a >nul 2>nul
@@ -861,7 +861,7 @@ set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservic
 
 :: Manuall
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Services to: Manuall Mode
+powershell -Command "Write-Host ' [Setting] Services to: Manuall Mode ' -F blue -B black"
 set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem asus asusm adobeupdateservice adobeflashplayerupdatesvc WSearch
 (for %%a in (%toManuall%) do ( 
    sc config %%a start= demand >nul 2>nul
@@ -878,7 +878,7 @@ if not exist %programdata%\etbloatware.lbool goto SkipBloatware
 setlocal enabledelayedexpansion
 
 :: Remove Bloatware Apps (Preinstalled) 68 apps
-echo - [Remove] Bloatware Apps
+powershell -Command "Write-Host ' [Remove] Bloatware Apps ' -F red -B black"
 
 set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok ToDo
 (for %%a in (%listofbloatware%) do ( 
@@ -899,7 +899,7 @@ if not exist %programdata%\etstartup.lbool goto SkipStartUp
 
 :: Disabling unnecessary applications at startup
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Unnecessary applications at startup
+powershell -Command "Write-Host ' [Disable] Unnecessary applications at startup ' -F darkgray -B black"
 
 :: Java Update Checker x64
 reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f >nul 2>nul
@@ -1009,16 +1009,16 @@ if not exist %programdata%\etcleaning.lbool goto SkipCleaning
 
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Clean] Temp
+powershell -Command "Write-Host ' [Clean] Temp ' -F darkgreen -B black"
 Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Clean] Windows Update downloads
+powershell -Command "Write-Host ' [Clean] Windows Update downloads ' -F darkgreen -B black"
 Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Clean] Prefetch/Cache/Logs
+powershell -Command "Write-Host ' [Clean] Prefetch/Cache/Logs ' -F darkgreen -B black"
 Del /S /F /Q %windir%\Prefetch >nul 2>nul
 
 del %AppData%\Origin\Telemetry /F /Q /S >nul 2>nul
@@ -1079,7 +1079,7 @@ if not exist %programdata%\etonedrive.lbool goto SkipOneDrive
 
 :OneDrive
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo - [Remove] Microsoft OneDrive
+powershell -Command "Write-Host ' [Remove] Microsoft OneDrive ' -F red -B black"
 taskkill /F /IM "OneDrive.exe" >nul 2>nul
 %systemroot\SysWOW64\OneDriveSetup.exe /uninstall >nul 2>nul
 %systemroot\System32\OneDriveSetup.exe /uninstall >nul 2>nul
@@ -1101,7 +1101,7 @@ if not exist %programdata%\etxbxservices.lbool goto SkipXboxServices
 
 :XboxServices
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo # [Disable] Xbox Services
+powershell -Command "Write-Host ' [Disable] Xbox Services ' -F darkgray -B black"
 sc config XblAuthManager start= disabled >nul 2>nul
 sc config XboxNetApiSvc start= disabled >nul 2>nul
 sc config XblGameSave start= disabled >nul 2>nul
@@ -1114,7 +1114,7 @@ if not exist %programdata%\etdnsone.lbool goto SkipDNSOne
 
 :DNSOne
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-echo + [Setting] Fast/Secure DNS 1.1.1.1
+powershell -Command "Write-Host ' [Setting] Fast/Secure DNS 1.1.1.1 ' -F blue -B black"
 ipconfig /flushdns >nul 2>nul
 
 :: Custom DNS can couse problems with connection mostly becouse of Internet Service Provider (blocking custom DNS)
@@ -1133,7 +1133,7 @@ del %programdata%\etdnsone.lbool >nul 2>nul
 echo ------------------------------------------------
 
 set announcement=Everything has been done. Reboot is recommended.
-echo %announcement%
-echo Donate with PayPal button if you want :)
+echo  %announcement%
+echo  Donate with PayPal button if you want :)
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
 exit
