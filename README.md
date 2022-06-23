@@ -28,9 +28,9 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
-<img src="https://user-images.githubusercontent.com/85984736/170831344-54b368e5-8c3f-454c-a00b-17a1b1976624.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/175351729-79610497-5ebd-4770-bd96-240395ff443a.png" width="400">
 
-<img src="https://user-images.githubusercontent.com/85984736/170831508-cb95908b-6067-4286-a5b6-f79580323d3d.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/175351925-7468fe01-3972-44c3-bfd3-09db46a3e6c7.png" width="400">
 </p>
 Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
 System RAM Usage (After ET):
