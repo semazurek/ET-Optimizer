@@ -33,12 +33,12 @@ if '%errorlevel%' NEQ '0' (
 :: https://github.com/semazurek/ET-All-in-One-Optimizer
 :: https://www.paypal.com/paypalme/rikey
 
-set version=E.T. ver 4.6
+set version=E.T. ver 4.7
 title %version%
-
+::mode con cols=72 lines=30
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 66
+:: alltodo all 71
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -61,6 +61,8 @@ echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10 + 4096)
 :: Checks if it is running as administrator if not quit
 exit
+
+
 
 :: GUI Window Form
 :GUIChoice
@@ -286,6 +288,7 @@ echo $extraFormB7 = New-Object System.Windows.Forms.Button;
 echo $extraFormB8 = New-Object System.Windows.Forms.Button; 
 echo $extraFormB9 = New-Object System.Windows.Forms.Button; 
 echo $extraFormB10 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB11 = New-Object System.Windows.Forms.Button; 
 echo $extraForm.MinimizeBox = $false; 
 echo $extraForm.MaximizeBox = $false; 
 echo $extraForm.TopMost = $true; 
@@ -293,7 +296,7 @@ echo $extraForm.AutoSizeMode = 'GrowAndShrink';
 echo $extraForm.FormBorderStyle = 'FixedDialog'; 
 echo $extraForm.AcceptButton = $extraFormExit; 
 echo $extraForm.CancelButton = $extraFormExit; 
-echo $extraForm.ClientSize = '200, 330'; 
+echo $extraForm.ClientSize = '200, 360'; 
 echo $extraForm.ShowInTaskBar = $false; 
 
 echo $extraForm.Location = ^(30,30^);
@@ -360,6 +363,12 @@ echo $extraFormB10.Text = 'Event Viewer';
 echo $extraFormB10.add_click^({eventvwr.msc}^);
 echo $extraForm.Controls.Add^($extraFormB10^); 
 
+echo $extraFormB11.Location = '25, 315'; 
+echo $extraFormB11.Size = New-Object Drawing.Point 150,25;
+echo $extraFormB11.Text = 'Reset Network'; 
+echo $extraFormB11.add_click^({start restart-network-settings.bat}^);
+echo $extraForm.Controls.Add^($extraFormB11^); 
+
 echo [void]$extraForm.ShowDialog^(^)
 echo }; 
 
@@ -383,17 +392,36 @@ echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 
 echo $form.ShowDialog^(^);
 )>GUI.ps1
 
+:: Restart Network Settings Module (Extras)
+echo netsh winsock reset > restart-network-settings.bat
+echo netsh int ipv4 reset >> restart-network-settings.bat
+echo netsh int ipv6 reset >> restart-network-settings.bat
+echo ipconfig /release >> restart-network-settings.bat
+echo ipconfig /renew >> restart-network-settings.bat
+echo ipconfig /flushdns >> restart-network-settings.bat
+
+echo for /f "tokens=3,*" %%i in ('netsh int show interface^|find "Connected"') do ( >> restart-network-settings.bat
+echo	netsh int set interface name="%%j" admin="disabled" >> restart-network-settings.bat
+echo	netsh int set interface name="%%j" admin="enabled" >> restart-network-settings.bat
+echo ) >> restart-network-settings.bat
+
 ::Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
 cls
 echo Selection window has been initiated
 Powershell -Command ".\GUI.ps1 %version%" >nul 2>nul
 
+:: Cleaning GUI windows form file after usage
+if exist GUI.ps1 del GUI.ps1 /F /Q>nul 2>nul
+
+:: Cleaning Restart Network Settings Module file after usage
+if exist restart-network-settings.bat del restart-network-settings.bat /F /Q>nul 2>nul
+
 if not exist %programdata%\*.lbool exit.
 :: if not chosen any option = no .lbool files in programdata = exit
 
 if exist %programdata%\etadblock.lbool set /a alltodo+=1
-if exist %programdata%\etcleaning.lbool set /a alltodo+=3
+if exist %programdata%\etcleaning.lbool set /a alltodo+=8
 if exist %programdata%\etstartup.lbool set /a alltodo+=1
 if exist %programdata%\etbloatware.lbool set /a alltodo+=1
 if exist %programdata%\etservices.lbool set /a alltodo+=2
@@ -404,9 +432,6 @@ if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=7
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 if exist %programdata%\etxbxservices.lbool set /a alltodo+=1
 if exist %programdata%\etdnsone.lbool set /a alltodo+=1
-
-:: Cleaning GUI windows form file after usage
-if exist GUI.ps1 del GUI.ps1 >nul 2>nul
 
 :: BackUp/Restore Point First Time Run Asking
 :RestorePoint
@@ -1009,17 +1034,105 @@ if not exist %programdata%\etcleaning.lbool goto SkipCleaning
 
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Clean] Temp ' -F darkgreen -B black"
+powershell -Command "Write-Host ' [Clean] Temp ' -F yellow -B black"
 Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Clean] Windows Update downloads ' -F darkgreen -B black"
+powershell -Command "Write-Host ' [Clean] Windows Update Downloads ' -F yellow -B black"
 Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
+Del /S /F /Q %WinDir%\Logs\WindowsUpdate >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Clean] Prefetch/Cache/Logs ' -F darkgreen -B black"
+powershell -Command "Write-Host ' [Clean] Windows Prefetch/Cache/Logs ' -F yellow -B black"
 Del /S /F /Q %windir%\Prefetch >nul 2>nul
+
+del %AppData%\vstelemetry >nul 2>nul
+del %LocalAppData%\Microsoft\VSApplicationInsights /F /Q /S >nul 2>nul
+del %ProgramData%\Microsoft\VSApplicationInsights  /F /Q /S >nul 2>nul
+del %Temp%\Microsoft\VSApplicationInsights  /F /Q /S >nul 2>nul
+del %Temp%\VSFaultInfo  /F /Q /S >nul 2>nul
+del %Temp%\VSFeedbackPerfWatsonData  /F /Q /S >nul 2>nul
+del %Temp%\VSFeedbackVSRTCLogs  /F /Q /S >nul 2>nul
+del %Temp%\VSRemoteControl  /F /Q /S >nul 2>nul
+del %Temp%\VSTelem /F /Q /S >nul 2>nul
+del %Temp%\VSTelem.Out /F /Q /S >nul 2>nul
+
+del %localappdata%\Yarn\Cache /F /Q /S >nul 2>nul
+
+del %appdata%\Microsoft\Teams\Cache /F /Q /S >nul 2>nul
+
+del %programdata%\GOG.com\Galaxy\webcache /F /Q /S >nul 2>nul
+del %programdata%\GOG.com\Galaxy\logs /F /Q /S >nul 2>nul
+
+del %localappdata%\Microsoft\Windows\WebCache /F /Q /S >nul 2>nul
+
+del "%SystemDrive%\*.log" /F /Q >nul 2>nul
+del "%WinDir%\Directx.log" /F /Q >nul 2>nul
+del "%WinDir%\SchedLgU.txt" /F /Q >nul 2>nul
+del "%WinDir%\*.log" /F /Q >nul 2>nul
+del "%WinDir%\security\logs\*.old" /F /Q >nul 2>nul
+del "%WinDir%\security\logs\*.log" /F /Q >nul 2>nul
+del "%WinDir%\Debug\*.log" /F /Q >nul 2>nul
+del "%WinDir%\Debug\UserMode\*.bak" /F /Q >nul 2>nul
+del "%WinDir%\Debug\UserMode\*.log" /F /Q >nul 2>nul
+del "%WinDir%\*.bak" /F /Q >nul 2>nul
+del "%WinDir%\system32\wbem\Logs\*.log" /F /Q >nul 2>nul
+del "%WinDir%\OEWABLog.txt" /F /Q >nul 2>nul
+del "%WinDir%\setuplog.txt" /F /Q >nul 2>nul
+del "%WinDir%\Logs\DISM\*.log" /F /Q >nul 2>nul
+del "%WinDir%\*.log.txt" /F /Q >nul 2>nul
+del "%WinDir%\APPLOG\*.*" /F /Q >nul 2>nul
+del "%WinDir%\system32\wbem\Logs\*.log" /F /Q >nul 2>nul
+del "%WinDir%\system32\wbem\Logs\*.lo_" /F /Q >nul 2>nul
+del "%WinDir%\Logs\DPX\*.log" /F /Q >nul 2>nul
+del "%WinDir%\ServiceProfiles\NetworkService\AppData\Local\Temp\*.log" /F /Q >nul 2>nul
+del "%WinDir%\Logs\*.log" /F /Q >nul 2>nul
+del "%LocalAppData%\Microsoft\Windows\WindowsUpdate.log" /F /Q >nul 2>nul
+del "%LocalAppData%\Microsoft\Windows\WebCache\*.log" /F /Q >nul 2>nul
+del "%WinDir%\Panther\cbs.log" /F /Q >nul 2>nul
+del "%WinDir%\Panther\DDACLSys.log" /F /Q >nul 2>nul
+del "%WinDir%\repair\setup.log" /F /Q >nul 2>nul
+del "%WinDir%\Panther\UnattendGC\diagerr.xml" /F /Q >nul 2>nul
+del "%WinDir%\Panther\UnattendGC\diagwrn.xml" /F /Q >nul 2>nul
+del "%WinDir%\inf\setupapi.offline.log" /F /Q >nul 2>nul
+del "%WinDir%\inf\setupapi.app.log" /F /Q >nul 2>nul
+del "%WinDir%\debug\WIA\*.log" /F /Q >nul 2>nul
+del "%SystemDrive%\PerfLogs\System\Diagnostics\*.*" /F /Q >nul 2>nul
+del "%WinDir%\Logs\CBS\*.cab" /F /Q >nul 2>nul
+del "%WinDir%\Logs\CBS\*.cab" /F /Q >nul 2>nul
+del "%WinDir%\Logs\WindowsBackup\*.etl" /F /Q >nul 2>nul
+del "%WinDir%\System32\LogFiles\HTTPERR\*.*" /F /Q >nul 2>nul
+del "%WinDir%\SysNative\SleepStudy\*.etl" /F /Q >nul 2>nul
+del "%WinDir%\SysNative\SleepStudy\ScreenOn\*.etl" /F /Q >nul 2>nul
+del "%WinDir%\System32\SleepStudy\*.etl" /F /Q >nul 2>nul
+del "%WinDir%\System32\SleepStudy\ScreenOn\*.etl" /F /Q >nul 2>nul
+del "%WinDir%\Logs" /F /Q >nul 2>nul
+del "%WinDir%\DISM" /F /Q >nul 2>nul
+del "%WinDir%\System32\catroot2\*.chk" /F /Q >nul 2>nul
+del "%WinDir%\System32\catroot2\*.log" /F /Q >nul 2>nul
+del "%WinDir%\System32\catroot2\.jrs" /F /Q >nul 2>nul
+del "%WinDir%\System32\catroot2\*.txt" /F /Q >nul 2>nul
+
+:: Cleaning Disk - cleanmgr
+start cleanmgr.exe /autoclean
+
+:: Cleaning Disk - CCleaner
+if not exist "%programfiles%\CCleaner\CCleaner.exe" goto NoCC
+if not exist "%programfiles%\CCleaner\CCleaner64.exe" goto NoCC
+start CCleaner.exe /AUTO
+
+:NoCC
+
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Clean] Games Platforms Cache/Logs ' -F yellow -B black"
+
+del %localappdata%\EpicGamesLauncher\Saved\Logs /F /Q /S >nul 2>nul
+del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >nul 2>nul
+
+del "%localappdata%\Steam\htmlcache\Code Cache" /F /Q /S >nul 2>nul
+del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >nul 2>nul
+del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
 
 del %AppData%\Origin\Telemetry /F /Q /S >nul 2>nul
 del %AppData%\Origin\Logs /F /Q /S >nul 2>nul
@@ -1034,42 +1147,70 @@ del %localAppData%\Battle.net\Cache /F /Q /S >nul 2>nul
 del %AppData%\Battle.net\Logs /F /Q /S >nul 2>nul
 del %AppData%\Battle.net\Errors /F /Q /S >nul 2>nul
 
-del %AppData%\vstelemetry >nul 2>nul
-del %LocalAppData%\Microsoft\VSApplicationInsights /F /Q /S >nul 2>nul
-del %ProgramData%\Microsoft\VSApplicationInsights  /F /Q /S >nul 2>nul
-del %Temp%\Microsoft\VSApplicationInsights  /F /Q /S >nul 2>nul
-del %Temp%\VSFaultInfo  /F /Q /S >nul 2>nul
-del %Temp%\VSFeedbackPerfWatsonData  /F /Q /S >nul 2>nul
-del %Temp%\VSFeedbackVSRTCLogs  /F /Q /S >nul 2>nul
-del %Temp%\VSRemoteControl  /F /Q /S >nul 2>nul
-del %Temp%\VSTelem /F /Q /S >nul 2>nul
-del %Temp%\VSTelem.Out /F /Q /S >nul 2>nul
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Clean] All Web Browsers Cache/Logs ' -F yellow -B black"
 
-del %localappdata%\EpicGamesLauncher\Saved\Logs /F /Q /S >nul 2>nul
-del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Media Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Storage\ext" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Google\Chrome\User Data\ShaderCache" /F /Q /S >nul 2>nul
 
-del %localappdata%\Steam\htmlcache\Code Cache /F /Q /S >nul 2>nul
-del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >nul 2>nul
-del %localappdata%\Steam\htmlcache\Cache /F /Q /S >nul 2>nul
 
-del %localappdata%\Yarn\Cache /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Storage\ext" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge\User Data\ShaderCache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Media Cache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\GPUCache" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Storage\ext" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Service Worker" /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Edge SxS\User Data\ShaderCache" /F /Q /S >nul 2>nul
 
-del %appdata%\Microsoft\Teams\Cache /F /Q /S >nul 2>nul
+del "%LocalAppData%\Opera Software\Opera Stable\cache" /F /Q /S >nul 2>nul
+del "%AppData%\Opera Software\Opera Stable\GPUCache" /F /Q /S >nul 2>nul
+del "%AppData%\Opera Software\Opera Stable\ShaderCache" /F /Q /S >nul 2>nul
+del "%AppData%\Opera Software\Opera Stable\Jump List Icons" /F /Q /S >nul 2>nul
+del "%AppData%\Opera Software\Opera Stable\Jump List IconsOld\Jump List Icons" /F /Q /S >nul 2>nul
 
-del %programdata%\GOG.com\Galaxy\webcache /F /Q /S >nul 2>nul
-del %programdata%\GOG.com\Galaxy\logs /F /Q /S >nul 2>nul
+del "%LocalAppData%\Vivaldi\User Data\Default\Cache" /F /Q /S >nul 2>nul
 
-del %localappdata%\Microsoft\Windows\WebCache /F /Q /S >nul 2>nul
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Clean] Windows Defender Cache/Logs ' -F yellow -B black"
 
-:: Cleaning Disk - cleanmgr
-start cleanmgr.exe /autoclean
+del "%ProgramData%\Microsoft\Windows Defender\Network Inspection System\Support\*.log" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\CacheManager" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\ReportLatency\Latency" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Service\*.log" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\MetaStore" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Support" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick" /F /Q /S >nul 2>nul
+del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /F /Q /S >nul 2>nul
 
-:: Cleaning Disk - CCleaner
-if not exist "%programfiles%\CCleaner\CCleaner.exe" goto NoCC
-if not exist "%programfiles%\CCleaner\CCleaner64.exe" goto NoCC
-start CCleaner.exe /AUTO
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Clean] Windows Font Cache ' -F yellow -B black"
 
-:NoCC
+net stop FontCache >nul 2>nul
+net stop FontCache3.0.0.0 >nul 2>nul
+del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.dat" /F /Q /S >nul 2>nul
+del "%WinDir%\SysNative\FNTCACHE.DAT" /F /Q /S >nul 2>nul
+del "%WinDir%\System32\FNTCACHE.DAT" /F /Q /S >nul 2>nul
+net start FontCache >nul 2>nul
+net start FontCache3.0.0.0 >nul 2>nul
+
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Clean] Windows Icon Cache ' -F yellow -B black"
+
+%WinDir%\SysNative\ie4uinit.exe -show >nul 2>nul
+%WinDir%\System32\ie4uinit.exe -show >nul 2>nul
+del %LocalAppData%\IconCache.db /F /Q /S >nul 2>nul
+del "%LocalAppData%\Microsoft\Windows\Explorer\iconcache_*.db" /F /Q /S >nul 2>nul
+
+
 
 del %programdata%\etcleaning.lbool >nul 2>nul
 
@@ -1130,7 +1271,7 @@ del %programdata%\etdnsone.lbool >nul 2>nul
 
 :SkipDNSOne
 
-echo ------------------------------------------------
+echo ------------------------------------------------------------------------
 
 set announcement=Everything has been done. Reboot is recommended.
 echo  %announcement%
