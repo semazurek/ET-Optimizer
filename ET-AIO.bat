@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 
 :: #############################################################################################################################################
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
@@ -61,8 +62,6 @@ echo %announcement%
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x10 + 4096)
 :: Checks if it is running as administrator if not quit
 exit
-
-
 
 :: GUI Window Form
 :GUIChoice
@@ -405,7 +404,7 @@ echo	netsh int set interface name="%%j" admin="disabled" >> restart-network-sett
 echo	netsh int set interface name="%%j" admin="enabled" >> restart-network-settings.bat
 echo ) >> restart-network-settings.bat
 
-::Force PS authorization for scripts
+:: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
 cls
 echo Selection window has been initiated
@@ -475,7 +474,7 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Setting] Show file extensions in Explorer ' -F blue -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f >nul 2>nul
 
-::  Disable Transparency in taskbar, menu start etc
+:: Disable Transparency in taskbar, menu start etc
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Setting] Disable Transparency in taskbar/menu start ' -F blue -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f >nul 2>nul
@@ -681,7 +680,11 @@ set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Feature
 :: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Process Mitigation ' -F darkgray -B black"
-powershell set-ProcessMitigation -System -Disable  DEP, EmulateAtlThunks, SEHOP, ForceRelocateImages, RequireInfo, BottomUp, HighEntropy, StrictHandle, DisableWin32kSystemCalls, AuditSystemCall, DisableExtensionPoints, BlockDynamicCode, AllowThreadsToOptOut, AuditDynamicCode, CFG, SuppressExports, StrictCFG, MicrosoftSignedOnly, AllowStoreSignedBinaries, AuditMicrosoftSigned, AuditStoreSigned, EnforceModuleDependencySigning, DisableNonSystemFonts, AuditFont, BlockRemoteImageLoads, BlockLowLabelImageLoads, PreferSystem32, AuditRemoteImageLoads, AuditLowLabelImageLoads, AuditPreferSystem32, EnableExportAddressFilter, AuditEnableExportAddressFilter, EnableExportAddressFilterPlus, AuditEnableExportAddressFilterPlus, EnableImportAddressFilter, AuditEnableImportAddressFilter, EnableRopStackPivot, AuditEnableRopStackPivot, EnableRopCallerCheck, AuditEnableRopCallerCheck, EnableRopSimExec, AuditEnableRopSimExec, SEHOP, AuditSEHOP, SEHOPTelemetry, TerminateOnError, DisallowChildProcessCreation, AuditChildProcess >nul 2>nul
+powershell.exe -command "Set-ProcessMitigation -System -Disable CFG"
+for /f "tokens=3 skip=2" %%i in ('reg query "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions"') do set mitigation_mask=%%i
+for /l %%i in (0,1,9) do set mitigation_mask=!mitigation_mask:%%i=2!
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "!mitigation_mask!" /f >nul 2>&1
 
 :: Defragmenting the File Indexing Service database file
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -899,8 +902,6 @@ del %programdata%\etservices.lbool >nul 2>nul
 if not exist %programdata%\etbloatware.lbool goto SkipBloatware
 
 :Bloatware
-
-setlocal enabledelayedexpansion
 
 :: Remove Bloatware Apps (Preinstalled) 68 apps
 powershell -Command "Write-Host ' [Remove] Bloatware Apps ' -F red -B black"
@@ -1209,8 +1210,6 @@ powershell -Command "Write-Host ' [Clean] Windows Icon Cache ' -F yellow -B blac
 %WinDir%\System32\ie4uinit.exe -show >nul 2>nul
 del %LocalAppData%\IconCache.db /F /Q /S >nul 2>nul
 del "%LocalAppData%\Microsoft\Windows\Explorer\iconcache_*.db" /F /Q /S >nul 2>nul
-
-
 
 del %programdata%\etcleaning.lbool >nul 2>nul
 
