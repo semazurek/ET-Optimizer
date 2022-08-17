@@ -67,7 +67,7 @@ System RAM Usage (Before ET):
    <td>Windows Updates to "Notify to schedule restart"</td>
   </tr>
   <tr>
-   <td>Ads blocking via hosts file (AdAway git)</td>
+   <td>Remove Widgets</td>
    <td>Disable P2P Update downloads outside of local network</td>
   </tr>
   <tr>
