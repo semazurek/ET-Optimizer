@@ -155,7 +155,7 @@ Zużycie RAMu przez system (Przed zastosowaniem skryptu):
 </tr>
 <tr>
 	<td>Użycie szybkiego i bezpiecznego DNS (1.1.1.1)</td>
-	<td></td>
+	<td>Ustawianie zaplanowanego Windows Defender Scan z najwyższego na normalny priorytet </td>
 </tr>	
 </table>
 </br>
