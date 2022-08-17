@@ -66,7 +66,7 @@ Zużycie RAMu przez system (Przed zastosowaniem skryptu):
    <td>Aktualizacje systemu Windows do "Powiadomienie o zaplanowanym ponownym uruchomieniu".</td>
   </tr>
   <tr>
-   <td>Blokowanie reklam za pomocą pliku hosts (AdAway git)</td>
+   <td>Usuwanie Widżetów</td>
    <td>Wyłącz pobieranie aktualizacji P2P poza siecią lokalną</td>
   </tr>
   <tr>
