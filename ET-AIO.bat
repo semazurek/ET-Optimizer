@@ -40,7 +40,7 @@ title %version%
 ::mode con cols=72 lines=30
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 72
+:: alltodo all 70
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -85,7 +85,7 @@ echo If ^($chck5.Checked -eq 1^) {echo True ^> $Env:programdata\etservices.lbool
 echo If ^($chck6.Checked -eq 1^) {echo True ^> $Env:programdata\etbloatware.lbool}; 
 echo If ^($chck7.Checked -eq 1^) {echo True ^> $Env:programdata\etstartup.lbool}; 
 echo If ^($chck8.Checked -eq 1^) {echo True ^> $Env:programdata\etcleaning.lbool}; 
-echo If ^($chck9.Checked -eq 1^) {echo True ^> $Env:programdata\etadblock.lbool}; 
+echo If ^($chck9.Checked -eq 1^) {echo True ^> $Env:programdata\etremovewidgets.lbool}; 
 echo If ^($chck10.Checked -eq 1^) {echo True ^> $Env:programdata\etonedrive.lbool}; 
 echo If ^($chck11.Checked -eq 1^) {echo True ^> $Env:programdata\etxbxservices.lbool}; 
 echo If ^($chck12.Checked -eq 1^) {echo True ^> $Env:programdata\etdnsone.lbool}; 
@@ -200,15 +200,15 @@ echo $form.controls.add^($chck7^);
 echo $chck8 = New-Object Windows.Forms.Checkbox; 
 echo $chck8.Location = New-Object Drawing.Point 20,230; 
 echo $chck8.Size = New-Object Drawing.Point 275,25; 
-echo $chck8.Text = 'Clean Temp/Cache/Prefetch/Updates'; 
+echo $chck8.Text = 'Clean Temp/Cache/Prefetch/Logs'; 
 echo $chck8.TabIndex = 7; 
 echo $chck8.Checked = $true; 
 echo $form.controls.add^($chck8^); 
 
 echo $chck9 = New-Object Windows.Forms.Checkbox; 
 echo $chck9.Location = New-Object Drawing.Point 20,255; 
-echo $chck9.Size = New-Object Drawing.Point 270,25; 
-echo $chck9.Text = 'Enable Lite-Adblock ^(AdAway^)'; 
+echo $chck9.Size = New-Object Drawing.Point 275,25; 
+echo $chck9.Text = 'Remove News and Interests/Widgets'; 
 echo $chck9.TabIndex = 8; 
 echo $chck9.Checked = $false; 
 echo $form.controls.add^($chck9^); 
@@ -421,15 +421,15 @@ if exist %programdata%\restart-network-settings.bat del %programdata%\restart-ne
 if not exist %programdata%\*.lbool exit.
 :: if not chosen any option = no .lbool files in programdata = exit
 
-if exist %programdata%\etadblock.lbool set /a alltodo+=1
-if exist %programdata%\etcleaning.lbool set /a alltodo+=8
+if exist %programdata%\etremovewidgets.lbool set /a alltodo+=1
+if exist %programdata%\etcleaning.lbool set /a alltodo+=7
 if exist %programdata%\etstartup.lbool set /a alltodo+=1
 if exist %programdata%\etbloatware.lbool set /a alltodo+=1
 if exist %programdata%\etservices.lbool set /a alltodo+=2
 if exist %programdata%\etwindowsgamebar.lbool set /a alltodo+=2
 if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
 if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=30
-if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=7
+if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=6
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 if exist %programdata%\etxbxservices.lbool set /a alltodo+=1
 if exist %programdata%\etdnsone.lbool set /a alltodo+=1
@@ -496,11 +496,6 @@ REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\C
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
 REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f >nul 2>nul
-
-:: Disable News and Interests on Taskbar
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Disable] News and Interests on Taskbar ' -F darkgray -B black"
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable MRU lists (jump lists) of XAML apps in Start Menu
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul 
@@ -864,21 +859,21 @@ del %programdata%\etwindowsgamebar.lbool >nul 2>nul
 
 :SkipWindowsGameBar
 
-if not exist %programdata%\etadblock.lbool goto SkipAdblock
+if not exist %programdata%\etremovewidgets.lbool goto SkipRemoveWidgets
 
-:Adblock
+:RemoveWidgets
 
-::  Ads blocking via hosts file (AdAway)
+:: Remove Widgets from Win 11 (even if not shown on taskbar, that takes RAM/CPU running in background)
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Setting] Ad blocking via hosts file ' -F blue -B black"
-PowerShell -Command "wget https://raw.githubusercontent.com/AdAway/adaway.github.io/master/hosts.txt -OutFile hosts.txt" >nul 2>nul
-if not exist %windir%\System32\Drivers\etc\hosts-copy-et copy %windir%\System32\Drivers\etc\hosts %windir%\System32\Drivers\etc\hosts-copy-et >nul 2>nul
-copy hosts.txt %windir%\System32\Drivers\etc\hosts >nul 2>nul
-if exist hosts.txt del hosts.txt
+powershell -Command "Write-Host ' [Remove] News and Interests/Widgets' -F red -B black"
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f >nul 2>nul
 
-del %programdata%\etadblock.lbool >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f >nul 2>nul
+winget uninstall "windows web experience pack" --accept-source-agreements >nul 2>nul
 
-:SkipAdblock
+del %programdata%\etremovewidgets.lbool >nul 2>nul
+
+:SkipRemoveWidgets
 
 :: Disable Some Service:
 
@@ -1046,11 +1041,6 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Clean] Temp ' -F yellow -B black"
 Del /S /F /Q %temp% >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
-
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Clean] Windows Update Downloads ' -F yellow -B black"
-Del /S /F /Q %windir%\SoftwareDistribution\Download >nul 2>nul
-Del /S /F /Q %WinDir%\Logs\WindowsUpdate >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Clean] Windows Prefetch/Cache/Logs ' -F yellow -B black"
