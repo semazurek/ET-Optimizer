@@ -156,7 +156,7 @@ System RAM Usage (Before ET):
 </tr>
 <tr>
 	<td>Enable Fast/Secure DNS (1.1.1.1)</td>
-	<td></td>
+	<td>Setting the scheduled Windows Defender Scan from highest to normal priority</td>
 </tr>	
 </table>
 </br>
