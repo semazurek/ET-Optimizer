@@ -1,8 +1,9 @@
-@echo off
-setlocal enabledelayedexpansion
+
 
 :: #############################################################################################################################################
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
+@echo off
+setlocal enabledelayedexpansion
 
 :: Check for admin permissions
     IF "%PROCESSOR_ARCHITECTURE%" EQU "amd64" (
@@ -39,7 +40,7 @@ title %version%
 ::mode con cols=72 lines=30
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 71
+:: alltodo all 72
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -365,7 +366,7 @@ echo $extraForm.Controls.Add^($extraFormB10^);
 echo $extraFormB11.Location = '25, 315'; 
 echo $extraFormB11.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB11.Text = 'Reset Network'; 
-echo $extraFormB11.add_click^({start restart-network-settings.bat}^);
+echo $extraFormB11.add_click^({start %programdata%\restart-network-settings.bat}^);
 echo $extraForm.Controls.Add^($extraFormB11^); 
 
 echo [void]$extraForm.ShowDialog^(^)
@@ -389,32 +390,33 @@ echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 
 echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about^);  
 echo ^(addMenuItem -ParentItem ^([ref]$mainMenu^) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit^); 
 echo $form.ShowDialog^(^);
-)>GUI.ps1
+)>%programdata%\GUI.ps1
 
 :: Restart Network Settings Module (Extras)
-echo netsh winsock reset > restart-network-settings.bat
-echo netsh int ipv4 reset >> restart-network-settings.bat
-echo netsh int ipv6 reset >> restart-network-settings.bat
-echo ipconfig /release >> restart-network-settings.bat
-echo ipconfig /renew >> restart-network-settings.bat
-echo ipconfig /flushdns >> restart-network-settings.bat
+echo netsh winsock reset > %programdata%\restart-network-settings.bat
+echo netsh int ipv4 reset >> %programdata%\restart-network-settings.bat
+echo netsh int ipv6 reset >> %programdata%\restart-network-settings.bat
+echo ipconfig /release >> %programdata%\restart-network-settings.bat
+echo ipconfig /renew >> %programdata%\restart-network-settings.bat
+echo ipconfig /flushdns >> %programdata%\restart-network-settings.bat
 
-echo for /f "tokens=3,*" %%i in ('netsh int show interface^|find "Connected"') do ( >> restart-network-settings.bat
-echo	netsh int set interface name="%%j" admin="disabled" >> restart-network-settings.bat
-echo	netsh int set interface name="%%j" admin="enabled" >> restart-network-settings.bat
-echo ) >> restart-network-settings.bat
+echo for /f "tokens=3,*" %%i in ('netsh int show interface^|find "Connected"') do ( >> %programdata%\restart-network-settings.bat
+echo	netsh int set interface name="%%j" admin="disabled" >> %programdata%\restart-network-settings.bat
+echo	netsh int set interface name="%%j" admin="enabled" >> %programdata%\restart-network-settings.bat
+echo ) >> %programdata%\restart-network-settings.bat
 
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
 cls
 echo Selection window has been initiated
-Powershell -Command ".\GUI.ps1 %version%" >nul 2>nul
+Powershell -Command "%programdata%\GUI.ps1 %version%" >nul 2>nul
 
 :: Cleaning GUI windows form file after usage
 if exist GUI.ps1 del GUI.ps1 /F /Q>nul 2>nul
 
 :: Cleaning Restart Network Settings Module file after usage
 if exist restart-network-settings.bat del restart-network-settings.bat /F /Q>nul 2>nul
+if exist %programdata%\restart-network-settings.bat del %programdata%\restart-network-settings.bat /F /Q>nul 2>nul
 
 if not exist %programdata%\*.lbool exit.
 :: if not chosen any option = no .lbool files in programdata = exit
@@ -426,7 +428,7 @@ if exist %programdata%\etbloatware.lbool set /a alltodo+=1
 if exist %programdata%\etservices.lbool set /a alltodo+=2
 if exist %programdata%\etwindowsgamebar.lbool set /a alltodo+=2
 if exist %programdata%\ettelemetry.lbool set /a alltodo+=17
-if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=29
+if exist %programdata%\etperformancetweaks.lbool set /a alltodo+=30
 if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=7
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 if exist %programdata%\etxbxservices.lbool set /a alltodo+=1
@@ -676,6 +678,11 @@ set components=Printing-PrintToPDFServices-Features Printing-XPSServices-Feature
    PowerShell -Command " disable-windowsoptionalfeature -online -featureName %%a -NoRestart " >nul 2>nul
 ))
 
+:: Setting Windows Defender Scheduled Scan from highest to normal privileges (CPU % high usage)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Setting] Windows Defender Scheduled Scan from highest to normal privileges ' -F blue -B black"
+schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /RL LIMITED >nul 2>nul
+
 ::  Disabling Process Mitigation
 :: Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -689,7 +696,7 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "Mitig
 :: Defragmenting the File Indexing Service database file
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Setting] Defragment Database Indexing Service File ' -F blue -B black" 
-net stop wsearch >nul 2>nul
+net stop wsearch /y >nul 2>nul
 esentutl /d C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb >nul 2>nul
 net start wsearch >nul 2>nul
 
@@ -724,7 +731,8 @@ schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disabl
 schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable >nul 2>nul
 schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable >nul 2>nul
-schtasks /Change /TN "NerveCenterUpdate" /Disable >nul 2>nul
+schtasks /Change /TN "CCleaner Update" /Disable >nul 2>nul
+schtasks /Change /TN "CCleanerSkipUAC - %username%" /Disable >nul 2>nul
 schtasks /Change /TN "Adobe Acrobat Update Task" /Disable >nul 2>nul
 schtasks /Change /TN "AMDLinkUpdate" /Disable >nul 2>nul
 schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable >nul 2>nul
@@ -1149,7 +1157,7 @@ del %AppData%\Battle.net\Logs /F /Q /S >nul 2>nul
 del %AppData%\Battle.net\Errors /F /Q /S >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Clean] All Web Browsers Cache/Logs ' -F yellow -B black"
+powershell -Command "Write-Host ' [Clean] Web Browsers Cache/Logs ' -F yellow -B black"
 
 del "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /F /Q /S >nul 2>nul
 del "%LocalAppData%\Google\Chrome\User Data\Default\Media Cache" /F /Q /S >nul 2>nul
