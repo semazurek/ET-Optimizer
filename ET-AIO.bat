@@ -1,5 +1,4 @@
 
-
 :: #############################################################################################################################################
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
 @echo off
@@ -35,12 +34,12 @@ if '%errorlevel%' NEQ '0' (
 :: https://github.com/semazurek/ET-All-in-One-Optimizer
 :: https://www.paypal.com/paypalme/rikey
 
-set version=E.T. ver 4.7
+set version=E.T. ver 4.8
 title %version%
 ::mode con cols=72 lines=30
 set /a counter=1
 set /a alltodo=0
-:: alltodo all 70
+:: alltodo is 71
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -69,12 +68,15 @@ exit
 :: Cleaning help files
 del %programdata%\*.lbool >nul 2>nul
 if exist GUI.ps1 del GUI.ps1 >nul 2>nul
+if exist %programdata%\GUI.ps1 del %programdata%\GUI.ps1 >nul 2>nul
 
 :: PowerShell Window.Forms Code exported into .ps1
 (
 echo $versionPS=$args[0]+' '+$args[1]+' '+$args[2];
 echo [reflection.assembly]::LoadWithPartialName^( 'System.Windows.Forms'^); 
 echo [reflection.assembly]::loadwithpartialname^('System.Drawing'^); 
+echo Add-Type -AssemblyName System.Windows.Forms
+echo [System.Windows.Forms.Application]::EnableVisualStyles^(^)
 
 echo function do_start { 
 echo If ^($chck1.Checked -eq 1^) {echo True ^> $Env:programdata\etvisualtweaks.lbool}; 
@@ -89,10 +91,11 @@ echo If ^($chck9.Checked -eq 1^) {echo True ^> $Env:programdata\etremovewidgets.
 echo If ^($chck10.Checked -eq 1^) {echo True ^> $Env:programdata\etonedrive.lbool}; 
 echo If ^($chck11.Checked -eq 1^) {echo True ^> $Env:programdata\etxbxservices.lbool}; 
 echo If ^($chck12.Checked -eq 1^) {echo True ^> $Env:programdata\etdnsone.lbool}; 
+echo If ^($chck13.Checked -eq 1^) {echo True ^> $Env:programdata\etadwcleaner.lbool}; 
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
-echo $form.Size = New-Object System.Drawing.Size^(350,440^); 
+echo $form.Size = New-Object System.Drawing.Size^(350,465^); 
 echo $form.StartPosition = 'CenterScreen'; 
 echo $form.FormBorderStyle = 'FixedDialog'; 
 echo $form.Text = $versionPS; 
@@ -103,19 +106,27 @@ echo $form.MaximizeBox = $false;
 echo $Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Regular^); 
 echo $form.Font = $font; 
 
+echo $PictureBox1 = New-Object system.Windows.Forms.PictureBox
+echo $PictureBox1.width = 100
+echo $PictureBox1.height = 250
+echo $PictureBox1.location = New-Object System.Drawing.Point^(275,74^)
+echo $PictureBox1.imageLocation = 'https://user-images.githubusercontent.com/85984736/185690086-62feb03a-abe4-4b72-91d7-4df25fb7e9c4.png'
+echo $PictureBox1.SizeMode = [System.Windows.Forms.PictureBoxSizeMode]::zoom
+echo $Form.controls.AddRange^(@^($PictureBox1^)^)
+
 echo $B_close = New-Object Windows.Forms.Button; 
 echo $B_close.text = 'Start'; 
-echo $B_close.Location = New-Object Drawing.Point 170,365; 
+echo $B_close.Location = New-Object Drawing.Point 170,388; 
 echo $B_close.Size = New-Object Drawing.Point 100,25;
 echo $B_close.add_click^({do_start}^); $form.controls.add^($B_close^); 
 
 echo $B_checkall = New-Object Windows.Forms.Button; 
 echo $B_checkall.text = 'Select All'; 
-echo $B_checkall.Location = New-Object Drawing.Point 60,365; 
+echo $B_checkall.Location = New-Object Drawing.Point 60,388; 
 echo $B_checkall.Size = New-Object Drawing.Point 100,25;
 echo $B_checkall.add_click^({
 echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; 
-echo $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; $chck11.Checked = $true; $chck12.Checked = $true; 
+echo $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true;
 echo $B_checkall.Visible = $false;
 echo $B_uncheckall.Visible = $true;
 echo }^); 
@@ -123,11 +134,11 @@ echo $form.controls.add^($B_checkall^);
 
 echo $B_uncheckall = New-Object Windows.Forms.Button; 
 echo $B_uncheckall.text = 'Unselect All'; 
-echo $B_uncheckall.Location = New-Object Drawing.Point 60,365; 
+echo $B_uncheckall.Location = New-Object Drawing.Point 60,388; 
 echo $B_uncheckall.Size = New-Object Drawing.Point 100,25;
 echo $B_uncheckall.add_click^({
 echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; 
-echo $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; $chck11.Checked = $false; $chck12.Checked = $false; 
+echo $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false;
 echo $B_checkall.Visible = $true;
 echo $B_uncheckall.Visible = $false;
 echo }^); 
@@ -208,9 +219,9 @@ echo $form.controls.add^($chck8^);
 echo $chck9 = New-Object Windows.Forms.Checkbox; 
 echo $chck9.Location = New-Object Drawing.Point 20,255; 
 echo $chck9.Size = New-Object Drawing.Point 275,25; 
-echo $chck9.Text = 'Remove News and Interests/Widgets'; 
+echo $chck9.Text = 'Remove News and Interest/Widgets'; 
 echo $chck9.TabIndex = 8; 
-echo $chck9.Checked = $false; 
+echo $chck9.Checked = $true; 
 echo $form.controls.add^($chck9^); 
 
 echo $chck10 = New-Object Windows.Forms.Checkbox; 
@@ -229,7 +240,6 @@ echo $chck11.TabIndex = 10;
 echo $chck11.Checked = $false; 
 echo $form.controls.add^($chck11^); 
 
-
 echo $chck12 = New-Object Windows.Forms.Checkbox; 
 echo $chck12.Location = New-Object Drawing.Point 20,330; 
 echo $chck12.Size = New-Object Drawing.Point 270,25; 
@@ -237,6 +247,14 @@ echo $chck12.Text = 'Enable Fast/Secure DNS ^(1.1.1.1^)';
 echo $chck12.TabIndex = 11; 
 echo $chck12.Checked = $false; 
 echo $form.controls.add^($chck12^); 
+
+echo $chck13 = New-Object Windows.Forms.Checkbox; 
+echo $chck13.Location = New-Object Drawing.Point 20,355; 
+echo $chck13.Size = New-Object Drawing.Point 270,25; 
+echo $chck13.Text = 'Scan for Adware ^(AdwCleaner^)'; 
+echo $chck13.TabIndex = 12; 
+echo $chck13.Checked = $false; 
+echo $form.controls.add^($chck13^); 
 
 
 echo function About {
@@ -413,6 +431,7 @@ Powershell -Command "%programdata%\GUI.ps1 %version%" >nul 2>nul
 
 :: Cleaning GUI windows form file after usage
 if exist GUI.ps1 del GUI.ps1 /F /Q>nul 2>nul
+if exist %programdata%\GUI.ps1 del %programdata%\GUI.ps1 /F /Q>nul 2>nul
 
 :: Cleaning Restart Network Settings Module file after usage
 if exist restart-network-settings.bat del restart-network-settings.bat /F /Q>nul 2>nul
@@ -433,6 +452,7 @@ if exist %programdata%\etvisualtweaks.lbool set /a alltodo+=6
 if exist %programdata%\etonedrive.lbool set /a alltodo+=1
 if exist %programdata%\etxbxservices.lbool set /a alltodo+=1
 if exist %programdata%\etdnsone.lbool set /a alltodo+=1
+if exist %programdata%\etadwcleaner.lbool set /a alltodo+=1
 
 :: BackUp/Restore Point First Time Run Asking
 :RestorePoint
@@ -643,6 +663,14 @@ SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Get Even More Out of Windows Screen ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314559Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314563Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353698Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" /v "ScoobeSystemSettingEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable automatically installing suggested apps /W10
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -653,12 +681,19 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeli
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RemediationRequired" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Start Menu Ads/Suggestions /W10
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Start Menu Ads/Suggestions ' -F darkgray -B black"
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f >nul 2>nul
 
 :: Disable Allowing Suggested Apps In WindowsInk Workspace
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -909,10 +944,10 @@ if not exist %programdata%\etbloatware.lbool goto SkipBloatware
 :: Remove Bloatware Apps (Preinstalled) 69 apps
 powershell -Command "Write-Host ' [Remove] Bloatware Apps ' -F red -B black"
 
-set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok ToDo Family
+set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok ToDo Family NewVoiceNote SamsungNotes SamsungFlux StudioPlus SamsungWelcome SamsungQuickSearch SamsungPCCleaner SamsungCloudBluetoothSync PCGallery OnlineSupportSService 
 (for %%a in (%listofbloatware%) do ( 
 	set /a insidecount+=1 >nul 2>nul
-	title %version% [%counter%/%alltodo%] [!insidecount!/69]
+	title %version% [%counter%/%alltodo%] [!insidecount!/79]
    PowerShell -Command "Get-AppxPackage -allusers *%%a* | Remove-AppxPackage"
 ))
 
@@ -1222,6 +1257,8 @@ taskkill /F /IM "OneDrive.exe" >nul 2>nul
 %systemroot\SysWOW64\OneDriveSetup.exe /uninstall >nul 2>nul
 %systemroot\System32\OneDriveSetup.exe /uninstall >nul 2>nul
 
+PowerShell -Command "Get-AppxPackage -allusers *Microsoft.OneDriveSync* | Remove-AppxPackage"
+
 rd "%UserProfile%\OneDrive" /Q /S 1>NUL 2>NUL
 rd "%LocalAppData%\Microsoft\OneDrive" /Q /S 1>NUL 2>NUL
 rd "%ProgramData%\Microsoft OneDrive" /Q /S 1>NUL 2>NUL
@@ -1267,6 +1304,19 @@ netsh interface ipv4 add dnsservers "Wi-Fi" address=8.8.8.8 index=2 >nul 2>nul
 del %programdata%\etdnsone.lbool >nul 2>nul
 
 :SkipDNSOne
+
+if not exist %programdata%\etadwcleaner.lbool goto SkipAdwCleaner
+
+:AdwCleaner
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Scanning] AdwCleaner ' -F darkgreen -B black"
+Powershell -Command "wget https://downloads.malwarebytes.com/file/adwcleaner -o %programdata%\adwcleaner.exe" >nul 2>nul
+start /WAIT %programdata%\adwcleaner.exe /eula /clean /noreboot >nul 2>nul
+
+del %programdata%\etadwcleaner.lbool >nul 2>nul
+del %programdata%\adwcleaner.exe >nul 2>nul
+
+:SkipAdwCleaner 
 
 echo ------------------------------------------------------------------------
 
