@@ -15,7 +15,7 @@ Ostatnio testowane/aktualizowane na:
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
 </ul> 
 </br>
-Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.8/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.8/ET-AIO.exe" target="_blank">ET-AIO.bat</a> 
  
 Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu z GUI (2017)</a>
 </br>
@@ -155,7 +155,7 @@ Zużycie RAMu przez system (Przed zastosowaniem skryptu):
 </tr>
 <tr>
 	<td>Użycie szybkiego i bezpiecznego DNS (1.1.1.1)</td>
-	<td>Ustawianie zaplanowanego Windows Defender Scan z najwyższego na normalny priorytet </td>
+	<td>Zaplanowany Windows Defender Scan z wysokiego na normalny priorytet </td>
 </tr>	
 <tr>
 	<td>Skanowanie w poszukiwaniu adware (adwcleaner)</td>
