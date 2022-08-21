@@ -15,7 +15,7 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.8/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.8/ET-AIO.exe" target="_blank">ET-AIO.bat</a> 
  
 This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
 </br>
@@ -156,7 +156,7 @@ System RAM Usage (Before ET):
 </tr>
 <tr>
 	<td>Enable Fast/Secure DNS (1.1.1.1)</td>
-	<td>Setting the scheduled Windows Defender Scan from highest to normal priority</td>
+	<td>Scheduled Windows Defender Scan from highest to normal priority</td>
 </tr>	
 <tr>
 	<td>Scanning for adware (adwcleaner)</td>
