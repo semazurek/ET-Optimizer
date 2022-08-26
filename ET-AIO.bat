@@ -567,7 +567,7 @@ bcdedit /set timeout 3 >nul 2>nul
 :: Disable Hibernation/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Hibernation/Fast startup in Windows ' -F darkgray -B black"
-powercfg -hibernate off
+powercfg -hibernate off >nul 2>nul
 
 :: Disable windows insider experiments
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -1074,7 +1074,7 @@ if not exist %programdata%\etcleaning.lbool goto SkipCleaning
 ::  TEMP/Logs/Cache/Prefetch/Updates Cleaning
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Clean] Temp ' -F yellow -B black"
-Del /S /F /Q %temp% >nul 2>nul
+powershell -Command "Get-ChildItem -Path $env:TEMP -Include *.* -Exclude *.bat -File -Recurse | foreach { $_.Delete()}" >nul 2>nul
 Del /S /F /Q %Windir%\Temp >nul 2>nul
 
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
