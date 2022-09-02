@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v4.8-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.0-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -15,7 +15,7 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/4.8/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.0/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
 This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
 </br>
@@ -28,7 +28,7 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
-<img src="https://user-images.githubusercontent.com/85984736/185700440-e13a6e06-15bb-44e8-a00e-7088d24792e1.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/188245912-5f6fd0f5-68a3-4f35-9d9a-a314e8515bb9.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/185700476-814fb0b9-063a-475e-9bb7-9eb5e90c9f53.png" width="400">
 </p>
