@@ -22,15 +22,15 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/85984736/193463051-49a22ac0-a275-479f-ba92-94bb5ce4730f.png" width="600">
+</p>
 
 ## Benchmark
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
-<img src="https://user-images.githubusercontent.com/85984736/188245912-5f6fd0f5-68a3-4f35-9d9a-a314e8515bb9.png" width="400">
-
-<img src="https://user-images.githubusercontent.com/85984736/185700476-814fb0b9-063a-475e-9bb7-9eb5e90c9f53.png" width="400">
 </p>
 Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (1:35 up time).</br></br>
 System RAM Usage (After ET):
