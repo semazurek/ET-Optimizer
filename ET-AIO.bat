@@ -146,7 +146,7 @@ echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
-echo $form.Size = New-Object System.Drawing.Size^(895,720^); 
+echo $form.Size = New-Object System.Drawing.Size^(895,730^); 
 echo $form.StartPosition = 'CenterScreen'; 
 echo $form.FormBorderStyle = 'FixedDialog'; 
 echo $form.Text = $versionPS; 
@@ -154,21 +154,27 @@ echo $form.AutoSizeMode = 'GrowAndShrink';
 echo $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen; 
 echo $form.MinimizeBox = $false; 
 echo $form.MaximizeBox = $false; 
-echo $Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Regular^); 
+echo $Font = New-Object System.Drawing.Font^('Consolas',9,[System.Drawing.FontStyle]::Regular^); 
+echo $form.FlatStyle = 'Flat'
+echo $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml^('#252525'^)
+echo $form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $form.Font = $font; 
 
 echo $B_close = New-Object Windows.Forms.Button; 
 echo $B_close.text = 'Start'; 
-echo $B_close.Location = New-Object Drawing.Point 640,620; 
+echo $B_close.FlatStyle = 'Flat'
+echo $B_close.Location = New-Object Drawing.Point 660,625; 
 echo $B_close.Size = New-Object Drawing.Point 120,50;
-echo $B_close.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_close.FlatStyle = 'Flat'
+echo $B_close.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_close.add_click^({do_start}^); $form.controls.add^($B_close^); 
 
 echo $B_checkall = New-Object Windows.Forms.Button; 
 echo $B_checkall.text = 'Select All'; 
-echo $B_checkall.Location = New-Object Drawing.Point 510,620; 
-echo $B_checkall.Size = New-Object Drawing.Point 120,50;
-echo $B_checkall.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_checkall.Location = New-Object Drawing.Point 510,625; 
+echo $B_checkall.Size = New-Object Drawing.Point 140,50;
+echo $B_checkall.FlatStyle = 'Flat'
+echo $B_checkall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_checkall.add_click^({
 echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
 echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; $chck14.Checked = $true; $chck15.Checked = $true; $chck16.Checked = $true; $chck17.Checked = $true; $chck18.Checked = $true; $chck19.Checked = $true; $chck20.Checked = $true;
@@ -190,9 +196,10 @@ echo $form.controls.add^($B_checkall^);
 
 echo $B_uncheckall = New-Object Windows.Forms.Button; 
 echo $B_uncheckall.text = 'Unselect All'; 
-echo $B_uncheckall.Location = New-Object Drawing.Point 510,620; 
-echo $B_uncheckall.Size = New-Object Drawing.Point 120,50;
-echo $B_uncheckall.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_uncheckall.Location = New-Object Drawing.Point 510,625; 
+echo $B_uncheckall.Size = New-Object Drawing.Point 140,50;
+echo $B_uncheckall.FlatStyle = 'Flat'
+echo $B_uncheckall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_uncheckall.add_click^({
 echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
 echo $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false; $chck14.Checked = $false; $chck15.Checked = $false; $chck16.Checked = $false; $chck17.Checked = $false; $chck18.Checked = $false; $chck19.Checked = $false; $chck20.Checked = $false;
@@ -214,9 +221,10 @@ echo $form.controls.add^($B_uncheckall^);
 
 echo $B_performanceall = New-Object Windows.Forms.Button; 
 echo $B_performanceall.text = 'Performance'; 
-echo $B_performanceall.Location = New-Object Drawing.Point 120,620; 
-echo $B_performanceall.Size = New-Object Drawing.Point 120,50;
-echo $B_performanceall.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_performanceall.Location = New-Object Drawing.Point 110,625; 
+echo $B_performanceall.Size = New-Object Drawing.Point 130,50;
+echo $B_performanceall.FlatStyle = 'Flat'
+echo $B_performanceall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceall.add_click^({
 echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
 echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; $chck14.Checked = $true; $chck15.Checked = $true; $chck16.Checked = $true; $chck17.Checked = $true; $chck18.Checked = $true; $chck19.Checked = $true; $chck20.Checked = $true;
@@ -228,10 +236,11 @@ echo $form.controls.add^($B_performanceall^);
 
 echo $B_performanceoff = New-Object Windows.Forms.Button; 
 echo $B_performanceoff.text = 'Performance'; 
-echo $B_performanceoff.Location = New-Object Drawing.Point 120,620; 
-echo $B_performanceoff.Size = New-Object Drawing.Point 120,50;
+echo $B_performanceoff.Location = New-Object Drawing.Point 110,625; 
+echo $B_performanceoff.Size = New-Object Drawing.Point 130,50;
 echo $B_performanceoff.ForeColor = 'blue';
-echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_performanceoff.FlatStyle = 'Flat'
+echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceoff.add_click^({
 echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
 echo $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false; $chck14.Checked = $false; $chck15.Checked = $false; $chck16.Checked = $false; $chck17.Checked = $false; $chck18.Checked = $false; $chck19.Checked = $false; $chck20.Checked = $false;
@@ -243,9 +252,10 @@ echo $form.controls.add^($B_performanceoff^);
 
 echo $B_visualall = New-Object Windows.Forms.Button; 
 echo $B_visualall.text = 'Visual'; 
-echo $B_visualall.Location = New-Object Drawing.Point 250,620; 
+echo $B_visualall.Location = New-Object Drawing.Point 250,625; 
 echo $B_visualall.Size = New-Object Drawing.Point 120,50;
-echo $B_visualall.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_visualall.FlatStyle = 'Flat'
+echo $B_visualall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_visualall.add_click^({
 echo $chck48.Checked = $true; $chck49.Checked = $true; $chck50.Checked = $true;
 echo $chck51.Checked = $true; $chck52.Checked = $true; $chck53.Checked = $true;
@@ -256,10 +266,11 @@ echo $form.controls.add^($B_visualall^);
 
 echo $B_visualoff = New-Object Windows.Forms.Button; 
 echo $B_visualoff.text = 'Visual'; 
-echo $B_visualoff.Location = New-Object Drawing.Point 250,620; 
+echo $B_visualoff.Location = New-Object Drawing.Point 250,625; 
 echo $B_visualoff.Size = New-Object Drawing.Point 120,50;
 echo $B_visualoff.ForeColor = 'blue';
-echo $B_visualoff.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_visualoff.FlatStyle = 'Flat'
+echo $B_visualoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_visualoff.add_click^({
 echo $chck48.Checked = $false; $chck49.Checked = $false; $chck50.Checked = $false;
 echo $chck51.Checked = $false; $chck52.Checked = $false; $chck53.Checked = $false;
@@ -270,9 +281,10 @@ echo $form.controls.add^($B_visualoff^);
 
 echo $B_privacyall = New-Object Windows.Forms.Button; 
 echo $B_privacyall.text = 'Privacy'; 
-echo $B_privacyall.Location = New-Object Drawing.Point 380,620; 
+echo $B_privacyall.Location = New-Object Drawing.Point 380,625; 
 echo $B_privacyall.Size = New-Object Drawing.Point 120,50;
-echo $B_privacyall.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_privacyall.FlatStyle = 'Flat'
+echo $B_privacyall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_privacyall.add_click^({
 echo $chck31.Checked = $true; $chck32.Checked = $true; $chck33.Checked = $true; $chck34.Checked = $true; $chck35.Checked = $true; $chck36.Checked = $true; $chck37.Checked = $true; $chck38.Checked = $true; $chck39.Checked = $true; $chck40.Checked = $true;
 echo $chck41.Checked = $true; $chck42.Checked = $true; $chck43.Checked = $true; $chck44.Checked = $true; $chck45.Checked = $true; $chck46.Checked = $true; $chck47.Checked = $true;
@@ -283,10 +295,11 @@ echo $form.controls.add^($B_privacyall^);
 
 echo $B_privacyoff = New-Object Windows.Forms.Button; 
 echo $B_privacyoff.text = 'Privacy'; 
-echo $B_privacyoff.Location = New-Object Drawing.Point 380,620; 
+echo $B_privacyoff.Location = New-Object Drawing.Point 380,625; 
 echo $B_privacyoff.Size = New-Object Drawing.Point 120,50;
 echo $B_privacyoff.ForeColor = 'blue';
-echo $B_privacyoff.Font = New-Object System.Drawing.Font^('Arial',13,[System.Drawing.FontStyle]::Regular^);
+echo $B_privacyoff.FlatStyle = 'Flat'
+echo $B_privacyoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_privacyoff.add_click^({
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
 echo $chck41.Checked = $false; $chck42.Checked = $false; $chck43.Checked = $false; $chck44.Checked = $false; $chck45.Checked = $false; $chck46.Checked = $false; $chck47.Checked = $false;
@@ -303,7 +316,7 @@ echo $label2 = New-Object Windows.Forms.Label;
 echo $label2.Location = '302,436';
 echo $label2.Size = New-Object Drawing.Point 270,25; 
 echo $label2.text = 'Other'; 
-echo $label2.Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Bold^); 
+echo $label2.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $form.controls.add^($label2^); 
 
 echo $chck1 = New-Object Windows.Forms.Checkbox; 
@@ -872,7 +885,8 @@ echo $groupBox1.Location = '10,30'
 echo $groupBox1.size = '570,405'
 echo $groupBox1.text = 'Performance Tweaks'
 echo $groupBox1.Visible = $true
-echo $groupBox1.Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox1.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $form.Controls.Add^($groupBox1^) 
 
 echo $groupBox2 = New-Object System.Windows.Forms.GroupBox
@@ -880,7 +894,8 @@ echo $groupBox2.Location = '585,30'
 echo $groupBox2.size = '285,455'
 echo $groupBox2.text = 'Privacy'
 echo $groupBox2.Visible = $true
-echo $groupBox2.Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox2.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $form.Controls.Add^($groupBox2^) 
 
 echo $groupBox3 = New-Object System.Windows.Forms.GroupBox
@@ -888,7 +903,8 @@ echo $groupBox3.Location = '10,435'
 echo $groupBox3.size = '285,180'
 echo $groupBox3.text = 'Visual Tweaks'
 echo $groupBox3.Visible = $true
-echo $groupBox3.Font = New-Object System.Drawing.Font^('Arial',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox3.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $form.Controls.Add^($groupBox3^) 
 
 echo function About {
@@ -900,6 +916,9 @@ echo $aboutFormText2 = New-Object System.Windows.Forms.Label;
 echo $aboutForm.MinimizeBox = $false; 
 echo $aboutForm.MaximizeBox = $false; 
 echo $aboutForm.TopMost = $true; 
+echo $aboutForm.FlatStyle = 'Flat'
+echo $aboutForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml^('#252525'^)
+echo $aboutForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $aboutForm.AutoSizeMode = 'GrowAndShrink'; 
 echo $aboutForm.FormBorderStyle = 'FixedDialog'; 
 echo $aboutForm.AcceptButton = $aboutFormExit; 
@@ -910,10 +929,10 @@ echo $aboutForm.ShowInTaskBar = $false;
 echo $aboutForm.StartPosition = 'CenterParent'; 
 echo $aboutForm.Text = 'About'; 
 echo $aboutForm.Add_Load^($aboutForm_Load^); 
-echo $aboutFormNameLabel.Font = New-Object Drawing.Font^('Arial', 9, [System.Drawing.FontStyle]::Bold^); 
+echo $aboutFormNameLabel.Font = New-Object Drawing.Font^('Consolas', 9, [System.Drawing.FontStyle]::Bold^); 
 echo $aboutFormNameLabel.Location = '110, 10'; 
 echo $aboutFormNameLabel.Size = '200, 18'; 
-echo $aboutFormNameLabel.Text = '       E.T. All in One'; 
+echo $aboutFormNameLabel.Text = '  E.T. All in One'; 
 echo $aboutForm.Controls.Add^($aboutFormNameLabel^); 
 echo $aboutFormText.Location = '100, 30'; 
 echo $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
@@ -924,6 +943,7 @@ echo $aboutFormText2.Text = '      GitHub.com/semazurek';
 echo $aboutForm.Controls.Add^($aboutFormText2^); 
 echo $aboutFormExit.Location = '138, 75'; 
 echo $aboutFormExit.Text = 'OK'; 
+echo $aboutFormExit.FlatStyle = 'Flat'
 echo $aboutForm.Controls.Add^($aboutFormExit^); 
 echo [void]$aboutForm.ShowDialog^(^)
 echo }; 
@@ -950,6 +970,9 @@ echo $extraForm.AcceptButton = $extraFormExit;
 echo $extraForm.CancelButton = $extraFormExit; 
 echo $extraForm.ClientSize = '200, 360'; 
 echo $extraForm.ShowInTaskBar = $false; 
+echo $extraForm.FlatStyle = 'Flat'
+echo $extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml^('#252525'^)
+echo $extraForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 
 echo $extraForm.Location = ^(30,30^);
 echo $extraForm.Text = 'Extras'; 
@@ -959,6 +982,7 @@ echo $extraFormB1.Location = '25, 15';
 echo $extraFormB1.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB1.Text = 'Disk Defragmenter'; 
 echo $extraFormB1.add_click^({dfrgui.exe}^);
+echo $extraFormB1.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB1^); 
 echo $extraFormB1.add_MouseHover^({
 echo $tooltipEB1 = New-Object System.Windows.Forms.ToolTip
@@ -969,6 +993,7 @@ echo $extraFormB2.Location = '25, 45';
 echo $extraFormB2.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB2.Text = 'Cleanmgr'; 
 echo $extraFormB2.add_click^({cleanmgr.exe}^);
+echo $extraFormB2.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB2^); 
 echo $extraFormB2.add_MouseHover^({
 echo $tooltipEB2 = New-Object System.Windows.Forms.ToolTip
@@ -979,6 +1004,7 @@ echo $extraFormB3.Location = '25, 75';
 echo $extraFormB3.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB3.Text = 'Msconfig'; 
 echo $extraFormB3.add_click^({msconfig}^);
+echo $extraFormB3.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB3^); 
 echo $extraFormB3.add_MouseHover^({
 echo $tooltipEB3 = New-Object System.Windows.Forms.ToolTip
@@ -989,24 +1015,28 @@ echo $extraFormB4.Location = '25, 105';
 echo $extraFormB4.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB4.Text = 'Control Panel'; 
 echo $extraFormB4.add_click^({control.exe}^);
+echo $extraFormB4.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB4^); 
 
 echo $extraFormB5.Location = '25, 135'; 
 echo $extraFormB5.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB5.Text = 'Device Manager'; 
 echo $extraFormB5.add_click^({devmgmt.msc}^);
+echo $extraFormB5.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB5^); 
 
 echo $extraFormB6.Location = '25, 165'; 
 echo $extraFormB6.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB6.Text = 'UAC Settings'; 
 echo $extraFormB6.add_click^({UserAccountControlSettings.exe}^);
+echo $extraFormB6.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB6^); 
 
 echo $extraFormB7.Location = '25, 195'; 
 echo $extraFormB7.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB7.Text = 'Msinfo32'; 
 echo $extraFormB7.add_click^({msinfo32}^);
+echo $extraFormB7.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB7^); 
 echo $extraFormB7.add_MouseHover^({
 echo $tooltipEB7 = New-Object System.Windows.Forms.ToolTip
@@ -1017,24 +1047,28 @@ echo $extraFormB8.Location = '25, 225';
 echo $extraFormB8.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB8.Text = 'Services'; 
 echo $extraFormB8.add_click^({services.msc}^);
+echo $extraFormB8.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB8^); 
 
 echo $extraFormB9.Location = '25, 255'; 
 echo $extraFormB9.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB9.Text = 'Remote Desktop'; 
 echo $extraFormB9.add_click^({mstsc}^);
+echo $extraFormB9.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB9^); 
 
 echo $extraFormB10.Location = '25, 285'; 
 echo $extraFormB10.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB10.Text = 'Event Viewer'; 
 echo $extraFormB10.add_click^({eventvwr.msc}^);
+echo $extraFormB10.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB10^); 
 
 echo $extraFormB11.Location = '25, 315'; 
 echo $extraFormB11.Size = New-Object Drawing.Point 150,25;
 echo $extraFormB11.Text = 'Reset Network'; 
 echo $extraFormB11.add_click^({start %programdata%\restart-network-settings.bat}^);
+echo $extraFormB11.FlatStyle = 'Flat'
 echo $extraForm.Controls.Add^($extraFormB11^); 
 echo $extraFormB11.add_MouseHover^({
 echo $tooltipEB11 = New-Object System.Windows.Forms.ToolTip
