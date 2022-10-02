@@ -1,6 +1,6 @@
 # ET All-in-One Skrypt Optymalizacyjny
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.0-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/Wersja-v5.0-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -22,14 +22,15 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/85984736/193463051-49a22ac0-a275-479f-ba92-94bb5ce4730f.png" width="600">
+</p>
+
 ## Test wydajności
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
 
 <img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
-<img src="https://user-images.githubusercontent.com/85984736/188245912-5f6fd0f5-68a3-4f35-9d9a-a314e8515bb9.png" width="400">
-
-<img src="https://user-images.githubusercontent.com/85984736/185700476-814fb0b9-063a-475e-9bb7-9eb5e90c9f53.png" width="400">
 </p>
 Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (1:35 czas działania)</br></br>
 Zużycie RAMu przez system (Po zastosowaniu skryptu):
