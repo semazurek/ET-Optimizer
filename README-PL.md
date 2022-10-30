@@ -28,11 +28,11 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 
 ## Test wydajności
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85984736/159177028-067b5b11-69e3-4dda-9335-5e32ae16168e.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/198885777-a93d6aec-50ec-4a05-be55-620cc016dfa1.png" width="400">
 
-<img src="https://user-images.githubusercontent.com/85984736/159177034-1a68d273-063c-41cb-b825-1f9f21a008ca.png" width="400">
+<img src="https://user-images.githubusercontent.com/85984736/198885788-50f9ed4d-4987-40a4-b621-4271b620893d.png" width="400">
 </p>
-Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (1:35 czas działania)</br></br>
+Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (2:00 czas działania)</br></br>
 Zużycie RAMu przez system (Po zastosowaniu skryptu):
 <ul>
  <li>Windows 10: 1/4 GB</li>
