@@ -33,7 +33,6 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 <img src="https://user-images.githubusercontent.com/85984736/198885788-50f9ed4d-4987-40a4-b621-4271b620893d.png" width="400">
 </p>
 Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (2:00 up time).</br></br>
-System RAM Usage (After ET):
 
 ## What it does 
 
