@@ -33,7 +33,6 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 <img src="https://user-images.githubusercontent.com/85984736/198885788-50f9ed4d-4987-40a4-b621-4271b620893d.png" width="400">
 </p>
 Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (2:00 czas działania)</br></br>
-Zużycie RAMu przez system (Po zastosowaniu skryptu):
 
 ## Co robi skrypt
 
