@@ -34,15 +34,6 @@ This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI pro
 </p>
 Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (2:00 up time).</br></br>
 System RAM Usage (After ET):
-<ul>
- <li>Windows 10: 1/4 GB</li>
- <li>Windows 11: 1.4/4 GB</li>
-</ul>
-System RAM Usage (Before ET):
-<ul>
- <li>Windows 10: 1.6/4 GB</li>
- <li>Windows 11: 2/4 GB</li>
-</ul>
 
 ## What it does 
 
