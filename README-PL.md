@@ -34,15 +34,6 @@ Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu 
 </p>
 Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (2:00 czas działania)</br></br>
 Zużycie RAMu przez system (Po zastosowaniu skryptu):
-<ul>
- <li>Windows 10: 1/4 GB</li>
- <li>Windows 11: 1.4/4 GB</li>
-</ul>
-Zużycie RAMu przez system (Przed zastosowaniem skryptu):
-<ul>
- <li>Windows 10: 1.6/4 GB</li>
- <li>Windows 11: 2/4 GB</li>
-</ul>
 
 ## Co robi skrypt
 
