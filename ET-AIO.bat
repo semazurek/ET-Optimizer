@@ -238,7 +238,7 @@ echo $B_performanceoff = New-Object Windows.Forms.Button;
 echo $B_performanceoff.text = 'Performance'; 
 echo $B_performanceoff.Location = New-Object Drawing.Point 110,625; 
 echo $B_performanceoff.Size = New-Object Drawing.Point 130,50;
-echo $B_performanceoff.ForeColor = 'blue';
+echo $B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^);
 echo $B_performanceoff.FlatStyle = 'Flat'
 echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceoff.add_click^({
@@ -268,7 +268,7 @@ echo $B_visualoff = New-Object Windows.Forms.Button;
 echo $B_visualoff.text = 'Visual'; 
 echo $B_visualoff.Location = New-Object Drawing.Point 250,625; 
 echo $B_visualoff.Size = New-Object Drawing.Point 120,50;
-echo $B_visualoff.ForeColor = 'blue';
+echo $B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^);
 echo $B_visualoff.FlatStyle = 'Flat'
 echo $B_visualoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_visualoff.add_click^({
@@ -297,7 +297,7 @@ echo $B_privacyoff = New-Object Windows.Forms.Button;
 echo $B_privacyoff.text = 'Privacy'; 
 echo $B_privacyoff.Location = New-Object Drawing.Point 380,625; 
 echo $B_privacyoff.Size = New-Object Drawing.Point 120,50;
-echo $B_privacyoff.ForeColor = 'blue';
+echo $B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^);
 echo $B_privacyoff.FlatStyle = 'Flat'
 echo $B_privacyoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_privacyoff.add_click^({
@@ -849,7 +849,7 @@ echo $chck59.Checked = $false;
 echo $form.controls.add^($chck59^); 
 
 echo $chck60 = New-Object Windows.Forms.Checkbox; 
-echo $chck60.Location = New-Object Drawing.Point 595,495; 
+echo $chck60.Location = New-Object Drawing.Point 595,510; 
 echo $chck60.Size = New-Object Drawing.Point 270,25; 
 echo $chck60.Text = 'Remove Microsoft OneDrive'; 
 echo $chck60.TabIndex = 59; 
@@ -857,7 +857,7 @@ echo $chck60.Checked = $false;
 echo $form.controls.add^($chck60^); 
 
 echo $chck61 = New-Object Windows.Forms.Checkbox; 
-echo $chck61.Location = New-Object Drawing.Point 595,520; 
+echo $chck61.Location = New-Object Drawing.Point 595,535; 
 echo $chck61.Size = New-Object Drawing.Point 270,25; 
 echo $chck61.Text = 'Disable Xbox Services'; 
 echo $chck61.TabIndex = 60; 
@@ -865,7 +865,7 @@ echo $chck61.Checked = $false;
 echo $form.controls.add^($chck61^); 
 
 echo $chck62 = New-Object Windows.Forms.Checkbox; 
-echo $chck62.Location = New-Object Drawing.Point 595,545; 
+echo $chck62.Location = New-Object Drawing.Point 595,560; 
 echo $chck62.Size = New-Object Drawing.Point 270,25; 
 echo $chck62.Text = 'Enable Fast/Secure DNS ^(1.1.1.1^)'; 
 echo $chck62.TabIndex = 61; 
@@ -873,7 +873,7 @@ echo $chck62.Checked = $false;
 echo $form.controls.add^($chck62^); 
 
 echo $chck63 = New-Object Windows.Forms.Checkbox; 
-echo $chck63.Location = New-Object Drawing.Point 595,570; 
+echo $chck63.Location = New-Object Drawing.Point 595,585; 
 echo $chck63.Size = New-Object Drawing.Point 270,25; 
 echo $chck63.Text = 'Scan for Adware ^(AdwCleaner^)'; 
 echo $chck63.TabIndex = 62; 
@@ -961,6 +961,7 @@ echo $extraFormB8 = New-Object System.Windows.Forms.Button;
 echo $extraFormB9 = New-Object System.Windows.Forms.Button; 
 echo $extraFormB10 = New-Object System.Windows.Forms.Button; 
 echo $extraFormB11 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB12 = New-Object System.Windows.Forms.Button; 
 echo $extraForm.MinimizeBox = $false; 
 echo $extraForm.MaximizeBox = $false; 
 echo $extraForm.TopMost = $true; 
@@ -968,7 +969,7 @@ echo $extraForm.AutoSizeMode = 'GrowAndShrink';
 echo $extraForm.FormBorderStyle = 'FixedDialog'; 
 echo $extraForm.AcceptButton = $extraFormExit; 
 echo $extraForm.CancelButton = $extraFormExit; 
-echo $extraForm.ClientSize = '200, 360'; 
+echo $extraForm.ClientSize = '200, 390'; 
 echo $extraForm.ShowInTaskBar = $false; 
 echo $extraForm.FlatStyle = 'Flat'
 echo $extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml^('#252525'^)
@@ -1073,6 +1074,17 @@ echo $extraForm.Controls.Add^($extraFormB11^);
 echo $extraFormB11.add_MouseHover^({
 echo $tooltipEB11 = New-Object System.Windows.Forms.ToolTip
 echo $tooltipEB11.SetToolTip^($extraFormB11, 'This option will reset any internet settings on your device.'^)
+echo }^)
+
+echo $extraFormB12.Location = '25, 345'; 
+echo $extraFormB12.Size = New-Object Drawing.Point 150,25; 
+echo $extraFormB12.Text = 'Update Applications ^(Winget^)'; 
+echo $extraFormB12.add_click^({winget upgrade --all}^); 
+echo $extraFormB12.FlatStyle = 'Flat' 
+echo $extraForm.Controls.Add^($extraFormB12^); 
+echo $extraFormB12.add_MouseHover^({
+echo $tooltipEB12 = New-Object System.Windows.Forms.ToolTip
+echo $tooltipEB12.SetToolTip^($extraFormB12, 'Update Applications ^(Winget upgrade --all^)'^)
 echo }^)
 
 echo [void]$extraForm.ShowDialog^(^)
