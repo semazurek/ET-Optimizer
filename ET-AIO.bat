@@ -1754,6 +1754,9 @@ set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservic
    sc config %%a start= disabled  >nul 2>nul
 ))
 
+::Disable Network Diagnostic Usage Service
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG_DWORD /d 4 /f >nul 2>nul
+
 :: Manuall
 powershell -Command "Write-Host ' [Setting] Services to: Manuall Mode ' -F blue -B black"
 set toManuall=BITS SamSs TapiSrv seclogon wuauserv PhoneSvc lmhosts iphlpsvc gupdate gupdatem edgeupdate edgeupdatem MapsBroker PnkBstrA brave bravem asus asusm adobeupdateservice adobeflashplayerupdatesvc WSearch
@@ -2082,7 +2085,6 @@ rd "%systemdrive%\OneDriveTemp" /Q /S 1>NUL 2>NUL
 reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >nul 2>nul
 reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >nul 2>nul
-del "%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk" /s /f /q >nul 2>nul
 goto Start
 
 :XboxServices
