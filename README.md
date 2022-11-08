@@ -181,6 +181,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 | Management of payments and NFC | `SEMgrSvc`  | Disabled |
 | Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
 | Alljoyn Router Service | `AJRouter`  | Disabled |
+| Network Diagnostic Usage | `NDU`  | Disabled |
 | Windows Search | `WSearch`  | Manuall |
 | Background Intelligent Transfer Service | `BITS`  | Manuall |
 | Security Accounts Manager | `SamSs` | Manuall |  
