@@ -1,6 +1,6 @@
 # ET All-in-One Optimization Script
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.0-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.1-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -15,16 +15,17 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.0/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.1/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
-This project is a continuation of <a href="https://youtu.be/SZLV0DbMyHw">GUI project (2017)</a> (abandoned)
+</br>
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85984736/193463051-49a22ac0-a275-479f-ba92-94bb5ce4730f.png" width="600">
+<img src="https://semazurek.github.io/assets/img/work1.jpg" width="600">
 </p>
+Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
 
 ## Benchmark
 <p align="center">
@@ -150,8 +151,16 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 </tr>	
 <tr>
 	<td>Scanning for adware (adwcleaner)</td>
-	<td></td>
+	<td>Disable Nage's Algorithm (Delayed ACK).</td>
 </tr>	
+<tr>
+	<td>Disable Sleep Mode Timeouts</td>
+	<td>Graphic Card Optimization</td>
+</tr>
+<tr>
+	<td>Disable  Spectre/Meltdown Protection</td>
+	<td></td>
+</tr>
 </table>
 </br>
 <li>Unnecessary services set to disabled/manuall mode: </li>  
