@@ -34,11 +34,11 @@ if '%errorlevel%' NEQ '0' (
 :: https://github.com/semazurek/ET-All-in-One-Optimizer
 :: https://www.paypal.com/paypalme/rikey
 
-set version=E.T. ver 5.0
+set version=E.T. ver 5.1
 title %version%
 ::mode con cols=72 lines=30
 set /a counter=1
-:: alltodo is 63
+:: alltodo is 67
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -73,7 +73,7 @@ if not exist %programdata%\ET mkdir %programdata%\ET
 
 :: PowerShell Window.Forms Code exported into .ps1
 (
-echo $versionPS=$args[0]+' '+$args[1]+' '+$args[2]+'.0';
+echo $versionPS=$args[0]+' '+$args[1]+' '+$args[2];
 echo [reflection.assembly]::LoadWithPartialName^( 'System.Windows.Forms'^); 
 echo [reflection.assembly]::loadwithpartialname^('System.Drawing'^); 
 echo Add-Type -AssemblyName System.Windows.Forms
@@ -143,10 +143,14 @@ echo If ^($chck60.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck60.lbool
 echo If ^($chck61.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck61.lbool};
 echo If ^($chck62.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck62.lbool};
 echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool};
+echo If ^($chck64.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck64.lbool};
+echo If ^($chck65.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck65.lbool};
+echo If ^($chck66.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck66.lbool};
+echo If ^($chck67.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck67.lbool};
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
-echo $form.Size = New-Object System.Drawing.Size^(895,730^); 
+echo $form.Size = New-Object System.Drawing.Size^(895,780^); 
 echo $form.StartPosition = 'CenterScreen'; 
 echo $form.FormBorderStyle = 'FixedDialog'; 
 echo $form.Text = $versionPS; 
@@ -163,7 +167,7 @@ echo $form.Font = $font;
 echo $B_close = New-Object Windows.Forms.Button; 
 echo $B_close.text = 'Start'; 
 echo $B_close.FlatStyle = 'Flat'
-echo $B_close.Location = New-Object Drawing.Point 660,625; 
+echo $B_close.Location = New-Object Drawing.Point 660,675; 
 echo $B_close.Size = New-Object Drawing.Point 120,50;
 echo $B_close.FlatStyle = 'Flat'
 echo $B_close.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
@@ -171,7 +175,7 @@ echo $B_close.add_click^({do_start}^); $form.controls.add^($B_close^);
 
 echo $B_checkall = New-Object Windows.Forms.Button; 
 echo $B_checkall.text = 'Select All'; 
-echo $B_checkall.Location = New-Object Drawing.Point 510,625; 
+echo $B_checkall.Location = New-Object Drawing.Point 510,675; 
 echo $B_checkall.Size = New-Object Drawing.Point 140,50;
 echo $B_checkall.FlatStyle = 'Flat'
 echo $B_checkall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
@@ -182,7 +186,7 @@ echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; 
 echo $chck31.Checked = $true; $chck32.Checked = $true; $chck33.Checked = $true; $chck34.Checked = $true; $chck35.Checked = $true; $chck36.Checked = $true; $chck37.Checked = $true; $chck38.Checked = $true; $chck39.Checked = $true; $chck40.Checked = $true;
 echo $chck41.Checked = $true; $chck42.Checked = $true; $chck43.Checked = $true; $chck44.Checked = $true; $chck45.Checked = $true; $chck46.Checked = $true; $chck47.Checked = $true; $chck48.Checked = $true; $chck49.Checked = $true; $chck50.Checked = $true;
 echo $chck51.Checked = $true; $chck52.Checked = $true; $chck53.Checked = $true; $chck54.Checked = $true; $chck55.Checked = $true; $chck56.Checked = $true; $chck57.Checked = $true; $chck58.Checked = $true; $chck59.Checked = $true; $chck60.Checked = $true;
-echo $chck61.Checked = $true; $chck62.Checked = $true; $chck63.Checked = $true;
+echo $chck61.Checked = $true; $chck62.Checked = $true; $chck63.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true; $chck66.Checked = $true; $chck67.Checked = $true;
 echo $B_checkall.Visible = $false;
 echo $B_uncheckall.Visible = $true;
 echo $B_performanceoff.Visible = $true;
@@ -196,7 +200,7 @@ echo $form.controls.add^($B_checkall^);
 
 echo $B_uncheckall = New-Object Windows.Forms.Button; 
 echo $B_uncheckall.text = 'Unselect All'; 
-echo $B_uncheckall.Location = New-Object Drawing.Point 510,625; 
+echo $B_uncheckall.Location = New-Object Drawing.Point 510,675; 
 echo $B_uncheckall.Size = New-Object Drawing.Point 140,50;
 echo $B_uncheckall.FlatStyle = 'Flat'
 echo $B_uncheckall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
@@ -207,7 +211,7 @@ echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $fals
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
 echo $chck41.Checked = $false; $chck42.Checked = $false; $chck43.Checked = $false; $chck44.Checked = $false; $chck45.Checked = $false; $chck46.Checked = $false; $chck47.Checked = $false; $chck48.Checked = $false; $chck49.Checked = $false; $chck50.Checked = $false;
 echo $chck51.Checked = $false; $chck52.Checked = $false; $chck53.Checked = $false; $chck54.Checked = $false; $chck55.Checked = $false; $chck56.Checked = $false; $chck57.Checked = $false; $chck58.Checked = $false; $chck59.Checked = $false; $chck60.Checked = $false;
-echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false;
+echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false; $chck67.Checked = $false;
 echo $B_checkall.Visible = $true;
 echo $B_uncheckall.Visible = $false;
 echo $B_performanceoff.Visible = $false;
@@ -221,14 +225,14 @@ echo $form.controls.add^($B_uncheckall^);
 
 echo $B_performanceall = New-Object Windows.Forms.Button; 
 echo $B_performanceall.text = 'Performance'; 
-echo $B_performanceall.Location = New-Object Drawing.Point 110,625; 
+echo $B_performanceall.Location = New-Object Drawing.Point 110,675; 
 echo $B_performanceall.Size = New-Object Drawing.Point 130,50;
 echo $B_performanceall.FlatStyle = 'Flat'
 echo $B_performanceall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceall.add_click^({
 echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
 echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; $chck14.Checked = $true; $chck15.Checked = $true; $chck16.Checked = $true; $chck17.Checked = $true; $chck18.Checked = $true; $chck19.Checked = $true; $chck20.Checked = $true;
-echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true;
+echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true; $chck66.Checked = $true;
 echo $B_performanceoff.Visible = $true;
 echo $B_performanceall.Visible = $false;
 echo }^); 
@@ -236,7 +240,7 @@ echo $form.controls.add^($B_performanceall^);
 
 echo $B_performanceoff = New-Object Windows.Forms.Button; 
 echo $B_performanceoff.text = 'Performance'; 
-echo $B_performanceoff.Location = New-Object Drawing.Point 110,625; 
+echo $B_performanceoff.Location = New-Object Drawing.Point 110,675; 
 echo $B_performanceoff.Size = New-Object Drawing.Point 130,50;
 echo $B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^);
 echo $B_performanceoff.FlatStyle = 'Flat'
@@ -244,7 +248,7 @@ echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Consolas',13,[Sys
 echo $B_performanceoff.add_click^({
 echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
 echo $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false; $chck14.Checked = $false; $chck15.Checked = $false; $chck16.Checked = $false; $chck17.Checked = $false; $chck18.Checked = $false; $chck19.Checked = $false; $chck20.Checked = $false;
-echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $false; $chck24.Checked = $false; $chck25.Checked = $false; $chck26.Checked = $false; $chck27.Checked = $false; $chck28.Checked = $false; $chck29.Checked = $false; $chck30.Checked = $false;
+echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $false; $chck24.Checked = $false; $chck25.Checked = $false; $chck26.Checked = $false; $chck27.Checked = $false; $chck28.Checked = $false; $chck29.Checked = $false; $chck30.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false;
 echo $B_performanceoff.Visible = $false;
 echo $B_performanceall.Visible = $true;
 echo }^); 
@@ -252,7 +256,7 @@ echo $form.controls.add^($B_performanceoff^);
 
 echo $B_visualall = New-Object Windows.Forms.Button; 
 echo $B_visualall.text = 'Visual'; 
-echo $B_visualall.Location = New-Object Drawing.Point 250,625; 
+echo $B_visualall.Location = New-Object Drawing.Point 250,675; 
 echo $B_visualall.Size = New-Object Drawing.Point 120,50;
 echo $B_visualall.FlatStyle = 'Flat'
 echo $B_visualall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
@@ -266,7 +270,7 @@ echo $form.controls.add^($B_visualall^);
 
 echo $B_visualoff = New-Object Windows.Forms.Button; 
 echo $B_visualoff.text = 'Visual'; 
-echo $B_visualoff.Location = New-Object Drawing.Point 250,625; 
+echo $B_visualoff.Location = New-Object Drawing.Point 250,675; 
 echo $B_visualoff.Size = New-Object Drawing.Point 120,50;
 echo $B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^);
 echo $B_visualoff.FlatStyle = 'Flat'
@@ -281,7 +285,7 @@ echo $form.controls.add^($B_visualoff^);
 
 echo $B_privacyall = New-Object Windows.Forms.Button; 
 echo $B_privacyall.text = 'Privacy'; 
-echo $B_privacyall.Location = New-Object Drawing.Point 380,625; 
+echo $B_privacyall.Location = New-Object Drawing.Point 380,675; 
 echo $B_privacyall.Size = New-Object Drawing.Point 120,50;
 echo $B_privacyall.FlatStyle = 'Flat'
 echo $B_privacyall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
@@ -295,7 +299,7 @@ echo $form.controls.add^($B_privacyall^);
 
 echo $B_privacyoff = New-Object Windows.Forms.Button; 
 echo $B_privacyoff.text = 'Privacy'; 
-echo $B_privacyoff.Location = New-Object Drawing.Point 380,625; 
+echo $B_privacyoff.Location = New-Object Drawing.Point 380,675; 
 echo $B_privacyoff.Size = New-Object Drawing.Point 120,50;
 echo $B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^);
 echo $B_privacyoff.FlatStyle = 'Flat'
@@ -313,7 +317,7 @@ echo $B_performanceall.Visible = $false;
 echo $B_visualall.Visible = $false;
 echo $B_privacyall.Visible = $false;
 echo $label2 = New-Object Windows.Forms.Label; 
-echo $label2.Location = '302,436';
+echo $label2.Location = '302,485';
 echo $label2.Size = New-Object Drawing.Point 270,25; 
 echo $label2.text = 'Other'; 
 echo $label2.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
@@ -450,6 +454,22 @@ echo $chck15.Text = 'Fix Microsoft Edge Settings';
 echo $chck15.TabIndex = 14; 
 echo $chck15.Checked = $true; 
 echo $form.controls.add^($chck15^); 
+
+echo $chck64 = New-Object Windows.Forms.Checkbox; 
+echo $chck64.Location = New-Object Drawing.Point 20,430; 
+echo $chck64.Size = New-Object Drawing.Point 270,25; 
+echo $chck64.Text = 'Disable Nagle''s Alg. ^(Delayed ACKs^)'; 
+echo $chck64.TabIndex = 63; 
+echo $chck64.Checked = $true; 
+echo $form.controls.add^($chck64^); 
+
+echo $chck65 = New-Object Windows.Forms.Checkbox; 
+echo $chck65.Location = New-Object Drawing.Point 20,455; 
+echo $chck65.Size = New-Object Drawing.Point 270,25; 
+echo $chck65.Text = 'Disable Sleep Mode Timeouts'; 
+echo $chck65.TabIndex = 64; 
+echo $chck65.Checked = $true; 
+echo $form.controls.add^($chck65^); 
 
 echo $chck16 = New-Object Windows.Forms.Checkbox; 
 echo $chck16.Location = New-Object Drawing.Point 305,55; 
@@ -604,6 +624,30 @@ echo $tooltip30 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip30.SetToolTip^($chck30, 'Defragmenting the Indexing Service database file'^)
 echo }^) 
 
+echo $chck66 = New-Object Windows.Forms.Checkbox; 
+echo $chck66.Location = New-Object Drawing.Point 305,430; 
+echo $chck66.Size = New-Object Drawing.Point 270,25; 
+echo $chck66.Text = 'Graphic Card Optimization'; 
+echo $chck66.TabIndex = 65; 
+echo $chck66.Checked = $true; 
+echo $form.controls.add^($chck66^); 
+echo $chck66.add_MouseHover^({
+echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
+echo $tooltip66.SetToolTip^($chck66, 'Registry keys for optimizing the graphic card.'^)
+echo }^)
+
+echo $chck67 = New-Object Windows.Forms.Checkbox; 
+echo $chck67.Location = New-Object Drawing.Point 595,610; 
+echo $chck67.Size = New-Object Drawing.Point 270,25; 
+echo $chck67.Text = 'Disable Spectre/Meltdown Protection'; 
+echo $chck67.TabIndex = 66; 
+echo $chck67.Checked = $false; 
+echo $form.controls.add^($chck67^); 
+echo $chck67.add_MouseHover^({
+echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
+echo $tooltip67.SetToolTip^($chck67, 'These are important secure patches although it decrease system performance.'^)
+echo }^)
+
 echo $chck31 = New-Object Windows.Forms.Checkbox; 
 echo $chck31.Location = New-Object Drawing.Point 595,55; 
 echo $chck31.Size = New-Object Drawing.Point 270,25; 
@@ -741,7 +785,7 @@ echo $chck47.Checked = $true;
 echo $form.controls.add^($chck47^); 
 
 echo $chck48 = New-Object Windows.Forms.Checkbox; 
-echo $chck48.Location = New-Object Drawing.Point 20,460; 
+echo $chck48.Location = New-Object Drawing.Point 20,510; 
 echo $chck48.Size = New-Object Drawing.Point 270,25; 
 echo $chck48.Text = 'Show File Extensions in Explorer'; 
 echo $chck48.TabIndex = 47; 
@@ -749,7 +793,7 @@ echo $chck48.Checked = $true;
 echo $form.controls.add^($chck48^); 
 
 echo $chck49 = New-Object Windows.Forms.Checkbox; 
-echo $chck49.Location = New-Object Drawing.Point 20,485; 
+echo $chck49.Location = New-Object Drawing.Point 20,535; 
 echo $chck49.Size = New-Object Drawing.Point 270,25; 
 echo $chck49.Text = 'Disable Transparency on Taskbar'; 
 echo $chck49.TabIndex = 48; 
@@ -757,7 +801,7 @@ echo $chck49.Checked = $true;
 echo $form.controls.add^($chck49^); 
 
 echo $chck50 = New-Object Windows.Forms.Checkbox; 
-echo $chck50.Location = New-Object Drawing.Point 20,510; 
+echo $chck50.Location = New-Object Drawing.Point 20,560; 
 echo $chck50.Size = New-Object Drawing.Point 270,25; 
 echo $chck50.Text = 'Disable Windows Animations'; 
 echo $chck50.TabIndex = 49; 
@@ -765,7 +809,7 @@ echo $chck50.Checked = $true;
 echo $form.controls.add^($chck50^); 
 
 echo $chck51 = New-Object Windows.Forms.Checkbox; 
-echo $chck51.Location = New-Object Drawing.Point 20,535; 
+echo $chck51.Location = New-Object Drawing.Point 20,585; 
 echo $chck51.Size = New-Object Drawing.Point 270,25; 
 echo $chck51.Text = 'Disable MRU lists ^(jump lists^)'; 
 echo $chck51.TabIndex = 50; 
@@ -773,7 +817,7 @@ echo $chck51.Checked = $true;
 echo $form.controls.add^($chck51^); 
 
 echo $chck52 = New-Object Windows.Forms.Checkbox; 
-echo $chck52.Location = New-Object Drawing.Point 20,560; 
+echo $chck52.Location = New-Object Drawing.Point 20,610; 
 echo $chck52.Size = New-Object Drawing.Point 270,25; 
 echo $chck52.Text = 'Set Search Box to Icon Only'; 
 echo $chck52.TabIndex = 51; 
@@ -781,7 +825,7 @@ echo $chck52.Checked = $true;
 echo $form.controls.add^($chck52^);
 
 echo $chck53 = New-Object Windows.Forms.Checkbox; 
-echo $chck53.Location = New-Object Drawing.Point 20,585; 
+echo $chck53.Location = New-Object Drawing.Point 20,635; 
 echo $chck53.Size = New-Object Drawing.Point 270,25; 
 echo $chck53.Text = 'Explorer on Start on This PC'; 
 echo $chck53.TabIndex = 52; 
@@ -789,7 +833,7 @@ echo $chck53.Checked = $true;
 echo $form.controls.add^($chck53^); 
 
 echo $chck54 = New-Object Windows.Forms.Checkbox; 
-echo $chck54.Location = New-Object Drawing.Point 305,460; 
+echo $chck54.Location = New-Object Drawing.Point 305,510; 
 echo $chck54.Size = New-Object Drawing.Point 270,25; 
 echo $chck54.Text = 'Remove Windows Game Bar/DVR'; 
 echo $chck54.TabIndex = 53; 
@@ -797,7 +841,7 @@ echo $chck54.Checked = $true;
 echo $form.controls.add^($chck54^);  
 
 echo $chck55 = New-Object Windows.Forms.Checkbox; 
-echo $chck55.Location = New-Object Drawing.Point 305,485; 
+echo $chck55.Location = New-Object Drawing.Point 305,535; 
 echo $chck55.Size = New-Object Drawing.Point 270,25; 
 echo $chck55.Text = 'Enable Service Tweaks'; 
 echo $chck55.TabIndex = 54; 
@@ -809,7 +853,7 @@ echo $tooltip55.SetToolTip^($chck55, 'More details on github.com/semazurek '^)
 echo }^)
 
 echo $chck56 = New-Object Windows.Forms.Checkbox; 
-echo $chck56.Location = New-Object Drawing.Point 305,510; 
+echo $chck56.Location = New-Object Drawing.Point 305,560; 
 echo $chck56.Size = New-Object Drawing.Point 270,25; 
 echo $chck56.Text = 'Remove Bloatware ^(Preinstalled^)'; 
 echo $chck56.TabIndex = 55; 
@@ -821,7 +865,7 @@ echo $tooltip56.SetToolTip^($chck56, 'More details on github.com/semazurek '^)
 echo }^)
 
 echo $chck57 = New-Object Windows.Forms.Checkbox; 
-echo $chck57.Location = New-Object Drawing.Point 305,535; 
+echo $chck57.Location = New-Object Drawing.Point 305,585; 
 echo $chck57.Size = New-Object Drawing.Point 270,25; 
 echo $chck57.Text = 'Disable Unnecessary Startup Apps'; 
 echo $chck57.TabIndex = 56; 
@@ -833,7 +877,7 @@ echo $tooltip57.SetToolTip^($chck57, "Java Update Checker x64 `n Mini Partition 
 echo }^)
 
 echo $chck58 = New-Object Windows.Forms.Checkbox; 
-echo $chck58.Location = New-Object Drawing.Point 305,560; 
+echo $chck58.Location = New-Object Drawing.Point 305,610; 
 echo $chck58.Size = New-Object Drawing.Point 270,25; 
 echo $chck58.Text = 'Clean Temp/Cache/Prefetch/Logs'; 
 echo $chck58.TabIndex = 57; 
@@ -841,7 +885,7 @@ echo $chck58.Checked = $true;
 echo $form.controls.add^($chck58^); 
 
 echo $chck59 = New-Object Windows.Forms.Checkbox; 
-echo $chck59.Location = New-Object Drawing.Point 305,585; 
+echo $chck59.Location = New-Object Drawing.Point 305,635; 
 echo $chck59.Size = New-Object Drawing.Point 275,25; 
 echo $chck59.Text = 'Remove News and Interests/Widgets'; 
 echo $chck59.TabIndex = 58; 
@@ -882,7 +926,7 @@ echo $form.controls.add^($chck63^);
 
 echo $groupBox1 = New-Object System.Windows.Forms.GroupBox
 echo $groupBox1.Location = '10,30' 
-echo $groupBox1.size = '570,405'
+echo $groupBox1.size = '570,455'
 echo $groupBox1.text = 'Performance Tweaks'
 echo $groupBox1.Visible = $true
 echo $groupBox1.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
@@ -899,7 +943,7 @@ echo $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee
 echo $form.Controls.Add^($groupBox2^) 
 
 echo $groupBox3 = New-Object System.Windows.Forms.GroupBox
-echo $groupBox3.Location = '10,435' 
+echo $groupBox3.Location = '10,485' 
 echo $groupBox3.size = '285,180'
 echo $groupBox3.text = 'Visual Tweaks'
 echo $groupBox3.Visible = $true
@@ -1125,6 +1169,66 @@ echo	netsh int set interface name="%%j" admin="disabled" >> %programdata%\restar
 echo	netsh int set interface name="%%j" admin="enabled" >> %programdata%\restart-network-settings.bat
 echo ) >> %programdata%\restart-network-settings.bat
 
+echo $errpref = $ErrorActionPreference #save actual preference > %programdata%\NagleAlg.ps1
+echo $ErrorActionPreference = "silentlycontinue" >> %programdata%\NagleAlg.ps1
+echo $NetworkIDS = @( >> %programdata%\NagleAlg.ps1
+echo (Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName >> %programdata%\NagleAlg.ps1
+echo ) >> %programdata%\NagleAlg.ps1
+echo    foreach ($NetworkID in $NetworkIDS) { >> %programdata%\NagleAlg.ps1
+echo Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TcpAckFrequency" -Type DWord -Value 1 >> %programdata%\NagleAlg.ps1
+echo Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1 >> %programdata%\NagleAlg.ps1
+echo } >> %programdata%\NagleAlg.ps1
+echo $ErrorActionPreference = $errpref #restore previous preference >> %programdata%\NagleAlg.ps1
+
+(
+echo Windows Registry Editor Version 5.00
+
+echo [HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics]
+echo "MaxMultisampleType"=dword:00000004
+echo "DisableHWAcceleration"=dword:00000000
+echo "EnableDebugControl"=dword:00000001
+echo "UseDX9LText"=dword:00000001
+echo "BreakOnUnexpectedErrors"=dword:00000001
+echo "RPCAvalon"=dword:00000001
+echo "RecordAvalonFile"=dword:00000000
+echo "UseReferenceRasterizer"=dword:00000001
+echo "SkipDriverDateCheck"=dword:00000000
+echo "SkipDriverCheck"=dword:00000000
+
+echo [HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics\DISPLAY1]
+echo "PixelStructure"=dword:00000001
+echo "GammaLevel"=dword:00000898
+echo "ClearTypeLevel"=dword:00000064
+echo "EnhancedContrastLevel"=dword:00000190
+echo "GrayscaleEnhancedContrastLevel"=dword:00000190
+echo "TextContrastLevel"=dword:00000002
+
+echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler]
+echo "EnablePreemption"=dword:00000001
+
+echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Watchdog\Logging]
+echo "BreakOnError"=dword:00000001
+echo "BreakOnAssertion "=dword:00000001
+
+echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
+echo "TdrLevel"=dword:00000003
+echo "TdrDelay"=dword:00000078
+echo "TdrDdiDelay"=dword:0000003c
+echo "TdrTestMode"=dword:00000000
+echo "TdrDebugMode"=dword:00000002
+echo "TdrLimitTime"=dword:00000078
+echo "TdrLimitCount"=dword:00000005
+
+echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\BasicDisplay]
+echo "BasicDisplayUserNotified"=dword:00000000
+
+echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DCI]
+echo "Timeout"=dword:00000078
+
+echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\TdrWatch]
+echo "TDR_RECOVERY"=dword:00000001
+)>%programdata%\Reg-GPU.reg
+
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
 cls
@@ -1181,7 +1285,7 @@ goto Start
 :Start
 
 ::menu loop checking for every checkbox and go to goto func
-for /l %%x in (1, 1, 63) do (
+for /l %%x in (1, 1, 67) do (
 if exist %programdata%\ET\chck%%x.lbool goto chck%%x
 )
 
@@ -1377,6 +1481,36 @@ reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Current
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\User\Default\SearchScopes" /v ShowSearchSuggestionsGlobal /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead" /v FPEnabled /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v EnabledV9 /t REG_DWORD /d 0 /f >nul 2>nul
+goto Start
+
+:chck64
+if exist %programdata%\ET\chck64.lbool del %programdata%\ET\chck64.lbool
+::	Disable Nagle's Algorithm (Delayed ACKs)
+powershell -Command "Write-Host ' [Disable] Nagle''s Algorithm (Delayed ACKs) ' -F darkgray -B black"
+Powershell -Command "%programdata%\NagleAlg.ps1" >nul 2>nul
+goto Start
+
+:chck65
+if exist %programdata%\ET\chck65.lbool del %programdata%\ET\chck65.lbool
+::	Disable Sleep Mode Timeouts - Power Options
+powershell -Command "Write-Host ' [Disable] Sleep Mode Timeouts' -F darkgray -B black"
+	powercfg /X standby-timeout-ac 0 >nul 2>nul
+	powercfg /X standby-timeout-dc 0 >nul 2>nul
+goto Start
+
+:chck66
+if exist %programdata%\ET\chck66.lbool del %programdata%\ET\chck66.lbool
+::	Graphic Card Optimization
+powershell -Command "Write-Host ' [Setting] Graphic Card Optimization ' -F blue -B black"
+regedit.exe /s %programdata%\Reg-GPU.reg >nul 2>nul
+goto Start
+
+:chck67
+if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
+::	Disable Sleep Mode Timeouts - Power Options
+powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black"
+	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 1 /f >nul 2>nul
+	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 1 /f >nul 2>nul
 goto Start
 
 :chck16
@@ -2130,6 +2264,8 @@ del %programdata%\adwcleaner.exe >nul 2>nul
 goto Start
 
 :Done
+if exist %programdata%\NagleAlg.ps1 del %programdata%\NagleAlg.ps1
+if exist %programdata%\Reg-GPU.reg del %programdata%\Reg-GPU.reg
 del %programdata%\ET\*.lbool >nul 2>nul
 
 echo ------------------------------------------------------------------------
