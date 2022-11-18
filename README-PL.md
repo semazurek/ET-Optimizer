@@ -1,6 +1,6 @@
 # ET All-in-One Skrypt Optymalizacyjny
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/Wersja-v5.0-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/Wersja-v5.1-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
@@ -15,16 +15,17 @@ Ostatnio testowane/aktualizowane na:
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
 </ul> 
 </br>
-Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.0/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.1/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
  
-Jest to kontynuacja porzuconego <a href="https://youtu.be/SZLV0DbMyHw">projektu z GUI (2017)</a>
+</br>
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85984736/193463051-49a22ac0-a275-479f-ba92-94bb5ce4730f.png" width="600">
+<img src="https://semazurek.github.io/assets/img/work1.jpg" width="600">
 </p>
+Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
 
 ## Test wydajności
 <p align="center">
@@ -150,8 +151,16 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 </tr>	
 <tr>
 	<td>Skanowanie w poszukiwaniu adware (adwcleaner)</td>
-	<td></td>
+	<td>Wyłącz Algorytm Nagla (Opóźnione ACK)</td>
 </tr>	
+<tr>
+	<td>Wyłącz odliczanie do Trybu Uśpienia</td>
+	<td>Ustawienia optymalizacji karty graficznej</td>
+</tr>
+<tr>
+	<td>Wyłącz zabezpieczenia Spectre/Meltdown</td>
+	<td></td>
+</tr>
 </table>
 </br>
 <li>Niepotrzebne usługi ustawione na tryb wyłączony/ręczny: </li>  
