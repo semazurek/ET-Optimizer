@@ -15,9 +15,13 @@ Ostatnio testowane/aktualizowane na:
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
 </ul> 
 </br>
-Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.1/ET-AIO.bat" target="_blank">ET-AIO.bat</a> 
+Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.1/ET-AIO.bat" target="_blank">ET-AIO.bat</a></br></br>
+Uruchom przez komende: 
+
+```PowerShell
+Powershell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All-in-One-Optimizer/master/ET-AIO.bat -o ET-AIO.bat; start ET-AIO.bat
+```
  
-</br>
 </br>
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
