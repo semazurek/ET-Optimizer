@@ -185,8 +185,8 @@ echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; 
 echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true;
 echo $chck31.Checked = $true; $chck32.Checked = $true; $chck33.Checked = $true; $chck34.Checked = $true; $chck35.Checked = $true; $chck36.Checked = $true; $chck37.Checked = $true; $chck38.Checked = $true; $chck39.Checked = $true; $chck40.Checked = $true;
 echo $chck41.Checked = $true; $chck42.Checked = $true; $chck43.Checked = $true; $chck44.Checked = $true; $chck45.Checked = $true; $chck46.Checked = $true; $chck47.Checked = $true; $chck48.Checked = $true; $chck49.Checked = $true; $chck50.Checked = $true;
-echo $chck51.Checked = $true; $chck52.Checked = $true; $chck53.Checked = $true; $chck54.Checked = $true; $chck55.Checked = $true; $chck56.Checked = $true; $chck57.Checked = $true; $chck58.Checked = $true; $chck59.Checked = $true; $chck60.Checked = $true;
-echo $chck61.Checked = $true; $chck62.Checked = $true; $chck63.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true; $chck66.Checked = $true; $chck67.Checked = $true;
+echo $chck51.Checked = $true; $chck52.Checked = $true; $chck53.Checked = $true; $chck54.Checked = $true; $chck55.Checked = $true; $chck56.Checked = $true; $chck57.Checked = $true; $chck58.Checked = $true; $chck59.Checked = $true;
+echo $chck63.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true; 
 echo $B_checkall.Visible = $false;
 echo $B_uncheckall.Visible = $true;
 echo $B_performanceoff.Visible = $true;
@@ -232,7 +232,7 @@ echo $B_performanceall.Font = New-Object System.Drawing.Font^('Consolas',13,[Sys
 echo $B_performanceall.add_click^({
 echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
 echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; $chck14.Checked = $true; $chck15.Checked = $true; $chck16.Checked = $true; $chck17.Checked = $true; $chck18.Checked = $true; $chck19.Checked = $true; $chck20.Checked = $true;
-echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true; $chck66.Checked = $true;
+echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true;
 echo $B_performanceoff.Visible = $true;
 echo $B_performanceall.Visible = $false;
 echo }^); 
@@ -248,7 +248,7 @@ echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Consolas',13,[Sys
 echo $B_performanceoff.add_click^({
 echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
 echo $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false; $chck14.Checked = $false; $chck15.Checked = $false; $chck16.Checked = $false; $chck17.Checked = $false; $chck18.Checked = $false; $chck19.Checked = $false; $chck20.Checked = $false;
-echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $false; $chck24.Checked = $false; $chck25.Checked = $false; $chck26.Checked = $false; $chck27.Checked = $false; $chck28.Checked = $false; $chck29.Checked = $false; $chck30.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false;
+echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $false; $chck24.Checked = $false; $chck25.Checked = $false; $chck26.Checked = $false; $chck27.Checked = $false; $chck28.Checked = $false; $chck29.Checked = $false; $chck30.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false;
 echo $B_performanceoff.Visible = $false;
 echo $B_performanceall.Visible = $true;
 echo }^); 
@@ -625,11 +625,11 @@ echo $tooltip30.SetToolTip^($chck30, 'Defragmenting the Indexing Service databas
 echo }^) 
 
 echo $chck66 = New-Object Windows.Forms.Checkbox; 
-echo $chck66.Location = New-Object Drawing.Point 305,430; 
+echo $chck66.Location = New-Object Drawing.Point 595,635; 
 echo $chck66.Size = New-Object Drawing.Point 270,25; 
 echo $chck66.Text = 'Graphic Card Optimization'; 
 echo $chck66.TabIndex = 65; 
-echo $chck66.Checked = $true; 
+echo $chck66.Checked = $false; 
 echo $form.controls.add^($chck66^); 
 echo $chck66.add_MouseHover^({
 echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
@@ -893,7 +893,7 @@ echo $chck59.Checked = $false;
 echo $form.controls.add^($chck59^); 
 
 echo $chck60 = New-Object Windows.Forms.Checkbox; 
-echo $chck60.Location = New-Object Drawing.Point 595,510; 
+echo $chck60.Location = New-Object Drawing.Point 595,585; 
 echo $chck60.Size = New-Object Drawing.Point 270,25; 
 echo $chck60.Text = 'Remove Microsoft OneDrive'; 
 echo $chck60.TabIndex = 59; 
@@ -917,7 +917,7 @@ echo $chck62.Checked = $false;
 echo $form.controls.add^($chck62^); 
 
 echo $chck63 = New-Object Windows.Forms.Checkbox; 
-echo $chck63.Location = New-Object Drawing.Point 595,585; 
+echo $chck63.Location = New-Object Drawing.Point 595,510; 
 echo $chck63.Size = New-Object Drawing.Point 270,25; 
 echo $chck63.Text = 'Scan for Adware ^(AdwCleaner^)'; 
 echo $chck63.TabIndex = 62; 
