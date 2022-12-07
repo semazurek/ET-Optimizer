@@ -163,7 +163,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 </tr>
 <tr>
 	<td>Disable  Spectre/Meltdown Protection</td>
-	<td></td>
+	<td>Power Option to Ultimate Performance</td>
 </tr>
 </table>
 </br>
@@ -224,7 +224,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 <li>Disable Unnecessary StartUp Applications:</li>
 <ul></br>
 
- `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent` `Wargaming.net Game Center` `Skype for Desktop` `Gog Galaxy` `Epic Games Launcher` `Origin` `Steam` `Opera Browser Assistant` `uTorrent` `Skype for Business` `Google Chrome Installer` `Microsoft Edge Installer` `Discord Update`
+ `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent` `Wargaming.net Game Center` `Skype for Desktop` `Gog Galaxy` `Epic Games Launcher` `Origin` `Steam` `Opera Browser Assistant` `uTorrent` `Skype for Business` `Google Chrome Installer` `Microsoft Edge Installer` `Discord Update` `Bliz`
  
 </ul>
 </ul></br>
