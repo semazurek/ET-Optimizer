@@ -334,13 +334,13 @@ echo $form.controls.add^($chck1^);
 echo $chck2 = New-Object Windows.Forms.Checkbox; 
 echo $chck2.Location = New-Object Drawing.Point 20,80; 
 echo $chck2.Size = New-Object Drawing.Point 270,25; 
-echo $chck2.Text = 'Set Power Option to High'; 
+echo $chck2.Text = 'Power Option to Ultimate Performance'; 
 echo $chck2.TabIndex = 1; 
 echo $chck2.Checked = $true; 
 echo $form.controls.add^($chck2^); 
 echo $chck2.add_MouseHover^({
 echo $tooltip2 = New-Object System.Windows.Forms.ToolTip
-echo $tooltip2.SetToolTip^($chck2, 'Setting power option to high for best CPU performance'^)
+echo $tooltip2.SetToolTip^($chck2, 'Setting power option to high/ultimate for best CPU performance'^)
 echo }^)
 
 echo $chck3 = New-Object Windows.Forms.Checkbox; 
@@ -630,6 +630,7 @@ echo $chck66.Size = New-Object Drawing.Point 270,25;
 echo $chck66.Text = 'Graphic Card Optimization'; 
 echo $chck66.TabIndex = 65; 
 echo $chck66.Checked = $false; 
+echo $chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $form.controls.add^($chck66^); 
 echo $chck66.add_MouseHover^({
 echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
@@ -642,6 +643,7 @@ echo $chck67.Size = New-Object Drawing.Point 270,25;
 echo $chck67.Text = 'Disable Spectre/Meltdown Protection'; 
 echo $chck67.TabIndex = 66; 
 echo $chck67.Checked = $false; 
+echo $chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $form.controls.add^($chck67^); 
 echo $chck67.add_MouseHover^({
 echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
@@ -873,7 +875,7 @@ echo $chck57.Checked = $true;
 echo $form.controls.add^($chck57^); 
 echo $chck57.add_MouseHover^({
 echo $tooltip57 = New-Object System.Windows.Forms.ToolTip
-echo $tooltip57.SetToolTip^($chck57, "Java Update Checker x64 `n Mini Partition Tool Wizard Updater `n Teams Machine Installer `n Cisco Meeting Daemon `n Adobe Reader Speed Launcher `n CCleaner Smart Cleaning/Monitor `n Spotify Web Helper `n Gaijin.Net Updater `n Microsoft Teams Update `n Google Update `n Microsoft Edge Update `n BitTorrent Bleep `n Skype `n Adobe Update Startup Utility `n iTunes Helper `n CyberLink Update Utility `n MSI Live Update `n Wondershare Helper Compact `n Cisco AnyConnect Secure Mobility Agent `n Wargaming.net Game Center `n Skype for Desktop `n Gog Galaxy `n Epic Games Launcher `n Origin `n Steam `n Opera Browser Assistant `n uTorrent `n Skype for Business `n Google Chrome Installer `n Microsoft Edge Installer `n Discord Update"^)
+echo $tooltip57.SetToolTip^($chck57, "Java Update Checker x64 `n Mini Partition Tool Wizard Updater `n Teams Machine Installer `n Cisco Meeting Daemon `n Adobe Reader Speed Launcher `n CCleaner Smart Cleaning/Monitor `n Spotify Web Helper `n Gaijin.Net Updater `n Microsoft Teams Update `n Google Update `n Microsoft Edge Update `n BitTorrent Bleep `n Skype `n Adobe Update Startup Utility `n iTunes Helper `n CyberLink Update Utility `n MSI Live Update `n Wondershare Helper Compact `n Cisco AnyConnect Secure Mobility Agent `n Wargaming.net Game Center `n Skype for Desktop `n Gog Galaxy `n Epic Games Launcher `n Origin `n Steam `n Opera Browser Assistant `n uTorrent `n Skype for Business `n Google Chrome Installer `n Microsoft Edge Installer `n Discord Update `n Blitz"^)
 echo }^)
 
 echo $chck58 = New-Object Windows.Forms.Checkbox; 
@@ -896,6 +898,7 @@ echo $chck60 = New-Object Windows.Forms.Checkbox;
 echo $chck60.Location = New-Object Drawing.Point 595,585; 
 echo $chck60.Size = New-Object Drawing.Point 270,25; 
 echo $chck60.Text = 'Remove Microsoft OneDrive'; 
+echo $chck60.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $chck60.TabIndex = 59; 
 echo $chck60.Checked = $false; 
 echo $form.controls.add^($chck60^); 
@@ -905,7 +908,8 @@ echo $chck61.Location = New-Object Drawing.Point 595,535;
 echo $chck61.Size = New-Object Drawing.Point 270,25; 
 echo $chck61.Text = 'Disable Xbox Services'; 
 echo $chck61.TabIndex = 60; 
-echo $chck61.Checked = $false; 
+echo $chck61.Checked = $false;
+echo $chck61.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^) 
 echo $form.controls.add^($chck61^); 
 
 echo $chck62 = New-Object Windows.Forms.Checkbox; 
@@ -914,6 +918,7 @@ echo $chck62.Size = New-Object Drawing.Point 270,25;
 echo $chck62.Text = 'Enable Fast/Secure DNS ^(1.1.1.1^)'; 
 echo $chck62.TabIndex = 61; 
 echo $chck62.Checked = $false; 
+echo $chck62.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $form.controls.add^($chck62^); 
 
 echo $chck63 = New-Object Windows.Forms.Checkbox; 
@@ -1365,10 +1370,12 @@ goto Start
 
 :chck2
 if exist %programdata%\ET\chck2.lbool del %programdata%\ET\chck2.lbool
-::  Setting power option to high for best performance
+::  Setting power option to high/ultimate performance
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Setting] Power option to high for best performance ' -F blue -B black"
+powershell -Command "Write-Host ' [Setting] Power option to ultimate performance ' -F blue -B black"
 powercfg -setactive scheme_min
+powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
+powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d
 goto Start
 
 :chck3
