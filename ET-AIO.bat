@@ -1373,9 +1373,9 @@ if exist %programdata%\ET\chck2.lbool del %programdata%\ET\chck2.lbool
 ::  Setting power option to high/ultimate performance
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Setting] Power option to ultimate performance ' -F blue -B black"
-powercfg -setactive scheme_min
-powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
-powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d
+powercfg -setactive scheme_min >nul 2>nul
+powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>nul
+powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d >nul 2>nul
 goto Start
 
 :chck3
