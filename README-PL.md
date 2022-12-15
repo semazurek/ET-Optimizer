@@ -159,11 +159,11 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 </tr>	
 <tr>
 	<td>Wyłącz odliczanie do Trybu Uśpienia</td>
-	<td>Ustawienia optymalizacji karty graficznej</td>
+	<td>Opcje zasilania na: Najwyższą wydajność</td>
 </tr>
 <tr>
 	<td>Wyłącz zabezpieczenia Spectre/Meltdown</td>
-	<td>Opcje zasilania na: Najwyższą wydajność</td>
+	<td></td>
 </tr>
 </table>
 </br>
