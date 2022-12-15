@@ -159,11 +159,11 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 </tr>	
 <tr>
 	<td>Disable Sleep Mode Timeouts</td>
-	<td>Graphic Card Optimization</td>
+	<td>Power Option to Ultimate Performance</td>
 </tr>
 <tr>
 	<td>Disable  Spectre/Meltdown Protection</td>
-	<td>Power Option to Ultimate Performance</td>
+	<td></td>
 </tr>
 </table>
 </br>
