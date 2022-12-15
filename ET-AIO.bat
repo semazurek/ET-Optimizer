@@ -145,7 +145,7 @@ echo If ^($chck62.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck62.lbool
 echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool};
 echo If ^($chck64.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck64.lbool};
 echo If ^($chck65.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck65.lbool};
-echo If ^($chck66.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck66.lbool};
+
 echo If ^($chck67.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck67.lbool};
 echo $form.close^(^)
 echo }; 
@@ -211,7 +211,7 @@ echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $fals
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
 echo $chck41.Checked = $false; $chck42.Checked = $false; $chck43.Checked = $false; $chck44.Checked = $false; $chck45.Checked = $false; $chck46.Checked = $false; $chck47.Checked = $false; $chck48.Checked = $false; $chck49.Checked = $false; $chck50.Checked = $false;
 echo $chck51.Checked = $false; $chck52.Checked = $false; $chck53.Checked = $false; $chck54.Checked = $false; $chck55.Checked = $false; $chck56.Checked = $false; $chck57.Checked = $false; $chck58.Checked = $false; $chck59.Checked = $false; $chck60.Checked = $false;
-echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false; $chck67.Checked = $false;
+echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck67.Checked = $false;
 echo $B_checkall.Visible = $true;
 echo $B_uncheckall.Visible = $false;
 echo $B_performanceoff.Visible = $false;
@@ -623,19 +623,6 @@ echo $chck30.add_MouseHover^({
 echo $tooltip30 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip30.SetToolTip^($chck30, 'Defragmenting the Indexing Service database file'^)
 echo }^) 
-
-echo $chck66 = New-Object Windows.Forms.Checkbox; 
-echo $chck66.Location = New-Object Drawing.Point 595,635; 
-echo $chck66.Size = New-Object Drawing.Point 270,25; 
-echo $chck66.Text = 'Graphic Card Optimization'; 
-echo $chck66.TabIndex = 65; 
-echo $chck66.Checked = $false; 
-echo $chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
-echo $form.controls.add^($chck66^); 
-echo $chck66.add_MouseHover^({
-echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
-echo $tooltip66.SetToolTip^($chck66, 'Registry keys for optimizing the graphic card.'^)
-echo }^)
 
 echo $chck67 = New-Object Windows.Forms.Checkbox; 
 echo $chck67.Location = New-Object Drawing.Point 595,610; 
@@ -1503,13 +1490,6 @@ if exist %programdata%\ET\chck65.lbool del %programdata%\ET\chck65.lbool
 powershell -Command "Write-Host ' [Disable] Sleep Mode Timeouts' -F darkgray -B black"
 	powercfg /X standby-timeout-ac 0 >nul 2>nul
 	powercfg /X standby-timeout-dc 0 >nul 2>nul
-goto Start
-
-:chck66
-if exist %programdata%\ET\chck66.lbool del %programdata%\ET\chck66.lbool
-::	Graphic Card Optimization
-powershell -Command "Write-Host ' [Setting] Graphic Card Optimization ' -F blue -B black"
-regedit.exe /s %programdata%\Reg-GPU.reg >nul 2>nul
 goto Start
 
 :chck67
