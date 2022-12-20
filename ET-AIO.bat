@@ -38,7 +38,7 @@ set version=E.T. ver 5.1
 title %version%
 ::mode con cols=72 lines=30
 set /a counter=1
-:: alltodo is 67
+:: alltodo is 66
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -145,7 +145,6 @@ echo If ^($chck62.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck62.lbool
 echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool};
 echo If ^($chck64.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck64.lbool};
 echo If ^($chck65.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck65.lbool};
-
 echo If ^($chck67.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck67.lbool};
 echo $form.close^(^)
 echo }; 
@@ -1277,7 +1276,7 @@ goto Start
 :Start
 
 ::menu loop checking for every checkbox and go to goto func
-for /l %%x in (1, 1, 67) do (
+for /l %%x in (1, 1, 66) do (
 if exist %programdata%\ET\chck%%x.lbool goto chck%%x
 )
 
@@ -1480,6 +1479,7 @@ goto Start
 :chck64
 if exist %programdata%\ET\chck64.lbool del %programdata%\ET\chck64.lbool
 ::	Disable Nagle's Algorithm (Delayed ACKs)
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Nagle''s Algorithm (Delayed ACKs) ' -F darkgray -B black"
 Powershell -Command "%programdata%\NagleAlg.ps1" >nul 2>nul
 goto Start
@@ -1487,6 +1487,7 @@ goto Start
 :chck65
 if exist %programdata%\ET\chck65.lbool del %programdata%\ET\chck65.lbool
 ::	Disable Sleep Mode Timeouts - Power Options
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Sleep Mode Timeouts' -F darkgray -B black"
 	powercfg /X standby-timeout-ac 0 >nul 2>nul
 	powercfg /X standby-timeout-dc 0 >nul 2>nul
@@ -1495,6 +1496,7 @@ goto Start
 :chck67
 if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 ::	Disable Sleep Mode Timeouts - Power Options
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black"
 	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 1 /f >nul 2>nul
 	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 1 /f >nul 2>nul
