@@ -19,7 +19,7 @@ Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/rel
 Run via command: 
 
 ```PowerShell
-Powershell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All-in-One-Optimizer/master/ET-AIO.bat" -o ET-AIO.bat; start ET-AIO.bat
+PoweShell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All-in-One-Optimizer/master/ET-AIO.bat" -o ET-AIO.bat; start ET-AIO.bat
 ```
 
 </br>
