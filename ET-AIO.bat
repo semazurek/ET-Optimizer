@@ -1130,11 +1130,11 @@ echo $private:menuItem.Name =$ItemName;
 echo $private:menuItem.Text =$ItemText; 
 echo if ^($ScriptBlock -ne $null^) { $private:menuItem.add_Click^(^([System.EventHandler]$handler=` $ScriptBlock^)^);}; 
 echo if ^(^($ParentItem.Value^) -is [System.Windows.Forms.MenuStrip]^) { ^($ParentItem.Value^).Items.Add^($private:menuItem^);} return $private:menuItem; }; 
-echo function Backup{vssadmin delete shadows /All /Quiet; powershell.exe -Command 'Enable-ComputerRestore -Drive $Env:systemdrive'; powershell.exe -ExecutionPolicy Bypass -Command 'Checkpoint-Computer -Description 'ET-RestorePoint' -RestorePointType 'MODIFY_SETTINGS''; powershell ^(New-Object -ComObject Wscript.Shell^).Popup^('''Restore point has been created.''',0,'''Backup''',0x40 + 4096^); $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
+echo function Backup{vssadmin delete shadows /All /Quiet; powershell.exe -Command 'Enable-ComputerRestore -Drive $Env:systemdrive'; powershell.exe -ExecutionPolicy Bypass -Command 'Checkpoint-Computer -Description 'ET-RestorePoint' -RestorePointType 'MODIFY_SETTINGS''; mkdir C:\RegBack; reg export HKCR C:\RegBack\HKCR.Reg /y; reg export HKCU C:\RegBack\HKCU.Reg /y; reg export HKLM C:\RegBack\HKLM.Reg /y; reg export HKU C:\RegBack\HKU.Reg /y; reg export HKCC C:\RegBack\HKCC.Reg /y; powershell ^(New-Object -ComObject Wscript.Shell^).Popup^('''Restore point has been created.''',0,'''Backup''',0x40 + 4096^); $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
 echo [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add^($mainMenu^); 
 echo [scriptblock]$exit= {$form.Close^(^)}; 
 echo [scriptblock]$backup= {Backup}; 
-echo [scriptblock]$restore= {rstrui.exe}; 
+echo [scriptblock]$restore= {start C:\RegBack; rstrui.exe}; 
 echo [scriptblock]$about= {About}; 
 echo [scriptblock]$donate= {start https://www.paypal.com/paypalme/rikey}; 
 echo [scriptblock]$extras= {Extras}; 
@@ -1170,55 +1170,6 @@ echo Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Param
 echo Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1 >> %programdata%\NagleAlg.ps1
 echo } >> %programdata%\NagleAlg.ps1
 echo $ErrorActionPreference = $errpref #restore previous preference >> %programdata%\NagleAlg.ps1
-
-(
-echo Windows Registry Editor Version 5.00
-
-echo [HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics]
-echo "MaxMultisampleType"=dword:00000004
-echo "DisableHWAcceleration"=dword:00000000
-echo "EnableDebugControl"=dword:00000001
-echo "UseDX9LText"=dword:00000001
-echo "BreakOnUnexpectedErrors"=dword:00000001
-echo "RPCAvalon"=dword:00000001
-echo "RecordAvalonFile"=dword:00000000
-echo "UseReferenceRasterizer"=dword:00000001
-echo "SkipDriverDateCheck"=dword:00000000
-echo "SkipDriverCheck"=dword:00000000
-
-echo [HKEY_CURRENT_USER\Software\Microsoft\Avalon.Graphics\DISPLAY1]
-echo "PixelStructure"=dword:00000001
-echo "GammaLevel"=dword:00000898
-echo "ClearTypeLevel"=dword:00000064
-echo "EnhancedContrastLevel"=dword:00000190
-echo "GrayscaleEnhancedContrastLevel"=dword:00000190
-echo "TextContrastLevel"=dword:00000002
-
-echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\Scheduler]
-echo "EnablePreemption"=dword:00000001
-
-echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Watchdog\Logging]
-echo "BreakOnError"=dword:00000001
-echo "BreakOnAssertion "=dword:00000001
-
-echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers]
-echo "TdrLevel"=dword:00000003
-echo "TdrDelay"=dword:00000078
-echo "TdrDdiDelay"=dword:0000003c
-echo "TdrTestMode"=dword:00000000
-echo "TdrDebugMode"=dword:00000002
-echo "TdrLimitTime"=dword:00000078
-echo "TdrLimitCount"=dword:00000005
-
-echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\BasicDisplay]
-echo "BasicDisplayUserNotified"=dword:00000000
-
-echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\DCI]
-echo "Timeout"=dword:00000078
-
-echo [HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\GraphicsDrivers\TdrWatch]
-echo "TDR_RECOVERY"=dword:00000001
-)>%programdata%\Reg-GPU.reg
 
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
@@ -1265,6 +1216,14 @@ vssadmin delete shadows /All /Quiet
 cls
 powershell.exe -Command "Enable-ComputerRestore -Drive %systemdrive%"
 powershell.exe -ExecutionPolicy Bypass -Command "Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS""
+if not exist C:\RegBack mkdir C:\RegBack
+echo Creating Registry Backup...
+reg export HKCR C:\RegBack\HKCR.Reg /y
+reg export HKCU C:\RegBack\HKCU.Reg /y
+reg export HKLM C:\RegBack\HKLM.Reg /y
+reg export HKU C:\RegBack\HKU.Reg /y
+reg export HKCC C:\RegBack\HKCC.Reg /y
+echo [ET] %date%: %time% > %programdata%\ET-dump.log
 cls
 goto Start
 
