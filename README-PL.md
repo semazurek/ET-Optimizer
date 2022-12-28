@@ -19,7 +19,7 @@ Pobierz: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/
 Uruchom przez komende: 
 
 ```PowerShell
-Powershell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All-in-One-Optimizer/master/ET-AIO.bat" -o ET-AIO.bat; start ET-AIO.bat
+powershell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All-in-One-Optimizer/master/ET-AIO.bat" -o ET-AIO.bat; start ET-AIO.bat
 ```
  
 </br>
