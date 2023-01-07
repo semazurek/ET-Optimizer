@@ -145,7 +145,7 @@ echo If ^($chck62.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck62.lbool
 echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool};
 echo If ^($chck64.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck64.lbool};
 echo If ^($chck65.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck65.lbool};
-echo If ^($chck67.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck67.lbool};
+echo If ^($chck66.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck66.lbool};
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
@@ -210,7 +210,7 @@ echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $fals
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
 echo $chck41.Checked = $false; $chck42.Checked = $false; $chck43.Checked = $false; $chck44.Checked = $false; $chck45.Checked = $false; $chck46.Checked = $false; $chck47.Checked = $false; $chck48.Checked = $false; $chck49.Checked = $false; $chck50.Checked = $false;
 echo $chck51.Checked = $false; $chck52.Checked = $false; $chck53.Checked = $false; $chck54.Checked = $false; $chck55.Checked = $false; $chck56.Checked = $false; $chck57.Checked = $false; $chck58.Checked = $false; $chck59.Checked = $false; $chck60.Checked = $false;
-echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck67.Checked = $false;
+echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false;
 echo $B_checkall.Visible = $true;
 echo $B_uncheckall.Visible = $false;
 echo $B_performanceoff.Visible = $false;
@@ -623,17 +623,17 @@ echo $tooltip30 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip30.SetToolTip^($chck30, 'Defragmenting the Indexing Service database file'^)
 echo }^) 
 
-echo $chck67 = New-Object Windows.Forms.Checkbox; 
-echo $chck67.Location = New-Object Drawing.Point 595,610; 
-echo $chck67.Size = New-Object Drawing.Point 270,25; 
-echo $chck67.Text = 'Disable Spectre/Meltdown Protection'; 
-echo $chck67.TabIndex = 66; 
-echo $chck67.Checked = $false; 
-echo $chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
-echo $form.controls.add^($chck67^); 
-echo $chck67.add_MouseHover^({
-echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
-echo $tooltip67.SetToolTip^($chck67, 'These are important secure patches although it decrease system performance.'^)
+echo $chck66 = New-Object Windows.Forms.Checkbox; 
+echo $chck66.Location = New-Object Drawing.Point 595,610; 
+echo $chck66.Size = New-Object Drawing.Point 270,25; 
+echo $chck66.Text = 'Disable Spectre/Meltdown Protection'; 
+echo $chck66.TabIndex = 66; 
+echo $chck66.Checked = $false; 
+echo $chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
+echo $form.controls.add^($chck66^); 
+echo $chck66.add_MouseHover^({
+echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
+echo $tooltip66.SetToolTip^($chck67, 'These are important secure patches although it decrease system performance.'^)
 echo }^)
 
 echo $chck31 = New-Object Windows.Forms.Checkbox; 
@@ -1452,8 +1452,8 @@ powershell -Command "Write-Host ' [Disable] Sleep Mode Timeouts' -F darkgray -B 
 	powercfg /X standby-timeout-dc 0 >nul 2>nul
 goto Start
 
-:chck67
-if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
+:chck66
+if exist %programdata%\ET\chck66.lbool del %programdata%\ET\chck66.lbool
 ::	Disable Sleep Mode Timeouts - Power Options
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black"
