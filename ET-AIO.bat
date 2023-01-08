@@ -38,7 +38,7 @@ set version=E.T. ver 5.1
 title %version%
 ::mode con cols=72 lines=30
 set /a counter=1
-:: alltodo is 66
+:: alltodo is 67
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -146,6 +146,7 @@ echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool
 echo If ^($chck64.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck64.lbool};
 echo If ^($chck65.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck65.lbool};
 echo If ^($chck66.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck66.lbool};
+echo If ^($chck67.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck67.lbool};
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
@@ -210,7 +211,7 @@ echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $fals
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
 echo $chck41.Checked = $false; $chck42.Checked = $false; $chck43.Checked = $false; $chck44.Checked = $false; $chck45.Checked = $false; $chck46.Checked = $false; $chck47.Checked = $false; $chck48.Checked = $false; $chck49.Checked = $false; $chck50.Checked = $false;
 echo $chck51.Checked = $false; $chck52.Checked = $false; $chck53.Checked = $false; $chck54.Checked = $false; $chck55.Checked = $false; $chck56.Checked = $false; $chck57.Checked = $false; $chck58.Checked = $false; $chck59.Checked = $false; $chck60.Checked = $false;
-echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false;
+echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false; $chck67.Checked = $false;
 echo $B_checkall.Visible = $true;
 echo $B_uncheckall.Visible = $false;
 echo $B_performanceoff.Visible = $false;
@@ -627,13 +628,26 @@ echo $chck66 = New-Object Windows.Forms.Checkbox;
 echo $chck66.Location = New-Object Drawing.Point 595,610; 
 echo $chck66.Size = New-Object Drawing.Point 270,25; 
 echo $chck66.Text = 'Disable Spectre/Meltdown Protection'; 
-echo $chck66.TabIndex = 66; 
+echo $chck66.TabIndex = 65; 
 echo $chck66.Checked = $false; 
 echo $chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $form.controls.add^($chck66^); 
 echo $chck66.add_MouseHover^({
 echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
-echo $tooltip66.SetToolTip^($chck67, 'These are important secure patches although it decrease system performance.'^)
+echo $tooltip66.SetToolTip^($chck66, 'These are important secure patches although it decrease system performance.'^)
+echo }^)
+
+echo $chck67 = New-Object Windows.Forms.Checkbox; 
+echo $chck67.Location = New-Object Drawing.Point 595,635; 
+echo $chck67.Size = New-Object Drawing.Point 270,25; 
+echo $chck67.Text = 'Disable Windows Defender'; 
+echo $chck67.TabIndex = 66; 
+echo $chck67.Checked = $false; 
+echo $chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
+echo $form.controls.add^($chck67^); 
+echo $chck67.add_MouseHover^({
+echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
+echo $tooltip67.SetToolTip^($chck67, 'You are doing this at your own risk !'^)
 echo }^)
 
 echo $chck31 = New-Object Windows.Forms.Checkbox; 
@@ -1114,12 +1128,12 @@ echo }^)
 echo $extraFormB12.Location = '25, 345'; 
 echo $extraFormB12.Size = New-Object Drawing.Point 150,25; 
 echo $extraFormB12.Text = 'Update Applications ^(Winget^)'; 
-echo $extraFormB12.add_click^({winget upgrade --all}^); 
+echo $extraFormB12.add_click^({start %programdata%\wignet-et.bat}^); 
 echo $extraFormB12.FlatStyle = 'Flat' 
 echo $extraForm.Controls.Add^($extraFormB12^); 
 echo $extraFormB12.add_MouseHover^({
 echo $tooltipEB12 = New-Object System.Windows.Forms.ToolTip
-echo $tooltipEB12.SetToolTip^($extraFormB12, 'Update Applications ^(Winget upgrade --all^)'^)
+echo $tooltipEB12.SetToolTip^($extraFormB12, 'Update Applications ^(winget upgrade --all^)'^)
 echo }^)
 
 echo [void]$extraForm.ShowDialog^(^)
@@ -1171,6 +1185,9 @@ echo Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Param
 echo } >> %programdata%\NagleAlg.ps1
 echo $ErrorActionPreference = $errpref #restore previous preference >> %programdata%\NagleAlg.ps1
 
+echo @echo off > %programdata%\wignet-et.bat
+echo Winget upgrade --all >> %programdata%\wignet-et.bat
+
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
 cls
@@ -1184,6 +1201,9 @@ if exist %programdata%\GUI.ps1 del %programdata%\GUI.ps1 /F /Q>nul 2>nul
 :: Cleaning Restart Network Settings Module file after usage
 if exist restart-network-settings.bat del restart-network-settings.bat /F /Q>nul 2>nul
 if exist %programdata%\restart-network-settings.bat del %programdata%\restart-network-settings.bat /F /Q>nul 2>nul
+
+
+if exist %programdata%\wignet-et.bat del %programdata%\wignet-et.bat /F /Q>nul 2>nul
 
 if not exist %programdata%\ET\*.lbool exit.
 :: if not chosen any option = no .lbool files in programdata = exit
@@ -1235,7 +1255,7 @@ goto Start
 :Start
 
 ::menu loop checking for every checkbox and go to goto func
-for /l %%x in (1, 1, 66) do (
+for /l %%x in (1, 1, 67) do (
 if exist %programdata%\ET\chck%%x.lbool goto chck%%x
 )
 
@@ -1459,6 +1479,45 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black"
 	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 1 /f >nul 2>nul
 	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 1 /f >nul 2>nul
+goto Start
+
+:chck67
+if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
+::	Disable Windows Defender
+title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
+::Windows Defender
+reg add "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\Sense" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\WdBoot" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\WdFilter" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+::WindowsSystemTray
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f >NUL 2>nul
+::System Guard
+reg add "HKLM\SYSTEM\ControlSet001\Services\SgrmAgent" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+::WebThreatDefSvc
+reg add "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+for /f %%i in ('reg query "HKLM\SYSTEM\ControlSet001\Services" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" ') do (
+  reg add "%%i" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+)
+
+reg add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe" /v "Debugger" /t REG_SZ /d "%%windir%%\System32\taskkill.exe" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "DefaultFileTypeRisk" /t REG_DWORD /d "6152" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d "1" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "LowRiskFileTypes" /t REG_SZ /d ".avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;" /f >NUL 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "ModRiskFileTypes" /t REG_SZ /d ".bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd" /f >NUL 2>nul
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKCU\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
 goto Start
 
 :chck16
