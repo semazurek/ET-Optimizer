@@ -163,7 +163,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 </tr>
 <tr>
 	<td>Disable  Spectre/Meltdown Protection</td>
-	<td></td>
+	<td>Disable Windows Defender</td>
 </tr>
 </table>
 </br>
