@@ -163,7 +163,7 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 </tr>
 <tr>
 	<td>Wyłącz zabezpieczenia Spectre/Meltdown</td>
-	<td></td>
+	<td>Wyłącz Windows Defender</td>
 </tr>
 </table>
 </br>
