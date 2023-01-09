@@ -1144,11 +1144,11 @@ echo $private:menuItem.Name =$ItemName;
 echo $private:menuItem.Text =$ItemText; 
 echo if ^($ScriptBlock -ne $null^) { $private:menuItem.add_Click^(^([System.EventHandler]$handler=` $ScriptBlock^)^);}; 
 echo if ^(^($ParentItem.Value^) -is [System.Windows.Forms.MenuStrip]^) { ^($ParentItem.Value^).Items.Add^($private:menuItem^);} return $private:menuItem; }; 
-echo function Backup{vssadmin delete shadows /All /Quiet; powershell.exe -Command 'Enable-ComputerRestore -Drive $Env:systemdrive'; powershell.exe -ExecutionPolicy Bypass -Command 'Checkpoint-Computer -Description 'ET-RestorePoint' -RestorePointType 'MODIFY_SETTINGS''; mkdir C:\RegBack; reg export HKCR C:\RegBack\HKCR.Reg /y; reg export HKCU C:\RegBack\HKCU.Reg /y; reg export HKLM C:\RegBack\HKLM.Reg /y; reg export HKU C:\RegBack\HKU.Reg /y; reg export HKCC C:\RegBack\HKCC.Reg /y; powershell ^(New-Object -ComObject Wscript.Shell^).Popup^('''Restore point has been created.''',0,'''Backup''',0x40 + 4096^); $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
+echo function Backup{start %programdata%\regback-et.bat; $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
 echo [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add^($mainMenu^); 
 echo [scriptblock]$exit= {$form.Close^(^)}; 
 echo [scriptblock]$backup= {Backup}; 
-echo [scriptblock]$restore= {start C:\RegBack; rstrui.exe}; 
+echo [scriptblock]$restore= {rstrui.exe; sleep 1;start C:\RegBack}; 
 echo [scriptblock]$about= {About}; 
 echo [scriptblock]$donate= {start https://www.paypal.com/paypalme/rikey}; 
 echo [scriptblock]$extras= {Extras}; 
@@ -1174,6 +1174,7 @@ echo	netsh int set interface name="%%j" admin="disabled" >> %programdata%\restar
 echo	netsh int set interface name="%%j" admin="enabled" >> %programdata%\restart-network-settings.bat
 echo ) >> %programdata%\restart-network-settings.bat
 
+:: Disable Nagle Algorithm Module
 echo $errpref = $ErrorActionPreference #save actual preference > %programdata%\NagleAlg.ps1
 echo $ErrorActionPreference = "silentlycontinue" >> %programdata%\NagleAlg.ps1
 echo $NetworkIDS = @( >> %programdata%\NagleAlg.ps1
@@ -1185,8 +1186,31 @@ echo Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Param
 echo } >> %programdata%\NagleAlg.ps1
 echo $ErrorActionPreference = $errpref #restore previous preference >> %programdata%\NagleAlg.ps1
 
+:: Winget update aplications module
 echo @echo off > %programdata%\wignet-et.bat
+echo title ET Update Application (Winget) >> %programdata%\winget-et.bat
 echo Winget upgrade --all >> %programdata%\wignet-et.bat
+
+:: BackUp Registry and RestorePoint Module
+echo @echo off > %programdata%\regback-et.bat
+echo title ET Backup >> %programdata%\regback-et.bat
+echo echo Creating Restore Point... >> %programdata%\regback-et.bat
+echo title ET Backup [1/6] >> %programdata%\regback-et.bat
+echo powershell.exe -Command "Enable-ComputerRestore -Drive %systemdrive%" >> %programdata%\regback-et.bat
+echo powershell.exe -ExecutionPolicy Bypass -Command "Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"" >> %programdata%\regback-et.bat
+echo if not exist C:\RegBack mkdir C:\RegBack >> %programdata%\regback-et.bat
+echo echo Creating Registry Backup... >> %programdata%\regback-et.bat
+echo title ET Backup [2/6] >> %programdata%\regback-et.bat
+echo reg export HKCR C:\RegBack\HKCR.Reg /y >> %programdata%\regback-et.bat
+echo title ET Backup [3/6] >> %programdata%\regback-et.bat
+echo reg export HKCU C:\RegBack\HKCU.Reg /y >> %programdata%\regback-et.bat
+echo title ET Backup [4/6] >> %programdata%\regback-et.bat
+echo reg export HKLM C:\RegBack\HKLM.Reg /y >> %programdata%\regback-et.bat
+echo title ET Backup [5/6] >> %programdata%\regback-et.bat
+echo reg export HKU C:\RegBack\HKU.Reg /y >> %programdata%\regback-et.bat
+echo title ET Backup [6/6] >> %programdata%\regback-et.bat
+echo reg export HKCC C:\RegBack\HKCC.Reg /y >> %programdata%\regback-et.bat
+echo powershell (New-Object -ComObject Wscript.Shell).Popup("""Restore point has been created.""",0,"""Backup""",0x40 + 4096) >> %programdata%\regback-et.bat
 
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
@@ -1202,11 +1226,14 @@ if exist %programdata%\GUI.ps1 del %programdata%\GUI.ps1 /F /Q>nul 2>nul
 if exist restart-network-settings.bat del restart-network-settings.bat /F /Q>nul 2>nul
 if exist %programdata%\restart-network-settings.bat del %programdata%\restart-network-settings.bat /F /Q>nul 2>nul
 
-
+:: Cleaning winget update moduile file
 if exist %programdata%\wignet-et.bat del %programdata%\wignet-et.bat /F /Q>nul 2>nul
 
-if not exist %programdata%\ET\*.lbool exit.
 :: if not chosen any option = no .lbool files in programdata = exit
+if not exist %programdata%\ET\*.lbool exit.
+
+:: if not exist clicked chck64 checkbox remove NagleAlg.ps1 module file
+if not exist %programdata%\ET\chck64.lbool del %programdata%\NagleAlg.ps1
 
 :: counting amount to do value
 dir /a:-d /s /b "%programdata%\ET" | find /c ":" > %programdata%\todo.lbool
@@ -1232,17 +1259,8 @@ if %choice%==7 goto Start
 goto FirstTime
 
 :YesCreateRestore
-vssadmin delete shadows /All /Quiet
 cls
-powershell.exe -Command "Enable-ComputerRestore -Drive %systemdrive%"
-powershell.exe -ExecutionPolicy Bypass -Command "Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS""
-if not exist C:\RegBack mkdir C:\RegBack
-echo Creating Registry Backup...
-reg export HKCR C:\RegBack\HKCR.Reg /y
-reg export HKCU C:\RegBack\HKCU.Reg /y
-reg export HKLM C:\RegBack\HKLM.Reg /y
-reg export HKU C:\RegBack\HKU.Reg /y
-reg export HKCC C:\RegBack\HKCC.Reg /y
+start %programdata%\regback-et.bat
 echo [ET] %date%: %time% > %programdata%\ET-dump.log
 cls
 goto Start
@@ -1253,6 +1271,9 @@ goto Start
 :: HERE YOU CAN DO ANYTHING YOU WANT:
 
 :Start
+
+::Cleaning BackUp Module
+if exist %programdata%\regback-et.bat del %programdata%\regback-et.bat
 
 ::menu loop checking for every checkbox and go to goto func
 for /l %%x in (1, 1, 67) do (
@@ -2274,7 +2295,6 @@ goto Start
 
 :Done
 if exist %programdata%\NagleAlg.ps1 del %programdata%\NagleAlg.ps1
-if exist %programdata%\Reg-GPU.reg del %programdata%\Reg-GPU.reg
 del %programdata%\ET\*.lbool >nul 2>nul
 
 echo ------------------------------------------------------------------------
