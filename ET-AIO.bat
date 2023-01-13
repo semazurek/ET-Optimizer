@@ -2,6 +2,21 @@
 :: #############################################################################################################################################
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
 @echo off
+
+::window size
+mode con cols=80 lines=30
+:: or just mode 80, 30
+
+::Using UTF-8 Encoding special characters
+chcp 65001 >nul
+
+::Colors for batch
+set gr=[0;32m
+set rd=[0;31m
+set wh=[0m
+set b=[96m
+set grey=[38;5;238m
+
 setlocal enabledelayedexpansion
 
 :: Check for admin permissions
@@ -36,7 +51,7 @@ if '%errorlevel%' NEQ '0' (
 
 set version=E.T. ver 5.1
 title %version%
-::mode con cols=72 lines=30
+
 set /a counter=1
 :: alltodo is 67
 
@@ -1162,7 +1177,10 @@ echo $form.ShowDialog^(^);
 )>%programdata%\GUI.ps1
 
 :: Restart Network Settings Module (Extras)
-echo netsh winsock reset > %programdata%\restart-network-settings.bat
+echo mode con cols=80 lines=30 > %programdata%\restart-network-settings.bat
+echo chcp 65001 >> %programdata%\restart-network-settings.bat
+echo cls >> %programdata%\restart-network-settings.bat
+echo netsh winsock reset >> %programdata%\restart-network-settings.bat
 echo netsh int ipv4 reset >> %programdata%\restart-network-settings.bat
 echo netsh int ipv6 reset >> %programdata%\restart-network-settings.bat
 echo ipconfig /release >> %programdata%\restart-network-settings.bat
@@ -1188,12 +1206,17 @@ echo $ErrorActionPreference = $errpref #restore previous preference >> %programd
 
 :: Winget update aplications module
 echo @echo off > %programdata%\winget-et.bat
+echo chcp 65001 >> %programdata%\winget-et.bat
+echo cls >> %programdata%\winget-et.bat
 echo title ET Update Application (Winget) >> %programdata%\winget-et.bat
+echo Winget upgrade --all >> %programdata%\winget-et.bat
 echo Winget upgrade --all >> %programdata%\winget-et.bat
 
 :: BackUp Registry and RestorePoint Module
 echo @echo off > %programdata%\regback-et.bat
 echo title ET Backup >> %programdata%\regback-et.bat
+echo chcp 65001 >> %programdata%\regback-et.bat
+echo cls >> %programdata%\regback-et.bat
 echo echo Creating Restore Point... >> %programdata%\regback-et.bat
 echo title ET Backup [1/6] >> %programdata%\regback-et.bat
 echo powershell.exe -Command "Enable-ComputerRestore -Drive %systemdrive%" >> %programdata%\regback-et.bat
@@ -1215,8 +1238,39 @@ echo exit. >> %programdata%\regback-et.bat
 
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
+
+::Hello World
 cls
-echo Selection window has been initiated
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.                                    %b%______  ______
+echo.                                   / ____/ /_  __/
+echo.                                  / __/     / /%wh%   
+echo.                                 / /___    / /    
+echo.                                /_____/   /_/     
+echo.
+echo. 
+echo %b%                  ╔═════════════════════════════════════════╗
+echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%5.1                        %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%13.01.2023             %b%║
+echo %b%                  ╚═════════════════════════════════════════╝%wh%
+echo.
+echo.                        %grey%- Always have a %rd%backup %grey%plan. -
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
 Powershell -Command "%programdata%\GUI.ps1 %version%" >nul 2>nul
 
 :: Cleaning GUI windows form file after usage
@@ -2298,10 +2352,15 @@ goto Start
 if exist %programdata%\NagleAlg.ps1 del %programdata%\NagleAlg.ps1
 del %programdata%\ET\*.lbool >nul 2>nul
 
-echo ------------------------------------------------------------------------
-
 set announcement=Everything has been done. Reboot is recommended.
-echo  %announcement%
-echo  Donate with PayPal button if you want :)
+echo.
+echo.
+echo %b%             ╔══════════════════════════════════════════════════╗
+echo %b%             ║                                                  ║
+echo %b%             ║ %wh%%announcement% %b%║
+echo %b%             ║                                                  ║
+echo %b%             ╚══════════════════════════════════════════════════╝%wh%
+echo.
+echo.
 powershell (New-Object -ComObject Wscript.Shell).Popup("""%announcement%""",0,"""%version%""",0x40 + 4096) >nul 2>nul
 exit
