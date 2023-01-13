@@ -1128,7 +1128,7 @@ echo }^)
 echo $extraFormB12.Location = '25, 345'; 
 echo $extraFormB12.Size = New-Object Drawing.Point 150,25; 
 echo $extraFormB12.Text = 'Update Applications ^(Winget^)'; 
-echo $extraFormB12.add_click^({start %programdata%\wignet-et.bat}^); 
+echo $extraFormB12.add_click^({start %programdata%\winget-et.bat}^); 
 echo $extraFormB12.FlatStyle = 'Flat' 
 echo $extraForm.Controls.Add^($extraFormB12^); 
 echo $extraFormB12.add_MouseHover^({
@@ -1187,9 +1187,9 @@ echo } >> %programdata%\NagleAlg.ps1
 echo $ErrorActionPreference = $errpref #restore previous preference >> %programdata%\NagleAlg.ps1
 
 :: Winget update aplications module
-echo @echo off > %programdata%\wignet-et.bat
+echo @echo off > %programdata%\winget-et.bat
 echo title ET Update Application (Winget) >> %programdata%\winget-et.bat
-echo Winget upgrade --all >> %programdata%\wignet-et.bat
+echo Winget upgrade --all >> %programdata%\winget-et.bat
 
 :: BackUp Registry and RestorePoint Module
 echo @echo off > %programdata%\regback-et.bat
@@ -1227,7 +1227,7 @@ if exist restart-network-settings.bat del restart-network-settings.bat /F /Q>nul
 if exist %programdata%\restart-network-settings.bat del %programdata%\restart-network-settings.bat /F /Q>nul 2>nul
 
 :: Cleaning winget update moduile file
-if exist %programdata%\wignet-et.bat del %programdata%\wignet-et.bat /F /Q>nul 2>nul
+if exist %programdata%\winget-et.bat del %programdata%\winget-et.bat /F /Q>nul 2>nul
 
 :: if not chosen any option = no .lbool files in programdata = exit
 if not exist %programdata%\ET\*.lbool exit.
