@@ -1211,6 +1211,7 @@ echo reg export HKU C:\RegBack\HKU.Reg /y >> %programdata%\regback-et.bat
 echo title ET Backup [6/6] >> %programdata%\regback-et.bat
 echo reg export HKCC C:\RegBack\HKCC.Reg /y >> %programdata%\regback-et.bat
 echo powershell (New-Object -ComObject Wscript.Shell).Popup("""Restore point has been created.""",0,"""Backup""",0x40 + 4096) >> %programdata%\regback-et.bat
+echo exit. >> %programdata%\regback-et.bat
 
 :: Force PS authorization for scripts
 Powershell -Command "set-executionpolicy remotesigned"
