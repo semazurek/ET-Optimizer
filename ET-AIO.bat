@@ -1260,7 +1260,7 @@ goto FirstTime
 
 :YesCreateRestore
 cls
-start %programdata%\regback-et.bat
+start /WAIT %programdata%\regback-et.bat
 echo [ET] %date%: %time% > %programdata%\ET-dump.log
 cls
 goto Start
