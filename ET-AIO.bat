@@ -1209,6 +1209,7 @@ echo @echo off > %programdata%\winget-et.bat
 echo chcp 65001 >> %programdata%\winget-et.bat
 echo cls >> %programdata%\winget-et.bat
 echo title ET Update Application (Winget) >> %programdata%\winget-et.bat
+echo Winget upgrade >> %programdata%\winget-et.bat
 echo Winget upgrade --all >> %programdata%\winget-et.bat
 echo Winget upgrade --all >> %programdata%\winget-et.bat
 
