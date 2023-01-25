@@ -66,7 +66,6 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
    <td>Wyłącz pobieranie aktualizacji P2P poza siecią lokalną</td>
   </tr>
   <tr>
-   <td>Włącz wszystkie (logiczne) rdzenie (Opcje zaawansowane rozruchu)</td>
    <td>Ukryj pole wyszukiwania na pasku zadań.</td>
   </tr>
   <tr>

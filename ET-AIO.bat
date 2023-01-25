@@ -97,7 +97,6 @@ echo [System.Windows.Forms.Application]::EnableVisualStyles^(^)
 echo function do_start { 
 echo If ^($chck1.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck1.lbool};
 echo If ^($chck2.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck2.lbool};
-echo If ^($chck3.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck3.lbool};
 echo If ^($chck4.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck4.lbool};
 echo If ^($chck5.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck5.lbool};
 echo If ^($chck6.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck6.lbool};
@@ -195,7 +194,7 @@ echo $B_checkall.Size = New-Object Drawing.Point 140,50;
 echo $B_checkall.FlatStyle = 'Flat'
 echo $B_checkall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_checkall.add_click^({
-echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
+echo $chck1.Checked = $true; $chck2.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
 echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; $chck14.Checked = $true; $chck15.Checked = $true; $chck16.Checked = $true; $chck17.Checked = $true; $chck18.Checked = $true; $chck19.Checked = $true; $chck20.Checked = $true;
 echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true;
 echo $chck31.Checked = $true; $chck32.Checked = $true; $chck33.Checked = $true; $chck34.Checked = $true; $chck35.Checked = $true; $chck36.Checked = $true; $chck37.Checked = $true; $chck38.Checked = $true; $chck39.Checked = $true; $chck40.Checked = $true;
@@ -220,7 +219,7 @@ echo $B_uncheckall.Size = New-Object Drawing.Point 140,50;
 echo $B_uncheckall.FlatStyle = 'Flat'
 echo $B_uncheckall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_uncheckall.add_click^({
-echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
+echo $chck1.Checked = $false; $chck2.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
 echo $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false; $chck14.Checked = $false; $chck15.Checked = $false; $chck16.Checked = $false; $chck17.Checked = $false; $chck18.Checked = $false; $chck19.Checked = $false; $chck20.Checked = $false;
 echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $false; $chck24.Checked = $false; $chck25.Checked = $false; $chck26.Checked = $false; $chck27.Checked = $false; $chck28.Checked = $false; $chck29.Checked = $false; $chck30.Checked = $false;
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
@@ -245,7 +244,7 @@ echo $B_performanceall.Size = New-Object Drawing.Point 130,50;
 echo $B_performanceall.FlatStyle = 'Flat'
 echo $B_performanceall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceall.add_click^({
-echo $chck1.Checked = $true; $chck2.Checked = $true; $chck3.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
+echo $chck1.Checked = $true; $chck2.Checked = $true; $chck4.Checked = $true; $chck5.Checked = $true; $chck6.Checked = $true; $chck7.Checked = $true; $chck8.Checked = $true; $chck9.Checked = $true; $chck10.Checked = $true; 
 echo $chck11.Checked = $true; $chck12.Checked = $true; $chck13.Checked = $true; $chck14.Checked = $true; $chck15.Checked = $true; $chck16.Checked = $true; $chck17.Checked = $true; $chck18.Checked = $true; $chck19.Checked = $true; $chck20.Checked = $true;
 echo $chck21.Checked = $true; $chck22.Checked = $true; $chck23.Checked = $true; $chck24.Checked = $true; $chck25.Checked = $true; $chck26.Checked = $true; $chck27.Checked = $true; $chck28.Checked = $true; $chck29.Checked = $true; $chck30.Checked = $true; $chck64.Checked = $true; $chck65.Checked = $true;
 echo $B_performanceoff.Visible = $true;
@@ -261,7 +260,7 @@ echo $B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('
 echo $B_performanceoff.FlatStyle = 'Flat'
 echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceoff.add_click^({
-echo $chck1.Checked = $false; $chck2.Checked = $false; $chck3.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
+echo $chck1.Checked = $false; $chck2.Checked = $false; $chck4.Checked = $false; $chck5.Checked = $false; $chck6.Checked = $false; $chck7.Checked = $false; $chck8.Checked = $false; $chck9.Checked = $false; $chck10.Checked = $false; 
 echo $chck11.Checked = $false; $chck12.Checked = $false; $chck13.Checked = $false; $chck14.Checked = $false; $chck15.Checked = $false; $chck16.Checked = $false; $chck17.Checked = $false; $chck18.Checked = $false; $chck19.Checked = $false; $chck20.Checked = $false;
 echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $false; $chck24.Checked = $false; $chck25.Checked = $false; $chck26.Checked = $false; $chck27.Checked = $false; $chck28.Checked = $false; $chck29.Checked = $false; $chck30.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false;
 echo $B_performanceoff.Visible = $false;
@@ -357,14 +356,6 @@ echo $chck2.add_MouseHover^({
 echo $tooltip2 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip2.SetToolTip^($chck2, 'Setting power option to high/ultimate for best CPU performance'^)
 echo }^)
-
-echo $chck3 = New-Object Windows.Forms.Checkbox; 
-echo $chck3.Location = New-Object Drawing.Point 20,105; 
-echo $chck3.Size = New-Object Drawing.Point 270,25; 
-echo $chck3.Text = 'Enable All ^(Logical^) Cores'; 
-echo $chck3.TabIndex = 2; 
-echo $chck3.Checked = $true; 
-echo $form.controls.add^($chck3^); 
 
 echo $chck4 = New-Object Windows.Forms.Checkbox; 
 echo $chck4.Location = New-Object Drawing.Point 20,130; 
@@ -1418,17 +1409,6 @@ powershell -Command "Write-Host ' [Setting] Power option to ultimate performance
 powercfg -setactive scheme_min >nul 2>nul
 powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>nul
 powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d >nul 2>nul
-goto Start
-
-:chck3
-if exist %programdata%\ET\chck3.lbool del %programdata%\ET\chck3.lbool
-::  Enable All (Logical) Cores (Boot Advanced Options)
-title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Setting] Enable All (Logical) Cores (Boot Advanced Options) ' -F blue -B black"
-wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
-set /P NOLP=<NumLogicalCores.txt
-bcdedit /set {current} numproc %NOLP% >nul 2>nul
-if exist NumLogicalCores.txt del NumLogicalCores.txt
 goto Start
 
 :chck4
