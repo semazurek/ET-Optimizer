@@ -6,12 +6,12 @@
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
 
  <img align="left" src="https://user-images.githubusercontent.com/85984736/155878549-829f33b3-a3fa-4172-8d88-6bbae77c1341.png" width="130"/> 
-Performance optimization, privacy fix and debloating with 1 click. 
+Optimize performance, improve privacy, and remove bloatware with 1 click.
 
 Last tested/updated on:
 <ul>
 <li>Windows 10 Home 22H2</li>
-<li>Windows 11 Ent 22H2</li>
+<li>Windows 11 Enterprise 22H2</li>
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
@@ -37,7 +37,7 @@ Script developed from many sources found on the Internet, tested and updated for
 
 <img src="https://user-images.githubusercontent.com/85984736/198885788-50f9ed4d-4987-40a4-b621-4271b620893d.png" width="400">
 </p>
-Tested after installing all updates & drivers, including: java, winrar, office 2016, redisturable c++ etc.</br>After startup (2:00 up time).</br></br>
+Tested after installing all updates & drivers, including: Java, WinRAR, Office 2016, Visual C++ Redistributable, etc.</br>After startup (2:00 up time).</br></br>
 
 ## What it does 
 
@@ -46,7 +46,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 </br>
  <table style="width: 100%">
   <tr>
-    <td>Set showing file extensions in Explorer  </td>
+    <td>Enable file extensions in Explorer  </td>
     <td>Disable location sensor  </td>
   </tr>
   <tr>
@@ -54,7 +54,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
    <td>WiFi: HotSpot Sharing: Disable</td>
   </tr>
   <tr>
-   <td>Disable windows, menu Start animations.</td>
+   <td>Disable windows animations and start menu.</td>
    <td>WiFi: Shared HotSpot Auto-Connect: Disable</td>
   </tr>
   <tr>
@@ -63,10 +63,9 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
   </tr>
   <tr>
    <td>Remove Widgets</td>
-   <td>Disable P2P Update downloads outside of local network</td>
+   <td>Disable downloading P2P updates outside the local network</td>
   </tr>
   <tr>
-   <td>Enable All (Logical) Cores (Boot Advanced Options)</td>
    <td>Hide the search box from taskbar.</td>
   </tr>
   <tr>
@@ -78,7 +77,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
    <td>Disable MRU lists (jump lists) of XAML apps</td>
   </tr>
   <tr>
-   <td>Disable SCHEDULED TASKS tweaks </td>
+   <td>Disable unnecessary startup apps</td>
    <td>Windows Explorer on start on This PC</td>
   </tr>
   <tr>
@@ -86,7 +85,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
    <td>Disable Get Even More Out of Windows Screen</td>
   </tr>
   <tr>
-   <td>Disable Let apps use my advertising ID...</td>
+   <td>Disable Let apps use my advertising ID</td>
    <td>Disable automatically installing suggested apps</td>
   </tr>
   <tr>
@@ -94,8 +93,8 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
    <td>Disable Start Menu Ads/Suggestions</td>
   </tr>
   <tr>
-   <td>Let websites provide locally...</td>
-   <td>Setting shorter shutdown time</td>
+   <td>Let websites provide locally</td>
+   <td>Set shorter shutdown time</td>
   </tr>
   <tr>
    <td>Disable: Send Microsoft info about how I write</td>
@@ -131,7 +130,7 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
  </tr>
    <tr>
 	<td>Disable malware diagnostic data </td>
-	<td>Disable  setting override for reporting to Microsoft MAPS</td>
+	<td>Disable setting override for reporting to Microsoft MAPS</td>
  </tr>
    <tr>
 	<td>Disable spynet Defender reporting</td>
@@ -154,20 +153,20 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 	<td>Scheduled Windows Defender Scan from highest to normal priority</td>
 </tr>	
 <tr>
-	<td>Scanning for adware (adwcleaner)</td>
-	<td>Disable Nage's Algorithm (Delayed ACK).</td>
+	<td>Scan for adware (adwcleaner)</td>
+	<td>Disable Nagel's Algorithm (Delayed ACK).</td>
 </tr>	
 <tr>
 	<td>Disable Sleep Mode Timeouts</td>
 	<td>Power Option to Ultimate Performance</td>
 </tr>
 <tr>
-	<td>Disable  Spectre/Meltdown Protection</td>
+	<td>Disable Spectre/Meltdown Protection</td>
 	<td>Disable Windows Defender</td>
 </tr>
 </table>
 </br>
-<li>Unnecessary services set to disabled/manuall mode: </li>  
+<li>Unnecessary services set to disabled/manual mode: </li>  
 
   </br>
 
@@ -195,23 +194,23 @@ Tested after installing all updates & drivers, including: java, winrar, office 2
 | Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
 | Alljoyn Router Service | `AJRouter`  | Disabled |
 | Network Diagnostic Usage | `NDU`  | Disabled |
-| Windows Search | `WSearch`  | Manuall |
-| Background Intelligent Transfer Service | `BITS`  | Manuall |
-| Security Accounts Manager | `SamSs` | Manuall |  
-| Telephony | `TapiSrv` | Manuall |  
-| Secondary Logon | `seclogon` | Manuall | 
-| Windows Update | `wuauserv`| Manuall | 
-| Telephony state on the device | `PhoneSvc` | Manuall | 
-| TCP/IP NetBIOS Helper | `lmhosts` | Manuall | 
-| IP Helper | `iphlpsvc` | Manuall | 
-| Google Update service | `gupdate` `gupdatem` | Manuall | 
-| Microsoft Edge Update Service | `edgeupdate` `edgeupdatem` | Manuall | 
-| Downloaded Windows Maps Manager | `MapsBroker` | Manuall | 
-| PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manuall |  
-| Brave Update service | `brave` `bravem` | Manuall |
-| ASUS Update service | `asus` `asusm` | Manuall |
-| Adobe Update Service | `adobeupdateservice` | Manuall |
-| Adobe FlashPlayer Service | `adobeflashplayerupdatesvc` | Manuall |
+| Windows Search | `WSearch`  | Manual |
+| Background Intelligent Transfer Service | `BITS`  | Manual |
+| Security Accounts Manager | `SamSs` | Manual |  
+| Telephony | `TapiSrv` | Manual |  
+| Secondary Logon | `seclogon` | Manual | 
+| Windows Update | `wuauserv`| Manual | 
+| Telephony state on the device | `PhoneSvc` | Manual | 
+| TCP/IP NetBIOS Helper | `lmhosts` | Manual | 
+| IP Helper | `iphlpsvc` | Manual | 
+| Google Update service | `gupdate` `gupdatem` | Manual | 
+| Microsoft Edge Update Service | `edgeupdate` `edgeupdatem` | Manual | 
+| Downloaded Windows Maps Manager | `MapsBroker` | Manual | 
+| PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manual |  
+| Brave Update service | `brave` `bravem` | Manual |
+| ASUS Update service | `asus` `asusm` | Manual |
+| Adobe Update Service | `adobeupdateservice` | Manual |
+| Adobe FlashPlayer Service | `adobeflashplayerupdatesvc` | Manual |
 
 </br>
 <li>Remove Bloatware Apps (Preinstalled):</li>  
