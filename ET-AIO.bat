@@ -53,7 +53,7 @@ set version=E.T. ver 5.1
 title %version%
 
 set /a counter=1
-:: alltodo is 67
+:: alltodo is 66
 
 ::First Admin Check
 NET SESSION >nul 2>&1
@@ -358,7 +358,7 @@ echo $tooltip2.SetToolTip^($chck2, 'Setting power option to high/ultimate for be
 echo }^)
 
 echo $chck4 = New-Object Windows.Forms.Checkbox; 
-echo $chck4.Location = New-Object Drawing.Point 20,130; 
+echo $chck4.Location = New-Object Drawing.Point 20,105; 
 echo $chck4.Size = New-Object Drawing.Point 270,25; 
 echo $chck4.Text = 'Dual Boot Timeout 3sec'; 
 echo $chck4.TabIndex = 3; 
@@ -366,7 +366,7 @@ echo $chck4.Checked = $true;
 echo $form.controls.add^($chck4^); 
 
 echo $chck5 = New-Object Windows.Forms.Checkbox; 
-echo $chck5.Location = New-Object Drawing.Point 20,155; 
+echo $chck5.Location = New-Object Drawing.Point 20,130; 
 echo $chck5.Size = New-Object Drawing.Point 270,25; 
 echo $chck5.Text = 'Disable Hibernation/Fast Startup'; 
 echo $chck5.TabIndex = 4; 
@@ -378,7 +378,7 @@ echo $tooltip5.SetToolTip^($chck5, 'Disable Hibernation/Fast startup in Windows 
 echo }^)
 
 echo $chck6 = New-Object Windows.Forms.Checkbox; 
-echo $chck6.Location = New-Object Drawing.Point 20,180; 
+echo $chck6.Location = New-Object Drawing.Point 20,155; 
 echo $chck6.Size = New-Object Drawing.Point 280,25; 
 echo $chck6.Text = 'Disable Windows Insider Experiments'; 
 echo $chck6.TabIndex = 5; 
@@ -386,7 +386,7 @@ echo $chck6.Checked = $true;
 echo $form.controls.add^($chck6^); 
 
 echo $chck7 = New-Object Windows.Forms.Checkbox; 
-echo $chck7.Location = New-Object Drawing.Point 20,205; 
+echo $chck7.Location = New-Object Drawing.Point 20,180; 
 echo $chck7.Size = New-Object Drawing.Point 270,25; 
 echo $chck7.Text = 'Disable App Launch Tracking'; 
 echo $chck7.TabIndex = 6; 
@@ -394,7 +394,7 @@ echo $chck7.Checked = $true;
 echo $form.controls.add^($chck7^); 
 
 echo $chck8 = New-Object Windows.Forms.Checkbox; 
-echo $chck8.Location = New-Object Drawing.Point 20,230; 
+echo $chck8.Location = New-Object Drawing.Point 20,205; 
 echo $chck8.Size = New-Object Drawing.Point 275,25; 
 echo $chck8.Text = 'Disable Powerthrottling ^(Intel 6gen+^)'; 
 echo $chck8.TabIndex = 7; 
@@ -402,7 +402,7 @@ echo $chck8.Checked = $true;
 echo $form.controls.add^($chck8^); 
 
 echo $chck9 = New-Object Windows.Forms.Checkbox; 
-echo $chck9.Location = New-Object Drawing.Point 20,255; 
+echo $chck9.Location = New-Object Drawing.Point 20,230; 
 echo $chck9.Size = New-Object Drawing.Point 275,25; 
 echo $chck9.Text = 'Turn Off Background Apps'; 
 echo $chck9.TabIndex = 8; 
@@ -410,7 +410,7 @@ echo $chck9.Checked = $true;
 echo $form.controls.add^($chck9^); 
 
 echo $chck10 = New-Object Windows.Forms.Checkbox; 
-echo $chck10.Location = New-Object Drawing.Point 20,280; 
+echo $chck10.Location = New-Object Drawing.Point 20,255; 
 echo $chck10.Size = New-Object Drawing.Point 270,25; 
 echo $chck10.Text = 'Disable Sticky Keys Prompt'; 
 echo $chck10.TabIndex = 9; 
@@ -418,7 +418,7 @@ echo $chck10.Checked = $true;
 echo $form.controls.add^($chck10^); 
 
 echo $chck11 = New-Object Windows.Forms.Checkbox; 
-echo $chck11.Location = New-Object Drawing.Point 20,305; 
+echo $chck11.Location = New-Object Drawing.Point 20,280; 
 echo $chck11.Size = New-Object Drawing.Point 270,25; 
 echo $chck11.Text = 'Disable Activity History'; 
 echo $chck11.TabIndex = 10; 
@@ -426,7 +426,7 @@ echo $chck11.Checked = $true;
 echo $form.controls.add^($chck11^); 
 
 echo $chck12 = New-Object Windows.Forms.Checkbox; 
-echo $chck12.Location = New-Object Drawing.Point 20,330; 
+echo $chck12.Location = New-Object Drawing.Point 20,305; 
 echo $chck12.Size = New-Object Drawing.Point 280,25; 
 echo $chck12.Text = 'Disable Updates for MS Store Apps'; 
 echo $chck12.TabIndex = 11; 
@@ -438,7 +438,7 @@ echo $tooltip12.SetToolTip^($chck12, 'Disable Automatic Updates for Microsoft St
 echo }^)
 
 echo $chck13 = New-Object Windows.Forms.Checkbox; 
-echo $chck13.Location = New-Object Drawing.Point 20,355; 
+echo $chck13.Location = New-Object Drawing.Point 20,330; 
 echo $chck13.Size = New-Object Drawing.Point 270,25; 
 echo $chck13.Text = 'SmartScreen Filter for Apps: Disable'; 
 echo $chck13.TabIndex = 12; 
@@ -446,7 +446,7 @@ echo $chck13.Checked = $true;
 echo $form.controls.add^($chck13^); 
 
 echo $chck14 = New-Object Windows.Forms.Checkbox; 
-echo $chck14.Location = New-Object Drawing.Point 20,380; 
+echo $chck14.Location = New-Object Drawing.Point 20,355; 
 echo $chck14.Size = New-Object Drawing.Point 270,25; 
 echo $chck14.Text = 'Let Websites Provide Locally'; 
 echo $chck14.TabIndex = 13; 
@@ -454,7 +454,7 @@ echo $chck14.Checked = $true;
 echo $form.controls.add^($chck14^); 
 
 echo $chck15 = New-Object Windows.Forms.Checkbox; 
-echo $chck15.Location = New-Object Drawing.Point 20,405; 
+echo $chck15.Location = New-Object Drawing.Point 20,380; 
 echo $chck15.Size = New-Object Drawing.Point 270,25; 
 echo $chck15.Text = 'Fix Microsoft Edge Settings'; 
 echo $chck15.TabIndex = 14; 
@@ -462,7 +462,7 @@ echo $chck15.Checked = $true;
 echo $form.controls.add^($chck15^); 
 
 echo $chck64 = New-Object Windows.Forms.Checkbox; 
-echo $chck64.Location = New-Object Drawing.Point 20,430; 
+echo $chck64.Location = New-Object Drawing.Point 20,405; 
 echo $chck64.Size = New-Object Drawing.Point 270,25; 
 echo $chck64.Text = 'Disable Nagle''s Alg. ^(Delayed ACKs^)'; 
 echo $chck64.TabIndex = 63; 
@@ -470,7 +470,7 @@ echo $chck64.Checked = $true;
 echo $form.controls.add^($chck64^); 
 
 echo $chck65 = New-Object Windows.Forms.Checkbox; 
-echo $chck65.Location = New-Object Drawing.Point 20,455; 
+echo $chck65.Location = New-Object Drawing.Point 20,430; 
 echo $chck65.Size = New-Object Drawing.Point 270,25; 
 echo $chck65.Text = 'Disable Sleep Mode Timeouts'; 
 echo $chck65.TabIndex = 64; 
@@ -1251,7 +1251,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%5.1                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%13.01.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%25.01.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -1322,8 +1322,9 @@ goto Start
 ::Cleaning BackUp Module
 if exist %programdata%\regback-et.bat del %programdata%\regback-et.bat
 
+::chck3 removed
 ::menu loop checking for every checkbox and go to goto func
-for /l %%x in (1, 1, 67) do (
+for /l %%x in (1, 1, 66) do (
 if exist %programdata%\ET\chck%%x.lbool goto chck%%x
 )
 
