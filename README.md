@@ -67,6 +67,7 @@ Tested after installing all updates & drivers, including: Java, WinRAR, Office 2
   </tr>
   <tr>
    <td>Hide the search box from taskbar.</td>
+   <td>Disable Windows Defender</td>
   </tr>
   <tr>
    <td>Disable Hibernation</td>
@@ -162,7 +163,7 @@ Tested after installing all updates & drivers, including: Java, WinRAR, Office 2
 </tr>
 <tr>
 	<td>Disable Spectre/Meltdown Protection</td>
-	<td>Disable Windows Defender</td>
+	<td></td>
 </tr>
 </table>
 </br>
