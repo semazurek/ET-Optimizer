@@ -160,7 +160,7 @@ echo If ^($chck63.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck63.lbool
 echo If ^($chck64.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck64.lbool};
 echo If ^($chck65.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck65.lbool};
 echo If ^($chck66.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck66.lbool};
-echo If ^($chck67.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck67.lbool};
+echo If ^($chck3.Checked -eq 1^) {echo True ^> $Env:programdata\ET\chck3.lbool};
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
@@ -225,7 +225,7 @@ echo $chck21.Checked = $false; $chck22.Checked = $false; $chck23.Checked = $fals
 echo $chck31.Checked = $false; $chck32.Checked = $false; $chck33.Checked = $false; $chck34.Checked = $false; $chck35.Checked = $false; $chck36.Checked = $false; $chck37.Checked = $false; $chck38.Checked = $false; $chck39.Checked = $false; $chck40.Checked = $false;
 echo $chck41.Checked = $false; $chck42.Checked = $false; $chck43.Checked = $false; $chck44.Checked = $false; $chck45.Checked = $false; $chck46.Checked = $false; $chck47.Checked = $false; $chck48.Checked = $false; $chck49.Checked = $false; $chck50.Checked = $false;
 echo $chck51.Checked = $false; $chck52.Checked = $false; $chck53.Checked = $false; $chck54.Checked = $false; $chck55.Checked = $false; $chck56.Checked = $false; $chck57.Checked = $false; $chck58.Checked = $false; $chck59.Checked = $false; $chck60.Checked = $false;
-echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false; $chck67.Checked = $false;
+echo $chck61.Checked = $false; $chck62.Checked = $false; $chck63.Checked = $false; $chck64.Checked = $false; $chck65.Checked = $false; $chck66.Checked = $false; $chck3.Checked = $false;
 echo $B_checkall.Visible = $true;
 echo $B_uncheckall.Visible = $false;
 echo $B_performanceoff.Visible = $false;
@@ -643,17 +643,17 @@ echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip66.SetToolTip^($chck66, 'These are important secure patches although it decrease system performance.'^)
 echo }^)
 
-echo $chck67 = New-Object Windows.Forms.Checkbox; 
-echo $chck67.Location = New-Object Drawing.Point 595,635; 
-echo $chck67.Size = New-Object Drawing.Point 270,25; 
-echo $chck67.Text = 'Disable Windows Defender'; 
-echo $chck67.TabIndex = 66; 
-echo $chck67.Checked = $false; 
-echo $chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
-echo $form.controls.add^($chck67^); 
-echo $chck67.add_MouseHover^({
+echo $chck3 = New-Object Windows.Forms.Checkbox; 
+echo $chck3.Location = New-Object Drawing.Point 595,635; 
+echo $chck3.Size = New-Object Drawing.Point 270,25; 
+echo $chck3.Text = 'Disable Windows Defender'; 
+echo $chck3.TabIndex = 66; 
+echo $chck3.Checked = $false; 
+echo $chck3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
+echo $form.controls.add^($chck3^); 
+echo $chck3.add_MouseHover^({
 echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
-echo $tooltip67.SetToolTip^($chck67, 'You are doing this at your own risk !'^)
+echo $tooltip67.SetToolTip^($chck3, 'You are doing this at your own risk !'^)
 echo }^)
 
 echo $chck31 = New-Object Windows.Forms.Checkbox; 
@@ -1251,7 +1251,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%5.1                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%25.01.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%29.01.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -1539,8 +1539,8 @@ powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F dark
 	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 1 /f >nul 2>nul
 goto Start
 
-:chck67
-if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
+:chck3
+if exist %programdata%\ET\chck3.lbool del %programdata%\ET\chck3.lbool
 ::	Disable Windows Defender
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
