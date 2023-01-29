@@ -67,6 +67,7 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
   </tr>
   <tr>
    <td>Ukryj pole wyszukiwania na pasku zadań.</td>
+   <td>Wyłącz Windows Defender</td>
   </tr>
   <tr>
    <td>Wyłączenie hibernacji</td>
@@ -162,7 +163,7 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 </tr>
 <tr>
 	<td>Wyłącz zabezpieczenia Spectre/Meltdown</td>
-	<td>Wyłącz Windows Defender</td>
+	<td></td>
 </tr>
 </table>
 </br>
