@@ -163,7 +163,11 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 </tr>
 <tr>
 	<td>Wyłącz zabezpieczenia Spectre/Meltdown</td>
-	<td></td>
+	<td>Usuwanie Microsoft Edge</td>
+</tr>
+<tr>
+	<td>Czyszczenie WinSxS folderu</td>
+	<td>Usuwanie Microsoft Teams (Preview)</td>
 </tr>
 </table>
 </br>
@@ -217,7 +221,7 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 <li>Usuwanie Bloatware (Preinstalowanych):</li>  
 <ul></br>
 
-`3DBuilder` `Automate` `Appconnector` `Microsoft3DViewer` `MicrosoftPowerBIForWindows` `Print3D` `XboxApp` `GetHelp` `WindowsFeedbackHub` `BingFoodAndDrink` `BingHealthAndFitness` `BingTravel` `WindowsReadingList` `MixedReality.Portal` `ScreenSketch` `YourPhone` `PicsArt-PhotoStudio` `EclipseManager` `PolarrPhotoEditorAcademicEdition` `Wunderlist` `LinkedInforWindows` `AutodeskSketchBook` `DisneyMagicKingdoms` `MarchofEmpires` `ActiproSoftwareLLC` `Plex` `iHeartRadio` `FarmVille2CountryEscape` `Duolingo` `CyberLinkMediaSuiteEssentials` `DolbyAccess` `DrawboardPDF` `FitbitCoach` `Flipboard` `Asphalt8Airborne`   `Keeper` `BingNews` `COOKINGFEVER` `PandoraMediaInc` `CaesarsSlotsFreeCasino` `Shazam` `PhototasticCollage` `TuneInRadio` `WinZipUniversal` `XING` `RoyalRevolt2` `CandyCrushSodaSaga` `BubbleWitch3Saga` `CandyCrushSaga` `Getstarted` `WindowsAlarms` `bing` `MicrosoftOfficeHub` `OneNote` `WindowsPhone` `SkypeApp`  `windowscommunicationsapps` `WindowsMaps` `Sway` `CommsPhone` `ConnectivityStore` `Twitter` `Drawboard PDF` `Sketchable` `Clipchamp` `Prime Videos` `TikTok` `ToDo` `Family` `NewVoiceNote` `SamsungNotes` `SamsungFlux` `StudioPlus` `SamsungWelcome` `SamsungQuickSearch` `SamsungPCCleaner` `SamsungCloudBluetoothSync` `PCGallery` `OnlineSupportSService`
+`3DBuilder` `Automate` `Appconnector` `Microsoft3DViewer` `MicrosoftPowerBIForWindows` `Print3D` `XboxApp` `GetHelp` `WindowsFeedbackHub` `BingFoodAndDrink` `BingHealthAndFitness` `BingTravel` `WindowsReadingList` `MixedReality.Portal` `ScreenSketch` `YourPhone` `PicsArt-PhotoStudio` `EclipseManager` `PolarrPhotoEditorAcademicEdition` `Wunderlist` `LinkedInforWindows` `AutodeskSketchBook` `DisneyMagicKingdoms` `MarchofEmpires` `ActiproSoftwareLLC` `Plex` `iHeartRadio` `FarmVille2CountryEscape` `Duolingo` `CyberLinkMediaSuiteEssentials` `DolbyAccess` `DrawboardPDF` `FitbitCoach` `Flipboard` `Asphalt8Airborne`   `Keeper` `BingNews` `COOKINGFEVER` `PandoraMediaInc` `CaesarsSlotsFreeCasino` `Shazam` `PhototasticCollage` `TuneInRadio` `WinZipUniversal` `XING` `RoyalRevolt2` `CandyCrushSodaSaga` `BubbleWitch3Saga` `CandyCrushSaga` `Getstarted` `WindowsAlarms` `bing` `MicrosoftOfficeHub` `OneNote` `WindowsPhone` `SkypeApp`  `windowscommunicationsapps` `WindowsMaps` `Sway` `CommsPhone` `ConnectivityStore` `Twitter` `Drawboard PDF` `Sketchable` `Clipchamp` `Prime Videos` `TikTok` `ToDo` `Family` `NewVoiceNote` `SamsungNotes` `SamsungFlux` `StudioPlus` `SamsungWelcome` `SamsungQuickSearch` `SamsungPCCleaner` `SamsungCloudBluetoothSync` `PCGallery` `OnlineSupportSService` `HPJumpStarts` `HPPCHardwareDiagnosticsWindows` `HPPowerManager` `HPPrivacySettings` `HPSupportAssistant` `HPSureShieldAI` `HPSystemInformation` `HPQuickDrop` `HPWorkWell` `myHP` `HPDesktopSupportUtilities` `HPQuickTouch` `HPEasyClean` `HPSystemInformation`
  
 </ul>
 </br>
