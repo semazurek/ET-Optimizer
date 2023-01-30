@@ -27,7 +27,7 @@ powershell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://semazurek.github.io/assets/img/work1.jpg" width="600">
+<img src="https://user-images.githubusercontent.com/85984736/215550971-8c53f23b-fbd7-4143-a8da-aa0fa9b9f3aa.gif" width="600">
 </p>
 Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
 
