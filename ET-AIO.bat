@@ -1371,6 +1371,8 @@ echo if ^($ScriptBlock -ne $null^) { $private:menuItem.add_Click^(^([System.Even
 echo if ^(^($ParentItem.Value^) -is [System.Windows.Forms.MenuStrip]^) { ^($ParentItem.Value^).Items.Add^($private:menuItem^);} return $private:menuItem; }; 
 echo function Backup{start %programdata%\regback-et.bat; $timeback=Get-Date -Format G ;echo [ET] $timeback ^> $Env:programdata\ET-dump.log}; 
 echo [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add^($mainMenu^); 
+echo $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml^('#323232'^);
+echo $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^);
 echo [scriptblock]$exit= {$form.Close^(^)}; 
 echo [scriptblock]$backup= {Backup}; 
 echo [scriptblock]$restore= {rstrui.exe; sleep 1;start C:\RegBack}; 
