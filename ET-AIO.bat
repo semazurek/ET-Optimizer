@@ -1472,7 +1472,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%30.01.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%03.02.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -2593,7 +2593,7 @@ goto Start
 if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Remove] Microsoft Teams ' -F red -B black"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftTeams* | Remove-AppxPackage"
+PowerShell -Command "Get-AppxPackage -allusers *MicrosoftTeams* | Remove-AppxPackage" > nul 2>&1
 
 goto Start
 
