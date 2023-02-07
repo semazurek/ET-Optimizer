@@ -2196,7 +2196,7 @@ set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftP
 (for %%a in (%listofbloatware%) do ( 
 	set /a insidecount+=1 >nul 2>nul
 	title %version% [%counter%/%alltodo%] [!insidecount!/93]
-   PowerShell -Command "Get-AppxPackage -allusers *%%a* | Remove-AppxPackage"
+   PowerShell -Command "Get-AppxPackage -allusers *%%a* | Remove-AppxPackage" >nul 2>nul
 ))
 
 set /a counter+=1 >nul 2>nul
