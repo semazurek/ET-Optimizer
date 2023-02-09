@@ -167,7 +167,7 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 </tr>
 <tr>
 	<td>Czyszczenie WinSxS folderu</td>
-	<td>Usuwanie Microsoft Teams (Preview)</td>
+	<td>Dzielenie progu (limit) dla Svchost</td>
 </tr>
 </table>
 </br>
