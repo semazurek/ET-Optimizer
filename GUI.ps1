@@ -993,7 +993,7 @@ $groupBox4.controls.add($chck68);
 $chck69 = New-Object Windows.Forms.Checkbox; 
 $chck69.Location = New-Object Drawing.Point 10,150; 
 $chck69.Size = New-Object Drawing.Point 270,25; 
-$chck69.Text = 'Remove Microsoft Teams'; 
+$chck69.Text = 'Split Threshold for Svchost'; 
 $chck69.TabIndex = 68; 
 $chck69.Checked = $false;
 $chck69.Font = $Font;
