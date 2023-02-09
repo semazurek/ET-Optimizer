@@ -1171,7 +1171,7 @@ echo $groupBox4.controls.add^($chck68^);
 echo $chck69 = New-Object Windows.Forms.Checkbox; 
 echo $chck69.Location = New-Object Drawing.Point 10,150; 
 echo $chck69.Size = New-Object Drawing.Point 270,25; 
-echo $chck69.Text = 'Remove Microsoft Teams'; 
+echo $chck69.Text = 'Split Threshold for Svchost'; 
 echo $chck69.TabIndex = 68; 
 echo $chck69.Checked = $false;
 echo $chck69.Font = $Font;
@@ -1472,7 +1472,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%03.02.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%09.02.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -2189,13 +2189,13 @@ goto Start
 
 :chck56
 if exist %programdata%\ET\chck56.lbool del %programdata%\ET\chck56.lbool
-:: Remove Bloatware Apps (Preinstalled) 93 apps
+:: Remove Bloatware Apps (Preinstalled) 94 apps
 powershell -Command "Write-Host ' [Remove] Bloatware Apps ' -F red -B black"
 
-set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok ToDo Family NewVoiceNote SamsungNotes SamsungFlux StudioPlus SamsungWelcome SamsungQuickSearch SamsungPCCleaner SamsungCloudBluetoothSync PCGallery OnlineSupportSService HPJumpStarts HPPCHardwareDiagnosticsWindows HPPowerManager HPPrivacySettings HPSupportAssistant HPSureShieldAI HPSystemInformation HPQuickDrop HPWorkWell myHP HPDesktopSupportUtilities HPQuickTouch HPEasyClean HPSystemInformation 
+set listofbloatware=3DBuilder Automate Appconnector Microsoft3DViewer MicrosoftPowerBIForWindows MicrosoftPowerBIForWindows Print3D XboxApp GetHelp WindowsFeedbackHub BingFoodAndDrink BingHealthAndFitness BingTravel WindowsReadingList MixedReality.Portal ScreenSketch YourPhone PicsArt-PhotoStudio EclipseManager PolarrPhotoEditorAcademicEdition Wunderlist LinkedInforWindows AutodeskSketchBook Twitter DisneyMagicKingdoms MarchofEmpires ActiproSoftwareLLC Plex iHeartRadio FarmVille2CountryEscape Duolingo CyberLinkMediaSuiteEssentials DolbyAccess DrawboardPDF FitbitCoach Flipboard Asphalt8Airborne Keeper BingNews COOKINGFEVER PandoraMediaInc CaesarsSlotsFreeCasino Shazam PhototasticCollage TuneInRadio WinZipUniversal XING RoyalRevolt2 CandyCrushSodaSaga BubbleWitch3Saga CandyCrushSaga Getstarted bing MicrosoftOfficeHub OneNote WindowsPhone SkypeApp windowscommunicationsapps WindowsMaps Sway CommsPhone ConnectivityStore Hotspot Sketchable Clipchamp Prime TikTok ToDo Family NewVoiceNote SamsungNotes SamsungFlux StudioPlus SamsungWelcome SamsungQuickSearch SamsungPCCleaner SamsungCloudBluetoothSync PCGallery OnlineSupportSService HPJumpStarts HPPCHardwareDiagnosticsWindows HPPowerManager HPPrivacySettings HPSupportAssistant HPSureShieldAI HPSystemInformation HPQuickDrop HPWorkWell myHP HPDesktopSupportUtilities HPQuickTouch HPEasyClean HPSystemInformation MicrosoftTeams
 (for %%a in (%listofbloatware%) do ( 
 	set /a insidecount+=1 >nul 2>nul
-	title %version% [%counter%/%alltodo%] [!insidecount!/93]
+	title %version% [%counter%/%alltodo%] [!insidecount!/94]
    PowerShell -Command "Get-AppxPackage -allusers *%%a* | Remove-AppxPackage" >nul 2>nul
 ))
 
@@ -2488,6 +2488,7 @@ goto Start
 
 :OneDrive
 
+:: Remove OneDrive
 :chck60
 if exist %programdata%\ET\chck60.lbool del %programdata%\ET\chck60.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -2511,6 +2512,7 @@ goto Start
 
 :XboxServices
 
+::Disable Xbx Services (Minecraft Luncher wont login into MS)
 :chck61
 if exist %programdata%\ET\chck61.lbool del %programdata%\ET\chck61.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -2522,6 +2524,7 @@ goto Start
 
 :DNSOne
 
+::Safe/Fast DNS 1.1.1.1
 :chck62
 if exist %programdata%\ET\chck62.lbool del %programdata%\ET\chck62.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -2540,6 +2543,7 @@ goto Start
 
 :AdwCleaner
 
+::Scan of Adware/Malware
 :chck63
 if exist %programdata%\ET\chck63.lbool del %programdata%\ET\chck63.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -2551,6 +2555,7 @@ del %programdata%\adwcleaner.exe >nul 2>nul
 
 goto Start
 
+::BETA TRY for Edge Removal
 :chck67
 if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -2581,6 +2586,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
 
 goto Start
 
+::Clean Database of WinSxS
 :chck68
 if exist %programdata%\ET\chck68.lbool del %programdata%\ET\chck68.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
@@ -2589,11 +2595,36 @@ DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase > nul 2>&1
 
 goto Start
 
+::Set Split Threshold for Svchost
 :chck69
 if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Remove] Microsoft Teams ' -F red -B black"
-PowerShell -Command "Get-AppxPackage -allusers *MicrosoftTeams* | Remove-AppxPackage" > nul 2>&1
+powershell -Command "Write-Host ' [Setting] Split Threshold for Svchost ' -F blue -B black"
+wmic computersystem get totalphysicalmemory | findstr /r "[0-9]" > NumRAM.txt
+set /P NomRAM=<NumRAM.txt
+
+::Default Hexa:380000
+
+::1GB
+if %NomRAM%==1073741824	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 1048576 /f >nul 2>nul
+::2GB
+if %NomRAM%==2147483648	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 2097152 /f >nul 2>nul
+::3GB
+if %NomRAM%==3221225472	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3145728 /f >nul 2>nul
+::4GB
+if %NomRAM%==4294967296	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 4194304 /f >nul 2>nul
+::8GB         
+if %NomRAM%==8589934592	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 8388608 /f >nul 2>nul
+::12GB
+if %NomRAM%==12771823616 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 12582912 /f >nul 2>nul
+::16GB
+if %NomRAM%==17179869184 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 16777216 /f >nul 2>nul
+::32GB
+if %NomRAM%==34359738368 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 33554432 /f >nul 2>nul
+::64GB
+if %NomRAM%==68719476736 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 67108864 /f >nul 2>nul
+
+if exist NumRAM.txt del NumRAM.txt
 
 goto Start
 
