@@ -167,7 +167,7 @@ Tested after installing all updates & drivers, including: Java, WinRAR, Office 2
 </tr>
 <tr>
 	<td>Clean WinSxS Folder</td>
-	<td>Remove Microsoft Teams (Preview)</td>
+	<td>Split Threshold for Svchost</td>
 </tr>
 </table>
 </br>
