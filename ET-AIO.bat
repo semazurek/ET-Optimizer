@@ -2670,6 +2670,8 @@ if %NomRAM%==1073741824	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Con
 if %NomRAM%==2147483648	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 2097152 /f >nul 2>nul
 ::3GB
 if %NomRAM%==3221225472	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3145728 /f >nul 2>nul
+::3,5GB
+if %NomRAM%==3757625344	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3669556 /f >nul 2>nul
 ::4GB
 if %NomRAM%==4294967296	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 4194304 /f >nul 2>nul
 ::8GB         
