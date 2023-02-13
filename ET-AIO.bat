@@ -1102,7 +1102,7 @@ echo $chck58.Font = $Font;
 echo $groupBox4.controls.add^($chck58^); 
 
 echo $chck59 = New-Object Windows.Forms.Checkbox; 
-echo $chck59.Location = New-Object Drawing.Point 10,75; 
+echo $chck59.Location = New-Object Drawing.Point 10,150; 
 echo $chck59.Size = New-Object Drawing.Point 275,25; 
 echo $chck59.Text = 'Remove News and Interests/Widgets'; 
 echo $chck59.TabIndex = 58; 
@@ -1169,11 +1169,11 @@ echo $chck68.Font = $Font;
 echo $groupBox4.controls.add^($chck68^); 
 
 echo $chck69 = New-Object Windows.Forms.Checkbox; 
-echo $chck69.Location = New-Object Drawing.Point 10,150; 
+echo $chck69.Location = New-Object Drawing.Point 10,75;
 echo $chck69.Size = New-Object Drawing.Point 270,25; 
 echo $chck69.Text = 'Split Threshold for Svchost'; 
 echo $chck69.TabIndex = 68; 
-echo $chck69.Checked = $false;
+echo $chck69.Checked = $true;
 echo $chck69.Font = $Font;
 echo $groupBox4.controls.add^($chck69^); 
 
@@ -1472,7 +1472,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%09.02.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%13.02.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
