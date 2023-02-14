@@ -593,7 +593,7 @@ echo $chck64.add_click^({count_p}^)
 echo $chck65 = New-Object Windows.Forms.Checkbox; 
 echo $chck65.Location = New-Object Drawing.Point 10,400; 
 echo $chck65.Size = New-Object Drawing.Point 270,25; 
-echo $chck65.Text = 'Disable Sleep Mode Timeouts'; 
+echo $chck65.Text = 'CPU Priority Tweaks'; 
 echo $chck65.TabIndex = 64; 
 echo $chck65.Checked = $true; 
 echo $chck65.Font = $Font;
@@ -1472,7 +1472,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%13.02.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%14.02.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -1631,6 +1631,8 @@ powershell -Command "Write-Host ' [Setting] Power option to ultimate performance
 powercfg -setactive scheme_min >nul 2>nul
 powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >nul 2>nul
 powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d >nul 2>nul
+powercfg /X standby-timeout-ac 0 >nul 2>nul
+powercfg /X standby-timeout-dc 0 >nul 2>nul
 goto Start
 
 :chck4
@@ -1744,16 +1746,46 @@ goto Start
 
 :chck65
 if exist %programdata%\ET\chck65.lbool del %programdata%\ET\chck65.lbool
-::	Disable Sleep Mode Timeouts - Power Options
+::	CPU Tweaks
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Disable] Sleep Mode Timeouts' -F darkgray -B black"
-	powercfg /X standby-timeout-ac 0 >nul 2>nul
-	powercfg /X standby-timeout-dc 0 >nul 2>nul
+powershell -Command "Write-Host ' [Setting] CPU Priority Tweaks' -F blue -B black"
+:: Thread Priority
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\usbxhci\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBHUB3\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f >nul 2>nul
+
+::All Logical Cores Enabled
+wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]" > NumLogicalCores.txt
+set /P NOLP=<NumLogicalCores.txt
+bcdedit /set {current} numproc %NOLP% >nul 2>nul
+if exist NumLogicalCores.txt del NumLogicalCores.txt
+
+:: AMD/Intel CPU Priority
+wmic cpu get name | findstr /r "Intel" >nul 2>nul
+if %ERRORLEVEL%==0 goto IntelCP
+if %ERRORLEVEL%==1 goto AMDCP
+goto Start
+:IntelCP
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v Affinity /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Background Only" /t REG_SZ /d "False" /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Clock Rate" /t REG_DWORD /d 10000 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f >nul 2>nul
+goto Start
+
+:AMDCP
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f >nul 2>nul
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f >nul 2>nul
 goto Start
 
 :chck66
 if exist %programdata%\ET\chck66.lbool del %programdata%\ET\chck66.lbool
-::	Disable Sleep Mode Timeouts - Power Options
+::	Disable Spectre/Meltdown Protection
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black"
 	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 1 /f >nul 2>nul
