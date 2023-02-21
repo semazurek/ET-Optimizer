@@ -1829,6 +1829,33 @@ reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "Conf
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "EnableSmartScreen" /t REG_DWORD /d "0" /f >NUL 2>nul
 reg add "HKCU\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
 reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\PhishingFilter" /v "EnabledV9" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+:: Disable Logging
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderApiLogger" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DefenderAuditLogger" /v "Start" /t REG_DWORD /d "0" /f >NUL 2>nul
+
+:: Disable Tasks
+schtasks /Change /TN "Microsoft\Windows\ExploitGuard\ExploitGuard MDM policy Refresh" /Disable >NUL 2>nul
+schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Cache Maintenance" /Disable >NUL 2>nul
+schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Cleanup" /Disable >NUL 2>nul
+schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /Disable >NUL 2>nul
+schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Verification" /Disable >NUL 2>nul
+
+:: Disable systray icon
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f >NUL 2>nul
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f >NUL 2>nul
+
+:: Remove context menu
+reg delete "HKCR\*\shellex\ContextMenuHandlers\EPP" /f >NUL 2>nul
+reg delete "HKCR\Directory\shellex\ContextMenuHandlers\EPP" /f >NUL 2>nul
+reg delete "HKCR\Drive\shellex\ContextMenuHandlers\EPP" /f >NUL 2>nul
+
+:: Disable services (it will stop WdFilter.sys as well, better not to disable the driver by itself)
+:: reg add "HKLM\System\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
+reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
 goto Start
 
 :chck16
@@ -1918,6 +1945,15 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeli
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RemediationRequired" /t REG_DWORD /d 0 /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f >nul 2>nul
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f >nul 2>nul
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f >nul 2>nul
 goto Start
 
 :chck25
@@ -2019,6 +2055,11 @@ schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable >nul 2>n
 schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable >nul 2>nul
 schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable >nul 2>nul
 schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable >nul 2>nul
+schtasks /DELETE /TN "AMDInstallLauncher" /f >nul 2>nul
+schtasks /DELETE /TN "AMDLinkUpdate" /f >nul 2>nul
+schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f >nul 2>nul
+schtasks /DELETE /TN "DUpdaterTask" /f >nul 2>nul
+schtasks /DELETE /TN "ModifyLinkUpdate" /f >nul 2>nul
 goto Start
 
 :chck32
@@ -2142,6 +2183,9 @@ if exist %programdata%\ET\chck37.lbool del %programdata%\ET\chck37.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Let apps use my advertising ID ' -F darkgray -B black"
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f >nul 2>nul
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f >nul 2>nul
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f >nul 2>nul
 goto Start
 
 :chck38
@@ -2259,7 +2303,7 @@ if exist %programdata%\ET\chck55.lbool del %programdata%\ET\chck55.lbool
 :: Disable
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Setting] Services to: Disable Mode ' -F blue -B black"
-set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter
+set toDisable=DiagTrack diagnosticshub.standardcollector.service dmwappushservice RemoteRegistry RemoteAccess SCardSvr SCPolicySvc fax WerSvc NvTelemetryContainer gadjservice AdobeARMservice PSI_SVC_2 lfsvc WalletService RetailDemo SEMgrSvc diagsvc AJRouter amdfendr amdfendrmgr
 (for %%a in (%toDisable%) do ( 
    sc stop %%a >nul 2>nul
    sc config %%a start= disabled  >nul 2>nul
@@ -2651,7 +2695,8 @@ goto Start
 if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Remove] Microsoft Edge ' -F red -B black"
-taskkill /im "msedge.exe" /f  >nul 2>nul
+taskkill /im "msedge.exe" /f >nul 2>nul
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "1" /d "msedge.exe" /f >nul 2>nul
 if exist "C:\Program Files (x86)\Microsoft\Edge\Application\" (
 for /f "delims=" %%a in ('dir /b "C:\Program Files (x86)\Microsoft\Edge\Application\"') do (
 cd /d "C:\Program Files (x86)\Microsoft\Edge\Application\%%a\Installer\" >nul 2>&1
@@ -2698,20 +2743,26 @@ set /P NomRAM=<NumRAM.txt
 
 ::1GB
 if %NomRAM%==1073741824	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 1048576 /f >nul 2>nul
+if %NomRAM%==1073270784	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 1048116 /f >nul 2>nul
 ::2GB
 if %NomRAM%==2147483648	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 2097152 /f >nul 2>nul
+if %NomRAM%==2147012608	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 2096692 /f >nul 2>nul
 ::3GB
 if %NomRAM%==3221225472	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3145728 /f >nul 2>nul
+if %NomRAM%==3220754432	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3145268 /f >nul 2>nul
 ::3,5GB
 if %NomRAM%==3757625344	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3669556 /f >nul 2>nul
 ::4GB
 if %NomRAM%==4294967296	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 4194304 /f >nul 2>nul
+if %NomRAM%==4294496256	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 4193844 /f >nul 2>nul
 ::8GB         
 if %NomRAM%==8589934592	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 8388608 /f >nul 2>nul
+if %NomRAM%==8589463552	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 8388148 /f >nul 2>nul
 ::12GB
 if %NomRAM%==12771823616 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 12582912 /f >nul 2>nul
 ::16GB
 if %NomRAM%==17179869184 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 16777216 /f >nul 2>nul
+if %NomRAM%==14723461120 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 14378380 /f >nul 2>nul
 ::32GB
 if %NomRAM%==34359738368 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 33554432 /f >nul 2>nul
 ::64GB
