@@ -199,6 +199,8 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 | Standardowa usługa kolektora centrum diagnostycznego firmy Microsoft | `diagsvc`  | Wyłączony |
 | Usługa routera AllJoyn | `AJRouter`  | Wyłączony |
 | Network Diagnostic Usage | `NDU`  | Wyłączony |
+| AMD Crash Defender Driver | `amdfendr`  | Wyłączony |
+| AMD Crash Defender Service | `amdfendrmgr`  | Wyłączony |
 | Windows Search | `WSearch`  | Ręczny |
 | Usługa inteligentnego transferu w tle | `BITS`  | Ręczny |
 | Menedżer kont zabezpieczeń | `SamSs` | Ręczny |  
