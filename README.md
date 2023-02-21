@@ -199,6 +199,8 @@ Tested after installing all updates & drivers, including: Java, WinRAR, Office 2
 | Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
 | Alljoyn Router Service | `AJRouter`  | Disabled |
 | Network Diagnostic Usage | `NDU`  | Disabled |
+| AMD Crash Defender Driver | `amdfendr`  | Disabled |
+| AMD Crash Defender Service | `amdfendrmgr`  | Disabled |
 | Windows Search | `WSearch`  | Manual |
 | Background Intelligent Transfer Service | `BITS`  | Manual |
 | Security Accounts Manager | `SamSs` | Manual |  
