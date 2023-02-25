@@ -93,6 +93,7 @@ echo [reflection.assembly]::LoadWithPartialName^( 'System.Windows.Forms'^);
 echo [reflection.assembly]::loadwithpartialname^('System.Drawing'^); 
 echo Add-Type -AssemblyName System.Windows.Forms
 echo [System.Windows.Forms.Application]::EnableVisualStyles^(^)
+echo $ErrorActionPreference= 'silentlycontinue'
 
 echo function count_p {
 echo $c_p = 0;
@@ -160,7 +161,6 @@ echo $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScree
 echo $form.MinimizeBox = $false; 
 echo $form.MaximizeBox = $false; 
 echo $Font = New-Object System.Drawing.Font^('Consolas',9,[System.Drawing.FontStyle]::Regular^); 
-echo $form.FlatStyle = 'Flat'
 echo $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml^('#252525'^)
 echo $form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $form.Font = $Font; 
@@ -1472,7 +1472,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%14.02.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%25.02.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -2741,32 +2741,8 @@ set /P NomRAM=<NumRAM.txt
 
 ::Default Hexa:380000
 
-::1GB
-if %NomRAM%==1073741824	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 1048576 /f >nul 2>nul
-if %NomRAM%==1073270784	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 1048116 /f >nul 2>nul
-::2GB
-if %NomRAM%==2147483648	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 2097152 /f >nul 2>nul
-if %NomRAM%==2147012608	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 2096692 /f >nul 2>nul
-::3GB
-if %NomRAM%==3221225472	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3145728 /f >nul 2>nul
-if %NomRAM%==3220754432	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3145268 /f >nul 2>nul
-::3,5GB
-if %NomRAM%==3757625344	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 3669556 /f >nul 2>nul
-::4GB
-if %NomRAM%==4294967296	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 4194304 /f >nul 2>nul
-if %NomRAM%==4294496256	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 4193844 /f >nul 2>nul
-::8GB         
-if %NomRAM%==8589934592	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 8388608 /f >nul 2>nul
-if %NomRAM%==8589463552	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 8388148 /f >nul 2>nul
-::12GB
-if %NomRAM%==12771823616 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 12582912 /f >nul 2>nul
-::16GB
-if %NomRAM%==17179869184 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 16777216 /f >nul 2>nul
-if %NomRAM%==14723461120 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 14378380 /f >nul 2>nul
-::32GB
-if %NomRAM%==34359738368 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 33554432 /f >nul 2>nul
-::64GB
-if %NomRAM%==68719476736 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "SvcHostSplitThresholdInKB" /t REG_DWORD /d 67108864 /f >nul 2>nul
+:: Convert into KB from Bytes and add into SvcHost registry
+PowerShell -Command "$clcrm = ([regex]::Match((Get-content 'NumRAM.txt'), '\d+')).Value; $clcrm=$clcrm/1024; reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control /v SvcHostSplitThresholdInKB /t REG_DWORD /d $clcrm /f" >nul 2>nul
 
 if exist NumRAM.txt del NumRAM.txt
 
