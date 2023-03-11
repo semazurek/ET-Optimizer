@@ -128,6 +128,17 @@ echo If ^($c_s -eq 17^) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator
 echo Else { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
 echo }
 
+echo function count_o {
+echo $c_o = 0;
+echo Foreach ^($control in $groupBox4.Controls^){
+echo		$tempval = $control.TabIndex+1;
+echo        $objectType = $control.GetType^(^).Name
+echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_o++}
+echo    }
+echo If ^($c_o -eq 6^) { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#3498db'^); }
+echo Else { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^); }
+echo }
+
 echo function do_start { 
 echo Foreach ^($control in $groupBox1.Controls^){
 echo		$tempval = $control.TabIndex+1;
@@ -145,6 +156,11 @@ echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
 echo    }
 echo Foreach ^($control in $groupBox4.Controls^){
+echo		$tempval = $control.TabIndex+1;
+echo        $objectType = $control.GetType^(^).Name
+echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
+echo    }
+echo Foreach ^($control in $groupBox5.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
@@ -216,6 +232,7 @@ echo $B_privacyall.Visible = $false;
 echo count_p;
 echo count_v;
 echo count_s;
+echo count_o;
 echo }^); 
 echo $form.controls.add^($B_checkall^);
 
@@ -261,6 +278,7 @@ echo $B_privacyall.Visible = $true;
 echo count_p;
 echo count_v;
 echo count_s;
+echo count_o;
 echo }^); 
 echo $form.controls.add^($B_uncheckall^);
 
@@ -388,6 +406,7 @@ echo $B_privacyall.Visible = $false;
 echo count_p;
 echo count_v;
 echo count_s;
+echo count_o;
 
 echo $groupBox1 = New-Object System.Windows.Forms.GroupBox
 echo $groupBox1.Location = '10,30' 
@@ -421,12 +440,25 @@ echo $groupBox3.add_click^({count_v}^)
 
 echo $groupBox4 = New-Object System.Windows.Forms.GroupBox
 echo $groupBox4.Location = '302,485' 
-echo $groupBox4.size = '568,180'
+echo $groupBox4.size = '278,180'
 echo $groupBox4.text = 'Other'
 echo $groupBox4.Visible = $true
 echo $groupBox4.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#eeeeee'^)
 echo $form.Controls.Add^($groupBox4^) 
+
+echo $groupBox5 = New-Object System.Windows.Forms.GroupBox
+echo $groupBox5.Location = '585,485' 
+echo $groupBox5.size = '285,180'
+echo $groupBox5.text = 'Expert Mode'
+echo $groupBox5.Visible = $true
+echo $groupBox5.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
+echo $groupBox5.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
+echo $form.Controls.Add^($groupBox5^) 
+echo $groupBox5.add_MouseHover^({
+echo $tooltipg5 = New-Object System.Windows.Forms.ToolTip
+echo $tooltipg5.SetToolTip^($groupBox5, 'Non recommended or unstable. May need to be done in safe mode.'^)
+echo }^)
 
 echo $chck1 = New-Object Windows.Forms.Checkbox; 
 echo $chck1.Location = New-Object Drawing.Point 10,25; 
@@ -784,28 +816,28 @@ echo }^)
 echo $chck30.add_click^({count_p}^)
 
 echo $chck66 = New-Object Windows.Forms.Checkbox; 
-echo $chck66.Location = New-Object Drawing.Point 295,125; 
+echo $chck66.Location = New-Object Drawing.Point 10,125; 
 echo $chck66.Size = New-Object Drawing.Point 270,25; 
 echo $chck66.Text = 'Disable Spectre/Meltdown Protection'; 
 echo $chck66.TabIndex = 65; 
 echo $chck66.Checked = $false; 
 echo $chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $chck66.Font = $Font;
-echo $groupBox4.controls.add^($chck66^); 
+echo $groupBox5.controls.add^($chck66^); 
 echo $chck66.add_MouseHover^({
 echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip66.SetToolTip^($chck66, 'These are important secure patches although it decrease system performance.'^)
 echo }^)
 
 echo $chck3 = New-Object Windows.Forms.Checkbox; 
-echo $chck3.Location = New-Object Drawing.Point 295,150; 
+echo $chck3.Location = New-Object Drawing.Point 10,150; 
 echo $chck3.Size = New-Object Drawing.Point 270,25; 
 echo $chck3.Text = 'Disable Windows Defender'; 
 echo $chck3.TabIndex = 2; 
 echo $chck3.Checked = $false; 
 echo $chck3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $chck3.Font = $Font;
-echo $groupBox4.controls.add^($chck3^); 
+echo $groupBox5.controls.add^($chck3^); 
 echo $chck3.add_MouseHover^({
 echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip67.SetToolTip^($chck3, 'You are doing this at your own risk !'^)
@@ -1043,12 +1075,13 @@ echo $chck53.add_click^({count_v}^)
 
 echo $chck54 = New-Object Windows.Forms.Checkbox; 
 echo $chck54.Location = New-Object Drawing.Point 10,25; 
-echo $chck54.Size = New-Object Drawing.Point 270,25; 
+echo $chck54.Size = New-Object Drawing.Point 250,25; 
 echo $chck54.Text = 'Remove Windows Game Bar/DVR'; 
 echo $chck54.TabIndex = 53; 
 echo $chck54.Checked = $true; 
 echo $chck54.Font = $Font;
 echo $groupBox4.controls.add^($chck54^);  
+echo $chck54.add_click^({count_o}^)
 
 echo $chck55 = New-Object Windows.Forms.Checkbox; 
 echo $chck55.Location = New-Object Drawing.Point 10,425; 
@@ -1094,92 +1127,98 @@ echo $chck57.add_click^({count_p}^)
 
 echo $chck58 = New-Object Windows.Forms.Checkbox; 
 echo $chck58.Location = New-Object Drawing.Point 10,50; 
-echo $chck58.Size = New-Object Drawing.Point 270,25; 
+echo $chck58.Size = New-Object Drawing.Point 250,25; 
 echo $chck58.Text = 'Clean Temp/Cache/Prefetch/Logs'; 
 echo $chck58.TabIndex = 57; 
 echo $chck58.Checked = $true; 
 echo $chck58.Font = $Font;
 echo $groupBox4.controls.add^($chck58^); 
+echo $chck58.add_click^({count_o}^)
 
 echo $chck59 = New-Object Windows.Forms.Checkbox; 
 echo $chck59.Location = New-Object Drawing.Point 10,150; 
-echo $chck59.Size = New-Object Drawing.Point 275,25; 
+echo $chck59.Size = New-Object Drawing.Point 250,25; 
 echo $chck59.Text = 'Remove News and Interests/Widgets'; 
 echo $chck59.TabIndex = 58; 
 echo $chck59.Checked = $false; 
 echo $chck59.Font = $Font;
 echo $groupBox4.controls.add^($chck59^); 
+echo $chck59.add_click^({count_o}^)
 
 echo $chck60 = New-Object Windows.Forms.Checkbox; 
-echo $chck60.Location = New-Object Drawing.Point 295,100; 
+echo $chck60.Location = New-Object Drawing.Point 10,100; 
 echo $chck60.Size = New-Object Drawing.Point 270,25; 
 echo $chck60.Text = 'Remove Microsoft OneDrive'; 
 echo $chck60.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $chck60.TabIndex = 59; 
 echo $chck60.Checked = $false; 
 echo $chck60.Font = $Font;
-echo $groupBox4.controls.add^($chck60^); 
+echo $groupBox5.controls.add^($chck60^); 
 
 echo $chck61 = New-Object Windows.Forms.Checkbox; 
-echo $chck61.Location = New-Object Drawing.Point 295,50; 
+echo $chck61.Location = New-Object Drawing.Point 10,50; 
 echo $chck61.Size = New-Object Drawing.Point 270,25; 
 echo $chck61.Text = 'Disable Xbox Services'; 
 echo $chck61.TabIndex = 60; 
 echo $chck61.Checked = $false;
 echo $chck61.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^) 
 echo $chck61.Font = $Font;
-echo $groupBox4.controls.add^($chck61^); 
+echo $groupBox5.controls.add^($chck61^); 
 
 echo $chck62 = New-Object Windows.Forms.Checkbox; 
-echo $chck62.Location = New-Object Drawing.Point 295,75; 
+echo $chck62.Location = New-Object Drawing.Point 10,75; 
 echo $chck62.Size = New-Object Drawing.Point 270,25; 
 echo $chck62.Text = 'Enable Fast/Secure DNS ^(1.1.1.1^)'; 
 echo $chck62.TabIndex = 61; 
 echo $chck62.Checked = $false; 
 echo $chck62.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
 echo $chck62.Font = $Font;
-echo $groupBox4.controls.add^($chck62^); 
+echo $groupBox5.controls.add^($chck62^); 
 
 echo $chck63 = New-Object Windows.Forms.Checkbox; 
 echo $chck63.Location = New-Object Drawing.Point 10,100; 
-echo $chck63.Size = New-Object Drawing.Point 270,25; 
+echo $chck63.Size = New-Object Drawing.Point 250,25; 
 echo $chck63.Text = 'Scan for Adware ^(AdwCleaner^)'; 
 echo $chck63.TabIndex = 62; 
 echo $chck63.Checked = $false; 
 echo $chck63.Font = $Font;
 echo $groupBox4.controls.add^($chck63^); 
+echo $chck63.add_click^({count_o}^)
 
 echo $chck67 = New-Object Windows.Forms.Checkbox; 
-echo $chck67.Location = New-Object Drawing.Point 295,25; 
+echo $chck67.Location = New-Object Drawing.Point 10,25; 
 echo $chck67.Size = New-Object Drawing.Point 270,25; 
 echo $chck67.Text = 'Remove Microsoft Edge'; 
 echo $chck67.TabIndex = 66; 
 echo $chck67.Checked = $false;
 echo $chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^) 
 echo $chck67.Font = $Font;
-echo $groupBox4.controls.add^($chck67^); 
+echo $groupBox5.controls.add^($chck67^); 
 
 echo $chck68 = New-Object Windows.Forms.Checkbox; 
 echo $chck68.Location = New-Object Drawing.Point 10,125; 
-echo $chck68.Size = New-Object Drawing.Point 270,25; 
+echo $chck68.Size = New-Object Drawing.Point 250,25; 
 echo $chck68.Text = 'Clean WinSxS Folder'; 
 echo $chck68.TabIndex = 67; 
 echo $chck68.Checked = $false;
 echo $chck68.Font = $Font;
 echo $groupBox4.controls.add^($chck68^); 
+echo $chck68.add_click^({count_o}^)
 
 echo $chck69 = New-Object Windows.Forms.Checkbox; 
 echo $chck69.Location = New-Object Drawing.Point 10,75;
-echo $chck69.Size = New-Object Drawing.Point 270,25; 
+echo $chck69.Size = New-Object Drawing.Point 250,25; 
 echo $chck69.Text = 'Split Threshold for Svchost'; 
 echo $chck69.TabIndex = 68; 
 echo $chck69.Checked = $true;
 echo $chck69.Font = $Font;
 echo $groupBox4.controls.add^($chck69^); 
+echo $chck69.add_click^({count_o}^)
 
 echo count_p;
 echo count_v;
 echo count_s;
+echo count_o;
 
 echo function About {
 echo $aboutForm = New-Object System.Windows.Forms.Form; 
@@ -1472,7 +1511,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%25.02.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%11.03.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -1543,7 +1582,6 @@ goto Start
 ::Cleaning BackUp Module
 if exist %programdata%\regback-et.bat del %programdata%\regback-et.bat
 
-::chck3 removed
 ::menu loop checking for every checkbox and go to goto func
 for /l %%x in (1, 1, 69) do (
 if exist %programdata%\ET\chck%%x.lbool goto chck%%x
