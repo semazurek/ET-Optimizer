@@ -1858,7 +1858,7 @@ echo reg add "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /v "Start" /t REG_D
 
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /v "Start" /t REG_DWORD /d "4" /f
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "4" /f
-echo for /f %%i in ^('reg query "HKLM\SYSTEM\ControlSet001\Services" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" '^) do ^(
+echo for /f %%i in ^('reg query "HKLM\SYSTEM\ControlSet001\Services" /s /k "webthreatdefusersvc" /f 2^^>nul ^^| find /i "webthreatdefusersvc" '^) do ^(
 echo  reg add "%%i" /v "Start" /t REG_DWORD /d "4" /f
 echo ^)
 
