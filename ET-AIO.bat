@@ -1837,10 +1837,11 @@ title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
 
 bcdedit /set {current} safeboot minimal >nul 2>nul
-reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v E-T-Defender /t REG_SZ /d %programdata%\ET-Defender.bat >nul 2>nul
+reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v ETDefender.bat /t REG_SZ /d %programdata%\ETDefender.bat >nul 2>nul
 
 (
 echo @echo off
+echo bcdedit /deletevalue {current} safeboot
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\Sense" /v "Start" /t REG_DWORD /d "4" /f
@@ -1857,7 +1858,7 @@ echo reg add "HKLM\SYSTEM\ControlSet001\Services\SgrmBroker" /v "Start" /t REG_D
 
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\webthreatdefsvc" /v "Start" /t REG_DWORD /d "4" /f
 echo reg add "HKLM\SYSTEM\ControlSet001\Services\webthreatdefusersvc" /v "Start" /t REG_DWORD /d "4" /f
-echo for /f %%i in ^('reg query "HKLM\SYSTEM\ControlSet001\Services" /s /k "webthreatdefusersvc" /f ^| find /i "webthreatdefusersvc" '^) do ^(
+echo for /f %%i in ^('reg query "HKLM\SYSTEM\ControlSet001\Services" /s /k "webthreatdefusersvc" /f 2^>nul ^| find /i "webthreatdefusersvc" '^) do ^(
 echo  reg add "%%i" /v "Start" /t REG_DWORD /d "4" /f
 echo ^)
 
@@ -1893,9 +1894,8 @@ echo reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t REG
 echo reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f
 echo reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 echo reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
-echo bcdedit /deletevalue {current} safeboot
 echo shutdown /r /t 3
-)>%programdata%\ET-Defender.bat
+)>%programdata%\ETDefender.bat
 
 goto Start
 
