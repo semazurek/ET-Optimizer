@@ -829,16 +829,16 @@ echo $tooltip66 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip66.SetToolTip^($chck66, 'These are important secure patches although it decrease system performance.'^)
 echo }^)
 
-echo $chck3 = New-Object Windows.Forms.Checkbox; 
-echo $chck3.Location = New-Object Drawing.Point 10,150; 
-echo $chck3.Size = New-Object Drawing.Point 270,25; 
-echo $chck3.Text = 'Disable Windows Defender'; 
-echo $chck3.TabIndex = 2; 
-echo $chck3.Checked = $false; 
-echo $chck3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
-echo $chck3.Font = $Font;
-echo $groupBox5.controls.add^($chck3^); 
-echo $chck3.add_MouseHover^({
+echo $chck69 = New-Object Windows.Forms.Checkbox; 
+echo $chck69.Location = New-Object Drawing.Point 10,150; 
+echo $chck69.Size = New-Object Drawing.Point 270,25; 
+echo $chck69.Text = 'Disable Windows Defender'; 
+echo $chck69.TabIndex = 68; 
+echo $chck69.Checked = $false; 
+echo $chck69.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^('#e74c3c'^)
+echo $chck69.Font = $Font;
+echo $groupBox5.controls.add^($chck69^); 
+echo $chck69.add_MouseHover^({
 echo $tooltip67 = New-Object System.Windows.Forms.ToolTip
 echo $tooltip67.SetToolTip^($chck3, 'You are doing this at your own risk !'^)
 echo }^)
@@ -1205,15 +1205,15 @@ echo $chck68.Font = $Font;
 echo $groupBox4.controls.add^($chck68^); 
 echo $chck68.add_click^({count_o}^)
 
-echo $chck69 = New-Object Windows.Forms.Checkbox; 
-echo $chck69.Location = New-Object Drawing.Point 10,75;
-echo $chck69.Size = New-Object Drawing.Point 250,25; 
-echo $chck69.Text = 'Split Threshold for Svchost'; 
-echo $chck69.TabIndex = 2; 
-echo $chck69.Checked = $true;
-echo $chck69.Font = $Font;
-echo $groupBox4.controls.add^($chck69^); 
-echo $chck69.add_click^({count_o}^)
+echo $chck3 = New-Object Windows.Forms.Checkbox; 
+echo $chck3.Location = New-Object Drawing.Point 10,75;
+echo $chck3.Size = New-Object Drawing.Point 250,25; 
+echo $chck3.Text = 'Split Threshold for Svchost'; 
+echo $chck3.TabIndex = 2; 
+echo $chck3.Checked = $true;
+echo $chck3.Font = $Font;
+echo $groupBox4.controls.add^($chck3^); 
+echo $chck3.add_click^({count_o}^)
 
 echo count_p;
 echo count_v;
