@@ -56,6 +56,7 @@ if '%errorlevel%' NEQ '0' (
 set version=E.T. ver 5.2
 title %version%
 
+set /a super=0
 set /a counter=1
 :: alltodo is 69
 
@@ -1849,6 +1850,7 @@ goto Start
 
 :: Already in safe mode, run the command and reboot
 :DEF-SM-ACTIVE
+if %super%==1 goto DEF-SM-DISABLE
 powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
 
 reg add "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
@@ -2805,6 +2807,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
 goto Start
 
 :EDGE-SM-DISABLE
+	set /a super=1
 	powershell -Command "Write-Host ' [Remove] Microsoft Edge - Continue After Reboot' -F darkgray -B black"
     :: Not in safe mode, set safe mode and reboot
     bcdedit /set {current} safeboot minimal >NUL 2>nul
