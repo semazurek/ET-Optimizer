@@ -1839,7 +1839,7 @@ if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
 ::	Disable Windows Defender
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 
-if exist %programdata%\ET\safe-edge.lbool goto DEF-SM-DISABLE
+if exist %programdata%\safe-edge.lbool goto DEF-SM-DISABLE
 
 :: This part of code safe mode reboot thanks to AzimsTech
 :: Check if running in safe mode
@@ -1851,7 +1851,7 @@ goto Start
 
 :: Already in safe mode, run the command and reboot
 :DEF-SM-ACTIVE
-powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
+powershell -Command "Write-Host ' [Disable] Windows Defender' -F red -B black"
 
 reg add "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
 reg add "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
@@ -1913,7 +1913,6 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
     
     bcdedit /deletevalue {current} safeboot >NUL 2>nul
-	if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
 	if exist %programdata%\safe-defender.lbool del %programdata%\safe-defender.lbool
     shutdown /r /t 3 >NUL 2>nul
 	exit
