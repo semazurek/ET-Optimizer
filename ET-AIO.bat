@@ -1914,6 +1914,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWO
     
     bcdedit /deletevalue {current} safeboot >NUL 2>nul
 	if exist %programdata%\safe-defender.lbool del %programdata%\safe-defender.lbool
+	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
     shutdown /r /t 3 >NUL 2>nul
 	exit
 	goto Start
@@ -2800,6 +2801,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
 
 	if exist %programdata%\safe-defender.lbool goto DEF-SM-ACTIVE
 	bcdedit /deletevalue {current} safeboot >NUL 2>nul
+	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
     shutdown /r /t 3 >NUL 2>nul
 	exit
 goto Start
