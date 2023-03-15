@@ -1919,7 +1919,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWO
 	goto Start
 	
 :DEF-SM-DISABLE
-	powershell -Command "Write-Host ' [Disable] Windows Defender - Continue After Reboot' -F darkgray -B black"
+	powershell -Command "Write-Host ' [Disable] Windows Defender - Continue After Reboot' -F red -B black"
     :: Not in safe mode, set safe mode and reboot
     bcdedit /set {current} safeboot minimal >NUL 2>nul
     :: Add a registry key to run the script at next startup
