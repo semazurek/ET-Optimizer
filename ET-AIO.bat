@@ -1835,10 +1835,11 @@ powershell -Command "Write-Host ' [Disable] Spectre/Meltdown Protection' -F dark
 goto Start
 
 :chck69
+if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
 ::	Disable Windows Defender
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 
-if exist %programdata%\ET\chck67.lbool goto DEF-SM-DISABLE
+if exist %programdata%\ET\safe-edge.lbool goto DEF-SM-DISABLE
 
 :: This part of code safe mode reboot thanks to AzimsTech
 :: Check if running in safe mode
@@ -2763,6 +2764,7 @@ goto Start
 
 ::BETA TRY for Edge Removal
 :chck67
+if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 bcdedit /enum {current} | findstr "safeboot" >NUL 2>nul
 if %errorlevel%==0 goto EDGE-SM-ACTIVE
@@ -2797,7 +2799,6 @@ del /S /Q "C:\Windows\System32\%%a" > NUL 2>&1))
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f >nul 2>nul
 
-	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
 	if exist %programdata%\safe-defender.lbool goto DEF-SM-ACTIVE
 	bcdedit /deletevalue {current} safeboot >NUL 2>nul
     shutdown /r /t 3 >NUL 2>nul
@@ -2806,7 +2807,7 @@ goto Start
 
 :EDGE-SM-DISABLE
 
-	powershell -Command "Write-Host ' [Remove] Microsoft Edge - Continue After Reboot' -F darkgray -B black"
+	powershell -Command "Write-Host ' [Remove] Microsoft Edge - Continue After Reboot' -F red -B black"
     :: Not in safe mode, set safe mode and reboot
     bcdedit /set {current} safeboot minimal >NUL 2>nul
     :: Add a registry key to run the script at next startup
