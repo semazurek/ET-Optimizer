@@ -3,7 +3,9 @@
 :: DO NOT TOUCH THIS PART INSIDE (PLEASE)
 @echo off
 
-if exist %programdata%\ET\chck69.lbool goto chck69
+:: Safe mode speciall actions
+if exist %programdata%\edge-defender.lbool goto chck67
+if exist %programdata%\safe-defender.lbool goto chck69
 
 ::window size
 mode con cols=80 lines=30
@@ -1513,7 +1515,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%12.03.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%15.03.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
@@ -1835,13 +1837,19 @@ goto Start
 :chck69
 ::	Disable Windows Defender
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
-powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
+
 
 :: This part of code safe mode reboot thanks to AzimsTech
-rem Check if running in safe mode
-bcdedit /enum | find "safeboot" > nul
-if %errorlevel% == 0 (
-rem Already in safe mode, run the command and reboot
+:: Check if running in safe mode
+bcdedit /enum {current} | findstr "safeboot" >NUL 2>nul
+if %errorlevel%==0 goto DEF-SM-ACTIVE
+if %errorlevel%==1 goto DEF-SM-DISABLE
+
+goto Start
+
+:: Already in safe mode, run the command and reboot
+:DEF-SM-ACTIVE
+powershell -Command "Write-Host ' [Disable] Windows Defender' -F darkgray -B black"
 
 reg add "HKLM\SYSTEM\ControlSet001\Services\MsSecFlt" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
 reg add "HKLM\SYSTEM\ControlSet001\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
@@ -1902,16 +1910,21 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f >NUL 2>nul
     
-    if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
-    bcdedit /deletevalue {current} safeboot > nul
-    shutdown /r /t 3
-) else (
-    rem Not in safe mode, set safe mode and reboot
-    bcdedit /set {current} safeboot minimal > nul
-    rem Add a registry key to run the script at next startup
-    reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v *%~n0 /t REG_SZ /d %~dpnx0
-)
-
+    bcdedit /deletevalue {current} safeboot >NUL 2>nul
+	if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
+	if exist %programdata%\safe-defender.lbool del %programdata%\safe-defender.lbool
+    shutdown /r /t 3 >NUL 2>nul
+	exit
+	goto Start
+	
+:DEF-SM-DISABLE
+	powershell -Command "Write-Host ' [Disable] Windows Defender - Continue After Reboot' -F darkgray -B black"
+    :: Not in safe mode, set safe mode and reboot
+    bcdedit /set {current} safeboot minimal >NUL 2>nul
+    :: Add a registry key to run the script at next startup
+    reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v *%~n0 /t REG_SZ /d %~dpnx0 /f >NUL 2>nul
+	if exist %programdata%\ET\chck69.lbool del %programdata%\ET\chck69.lbool
+	echo %time% %date% > %programdata%\safe-defender.lbool
 goto Start
 
 :chck16
@@ -2749,8 +2762,14 @@ goto Start
 
 ::BETA TRY for Edge Removal
 :chck67
-if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
+bcdedit /enum {current} | findstr "safeboot" >NUL 2>nul
+if %errorlevel%==0 goto EDGE-SM-ACTIVE
+if %errorlevel%==1 goto EDGE-SM-DISABLE
+
+goto Start
+
+:EDGE-SM-ACTIVE
 powershell -Command "Write-Host ' [Remove] Microsoft Edge ' -F red -B black"
 taskkill /im "msedge.exe" /f >nul 2>nul
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "1" /d "msedge.exe" /f >nul 2>nul
@@ -2777,6 +2796,23 @@ del /S /Q "C:\Windows\System32\%%a" > NUL 2>&1))
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f >nul 2>nul
 
+    bcdedit /deletevalue {current} safeboot >NUL 2>nul
+	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
+	if exist %programdata%\edge-defender.lbool del %programdata%\edge-defender.lbool
+	if exist %programdata%\ET\chck69.lbool goto chck69
+    shutdown /r /t 3 >NUL 2>nul
+	exit
+goto Start
+
+:EDGE-SM-DISABLE
+	powershell -Command "Write-Host ' [Remove] Microsoft Edge - Continue After Reboot' -F darkgray -B black"
+    :: Not in safe mode, set safe mode and reboot
+    bcdedit /set {current} safeboot minimal >NUL 2>nul
+    :: Add a registry key to run the script at next startup
+    reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v *%~n0 /t REG_SZ /d %~dpnx0 /f >NUL 2>nul
+	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
+	echo %time% %date% > %programdata%\edge-defender.lbool
+	
 goto Start
 
 ::Clean Database of WinSxS
