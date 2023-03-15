@@ -4,7 +4,7 @@
 @echo off
 
 :: Safe mode speciall actions
-if exist %programdata%\edge-defender.lbool goto chck67
+if exist %programdata%\safe-edge.lbool goto chck67
 if exist %programdata%\safe-defender.lbool goto chck69
 
 ::window size
@@ -2798,8 +2798,8 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
 
     bcdedit /deletevalue {current} safeboot >NUL 2>nul
 	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
-	if exist %programdata%\edge-defender.lbool del %programdata%\edge-defender.lbool
-	if exist %programdata%\ET\chck69.lbool goto chck69
+	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
+	if exist %programdata%\ET\chck69.lbool goto DEF-SM-ACTIVE
     shutdown /r /t 3 >NUL 2>nul
 	exit
 goto Start
@@ -2811,7 +2811,7 @@ goto Start
     :: Add a registry key to run the script at next startup
     reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v *%~n0 /t REG_SZ /d %~dpnx0 /f >NUL 2>nul
 	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
-	echo %time% %date% > %programdata%\edge-defender.lbool
+	echo %time% %date% > %programdata%\safe-edge.lbool
 	
 goto Start
 
