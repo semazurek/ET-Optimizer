@@ -4,8 +4,8 @@
 @echo off
 
 :: Safe mode speciall actions
-if exist %programdata%\safe-edge.lbool goto chck67
-if exist %programdata%\safe-defender.lbool goto chck69
+if exist %programdata%\safe-edge.lbool goto EDGE-SM-ACTIVE
+if exist %programdata%\safe-defender.lbool goto DEF-SM-ACTIVE
 
 ::window size
 mode con cols=80 lines=30
@@ -2798,7 +2798,7 @@ del /S /Q "C:\Windows\System32\%%a" > NUL 2>&1))
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f >nul 2>nul
 
 	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
-	if exist %programdata%\ET\safe-defender.lbool goto DEF-SM-ACTIVE
+	if exist %programdata%\safe-defender.lbool goto DEF-SM-ACTIVE
 	bcdedit /deletevalue {current} safeboot >NUL 2>nul
     shutdown /r /t 3 >NUL 2>nul
 	exit
