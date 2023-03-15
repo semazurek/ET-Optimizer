@@ -2799,7 +2799,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdge
     bcdedit /deletevalue {current} safeboot >NUL 2>nul
 	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
-	if exist %programdata%\ET\chck69.lbool goto DEF-SM-ACTIVE
+	if exist %programdata%\ET\safe-defender.lbool goto DEF-SM-ACTIVE
     shutdown /r /t 3 >NUL 2>nul
 	exit
 goto Start
