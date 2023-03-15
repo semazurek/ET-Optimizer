@@ -1838,6 +1838,7 @@ goto Start
 ::	Disable Windows Defender
 title %version% [%counter%/%alltodo%] && set /a counter+=1 >nul 2>nul
 
+if exist %programdata%\ET\chck67.lbool goto DEF-SM-DISABLE
 
 :: This part of code safe mode reboot thanks to AzimsTech
 :: Check if running in safe mode
@@ -2796,7 +2797,6 @@ del /S /Q "C:\Windows\System32\%%a" > NUL 2>&1))
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\EdgeUpdate" /v "DoNotUpdateToEdgeWithChromium" /t REG_DWORD /d 1 /f >nul 2>nul
 
-	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 	if exist %programdata%\safe-edge.lbool del %programdata%\safe-edge.lbool
 	if exist %programdata%\ET\safe-defender.lbool goto DEF-SM-ACTIVE
 	bcdedit /deletevalue {current} safeboot >NUL 2>nul
@@ -2811,7 +2811,6 @@ goto Start
     bcdedit /set {current} safeboot minimal >NUL 2>nul
     :: Add a registry key to run the script at next startup
     reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce /v *%~n0 /t REG_SZ /d %~dpnx0 /f >NUL 2>nul
-	if exist %programdata%\ET\chck67.lbool del %programdata%\ET\chck67.lbool
 	echo %time% %date% > %programdata%\safe-edge.lbool
 	
 goto Start
