@@ -16,13 +16,6 @@ Last tested/updated on:
 </ul> 
 </br>
 Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.2/ET-AIO.bat" target="_blank">ET-AIO.bat</a></br></br> 
-Run via command: 
-
-```PowerShell
-powershell.exe -Command "wget https://raw.githubusercontent.com/semazurek/ET-All-in-One-Optimizer/master/ET-AIO.bat" -o ET-AIO.bat; start ET-AIO.bat
-```
-
-</br>
 
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
