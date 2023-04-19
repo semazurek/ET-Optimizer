@@ -1,8 +1,20 @@
-$versionPS=$args[0]+' '+$args[1]+' '+$args[2];
+$ProcessorType=Get-WMIObject win32_Processor | select Name | findstr /c:AMD /c:Intel
+$ProcessorType = $ProcessorType.Replace('(R)','').Replace('(TM)','')
+$licensekey=wmic path softwarelicensingservice get OA3xOriginalProductKey | findstr /c:'-'
+$RAMGet=Get-WMIObject -Computername localhost -class win32_ComputerSystem | Select-Object -Expand TotalPhysicalMemory
+$RAMGet=$RAMGet/1024/1024/1024
+$versionPS=$args[0]+" "+$args[1]+" "+$args[2]+"   -   "+$args[3]+" "+$args[4]+" "+$args[5]+", "+$ProcessorType+", "+[math]::round($RAMGet)+" GB RAM";
 [reflection.assembly]::LoadWithPartialName( 'System.Windows.Forms'); 
 [reflection.assembly]::loadwithpartialname('System.Drawing'); 
 Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
+$ErrorActionPreference= 'silentlycontinue'
+$mainforecolor="#eeeeee"
+$mainbackcolor="#252525"
+$menubackcolor="#323232"
+$selectioncolor="#3498db"
+$expercolor="#e74c3c"
+If ( $args[4] -like "10"){$mainforecolor="#000000";$mainbackcolor="#f0f0f0";$menubackcolor="#f8f8f9";$selectioncolor="#021396";$expercolor="#FF0000"}
 function count_p {
 $c_p = 0;
 Foreach ($control in $groupBox1.Controls){
@@ -10,8 +22,8 @@ Foreach ($control in $groupBox1.Controls){
        $objectType = $control.GetType().Name
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_p++}
    }
-If ($c_p -eq 34) { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#3498db'); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
-Else { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee'); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
+If ($c_p -eq 34) { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
+Else { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
 }
 function count_v {
 $c_v = 0;
@@ -20,8 +32,8 @@ Foreach ($control in $groupBox3.Controls){
        $objectType = $control.GetType().Name
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_v++}
    }
-If ($c_v -eq 6) { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#3498db'); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
-Else { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee'); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
+If ($c_v -eq 6) { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
+Else { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
 }
 function count_s {
 $c_s = 0;
@@ -30,8 +42,18 @@ Foreach ($control in $groupBox2.Controls){
        $objectType = $control.GetType().Name
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_s++}
    }
-If ($c_s -eq 17) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#3498db'); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
-Else { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee'); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
+If ($c_s -eq 17) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
+Else { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
+}
+function count_o {
+$c_o = 0;
+Foreach ($control in $groupBox4.Controls){
+	$tempval = $control.TabIndex+1;
+       $objectType = $control.GetType().Name
+       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_o++}
+   }
+If ($c_o -eq 6) { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); }
+Else { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); }
 }
 function do_start { 
 Foreach ($control in $groupBox1.Controls){
@@ -54,6 +76,11 @@ Foreach ($control in $groupBox4.Controls){
        $objectType = $control.GetType().Name
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){ echo True > $Env:programdata\ET\chck$tempval.lbool}
    }
+Foreach ($control in $groupBox5.Controls){
+	$tempval = $control.TabIndex+1;
+       $objectType = $control.GetType().Name
+       If ($objectType -like "CheckBox" -and $control.checked -eq 1){ echo True > $Env:programdata\ET\chck$tempval.lbool}
+   }
 $form.close()
 }; 
 $form= New-Object Windows.Forms.Form; 
@@ -66,16 +93,14 @@ $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen;
 $form.MinimizeBox = $false; 
 $form.MaximizeBox = $false; 
 $Font = New-Object System.Drawing.Font('Consolas',9,[System.Drawing.FontStyle]::Regular); 
-$form.FlatStyle = 'Flat'
-$form.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
-$form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$form.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor)
+$form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $form.Font = $Font; 
 $B_close = New-Object Windows.Forms.Button; 
 $B_close.text = 'Start'; 
 $B_close.FlatStyle = 'Flat'
 $B_close.Location = New-Object Drawing.Point 660,675; 
 $B_close.Size = New-Object Drawing.Point 120,50;
-$B_close.FlatStyle = 'Flat'
 $B_close.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
 $B_close.add_click({do_start}); $form.controls.add($B_close); 
 $B_checkall = New-Object Windows.Forms.Button; 
@@ -105,7 +130,7 @@ Foreach ($control in $groupBox3.Controls){
    }
 Foreach ($control in $groupBox4.Controls){
        $objectType = $control.GetType().Name
-       If ($objectType -like "CheckBox" -and $control.TabIndex -ne 60 -and $control.TabIndex -ne 61 -and $control.TabIndex -ne 59 -and $control.TabIndex -ne 65 -and $control.TabIndex -ne 2 -and $control.TabIndex -ne 66){
+       If ($objectType -like "CheckBox" -and $control.TabIndex -ne 60 -and $control.TabIndex -ne 61 -and $control.TabIndex -ne 59 -and $control.TabIndex -ne 65 -and $control.TabIndex -ne 66){
            $control.checked = $true
        }
    }
@@ -120,6 +145,7 @@ $B_privacyall.Visible = $false;
 count_p;
 count_v;
 count_s;
+count_o;
 }); 
 $form.controls.add($B_checkall);
 $B_uncheckall = New-Object Windows.Forms.Button; 
@@ -153,6 +179,12 @@ Foreach ($control in $groupBox4.Controls){
            $control.checked = $false
        }
    }
+Foreach ($control in $groupBox5.Controls){
+       $objectType = $control.GetType().Name
+       If ($objectType -like "CheckBox"){
+           $control.checked = $false
+       }
+   }
 $B_checkall.Visible = $true;
 $B_uncheckall.Visible = $false;
 $B_performanceoff.Visible = $false;
@@ -164,6 +196,7 @@ $B_privacyall.Visible = $true;
 count_p;
 count_v;
 count_s;
+count_o;
 }); 
 $form.controls.add($B_uncheckall);
 $B_performanceall = New-Object Windows.Forms.Button; 
@@ -188,7 +221,7 @@ $B_performanceoff = New-Object Windows.Forms.Button;
 $B_performanceoff.text = 'Performance'; 
 $B_performanceoff.Location = New-Object Drawing.Point 110,675; 
 $B_performanceoff.Size = New-Object Drawing.Point 130,50;
-$B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#3498db');
+$B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_performanceoff.FlatStyle = 'Flat'
 $B_performanceoff.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
 $B_performanceoff.add_click({
@@ -225,7 +258,7 @@ $B_visualoff = New-Object Windows.Forms.Button;
 $B_visualoff.text = 'Visual'; 
 $B_visualoff.Location = New-Object Drawing.Point 250,675; 
 $B_visualoff.Size = New-Object Drawing.Point 120,50;
-$B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#3498db');
+$B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_visualoff.FlatStyle = 'Flat'
 $B_visualoff.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
 $B_visualoff.add_click({
@@ -262,7 +295,7 @@ $B_privacyoff = New-Object Windows.Forms.Button;
 $B_privacyoff.text = 'Privacy'; 
 $B_privacyoff.Location = New-Object Drawing.Point 380,675; 
 $B_privacyoff.Size = New-Object Drawing.Point 120,50;
-$B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#3498db');
+$B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_privacyoff.FlatStyle = 'Flat'
 $B_privacyoff.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
 $B_privacyoff.add_click({
@@ -284,13 +317,14 @@ $B_privacyall.Visible = $false;
 count_p;
 count_v;
 count_s;
+count_o;
 $groupBox1 = New-Object System.Windows.Forms.GroupBox
 $groupBox1.Location = '10,30' 
 $groupBox1.size = '570,455'
 $groupBox1.text = 'Performance Tweaks'
 $groupBox1.Visible = $true
 $groupBox1.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $form.controls.Add($groupBox1) 
 $groupBox1.add_click({count_p})
 $groupBox2 = New-Object System.Windows.Forms.GroupBox
@@ -299,7 +333,7 @@ $groupBox2.size = '285,455'
 $groupBox2.text = 'Privacy'
 $groupBox2.Visible = $true
 $groupBox2.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $form.Controls.Add($groupBox2) 
 $groupBox2.add_click({count_s})
 $groupBox3 = New-Object System.Windows.Forms.GroupBox
@@ -308,17 +342,29 @@ $groupBox3.size = '285,180'
 $groupBox3.text = 'Visual Tweaks'
 $groupBox3.Visible = $true
 $groupBox3.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $form.Controls.Add($groupBox3) 
 $groupBox3.add_click({count_v})
 $groupBox4 = New-Object System.Windows.Forms.GroupBox
 $groupBox4.Location = '302,485' 
-$groupBox4.size = '568,180'
+$groupBox4.size = '278,180'
 $groupBox4.text = 'Other'
 $groupBox4.Visible = $true
 $groupBox4.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
-$groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $form.Controls.Add($groupBox4) 
+$groupBox5 = New-Object System.Windows.Forms.GroupBox
+$groupBox5.Location = '585,485' 
+$groupBox5.size = '285,180'
+$groupBox5.text = 'Expert Mode'
+$groupBox5.Visible = $true
+$groupBox5.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
+$groupBox5.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
+$form.Controls.Add($groupBox5) 
+$groupBox5.add_MouseHover({
+$tooltipg5 = New-Object System.Windows.Forms.ToolTip
+$tooltipg5.SetToolTip($groupBox5, 'Non recommended or unstable. May need to be done in safe mode.')
+})
 $chck1 = New-Object Windows.Forms.Checkbox; 
 $chck1.Location = New-Object Drawing.Point 10,25; 
 $chck1.Size = New-Object Drawing.Point 270,25; 
@@ -469,7 +515,7 @@ $chck64.add_click({count_p})
 $chck65 = New-Object Windows.Forms.Checkbox; 
 $chck65.Location = New-Object Drawing.Point 10,400; 
 $chck65.Size = New-Object Drawing.Point 270,25; 
-$chck65.Text = 'Disable Sleep Mode Timeouts'; 
+$chck65.Text = 'CPU Priority Tweaks'; 
 $chck65.TabIndex = 64; 
 $chck65.Checked = $true; 
 $chck65.Font = $Font;
@@ -643,28 +689,28 @@ $tooltip30.SetToolTip($chck30, 'Defragmenting the Indexing Service database file
 }) 
 $chck30.add_click({count_p})
 $chck66 = New-Object Windows.Forms.Checkbox; 
-$chck66.Location = New-Object Drawing.Point 295,125; 
+$chck66.Location = New-Object Drawing.Point 10,125; 
 $chck66.Size = New-Object Drawing.Point 270,25; 
 $chck66.Text = 'Disable Spectre/Meltdown Protection'; 
 $chck66.TabIndex = 65; 
 $chck66.Checked = $false; 
-$chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#e74c3c')
+$chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
 $chck66.Font = $Font;
-$groupBox4.controls.add($chck66); 
+$groupBox5.controls.add($chck66); 
 $chck66.add_MouseHover({
 $tooltip66 = New-Object System.Windows.Forms.ToolTip
 $tooltip66.SetToolTip($chck66, 'These are important secure patches although it decrease system performance.')
 })
-$chck3 = New-Object Windows.Forms.Checkbox; 
-$chck3.Location = New-Object Drawing.Point 295,150; 
-$chck3.Size = New-Object Drawing.Point 270,25; 
-$chck3.Text = 'Disable Windows Defender'; 
-$chck3.TabIndex = 2; 
-$chck3.Checked = $false; 
-$chck3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#e74c3c')
-$chck3.Font = $Font;
-$groupBox4.controls.add($chck3); 
-$chck3.add_MouseHover({
+$chck69 = New-Object Windows.Forms.Checkbox; 
+$chck69.Location = New-Object Drawing.Point 10,150; 
+$chck69.Size = New-Object Drawing.Point 270,25; 
+$chck69.Text = 'Disable Windows Defender'; 
+$chck69.TabIndex = 68; 
+$chck69.Checked = $false; 
+$chck69.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
+$chck69.Font = $Font;
+$groupBox5.controls.add($chck69); 
+$chck69.add_MouseHover({
 $tooltip67 = New-Object System.Windows.Forms.ToolTip
 $tooltip67.SetToolTip($chck3, 'You are doing this at your own risk ')
 })
@@ -877,12 +923,13 @@ $groupBox3.controls.add($chck53);
 $chck53.add_click({count_v})
 $chck54 = New-Object Windows.Forms.Checkbox; 
 $chck54.Location = New-Object Drawing.Point 10,25; 
-$chck54.Size = New-Object Drawing.Point 270,25; 
+$chck54.Size = New-Object Drawing.Point 250,25; 
 $chck54.Text = 'Remove Windows Game Bar/DVR'; 
 $chck54.TabIndex = 53; 
 $chck54.Checked = $true; 
 $chck54.Font = $Font;
 $groupBox4.controls.add($chck54);  
+$chck54.add_click({count_o})
 $chck55 = New-Object Windows.Forms.Checkbox; 
 $chck55.Location = New-Object Drawing.Point 10,425; 
 $chck55.Size = New-Object Drawing.Point 270,25; 
@@ -924,83 +971,89 @@ $tooltip57.SetToolTip($chck57, "Java Update Checker x64 `n Mini Partition Tool W
 $chck57.add_click({count_p})
 $chck58 = New-Object Windows.Forms.Checkbox; 
 $chck58.Location = New-Object Drawing.Point 10,50; 
-$chck58.Size = New-Object Drawing.Point 270,25; 
+$chck58.Size = New-Object Drawing.Point 250,25; 
 $chck58.Text = 'Clean Temp/Cache/Prefetch/Logs'; 
 $chck58.TabIndex = 57; 
 $chck58.Checked = $true; 
 $chck58.Font = $Font;
 $groupBox4.controls.add($chck58); 
+$chck58.add_click({count_o})
 $chck59 = New-Object Windows.Forms.Checkbox; 
-$chck59.Location = New-Object Drawing.Point 10,75; 
-$chck59.Size = New-Object Drawing.Point 275,25; 
+$chck59.Location = New-Object Drawing.Point 10,150; 
+$chck59.Size = New-Object Drawing.Point 250,25; 
 $chck59.Text = 'Remove News and Interests/Widgets'; 
 $chck59.TabIndex = 58; 
 $chck59.Checked = $false; 
 $chck59.Font = $Font;
 $groupBox4.controls.add($chck59); 
+$chck59.add_click({count_o})
 $chck60 = New-Object Windows.Forms.Checkbox; 
-$chck60.Location = New-Object Drawing.Point 295,100; 
+$chck60.Location = New-Object Drawing.Point 10,100; 
 $chck60.Size = New-Object Drawing.Point 270,25; 
 $chck60.Text = 'Remove Microsoft OneDrive'; 
-$chck60.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#e74c3c')
+$chck60.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
 $chck60.TabIndex = 59; 
 $chck60.Checked = $false; 
 $chck60.Font = $Font;
-$groupBox4.controls.add($chck60); 
+$groupBox5.controls.add($chck60); 
 $chck61 = New-Object Windows.Forms.Checkbox; 
-$chck61.Location = New-Object Drawing.Point 295,50; 
+$chck61.Location = New-Object Drawing.Point 10,50; 
 $chck61.Size = New-Object Drawing.Point 270,25; 
 $chck61.Text = 'Disable Xbox Services'; 
 $chck61.TabIndex = 60; 
 $chck61.Checked = $false;
-$chck61.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#e74c3c') 
+$chck61.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor) 
 $chck61.Font = $Font;
-$groupBox4.controls.add($chck61); 
+$groupBox5.controls.add($chck61); 
 $chck62 = New-Object Windows.Forms.Checkbox; 
-$chck62.Location = New-Object Drawing.Point 295,75; 
+$chck62.Location = New-Object Drawing.Point 10,75; 
 $chck62.Size = New-Object Drawing.Point 270,25; 
 $chck62.Text = 'Enable Fast/Secure DNS (1.1.1.1)'; 
 $chck62.TabIndex = 61; 
 $chck62.Checked = $false; 
-$chck62.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#e74c3c')
+$chck62.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
 $chck62.Font = $Font;
-$groupBox4.controls.add($chck62); 
+$groupBox5.controls.add($chck62); 
 $chck63 = New-Object Windows.Forms.Checkbox; 
 $chck63.Location = New-Object Drawing.Point 10,100; 
-$chck63.Size = New-Object Drawing.Point 270,25; 
+$chck63.Size = New-Object Drawing.Point 250,25; 
 $chck63.Text = 'Scan for Adware (AdwCleaner)'; 
 $chck63.TabIndex = 62; 
 $chck63.Checked = $false; 
 $chck63.Font = $Font;
 $groupBox4.controls.add($chck63); 
+$chck63.add_click({count_o})
 $chck67 = New-Object Windows.Forms.Checkbox; 
-$chck67.Location = New-Object Drawing.Point 295,25; 
+$chck67.Location = New-Object Drawing.Point 10,25; 
 $chck67.Size = New-Object Drawing.Point 270,25; 
 $chck67.Text = 'Remove Microsoft Edge'; 
 $chck67.TabIndex = 66; 
 $chck67.Checked = $false;
-$chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#e74c3c') 
+$chck67.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor) 
 $chck67.Font = $Font;
-$groupBox4.controls.add($chck67); 
+$groupBox5.controls.add($chck67); 
 $chck68 = New-Object Windows.Forms.Checkbox; 
 $chck68.Location = New-Object Drawing.Point 10,125; 
-$chck68.Size = New-Object Drawing.Point 270,25; 
+$chck68.Size = New-Object Drawing.Point 250,25; 
 $chck68.Text = 'Clean WinSxS Folder'; 
 $chck68.TabIndex = 67; 
 $chck68.Checked = $false;
 $chck68.Font = $Font;
 $groupBox4.controls.add($chck68); 
-$chck69 = New-Object Windows.Forms.Checkbox; 
-$chck69.Location = New-Object Drawing.Point 10,150; 
-$chck69.Size = New-Object Drawing.Point 270,25; 
-$chck69.Text = 'Split Threshold for Svchost'; 
-$chck69.TabIndex = 68; 
-$chck69.Checked = $false;
-$chck69.Font = $Font;
-$groupBox4.controls.add($chck69); 
+$chck68.add_click({count_o})
+$chck3 = New-Object Windows.Forms.Checkbox; 
+$chck3.Location = New-Object Drawing.Point 10,75;
+$chck3.Size = New-Object Drawing.Point 250,25; 
+$chck3.Text = 'Split Threshold for Svchost'; 
+$chck3.TabIndex = 2; 
+$chck3.Checked = $true;
+$chck3.Font = $Font;
+$groupBox4.controls.add($chck3); 
+$chck3.add_click({count_o})
 count_p;
 count_v;
 count_s;
+count_o;
 function About {
 $aboutForm = New-Object System.Windows.Forms.Form; 
 $aboutFormExit = New-Object System.Windows.Forms.Button; 
@@ -1011,8 +1064,8 @@ $aboutForm.MinimizeBox = $false;
 $aboutForm.MaximizeBox = $false; 
 $aboutForm.TopMost = $true; 
 $aboutForm.FlatStyle = 'Flat'
-$aboutForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
-$aboutForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$aboutForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor)
+$aboutForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $aboutForm.AutoSizeMode = 'GrowAndShrink'; 
 $aboutForm.FormBorderStyle = 'FixedDialog'; 
 $aboutForm.AcceptButton = $aboutFormExit; 
@@ -1055,6 +1108,7 @@ $extraFormB9 = New-Object System.Windows.Forms.Button;
 $extraFormB10 = New-Object System.Windows.Forms.Button; 
 $extraFormB11 = New-Object System.Windows.Forms.Button; 
 $extraFormB12 = New-Object System.Windows.Forms.Button; 
+$extraFormB13 = New-Object System.Windows.Forms.Button; 
 $extraForm.MinimizeBox = $false; 
 $extraForm.MaximizeBox = $false; 
 $extraForm.TopMost = $true; 
@@ -1062,11 +1116,11 @@ $extraForm.AutoSizeMode = 'GrowAndShrink';
 $extraForm.FormBorderStyle = 'FixedDialog'; 
 $extraForm.AcceptButton = $extraFormExit; 
 $extraForm.CancelButton = $extraFormExit; 
-$extraForm.ClientSize = '200, 390'; 
+$extraForm.ClientSize = '200, 420'; 
 $extraForm.ShowInTaskBar = $false; 
 $extraForm.FlatStyle = 'Flat'
-$extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#252525')
-$extraForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee')
+$extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor)
+$extraForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $extraForm.Location = (30,30);
 $extraForm.Text = 'Extras'; 
 $extraForm.Font = $font;
@@ -1166,6 +1220,12 @@ $extraFormB12.add_MouseHover({
 $tooltipEB12 = New-Object System.Windows.Forms.ToolTip
 $tooltipEB12.SetToolTip($extraFormB12, 'Update Applications (winget upgrade --all)')
 })
+$extraFormB13.Location = '25, 375'; 
+$extraFormB13.Size = New-Object Drawing.Point 150,25; 
+$extraFormB13.Text = 'Windows License Key';
+$extraFormB13.add_click({echo Windows_License_Key: $licensekey > C:\ProgramData\verwin.txt;start notepad C:\ProgramData\verwin.txt}); 
+$extraFormB13.FlatStyle = 'Flat' 
+$extraForm.Controls.Add($extraFormB13); 
 [void]$extraForm.ShowDialog()
 }; 
 function addMenuItem { param([ref]$ParentItem, [string]$ItemName='', [string]$ItemText='', [scriptblock]$ScriptBlock=$null ) [System.Windows.Forms.ToolStripMenuItem]$private:menuItem=` New-Object System.Windows.Forms.ToolStripMenuItem;
@@ -1175,8 +1235,8 @@ if ($ScriptBlock -ne $null) { $private:menuItem.add_Click(([System.EventHandler]
 if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Value).Items.Add($private:menuItem);} return $private:menuItem; }; 
 function Backup{start C:\ProgramData\regback-et.bat; $timeback=Get-Date -Format G ;echo [ET] $timeback > $Env:programdata\ET-dump.log}; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
-$mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml('#323232');
-$mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml('#eeeeee');
+$mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml($menubackcolor);
+$mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
 [scriptblock]$exit= {$form.Close()}; 
 [scriptblock]$backup= {Backup}; 
 [scriptblock]$restore= {rstrui.exe; sleep 1;start C:\RegBack}; 
