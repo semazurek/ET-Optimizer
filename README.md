@@ -1,4 +1,4 @@
-# ET All-in-One Optimization Script
+# ET-Optimization Script
 
 <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.2-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
@@ -15,7 +15,7 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/download/5.2/ET-AIO.bat" target="_blank">ET-AIO.bat</a></br></br> 
+Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.2/ET-AIO.bat" target="_blank">ET-AIO.bat</a></br></br> 
 
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
