@@ -50,7 +50,7 @@ if '%errorlevel%' NEQ '0' (
     CD /D "%~dp0"
 
 :: Created by Rikey
-:: https://github.com/semazurek/ET-All-in-One-Optimizer
+:: https://github.com/semazurek/ET-Optimizer
 :: https://www.paypal.com/paypalme/rikey
 
 set version=E.T. ver 5.2
@@ -1279,7 +1279,7 @@ echo $aboutForm.Add_Load^($aboutForm_Load^);
 echo $aboutFormNameLabel.Font = New-Object Drawing.Font^('Consolas', 9, [System.Drawing.FontStyle]::Bold^); 
 echo $aboutFormNameLabel.Location = '110, 10'; 
 echo $aboutFormNameLabel.Size = '200, 18'; 
-echo $aboutFormNameLabel.Text = '  E.T. All in One'; 
+echo $aboutFormNameLabel.Text = '  E.T. Optimizer'; 
 echo $aboutForm.Controls.Add^($aboutFormNameLabel^); 
 echo $aboutFormText.Location = '100, 30'; 
 echo $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
