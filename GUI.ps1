@@ -14,13 +14,14 @@ $mainbackcolor="#252525"
 $menubackcolor="#323232"
 $selectioncolor="#3498db"
 $expercolor="#e74c3c"
-If ( $args[4] -like "10"){$mainforecolor="#000000";$mainbackcolor="#f0f0f0";$menubackcolor="#f8f8f9";$selectioncolor="#021396";$expercolor="#FF0000"}
+If ( $args[4] -like "7"){$mainforecolor="#000000";$mainbackcolor="#f0f0f0";$menubackcolor="#f8f8f9";$selectioncolor="#021396";$expercolor="#FF0000"}
 function count_p {
 $c_p = 0;
 Foreach ($control in $groupBox1.Controls){
 	$tempval = $control.TabIndex+1;
        $objectType = $control.GetType().Name
-       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_p++}
+       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_p++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
+		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
 If ($c_p -eq 34) { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
 Else { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
@@ -30,7 +31,8 @@ $c_v = 0;
 Foreach ($control in $groupBox3.Controls){
 	$tempval = $control.TabIndex+1;
        $objectType = $control.GetType().Name
-       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_v++}
+       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_v++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
+		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
 If ($c_v -eq 6) { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
 Else { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
@@ -40,7 +42,8 @@ $c_s = 0;
 Foreach ($control in $groupBox2.Controls){
 	$tempval = $control.TabIndex+1;
        $objectType = $control.GetType().Name
-       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_s++}
+       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_s++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
+		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
 If ($c_s -eq 17) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
 Else { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
@@ -50,7 +53,8 @@ $c_o = 0;
 Foreach ($control in $groupBox4.Controls){
 	$tempval = $control.TabIndex+1;
        $objectType = $control.GetType().Name
-       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_o++}
+       If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_o++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
+		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
 If ($c_o -eq 6) { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); }
 Else { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); }
@@ -1079,7 +1083,7 @@ $aboutForm.Add_Load($aboutForm_Load);
 $aboutFormNameLabel.Font = New-Object Drawing.Font('Consolas', 9, [System.Drawing.FontStyle]::Bold); 
 $aboutFormNameLabel.Location = '110, 10'; 
 $aboutFormNameLabel.Size = '200, 18'; 
-$aboutFormNameLabel.Text = '  E.T. All in One'; 
+$aboutFormNameLabel.Text = '  E.T. Optimizer'; 
 $aboutForm.Controls.Add($aboutFormNameLabel); 
 $aboutFormText.Location = '100, 30'; 
 $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
