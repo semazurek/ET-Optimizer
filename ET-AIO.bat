@@ -117,14 +117,16 @@ echo $mainbackcolor="#252525"
 echo $menubackcolor="#323232"
 echo $selectioncolor="#3498db"
 echo $expercolor="#e74c3c"
-echo If ^( $args[4] -like "10"^){$mainforecolor="#000000";$mainbackcolor="#f0f0f0";$menubackcolor="#f8f8f9";$selectioncolor="#021396";$expercolor="#FF0000"}
+
+echo If ^( $args[4] -like "7"^){$mainforecolor="#000000";$mainbackcolor="#f0f0f0";$menubackcolor="#f8f8f9";$selectioncolor="#021396";$expercolor="#FF0000"}
 
 echo function count_p {
 echo $c_p = 0;
 echo Foreach ^($control in $groupBox1.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
-echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_p++}
+echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_p++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
+echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
 echo If ^($c_p -eq 34^) { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
 echo Else { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
@@ -135,7 +137,8 @@ echo $c_v = 0;
 echo Foreach ^($control in $groupBox3.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
-echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_v++}
+echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_v++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
+echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
 echo If ^($c_v -eq 6^) { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
 echo Else { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
@@ -146,7 +149,8 @@ echo $c_s = 0;
 echo Foreach ^($control in $groupBox2.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
-echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_s++}
+echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_s++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
+echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
 echo If ^($c_s -eq 17^) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
 echo Else { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
@@ -157,7 +161,8 @@ echo $c_o = 0;
 echo Foreach ^($control in $groupBox4.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
-echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_o++}
+echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_o++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
+echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
 echo If ^($c_o -eq 6^) { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); }
 echo Else { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); }
@@ -1548,7 +1553,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%19.04.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%20.04.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
