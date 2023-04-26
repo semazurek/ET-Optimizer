@@ -122,69 +122,69 @@ echo If ^( $args[4] -like "7"^){$mainforecolor="#000000";$mainbackcolor="#f0f0f0
 
 echo function count_p {
 echo $c_p = 0;
-echo Foreach ^($control in $groupBox1.Controls^){
+echo Foreach ^($control in $panel1.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_p++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
 echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
-echo If ^($c_p -eq 34^) { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
-echo Else { $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
+echo If ^($c_p -eq 34^) { $panel1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
+echo Else { $panel1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
 echo }
 
 echo function count_v {
 echo $c_v = 0;
-echo Foreach ^($control in $groupBox3.Controls^){
+echo Foreach ^($control in $panel3.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_v++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
 echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
-echo If ^($c_v -eq 6^) { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
-echo Else { $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
+echo If ^($c_v -eq 6^) { $panel3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
+echo Else { $panel3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
 echo }
 
 echo function count_s {
 echo $c_s = 0;
-echo Foreach ^($control in $groupBox2.Controls^){
+echo Foreach ^($control in $panel2.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_s++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
 echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
-echo If ^($c_s -eq 17^) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
-echo Else { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
+echo If ^($c_s -eq 17^) { $panel2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
+echo Else { $panel2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
 echo }
 
 echo function count_o {
 echo $c_o = 0;
-echo Foreach ^($control in $groupBox4.Controls^){
+echo Foreach ^($control in $panel4.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){$c_o++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^)}
 echo 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)}
 echo    }
-echo If ^($c_o -eq 6^) { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); }
-echo Else { $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); }
+echo If ^($c_o -eq 6^) { $panel4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^); }
+echo Else { $panel4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^); }
 echo }
 
 echo function do_start { 
-echo Foreach ^($control in $groupBox1.Controls^){
+echo Foreach ^($control in $panel1.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
 echo    }
-echo Foreach ^($control in $groupBox2.Controls^){
+echo Foreach ^($control in $panel2.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
 echo    }
-echo Foreach ^($control in $groupBox3.Controls^){
+echo Foreach ^($control in $panel3.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
 echo    }
-echo Foreach ^($control in $groupBox4.Controls^){
+echo Foreach ^($control in $panel4.Controls^){
 echo		$tempval = $control.TabIndex+1;
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.checked -eq 1^){ echo True ^> $Env:programdata\ET\chck$tempval.lbool}
@@ -197,7 +197,7 @@ echo    }
 echo $form.close^(^)
 echo }; 
 echo $form= New-Object Windows.Forms.Form; 
-echo $form.Size = New-Object System.Drawing.Size^(895,780^); 
+echo $form.Size = New-Object System.Drawing.Size^(895,505^); 
 echo $form.StartPosition = 'CenterScreen'; 
 echo $form.FormBorderStyle = 'FixedDialog'; 
 echo $form.Text = $versionPS; 
@@ -213,37 +213,37 @@ echo $form.Font = $Font;
 echo $B_close = New-Object Windows.Forms.Button; 
 echo $B_close.text = 'Start'; 
 echo $B_close.FlatStyle = 'Flat'
-echo $B_close.Location = New-Object Drawing.Point 660,675; 
+echo $B_close.Location = New-Object Drawing.Point 660,400; 
 echo $B_close.Size = New-Object Drawing.Point 120,50;
 echo $B_close.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_close.add_click^({do_start}^); $form.controls.add^($B_close^); 
 
 echo $B_checkall = New-Object Windows.Forms.Button; 
 echo $B_checkall.text = 'Select All'; 
-echo $B_checkall.Location = New-Object Drawing.Point 510,675; 
+echo $B_checkall.Location = New-Object Drawing.Point 510,400; 
 echo $B_checkall.Size = New-Object Drawing.Point 140,50;
 echo $B_checkall.FlatStyle = 'Flat'
 echo $B_checkall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_checkall.add_click^({
-echo Foreach ^($control in $groupBox1.Controls^){
+echo Foreach ^($control in $panel1.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $true
 echo        }
 echo    }
-echo Foreach ^($control in $groupBox2.Controls^){
+echo Foreach ^($control in $panel2.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $true
 echo        }
 echo    }
-echo Foreach ^($control in $groupBox3.Controls^){
+echo Foreach ^($control in $panel3.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $true
 echo        }
 echo    }
-echo Foreach ^($control in $groupBox4.Controls^){
+echo Foreach ^($control in $panel4.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox" -and $control.TabIndex -ne 60 -and $control.TabIndex -ne 61 -and $control.TabIndex -ne 59 -and $control.TabIndex -ne 65 -and $control.TabIndex -ne 66^){
 echo            $control.checked = $true
@@ -266,30 +266,30 @@ echo $form.controls.add^($B_checkall^);
 
 echo $B_uncheckall = New-Object Windows.Forms.Button; 
 echo $B_uncheckall.text = 'Unselect All'; 
-echo $B_uncheckall.Location = New-Object Drawing.Point 510,675; 
+echo $B_uncheckall.Location = New-Object Drawing.Point 510,400; 
 echo $B_uncheckall.Size = New-Object Drawing.Point 140,50;
 echo $B_uncheckall.FlatStyle = 'Flat'
 echo $B_uncheckall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_uncheckall.add_click^({
-echo Foreach ^($control in $groupBox1.Controls^){
+echo Foreach ^($control in $panel1.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
 echo        }
 echo    }
-echo Foreach ^($control in $groupBox2.Controls^){
+echo Foreach ^($control in $panel2.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
 echo        }
 echo    }
-echo Foreach ^($control in $groupBox3.Controls^){
+echo Foreach ^($control in $panel3.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
 echo        }
 echo    }
-echo Foreach ^($control in $groupBox4.Controls^){
+echo Foreach ^($control in $panel4.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
@@ -318,12 +318,12 @@ echo $form.controls.add^($B_uncheckall^);
 
 echo $B_performanceall = New-Object Windows.Forms.Button; 
 echo $B_performanceall.text = 'Performance'; 
-echo $B_performanceall.Location = New-Object Drawing.Point 110,675; 
+echo $B_performanceall.Location = New-Object Drawing.Point 110,400; 
 echo $B_performanceall.Size = New-Object Drawing.Point 130,50;
 echo $B_performanceall.FlatStyle = 'Flat'
 echo $B_performanceall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceall.add_click^({
-echo Foreach ^($control in $groupBox1.Controls^){
+echo Foreach ^($control in $panel1.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $true
@@ -337,13 +337,13 @@ echo $form.controls.add^($B_performanceall^);
 
 echo $B_performanceoff = New-Object Windows.Forms.Button; 
 echo $B_performanceoff.text = 'Performance'; 
-echo $B_performanceoff.Location = New-Object Drawing.Point 110,675; 
+echo $B_performanceoff.Location = New-Object Drawing.Point 110,400; 
 echo $B_performanceoff.Size = New-Object Drawing.Point 130,50;
 echo $B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^);
 echo $B_performanceoff.FlatStyle = 'Flat'
 echo $B_performanceoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_performanceoff.add_click^({
-echo Foreach ^($control in $groupBox1.Controls^){
+echo Foreach ^($control in $panel1.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
@@ -357,12 +357,12 @@ echo $form.controls.add^($B_performanceoff^);
 
 echo $B_visualall = New-Object Windows.Forms.Button; 
 echo $B_visualall.text = 'Visual'; 
-echo $B_visualall.Location = New-Object Drawing.Point 250,675; 
+echo $B_visualall.Location = New-Object Drawing.Point 250,400; 
 echo $B_visualall.Size = New-Object Drawing.Point 120,50;
 echo $B_visualall.FlatStyle = 'Flat'
 echo $B_visualall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_visualall.add_click^({
-echo Foreach ^($control in $groupBox3.Controls^){
+echo Foreach ^($control in $panel3.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $true
@@ -376,13 +376,13 @@ echo $form.controls.add^($B_visualall^);
 
 echo $B_visualoff = New-Object Windows.Forms.Button; 
 echo $B_visualoff.text = 'Visual'; 
-echo $B_visualoff.Location = New-Object Drawing.Point 250,675; 
+echo $B_visualoff.Location = New-Object Drawing.Point 250,400; 
 echo $B_visualoff.Size = New-Object Drawing.Point 120,50;
 echo $B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^);
 echo $B_visualoff.FlatStyle = 'Flat'
 echo $B_visualoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_visualoff.add_click^({
-echo Foreach ^($control in $groupBox3.Controls^){
+echo Foreach ^($control in $panel3.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
@@ -396,12 +396,12 @@ echo $form.controls.add^($B_visualoff^);
 
 echo $B_privacyall = New-Object Windows.Forms.Button; 
 echo $B_privacyall.text = 'Privacy'; 
-echo $B_privacyall.Location = New-Object Drawing.Point 380,675; 
+echo $B_privacyall.Location = New-Object Drawing.Point 380,400; 
 echo $B_privacyall.Size = New-Object Drawing.Point 120,50;
 echo $B_privacyall.FlatStyle = 'Flat'
 echo $B_privacyall.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_privacyall.add_click^({
-echo Foreach ^($control in $groupBox2.Controls^){
+echo Foreach ^($control in $panel2.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $true
@@ -415,13 +415,13 @@ echo $form.controls.add^($B_privacyall^);
 
 echo $B_privacyoff = New-Object Windows.Forms.Button; 
 echo $B_privacyoff.text = 'Privacy'; 
-echo $B_privacyoff.Location = New-Object Drawing.Point 380,675; 
+echo $B_privacyoff.Location = New-Object Drawing.Point 380,400; 
 echo $B_privacyoff.Size = New-Object Drawing.Point 120,50;
 echo $B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($selectioncolor^);
 echo $B_privacyoff.FlatStyle = 'Flat'
 echo $B_privacyoff.Font = New-Object System.Drawing.Font^('Consolas',13,[System.Drawing.FontStyle]::Regular^);
 echo $B_privacyoff.add_click^({
-echo Foreach ^($control in $groupBox2.Controls^){
+echo Foreach ^($control in $panel2.Controls^){
 echo        $objectType = $control.GetType^(^).Name
 echo        If ^($objectType -like "CheckBox"^){
 echo            $control.checked = $false
@@ -445,7 +445,7 @@ echo count_o;
 echo $groupBox1 = New-Object System.Windows.Forms.GroupBox
 echo $groupBox1.Location = '10,30' 
 echo $groupBox1.size = '570,180'
-echo $groupBox1.text = 'Performance Tweaks'
+echo $groupBox1.text = 'Performance Tweaks ^(34^)'
 echo $groupBox1.Visible = $true
 echo $groupBox1.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)
@@ -464,37 +464,67 @@ echo $groupbox1.controls.Add^($panel1^)
 
 echo $groupBox2 = New-Object System.Windows.Forms.GroupBox
 echo $groupBox2.Location = '585,30' 
-echo $groupBox2.size = '285,455'
-echo $groupBox2.text = 'Privacy'
+echo $groupBox2.size = '285,180'
+echo $groupBox2.text = 'Privacy ^(17^)'
 echo $groupBox2.Visible = $true
 echo $groupBox2.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)
 echo $form.Controls.Add^($groupBox2^) 
 echo $groupBox2.add_click^({count_s}^)
 
+echo $panel2 = New-Object System.Windows.Forms.Panel
+echo $panel2.Dock = DockStyle.Fill
+echo $panel2.AutoScroll = $true
+echo $panel2.VerticalScroll.Enabled = $false
+echo $panel2.VerticalScroll.Visible = $false
+echo $panel2.size = '291,153'
+echo $panel2.FlatStyle = 'Flat'
+echo $panel2.Location = '10,20'
+echo $groupBox2.controls.Add^($panel2^) 
+
 echo $groupBox3 = New-Object System.Windows.Forms.GroupBox
-echo $groupBox3.Location = '10,485' 
+echo $groupBox3.Location = '10,210' 
 echo $groupBox3.size = '285,180'
-echo $groupBox3.text = 'Visual Tweaks'
+echo $groupBox3.text = 'Visual Tweaks ^(6^)'
 echo $groupBox3.Visible = $true
 echo $groupBox3.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)
 echo $form.Controls.Add^($groupBox3^) 
 echo $groupBox3.add_click^({count_v}^)
 
+echo $panel3 = New-Object System.Windows.Forms.Panel
+echo $panel3.Dock = DockStyle.Fill
+echo $panel3.AutoScroll = $true
+echo $panel3.VerticalScroll.Enabled = $false
+echo $panel3.VerticalScroll.Visible = $false
+echo $panel3.size = '291,153'
+echo $panel3.FlatStyle = 'Flat'
+echo $panel3.Location = '10,20'
+echo $groupBox3.controls.Add^($panel3^) 
+
 echo $groupBox4 = New-Object System.Windows.Forms.GroupBox
-echo $groupBox4.Location = '302,485' 
+echo $groupBox4.Location = '302,210' 
 echo $groupBox4.size = '278,180'
-echo $groupBox4.text = 'Other'
+echo $groupBox4.text = 'Other ^(6^)'
 echo $groupBox4.Visible = $true
 echo $groupBox4.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($mainforecolor^)
 echo $form.Controls.Add^($groupBox4^) 
 
+echo $panel4 = New-Object System.Windows.Forms.Panel
+echo $panel4.Dock = DockStyle.Fill
+echo $panel4.AutoScroll = $true
+echo $panel4.VerticalScroll.Enabled = $false
+echo $panel4.VerticalScroll.Visible = $false
+echo $panel4.size = '284,153'
+echo $panel4.FlatStyle = 'Flat'
+echo $panel4.Location = '10,20'
+echo $groupBox4.controls.Add^($panel4^) 
+
 echo $groupBox5 = New-Object System.Windows.Forms.GroupBox
-echo $groupBox5.Location = '585,485' 
+echo $groupBox5.Location = '585,210' 
 echo $groupBox5.size = '285,180'
-echo $groupBox5.text = 'Expert Mode'
+echo $groupBox5.text = 'Expert Mode ^(6^)'
 echo $groupBox5.Visible = $true
 echo $groupBox5.Font = New-Object System.Drawing.Font^('Consolas',11,[System.Drawing.FontStyle]::Bold^); 
 echo $groupBox5.ForeColor = [System.Drawing.ColorTranslator]::FromHtml^($expercolor^)
@@ -888,243 +918,243 @@ echo $tooltip67.SetToolTip^($chck3, 'You are doing this at your own risk !'^)
 echo }^)
 
 echo $chck31 = New-Object Windows.Forms.Checkbox; 
-echo $chck31.Location = New-Object Drawing.Point 10,25; 
+echo $chck31.Location = New-Object Drawing.Point 0,5; 
 echo $chck31.Size = New-Object Drawing.Point 270,25; 
 echo $chck31.Text = 'Disable Telemetry Scheduled Tasks'; 
 echo $chck31.TabIndex = 30; 
 echo $chck31.Checked = $true; 
 echo $chck31.Font = $Font;
-echo $groupBox2.controls.add^($chck31^); 
+echo $panel2.controls.add^($chck31^); 
 echo $chck31.add_click^({count_s}^)
 
 echo $chck32 = New-Object Windows.Forms.Checkbox; 
-echo $chck32.Location = New-Object Drawing.Point 10,50; 
+echo $chck32.Location = New-Object Drawing.Point 0,30; 
 echo $chck32.Size = New-Object Drawing.Point 270,25; 
 echo $chck32.Text = 'Remove Telemetry/Data Collection'; 
 echo $chck32.TabIndex = 31; 
 echo $chck32.Checked = $true; 
 echo $chck32.Font = $Font;
-echo $groupBox2.controls.add^($chck32^); 
+echo $panel2.controls.add^($chck32^); 
 echo $chck32.add_click^({count_s}^)
 
 echo $chck33 = New-Object Windows.Forms.Checkbox; 
-echo $chck33.Location = New-Object Drawing.Point 10,75; 
+echo $chck33.Location = New-Object Drawing.Point 0,55; 
 echo $chck33.Size = New-Object Drawing.Point 270,25; 
 echo $chck33.Text = 'Disable PowerShell Telemetry'; 
 echo $chck33.TabIndex = 32; 
 echo $chck33.Checked = $true; 
 echo $chck33.Font = $Font;
-echo $groupBox2.controls.add^($chck33^); 
+echo $panel2.controls.add^($chck33^); 
 echo $chck33.add_click^({count_s}^)
 
 echo $chck34 = New-Object Windows.Forms.Checkbox; 
-echo $chck34.Location = New-Object Drawing.Point 10,100; 
+echo $chck34.Location = New-Object Drawing.Point 0,80; 
 echo $chck34.Size = New-Object Drawing.Point 270,25; 
 echo $chck34.Text = 'Disable Skype Telemetry'; 
 echo $chck34.TabIndex = 33; 
 echo $chck34.Checked = $true; 
 echo $chck34.Font = $Font;
-echo $groupBox2.controls.add^($chck34^); 
+echo $panel2.controls.add^($chck34^); 
 echo $chck34.add_click^({count_s}^)
 
 echo $chck35 = New-Object Windows.Forms.Checkbox; 
-echo $chck35.Location = New-Object Drawing.Point 10,125; 
+echo $chck35.Location = New-Object Drawing.Point 0,105; 
 echo $chck35.Size = New-Object Drawing.Point 270,25; 
 echo $chck35.Text = 'Disable Media Player Usage Reports'; 
 echo $chck35.TabIndex = 34; 
 echo $chck35.Checked = $true; 
 echo $chck35.Font = $Font;
-echo $groupBox2.controls.add^($chck35^); 
+echo $panel2.controls.add^($chck35^); 
 echo $chck35.add_click^({count_s}^)
 
 echo $chck36 = New-Object Windows.Forms.Checkbox; 
-echo $chck36.Location = New-Object Drawing.Point 10,150; 
+echo $chck36.Location = New-Object Drawing.Point 0,130; 
 echo $chck36.Size = New-Object Drawing.Point 270,25; 
 echo $chck36.Text = 'Disable Mozilla Telemetry'; 
 echo $chck36.TabIndex = 35; 
 echo $chck36.Checked = $true; 
 echo $chck36.Font = $Font;
-echo $groupBox2.controls.add^($chck36^); 
+echo $panel2.controls.add^($chck36^); 
 echo $chck36.add_click^({count_s}^)
 
 echo $chck37 = New-Object Windows.Forms.Checkbox; 
-echo $chck37.Location = New-Object Drawing.Point 10,175; 
+echo $chck37.Location = New-Object Drawing.Point 0,155; 
 echo $chck37.Size = New-Object Drawing.Point 270,25; 
 echo $chck37.Text = 'Disable Apps Use My Advertising ID'; 
 echo $chck37.TabIndex = 36; 
 echo $chck37.Checked = $true; 
 echo $chck37.Font = $Font;
-echo $groupBox2.controls.add^($chck37^); 
+echo $panel2.controls.add^($chck37^); 
 echo $chck37.add_click^({count_s}^)
 
 echo $chck38 = New-Object Windows.Forms.Checkbox; 
-echo $chck38.Location = New-Object Drawing.Point 10,200; 
+echo $chck38.Location = New-Object Drawing.Point 0,180; 
 echo $chck38.Size = New-Object Drawing.Point 270,25; 
 echo $chck38.Text = 'Disable Send Info About How I Write'; 
 echo $chck38.TabIndex = 37; 
 echo $chck38.Checked = $true; 
 echo $chck38.Font = $Font;
-echo $groupBox2.controls.add^($chck38^); 
+echo $panel2.controls.add^($chck38^); 
 echo $chck38.add_click^({count_s}^)
 
 echo $chck39 = New-Object Windows.Forms.Checkbox; 
-echo $chck39.Location = New-Object Drawing.Point 10,225; 
+echo $chck39.Location = New-Object Drawing.Point 0,205; 
 echo $chck39.Size = New-Object Drawing.Point 270,25; 
 echo $chck39.Text = 'Disable Handwriting Recognition'; 
 echo $chck39.TabIndex = 38; 
 echo $chck39.Checked = $true; 
 echo $chck39.Font = $Font;
-echo $groupBox2.controls.add^($chck39^); 
+echo $panel2.controls.add^($chck39^); 
 echo $chck39.add_click^({count_s}^)
 
 echo $chck40 = New-Object Windows.Forms.Checkbox; 
-echo $chck40.Location = New-Object Drawing.Point 10,250; 
+echo $chck40.Location = New-Object Drawing.Point 0,230; 
 echo $chck40.Size = New-Object Drawing.Point 270,25; 
 echo $chck40.Text = 'Disable Watson Malware Reports'; 
 echo $chck40.TabIndex = 39; 
 echo $chck40.Checked = $true; 
 echo $chck40.Font = $Font;
-echo $groupBox2.controls.add^($chck40^); 
+echo $panel2.controls.add^($chck40^); 
 echo $chck40.add_click^({count_s}^)
 
 echo $chck41 = New-Object Windows.Forms.Checkbox; 
-echo $chck41.Location = New-Object Drawing.Point 10,275; 
+echo $chck41.Location = New-Object Drawing.Point 0,255; 
 echo $chck41.Size = New-Object Drawing.Point 270,25; 
 echo $chck41.Text = 'Disable Malware Diagnostic Data'; 
 echo $chck41.TabIndex = 40; 
 echo $chck41.Checked = $true; 
 echo $chck41.Font = $Font;
-echo $groupBox2.controls.add^($chck41^); 
+echo $panel2.controls.add^($chck41^); 
 echo $chck41.add_click^({count_s}^)
 
 echo $chck42 = New-Object Windows.Forms.Checkbox; 
-echo $chck42.Location = New-Object Drawing.Point 10,300; 
+echo $chck42.Location = New-Object Drawing.Point 0,280; 
 echo $chck42.Size = New-Object Drawing.Point 270,25; 
 echo $chck42.Text = 'Disable Reporting to MS MAPS'; 
 echo $chck42.TabIndex = 41; 
 echo $chck42.Checked = $true; 
 echo $chck42.Font = $Font;
-echo $groupBox2.controls.add^($chck42^); 
+echo $panel2.controls.add^($chck42^); 
 echo $chck42.add_click^({count_s}^)
 
 echo $chck43 = New-Object Windows.Forms.Checkbox; 
-echo $chck43.Location = New-Object Drawing.Point 10,325; 
+echo $chck43.Location = New-Object Drawing.Point 0,305; 
 echo $chck43.Size = New-Object Drawing.Point 270,25; 
 echo $chck43.Text = 'Disable Spynet Defender Reporting'; 
 echo $chck43.TabIndex = 42; 
 echo $chck43.Checked = $true; 
 echo $chck43.Font = $Font;
-echo $groupBox2.controls.add^($chck43^); 
+echo $panel2.controls.add^($chck43^); 
 echo $chck43.add_click^({count_s}^)
 
 echo $chck44 = New-Object Windows.Forms.Checkbox; 
-echo $chck44.Location = New-Object Drawing.Point 10,350; 
+echo $chck44.Location = New-Object Drawing.Point 0,330; 
 echo $chck44.Size = New-Object Drawing.Point 270,25; 
 echo $chck44.Text = 'Do Not Send Malware Samples'; 
 echo $chck44.TabIndex = 43; 
 echo $chck44.Checked = $true; 
 echo $chck44.Font = $Font;
-echo $groupBox2.controls.add^($chck44^); 
+echo $panel2.controls.add^($chck44^); 
 echo $chck44.add_click^({count_s}^)
 
 echo $chck45 = New-Object Windows.Forms.Checkbox; 
-echo $chck45.Location = New-Object Drawing.Point 10,375; 
+echo $chck45.Location = New-Object Drawing.Point 0,355; 
 echo $chck45.Size = New-Object Drawing.Point 270,25; 
 echo $chck45.Text = 'Disable Sending Typing Samples'; 
 echo $chck45.TabIndex = 44; 
 echo $chck45.Checked = $true; 
 echo $chck45.Font = $Font;
-echo $groupBox2.controls.add^($chck45^); 
+echo $panel2.controls.add^($chck45^); 
 echo $chck45.add_click^({count_s}^)
 
 echo $chck46 = New-Object Windows.Forms.Checkbox; 
-echo $chck46.Location = New-Object Drawing.Point 10,400; 
+echo $chck46.Location = New-Object Drawing.Point 0,380; 
 echo $chck46.Size = New-Object Drawing.Point 270,25; 
 echo $chck46.Text = 'Disable Sending Contacts to MS'; 
 echo $chck46.TabIndex = 45; 
 echo $chck46.Checked = $true; 
 echo $chck46.Font = $Font;
-echo $groupBox2.controls.add^($chck46^); 
+echo $panel2.controls.add^($chck46^); 
 echo $chck46.add_click^({count_s}^)
 
 echo $chck47 = New-Object Windows.Forms.Checkbox; 
-echo $chck47.Location = New-Object Drawing.Point 10,425; 
+echo $chck47.Location = New-Object Drawing.Point 0,405; 
 echo $chck47.Size = New-Object Drawing.Point 270,25; 
 echo $chck47.Text = 'Disable Cortana'; 
 echo $chck47.TabIndex = 46; 
 echo $chck47.Checked = $true; 
 echo $chck47.Font = $Font;
-echo $groupBox2.controls.add^($chck47^); 
+echo $panel2.controls.add^($chck47^); 
 echo $chck47.add_click^({count_s}^)
 
 echo $chck48 = New-Object Windows.Forms.Checkbox; 
-echo $chck48.Location = New-Object Drawing.Point 10,25; 
+echo $chck48.Location = New-Object Drawing.Point 0,5; 
 echo $chck48.Size = New-Object Drawing.Point 270,25; 
 echo $chck48.Text = 'Show File Extensions in Explorer'; 
 echo $chck48.TabIndex = 47; 
 echo $chck48.Checked = $true; 
 echo $chck48.Font = $Font;
-echo $groupBox3.controls.add^($chck48^); 
+echo $panel3.controls.add^($chck48^); 
 echo $chck48.add_click^({count_v}^)
 
 echo $chck49 = New-Object Windows.Forms.Checkbox; 
-echo $chck49.Location = New-Object Drawing.Point 10,50; 
+echo $chck49.Location = New-Object Drawing.Point 0,30; 
 echo $chck49.Size = New-Object Drawing.Point 270,25; 
 echo $chck49.Text = 'Disable Transparency on Taskbar'; 
 echo $chck49.TabIndex = 48; 
 echo $chck49.Checked = $true; 
 echo $chck49.Font = $Font;
-echo $groupBox3.controls.add^($chck49^); 
+echo $panel3.controls.add^($chck49^); 
 echo $chck49.add_click^({count_v}^)
 
 echo $chck50 = New-Object Windows.Forms.Checkbox; 
-echo $chck50.Location = New-Object Drawing.Point 10,75; 
+echo $chck50.Location = New-Object Drawing.Point 0,55; 
 echo $chck50.Size = New-Object Drawing.Point 270,25; 
 echo $chck50.Text = 'Disable Windows Animations'; 
 echo $chck50.TabIndex = 49; 
 echo $chck50.Checked = $true; 
 echo $chck50.Font = $Font;
-echo $groupBox3.controls.add^($chck50^); 
+echo $panel3.controls.add^($chck50^); 
 echo $chck50.add_click^({count_v}^)
 
 echo $chck51 = New-Object Windows.Forms.Checkbox; 
-echo $chck51.Location = New-Object Drawing.Point 10,100; 
+echo $chck51.Location = New-Object Drawing.Point 0,80; 
 echo $chck51.Size = New-Object Drawing.Point 270,25; 
 echo $chck51.Text = 'Disable MRU lists ^(jump lists^)'; 
 echo $chck51.TabIndex = 50; 
 echo $chck51.Checked = $true; 
 echo $chck51.Font = $Font;
-echo $groupBox3.controls.add^($chck51^); 
+echo $panel3.controls.add^($chck51^); 
 echo $chck51.add_click^({count_v}^)
 
 echo $chck52 = New-Object Windows.Forms.Checkbox; 
-echo $chck52.Location = New-Object Drawing.Point 10,125; 
+echo $chck52.Location = New-Object Drawing.Point 0,105; 
 echo $chck52.Size = New-Object Drawing.Point 270,25; 
 echo $chck52.Text = 'Set Search Box to Icon Only'; 
 echo $chck52.TabIndex = 51; 
 echo $chck52.Checked = $true; 
 echo $chck52.Font = $Font;
-echo $groupBox3.controls.add^($chck52^);
+echo $panel3.controls.add^($chck52^);
 echo $chck52.add_click^({count_v}^)
 
 echo $chck53 = New-Object Windows.Forms.Checkbox; 
-echo $chck53.Location = New-Object Drawing.Point 10,150; 
+echo $chck53.Location = New-Object Drawing.Point 0,130; 
 echo $chck53.Size = New-Object Drawing.Point 270,25; 
 echo $chck53.Text = 'Explorer on Start on This PC'; 
 echo $chck53.TabIndex = 52; 
 echo $chck53.Checked = $true; 
 echo $chck53.Font = $Font;
-echo $groupBox3.controls.add^($chck53^); 
+echo $panel3.controls.add^($chck53^); 
 echo $chck53.add_click^({count_v}^)
 
 echo $chck54 = New-Object Windows.Forms.Checkbox; 
-echo $chck54.Location = New-Object Drawing.Point 10,25; 
+echo $chck54.Location = New-Object Drawing.Point 0,05; 
 echo $chck54.Size = New-Object Drawing.Point 250,25; 
 echo $chck54.Text = 'Remove Windows Game Bar/DVR'; 
 echo $chck54.TabIndex = 53; 
 echo $chck54.Checked = $true; 
 echo $chck54.Font = $Font;
-echo $groupBox4.controls.add^($chck54^);  
+echo $panel4.controls.add^($chck54^);  
 echo $chck54.add_click^({count_o}^)
 
 echo $chck55 = New-Object Windows.Forms.Checkbox; 
@@ -1170,23 +1200,23 @@ echo }^)
 echo $chck57.add_click^({count_p}^)
 
 echo $chck58 = New-Object Windows.Forms.Checkbox; 
-echo $chck58.Location = New-Object Drawing.Point 10,50; 
+echo $chck58.Location = New-Object Drawing.Point 0,30; 
 echo $chck58.Size = New-Object Drawing.Point 250,25; 
 echo $chck58.Text = 'Clean Temp/Cache/Prefetch/Logs'; 
 echo $chck58.TabIndex = 57; 
 echo $chck58.Checked = $true; 
 echo $chck58.Font = $Font;
-echo $groupBox4.controls.add^($chck58^); 
+echo $panel4.controls.add^($chck58^); 
 echo $chck58.add_click^({count_o}^)
 
 echo $chck59 = New-Object Windows.Forms.Checkbox; 
-echo $chck59.Location = New-Object Drawing.Point 10,150; 
+echo $chck59.Location = New-Object Drawing.Point 0,130; 
 echo $chck59.Size = New-Object Drawing.Point 250,25; 
 echo $chck59.Text = 'Remove News and Interests/Widgets'; 
 echo $chck59.TabIndex = 58; 
 echo $chck59.Checked = $false; 
 echo $chck59.Font = $Font;
-echo $groupBox4.controls.add^($chck59^); 
+echo $panel4.controls.add^($chck59^); 
 echo $chck59.add_click^({count_o}^)
 
 echo $chck60 = New-Object Windows.Forms.Checkbox; 
@@ -1220,13 +1250,13 @@ echo $chck62.Font = $Font;
 echo $groupBox5.controls.add^($chck62^); 
 
 echo $chck63 = New-Object Windows.Forms.Checkbox; 
-echo $chck63.Location = New-Object Drawing.Point 10,100; 
+echo $chck63.Location = New-Object Drawing.Point 0,80; 
 echo $chck63.Size = New-Object Drawing.Point 250,25; 
 echo $chck63.Text = 'Scan for Adware ^(AdwCleaner^)'; 
 echo $chck63.TabIndex = 62; 
 echo $chck63.Checked = $false; 
 echo $chck63.Font = $Font;
-echo $groupBox4.controls.add^($chck63^); 
+echo $panel4.controls.add^($chck63^); 
 echo $chck63.add_click^({count_o}^)
 
 echo $chck67 = New-Object Windows.Forms.Checkbox; 
@@ -1240,23 +1270,23 @@ echo $chck67.Font = $Font;
 echo $groupBox5.controls.add^($chck67^); 
 
 echo $chck68 = New-Object Windows.Forms.Checkbox; 
-echo $chck68.Location = New-Object Drawing.Point 10,125; 
+echo $chck68.Location = New-Object Drawing.Point 0,105; 
 echo $chck68.Size = New-Object Drawing.Point 250,25; 
 echo $chck68.Text = 'Clean WinSxS Folder'; 
 echo $chck68.TabIndex = 67; 
 echo $chck68.Checked = $false;
 echo $chck68.Font = $Font;
-echo $groupBox4.controls.add^($chck68^); 
+echo $panel4.controls.add^($chck68^); 
 echo $chck68.add_click^({count_o}^)
 
 echo $chck3 = New-Object Windows.Forms.Checkbox; 
-echo $chck3.Location = New-Object Drawing.Point 10,75;
+echo $chck3.Location = New-Object Drawing.Point 0,55;
 echo $chck3.Size = New-Object Drawing.Point 250,25; 
 echo $chck3.Text = 'Split Threshold for Svchost'; 
 echo $chck3.TabIndex = 2; 
 echo $chck3.Checked = $true;
 echo $chck3.Font = $Font;
-echo $groupBox4.controls.add^($chck3^); 
+echo $panel4.controls.add^($chck3^); 
 echo $chck3.add_click^({count_o}^)
 
 echo count_p;
@@ -1563,7 +1593,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%20.04.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%26.04.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
