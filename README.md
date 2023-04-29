@@ -20,7 +20,7 @@ Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/downl
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85984736/215550971-8c53f23b-fbd7-4143-a8da-aa0fa9b9f3aa.gif" width="600">
+<img src="https://user-images.githubusercontent.com/85984736/235310748-7f1f8adf-c411-445a-9432-a3ae659cdf78.gif" width="600">
 </p>
 Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
 
