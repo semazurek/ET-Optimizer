@@ -22,6 +22,13 @@ Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/downl
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/235310748-7f1f8adf-c411-445a-9432-a3ae659cdf78.gif" width="600">
 </p>
+
+```diff
+
+# It's recommended to make a own extra backup. #
+# Some antiviruses may falsely detecting it as a threat. #
+
+```
 Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
 
 ## Benchmark
