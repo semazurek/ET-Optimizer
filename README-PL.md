@@ -22,6 +22,14 @@ Pobierz: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/235310748-7f1f8adf-c411-445a-9432-a3ae659cdf78.gif" width="600">
 </p>
+
+```diff
+
+# Zaleca się wykonanie własnej dodatkowej kopii zapasowej. #
+
+# Niektóre programy antywirusowe mogą fałszywie wykrywać to jako zagrożenie. #
+
+```
 Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
 
 ## Test wydajności
