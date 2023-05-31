@@ -26,7 +26,6 @@ Pobierz: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.
 ```diff
 
 # Zaleca się wykonanie własnej dodatkowej kopii zapasowej. #
-
 # Niektóre programy antywirusowe mogą fałszywie wykrywać to jako zagrożenie. #
 
 ```
