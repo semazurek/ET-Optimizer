@@ -1360,6 +1360,7 @@ echo $extraFormB10 = New-Object System.Windows.Forms.Button;
 echo $extraFormB11 = New-Object System.Windows.Forms.Button; 
 echo $extraFormB12 = New-Object System.Windows.Forms.Button; 
 echo $extraFormB13 = New-Object System.Windows.Forms.Button; 
+echo $extraFormB14 = New-Object System.Windows.Forms.Button; 
 echo $extraForm.MinimizeBox = $false; 
 echo $extraForm.MaximizeBox = $false; 
 echo $extraForm.TopMost = $true; 
@@ -1367,7 +1368,7 @@ echo $extraForm.AutoSizeMode = 'GrowAndShrink';
 echo $extraForm.FormBorderStyle = 'FixedDialog'; 
 echo $extraForm.AcceptButton = $extraFormExit; 
 echo $extraForm.CancelButton = $extraFormExit; 
-echo $extraForm.ClientSize = '200, 420'; 
+echo $extraForm.ClientSize = '200, 450'; 
 echo $extraForm.ShowInTaskBar = $false; 
 echo $extraForm.FlatStyle = 'Flat'
 echo $extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml^($mainbackcolor^)
@@ -1492,6 +1493,13 @@ echo $extraFormB13.add_click^({echo Windows_License_Key: $licensekey ^> %program
 echo $extraFormB13.FlatStyle = 'Flat' 
 echo $extraForm.Controls.Add^($extraFormB13^); 
 
+echo $extraFormB14.Location = '25, 405'; 
+echo $extraFormB14.Size = New-Object Drawing.Point 150,25; 
+echo $extraFormB14.Text = 'Reboot to BIOS';
+echo $extraFormB14.add_click^({shutdown /r /fw /t 1}^); 
+echo $extraFormB14.FlatStyle = 'Flat' 
+echo $extraForm.Controls.Add^($extraFormB14^);
+
 echo [void]$extraForm.ShowDialog^(^)
 echo }; 
 
@@ -1603,7 +1611,7 @@ echo %b%                  ╔═════════════════
 echo %b%                  ║ [%wh%-%b%] %wh%Version: %b%%version:~9%                        %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Build: %b%Public                       %b%║
 echo %b%                  ║ [%wh%-%b%] %wh%Created by: %b%Rikey                   %b%║
-echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%26.04.2023             %b%║
+echo %b%                  ║ [%wh%-%b%] %wh%Last update: %b%02.06.2023             %b%║
 echo %b%                  ╚═════════════════════════════════════════╝%wh%
 echo.
 echo.                        %grey%- Always have a %rd%backup %grey%plan. -
