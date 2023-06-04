@@ -1401,7 +1401,6 @@ Write-Host '                          [-] Last update: 04.06.2023               
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
-Sleep 1
 $form.ShowDialog();
 
 # Counter of tasks
