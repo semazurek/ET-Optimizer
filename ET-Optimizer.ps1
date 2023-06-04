@@ -2404,8 +2404,8 @@ cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resou
 
 Write-Host ' [Clean] Windows Font Cache ' -F yellow -B black
 
-net stop FontCache | Out-Null
-net stop FontCache3.0.0.0 | Out-Null
+cmd /c net stop FontCache >NUL 2>nul
+cmd /c net stop FontCache3.0.0.0 >NUL 2>nul
 cmd /c Del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.dat" /F /Q /S >NUL 2>nul
 cmd /c Del "%WinDir%\SysNative\FNTCACHE.DAT" /F /Q /S >NUL 2>nul
 cmd /c Del "%WinDir%\System32\FNTCACHE.DAT" /F /Q /S >NUL 2>nul
