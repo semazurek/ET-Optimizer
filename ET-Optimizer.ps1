@@ -11,8 +11,8 @@ if ((Test-Admin) -eq $false)  {
         # tried to elevate, did not work, aborting
 		#MsgBox information
 		Add-Type -AssemblyName PresentationCore,PresentationFramework
-		$msgBody = "You cannot run E.T. Script.`r`n Try PowerShell command(as Admin): set-executionpolicy remotesigned"
-		$msgTitle = "ERROR"
+		$msgBody = "You need to enable execution of PowerShell scripts.`r`nTry PowerShell command (as Administrator):`r`n`n set-executionpolicy remotesigned"
+		$msgTitle = "E.T. Permission Error"
 		$msgButton = 'OK'
 		$msgImage = 'Error'
 		$Result = [System.Windows.MessageBox]::Show($msgBody,$msgTitle,$msgButton,$msgImage)
