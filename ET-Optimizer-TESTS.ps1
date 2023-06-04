@@ -2120,8 +2120,8 @@ $counter++;
 Write-Host ' [Setting] Services to: Disable Mode ' -F blue -B black
 $toDisable = @('DiagTrack','diagnosticshub.standardcollector.service','dmwappushservice','RemoteRegistry','RemoteAccess','SCardSvr','SCPolicySvc','fax','WerSvc','NvTelemetryContainer','gadjservice','AdobeARMservice','PSI_SVC_2','lfsvc','WalletService','RetailDemo','SEMgrSvc','diagsvc','AJRouter','amdfendr','amdfendrmgr')
 foreach ($b in $toDisable) {
-   sc stop $b | Out-Null
-   sc config $b start= disabled  | Out-Null
+   cmd /c sc stop $b >nul 2>nul
+   cmd /c sc config $b start= disabled >nul 2>nul
 }
 #Disable Network Diagnostic Usage Service
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG_DWORD /d 4 /f | Out-Null
@@ -2130,7 +2130,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG
 Write-Host ' [Setting] Services to: Manuall Mode ' -F blue -B black
 $toManuall = @('BITS','SamSs','TapiSrv','seclogon','wuauserv','PhoneSvc','lmhosts','iphlpsvc','gupdate','gupdatem','edgeupdate','edgeupdatem','MapsBroker','PnkBstrA','brave','bravem','asus','asusm','adobeupdateservice','adobeflashplayerupdatesvc','WSearch')
 foreach ($c in $toManuall) {
-   sc config $c start= demand | Out-Null
+   cmd /c sc config $c start= demand >nul 2>nul
 }
 engine;};
 
