@@ -2409,8 +2409,8 @@ net stop FontCache3.0.0.0 | Out-Null
 cmd /c Del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.dat" /F /Q /S >NUL 2>nul
 cmd /c Del "%WinDir%\SysNative\FNTCACHE.DAT" /F /Q /S >NUL 2>nul
 cmd /c Del "%WinDir%\System32\FNTCACHE.DAT" /F /Q /S >NUL 2>nul
-net start FontCache | Out-Null
-net start FontCache3.0.0.0 | Out-Null
+cmd /c net start FontCache >NUL 2>nul
+cmd /c net start FontCache3.0.0.0 >NUL 2>nul
 
 Write-Host ' [Clean] Windows Icon Cache ' -F yellow -B black
 
