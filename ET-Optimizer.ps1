@@ -18,6 +18,8 @@ if ((Test-Admin) -eq $false)  {
 # Window CLI size
 [console]::WindowWidth=80
 [console]::WindowHeight=23
+[console]::BufferWidth = [console]::WindowWidth
+
 
 #Window CLI-Console show/hide
 Add-Type -Name Window -Namespace Console -MemberDefinition '
