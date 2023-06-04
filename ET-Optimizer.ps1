@@ -9,6 +9,13 @@ function Test-Admin {
 if ((Test-Admin) -eq $false)  {
     if ($elevated) {
         # tried to elevate, did not work, aborting
+		#MsgBox information
+		Add-Type -AssemblyName PresentationCore,PresentationFramework
+		$msgBody = "You cannot run E.T. Script.`r`n Try PowerShell command(as Admin): set-executionpolicy remotesigned"
+		$msgTitle = "ERROR"
+		$msgButton = 'OK'
+		$msgImage = 'Error'
+		$Result = [System.Windows.MessageBox]::Show($msgBody,$msgTitle,$msgButton,$msgImage)
     } else {
         Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
     }
