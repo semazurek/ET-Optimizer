@@ -1515,6 +1515,13 @@ cmd /c powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
 cmd /c powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d | Out-Null
 cmd /c powercfg /X standby-timeout-ac 0 | Out-Null
 cmd /c powercfg /X standby-timeout-dc 0 | Out-Null
+
+powercfg -setactive scheme_min | Out-Null
+powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
+powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d | Out-Null
+powercfg /X standby-timeout-ac 0 | Out-Null
+powercfg /X standby-timeout-dc 0 | Out-Null
+
 engine;};
 
 function chck4{
