@@ -1660,7 +1660,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameter
 #All Logical Cores Enabled
 $NOLP = wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]"
 
-cmd /c "bcdedit /set {current} numproc 8" | Out-Null
+cmd /c "bcdedit /set {current} numproc $NOLP" | Out-Null
 
 # AMD/Intel CPU Priority
 if (wmic cpu get name | findstr /r "Intel") {
