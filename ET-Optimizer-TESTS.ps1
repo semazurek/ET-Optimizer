@@ -50,7 +50,7 @@ public static extern bool ShowWindow(IntPtr hWnd, Int32 nCmdShow);
     # ShowDefault = 10,
     # ForceMinimized = 11
 
-[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
+# [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 
 
 #Window CLI color
@@ -113,7 +113,7 @@ Add-Type -AssemblyName System.Windows.Forms
 [System.Windows.Forms.Application]::EnableVisualStyles()
 
 # Continue if error
-$ErrorActionPreference= 'silentlycontinue'
+$ErrorActionPreference= "SilentlyContinue";
 
 $mainforecolor="#eeeeee"
 $mainbackcolor="#252525"
@@ -1410,6 +1410,7 @@ Write-Host '                          [-] Last update: 04.06.2023               
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
+[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 $form.ShowDialog();
 
 # Counter of tasks
