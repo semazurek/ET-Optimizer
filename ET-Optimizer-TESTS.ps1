@@ -1523,6 +1523,7 @@ cmd /c if exist %programdata%\ET\chck4.lbool del %programdata%\ET\chck4.lbool
 $counter++;
 Write-Host ' [Setting] Dual boot timeout 3sec ' -F blue -B black
 bcdedit /set timeout 3 | Out-Null
+bcdedit /timeout 3 | Out-Null
 engine;};
 
 function chck5{
@@ -1652,7 +1653,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameter
 #All Logical Cores Enabled
 $NOLP = wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]"
 
-bcdedit /set {current} numproc $NOLP | Out-Null
+cmd /c "bcdedit /set {current} numproc 8" | Out-Null
 
 # AMD/Intel CPU Priority
 if (wmic cpu get name | findstr /r "Intel") {
