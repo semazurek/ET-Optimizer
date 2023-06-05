@@ -11,13 +11,20 @@ if ((Test-Admin) -eq $false)  {
         # tried to elevate, did not work, aborting
 		#MsgBox information
 		Add-Type -AssemblyName PresentationCore,PresentationFramework
-		$msgBody = "You need to enable execution of PowerShell scripts.`r`nTry PowerShell command (as Administrator):`r`n`n set-executionpolicy remotesigned"
+		$msgBody = "Run the script as an Administrator."
 		$msgTitle = "E.T. Permission Error"
 		$msgButton = 'OK'
 		$msgImage = 'Error'
 		$Result = [System.Windows.MessageBox]::Show($msgBody,$msgTitle,$msgButton,$msgImage)
     } else {
+		if (Get-Item -Path $Env:programdata\Run-ET.log) {
+			Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
+		} 
+		else 
+		{
+		Start-Process powershell.exe "set-executionpolicy remotesigned" -Verb RunAs 
         Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
+		}
     }
     exit
 }
@@ -1406,10 +1413,11 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 04.06.2023                '
+Write-Host '                          [-] Last update: 05.06.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
+Write-Output "The script has already been initialized once" > $Env:programdata\Run-ET.log
 [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 $form.ShowDialog();
 
