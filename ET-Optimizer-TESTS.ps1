@@ -1687,8 +1687,8 @@ cmd /c if exist %programdata%\ET\chck66.lbool del %programdata%\ET\chck66.lbool
 #	Disable Spectre/Meltdown Protection
 $counter++;
 Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black
-	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 1 /f | Out-Null
-	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 1 /f | Out-Null
+	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f | Out-Null
+	reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f | Out-Null
 engine;};
 
 function chck16{
@@ -1835,8 +1835,6 @@ cmd /c if exist %programdata%\ET\chck29.lbool del %programdata%\ET\chck29.lbool
 $counter++;
 Write-Host ' [Disable] Process Mitigation ' -F darkgray -B black
 Set-ProcessMitigation -System -Disable CFG
-cmd /c reg add "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationOptions" /t REG_BINARY /d "!mitigation_mask!" /f | Out-Null
-cmd /c reg add "HKLM\System\CurrentControlSet\Control\Session Manager\kernel" /v "MitigationAuditOptions" /t REG_BINARY /d "!mitigation_mask!" /f | Out-Null
 engine;};
 
 function chck30{
