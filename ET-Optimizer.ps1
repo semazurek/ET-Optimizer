@@ -1932,8 +1932,8 @@ reg add "HKCU\SOFTWARE\Microsoft\Office\15.0\Common" /v "QMEnabled" /t REG_DWORD
 reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Common" /v "QMEnabled" /t REG_DWORD /d 0 /f | Out-Null
 reg add "HKCU\SOFTWARE\Microsoft\Office\17.0\Common" /v "QMEnabled" /t REG_DWORD /d 0 /f | Out-Null
 # VStudio Code Telemetry
-sc stop VSStandardCollectorService150 | Out-Null
-sc config VSStandardCollectorService150 start= disabled  | Out-Null
+cmd /c sc stop VSStandardCollectorService150 | Out-Null
+cmd /c sc config VSStandardCollectorService150 start= disabled  | Out-Null
 reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\14.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f | Out-Null
 reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\15.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f | Out-Null
 reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\16.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f | Out-Null
