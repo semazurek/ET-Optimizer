@@ -1382,7 +1382,7 @@ $private:menuItem.Name =$ItemName;
 $private:menuItem.Text =$ItemText; 
 if ($ScriptBlock -ne $null) { $private:menuItem.add_Click(([System.EventHandler]$handler=` $ScriptBlock));}; 
 if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Value).Items.Add($private:menuItem);} return $private:menuItem; }; 
-function Backup{Enable-ComputerRestore -Drive C:; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS" }; 
+function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive C:; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null}; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
 $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml($menubackcolor);
 $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
@@ -1412,7 +1412,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 05.06.2023                '
+Write-Host '                          [-] Last update: 06.06.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
