@@ -1380,7 +1380,7 @@ $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit); 
 
 # Hello World
-#cls
+cls
 $versionShort = $versionRAW.substring(9)
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host '';
 Write-Host '                                    ______  ______'
@@ -1397,7 +1397,7 @@ Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
 Write-Output "The script has already been initialized once" > $Env:programdata\Run-ET.log
-#[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
+[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 $form.ShowDialog();
 
 # Counter of tasks
