@@ -90,28 +90,7 @@ chcp 65001
 # https://github.com/semazurek/ET-Optimizer
 # https://www.paypal.com/paypalme/rikey
 
-
-# Winget update aplications module
-Write-Output " @echo off" > $Env:programdata\winget-et.bat
-Write-Output " chcp 65001" >> $Env:programdata\winget-et.bat
-Write-Output " cls" >> $Env:programdata\winget-et.bat
-Write-Output " title ET Update Application (Winget)" >> $Env:programdata\winget-et.bat
-Write-Output " Winget upgrade" >> $Env:programdata\winget-et.bat
-Write-Output " Winget upgrade --all" >> $Env:programdata\winget-et.bat
-Write-Output " Winget upgrade --all" >> $Env:programdata\winget-et.bat
-
-# Restart Network Settings Module (Extras)
-Write-Output " mode con cols=80 lines=30" > $Env:programdata\restart-network-settings.bat
-Write-Output " chcp 65001" >> $Env:programdata\restart-network-settings.bat
-Write-Output " cls" >> $Env:programdata\restart-network-settings.bat
-Write-Output " netsh winsock reset" >> $Env:programdata\restart-network-settings.bat
-Write-Output " netsh int ipv4 reset" >> $Env:programdata\restart-network-settings.bat
-Write-Output " netsh int ipv6 reset" >> $Env:programdata\restart-network-settings.bat
-Write-Output " ipconfig /release" >> $Env:programdata\restart-network-settings.bat
-Write-Output " ipconfig /renew" >> $Env:programdata\restart-network-settings.bat
-Write-Output " ipconfig /flushdns" >> $Env:programdata\restart-network-settings.bat
-
-$versionPS="E.T. ver 5.3   -   "+$ProcessorType+", "+[math]::round($RAMGet)+" GB RAM";
+$versionPS="E.T. ver 5.3   -   "+$ProcessorType+" "+[math]::round($RAMGet)+" GB RAM";
 $versionRAW="E.T. ver 5.3"
 $HOST.UI.RAWUI.WINDOWTITLE = $versionRAW
 [reflection.assembly]::LoadWithPartialName( 'System.Windows.Forms'); 
@@ -200,7 +179,7 @@ Foreach ($control in $groupBox5.Controls){
 $form.close()
 }; 
 $form= New-Object Windows.Forms.Form; 
-$form.Size = New-Object System.Drawing.Size(895,505); 
+$form.Size = New-Object System.Drawing.Size(895,500); 
 $form.StartPosition = 'CenterScreen'; 
 $form.FormBorderStyle = 'FixedDialog'; 
 $form.Text = $versionPS; 
@@ -272,6 +251,7 @@ count_o;
 $form.controls.add($B_checkall);
 $B_uncheckall = New-Object Windows.Forms.Button; 
 $B_uncheckall.text = 'Unselect All'; 
+$B_uncheckall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_uncheckall.Location = New-Object Drawing.Point 510,400; 
 $B_uncheckall.Size = New-Object Drawing.Point 140,50;
 $B_uncheckall.FlatStyle = 'Flat'
@@ -1346,7 +1326,7 @@ $extraForm.Controls.Add($extraFormB10);
 $extraFormB11.Location = '25, 315'; 
 $extraFormB11.Size = New-Object Drawing.Point 150,25;
 $extraFormB11.Text = 'Reset Network'; 
-$extraFormB11.add_click({start C:\ProgramData\restart-network-settings.bat});
+$extraFormB11.add_click({netsh winsock reset;netsh int ipv4 reset;netsh int ipv6 reset;ipconfig /release;ipconfig /renew;ipconfig /flushdns});
 $extraFormB11.FlatStyle = 'Flat'
 $extraForm.Controls.Add($extraFormB11); 
 $extraFormB11.add_MouseHover({
@@ -1356,7 +1336,7 @@ $tooltipEB11.SetToolTip($extraFormB11, 'This option will reset any internet sett
 $extraFormB12.Location = '25, 345'; 
 $extraFormB12.Size = New-Object Drawing.Point 150,25; 
 $extraFormB12.Text = 'Update Applications (Winget)'; 
-$extraFormB12.add_click({start C:\ProgramData\winget-et.bat}); 
+$extraFormB12.add_click({Winget upgrade --all}); 
 $extraFormB12.FlatStyle = 'Flat' 
 $extraForm.Controls.Add($extraFormB12); 
 $extraFormB12.add_MouseHover({
@@ -1400,7 +1380,7 @@ $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit); 
 
 # Hello World
-cls
+#cls
 $versionShort = $versionRAW.substring(9)
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host '';
 Write-Host '                                    ______  ______'
@@ -1412,12 +1392,12 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 06.06.2023                '
+Write-Host '                          [-] Last update: 07.06.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
 Write-Output "The script has already been initialized once" > $Env:programdata\Run-ET.log
-[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
+#[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 $form.ShowDialog();
 
 # Counter of tasks
