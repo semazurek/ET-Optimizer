@@ -15,9 +15,13 @@ Last tested/updated on:
 <li>Windows 8.1 Build 9600 (partial support)</li>
 </ul> 
 </br>
-Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> or <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.exe" target="_blank">ET-Optimizer.exe</a></br></br>
-
+Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> or <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.exe" target="_blank">ET-Optimizer.exe</a></br>
+Old Stable (ver 5.2): <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.2/ET-Optimizer.bat" target="_blank">ET-Optimizer.bat</a></br></br>
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
+</br></br>
+
+
+
 
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/235310748-7f1f8adf-c411-445a-9432-a3ae659cdf78.gif" width="600">
