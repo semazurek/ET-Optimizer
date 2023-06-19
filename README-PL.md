@@ -28,6 +28,7 @@ Starsza wersja stabilna (ver 5.2): <a href="https://github.com/semazurek/ET-Opti
 
 # Zaleca się wykonanie własnej dodatkowej kopii zapasowej. #
 # Niektóre programy antywirusowe mogą fałszywie wykrywać to jako zagrożenie. #
+# Zalecane jest wyłączenie antywirusa w trakcie działania. #
 
 ```
 Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
