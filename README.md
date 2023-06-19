@@ -31,6 +31,7 @@ Old Stable (ver 5.2): <a href="https://github.com/semazurek/ET-Optimizer/release
 
 # It's recommended to make a own extra backup. #
 # Some antiviruses may falsely detecting it as a threat. #
+# It is recommended to disable the antivirus while it is running. #
 
 ```
 Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
