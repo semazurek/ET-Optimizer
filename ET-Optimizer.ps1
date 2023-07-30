@@ -11,7 +11,7 @@ if ((Test-Admin) -eq $false)  {
         # tried to elevate, did not work, aborting
 		#MsgBox information
 		Add-Type -AssemblyName PresentationCore,PresentationFramework
-		$msgBody = "Run the script as an Administrator."
+		$msgBody = "Run the script as an Administrator or type command: Set-ExecutionPolicy RemoteSigned"
 		$msgTitle = "E.T. Permission Error"
 		$msgButton = 'OK'
 		$msgImage = 'Error'
@@ -22,7 +22,7 @@ if ((Test-Admin) -eq $false)  {
 		} 
 		else 
 		{
-		Start-Process powershell.exe "set-executionpolicy remotesigned" -Verb RunAs 
+		#Start-Process powershell.exe "set-executionpolicy remotesigned" -Verb RunAs 
         Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
 		}
     }
@@ -1175,6 +1175,10 @@ count_v;
 count_s;
 count_o;
 
+# Arguments off ET.ps1 /auto
+$param1=$args[0]
+if ($param1 -eq "/auto" -or $param1 -eq "-auto") {do_start;}
+
 function About {
 $aboutForm = New-Object System.Windows.Forms.Form; 
 $aboutFormExit = New-Object System.Windows.Forms.Button; 
@@ -1392,7 +1396,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 07.06.2023                '
+Write-Host '                          [-] Last update: 30.07.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -1847,27 +1851,32 @@ cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement P
 cmd /c schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable | Out-Null
-cmd /c schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable | Out-Null
-cmd /c schtasks /Change /TN "\Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable | Out-Null
+cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable | Out-Null
+cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\Office 16 Subscription Heartbeat" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable | Out-Null
 cmd /c schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable | Out-Null
 cmd /c schtasks /Change /TN "CCleaner Update" /Disable | Out-Null
-cmd /c schtasks /Change /TN "CCleanerSkipUAC - %username%" /Disable | Out-Null
+cmd /c schtasks /Change /TN "CCleanerCrashReportings" /Disable | Out-Null
+cmd /c schtasks /Change /TN "CCleanerSkipUAC - $env:username" /Disable | Out-Null
+cmd /c schtasks /Change /TN "updater" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Adobe Acrobat Update Task" /Disable | Out-Null
+cmd /c schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineCore" /Disable | Out-Null
+cmd /c schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineUA" /Disable | Out-Null
+cmd /c schtasks /Change /TN "MiniToolPartitionWizard" /Disable | Out-Null
 cmd /c schtasks /Change /TN "AMDLinkUpdate" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable | Out-Null
 cmd /c schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable | Out-Null
 cmd /c schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable | Out-Null
 cmd /c schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable | Out-Null
-schtasks /DELETE /TN "AMDInstallLauncher" /f | Out-Null
-schtasks /DELETE /TN "AMDLinkUpdate" /f | Out-Null
-schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f | Out-Null
-schtasks /DELETE /TN "DUpdaterTask" /f | Out-Null
-schtasks /DELETE /TN "ModifyLinkUpdate" /f | Out-Null
+cmd /c schtasks /DELETE /TN "AMDInstallLauncher" /f | Out-Null
+cmd /c schtasks /DELETE /TN "AMDLinkUpdate" /f | Out-Null
+cmd /c schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f | Out-Null
+cmd /c schtasks /DELETE /TN "DUpdaterTask" /f | Out-Null
+cmd /c schtasks /DELETE /TN "ModifyLinkUpdate" /f | Out-Null
 engine;};
 
 function chck32{
@@ -2122,7 +2131,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG
 
 # Manuall
 Write-Host ' [Setting] Services to: Manuall Mode ' -F blue -B black
-$toManuall = @('BITS','SamSs','TapiSrv','seclogon','wuauserv','PhoneSvc','lmhosts','iphlpsvc','gupdate','gupdatem','edgeupdate','edgeupdatem','MapsBroker','PnkBstrA','brave','bravem','asus','asusm','adobeupdateservice','adobeflashplayerupdatesvc','WSearch')
+$toManuall = @('BITS','SamSs','TapiSrv','seclogon','wuauserv','PhoneSvc','lmhosts','iphlpsvc','gupdate','gupdatem','edgeupdate','edgeupdatem','MapsBroker','PnkBstrA','brave','bravem','asus','asusm','adobeupdateservice','adobeflashplayerupdatesvc','WSearch','CCleanerPerformanceOptimizerService')
 foreach ($c in $toManuall) {
    cmd /c sc config $c start= demand | Out-Null
 }
