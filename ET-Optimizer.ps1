@@ -1177,7 +1177,7 @@ count_o;
 
 # Arguments off ET.ps1 /auto
 $param1=$args[0]
-if ($param1 -eq "/auto" -or $param1 -eq "-auto") {do_start;}
+if ($param1 -eq "/auto" -or $param1 -like "*auto") {do_start;}
 
 function About {
 $aboutForm = New-Object System.Windows.Forms.Form; 
