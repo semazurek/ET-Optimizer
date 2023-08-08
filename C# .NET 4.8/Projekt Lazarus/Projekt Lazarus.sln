@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projekt Lazarus", "Projekt Lazarus.csproj", "{BCF16C94-0691-4249-A449-3A821E116FDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCF16C94-0691-4249-A449-3A821E116FDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF16C94-0691-4249-A449-3A821E116FDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF16C94-0691-4249-A449-3A821E116FDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF16C94-0691-4249-A449-3A821E116FDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {27817AE2-0D2C-42C9-AC20-AAABF6832C98}
+	EndGlobalSection
+EndGlobal
