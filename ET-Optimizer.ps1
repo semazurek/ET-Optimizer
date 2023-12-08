@@ -1799,7 +1799,7 @@ $counter++;
 Write-Host ' [Disable] Unnecessary components ' -F darkgray -B black
 $components = @('Printing-PrintToPDFServices-Features','Printing-XPSServices-Features','Xps-Foundation-Xps-Viewer')
 foreach ($a in $components) {
-disable-windowsoptionalfeature -online -featureName  -NoRestart | Out-Null
+disable-windowsoptionalfeature -online -featureName $a -NoRestart | Out-Null
 }
 engine;};
 
