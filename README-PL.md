@@ -15,14 +15,11 @@ Ostatnio testowane/aktualizowane na:
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
 </ul> 
 </br>
-Uruchom PowerShell jako Administrator:
 
+Pobierz: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> Komenda przed uruchomieniem .ps1: ```Set-ExecutionPolicy RemoteSigned```</br>
 ```PowerShell
 iwr -useb https://raw.githubusercontent.com/semazurek/ET-Optimizer/master/ET-Optimizer.ps1 | iex
 ```
-
-Pobierz: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> Komenda przed uruchomieniem .ps1: ```Set-ExecutionPolicy RemoteSigned```</br>
-Starsza wersja (ver 5.2): <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.2/ET-Optimizer.bat" target="_blank">ET-Optimizer.bat</a></br></br>
 
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
