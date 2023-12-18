@@ -62,6 +62,7 @@ public static extern bool ShowWindow(IntPtr hWnd, Int32 nCmdShow);
 
 #Window CLI color
 $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
+cls
 
 # System Information function
 $ProcessorType=Get-WMIObject win32_Processor | select Name | findstr /c:AMD /c:Intel
@@ -1396,7 +1397,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 30.07.2023                '
+Write-Host '                          [-] Last update: 18.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -1493,17 +1494,17 @@ cmd /c if exist %programdata%\ET\chck2.lbool del %programdata%\ET\chck2.lbool
 # Setting power option to high/ultimate performance
 $counter++;
 Write-Host ' [Setting] Power option to ultimate performance ' -F blue -B black
-cmd /c powercfg -setactive scheme_min | Out-Null
-cmd /c powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
-cmd /c powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d | Out-Null
-cmd /c powercfg /X standby-timeout-ac 0 | Out-Null
-cmd /c powercfg /X standby-timeout-dc 0 | Out-Null
+cmd /c powercfg -setactive scheme_min >$null 2>$null
+cmd /c powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >$null 2>$null
+cmd /c powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d >$null 2>$null
+cmd /c powercfg /X standby-timeout-ac 0 >$null 2>$null
+cmd /c powercfg /X standby-timeout-dc 0 >$null 2>$null
 
-powercfg -setactive scheme_min | Out-Null
-powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 | Out-Null
-powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d | Out-Null
-powercfg /X standby-timeout-ac 0 | Out-Null
-powercfg /X standby-timeout-dc 0 | Out-Null
+powercfg -setactive scheme_min >$null 2>$null
+powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 >$null 2>$null
+powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d >$null 2>$null
+powercfg /X standby-timeout-ac 0 >$null 2>$null
+powercfg /X standby-timeout-dc 0 >$null 2>$null
 
 engine;};
 
@@ -1768,8 +1769,8 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f | Out-Null
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f | Out-Null
 reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f | Out-Null
-cmd /c reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f >NUL 2>nul
-cmd /c reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f >NUL 2>nul
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f >$null 2>$null
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f >$null 2>$null
 engine;};
 
 function chck25{
@@ -1808,7 +1809,7 @@ cmd /c if exist %programdata%\ET\chck28.lbool del %programdata%\ET\chck28.lbool
 # Setting Windows Defender Scheduled Scan from highest to normal privileges (CPU % high usage)
 $counter++;
 Write-Host ' [Setting] Windows Defender Scheduled Scan from highest to normal privileges ' -F blue -B black
-cmd /c schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /RL LIMITED | Out-Null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /RL LIMITED >$null 2>$null
 engine;};
 
 function chck29{
@@ -1837,46 +1838,46 @@ cmd /c if exist %programdata%\ET\chck31.lbool del %programdata%\ET\chck31.lbool
 # SCHEDULED TASKS tweaks (Updates, Telemetry etc)
 $counter++;
 Write-Host ' [Disable] SCHEDULED TASKS tweaks (Updates, Telemetry etc) ' -F darkgray -B black
-cmd /c schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvent" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Uploader" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\Office 16 Subscription Heartbeat" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable | Out-Null
-cmd /c schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable | Out-Null
-cmd /c schtasks /Change /TN "CCleaner Update" /Disable | Out-Null
-cmd /c schtasks /Change /TN "CCleanerCrashReportings" /Disable | Out-Null
-cmd /c schtasks /Change /TN "CCleanerSkipUAC - $env:username" /Disable | Out-Null
-cmd /c schtasks /Change /TN "updater" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Adobe Acrobat Update Task" /Disable | Out-Null
-cmd /c schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineCore" /Disable | Out-Null
-cmd /c schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineUA" /Disable | Out-Null
-cmd /c schtasks /Change /TN "MiniToolPartitionWizard" /Disable | Out-Null
-cmd /c schtasks /Change /TN "AMDLinkUpdate" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable | Out-Null
-cmd /c schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable | Out-Null
-cmd /c schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable | Out-Null
-cmd /c schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable | Out-Null
-cmd /c schtasks /DELETE /TN "AMDInstallLauncher" /f | Out-Null
-cmd /c schtasks /DELETE /TN "AMDLinkUpdate" /f | Out-Null
-cmd /c schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f | Out-Null
-cmd /c schtasks /DELETE /TN "DUpdaterTask" /f | Out-Null
-cmd /c schtasks /DELETE /TN "ModifyLinkUpdate" /f | Out-Null
+cmd /c schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvent" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Uploader" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\Office 16 Subscription Heartbeat" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "CCleaner Update" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "CCleanerCrashReportings" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "CCleanerSkipUAC - $env:username" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "updater" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Adobe Acrobat Update Task" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineCore" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineUA" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "MiniToolPartitionWizard" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "AMDLinkUpdate" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable >$null 2>$null
+cmd /c schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable >$null 2>$null
+cmd /c schtasks /DELETE /TN "AMDInstallLauncher" /f >$null 2>$null
+cmd /c schtasks /DELETE /TN "AMDLinkUpdate" /f >$null 2>$null
+cmd /c schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f >$null 2>$null
+cmd /c schtasks /DELETE /TN "DUpdaterTask" /f >$null 2>$null
+cmd /c schtasks /DELETE /TN "ModifyLinkUpdate" /f >$null 2>$null
 engine;};
 
 function chck32{
@@ -1941,8 +1942,8 @@ reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "ChromeCleanupEnabled" /t REG_
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "ChromeCleanupReportingEnabled" /t REG_SZ /d 0 /f | Out-Null
 reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "MetricsReportingEnabled" /t REG_SZ /d 0 /f | Out-Null
 # CCleaner Health Check / Monitoring etc
-cmd /c taskkill /f /im ccleaner.exe | Out-Null
-cmd /c taskkill /f /im ccleaner64.exe | Out-Null
+cmd /c taskkill /f /im ccleaner.exe >$null 2>$null
+cmd /c taskkill /f /im ccleaner64.exe >$null 2>$null
 reg add "HKCU\Software\Piriform\CCleaner" /v "HomeScreen" /t REG_SZ /d 2 /f | Out-Null
 reg add "HKCU\Software\Piriform\CCleaner" /v "Monitoring" /t REG_DWORD /d 0 /f | Out-Null
 reg add "HKCU\Software\Piriform\CCleaner" /v "HelpImproveCCleaner" /t REG_DWORD /d 0 /f | Out-Null
@@ -2161,119 +2162,119 @@ $counter++;
 Write-Host ' [Disable] Unnecessary applications at startup ' -F darkgray -B black
 
 # Java Update Checker x64
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f >$null 2>$null
 
 
 # Mini Partition Tool Wizard Updater
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MTPW" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MTPW" /f >$null 2>$null
 
 # Teams Machine Installer
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f >$null 2>$null
 
 
 # Cisco Meeting Daemon
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CiscoMeetingDaemon" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CiscoMeetingDaemon" /f >$null 2>$null
 
 # Adobe Reader Speed Launcher
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f >$null 2>$null
 
 
 # CCleaner Smart Cleaning/Monitor
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CCleaner Smart Cleaning" /f | Out-Null
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CCleaner Monitor" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CCleaner Smart Cleaning" /f >$null 2>$null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CCleaner Monitor" /f >$null 2>$null
 
 # Spotify Web Helper
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Spotify Web Helper" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Spotify Web Helper" /f >$null 2>$null
 
 # Gaijin.Net Updater
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Gaijin.Net Updater" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Gaijin.Net Updater" /f >$null 2>$null
 
 # Microsoft Teams Update
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "com.squirrel.Teams.Teams" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "com.squirrel.Teams.Teams" /f >$null 2>$null
 
 # Google Update
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Google Update" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Google Update" /f >$null 2>$null
 
 # BitTorrent Bleep
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "BitTorrent Bleep" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "BitTorrent Bleep" /f >$null 2>$null
 
 # Skype
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Skype" /f | Out-Null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Skype" /f >$null 2>$null
 
 # Adobe Update Startup Utility
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "adobeAAMUpdater-1.0" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "AdobeAAMUpdater" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "adobeAAMUpdater-1.0" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "AdobeAAMUpdater" /f >$null 2>$null
 
 # iTunes Helper
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "iTunesHelper" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "iTunesHelper" /f >$null 2>$null
 
 # CyberLink Update Utility
 cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "UpdatePPShortCut" /f >NUL 2>nul
 
 # MSI Live Update
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Live Update" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "Live Update" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Live Update" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "Live Update" /f >$null 2>$null
 
 
 # Wondershare Helper Compact
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Wondershare Helper Compact" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "Wondershare Helper Compact" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Wondershare Helper Compact" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "Wondershare Helper Compact" /f >$null 2>$null
 
 
 # Cisco AnyConnect Secure Mobility Agent
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f | Out-Null
-cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f | Out-Null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f >$null 2>$null
+cmd /c reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f >$null 2>$null
 
 
 # Opera Browser Assistant (Update/Tray)
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Opera Browser Assistant" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Opera Browser Assistant" /f >$null 2>$null
 
 # Steam Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /f >$null 2>$null
 
 # Origin Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EADM" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EADM" /f >$null 2>$null
 
 # Epic Games Launcher Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EpicGamesLauncher" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EpicGamesLauncher" /f >$null 2>$null
 
 # Gog Galaxy Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "GogGalaxy" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "GogGalaxy" /f >$null 2>$null
 
 # Skype for Desktop Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for Desktop" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for Desktop" /f >$null 2>$null
 
 # Wargaming.net Game Center
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f >$null 2>$null
 
 # uTorrent Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ut" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ut" /f >$null 2>$null
 
 # Lync - Skype for Business Autorun
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Lync" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Lync" /f >$null 2>$null
 
 # Google Chrome Installer (Update)
-cmd /c reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Google Chrome" /f | Out-Null
+cmd /c reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Google Chrome" /f >$null 2>$null
 
 # Microsoft Edge Installer (Update)
-cmd /c reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Microsoft Edge" /f | Out-Null
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_E9C49D8E9BDC4095F482C844743B9E82" /f | Out-Null
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_D3AB3F7FBB44621987441AECEC1156AD" /f | Out-Null
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch" /f | Out-Null
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Microsoft Edge Update" /f | Out-Null
-cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E" /f | Out-Null
+cmd /c reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Microsoft Edge" /f >$null 2>$null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_E9C49D8E9BDC4095F482C844743B9E82" /f >$null 2>$null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_D3AB3F7FBB44621987441AECEC1156AD" /f >$null 2>$null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch" /f >$null 2>$null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Microsoft Edge Update" /f >$null 2>$null
+cmd /c reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E" /f >$null 2>$null
 
 # Discord Update
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /f >$null 2>$null
 
 # Ubisoft Game Launcher
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Ubisoft Game Launcher" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Ubisoft Game Launcher" /f >$null 2>$null
 
 # Bliz - Autorun (League of Legends Tool)
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "com.blitz.app" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "com.blitz.app" /f >$null 2>$null
 
 engine;};
 
@@ -2285,161 +2286,161 @@ cmd /c if exist %programdata%\ET\chck58.lbool del %programdata%\ET\chck58.lbool
 $counter++;
 Write-Host ' [Clean] Temp ' -F yellow -B black
 Get-ChildItem -Path $env:TEMP -Include *.* -Exclude *.bat, *.lbool -File -Recurse | foreach { $_.Delete()} | Out-Null
-cmd /c Del /S /F /Q %Windir%\Temp | Out-Null
+cmd /c Del /S /F /Q %Windir%\Temp >$null 2>$null
 
 Write-Host ' [Clean] Windows Prefetch/Cache/Logs ' -F yellow -B black
-cmd /c Del /S /F /Q %windir%\Prefetch | Out-Null
+cmd /c Del /S /F /Q %windir%\Prefetch >$null 2>$null
 
-cmd /c Del %AppData%\vstelemetry | Out-Null
-cmd /c Del %LocalAppData%\Microsoft\VSApplicationInsights /F /Q /S | Out-Null
-cmd /c Del %ProgramData%\Microsoft\VSApplicationInsights  /F /Q /S | Out-Null
-cmd /c Del %Temp%\Microsoft\VSApplicationInsights  /F /Q /S | Out-Null
-cmd /c Del %Temp%\VSFaultInfo  /F /Q /S | Out-Null
-cmd /c Del %Temp%\VSFeedbackPerfWatsonData  /F /Q /S | Out-Null
-cmd /c Del %Temp%\VSFeedbackVSRTCLogs  /F /Q /S | Out-Null
-cmd /c Del %Temp%\VSRemoteControl  /F /Q /S | Out-Null
-cmd /c Del %Temp%\VSTelem /F /Q /S | Out-Null
-cmd /c Del %Temp%\VSTelem.Out /F /Q /S | Out-Null
+cmd /c Del %AppData%\vstelemetry >$null 2>$null
+cmd /c Del %LocalAppData%\Microsoft\VSApplicationInsights /F /Q /S >$null 2>$null
+cmd /c Del %ProgramData%\Microsoft\VSApplicationInsights  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\Microsoft\VSApplicationInsights  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSFaultInfo  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSFeedbackPerfWatsonData  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSFeedbackVSRTCLogs  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSRemoteControl  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSTelem /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSTelem.Out /F /Q /S >$null 2>$null
 
-cmd /c Del %localappdata%\Yarn\Cache /F /Q /S | Out-Null
+cmd /c Del %localappdata%\Yarn\Cache /F /Q /S >$null 2>$null
 
-cmd /c Del %appdata%\Microsoft\Teams\Cache /F /Q /S | Out-Null
+cmd /c Del %appdata%\Microsoft\Teams\Cache /F /Q /S >$null 2>$null
 
-cmd /c Del %programdata%\GOG.com\Galaxy\webcache /F /Q /S | Out-Null
-cmd /c Del %programdata%\GOG.com\Galaxy\logs /F /Q /S | Out-Null
+cmd /c Del %programdata%\GOG.com\Galaxy\webcache /F /Q /S >$null 2>$null
+cmd /c Del %programdata%\GOG.com\Galaxy\logs /F /Q /S >$null 2>$null
 
-cmd /c Del %localappdata%\Microsoft\Windows\WebCache /F /Q /S | Out-Null
+cmd /c Del %localappdata%\Microsoft\Windows\WebCache /F /Q /S >$null 2>$null
 
-cmd /c Del "%SystemDrive%\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Directx.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\SchedLgU.txt" /F /Q | Out-Null
-cmd /c Del "%WinDir%\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\security\logs\*.old" /F /Q | Out-Null
-cmd /c Del "%WinDir%\security\logs\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Debug\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Debug\UserMode\*.bak" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Debug\UserMode\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\*.bak" /F /Q | Out-Null
-cmd /c Del "%WinDir%\system32\wbem\Logs\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\OEWABLog.txt" /F /Q | Out-Null
-cmd /c Del "%WinDir%\setuplog.txt" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Logs\DISM\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\*.log.txt" /F /Q | Out-Null
-cmd /c Del "%WinDir%\APPLOG\*.*" /F /Q | Out-Null
-cmd /c Del "%WinDir%\system32\wbem\Logs\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\system32\wbem\Logs\*.lo_" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Logs\DPX\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\ServiceProfiles\NetworkService\AppData\Local\Temp\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Logs\*.log" /F /Q | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Windows\WindowsUpdate.log" /F /Q | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Windows\WebCache\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Panther\cbs.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Panther\DDACLSys.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\repair\setup.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Panther\UnattendGC\diagerr.xml" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Panther\UnattendGC\diagwrn.xml" /F /Q | Out-Null
-cmd /c Del "%WinDir%\inf\setupapi.offline.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\inf\setupapi.app.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\debug\WIA\*.log" /F /Q | Out-Null
-cmd /c Del "%SystemDrive%\PerfLogs\System\Diagnostics\*.*" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Logs\CBS\*.cab" /F /Q  | Out-Null
-cmd /c Del "%WinDir%\Logs\CBS\*.cab" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Logs\WindowsBackup\*.etl" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\LogFiles\HTTPERR\*.*" /F /Q | Out-Null
-cmd /c Del "%WinDir%\SysNative\SleepStudy\*.etl" /F /Q | Out-Null
-cmd /c Del "%WinDir%\SysNative\SleepStudy\ScreenOn\*.etl" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\SleepStudy\*.etl" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\SleepStudy\ScreenOn\*.etl" /F /Q | Out-Null
-cmd /c Del "%WinDir%\Logs" /F /Q | Out-Null
-cmd /c Del "%WinDir%\DISM" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\catroot2\*.chk" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\catroot2\*.log" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\catroot2\.jrs" /F /Q | Out-Null
-cmd /c Del "%WinDir%\System32\catroot2\*.txt" /F /Q | Out-Null
+cmd /c Del "%SystemDrive%\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Directx.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\SchedLgU.txt" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\security\logs\*.old" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\security\logs\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Debug\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Debug\UserMode\*.bak" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Debug\UserMode\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\*.bak" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\system32\wbem\Logs\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\OEWABLog.txt" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\setuplog.txt" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Logs\DISM\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\*.log.txt" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\APPLOG\*.*" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\system32\wbem\Logs\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\system32\wbem\Logs\*.lo_" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Logs\DPX\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\ServiceProfiles\NetworkService\AppData\Local\Temp\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Logs\*.log" /F /Q >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Windows\WindowsUpdate.log" /F /Q >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Windows\WebCache\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Panther\cbs.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Panther\DDACLSys.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\repair\setup.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Panther\UnattendGC\diagerr.xml" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Panther\UnattendGC\diagwrn.xml" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\inf\setupapi.offline.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\inf\setupapi.app.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\debug\WIA\*.log" /F /Q >$null 2>$null
+cmd /c Del "%SystemDrive%\PerfLogs\System\Diagnostics\*.*" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Logs\CBS\*.cab" /F /Q  >$null 2>$null
+cmd /c Del "%WinDir%\Logs\CBS\*.cab" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Logs\WindowsBackup\*.etl" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\LogFiles\HTTPERR\*.*" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\SysNative\SleepStudy\*.etl" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\SysNative\SleepStudy\ScreenOn\*.etl" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\SleepStudy\*.etl" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\SleepStudy\ScreenOn\*.etl" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\Logs" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\DISM" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\catroot2\*.chk" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\catroot2\*.log" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\catroot2\.jrs" /F /Q >$null 2>$null
+cmd /c Del "%WinDir%\System32\catroot2\*.txt" /F /Q >$null 2>$null
 
 # Cleaning Disk - cleanmgr
 start cleanmgr.exe /autoclean
 
 Write-Host ' [Clean] Games Platforms Cache/Logs ' -F yellow -B black
 
-cmd /c Del %localappdata%\EpicGamesLauncher\Saved\Logs /F /Q /S | Out-Null
-cmd /c Del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S | Out-Null
+cmd /c Del %localappdata%\EpicGamesLauncher\Saved\Logs /F /Q /S >$null 2>$null
+cmd /c Del %localappdata%\CrashReportClient\Saved\Logs /F /Q /S >$null 2>$null
 
-cmd /c Del "%localappdata%\Steam\htmlcache\Code Cache" /F /Q /S | Out-Null
-cmd /c Del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S | Out-Null
-cmd /c Del %localappdata%\Steam\htmlcache\Cache /F /Q /S | Out-Null
+cmd /c Del "%localappdata%\Steam\htmlcache\Code Cache" /F /Q /S >$null 2>$null
+cmd /c Del %localappdata%\Steam\htmlcache\GPUCache /F /Q /S >$null 2>$null
+cmd /c Del %localappdata%\Steam\htmlcache\Cache /F /Q /S >$null 2>$null
 
-cmd /c Del %AppData%\Origin\Telemetry /F /Q /S | Out-Null
-cmd /c Del %AppData%\Origin\Logs /F /Q /S | Out-Null
-cmd /c Del %AppData%\Origin\NucleusCache /F /Q /S | Out-Null
-cmd /c Del %AppData%\Origin\ConsolidatedCache /F /Q /S | Out-Null
-cmd /c Del %AppData%\Origin\CatalogCache /F /Q /S | Out-Null
-cmd /c Del %localAppData%\Origin\ThinSetup /F /Q /S | Out-Null
-cmd /c Del %AppData%\Origin\Telemetry /F /Q /S | Out-Null
-cmd /c Del %localAppData%\Origin\Logs /F /Q /S | Out-Null
+cmd /c Del %AppData%\Origin\Telemetry /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Origin\Logs /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Origin\NucleusCache /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Origin\ConsolidatedCache /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Origin\CatalogCache /F /Q /S >$null 2>$null
+cmd /c Del %localAppData%\Origin\ThinSetup /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Origin\Telemetry /F /Q /S >$null 2>$null
+cmd /c Del %localAppData%\Origin\Logs /F /Q /S >$null 2>$null
 
-cmd /c Del %localAppData%\Battle.net\Cache /F /Q /S | Out-Null
-cmd /c Del %AppData%\Battle.net\Logs /F /Q /S | Out-Null
-cmd /c Del %AppData%\Battle.net\Errors /F /Q /S | Out-Null
+cmd /c Del %localAppData%\Battle.net\Cache /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Battle.net\Logs /F /Q /S >$null 2>$null
+cmd /c Del %AppData%\Battle.net\Errors /F /Q /S >$null 2>$null
 
 Write-Host ' [Clean] Web Browsers Cache/Logs ' -F yellow -B black
 
-cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Media Cache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Storage\ext" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Google\Chrome\User Data\ShaderCache" /F /Q /S | Out-Null
+cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Media Cache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Storage\ext" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Google\Chrome\User Data\ShaderCache" /F /Q /S >$null 2>$null
 
 
-cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media Cache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Storage\ext" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\ShaderCache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Cache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Media Cache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\GPUCache" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Storage\ext" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Service Worker" /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\ShaderCache" /F /Q /S | Out-Null
+cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media Cache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Storage\ext" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge\User Data\ShaderCache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Cache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Media Cache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\GPUCache" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Storage\ext" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\Default\Service Worker" /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Edge SxS\User Data\ShaderCache" /F /Q /S >$null 2>$null
 
-cmd /c Del "%LocalAppData%\Opera Software\Opera Stable\cache" /F /Q /S | Out-Null
-cmd /c Del "%AppData%\Opera Software\Opera Stable\GPUCache" /F /Q /S | Out-Null
-cmd /c Del "%AppData%\Opera Software\Opera Stable\ShaderCache" /F /Q /S | Out-Null
-cmd /c Del "%AppData%\Opera Software\Opera Stable\Jump List Icons" /F /Q /S | Out-Null
-cmd /c Del "%AppData%\Opera Software\Opera Stable\Jump List IconsOld\Jump List Icons" /F /Q /S | Out-Null
+cmd /c Del "%LocalAppData%\Opera Software\Opera Stable\cache" /F /Q /S >$null 2>$null
+cmd /c Del "%AppData%\Opera Software\Opera Stable\GPUCache" /F /Q /S >$null 2>$null
+cmd /c Del "%AppData%\Opera Software\Opera Stable\ShaderCache" /F /Q /S >$null 2>$null
+cmd /c Del "%AppData%\Opera Software\Opera Stable\Jump List Icons" /F /Q /S >$null 2>$null
+cmd /c Del "%AppData%\Opera Software\Opera Stable\Jump List IconsOld\Jump List Icons" /F /Q /S >$null 2>$null
 
-cmd /c Del "%LocalAppData%\Vivaldi\User Data\Default\Cache" /F /Q /S | Out-Null
+cmd /c Del "%LocalAppData%\Vivaldi\User Data\Default\Cache" /F /Q /S >$null 2>$null
 
 Write-Host ' [Clean] Windows Defender Cache/Logs ' -F yellow -B black
 
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Network Inspection System\Support\*.log" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\CacheManager" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\ReportLatency\Latency" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Service\*.log" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\MetaStore" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Support" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick" /F /Q /S | Out-Null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /F /Q /S | Out-Null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Network Inspection System\Support\*.log" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\CacheManager" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\ReportLatency\Latency" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Service\*.log" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\MetaStore" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Support" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick" /F /Q /S >$null 2>$null
+cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /F /Q /S >$null 2>$null
 
 Write-Host ' [Clean] Windows Font Cache ' -F yellow -B black
 
-cmd /c net stop FontCache | Out-Null
-cmd /c net stop FontCache3.0.0.0 | Out-Null
-cmd /c Del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.dat" /F /Q /S | Out-Null
-cmd /c Del "%WinDir%\SysNative\FNTCACHE.DAT" /F /Q /S | Out-Null
-cmd /c Del "%WinDir%\System32\FNTCACHE.DAT" /F /Q /S | Out-Null
-cmd /c net start FontCache | Out-Null
-cmd /c net start FontCache3.0.0.0 | Out-Null
+cmd /c net stop FontCache >$null 2>$null
+cmd /c net stop FontCache3.0.0.0 >$null 2>$null
+cmd /c Del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*.dat" /F /Q /S >$null 2>$null
+cmd /c Del "%WinDir%\SysNative\FNTCACHE.DAT" /F /Q /S >$null 2>$null
+cmd /c Del "%WinDir%\System32\FNTCACHE.DAT" /F /Q /S >$null 2>$null
+cmd /c net start FontCache >$null 2>$null
+cmd /c net start FontCache3.0.0.0 >$null 2>$null
 
 Write-Host ' [Clean] Windows Icon Cache ' -F yellow -B black
 
-%WinDir%\SysNative\ie4uinit.exe -show | Out-Null
-%WinDir%\System32\ie4uinit.exe -show | Out-Null
-cmd /c Del %LocalAppData%\IconCache.db /F /Q /S | Out-Null
-cmd /c Del "%LocalAppData%\Microsoft\Windows\Explorer\iconcache_*.db" /F /Q /S | Out-Null
+%WinDir%\SysNative\ie4uinit.exe -show >$null 2>$null
+%WinDir%\System32\ie4uinit.exe -show >$null 2>$null
+cmd /c Del %LocalAppData%\IconCache.db /F /Q /S >$null 2>$null
+cmd /c Del "%LocalAppData%\Microsoft\Windows\Explorer\iconcache_*.db" /F /Q /S >$null 2>$null
 engine;};
 
 # Remove OneDrive
@@ -2447,21 +2448,21 @@ function chck60{
 cmd /c if exist %programdata%\ET\chck60.lbool del %programdata%\ET\chck60.lbool
 $counter++;
 Write-Host ' [Remove] Microsoft OneDrive ' -F red -B black
-cmd /c taskkill /F /IM "OneDrive.exe" | Out-Null
-cmd /c $env:systemroot\SysWOW64\OneDriveSetup.exe /uninstall | Out-Null
-cmd /c $env:systemroot\System32\OneDriveSetup.exe /uninstall | Out-Null
+cmd /c taskkill /F /IM "OneDrive.exe" >$null 2>$null
+cmd /c $env:systemroot\SysWOW64\OneDriveSetup.exe /uninstall >$null 2>$null
+cmd /c $env:systemroot\System32\OneDriveSetup.exe /uninstall >$null 2>$null
 
 Get-AppxPackage -allusers *Microsoft.OneDriveSync* | Remove-AppxPackage
 
-cmd /c rd "%UserProfile%\OneDrive" /Q /S | Out-Null
-cmd /c rd "%LocalAppData%\Microsoft\OneDrive" /Q /S | Out-Null
-cmd /c rd "%ProgramData%\Microsoft OneDrive" /Q /S | Out-Null
-cmd /c rd "%systemdrive%\OneDriveTemp" /Q /S | Out-Null
+cmd /c rd "%UserProfile%\OneDrive" /Q /S >$null 2>$null
+cmd /c rd "%LocalAppData%\Microsoft\OneDrive" /Q /S >$null 2>$null
+cmd /c rd "%ProgramData%\Microsoft OneDrive" /Q /S >$null 2>$null
+cmd /c rd "%systemdrive%\OneDriveTemp" /Q /S >$null 2>$null
 
 ::Remove OneDrive leftovers in explorer left side panel
-reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f | Out-Null
+reg add "HKEY_CLASSES_ROOT\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f >$null 2>$null
 reg add "HKEY_CLASSES_ROOT\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d 0 /f | Out-Null
-cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f | Out-Null
+cmd /c reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /f >$null 2>$null
 engine;};
 
 # Disable Xbx Services (Minecraft Luncher wont login into MS)
