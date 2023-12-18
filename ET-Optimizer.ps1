@@ -1221,152 +1221,15 @@ $aboutForm.Icon = [System.Drawing.Icon]::FromHandle((new-object System.Drawing.B
 $aboutForm.Controls.Add($aboutFormExit); 
 [void]$aboutForm.ShowDialog()
 }; 
-function Extras {
-$extraForm = New-Object System.Windows.Forms.Form; 
-$extraFormB1 = New-Object System.Windows.Forms.Button; 
-$extraFormB2 = New-Object System.Windows.Forms.Button; 
-$extraFormB3 = New-Object System.Windows.Forms.Button; 
-$extraFormB4 = New-Object System.Windows.Forms.Button; 
-$extraFormB5 = New-Object System.Windows.Forms.Button; 
-$extraFormB6 = New-Object System.Windows.Forms.Button; 
-$extraFormB7 = New-Object System.Windows.Forms.Button; 
-$extraFormB8 = New-Object System.Windows.Forms.Button; 
-$extraFormB9 = New-Object System.Windows.Forms.Button; 
-$extraFormB10 = New-Object System.Windows.Forms.Button; 
-$extraFormB11 = New-Object System.Windows.Forms.Button; 
-$extraFormB12 = New-Object System.Windows.Forms.Button; 
-$extraFormB13 = New-Object System.Windows.Forms.Button; 
-$extraFormB14 = New-Object System.Windows.Forms.Button; 
-$extraForm.MinimizeBox = $false; 
-$extraForm.MaximizeBox = $false; 
-$extraForm.TopMost = $true; 
-$extraForm.AutoSizeMode = 'GrowAndShrink'; 
-$extraForm.FormBorderStyle = 'FixedDialog'; 
-$extraForm.AcceptButton = $extraFormExit; 
-$extraForm.CancelButton = $extraFormExit; 
-$extraForm.ClientSize = '200, 450'; 
-$extraForm.ShowInTaskBar = $false; 
-$extraForm.FlatStyle = 'Flat'
-$extraForm.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor)
-$extraForm.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
-$extraForm.Location = (30,30);
-$extraForm.Text = 'Extras'; 
-$extraForm.Font = $font;
-$extraFormB1.Location = '25, 15'; 
-$extraFormB1.Size = New-Object Drawing.Point 150,25;
-$extraFormB1.Text = 'Disk Defragmenter'; 
-$extraFormB1.add_click({dfrgui.exe});
-$extraFormB1.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB1); 
-$extraFormB1.add_MouseHover({
-$tooltipEB1 = New-Object System.Windows.Forms.ToolTip
-$tooltipEB1.SetToolTip($extraFormB1, 'Optimize your drives to help your computer run more efficienlty.')
-})
-$extraFormB2.Location = '25, 45'; 
-$extraFormB2.Size = New-Object Drawing.Point 150,25;
-$extraFormB2.Text = 'Cleanmgr'; 
-$extraFormB2.add_click({cleanmgr.exe});
-$extraFormB2.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB2); 
-$extraFormB2.add_MouseHover({
-$tooltipEB2 = New-Object System.Windows.Forms.ToolTip
-$tooltipEB2.SetToolTip($extraFormB2, 'Clears unnecessary files from your computer hard disk.')
-})
-$extraFormB3.Location = '25, 75'; 
-$extraFormB3.Size = New-Object Drawing.Point 150,25;
-$extraFormB3.Text = 'Msconfig'; 
-$extraFormB3.add_click({msconfig});
-$extraFormB3.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB3); 
-$extraFormB3.add_MouseHover({
-$tooltipEB3 = New-Object System.Windows.Forms.ToolTip
-$tooltipEB3.SetToolTip($extraFormB3, 'Utility designed to troubleshoot and configure Windows startup process.')
-})
-$extraFormB4.Location = '25, 105'; 
-$extraFormB4.Size = New-Object Drawing.Point 150,25;
-$extraFormB4.Text = 'Control Panel'; 
-$extraFormB4.add_click({control.exe});
-$extraFormB4.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB4); 
-$extraFormB5.Location = '25, 135'; 
-$extraFormB5.Size = New-Object Drawing.Point 150,25;
-$extraFormB5.Text = 'Device Manager'; 
-$extraFormB5.add_click({devmgmt.msc});
-$extraFormB5.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB5); 
-$extraFormB6.Location = '25, 165'; 
-$extraFormB6.Size = New-Object Drawing.Point 150,25;
-$extraFormB6.Text = 'UAC Settings'; 
-$extraFormB6.add_click({UserAccountControlSettings.exe});
-$extraFormB6.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB6); 
-$extraFormB7.Location = '25, 195'; 
-$extraFormB7.Size = New-Object Drawing.Point 150,25;
-$extraFormB7.Text = 'Msinfo32'; 
-$extraFormB7.add_click({msinfo32});
-$extraFormB7.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB7); 
-$extraFormB7.add_MouseHover({
-$tooltipEB7 = New-Object System.Windows.Forms.ToolTip
-$tooltipEB7.SetToolTip($extraFormB7, 'This tool gathers information about your computer.')
-})
-$extraFormB8.Location = '25, 225'; 
-$extraFormB8.Size = New-Object Drawing.Point 150,25;
-$extraFormB8.Text = 'Services'; 
-$extraFormB8.add_click({services.msc});
-$extraFormB8.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB8); 
-$extraFormB9.Location = '25, 255'; 
-$extraFormB9.Size = New-Object Drawing.Point 150,25;
-$extraFormB9.Text = 'Remote Desktop'; 
-$extraFormB9.add_click({mstsc});
-$extraFormB9.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB9); 
-$extraFormB10.Location = '25, 285'; 
-$extraFormB10.Size = New-Object Drawing.Point 150,25;
-$extraFormB10.Text = 'Event Viewer'; 
-$extraFormB10.add_click({eventvwr.msc});
-$extraFormB10.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB10); 
-$extraFormB11.Location = '25, 315'; 
-$extraFormB11.Size = New-Object Drawing.Point 150,25;
-$extraFormB11.Text = 'Reset Network'; 
-$extraFormB11.add_click({netsh winsock reset;netsh int ipv4 reset;netsh int ipv6 reset;ipconfig /release;ipconfig /renew;ipconfig /flushdns});
-$extraFormB11.FlatStyle = 'Flat'
-$extraForm.Controls.Add($extraFormB11); 
-$extraFormB11.add_MouseHover({
-$tooltipEB11 = New-Object System.Windows.Forms.ToolTip
-$tooltipEB11.SetToolTip($extraFormB11, 'This option will reset any internet settings on your device.')
-})
-$extraFormB12.Location = '25, 345'; 
-$extraFormB12.Size = New-Object Drawing.Point 150,25; 
-$extraFormB12.Text = 'Update Applications (Winget)'; 
-$extraFormB12.add_click({Winget upgrade --all}); 
-$extraFormB12.FlatStyle = 'Flat' 
-$extraForm.Controls.Add($extraFormB12); 
-$extraFormB12.add_MouseHover({
-$tooltipEB12 = New-Object System.Windows.Forms.ToolTip
-$tooltipEB12.SetToolTip($extraFormB12, 'Update Applications (winget upgrade --all)')
-})
-$extraFormB13.Location = '25, 375'; 
-$extraFormB13.Size = New-Object Drawing.Point 150,25; 
-$extraFormB13.Text = 'Windows License Key';
-$extraFormB13.add_click({echo Windows_License_Key: $licensekey > C:\ProgramData\verwin.txt;start notepad C:\ProgramData\verwin.txt}); 
-$extraFormB13.FlatStyle = 'Flat' 
-$extraForm.Controls.Add($extraFormB13); 
-$extraFormB14.Location = '25, 405'; 
-$extraFormB14.Size = New-Object Drawing.Point 150,25; 
-$extraFormB14.Text = 'Reboot to BIOS';
-$extraFormB14.add_click({shutdown /r /fw /t 1}); 
-$extraFormB14.FlatStyle = 'Flat' 
-$extraForm.Controls.Add($extraFormB14);
-[void]$extraForm.ShowDialog()
-}; 
+
 function addMenuItem { param([ref]$ParentItem, [string]$ItemName='', [string]$ItemText='', [scriptblock]$ScriptBlock=$null ) [System.Windows.Forms.ToolStripMenuItem]$private:menuItem=` New-Object System.Windows.Forms.ToolStripMenuItem;
 $private:menuItem.Name =$ItemName; 
 $private:menuItem.Text =$ItemText; 
 if ($ScriptBlock -ne $null) { $private:menuItem.add_Click(([System.EventHandler]$handler=` $ScriptBlock));}; 
-if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Value).Items.Add($private:menuItem);} return $private:menuItem; }; 
+if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Value).Items.Add($private:menuItem);} 
+if (($ParentItem.Value) -is [System.Windows.Forms.ToolStripItem]) 
+{ ($ParentItem.Value).DropDownItems.Add($private:menuItem); } 
+return $private:menuItem; }; 
 function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive C:; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null}; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
 $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml($menubackcolor);
@@ -1376,13 +1239,40 @@ $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 [scriptblock]$restore= {rstrui.exe}; 
 [scriptblock]$about= {About}; 
 [scriptblock]$donate= {start https://www.paypal.com/paypalme/rikey}; 
-[scriptblock]$extras= {Extras}; 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Backup' -ScriptBlock $backup); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Restore' -ScriptBlock $restore); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Extras' -ScriptBlock $extras);
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'About' -ScriptBlock $about);  
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Donate' -ScriptBlock $donate);  
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuFile' -ItemText 'Exit' -ScriptBlock $exit); 
+[scriptblock]$ex1= {dfrgui.exe};
+[scriptblock]$ex2= {cleanmgr.exe};
+[scriptblock]$ex3= {msconfig};
+[scriptblock]$ex4= {control.exe};
+[scriptblock]$ex5= {devmgmt.msc};
+[scriptblock]$ex6= {UserAccountControlSettings.exe};
+[scriptblock]$ex7= {msinfo32};
+[scriptblock]$ex8= {services.msc};
+[scriptblock]$ex9= {mstsc};
+[scriptblock]$ex10= {eventvwr.msc};
+[scriptblock]$ex11= {netsh winsock reset;netsh int ipv4 reset;netsh int ipv6 reset;ipconfig /release;ipconfig /renew;ipconfig /flushdns};
+[scriptblock]$ex12= {Winget upgrade --all};
+[scriptblock]$ex13= {echo Windows_License_Key: $licensekey > C:\ProgramData\verwin.txt;start notepad C:\ProgramData\verwin.txt};
+[scriptblock]$ex14= {shutdown /r /fw /t 1};
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuBackup' -ItemText 'Backup' -ScriptBlock $backup); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuRestore' -ItemText 'Restore' -ScriptBlock $restore); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExtras' -ItemText 'Extras' -ScriptBlock $null) | %{
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE1' -ItemText 'Disk Defragmenter' -ScriptBlock $ex1;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE2' -ItemText 'Cleanmgr' -ScriptBlock $ex2;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE3' -ItemText 'Msconfig' -ScriptBlock $ex3;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE4' -ItemText 'Control Panel' -ScriptBlock $ex4;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE5' -ItemText 'Device Manager' -ScriptBlock $ex5;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE6' -ItemText 'UAC Settings' -ScriptBlock $ex6;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE7' -ItemText 'Msinfo32' -ScriptBlock $ex7;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE8' -ItemText 'Services' -ScriptBlock $ex8;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE9' -ItemText 'Remote Desktop' -ScriptBlock $ex9;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE10' -ItemText 'Event Viewer' -ScriptBlock $ex10;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE11' -ItemText 'Reset Network' -ScriptBlock $ex11;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE12' -ItemText 'Update Applications' -ScriptBlock $ex12;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE13' -ItemText 'Windows License Key' -ScriptBlock $ex13;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE14' -ItemText 'Reboot to BIOS' -ScriptBlock $ex14;	} | Out-Null;
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuAbout' -ItemText 'About' -ScriptBlock $about);  
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuDonate' -ItemText 'Donate' -ScriptBlock $donate);  
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExit' -ItemText 'Exit' -ScriptBlock $exit); 
 
 # Hello World
 cls
