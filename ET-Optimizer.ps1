@@ -1230,7 +1230,7 @@ if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Val
 if (($ParentItem.Value) -is [System.Windows.Forms.ToolStripItem]) 
 { ($ParentItem.Value).DropDownItems.Add($private:menuItem); } 
 return $private:menuItem; }; 
-function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive C:; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null}; 
+function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null}; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
 $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml($menubackcolor);
 $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
@@ -1291,6 +1291,17 @@ Write-Host '                          [-] Last update: 18.12.2023               
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
+
+#Force backup at first use of script
+if (Get-Item -Path $Env:programdata\Run-ET.log) {}
+else {
+	Enable-ComputerRestore -Drive $env:systemdrive >$null 2>$null
+	$OriginalPref = $ProgressPreference # Default is 'Continue'
+	$ProgressPreference = "SilentlyContinue"
+	Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS" -WarningAction SilentlyContinue
+	$ProgressPreference = $OriginalPref
+}
+
 Write-Output "The script has already been initialized once" > $Env:programdata\Run-ET.log
 [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 $form.ShowDialog();
