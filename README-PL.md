@@ -5,7 +5,6 @@
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://paypal.me/rikey" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white"></a>
 
- <img align="left" src="https://user-images.githubusercontent.com/85984736/155878549-829f33b3-a3fa-4172-8d88-6bbae77c1341.png" width="130"/> 
 Optymalizacja wydajności, poprawa prywatności i usuwanie bloatware'u za pomocą 1 kliknięcia.
 
 Ostatnio testowane/aktualizowane na:
@@ -24,8 +23,9 @@ iwr -useb https://raw.githubusercontent.com/semazurek/ET-Optimizer/master/ET-Opt
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://user-images.githubusercontent.com/85984736/235310748-7f1f8adf-c411-445a-9432-a3ae659cdf78.gif" width="600">
+<img src="https://github.com/semazurek/ET-Optimizer/assets/85984736/cb24d16f-b02a-4cfa-8e96-210d13239398" width="600">
 </p>
+
 
 ```diff
 
