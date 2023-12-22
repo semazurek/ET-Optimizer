@@ -20,10 +20,6 @@ Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/downl
 iwr -useb https://raw.githubusercontent.com/semazurek/ET-Optimizer/master/ET-Optimizer.ps1 | iex
 ```
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
-</br></br>
-
-
-
 
 <p align="center">
 <img src="https://github.com/semazurek/ET-Optimizer/assets/85984736/cb24d16f-b02a-4cfa-8e96-210d13239398" width="600">
