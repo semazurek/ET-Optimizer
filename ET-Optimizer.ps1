@@ -59,6 +59,8 @@ public static extern bool ShowWindow(IntPtr hWnd, Int32 nCmdShow);
 
 # [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null
 
+#Check for Language 
+$langos = (Get-WinUserLanguageList)[0].LocalizedName
 
 #Window CLI color
 $Host.UI.RawUI.BackgroundColor = ($bckgrnd = 'Black')
@@ -84,8 +86,8 @@ else
 }
 
 # Using UTF-8 Encoding + special characters
-$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 chcp 65001
+$PSDefaultParameterValues['*:Encoding'] = 'utf8'
 
 # Created by Rikey
 # https://github.com/semazurek/ET-Optimizer
@@ -207,6 +209,7 @@ $B_close.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.Fon
 $B_close.add_click({do_start}); $form.controls.add($B_close); 
 $B_checkall = New-Object Windows.Forms.Button; 
 $B_checkall.text = 'Select All'; 
+if ($langos -eq 'Polski') {$B_checkall.text = 'Zaznacz Wszystko'; }
 $B_checkall.Location = New-Object Drawing.Point 510,400; 
 $B_checkall.Size = New-Object Drawing.Point 140,50;
 $B_checkall.FlatStyle = 'Flat'
@@ -252,6 +255,7 @@ count_o;
 $form.controls.add($B_checkall);
 $B_uncheckall = New-Object Windows.Forms.Button; 
 $B_uncheckall.text = 'Unselect All'; 
+if ($langos -eq 'Polski') {$B_uncheckall.text = 'Odznacz Wszystko'; }
 $B_uncheckall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_uncheckall.Location = New-Object Drawing.Point 510,400; 
 $B_uncheckall.Size = New-Object Drawing.Point 140,50;
@@ -304,6 +308,7 @@ count_o;
 $form.controls.add($B_uncheckall);
 $B_performanceall = New-Object Windows.Forms.Button; 
 $B_performanceall.text = 'Performance'; 
+if ($langos -eq 'Polski') {$B_performanceall.text = 'Wydajnosc'; }
 $B_performanceall.Location = New-Object Drawing.Point 110,400; 
 $B_performanceall.Size = New-Object Drawing.Point 130,50;
 $B_performanceall.FlatStyle = 'Flat'
@@ -322,6 +327,7 @@ $B_performanceall.Visible = $false;
 $form.controls.add($B_performanceall); 
 $B_performanceoff = New-Object Windows.Forms.Button; 
 $B_performanceoff.text = 'Performance'; 
+if ($langos -eq 'Polski') {$B_performanceoff.text = 'Wydajnosc'; }
 $B_performanceoff.Location = New-Object Drawing.Point 110,400; 
 $B_performanceoff.Size = New-Object Drawing.Point 130,50;
 $B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
@@ -341,6 +347,7 @@ $B_performanceall.Visible = $true;
 $form.controls.add($B_performanceoff); 
 $B_visualall = New-Object Windows.Forms.Button; 
 $B_visualall.text = 'Visual'; 
+if ($langos -eq 'Polski') {$B_visualall.text = 'Wizualne'; }
 $B_visualall.Location = New-Object Drawing.Point 250,400; 
 $B_visualall.Size = New-Object Drawing.Point 120,50;
 $B_visualall.FlatStyle = 'Flat'
@@ -359,6 +366,7 @@ count_v;
 $form.controls.add($B_visualall); 
 $B_visualoff = New-Object Windows.Forms.Button; 
 $B_visualoff.text = 'Visual'; 
+if ($langos -eq 'Polski') {$B_visualoff.text = 'Wizualne'; }
 $B_visualoff.Location = New-Object Drawing.Point 250,400; 
 $B_visualoff.Size = New-Object Drawing.Point 120,50;
 $B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
@@ -378,6 +386,7 @@ count_v;
 $form.controls.add($B_visualoff); 
 $B_privacyall = New-Object Windows.Forms.Button; 
 $B_privacyall.text = 'Privacy'; 
+if ($langos -eq 'Polski') {$B_privacyall.text = 'Prywatnosc'; }
 $B_privacyall.Location = New-Object Drawing.Point 380,400; 
 $B_privacyall.Size = New-Object Drawing.Point 120,50;
 $B_privacyall.FlatStyle = 'Flat'
@@ -396,6 +405,7 @@ count_s;
 $form.controls.add($B_privacyall); 
 $B_privacyoff = New-Object Windows.Forms.Button; 
 $B_privacyoff.text = 'Privacy'; 
+if ($langos -eq 'Polski') {$B_privacyoff.text = 'Prywatnosc'; }
 $B_privacyoff.Location = New-Object Drawing.Point 380,400; 
 $B_privacyoff.Size = New-Object Drawing.Point 120,50;
 $B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
@@ -425,6 +435,7 @@ $groupBox1 = New-Object System.Windows.Forms.GroupBox
 $groupBox1.Location = '10,30' 
 $groupBox1.size = '570,180'
 $groupBox1.text = 'Performance Tweaks (34)'
+if ($langos -eq 'Polski') {$groupBox1.text = 'Poprawki Wydajnosci (34)'; }
 $groupBox1.Visible = $true
 $groupBox1.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
 $groupBox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
@@ -443,6 +454,7 @@ $groupBox2 = New-Object System.Windows.Forms.GroupBox
 $groupBox2.Location = '585,30' 
 $groupBox2.size = '285,180'
 $groupBox2.text = 'Privacy (17)'
+if ($langos -eq 'Polski') {$groupBox2.text = 'Prywatnosc (17)'; }
 $groupBox2.Visible = $true
 $groupBox2.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
 $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
@@ -461,6 +473,7 @@ $groupBox3 = New-Object System.Windows.Forms.GroupBox
 $groupBox3.Location = '10,210' 
 $groupBox3.size = '285,180'
 $groupBox3.text = 'Visual Tweaks (6)'
+if ($langos -eq 'Polski') {$groupBox3.text = 'Poprawki Wizualne (6)'; }
 $groupBox3.Visible = $true
 $groupBox3.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
 $groupBox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
@@ -479,6 +492,7 @@ $groupBox4 = New-Object System.Windows.Forms.GroupBox
 $groupBox4.Location = '302,210' 
 $groupBox4.size = '278,180'
 $groupBox4.text = 'Other (6)'
+if ($langos -eq 'Polski') {$groupBox4.text = 'Inne (6)'; }
 $groupBox4.Visible = $true
 $groupBox4.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
 $groupBox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
@@ -496,18 +510,21 @@ $groupBox5 = New-Object System.Windows.Forms.GroupBox
 $groupBox5.Location = '585,210' 
 $groupBox5.size = '285,180'
 $groupBox5.text = 'Expert Mode (4)'
+if ($langos -eq 'Polski') {$groupBox5.text = 'Tryb Eksperta (4)'; }
 $groupBox5.Visible = $true
 $groupBox5.Font = New-Object System.Drawing.Font('Consolas',11,[System.Drawing.FontStyle]::Bold); 
 $groupBox5.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
 $form.Controls.Add($groupBox5) 
 $groupBox5.add_MouseHover({
 $tooltipg5 = New-Object System.Windows.Forms.ToolTip
-$tooltipg5.SetToolTip($groupBox5, 'Non recommended or unstable. May need to be done in safe mode.')
+$tooltipg5.SetToolTip($groupBox5, 'Non recommended or unstable. May need to be done in safe mode.');
+if ($langos -eq 'Polski') {$tooltipg5.SetToolTip($groupBox5, 'Niezalecane lub niestabilne. Mozliwa potrzeba wykonania w trybie awaryjnym.');}
 })
 $chck1 = New-Object Windows.Forms.Checkbox; 
 $chck1.Location = New-Object Drawing.Point 0,5; 
 $chck1.Size = New-Object Drawing.Point 270,25; 
 $chck1.Text = 'Disable Edge WebWidget'; 
+if ($langos -eq 'Polski') {$tooltipg5.SetToolTip($groupBox5, 'Niezalecane lub niestabilne. Moze trzeba to zrobic w trybie awaryjnym.');}
 $chck1.TabIndex = 0;
 $chck1.Checked = $true; 
 $chck1.Font = $Font; 
@@ -1205,14 +1222,14 @@ $aboutForm.Add_Load($aboutForm_Load);
 $aboutFormNameLabel.Font = New-Object Drawing.Font('Consolas', 9, [System.Drawing.FontStyle]::Bold); 
 $aboutFormNameLabel.Location = '110, 10'; 
 $aboutFormNameLabel.Size = '200, 18'; 
-$aboutFormNameLabel.Text = '  E.T. Optimizer'; 
+$aboutFormNameLabel.Text = '   E.T. Optimizer'; 
 $aboutForm.Controls.Add($aboutFormNameLabel); 
 $aboutFormText.Location = '100, 30'; 
 $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
 $aboutForm.Controls.Add($aboutFormText); 
 $aboutFormText2.Location = '100, 50'; 
 $aboutFormText2.Size = '300, 20';  
-$aboutFormText2.Text = '      GitHub.com/semazurek'; 
+$aboutFormText2.Text = '       Github.com/semazurek'; 
 $aboutForm.Controls.Add($aboutFormText2); 
 $aboutFormExit.Location = '138, 75'; 
 $aboutFormExit.Text = 'OK'; 
