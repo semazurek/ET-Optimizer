@@ -524,7 +524,6 @@ $chck1 = New-Object Windows.Forms.Checkbox;
 $chck1.Location = New-Object Drawing.Point 0,5; 
 $chck1.Size = New-Object Drawing.Point 270,25; 
 $chck1.Text = 'Disable Edge WebWidget'; 
-if ($langos -eq 'Polski') {$tooltipg5.SetToolTip($groupBox5, 'Niezalecane lub niestabilne. Moze trzeba to zrobic w trybie awaryjnym.');}
 $chck1.TabIndex = 0;
 $chck1.Checked = $true; 
 $chck1.Font = $Font; 
@@ -1270,6 +1269,29 @@ $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 [scriptblock]$ex12= {Winget upgrade --all};
 [scriptblock]$ex13= {echo Windows_License_Key: $licensekey > C:\ProgramData\verwin.txt;start notepad C:\ProgramData\verwin.txt};
 [scriptblock]$ex14= {shutdown /r /fw /t 1};
+if ($langos -eq 'Polski') {
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuBackup' -ItemText 'Kopia Zapasowa' -ScriptBlock $backup); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuRestore' -ItemText 'Przywracanie' -ScriptBlock $restore); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExtras' -ItemText 'Dodatki' -ScriptBlock $null) | %{
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE1' -ItemText 'Defragmentacja Dysku' -ScriptBlock $ex1;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE2' -ItemText 'Cleanmgr' -ScriptBlock $ex2;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE3' -ItemText 'Msconfig' -ScriptBlock $ex3;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE4' -ItemText 'Panel Sterowania' -ScriptBlock $ex4;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE5' -ItemText 'Menedzer Urzadzen' -ScriptBlock $ex5;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE6' -ItemText 'UAC Ustawienia' -ScriptBlock $ex6;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE7' -ItemText 'Msinfo32' -ScriptBlock $ex7;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE8' -ItemText 'Uslugi' -ScriptBlock $ex8;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE9' -ItemText 'Pulpit Zdalny' -ScriptBlock $ex9;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE10' -ItemText 'Podglad Zdarzen' -ScriptBlock $ex10;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE11' -ItemText 'Reset Sieci' -ScriptBlock $ex11;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE12' -ItemText 'Aktualizuj Aplikacje' -ScriptBlock $ex12;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE13' -ItemText 'Klucz Licencyjny Windowsa' -ScriptBlock $ex13;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE14' -ItemText 'Restart do BIOSu' -ScriptBlock $ex14;	} | Out-Null;
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuAbout' -ItemText 'O mnie' -ScriptBlock $about);  
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuDonate' -ItemText 'Wsparcie' -ScriptBlock $donate);  
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExit' -ItemText 'Wyjdz' -ScriptBlock $exit); 
+}
+else {
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuBackup' -ItemText 'Backup' -ScriptBlock $backup); 
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuRestore' -ItemText 'Restore' -ScriptBlock $restore); 
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExtras' -ItemText 'Extras' -ScriptBlock $null) | %{
@@ -1290,7 +1312,7 @@ $null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE14' -ItemText 'Reboot to 
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuAbout' -ItemText 'About' -ScriptBlock $about);  
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuDonate' -ItemText 'Donate' -ScriptBlock $donate);  
 (addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExit' -ItemText 'Exit' -ScriptBlock $exit); 
-
+}
 # Hello World
 cls
 $versionShort = $versionRAW.substring(9)
@@ -1304,7 +1326,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 23.12.2023                '
+Write-Host '                          [-] Last update: 25.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
