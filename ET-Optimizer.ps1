@@ -181,6 +181,33 @@ Foreach ($control in $groupBox5.Controls){
    }
 $form.close()
 }; 
+
+function New-CheckBox {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory=$true)]
+        [string]$Location,
+        [Parameter(Mandatory=$true)]
+        [string]$Size,
+        [Parameter(Mandatory=$false)]
+        [string]$Text = '',
+        [Parameter(Mandatory=$true)]
+        [string]$TabID,
+        [Parameter(Mandatory=$false)]
+        [string]$Check
+    )
+
+    $o = New-Object Windows.Forms.CheckBox
+    $o.Location = $Location
+    $o.Size     = $Size
+    $o.Text     = $Text
+    $o.TabIndex = $TabID 
+    $o.Checked = $Check 
+    $o.Font = $Font
+
+    return $o
+}
+
 $form= New-Object Windows.Forms.Form; 
 $form.Size = New-Object System.Drawing.Size(895,500); 
 $form.StartPosition = 'CenterScreen'; 
@@ -520,673 +547,331 @@ $tooltipg5 = New-Object System.Windows.Forms.ToolTip
 $tooltipg5.SetToolTip($groupBox5, 'Non recommended or unstable. May need to be done in safe mode.');
 if ($langos -eq 'Polski') {$tooltipg5.SetToolTip($groupBox5, 'Niezalecane lub niestabilne. Mozliwa potrzeba wykonania w trybie awaryjnym.');}
 })
-$chck1 = New-Object Windows.Forms.Checkbox; 
-$chck1.Location = New-Object Drawing.Point 0,5; 
-$chck1.Size = New-Object Drawing.Point 270,25; 
-$chck1.Text = 'Disable Edge WebWidget'; 
-$chck1.TabIndex = 0;
-$chck1.Checked = $true; 
-$chck1.Font = $Font; 
-$panel1.controls.add($chck1); 
+
+$chck1 = New-CheckBox -Location '0,5' -Size '270,25' -Text 'Disable Edge WebWidget' -TabID '0' -Check '$true'
 $chck1.add_click({count_p})
-$chck2 = New-Object Windows.Forms.Checkbox; 
-$chck2.Location = New-Object Drawing.Point 0,30; 
-$chck2.Size = New-Object Drawing.Point 270,25; 
-$chck2.Text = 'Power Option to Ultimate Performance'; 
-$chck2.TabIndex = 1; 
-$chck2.Checked = $true; 
-$chck2.Font = $Font;
-$panel1.controls.add($chck2); 
+$panel1.controls.add($chck1);
+
+$chck2 = New-CheckBox -Location '0,30' -Size '270,25' -Text 'Power Option to Ultimate Performance' -TabID '1' -Check '$true'
 $chck2.add_MouseHover({
 $tooltip2 = New-Object System.Windows.Forms.ToolTip
 $tooltip2.SetToolTip($chck2, 'Setting power option to high/ultimate for best CPU performance')
 })
 $chck2.add_click({count_p})
-$chck4 = New-Object Windows.Forms.Checkbox; 
-$chck4.Location = New-Object Drawing.Point 0,55; 
-$chck4.Size = New-Object Drawing.Point 270,25; 
-$chck4.Text = 'Dual Boot Timeout 3sec'; 
-$chck4.TabIndex = 3; 
-$chck4.Checked = $true; 
-$chck4.Font = $Font;
-$panel1.controls.add($chck4); 
+$panel1.controls.add($chck2); 
+
+$chck4 = New-CheckBox -Location '0,55' -Size '270,25' -Text 'Dual Boot Timeout 3sec' -TabID '3' -Check '$true'
 $chck4.add_click({count_p})
-$chck5 = New-Object Windows.Forms.Checkbox; 
-$chck5.Location = New-Object Drawing.Point 0,80; 
-$chck5.Size = New-Object Drawing.Point 270,25; 
-$chck5.Text = 'Disable Hibernation/Fast Startup'; 
-$chck5.TabIndex = 4; 
-$chck5.Checked = $true; 
-$chck5.Font = $Font;
+$panel1.controls.add($chck4); 
+
+$chck5 = New-CheckBox -Location '0,80' -Size '270,25' -Text 'Disable Hibernation/Fast Startup' -TabID '4' -Check '$true'
+$chck5.add_click({count_p})
 $panel1.controls.add($chck5); 
 $chck5.add_MouseHover({
 $tooltip5 = New-Object System.Windows.Forms.ToolTip
 $tooltip5.SetToolTip($chck5, 'Disable Hibernation/Fast startup in Windows to free RAM from hiberfil.sys')
 })
-$chck5.add_click({count_p})
-$chck6 = New-Object Windows.Forms.Checkbox; 
-$chck6.Location = New-Object Drawing.Point 0,105; 
-$chck6.Size = New-Object Drawing.Point 280,25; 
-$chck6.Text = 'Disable Windows Insider Experiments'; 
-$chck6.TabIndex = 5; 
-$chck6.Checked = $true; 
-$chck6.Font = $Font;
-$panel1.controls.add($chck6); 
+
+$chck6 = New-CheckBox -Location '0,105' -Size '280,25' -Text 'Disable Windows Insider Experiments' -TabID '5' -Check '$true'
 $chck6.add_click({count_p})
-$chck7 = New-Object Windows.Forms.Checkbox; 
-$chck7.Location = New-Object Drawing.Point 0,130; 
-$chck7.Size = New-Object Drawing.Point 270,25; 
-$chck7.Text = 'Disable App Launch Tracking'; 
-$chck7.TabIndex = 6; 
-$chck7.Checked = $true; 
-$chck7.Font = $Font;
-$panel1.controls.add($chck7); 
+$panel1.controls.add($chck6); 
+
+$chck7 = New-CheckBox -Location '0,130' -Size '270,25' -Text 'Disable App Launch Tracking' -TabID '6' -Check '$true'
 $chck7.add_click({count_p})
-$chck8 = New-Object Windows.Forms.Checkbox; 
-$chck8.Location = New-Object Drawing.Point 0,155; 
-$chck8.Size = New-Object Drawing.Point 275,25; 
-$chck8.Text = 'Disable Powerthrottling (Intel 6gen+)'; 
-$chck8.TabIndex = 7; 
-$chck8.Checked = $true; 
-$chck8.Font = $Font;
-$panel1.controls.add($chck8); 
+$panel1.controls.add($chck7); 
+
+$chck8 = New-CheckBox -Location '0,155' -Size '270,25' -Text 'Disable Powerthrottling (Intel 6gen+)' -TabID '7' -Check '$true'
 $chck8.add_click({count_p})
-$chck9 = New-Object Windows.Forms.Checkbox; 
-$chck9.Location = New-Object Drawing.Point 0,180; 
-$chck9.Size = New-Object Drawing.Point 275,25; 
-$chck9.Text = 'Turn Off Background Apps'; 
-$chck9.TabIndex = 8; 
-$chck9.Checked = $true; 
-$chck9.Font = $Font;
-$panel1.controls.add($chck9); 
+$panel1.controls.add($chck8); 
+
+$chck9 = New-CheckBox -Location '0,180' -Size '270,25' -Text 'Turn Off Background Apps' -TabID '8' -Check '$true'
 $chck9.add_click({count_p})
-$chck10 = New-Object Windows.Forms.Checkbox; 
-$chck10.Location = New-Object Drawing.Point 0,205; 
-$chck10.Size = New-Object Drawing.Point 270,25; 
-$chck10.Text = 'Disable Sticky Keys Prompt'; 
-$chck10.TabIndex = 9; 
-$chck10.Checked = $true; 
-$chck10.Font = $Font;
-$panel1.controls.add($chck10); 
+$panel1.controls.add($chck9); 
+
+$chck10 = New-CheckBox -Location '0,205' -Size '270,25' -Text 'Disable Sticky Keys Prompt' -TabID '9' -Check '$true'
 $chck10.add_click({count_p})
-$chck11 = New-Object Windows.Forms.Checkbox; 
-$chck11.Location = New-Object Drawing.Point 0,230; 
-$chck11.Size = New-Object Drawing.Point 270,25; 
-$chck11.Text = 'Disable Activity History'; 
-$chck11.TabIndex = 10; 
-$chck11.Checked = $true; 
-$chck11.Font = $Font;
-$panel1.controls.add($chck11); 
+$panel1.controls.add($chck10); 
+
+$chck11 = New-CheckBox -Location '0,230' -Size '270,25' -Text 'Disable Activity History' -TabID '10' -Check '$true'
 $chck11.add_click({count_p})
-$chck12 = New-Object Windows.Forms.Checkbox; 
-$chck12.Location = New-Object Drawing.Point 0,255; 
-$chck12.Size = New-Object Drawing.Point 280,25; 
-$chck12.Text = 'Disable Updates for MS Store Apps'; 
-$chck12.TabIndex = 11; 
-$chck12.Checked = $true; 
-$chck12.Font = $Font;
+$panel1.controls.add($chck11); 
+
+$chck12 = New-CheckBox -Location '0,255' -Size '280,25' -Text 'Disable Updates for MS Store Apps' -TabID '11' -Check '$true'
+$chck12.add_click({count_p})
 $panel1.controls.add($chck12); 
 $chck12.add_MouseHover({
 $tooltip12 = New-Object System.Windows.Forms.ToolTip
 $tooltip12.SetToolTip($chck12, 'Disable Automatic Updates for Microsoft Store apps')
 })
-$chck12.add_click({count_p})
-$chck13 = New-Object Windows.Forms.Checkbox; 
-$chck13.Location = New-Object Drawing.Point 0,280; 
-$chck13.Size = New-Object Drawing.Point 270,25; 
-$chck13.Text = 'SmartScreen Filter for Apps: Disable'; 
-$chck13.TabIndex = 12; 
-$chck13.Checked = $true; 
-$chck13.Font = $Font;
-$panel1.controls.add($chck13); 
+
+$chck13 = New-CheckBox -Location '0,280' -Size '270,25' -Text 'SmartScreen Filter for Apps: Disable' -TabID '12' -Check '$true'
 $chck13.add_click({count_p})
-$chck14 = New-Object Windows.Forms.Checkbox; 
-$chck14.Location = New-Object Drawing.Point 0,305; 
-$chck14.Size = New-Object Drawing.Point 270,25; 
-$chck14.Text = 'Let Websites Provide Locally'; 
-$chck14.TabIndex = 13; 
-$chck14.Checked = $true; 
-$chck14.Font = $Font;
-$panel1.controls.add($chck14); 
+$panel1.controls.add($chck13); 
+
+$chck14 = New-CheckBox -Location '0,305' -Size '270,25' -Text 'Let Websites Provide Locally' -TabID '13' -Check '$true'
 $chck14.add_click({count_p})
-$chck15 = New-Object Windows.Forms.Checkbox; 
-$chck15.Location = New-Object Drawing.Point 0,330; 
-$chck15.Size = New-Object Drawing.Point 270,25; 
-$chck15.Text = 'Fix Microsoft Edge Settings'; 
-$chck15.TabIndex = 14; 
-$chck15.Checked = $true; 
-$chck15.Font = $Font;
-$panel1.controls.add($chck15); 
+$panel1.controls.add($chck14); 
+
+$chck15 = New-CheckBox -Location '0,330' -Size '270,25' -Text 'Fix Microsoft Edge Settings' -TabID '14' -Check '$true'
 $chck15.add_click({count_p})
-$chck64 = New-Object Windows.Forms.Checkbox; 
-$chck64.Location = New-Object Drawing.Point 0,355; 
-$chck64.Size = New-Object Drawing.Point 270,25; 
-$chck64.Text = 'Disable Nagle''s Alg. (Delayed ACKs)'; 
-$chck64.TabIndex = 63; 
-$chck64.Checked = $true; 
-$chck64.Font = $Font;
-$panel1.controls.add($chck64); 
+$panel1.controls.add($chck15); 
+
+$chck64 = New-CheckBox -Location '0,355' -Size '270,25' -Text 'Disable Nagle''s Alg. (Delayed ACKs)' -TabID '63' -Check '$true'
 $chck64.add_click({count_p})
-$chck65 = New-Object Windows.Forms.Checkbox; 
-$chck65.Location = New-Object Drawing.Point 0,380; 
-$chck65.Size = New-Object Drawing.Point 270,25; 
-$chck65.Text = 'CPU Priority Tweaks'; 
-$chck65.TabIndex = 64; 
-$chck65.Checked = $true; 
-$chck65.Font = $Font;
-$panel1.controls.add($chck65); 
+$panel1.controls.add($chck64); 
+
+$chck65 = New-CheckBox -Location '0,380' -Size '270,25' -Text 'CPU Priority Tweaks' -TabID '64' -Check '$true'
 $chck65.add_click({count_p})
-$chck16 = New-Object Windows.Forms.Checkbox; 
-$chck16.Location = New-Object Drawing.Point 285,05; 
-$chck16.Size = New-Object Drawing.Point 270,25; 
-$chck16.Text = 'Disable Location Sensor'; 
-$chck16.TabIndex = 15; 
-$chck16.Checked = $true; 
-$chck16.Font = $Font;
-$panel1.controls.add($chck16); 
+$panel1.controls.add($chck65); 
+
+$chck16 = New-CheckBox -Location '285,05' -Size '270,25' -Text 'Disable Location Sensor' -TabID '15' -Check '$true'
 $chck16.add_click({count_p})
-$chck17 = New-Object Windows.Forms.Checkbox; 
-$chck17.Location = New-Object Drawing.Point 285,30; 
-$chck17.Size = New-Object Drawing.Point 270,25; 
-$chck17.Text = 'Disable WiFi HotSpot Auto-Sharing'; 
-$chck17.TabIndex = 16; 
-$chck17.Checked = $true; 
-$chck17.Font = $Font;
-$panel1.controls.add($chck17); 
+$panel1.controls.add($chck16); 
+
+$chck17 = New-CheckBox -Location '285,30' -Size '270,25' -Text 'Disable WiFi HotSpot Auto-Sharing' -TabID '16' -Check '$true'
 $chck17.add_click({count_p})
-$chck18 = New-Object Windows.Forms.Checkbox; 
-$chck18.Location = New-Object Drawing.Point 285,55; 
-$chck18.Size = New-Object Drawing.Point 270,25; 
-$chck18.Text = 'Disable Shared HotSpot Connect'; 
-$chck18.TabIndex = 17; 
-$chck18.Checked = $true; 
-$chck18.Font = $Font;
-$panel1.controls.add($chck18); 
+$panel1.controls.add($chck17); 
+
+$chck18 = New-CheckBox -Location '285,55' -Size '270,25' -Text 'Disable Shared HotSpot Connect' -TabID '17' -Check '$true'
 $chck18.add_click({count_p})
-$chck19 = New-Object Windows.Forms.Checkbox; 
-$chck19.Location = New-Object Drawing.Point 285,80; 
-$chck19.Size = New-Object Drawing.Point 270,25; 
-$chck19.Text = 'Updates Notify to Schedule Restart'; 
-$chck19.TabIndex = 18; 
-$chck19.Checked = $true; 
-$chck19.Font = $Font;
+$panel1.controls.add($chck18); 
+
+$chck19 = New-CheckBox -Location '285,80' -Size '270,25' -Text 'Updates Notify to Schedule Restart' -TabID '18' -Check '$true'
+$chck19.add_click({count_p})
 $panel1.controls.add($chck19); 
 $chck19.add_MouseHover({
 $tooltip19 = New-Object System.Windows.Forms.ToolTip
 $tooltip19.SetToolTip($chck19, 'Change Windows Updates to: Notify to schedule restart')
 })
-$chck19.add_click({count_p})
-$chck20 = New-Object Windows.Forms.Checkbox; 
-$chck20.Location = New-Object Drawing.Point 285,105; 
-$chck20.Size = New-Object Drawing.Point 270,25; 
-$chck20.Text = 'P2P Update Setting to LAN (local)'; 
-$chck20.TabIndex = 19; 
-$chck20.Checked = $true; 
-$chck20.Font = $Font;
+
+$chck20 = New-CheckBox -Location '285,105' -Size '270,25' -Text 'P2P Update Setting to LAN (local)' -TabID '19' -Check '$true'
+$chck20.add_click({count_p})
 $panel1.controls.add($chck20); 
 $chck20.add_MouseHover({
 $tooltip20 = New-Object System.Windows.Forms.ToolTip
 $tooltip20.SetToolTip($chck20, 'Disable P2P Update downloads outside of local network')
 })
-$chck20.add_click({count_p})
-$chck21 = New-Object Windows.Forms.Checkbox; 
-$chck21.Location = New-Object Drawing.Point 285,130; 
-$chck21.Size = New-Object Drawing.Point 270,25; 
-$chck21.Text = 'Set Lower Shutdown Time (2sec)'; 
-$chck21.TabIndex = 20; 
-$chck21.Checked = $true; 
-$chck21.Font = $Font;
-$panel1.controls.add($chck21); 
+
+$chck21 = New-CheckBox -Location '285,130' -Size '270,25' -Text 'Set Lower Shutdown Time (2sec)' -TabID '20' -Check '$true'
 $chck21.add_click({count_p})
-$chck22 = New-Object Windows.Forms.Checkbox; 
-$chck22.Location = New-Object Drawing.Point 285,155; 
-$chck22.Size = New-Object Drawing.Point 270,25; 
-$chck22.Text = 'Remove Old Device Drivers'; 
-$chck22.TabIndex = 21; 
-$chck22.Checked = $true; 
-$chck22.Font = $Font;
-$panel1.controls.add($chck22); 
+$panel1.controls.add($chck21); 
+
+$chck22 = New-CheckBox -Location '285,155' -Size '270,25' -Text 'Remove Old Device Drivers' -TabID '21' -Check '$true'
 $chck22.add_click({count_p})
-$chck23 = New-Object Windows.Forms.Checkbox; 
-$chck23.Location = New-Object Drawing.Point 285,180; 
-$chck23.Size = New-Object Drawing.Point 270,25; 
-$chck23.Text = 'Disable Get Even More Out of...'; 
-$chck23.TabIndex = 22; 
-$chck23.Checked = $true; 
-$chck23.Font = $Font;
+$panel1.controls.add($chck22); 
+
+$chck23 = New-CheckBox -Location '285,180' -Size '270,25' -Text 'Disable Get Even More Out of...' -TabID '22' -Check '$true'
+$chck23.add_click({count_p})
 $panel1.controls.add($chck23); 
 $chck23.add_MouseHover({
 $tooltip23 = New-Object System.Windows.Forms.ToolTip
 $tooltip23.SetToolTip($chck23, 'Disable Get Even More Out of Windows Screen')
 })
-$chck23.add_click({count_p})
-$chck24 = New-Object Windows.Forms.Checkbox; 
-$chck24.Location = New-Object Drawing.Point 285,205; 
-$chck24.Size = New-Object Drawing.Point 270,25; 
-$chck24.Text = 'Disable Installing Suggested Apps'; 
-$chck24.TabIndex = 23; 
-$chck24.Checked = $true; 
-$chck24.Font = $Font;
+
+$chck24 = New-CheckBox -Location '285,205' -Size '270,25' -Text 'Disable Installing Suggested Apps' -TabID '23' -Check '$true'
+$chck24.add_click({count_p})
 $panel1.controls.add($chck24); 
 $chck24.add_MouseHover({
 $tooltip24 = New-Object System.Windows.Forms.ToolTip
 $tooltip24.SetToolTip($chck23, 'Disable automatically installing suggested apps')
 })
-$chck24.add_click({count_p})
-$chck25 = New-Object Windows.Forms.Checkbox; 
-$chck25.Location = New-Object Drawing.Point 285,230; 
-$chck25.Size = New-Object Drawing.Point 270,25; 
-$chck25.Text = 'Disable Start Menu Ads/Suggestions'; 
-$chck25.TabIndex = 24; 
-$chck25.Checked = $true; 
-$chck25.Font = $Font;
-$panel1.controls.add($chck25); 
+
+$chck25 = New-CheckBox -Location '285,230' -Size '270,25' -Text 'Disable Start Menu Ads/Suggestions' -TabID '24' -Check '$true'
 $chck25.add_click({count_p})
-$chck26 = New-Object Windows.Forms.Checkbox; 
-$chck26.Location = New-Object Drawing.Point 285,255; 
-$chck26.Size = New-Object Drawing.Point 274,25; 
-$chck26.Text = 'Disable Suggest Apps WindowsInk'; 
-$chck26.TabIndex = 25; 
-$chck26.Checked = $true; 
-$chck26.Font = $Font;
-$panel1.controls.add($chck26); 
+$panel1.controls.add($chck25); 
+
+$chck26 = New-CheckBox -Location '285,255' -Size '274,25' -Text 'Disable Suggest Apps WindowsInk' -TabID '25' -Check '$true'
 $chck26.add_click({count_p})
-$chck27 = New-Object Windows.Forms.Checkbox; 
-$chck27.Location = New-Object Drawing.Point 285,280; 
-$chck27.Size = New-Object Drawing.Point 270,25; 
-$chck27.Text = 'Disable Unnecessary Components'; 
-$chck27.TabIndex = 26; 
-$chck27.Checked = $true; 
-$chck27.Font = $Font;
+$panel1.controls.add($chck26); 
+
+$chck27 = New-CheckBox -Location '285,280' -Size '270,25' -Text 'Disable Unnecessary Components' -TabID '26' -Check '$true'
+$chck27.add_click({count_p})
 $panel1.controls.add($chck27); 
 $chck27.add_MouseHover({
 $tooltip27 = New-Object System.Windows.Forms.ToolTip
 $tooltip27.SetToolTip($chck27, 'PrintToPDFServices, Printing-XPSServices, Xps-Viewer')
 })
-$chck27.add_click({count_p})
-$chck28 = New-Object Windows.Forms.Checkbox; 
-$chck28.Location = New-Object Drawing.Point 285,305; 
-$chck28.Size = New-Object Drawing.Point 270,25; 
-$chck28.Text = 'Defender Scheduled Scan Nerf'; 
-$chck28.TabIndex = 27; 
-$chck28.Checked = $true; 
-$chck28.Font = $Font;
+
+$chck28 = New-CheckBox -Location '285,305' -Size '270,25' -Text 'Defender Scheduled Scan Nerf' -TabID '27' -Check '$true'
+$chck28.add_click({count_p})
 $panel1.controls.add($chck28); 
 $chck28.add_MouseHover({
 $tooltip28 = New-Object System.Windows.Forms.ToolTip
 $tooltip28.SetToolTip($chck28, 'Setting Windows Defender Scheduled Scan from highest to normal privileges')
 })
-$chck28.add_click({count_p})
-$chck29 = New-Object Windows.Forms.Checkbox; 
-$chck29.Location = New-Object Drawing.Point 285,330; 
-$chck29.Size = New-Object Drawing.Point 270,25; 
-$chck29.Text = 'Disable Process Mitigation'; 
-$chck29.TabIndex = 28; 
-$chck29.Checked = $true; 
-$chck29.Font = $Font;
+
+$chck29 = New-CheckBox -Location '285,330' -Size '270,25' -Text 'Disable Process Mitigation' -TabID '28' -Check '$true'
+$chck29.add_click({count_p})
 $panel1.controls.add($chck29); 
 $chck29.add_MouseHover({
 $tooltip29 = New-Object System.Windows.Forms.ToolTip
 $tooltip29.SetToolTip($chck29, 'Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit')
 })
-$chck29.add_click({count_p})
-$chck30 = New-Object Windows.Forms.Checkbox; 
-$chck30.Location = New-Object Drawing.Point 285,355; 
-$chck30.Size = New-Object Drawing.Point 270,25; 
-$chck30.Text = 'Defragment Indexing Service File'; 
-$chck30.TabIndex = 29; 
-$chck30.Checked = $true; 
-$chck30.Font = $Font;
-$panel1.controls.add($chck30); 
+
+$chck30 = New-CheckBox -Location '285,355' -Size '270,25' -Text 'Defragment Indexing Service File' -TabID '29' -Check '$true'
+$chck30.add_click({count_p})
 $chck30.add_MouseHover({
 $tooltip30 = New-Object System.Windows.Forms.ToolTip
 $tooltip30.SetToolTip($chck30, 'Defragmenting the Indexing Service database file')
 }) 
-$chck30.add_click({count_p})
-$chck66 = New-Object Windows.Forms.Checkbox; 
-$chck66.Location = New-Object Drawing.Point 10,100; 
-$chck66.Size = New-Object Drawing.Point 270,25; 
-$chck66.Text = 'Disable Spectre/Meltdown Protection'; 
-$chck66.TabIndex = 65; 
-$chck66.Checked = $false; 
-$chck66.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
-$chck66.Font = $Font;
+$panel1.Controls.Add($chck30)
+
+$chck66 = New-CheckBox -Location '10,100' -Size '270,25' -Text 'Disable Spectre/Meltdown Protection' -TabID '65'
 $groupBox5.controls.add($chck66); 
 $chck66.add_MouseHover({
 $tooltip66 = New-Object System.Windows.Forms.ToolTip
 $tooltip66.SetToolTip($chck66, 'These are important secure patches although it decrease system performance.')
 })
 
-
-
-$chck31 = New-Object Windows.Forms.Checkbox; 
-$chck31.Location = New-Object Drawing.Point 0,5; 
-$chck31.Size = New-Object Drawing.Point 270,25; 
-$chck31.Text = 'Disable Telemetry Scheduled Tasks'; 
-$chck31.TabIndex = 30; 
-$chck31.Checked = $true; 
-$chck31.Font = $Font;
-$panel2.controls.add($chck31); 
+$chck31 = New-CheckBox -Location '0,5' -Size '270,25' -Text 'Disable Telemetry Scheduled Tasks' -TabID '30' -Check '$true'
 $chck31.add_click({count_s})
-$chck32 = New-Object Windows.Forms.Checkbox; 
-$chck32.Location = New-Object Drawing.Point 0,30; 
-$chck32.Size = New-Object Drawing.Point 270,25; 
-$chck32.Text = 'Remove Telemetry/Data Collection'; 
-$chck32.TabIndex = 31; 
-$chck32.Checked = $true; 
-$chck32.Font = $Font;
-$panel2.controls.add($chck32); 
+$panel2.controls.add($chck31); 
+
+$chck32 = New-CheckBox -Location '0,30' -Size '270,25' -Text 'Remove Telemetry/Data Collection' -TabID '31' -Check '$true'
 $chck32.add_click({count_s})
-$chck33 = New-Object Windows.Forms.Checkbox; 
-$chck33.Location = New-Object Drawing.Point 0,55; 
-$chck33.Size = New-Object Drawing.Point 270,25; 
-$chck33.Text = 'Disable PowerShell Telemetry'; 
-$chck33.TabIndex = 32; 
-$chck33.Checked = $true; 
-$chck33.Font = $Font;
-$panel2.controls.add($chck33); 
+$panel2.controls.add($chck32); 
+
+$chck33 = New-CheckBox -Location '0,55' -Size '270,25' -Text 'Disable PowerShell Telemetry' -TabID '32' -Check '$true'
 $chck33.add_click({count_s})
-$chck34 = New-Object Windows.Forms.Checkbox; 
-$chck34.Location = New-Object Drawing.Point 0,80; 
-$chck34.Size = New-Object Drawing.Point 270,25; 
-$chck34.Text = 'Disable Skype Telemetry'; 
-$chck34.TabIndex = 33; 
-$chck34.Checked = $true; 
-$chck34.Font = $Font;
-$panel2.controls.add($chck34); 
+$panel2.controls.add($chck33); 
+
+$chck34 = New-CheckBox -Location '0,80' -Size '270,25' -Text 'Disable Skype Telemetry' -TabID '33' -Check '$true'
 $chck34.add_click({count_s})
-$chck35 = New-Object Windows.Forms.Checkbox; 
-$chck35.Location = New-Object Drawing.Point 0,105; 
-$chck35.Size = New-Object Drawing.Point 270,25; 
-$chck35.Text = 'Disable Media Player Usage Reports'; 
-$chck35.TabIndex = 34; 
-$chck35.Checked = $true; 
-$chck35.Font = $Font;
-$panel2.controls.add($chck35); 
+$panel2.controls.add($chck34); 
+
+$chck35 = New-CheckBox -Location '0,105' -Size '270,25' -Text 'Disable Media Player Usage Reports' -TabID '34' -Check '$true'
 $chck35.add_click({count_s})
-$chck36 = New-Object Windows.Forms.Checkbox; 
-$chck36.Location = New-Object Drawing.Point 0,130; 
-$chck36.Size = New-Object Drawing.Point 270,25; 
-$chck36.Text = 'Disable Mozilla Telemetry'; 
-$chck36.TabIndex = 35; 
-$chck36.Checked = $true; 
-$chck36.Font = $Font;
-$panel2.controls.add($chck36); 
+$panel2.controls.add($chck35); 
+
+$chck36 = New-CheckBox -Location '0,130' -Size '270,25' -Text 'Disable Mozilla Telemetry' -TabID '35' -Check '$true'
 $chck36.add_click({count_s})
-$chck37 = New-Object Windows.Forms.Checkbox; 
-$chck37.Location = New-Object Drawing.Point 0,155; 
-$chck37.Size = New-Object Drawing.Point 270,25; 
-$chck37.Text = 'Disable Apps Use My Advertising ID'; 
-$chck37.TabIndex = 36; 
-$chck37.Checked = $true; 
-$chck37.Font = $Font;
-$panel2.controls.add($chck37); 
+$panel2.controls.add($chck36); 
+
+$chck37 = New-CheckBox -Location '0,155' -Size '270,25' -Text 'Disable Apps Use My Advertising ID' -TabID '35' -Check '$true'
 $chck37.add_click({count_s})
-$chck38 = New-Object Windows.Forms.Checkbox; 
-$chck38.Location = New-Object Drawing.Point 0,180; 
-$chck38.Size = New-Object Drawing.Point 270,25; 
-$chck38.Text = 'Disable Send Info About How I Write'; 
-$chck38.TabIndex = 37; 
-$chck38.Checked = $true; 
-$chck38.Font = $Font;
-$panel2.controls.add($chck38); 
+$panel2.controls.add($chck37); 
+
+$chck38 = New-CheckBox -Location '0,180' -Size '270,25' -Text 'Disable Send Info About How I Write' -TabID '37' -Check '$true'
 $chck38.add_click({count_s})
-$chck39 = New-Object Windows.Forms.Checkbox; 
-$chck39.Location = New-Object Drawing.Point 0,205; 
-$chck39.Size = New-Object Drawing.Point 270,25; 
-$chck39.Text = 'Disable Handwriting Recognition'; 
-$chck39.TabIndex = 38; 
-$chck39.Checked = $true; 
-$chck39.Font = $Font;
-$panel2.controls.add($chck39); 
+$panel2.controls.add($chck38); 
+
+$chck39 = New-CheckBox -Location '0,205' -Size '270,25' -Text 'Disable Handwriting Recognition' -TabID '38' -Check '$true'
 $chck39.add_click({count_s})
-$chck40 = New-Object Windows.Forms.Checkbox; 
-$chck40.Location = New-Object Drawing.Point 0,230; 
-$chck40.Size = New-Object Drawing.Point 270,25; 
-$chck40.Text = 'Disable Watson Malware Reports'; 
-$chck40.TabIndex = 39; 
-$chck40.Checked = $true; 
-$chck40.Font = $Font;
-$panel2.controls.add($chck40); 
+$panel2.controls.add($chck39); 
+
+$chck40 = New-CheckBox -Location '0,230' -Size '270,25' -Text 'Disable Watson Malware Reports' -TabID '39' -Check '$true'
 $chck40.add_click({count_s})
-$chck41 = New-Object Windows.Forms.Checkbox; 
-$chck41.Location = New-Object Drawing.Point 0,255; 
-$chck41.Size = New-Object Drawing.Point 270,25; 
-$chck41.Text = 'Disable Malware Diagnostic Data'; 
-$chck41.TabIndex = 40; 
-$chck41.Checked = $true; 
-$chck41.Font = $Font;
-$panel2.controls.add($chck41); 
+$panel2.controls.add($chck40); 
+
+$chck41 = New-CheckBox -Location '0,255' -Size '270,25' -Text 'Disable Malware Diagnostic Data' -TabID '40' -Check '$true'
 $chck41.add_click({count_s})
-$chck42 = New-Object Windows.Forms.Checkbox; 
-$chck42.Location = New-Object Drawing.Point 0,280; 
-$chck42.Size = New-Object Drawing.Point 270,25; 
-$chck42.Text = 'Disable Reporting to MS MAPS'; 
-$chck42.TabIndex = 41; 
-$chck42.Checked = $true; 
-$chck42.Font = $Font;
-$panel2.controls.add($chck42); 
+$panel2.controls.add($chck41); 
+
+$chck42 = New-CheckBox -Location '0,280' -Size '270,25' -Text 'Disable Reporting to MS MAPS' -TabID '41' -Check '$true'
 $chck42.add_click({count_s})
-$chck43 = New-Object Windows.Forms.Checkbox; 
-$chck43.Location = New-Object Drawing.Point 0,305; 
-$chck43.Size = New-Object Drawing.Point 270,25; 
-$chck43.Text = 'Disable Spynet Defender Reporting'; 
-$chck43.TabIndex = 42; 
-$chck43.Checked = $true; 
-$chck43.Font = $Font;
-$panel2.controls.add($chck43); 
+$panel2.controls.add($chck42); 
+
+$chck43 = New-CheckBox -Location '0,305' -Size '270,25' -Text 'Disable Spynet Defender Reporting' -TabID '42' -Check '$true'
 $chck43.add_click({count_s})
-$chck44 = New-Object Windows.Forms.Checkbox; 
-$chck44.Location = New-Object Drawing.Point 0,330; 
-$chck44.Size = New-Object Drawing.Point 270,25; 
-$chck44.Text = 'Do Not Send Malware Samples'; 
-$chck44.TabIndex = 43; 
-$chck44.Checked = $true; 
-$chck44.Font = $Font;
-$panel2.controls.add($chck44); 
+$panel2.controls.add($chck43); 
+
+$chck44 = New-CheckBox -Location '0,330' -Size '270,25' -Text 'Do Not Send Malware Samples' -TabID '43' -Check '$true'
 $chck44.add_click({count_s})
-$chck45 = New-Object Windows.Forms.Checkbox; 
-$chck45.Location = New-Object Drawing.Point 0,355; 
-$chck45.Size = New-Object Drawing.Point 270,25; 
-$chck45.Text = 'Disable Sending Typing Samples'; 
-$chck45.TabIndex = 44; 
-$chck45.Checked = $true; 
-$chck45.Font = $Font;
-$panel2.controls.add($chck45); 
+$panel2.controls.add($chck44); 
+
+$chck45 = New-CheckBox -Location '0,355' -Size '270,25' -Text 'Disable Sending Typing Samples' -TabID '44' -Check '$true'
 $chck45.add_click({count_s})
-$chck46 = New-Object Windows.Forms.Checkbox; 
-$chck46.Location = New-Object Drawing.Point 0,380; 
-$chck46.Size = New-Object Drawing.Point 270,25; 
-$chck46.Text = 'Disable Sending Contacts to MS'; 
-$chck46.TabIndex = 45; 
-$chck46.Checked = $true; 
-$chck46.Font = $Font;
-$panel2.controls.add($chck46); 
+$panel2.controls.add($chck45); 
+
+$chck46 = New-CheckBox -Location '0,380' -Size '270,25' -Text 'Disable Sending Contacts to MS' -TabID '45' -Check '$true'
 $chck46.add_click({count_s})
-$chck47 = New-Object Windows.Forms.Checkbox; 
-$chck47.Location = New-Object Drawing.Point 0,405; 
-$chck47.Size = New-Object Drawing.Point 270,25; 
-$chck47.Text = 'Disable Cortana'; 
-$chck47.TabIndex = 46; 
-$chck47.Checked = $true; 
-$chck47.Font = $Font;
-$panel2.controls.add($chck47); 
+$panel2.controls.add($chck46); 
+
+$chck47 = New-CheckBox -Location '0,405' -Size '270,25' -Text 'Disable Cortana' -TabID '46' -Check '$true'
 $chck47.add_click({count_s})
-$chck48 = New-Object Windows.Forms.Checkbox; 
-$chck48.Location = New-Object Drawing.Point 0,5; 
-$chck48.Size = New-Object Drawing.Point 270,25; 
-$chck48.Text = 'Show File Extensions in Explorer'; 
-$chck48.TabIndex = 47; 
-$chck48.Checked = $true; 
-$chck48.Font = $Font;
-$panel3.controls.add($chck48); 
+$panel2.controls.add($chck47); 
+
+$chck48 = New-CheckBox -Location '0,5' -Size '270,25' -Text 'Show File Extensions in Explorer' -TabID '47' -Check '$true'
 $chck48.add_click({count_v})
-$chck49 = New-Object Windows.Forms.Checkbox; 
-$chck49.Location = New-Object Drawing.Point 0,30; 
-$chck49.Size = New-Object Drawing.Point 270,25; 
-$chck49.Text = 'Disable Transparency on Taskbar'; 
-$chck49.TabIndex = 48; 
-$chck49.Checked = $true; 
-$chck49.Font = $Font;
-$panel3.controls.add($chck49); 
+$panel3.controls.add($chck48); 
+
+$chck49 = New-CheckBox -Location '0,30' -Size '270,25' -Text 'Disable Transparency on Taskbar' -TabID '48' -Check '$true'
 $chck49.add_click({count_v})
-$chck50 = New-Object Windows.Forms.Checkbox; 
-$chck50.Location = New-Object Drawing.Point 0,55; 
-$chck50.Size = New-Object Drawing.Point 270,25; 
-$chck50.Text = 'Disable Windows Animations'; 
-$chck50.TabIndex = 49; 
-$chck50.Checked = $true; 
-$chck50.Font = $Font;
-$panel3.controls.add($chck50); 
+$panel3.controls.add($chck49); 
+
+$chck50 = New-CheckBox -Location '0,55' -Size '270,25' -Text 'Disable Windows Animations' -TabID '49' -Check '$true'
 $chck50.add_click({count_v})
-$chck51 = New-Object Windows.Forms.Checkbox; 
-$chck51.Location = New-Object Drawing.Point 0,80; 
-$chck51.Size = New-Object Drawing.Point 270,25; 
-$chck51.Text = 'Disable MRU lists (jump lists)'; 
-$chck51.TabIndex = 50; 
-$chck51.Checked = $true; 
-$chck51.Font = $Font;
-$panel3.controls.add($chck51); 
+$panel3.controls.add($chck50); 
+
+$chck51 = New-CheckBox -Location '0,80' -Size '270,25' -Text 'Disable MRU lists (jump lists)' -TabID '50' -Check '$true'
 $chck51.add_click({count_v})
-$chck52 = New-Object Windows.Forms.Checkbox; 
-$chck52.Location = New-Object Drawing.Point 0,105; 
-$chck52.Size = New-Object Drawing.Point 270,25; 
-$chck52.Text = 'Set Search Box to Icon Only'; 
-$chck52.TabIndex = 51; 
-$chck52.Checked = $true; 
-$chck52.Font = $Font;
-$panel3.controls.add($chck52);
+$panel3.controls.add($chck51); 
+
+$chck52 = New-CheckBox -Location '0,105' -Size '270,25' -Text 'Set Search Box to Icon Only)' -TabID '51' -Check '$true'
 $chck52.add_click({count_v})
-$chck53 = New-Object Windows.Forms.Checkbox; 
-$chck53.Location = New-Object Drawing.Point 0,130; 
-$chck53.Size = New-Object Drawing.Point 270,25; 
-$chck53.Text = 'Explorer on Start on This PC'; 
-$chck53.TabIndex = 52; 
-$chck53.Checked = $true; 
-$chck53.Font = $Font;
-$panel3.controls.add($chck53); 
+$panel3.controls.add($chck52);
+
+$chck53 = New-CheckBox -Location '0,130' -Size '270,25' -Text 'Explorer on Start on This PC' -TabID '52' -Check '$true'
 $chck53.add_click({count_v})
-$chck54 = New-Object Windows.Forms.Checkbox; 
-$chck54.Location = New-Object Drawing.Point 0,05; 
-$chck54.Size = New-Object Drawing.Point 250,25; 
-$chck54.Text = 'Remove Windows Game Bar/DVR'; 
-$chck54.TabIndex = 53; 
-$chck54.Checked = $true; 
-$chck54.Font = $Font;
-$panel4.controls.add($chck54);  
+$panel3.controls.add($chck53); 
+
+$chck54 = New-CheckBox -Location '0,05' -Size '250,25' -Text 'Remove Windows Game Bar/DVR' -TabID '53' -Check '$true'
 $chck54.add_click({count_o})
-$chck55 = New-Object Windows.Forms.Checkbox; 
-$chck55.Location = New-Object Drawing.Point 0,405; 
-$chck55.Size = New-Object Drawing.Point 270,25; 
-$chck55.Text = 'Enable Service Tweaks'; 
-$chck55.TabIndex = 54; 
-$chck55.Checked = $true; 
-$chck55.Font = $Font;
+$panel4.controls.add($chck54);  
+
+$chck55 = New-CheckBox -Location '0,405' -Size '270,25' -Text 'Enable Service Tweaks' -TabID '54' -Check '$true'
+$chck55.add_click({count_p})
 $panel1.controls.add($chck55); 
 $chck55.add_MouseHover({
 $tooltip55 = New-Object System.Windows.Forms.ToolTip
 $tooltip55.SetToolTip($chck55, 'More details on github.com/semazurek ')
 })
-$chck55.add_click({count_p})
-$chck56 = New-Object Windows.Forms.Checkbox; 
-$chck56.Location = New-Object Drawing.Point 285,380; 
-$chck56.Size = New-Object Drawing.Point 270,25; 
-$chck56.Text = 'Remove Bloatware (Preinstalled)'; 
-$chck56.TabIndex = 55; 
-$chck56.Checked = $true; 
-$chck56.Font = $Font;
+
+$chck56 = New-CheckBox -Location '285,380' -Size '270,25' -Text 'Remove Bloatware (Preinstalled)' -TabID '55' -Check '$true'
+$chck56.add_click({count_p})
 $panel1.controls.add($chck56);
 $chck56.add_MouseHover({
 $tooltip56 = New-Object System.Windows.Forms.ToolTip
 $tooltip56.SetToolTip($chck56, 'More details on github.com/semazurek ')
 })
-$chck56.add_click({count_p})
-$chck57 = New-Object Windows.Forms.Checkbox; 
-$chck57.Location = New-Object Drawing.Point 285,405; 
-$chck57.Size = New-Object Drawing.Point 270,25; 
-$chck57.Text = 'Disable Unnecessary Startup Apps'; 
-$chck57.TabIndex = 56; 
-$chck57.Checked = $true; 
-$chck57.Font = $Font;
+
+$chck57 = New-CheckBox -Location '285,405' -Size '270,25' -Text 'Disable Unnecessary Startup Apps' -TabID '56' -Check '$true'
+$chck57.add_click({count_p})
 $panel1.controls.add($chck57); 
 $chck57.add_MouseHover({
 $tooltip57 = New-Object System.Windows.Forms.ToolTip
 $tooltip57.SetToolTip($chck57, "Java Update Checker x64 `n Mini Partition Tool Wizard Updater `n Teams Machine Installer `n Cisco Meeting Daemon `n Adobe Reader Speed Launcher `n CCleaner Smart Cleaning/Monitor `n Spotify Web Helper `n Gaijin.Net Updater `n Microsoft Teams Update `n Google Update `n Microsoft Edge Update `n BitTorrent Bleep `n Skype `n Adobe Update Startup Utility `n iTunes Helper `n CyberLink Update Utility `n MSI Live Update `n Wondershare Helper Compact `n Cisco AnyConnect Secure Mobility Agent `n Wargaming.net Game Center `n Skype for Desktop `n Gog Galaxy `n Epic Games Launcher `n Origin `n Steam `n Opera Browser Assistant `n uTorrent `n Skype for Business `n Google Chrome Installer `n Microsoft Edge Installer `n Discord Update `n Blitz")
 })
-$chck57.add_click({count_p})
-$chck58 = New-Object Windows.Forms.Checkbox; 
-$chck58.Location = New-Object Drawing.Point 0,30; 
-$chck58.Size = New-Object Drawing.Point 250,25; 
-$chck58.Text = 'Clean Temp/Cache/Prefetch/Logs'; 
-$chck58.TabIndex = 57; 
-$chck58.Checked = $true; 
-$chck58.Font = $Font;
-$panel4.controls.add($chck58); 
-$chck58.add_click({count_o})
-$chck59 = New-Object Windows.Forms.Checkbox; 
-$chck59.Location = New-Object Drawing.Point 0,130; 
-$chck59.Size = New-Object Drawing.Point 250,25; 
-$chck59.Text = 'Remove News and Interests/Widgets'; 
-$chck59.TabIndex = 58; 
-$chck59.Checked = $false; 
-$chck59.Font = $Font;
-$panel4.controls.add($chck59); 
-$chck59.add_click({count_o})
-$chck60 = New-Object Windows.Forms.Checkbox; 
-$chck60.Location = New-Object Drawing.Point 10,75; 
-$chck60.Size = New-Object Drawing.Point 270,25; 
-$chck60.Text = 'Remove Microsoft OneDrive'; 
-$chck60.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
-$chck60.TabIndex = 59; 
-$chck60.Checked = $false; 
-$chck60.Font = $Font;
-$groupBox5.controls.add($chck60); 
-$chck61 = New-Object Windows.Forms.Checkbox; 
-$chck61.Location = New-Object Drawing.Point 10,25; 
-$chck61.Size = New-Object Drawing.Point 270,25; 
-$chck61.Text = 'Disable Xbox Services'; 
-$chck61.TabIndex = 60; 
-$chck61.Checked = $false;
-$chck61.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor) 
-$chck61.Font = $Font;
-$groupBox5.controls.add($chck61); 
-$chck62 = New-Object Windows.Forms.Checkbox; 
-$chck62.Location = New-Object Drawing.Point 10,50; 
-$chck62.Size = New-Object Drawing.Point 270,25; 
-$chck62.Text = 'Enable Fast/Secure DNS (1.1.1.1)'; 
-$chck62.TabIndex = 61; 
-$chck62.Checked = $false; 
-$chck62.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($expercolor)
-$chck62.Font = $Font;
-$groupBox5.controls.add($chck62); 
-$chck63 = New-Object Windows.Forms.Checkbox; 
-$chck63.Location = New-Object Drawing.Point 0,80; 
-$chck63.Size = New-Object Drawing.Point 250,25; 
-$chck63.Text = 'Scan for Adware (AdwCleaner)'; 
-$chck63.TabIndex = 62; 
-$chck63.Checked = $false; 
-$chck63.Font = $Font;
-$panel4.controls.add($chck63); 
-$chck63.add_click({count_o})
 
-$chck68 = New-Object Windows.Forms.Checkbox; 
-$chck68.Location = New-Object Drawing.Point 0,105; 
-$chck68.Size = New-Object Drawing.Point 250,25; 
-$chck68.Text = 'Clean WinSxS Folder'; 
-$chck68.TabIndex = 67; 
-$chck68.Checked = $false;
-$chck68.Font = $Font;
-$panel4.controls.add($chck68); 
+$chck58 = New-CheckBox -Location '0,30' -Size '250,25' -Text 'Clean Temp/Cache/Prefetch/Logs' -TabID '57' -Check '$true'
+$chck58.add_click({count_o})
+$panel4.controls.add($chck58); 
+
+$chck59 = New-CheckBox -Location '0,130' -Size '250,25' -Text 'Remove News and Interests/Widgets' -TabID '58'
+$chck59.add_click({count_o})
+$panel4.controls.add($chck59); 
+
+$chck60 = New-CheckBox -Location '10,75' -Size '270,25' -Text 'Remove Microsoft OneDrive' -TabID '59'
+$groupBox5.controls.add($chck60); 
+
+$chck61 = New-CheckBox -Location '10,25' -Size '270,25' -Text 'Disable Xbox Services' -TabID '60'
+$groupBox5.controls.add($chck61); 
+
+$chck62 = New-CheckBox -Location '10,50' -Size '270,25' -Text 'Enable Fast/Secure DNS (1.1.1.1)' -TabID '61'
+$groupBox5.controls.add($chck62); 
+
+$chck63 = New-CheckBox -Location '0,80' -Size '250,25' -Text 'Scan for Adware (AdwCleaner)' -TabID '62'
+$chck63.add_click({count_o})
+$panel4.controls.add($chck63); 
+
+$chck68 = New-CheckBox -Location '0,105' -Size '250,25' -Text 'Clean WinSxS Folder' -TabID '67'
 $chck68.add_click({count_o})
-$chck3 = New-Object Windows.Forms.Checkbox; 
-$chck3.Location = New-Object Drawing.Point 0,55;
-$chck3.Size = New-Object Drawing.Point 250,25; 
-$chck3.Text = 'Split Threshold for Svchost'; 
-$chck3.TabIndex = 2; 
-$chck3.Checked = $true;
-$chck3.Font = $Font;
-$panel4.controls.add($chck3); 
+$panel4.controls.add($chck68); 
+
+$chck3 = New-CheckBox -Location '0,55' -Size '250,25' -Text 'Split Threshold for Svchost' -TabID '2' -Check '$true'
 $chck3.add_click({count_o})
+$panel4.controls.add($chck3); 
+
 count_p;
 count_v;
 count_s;
@@ -1326,7 +1011,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 25.12.2023                '
+Write-Host '                          [-] Last update: 26.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -2602,6 +2287,7 @@ Write-Host "";Write-Host "";
 #MsgBox information
 Add-Type -AssemblyName PresentationCore,PresentationFramework
 $msgBody = "Everything has been done. Reboot is recommended."
+if ($langos -eq 'Polski') {$msgBody = "Zakonczono. Zalecane jest ponowne uruchomienie."}
 $msgTitle = $versionRAW
 $msgButton = 'OK'
 $msgImage = 'Information'
