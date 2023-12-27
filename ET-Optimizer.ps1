@@ -218,6 +218,7 @@ $form.StartPosition = [System.Windows.Forms.FormStartPosition]::CenterScreen;
 $form.MinimizeBox = $false; 
 $form.MaximizeBox = $false; 
 $Font = New-Object System.Drawing.Font('Consolas',9,[System.Drawing.FontStyle]::Regular); 
+$ButtonFont = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
 $form.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor)
 $form.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 $form.Font = $Font; 
@@ -232,7 +233,7 @@ $B_close.text = 'Start';
 $B_close.FlatStyle = 'Flat'
 $B_close.Location = New-Object Drawing.Point 660,400; 
 $B_close.Size = New-Object Drawing.Point 120,50;
-$B_close.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_close.Font = $ButtonFont
 $B_close.add_click({do_start}); $form.controls.add($B_close); 
 $B_checkall = New-Object Windows.Forms.Button; 
 $B_checkall.text = 'Select All'; 
@@ -287,7 +288,7 @@ $B_uncheckall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectionc
 $B_uncheckall.Location = New-Object Drawing.Point 510,400; 
 $B_uncheckall.Size = New-Object Drawing.Point 140,50;
 $B_uncheckall.FlatStyle = 'Flat'
-$B_uncheckall.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_uncheckall.Font = $ButtonFont
 $B_uncheckall.add_click({
 Foreach ($control in $panel1.Controls){
        $objectType = $control.GetType().Name
@@ -339,7 +340,7 @@ if ($langos -eq 'Polski') {$B_performanceall.text = 'Wydajnosc'; }
 $B_performanceall.Location = New-Object Drawing.Point 110,400; 
 $B_performanceall.Size = New-Object Drawing.Point 130,50;
 $B_performanceall.FlatStyle = 'Flat'
-$B_performanceall.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_performanceall.Font = $ButtonFont
 $B_performanceall.add_click({
 Foreach ($control in $panel1.Controls){
        $objectType = $control.GetType().Name
@@ -359,7 +360,7 @@ $B_performanceoff.Location = New-Object Drawing.Point 110,400;
 $B_performanceoff.Size = New-Object Drawing.Point 130,50;
 $B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_performanceoff.FlatStyle = 'Flat'
-$B_performanceoff.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_performanceoff.Font = $ButtonFont
 $B_performanceoff.add_click({
 Foreach ($control in $panel1.Controls){
        $objectType = $control.GetType().Name
@@ -378,7 +379,7 @@ if ($langos -eq 'Polski') {$B_visualall.text = 'Wizualne'; }
 $B_visualall.Location = New-Object Drawing.Point 250,400; 
 $B_visualall.Size = New-Object Drawing.Point 120,50;
 $B_visualall.FlatStyle = 'Flat'
-$B_visualall.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_visualall.Font = $ButtonFont
 $B_visualall.add_click({
 Foreach ($control in $panel3.Controls){
        $objectType = $control.GetType().Name
@@ -398,7 +399,7 @@ $B_visualoff.Location = New-Object Drawing.Point 250,400;
 $B_visualoff.Size = New-Object Drawing.Point 120,50;
 $B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_visualoff.FlatStyle = 'Flat'
-$B_visualoff.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_visualoff.Font = $ButtonFont
 $B_visualoff.add_click({
 Foreach ($control in $panel3.Controls){
        $objectType = $control.GetType().Name
@@ -417,7 +418,7 @@ if ($langos -eq 'Polski') {$B_privacyall.text = 'Prywatnosc'; }
 $B_privacyall.Location = New-Object Drawing.Point 380,400; 
 $B_privacyall.Size = New-Object Drawing.Point 120,50;
 $B_privacyall.FlatStyle = 'Flat'
-$B_privacyall.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_privacyall.Font = $ButtonFont
 $B_privacyall.add_click({
 Foreach ($control in $panel2.Controls){
        $objectType = $control.GetType().Name
@@ -437,7 +438,7 @@ $B_privacyoff.Location = New-Object Drawing.Point 380,400;
 $B_privacyoff.Size = New-Object Drawing.Point 120,50;
 $B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_privacyoff.FlatStyle = 'Flat'
-$B_privacyoff.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
+$B_privacyoff.Font = $ButtonFont
 $B_privacyoff.add_click({
 Foreach ($control in $panel2.Controls){
        $objectType = $control.GetType().Name
@@ -955,49 +956,69 @@ $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 [scriptblock]$ex13= {echo Windows_License_Key: $licensekey > C:\ProgramData\verwin.txt;start notepad C:\ProgramData\verwin.txt};
 [scriptblock]$ex14= {shutdown /r /fw /t 1};
 if ($langos -eq 'Polski') {
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuBackup' -ItemText 'Kopia Zapasowa' -ScriptBlock $backup); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuRestore' -ItemText 'Przywracanie' -ScriptBlock $restore); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExtras' -ItemText 'Dodatki' -ScriptBlock $null) | %{
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE1' -ItemText 'Defragmentacja Dysku' -ScriptBlock $ex1;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE2' -ItemText 'Cleanmgr' -ScriptBlock $ex2;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE3' -ItemText 'Msconfig' -ScriptBlock $ex3;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE4' -ItemText 'Panel Sterowania' -ScriptBlock $ex4;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE5' -ItemText 'Menedzer Urzadzen' -ScriptBlock $ex5;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE6' -ItemText 'UAC Ustawienia' -ScriptBlock $ex6;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE7' -ItemText 'Msinfo32' -ScriptBlock $ex7;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE8' -ItemText 'Uslugi' -ScriptBlock $ex8;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE9' -ItemText 'Pulpit Zdalny' -ScriptBlock $ex9;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE10' -ItemText 'Podglad Zdarzen' -ScriptBlock $ex10;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE11' -ItemText 'Reset Sieci' -ScriptBlock $ex11;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE12' -ItemText 'Aktualizuj Aplikacje' -ScriptBlock $ex12;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE13' -ItemText 'Klucz Licencyjny Windowsa' -ScriptBlock $ex13;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE14' -ItemText 'Restart do BIOSu' -ScriptBlock $ex14;	} | Out-Null;
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuAbout' -ItemText 'O mnie' -ScriptBlock $about);  
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuDonate' -ItemText 'Wsparcie' -ScriptBlock $donate);  
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExit' -ItemText 'Wyjdz' -ScriptBlock $exit); 
+$mnuBackupT = 'Kopia Zapasowa'
+$mnuRestoreT = 'Przywracanie'
+$mnuExtrasT = 'Dodatki'
+$mnuE1T = 'Defragmentacja Dysku'
+$mnuE2T = 'Cleanmgr'
+$mnuE3T = 'Msconfig'
+$mnuE4T = 'Panel Sterowania'
+$mnuE5T = 'Menedzer Urzadzen'
+$mnuE6T = 'UAC Ustawienia'
+$mnuE7T = 'Msinfo32'
+$mnuE8T = 'Uslugi'
+$mnuE9T = 'Pulpit Zdalny'
+$mnuE10T = 'Podglad Zdarzen'
+$mnuE11T = 'Reset Sieci'
+$mnuE12T = 'Aktualizuj Aplikacje'
+$mnuE13T = 'Klucz Licencyjny Windowsa'
+$mnuE14T = 'Restart do BIOSu'
+$mnuAboutT = 'O mnie'
+$mnuDonateT = 'Wsparcie'  
+$mnuExitT = 'Wyjdz'
 }
 else {
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuBackup' -ItemText 'Backup' -ScriptBlock $backup); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuRestore' -ItemText 'Restore' -ScriptBlock $restore); 
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExtras' -ItemText 'Extras' -ScriptBlock $null) | %{
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE1' -ItemText 'Disk Defragmenter' -ScriptBlock $ex1;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE2' -ItemText 'Cleanmgr' -ScriptBlock $ex2;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE3' -ItemText 'Msconfig' -ScriptBlock $ex3;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE4' -ItemText 'Control Panel' -ScriptBlock $ex4;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE5' -ItemText 'Device Manager' -ScriptBlock $ex5;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE6' -ItemText 'UAC Settings' -ScriptBlock $ex6;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE7' -ItemText 'Msinfo32' -ScriptBlock $ex7;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE8' -ItemText 'Services' -ScriptBlock $ex8;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE9' -ItemText 'Remote Desktop' -ScriptBlock $ex9;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE10' -ItemText 'Event Viewer' -ScriptBlock $ex10;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE11' -ItemText 'Reset Network' -ScriptBlock $ex11;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE12' -ItemText 'Update Applications' -ScriptBlock $ex12;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE13' -ItemText 'Windows License Key' -ScriptBlock $ex13;
-$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE14' -ItemText 'Reboot to BIOS' -ScriptBlock $ex14;	} | Out-Null;
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuAbout' -ItemText 'About' -ScriptBlock $about);  
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuDonate' -ItemText 'Donate' -ScriptBlock $donate);  
-(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExit' -ItemText 'Exit' -ScriptBlock $exit); 
+$mnuBackupT = 'Backup'
+$mnuRestoreT = 'Restore'
+$mnuExtrasT = 'Extras'
+$mnuE1T = 'Disk Defragmenter'
+$mnuE2T = 'Cleanmgr'
+$mnuE3T = 'Msconfig'
+$mnuE4T = 'Control Panel'
+$mnuE5T = 'Device Manager'
+$mnuE6T = 'UAC Settings'
+$mnuE7T = 'Msinfo32'
+$mnuE8T = 'Services'
+$mnuE9T = 'Remote Desktop'
+$mnuE10T = 'Event Viewer'
+$mnuE11T = 'Reset Network'
+$mnuE12T = 'Update Applications'
+$mnuE13T = 'Windows License Key'
+$mnuE14T = 'Reboot to BIOS'
+$mnuAboutT = 'About'
+$mnuDonateT = 'Donate'  
+$mnuExitT = 'Exit'
 }
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuBackup' -ItemText $mnuBackupT -ScriptBlock $backup); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuRestore' -ItemText $mnuRestoreT -ScriptBlock $restore); 
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExtras' -ItemText $mnuExtrasT -ScriptBlock $null) | %{
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE1' -ItemText $mnuE1T -ScriptBlock $ex1;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE2' -ItemText $mnuE2T -ScriptBlock $ex2;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE3' -ItemText $mnuE3T -ScriptBlock $ex3;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE4' -ItemText $mnuE4T -ScriptBlock $ex4;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE5' -ItemText $mnuE5T -ScriptBlock $ex5;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE6' -ItemText $mnuE6T -ScriptBlock $ex6;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE7' -ItemText $mnuE7T -ScriptBlock $ex7;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE8' -ItemText $mnuE8T -ScriptBlock $ex8;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE9' -ItemText $mnuE9T -ScriptBlock $ex9;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE10' -ItemText $mnuE10T -ScriptBlock $ex10;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE11' -ItemText $mnuE11T -ScriptBlock $ex11;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE12' -ItemText $mnuE12T -ScriptBlock $ex12;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE13' -ItemText $mnuE13T -ScriptBlock $ex13;
+$null=addMenuItem -ParentItem ([ref]$_) -ItemName 'mnuE14' -ItemText $mnuE14T -ScriptBlock $ex14;	} | Out-Null;
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuAbout' -ItemText $mnuAboutT -ScriptBlock $about);  
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuDonate' -ItemText $mnuDonateT -ScriptBlock $donate);  
+(addMenuItem -ParentItem ([ref]$mainMenu) -ItemName 'mnuExit' -ItemText $mnuExitT -ScriptBlock $exit); 
 # Hello World
 cls
 $versionShort = $versionRAW.substring(9)
@@ -1011,7 +1032,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 26.12.2023                '
+Write-Host '                          [-] Last update: 27.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -1511,6 +1532,9 @@ cmd /c if exist %programdata%\ET\chck32.lbool del %programdata%\ET\chck32.lbool
 $counter++;
 Write-Host ' [Disable] Telemetry/Data Collection ' -F darkgray -B black 
 
+del /q "%temp%\NVIDIA Corporation\NV_Cache\*" >$null 2>$null
+del /q "%programdata%\NVIDIA Corporation\NV_Cache\*" >$null 2>$null
+
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v OptInOrOutPreference /t REG_DWORD /d 0 /f | Out-Null
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\FTS" /v EnableRID44231 /t REG_DWORD /d 0 /f | Out-Null
 REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\FTS" /v EnableRID64640 /t REG_DWORD /d 0 /f | Out-Null
@@ -1930,6 +1954,8 @@ function chck58{
 cmd /c if exist %programdata%\ET\chck58.lbool del %programdata%\ET\chck58.lbool
 # TEMP/Logs/Cache/Prefetch/Updates Cleaning
 $counter++;
+taskkill /f /im explorer.exe >$null 2>$null
+start explorer.exe >$null 2>$null
 Write-Host ' [Clean] Temp ' -F yellow -B black
 Get-ChildItem -Path $env:TEMP -Include *.* -Exclude *.bat, *.lbool -File -Recurse | foreach { $_.Delete()} | Out-Null
 cmd /c Del /S /F /Q %Windir%\Temp >$null 2>$null
@@ -2014,7 +2040,7 @@ cmd /c Del "%WinDir%\System32\catroot2\.jrs" /F /Q >$null 2>$null
 cmd /c Del "%WinDir%\System32\catroot2\*.txt" /F /Q >$null 2>$null
 
 # Cleaning Disk - cleanmgr
-start cleanmgr.exe /autoclean
+start cleanmgr.exe /sagerun:5
 
 Write-Host ' [Clean] Games Platforms Cache/Logs ' -F yellow -B black
 
