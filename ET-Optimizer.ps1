@@ -1954,8 +1954,7 @@ function chck58{
 cmd /c if exist %programdata%\ET\chck58.lbool del %programdata%\ET\chck58.lbool
 # TEMP/Logs/Cache/Prefetch/Updates Cleaning
 $counter++;
-taskkill /f /im explorer.exe >$null 2>$null
-start explorer.exe >$null 2>$null
+
 Write-Host ' [Clean] Temp ' -F yellow -B black
 Get-ChildItem -Path $env:TEMP -Include *.* -Exclude *.bat, *.lbool -File -Recurse | foreach { $_.Delete()} | Out-Null
 cmd /c Del /S /F /Q %Windir%\Temp >$null 2>$null
@@ -2106,6 +2105,8 @@ cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Support" /F /Q /S >$null 2>
 cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick" /F /Q /S >$null 2>$null
 cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /F /Q /S >$null 2>$null
 
+taskkill /f /im explorer.exe >$null 2>$null
+
 Write-Host ' [Clean] Windows Font Cache ' -F yellow -B black
 
 cmd /c net stop FontCache >$null 2>$null
@@ -2122,6 +2123,7 @@ Write-Host ' [Clean] Windows Icon Cache ' -F yellow -B black
 %WinDir%\System32\ie4uinit.exe -show >$null 2>$null
 cmd /c Del %LocalAppData%\IconCache.db /F /Q /S >$null 2>$null
 cmd /c Del "%LocalAppData%\Microsoft\Windows\Explorer\iconcache_*.db" /F /Q /S >$null 2>$null
+start explorer.exe >$null 2>$null
 engine;};
 
 # Remove OneDrive
