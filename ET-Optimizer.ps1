@@ -117,8 +117,8 @@ Foreach ($control in $panel1.Controls){
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_p++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
-If ($c_p -eq 34) { $panel1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
-Else { $panel1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
+If ($c_p -eq 34) { $groupbox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);$panel1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_performanceall.Visible = $false; $B_performanceoff.Visible = $true; }
+Else { $groupbox1.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_performanceall.Visible = $true; $B_performanceoff.Visible = $false; }
 }
 function count_v {
 $c_v = 0;
@@ -128,8 +128,8 @@ Foreach ($control in $panel3.Controls){
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_v++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
-If ($c_v -eq 6) { $panel3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
-Else { $panel3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
+If ($c_v -eq 6) { $groupbox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_visualoff.Visible = $true; $B_visualall.Visible = $false; }
+Else { $groupbox3.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_visualoff.Visible = $false; $B_visualall.Visible = $true; }
 }
 function count_s {
 $c_s = 0;
@@ -139,8 +139,8 @@ Foreach ($control in $panel2.Controls){
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_s++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
-If ($c_s -eq 17) { $panel2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
-Else { $panel2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
+If ($c_s -eq 17) { $groupBox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); $B_privacyoff.Visible = $true; $B_privacyall.Visible = $false; }
+Else { $groupbox2.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); $B_privacyoff.Visible = $false; $B_privacyall.Visible = $true; }
 }
 function count_o {
 $c_o = 0;
@@ -150,8 +150,8 @@ Foreach ($control in $panel4.Controls){
        If ($objectType -like "CheckBox" -and $control.checked -eq 1){$c_o++;$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor)}
 		Else {$control.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)}
    }
-If ($c_o -eq 6) { $panel4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); }
-Else { $panel4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); }
+If ($c_o -eq 6) { $groupbox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor); }
+Else { $groupbox4.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor); }
 }
 function do_start { 
 Foreach ($control in $panel1.Controls){
@@ -1032,7 +1032,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 27.12.2023                '
+Write-Host '                          [-] Last update: 28.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
