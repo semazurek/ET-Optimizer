@@ -952,7 +952,7 @@ $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
 [scriptblock]$ex9= {mstsc};
 [scriptblock]$ex10= {eventvwr.msc};
 [scriptblock]$ex11= {netsh winsock reset;netsh int ipv4 reset;netsh int ipv6 reset;ipconfig /release;ipconfig /renew;ipconfig /flushdns};
-[scriptblock]$ex12= {Winget upgrade --all};
+[scriptblock]$ex12= {$jobwinget = Start-Job -Name jobwinget -ScriptBlock {Winget upgrade --all}};
 [scriptblock]$ex13= {echo Windows_License_Key: $licensekey > C:\ProgramData\verwin.txt;start notepad C:\ProgramData\verwin.txt};
 [scriptblock]$ex14= {shutdown /r /fw /t 1};
 if ($langos -eq 'Polski') {
@@ -1032,7 +1032,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 28.12.2023                '
+Write-Host '                          [-] Last update: 29.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -2293,6 +2293,10 @@ function error_exit { exit };
 			if (Get-Item -Path $Env:programdata\ET\chck68.lbool) {chck68;} 
 			if (Get-Item -Path $Env:programdata\ET\chck69.lbool) {} 
 	};
+
+#Stop background jobs
+Stop-Job -Name jobwinget
+$jobwinget | Remove-Job
 
 cls
 if (-not(Test-Path $Env:programdata\ET\*.lbool)) { error_exit; }
