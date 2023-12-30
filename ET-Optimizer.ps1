@@ -1032,7 +1032,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 29.12.2023                '
+Write-Host '                          [-] Last update: 30.12.2023                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -1472,9 +1472,9 @@ cmd /c if exist %programdata%\ET\chck30.lbool del %programdata%\ET\chck30.lbool
 # Defragmenting the File Indexing Service database file
 $counter++;
 Write-Host ' [Setting] Defragment Database Indexing Service File ' -F blue -B black 
-net stop wsearch /y | Out-Null
-esentutl /d C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb | Out-Null
-net start wsearch | Out-Null
+net stop wsearch /y >$null 2>$null
+esentutl /d C:\ProgramData\Microsoft\Search\Data\Applications\Windows\Windows.edb >$null 2>$null
+net start wsearch >$null 2>$null
 engine;};
 
 #Telemetry
@@ -2293,10 +2293,6 @@ function error_exit { exit };
 			if (Get-Item -Path $Env:programdata\ET\chck68.lbool) {chck68;} 
 			if (Get-Item -Path $Env:programdata\ET\chck69.lbool) {} 
 	};
-
-#Stop background jobs
-Stop-Job -Name jobwinget
-$jobwinget | Remove-Job
 
 cls
 if (-not(Test-Path $Env:programdata\ET\*.lbool)) { error_exit; }
