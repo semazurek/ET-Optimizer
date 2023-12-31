@@ -15,9 +15,10 @@ Last tested/updated on:
 </ul> 
 </br>
 
-Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> Command before running .ps1: ```Set-ExecutionPolicy RemoteSigned```</br>
+Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> or <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.exe" target="_blank">ET-Optimizer.exe</a>
+</br></br>Command before running .ps1:
 ```PowerShell
-iwr -useb https://raw.githubusercontent.com/semazurek/ET-Optimizer/master/ET-Optimizer.ps1 | iex
+Set-ExecutionPolicy RemoteSigned
 ```
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
