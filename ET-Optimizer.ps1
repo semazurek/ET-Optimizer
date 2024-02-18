@@ -108,6 +108,8 @@ $mainforecolor="#eeeeee"
 $mainbackcolor="#252525"
 $menubackcolor="#323232"
 $selectioncolor="#3498db"
+$selectioncolor2="#246c9d"
+$unselectionc="#ecf0f1"
 $expercolor="#e74c3c"
 function count_p {
 $c_p = 0;
@@ -233,6 +235,8 @@ $B_close.text = 'Start';
 $B_close.FlatStyle = 'Flat'
 $B_close.Location = New-Object Drawing.Point 660,400; 
 $B_close.Size = New-Object Drawing.Point 120,50;
+$B_close.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor)
+$B_close.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor)
 $B_close.Font = $ButtonFont
 $B_close.add_click({do_start}); $form.controls.add($B_close); 
 $B_checkall = New-Object Windows.Forms.Button; 
@@ -241,6 +245,8 @@ if ($langos -eq 'Polski') {$B_checkall.text = 'Zaznacz Wszystko'; }
 $B_checkall.Location = New-Object Drawing.Point 510,400; 
 $B_checkall.Size = New-Object Drawing.Point 140,50;
 $B_checkall.FlatStyle = 'Flat'
+$B_checkall.BackColor = [System.Drawing.ColorTranslator]::FromHtml($unselectionc);
+$B_checkall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor);
 $B_checkall.Font = New-Object System.Drawing.Font('Consolas',13,[System.Drawing.FontStyle]::Regular);
 $B_checkall.add_click({
 Foreach ($control in $panel1.Controls){
@@ -284,7 +290,9 @@ $form.controls.add($B_checkall);
 $B_uncheckall = New-Object Windows.Forms.Button; 
 $B_uncheckall.text = 'Unselect All'; 
 if ($langos -eq 'Polski') {$B_uncheckall.text = 'Odznacz Wszystko'; }
-$B_uncheckall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
+$B_uncheckall.BackColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor2);
+$B_uncheckall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
+$B_uncheckall.FlatAppearance.BorderSize = 0;
 $B_uncheckall.Location = New-Object Drawing.Point 510,400; 
 $B_uncheckall.Size = New-Object Drawing.Point 140,50;
 $B_uncheckall.FlatStyle = 'Flat'
@@ -340,6 +348,9 @@ if ($langos -eq 'Polski') {$B_performanceall.text = 'Wydajnosc'; }
 $B_performanceall.Location = New-Object Drawing.Point 110,400; 
 $B_performanceall.Size = New-Object Drawing.Point 130,50;
 $B_performanceall.FlatStyle = 'Flat'
+$B_performanceall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
+$B_performanceall.BackColor = [System.Drawing.ColorTranslator]::FromHtml($unselectionc);
+$B_performanceall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor);
 $B_performanceall.Font = $ButtonFont
 $B_performanceall.add_click({
 Foreach ($control in $panel1.Controls){
@@ -358,7 +369,9 @@ $B_performanceoff.text = 'Performance';
 if ($langos -eq 'Polski') {$B_performanceoff.text = 'Wydajnosc'; }
 $B_performanceoff.Location = New-Object Drawing.Point 110,400; 
 $B_performanceoff.Size = New-Object Drawing.Point 130,50;
-$B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
+$B_performanceoff.BackColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor2);
+$B_performanceoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
+$B_performanceoff.FlatAppearance.BorderSize = 0;
 $B_performanceoff.FlatStyle = 'Flat'
 $B_performanceoff.Font = $ButtonFont
 $B_performanceoff.add_click({
@@ -379,6 +392,8 @@ if ($langos -eq 'Polski') {$B_visualall.text = 'Wizualne'; }
 $B_visualall.Location = New-Object Drawing.Point 250,400; 
 $B_visualall.Size = New-Object Drawing.Point 120,50;
 $B_visualall.FlatStyle = 'Flat'
+$B_visualall.BackColor = [System.Drawing.ColorTranslator]::FromHtml($unselectionc);
+$B_visualall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor);
 $B_visualall.Font = $ButtonFont
 $B_visualall.add_click({
 Foreach ($control in $panel3.Controls){
@@ -397,8 +412,10 @@ $B_visualoff.text = 'Visual';
 if ($langos -eq 'Polski') {$B_visualoff.text = 'Wizualne'; }
 $B_visualoff.Location = New-Object Drawing.Point 250,400; 
 $B_visualoff.Size = New-Object Drawing.Point 120,50;
-$B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_visualoff.FlatStyle = 'Flat'
+$B_visualoff.BackColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor2);
+$B_visualoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
+$B_visualoff.FlatAppearance.BorderSize = 0;
 $B_visualoff.Font = $ButtonFont
 $B_visualoff.add_click({
 Foreach ($control in $panel3.Controls){
@@ -418,6 +435,8 @@ if ($langos -eq 'Polski') {$B_privacyall.text = 'Prywatnosc'; }
 $B_privacyall.Location = New-Object Drawing.Point 380,400; 
 $B_privacyall.Size = New-Object Drawing.Point 120,50;
 $B_privacyall.FlatStyle = 'Flat'
+$B_privacyall.BackColor = [System.Drawing.ColorTranslator]::FromHtml($unselectionc);
+$B_privacyall.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor);
 $B_privacyall.Font = $ButtonFont
 $B_privacyall.add_click({
 Foreach ($control in $panel2.Controls){
@@ -436,8 +455,10 @@ $B_privacyoff.text = 'Privacy';
 if ($langos -eq 'Polski') {$B_privacyoff.text = 'Prywatnosc'; }
 $B_privacyoff.Location = New-Object Drawing.Point 380,400; 
 $B_privacyoff.Size = New-Object Drawing.Point 120,50;
-$B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor);
 $B_privacyoff.FlatStyle = 'Flat'
+$B_privacyoff.BackColor = [System.Drawing.ColorTranslator]::FromHtml($selectioncolor2);
+$B_privacyoff.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
+$B_privacyoff.FlatAppearance.BorderSize = 0;
 $B_privacyoff.Font = $ButtonFont
 $B_privacyoff.add_click({
 Foreach ($control in $panel2.Controls){
@@ -1032,7 +1053,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 30.12.2023                '
+Write-Host '                          [-] Last update: 18.02.2024                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
