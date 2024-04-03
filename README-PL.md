@@ -24,7 +24,7 @@ Set-ExecutionPolicy RemoteSigned
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://github.com/semazurek/ET-Optimizer/assets/85984736/741c1106-8211-4d3f-8020-ea47d5d7846c" width="600">
+<img src="https://github.com/semazurek/ET-Optimizer/assets/85984736/6594ea6e-f85d-4df1-8b73-a64161b4c4ae" width="600">
 </p>
 
 
