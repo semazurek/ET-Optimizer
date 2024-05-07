@@ -69,6 +69,16 @@ $whitelistapps = @(
 	"Windows.PrintDialog"
 	"c5e2524a-ea46-4f67-841f-6a9465d9d515"
 	"windows.immersivecontrolpanel"
+	"WinRAR.ShellExtension"
+	"Microsoft.WindowsNotepad"
+	"MicrosoftWindows.Client.WebExperience"
+	"Microsoft.ZuneMusic"
+	"Microsoft.ZuneVideo"
+	"Microsoft.OutlookForWindows"
+	"MicrosoftWindows.Ai.Copilot.Provider"
+	"Microsoft.WindowsTerminal"
+	"Microsoft.Winget.Source"
+	"Microsoft.DesktopAppInstaller"
     "NotepadPlusPlus"
 )
 
