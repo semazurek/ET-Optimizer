@@ -21,6 +21,7 @@ $whitelistapps = @(
 	"Microsoft.Windows.Search"
 	"Microsoft.Windows.OOBENetworkCaptivePortal"    
 	"Microsoft.Windows.SecHealthUI"
+	"Microsoft.SecHealthUI"
 	"Microsoft.WindowsAppRuntime.CBS"
 	"Microsoft.VCLibs.140.00.UWPDesktop"
 	"Microsoft.VCLibs.120.00.UWPDesktop"
@@ -79,7 +80,20 @@ $whitelistapps = @(
 	"Microsoft.WindowsTerminal"
 	"Microsoft.Winget.Source"
 	"Microsoft.DesktopAppInstaller"
+	"Microsoft.Services.Store.Engagement"
+	"Microsoft.HEVCVideoExtension"
+	"Microsoft.WebpImageExtension"
+	"MicrosoftWindows.CrossDevice"
     "NotepadPlusPlus"
+    "MicrosoftCorporationII.WinAppRuntime.Main.1.5"
+    "Microsoft.WindowsAppRuntime.1.5"
+    "MicrosoftCorporationII.WinAppRuntime.Singleton"
+    "Microsoft.WindowsSoundRecorder"
+    "MicrosoftCorporationII.WinAppRuntime.Main.1.4"
+    "MicrosoftWindows.Client.LKG"
+    "MicrosoftWindows.Client.CBS"
+	"Microsoft.VCLibs.140.00"
+	"Microsoft.Windows.CloudExperienceHost"
 )
 
 $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name
