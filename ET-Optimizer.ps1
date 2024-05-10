@@ -28,6 +28,15 @@ if ((Test-Admin) -eq $false)  {
     }
     exit
 }
+elseif (!(Test-Path $Env:programdata\Run-ET.log))
+{
+    # speeds up powershell startup time by 10x
+    $env:path = "$([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory());" + $env:path
+    [AppDomain]::CurrentDomain.GetAssemblies().Location | ? {$_} | % {
+        Write-Host "NGENing: $(Split-Path $_ -Leaf)" -F Orange -B Black
+        ngen install $_ | Out-Null
+    }
+}
 
 # Window CLI size
 [console]::WindowWidth=80
@@ -1059,8 +1068,8 @@ Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
 
 #Force backup at first use of script
-if (Get-Item -Path $Env:programdata\Run-ET.log) {}
-else {
+if (!(Test-Path $Env:programdata\Run-ET.log))
+{
 	Enable-ComputerRestore -Drive $env:systemdrive >$null 2>$null
 	$OriginalPref = $ProgressPreference # Default is 'Continue'
 	$ProgressPreference = "SilentlyContinue"
@@ -1080,7 +1089,7 @@ $alltodo = (Get-ChildItem -Path $Env:programdata\ET\ | Measure-Object).Count
 # VisualTweaks
 
 function chck48 {
-if (Test-Path $Env:programdata\ET\chck48.lbool) {Remove-Item $Env:programdata\ET\chck48.lbool}
+CleanFlag $MyInvocation.MyCommand
 :: Show file extensions in Explorer
 $counter++;
 Write-Host ' [Setting] Show file extensions in Explorer ' -F blue -B black
@@ -1089,7 +1098,7 @@ engine;
 };
 
 function chck49 {
-if (Test-Path $Env:programdata\ET\chck49.lbool) {Remove-Item $Env:programdata\ET\chck49.lbool}
+CleanFlag $MyInvocation.MyCommand
 :: Disable Transparency in taskbar, menu start etc
 $counter++;
 Write-Host ' [Setting] Disable Transparency in taskbar/menu start ' -F blue -B black
@@ -1099,7 +1108,7 @@ engine;
 };
 
 function chck50 {
-if (Test-Path $Env:programdata\ET\chck50.lbool) {Remove-Item $Env:programdata\ET\chck50.lbool}
+CleanFlag $MyInvocation.MyCommand
 ::  Disable windows animations, menu Start animations.
 $counter++;
 Write-Host ' [Disable] Windows animations, menu Start animations ' -F darkgray -B black
@@ -1118,7 +1127,7 @@ engine;
 };
 
 function chck51 {
-if (Test-Path $Env:programdata\ET\chck51.lbool) {Remove-Item $Env:programdata\ET\chck51.lbool}
+CleanFlag $MyInvocation.MyCommand
 # Disable MRU lists (jump lists) of XAML apps in Start Menu
 $counter++;
 Write-Host ' [Disable] MRU lists (jump lists) of XAML apps in Start Menu ' -F darkgray -B black
@@ -1127,7 +1136,7 @@ engine;
 };
 
 function chck52 {
-if (Test-Path $Env:programdata\ET\chck52.lbool) {Remove-Item $Env:programdata\ET\chck52.lbool}
+CleanFlag $MyInvocation.MyCommand
 #  Hide the search box from taskbar. You can still search by pressing the Win key and start typing what you're looking for 
 # 0 = hide completely, 1 = show only icon, 2 = show long search box
 $counter++;
@@ -1137,7 +1146,7 @@ engine;
 };
 
 function chck53 {
-if (Test-Path $Env:programdata\ET\chck53.lbool) {Remove-Item $Env:programdata\ET\chck53.lbool}
+CleanFlag $MyInvocation.MyCommand
 # Windows Explorer to start on This PC instead of Quick Access 
 $counter++;
 Write-Host ' [Setting] Windows Explorer to start on This PC instead of Quick Access ' -F blue -B black
@@ -1149,7 +1158,7 @@ engine;
 # PerformanceTweaks
 
 function chck1{
-cmd /c if exist %programdata%\ET\chck1.lbool del %programdata%\ET\chck1.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Edge WebWidget
 $counter++;
 Write-Host ' [Disable] Edge WebWidget ' -F darkgray -B black
@@ -1157,7 +1166,7 @@ REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v WebWidgetAllowe
 engine;};
 
 function chck2{
-cmd /c if exist %programdata%\ET\chck2.lbool del %programdata%\ET\chck2.lbool
+CleanFlag $MyInvocation.MyCommand
 # Setting power option to high/ultimate performance
 $counter++;
 Write-Host ' [Setting] Power option to ultimate performance ' -F blue -B black
@@ -1176,7 +1185,7 @@ powercfg /X standby-timeout-dc 0 >$null 2>$null
 engine;};
 
 function chck4{
-cmd /c if exist %programdata%\ET\chck4.lbool del %programdata%\ET\chck4.lbool
+CleanFlag $MyInvocation.MyCommand
 # Dual boot timeout 3sec
 $counter++;
 Write-Host ' [Setting] Dual boot timeout 3sec ' -F blue -B black
@@ -1185,7 +1194,7 @@ bcdedit /timeout 3 | Out-Null
 engine;};
 
 function chck5{
-cmd /c if exist %programdata%\ET\chck5.lbool del %programdata%\ET\chck5.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Hibernation/Fast startup in Windows to free RAM from "C:\hiberfil.sys"
 $counter++;
 Write-Host ' [Disable] Hibernation/Fast startup in Windows ' -F darkgray -B black
@@ -1193,7 +1202,7 @@ powercfg -hibernate off | Out-Null
 engine;};
 
 function chck6{
-cmd /c if exist %programdata%\ET\chck6.lbool del %programdata%\ET\chck6.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable windows insider experiments
 $counter++;
 Write-Host ' [Disable] Windows Insider experiments ' -F darkgray -B black
@@ -1202,7 +1211,7 @@ reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowExperimentati
 engine;};
 
 function chck7{
-cmd /c if exist %programdata%\ET\chck7.lbool del %programdata%\ET\chck7.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable app launch tracking
 $counter++;
 Write-Host ' [Disable] App launch tracking ' -F darkgray -B black
@@ -1210,7 +1219,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "S
 engine;};
 
 function chck8{
-cmd /c if exist %programdata%\ET\chck8.lbool del %programdata%\ET\chck8.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable powerthrottling (Intel 6gen and higher)
 $counter++;
 Write-Host ' [Disable] Powerthrottling (Intel 6gen and higher) ' -F darkgray -B black
@@ -1218,7 +1227,7 @@ reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerT
 engine;};
 
 function chck9{
-cmd /c if exist %programdata%\ET\chck9.lbool del %programdata%\ET\chck9.lbool
+CleanFlag $MyInvocation.MyCommand
 # Turn Off Background Apps
 $counter++;
 Write-Host ' [Setting] Turn Off Background Apps ' -F blue -B black
@@ -1227,7 +1236,7 @@ REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v 
 engine;};
 
 function chck10{
-cmd /c if exist %programdata%\ET\chck10.lbool del %programdata%\ET\chck10.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Sticky Keys prompt
 $counter++;
 Write-Host ' [Disable] Sticky Keys prompt ' -F darkgray -B black
@@ -1235,7 +1244,7 @@ reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t
 engine;};
 
 function chck11{
-cmd /c if exist %programdata%\ET\chck11.lbool del %programdata%\ET\chck11.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Activity History
 $counter++;
 Write-Host ' [Disable] Activity History ' -F darkgray -B black
@@ -1243,7 +1252,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "Publ
 engine;};
 
 function chck12{
-cmd /c if exist %programdata%\ET\chck12.lbool del %programdata%\ET\chck12.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Automatic Updates for Microsoft Store apps
 $counter++;
 Write-Host ' [Disable] Automatic Updates for Microsoft Store apps ' -F darkgray -B black
@@ -1251,7 +1260,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDo
 engine;};
 
 function chck13{
-cmd /c if exist %programdata%\ET\chck13.lbool del %programdata%\ET\chck13.lbool
+CleanFlag $MyInvocation.MyCommand
 # SmartScreen Filter for Store Apps: Disable
 $counter++;
 Write-Host ' [Disable] SmartScreen Filter for Store Apps ' -F darkgray -B black
@@ -1259,7 +1268,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebCon
 engine;};
 
 function chck14{
-cmd /c if exist %programdata%\ET\chck14.lbool del %programdata%\ET\chck14.lbool
+CleanFlag $MyInvocation.MyCommand
 # Let websites provide locally...
 $counter++;
 Write-Host ' [Setting] Let websites provide locally ' -F blue -B black
@@ -1267,7 +1276,7 @@ reg add "HKCU\Control Panel\International\User Profile" /v HttpAcceptLanguageOpt
 engine;};
 
 function chck15{
-cmd /c if exist %programdata%\ET\chck15.lbool del %programdata%\ET\chck15.lbool
+CleanFlag $MyInvocation.MyCommand
 # Microsoft Edge settings
 $counter++;
 Write-Host ' [Setting] Microsoft Edge settings for privacy ' -F blue -B black
@@ -1278,7 +1287,7 @@ reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Current
 engine;};
 
 function chck64{
-cmd /c if exist %programdata%\ET\chck64.lbool del %programdata%\ET\chck64.lbool
+CleanFlag $MyInvocation.MyCommand
 #	Disable Nagle's Algorithm (Delayed ACKs)
 $counter++;
 Write-Host ' [Disable] Nagle''s Algorithm (Delayed ACKs) ' -F darkgray -B black
@@ -1297,7 +1306,7 @@ $ErrorActionPreference = $errpref
 engine;};
 
 function chck65{
-cmd /c if exist %programdata%\ET\chck65.lbool del %programdata%\ET\chck65.lbool
+CleanFlag $MyInvocation.MyCommand
 #CPU Tweaks
 $counter++;
 Write-Host ' [Setting] CPU Priority Tweaks ' -F blue -B black
@@ -1334,7 +1343,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multime
 engine;};
 
 function chck66{
-cmd /c if exist %programdata%\ET\chck66.lbool del %programdata%\ET\chck66.lbool
+CleanFlag $MyInvocation.MyCommand
 #	Disable Spectre/Meltdown Protection
 $counter++;
 Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black
@@ -1343,7 +1352,7 @@ Write-Host ' [Disable] Spectre/Meltdown Protection' -F darkgray -B black
 engine;};
 
 function chck16{
-cmd /c if exist %programdata%\ET\chck16.lbool del %programdata%\ET\chck16.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable location sensor
 $counter++;
 Write-Host ' [Disable] Location sensor ' -F darkgray -B black
@@ -1351,7 +1360,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{B
 engine;};
 
 function chck17{
-cmd /c if exist %programdata%\ET\chck17.lbool del %programdata%\ET\chck17.lbool
+CleanFlag $MyInvocation.MyCommand
 # WiFi Sense: HotSpot Sharing: Disable
 $counter++;
 Write-Host ' [Disable] WiFi Sense: HotSpot Sharing ' -F darkgray -B black
@@ -1359,7 +1368,7 @@ reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotRepo
 engine;};
 
 function chck18{
-cmd /c if exist %programdata%\ET\chck18.lbool del %programdata%\ET\chck18.lbool
+CleanFlag $MyInvocation.MyCommand
 # WiFi Sense: Shared HotSpot Auto-Connect: Disable
 $counter++;
 Write-Host ' [Disable] WiFi Sense: Shared HotSpot Auto-Connect ' -F darkgray -B black
@@ -1367,7 +1376,7 @@ reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWi
 engine;};
 
 function chck19{
-cmd /c if exist %programdata%\ET\chck19.lbool del %programdata%\ET\chck19.lbool
+CleanFlag $MyInvocation.MyCommand
 # Change Windows Updates to "Notify to schedule restart"
 $counter++;
 Write-Host ' [Setting] Windows Updates to Notify to schedule restart ' -F blue -B black
@@ -1375,7 +1384,7 @@ reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_D
 engine;};
 
 function chck20{
-cmd /c if exist %programdata%\ET\chck20.lbool del %programdata%\ET\chck20.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable P2P Update downloads outside of local network
 $counter++;
 Write-Host ' [Disable] P2P Update downloads outside of local network ' -F darkgray -B black
@@ -1383,7 +1392,7 @@ reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Con
 engine;};
 
 function chck21{
-cmd /c if exist %programdata%\ET\chck21.lbool del %programdata%\ET\chck21.lbool
+CleanFlag $MyInvocation.MyCommand
 # Setting Lower Shutdown time
 $counter++;
 Write-Host ' [Setting] Lower Shutdown time ' -F blue -B black
@@ -1391,7 +1400,7 @@ reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServ
 engine;};
 
 function chck22{
-cmd /c if exist %programdata%\ET\chck22.lbool del %programdata%\ET\chck22.lbool
+CleanFlag $MyInvocation.MyCommand
 # Remove Old Device Drivers
 $counter++;
 Write-Host ' [Remove] Old Device Drivers ' -F red -B black
@@ -1399,7 +1408,7 @@ SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
 engine;};
 
 function chck23{
-cmd /c if exist %programdata%\ET\chck23.lbool del %programdata%\ET\chck23.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Get Even More Out of Windows Screen /W10
 $counter++;
 Write-Host ' [Disable] Get Even More Out of Windows Screen ' -F darkgray -B black
@@ -1415,7 +1424,7 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfile
 engine;};
 
 function chck24{
-cmd /c if exist %programdata%\ET\chck24.lbool del %programdata%\ET\chck24.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable automatically installing suggested apps /W10
 $counter++;
 Write-Host ' [Disable] Automatically installing suggested apps ' -F darkgray -B black
@@ -1441,7 +1450,7 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManage
 engine;};
 
 function chck25{
-cmd /c if exist %programdata%\ET\chck25.lbool del %programdata%\ET\chck25.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Start Menu Ads/Suggestions /W10
 $counter++;
 Write-Host ' [Disable] Start Menu Ads/Suggestions ' -F darkgray -B black
@@ -1453,7 +1462,7 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeli
 engine;};
 
 function chck26{
-cmd /c if exist %programdata%\ET\chck26.lbool del %programdata%\ET\chck26.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Allowing Suggested Apps In WindowsInk Workspace
 $counter++;
 Write-Host ' [Disable] Allowing Suggested Apps In WindowsInk Workspace ' -F darkgray -B black
@@ -1461,7 +1470,7 @@ reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\Allow
 engine;};
 
 function chck27{
-cmd /c if exist %programdata%\ET\chck27.lbool del %programdata%\ET\chck27.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disables several unnecessary components
 $counter++;
 Write-Host ' [Disable] Unnecessary components ' -F darkgray -B black
@@ -1472,7 +1481,7 @@ disable-windowsoptionalfeature -online -featureName $a -NoRestart | Out-Null
 engine;};
 
 function chck28{
-cmd /c if exist %programdata%\ET\chck28.lbool del %programdata%\ET\chck28.lbool
+CleanFlag $MyInvocation.MyCommand
 # Setting Windows Defender Scheduled Scan from highest to normal privileges (CPU % high usage)
 $counter++;
 Write-Host ' [Setting] Windows Defender Scheduled Scan from highest to normal privileges ' -F blue -B black
@@ -1480,7 +1489,7 @@ cmd /c schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender
 engine;};
 
 function chck29{
-cmd /c if exist %programdata%\ET\chck29.lbool del %programdata%\ET\chck29.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disabling Process Mitigation
 # Audit exploit mitigations for increased process security or for converting existing Enhanced Mitigation Experience Toolkit
 $counter++;
@@ -1489,7 +1498,7 @@ Set-ProcessMitigation -System -Disable CFG
 engine;};
 
 function chck30{
-cmd /c if exist %programdata%\ET\chck30.lbool del %programdata%\ET\chck30.lbool
+CleanFlag $MyInvocation.MyCommand
 # Defragmenting the File Indexing Service database file
 $counter++;
 Write-Host ' [Setting] Defragment Database Indexing Service File ' -F blue -B black 
@@ -1501,7 +1510,7 @@ engine;};
 #Telemetry
 
 function chck31{
-cmd /c if exist %programdata%\ET\chck31.lbool del %programdata%\ET\chck31.lbool
+CleanFlag $MyInvocation.MyCommand
 # SCHEDULED TASKS tweaks (Updates, Telemetry etc)
 $counter++;
 Write-Host ' [Disable] SCHEDULED TASKS tweaks (Updates, Telemetry etc) ' -F darkgray -B black
@@ -1548,7 +1557,7 @@ cmd /c schtasks /DELETE /TN "ModifyLinkUpdate" /f >$null 2>$null
 engine;};
 
 function chck32{
-cmd /c if exist %programdata%\ET\chck32.lbool del %programdata%\ET\chck32.lbool
+CleanFlag $MyInvocation.MyCommand
 # Remove Telemetry & Data Collection 
 $counter++;
 Write-Host ' [Disable] Telemetry/Data Collection ' -F darkgray -B black 
@@ -1651,7 +1660,7 @@ reg add "HKCU\Software\Piriform\CCleaner" /v "(Cfg)SoftwareUpdaterIpm" /t REG_DW
 engine;};
 
 function chck33{
-cmd /c if exist %programdata%\ET\chck33.lbool del %programdata%\ET\chck33.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable PowerShell Telemetry
 $counter++;
 Write-Host ' [Disable] PowerShell Telemetry ' -F darkgray -B black
@@ -1659,7 +1668,7 @@ setx POWERSHELL_TELEMETRY_OPTOUT 1 | Out-Null
 engine;};
 
 function chck34{
-cmd /c if exist %programdata%\ET\chck34.lbool del %programdata%\ET\chck34.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable Skype Telemetry
 $counter++;
 Write-Host ' [Disable] Skype Telemetry ' -F darkgray -B black
@@ -1671,7 +1680,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "WPPFilePa
 engine;};
 
 function chck35{
-cmd /c if exist %programdata%\ET\chck35.lbool del %programdata%\ET\chck35.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable windows media player usage reports
 $counter++;
 Write-Host ' [Disable] Windows media player usage reports ' -F darkgray -B black
@@ -1679,7 +1688,7 @@ reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t 
 engine;};
 
 function chck36{
-cmd /c if exist %programdata%\ET\chck36.lbool del %programdata%\ET\chck36.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable mozilla telemetry
 $counter++;
 Write-Host ' [Disable] Mozilla telemetry ' -F darkgray -B black
@@ -1687,7 +1696,7 @@ reg add HKLM\SOFTWARE\Policies\Mozilla\Firefox /v "DisableTelemetry" /t REG_DWOR
 engine;};
 
 function chck37{
-cmd /c if exist %programdata%\ET\chck37.lbool del %programdata%\ET\chck37.lbool
+CleanFlag $MyInvocation.MyCommand
 # Settings -> Privacy -> General -> Let apps use my advertising ID...
 $counter++;
 Write-Host ' [Disable] Let apps use my advertising ID ' -F darkgray -B black
@@ -1698,7 +1707,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 engine;};
 
 function chck38{
-cmd /c if exist %programdata%\ET\chck38.lbool del %programdata%\ET\chck38.lbool
+CleanFlag $MyInvocation.MyCommand
 # Send Microsoft info about how I write to help us improve typing and writing in the future
 $counter++;
 Write-Host ' [Disable] Send Microsoft info about how I write ' -F darkgray -B black
@@ -1706,7 +1715,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Input\TIPC" /v Enabled /t REG_DWORD /d 0 /f | O
 engine;};
 
 function chck39{
-cmd /c if exist %programdata%\ET\chck39.lbool del %programdata%\ET\chck39.lbool
+CleanFlag $MyInvocation.MyCommand
 # Handwriting recognition personalization
 $counter++;
 Write-Host ' [Disable] Handwriting recognition personalization ' -F darkgray -B black
@@ -1715,7 +1724,7 @@ reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitTextCo
 engine;};
 
 function chck40{
-cmd /c if exist %programdata%\ET\chck40.lbool del %programdata%\ET\chck40.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable watson malware reports
 $counter++;
 Write-Host ' [Disable] Watson malware reports ' -F darkgray -B black
@@ -1723,7 +1732,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting" /v "Disabl
 engine;};
 
 function chck41{
-cmd /c if exist %programdata%\ET\chck41.lbool del %programdata%\ET\chck41.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable malware diagnostic data 
 $counter++;
 Write-Host ' [Disable] Malware diagnostic data ' -F darkgray -B black 
@@ -1731,7 +1740,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformatio
 engine;};
 
 function chck42{
-cmd /c if exist %programdata%\ET\chck42.lbool del %programdata%\ET\chck42.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable  setting override for reporting to Microsoft MAPS
 $counter++;
 Write-Host ' [Disable] Setting override for reporting to Microsoft MAPS ' -F darkgray -B black
@@ -1739,7 +1748,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "LocalSett
 engine;};
 
 function chck43{
-cmd /c if exist %programdata%\ET\chck43.lbool del %programdata%\ET\chck43.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable spynet Defender reporting
 $counter++;
 Write-Host ' [Disable] Spynet Defender reporting ' -F darkgray -B black
@@ -1747,7 +1756,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpynetRep
 engine;};
 
 function chck44{
-cmd /c if exist %programdata%\ET\chck44.lbool del %programdata%\ET\chck44.lbool
+CleanFlag $MyInvocation.MyCommand
 # Do not send malware samples for further analysis
 $counter++;
 Write-Host ' [Setting] Do not send malware samples for further analysis ' -F blue -B black
@@ -1755,7 +1764,7 @@ reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSam
 engine;};
 
 function chck45{
-cmd /c if exist %programdata%\ET\chck45.lbool del %programdata%\ET\chck45.lbool
+CleanFlag $MyInvocation.MyCommand
 # Prevents sending speech, inking and typing samples to MS (so Cortana can learn to recognise you)
 $counter++;
 Write-Host ' [Disable] Sending speech, inking and typing samples to MS ' -F darkgray -B black
@@ -1763,7 +1772,7 @@ reg add "HKCU\SOFTWARE\Microsoft\Personalization\Settings" /v AcceptedPrivacyPol
 engine;};
 
 function chck46{
-cmd /c if exist %programdata%\ET\chck46.lbool del %programdata%\ET\chck46.lbool
+CleanFlag $MyInvocation.MyCommand
 # Prevents sending contacts to MS (so Cortana can compare speech etc samples)
 $counter++;
 Write-Host ' [Disable] Sending contacts to MS ' -F darkgray -B black
@@ -1771,7 +1780,7 @@ reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v Harve
 engine;};
 
 function chck47{
-cmd /c if exist %programdata%\ET\chck47.lbool del %programdata%\ET\chck47.lbool
+CleanFlag $MyInvocation.MyCommand
 # Immobilise Cortana 
 $counter++;
 Write-Host ' [Disable] Cortana ' -F darkgray -B black
@@ -1781,7 +1790,7 @@ engine;};
 #WindowsGameBar
 
 function chck54{
-cmd /c if exist %programdata%\ET\chck54.lbool del %programdata%\ET\chck54.lbool
+CleanFlag $MyInvocation.MyCommand
 # Removing Windows Game Bar 
 $counter++;
 Write-Host ' [Remove] Windows Game Bar ' -F red -B black
@@ -1795,7 +1804,7 @@ engine;};
 #RemoveWidgets
 
 function chck59{
-cmd /c if exist %programdata%\ET\chck59.lbool del %programdata%\ET\chck59.lbool
+CleanFlag $MyInvocation.MyCommand
 # Remove News and Interests/Widgets from Win 11 (even if not shown on taskbar, that takes RAM/CPU running in background)
 $counter++;
 Write-Host ' [Remove] News and Interests/Widgets' -F red -B black
@@ -1809,7 +1818,7 @@ engine;};
 #Services
 
 function chck55{
-cmd /c if exist %programdata%\ET\chck55.lbool del %programdata%\ET\chck55.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disable
 $counter++;
 Write-Host ' [Setting] Services to: Disable Mode ' -F blue -B black
@@ -1832,7 +1841,7 @@ engine;};
 :Bloatware
 
 function chck56{
-cmd /c if exist %programdata%\ET\chck56.lbool del %programdata%\ET\chck56.lbool
+CleanFlag $MyInvocation.MyCommand
 # Remove Bloatware Apps (Preinstalled) 108 apps
 Write-Host ' [Remove] Bloatware Apps ' -F red -B black
 $counter++;
@@ -1847,7 +1856,7 @@ engine;};
 #StartUp
 
 function chck57{
-cmd /c if exist %programdata%\ET\chck57.lbool del %programdata%\ET\chck57.lbool
+CleanFlag $MyInvocation.MyCommand
 # Disabling unnecessary applications at startup
 $counter++;
 Write-Host ' [Disable] Unnecessary applications at startup ' -F darkgray -B black
@@ -1972,7 +1981,7 @@ engine;};
 #Cleaning
 
 function chck58{
-cmd /c if exist %programdata%\ET\chck58.lbool del %programdata%\ET\chck58.lbool
+CleanFlag $MyInvocation.MyCommand
 # TEMP/Logs/Cache/Prefetch/Updates Cleaning
 $counter++;
 
@@ -2149,7 +2158,7 @@ engine;};
 
 # Remove OneDrive
 function chck60{
-cmd /c if exist %programdata%\ET\chck60.lbool del %programdata%\ET\chck60.lbool
+CleanFlag $MyInvocation.MyCommand
 $counter++;
 Write-Host ' [Remove] Microsoft OneDrive ' -F red -B black
 cmd /c taskkill /F /IM "OneDrive.exe" >$null 2>$null
@@ -2171,7 +2180,7 @@ engine;};
 
 # Disable Xbx Services (Minecraft Luncher wont login into MS)
 function chck61{
-cmd /c if exist %programdata%\ET\chck61.lbool del %programdata%\ET\chck61.lbool
+CleanFlag $MyInvocation.MyCommand
 $counter++;
 Write-Host ' [Disable] Xbox Services ' -F darkgray -B black
 cmd /c sc config XblAuthManager start= disabled | Out-Null
@@ -2181,7 +2190,7 @@ engine;};
 
 # Safe/Fast DNS 1.1.1.1
 function chck62{
-cmd /c if exist %programdata%\ET\chck62.lbool del %programdata%\ET\chck62.lbool
+CleanFlag $MyInvocation.MyCommand
 $counter++;
 Write-Host ' [Setting] Fast/Secure DNS 1.1.1.1 ' -F blue -B black
 ipconfig /flushdns | Out-Null
@@ -2198,7 +2207,7 @@ engine;};
 
 # Scan of Adware/Malware
 function chck63 {
-cmd /c if exist %programdata%\ET\chck63.lbool del %programdata%\ET\chck63.lbool
+CleanFlag $MyInvocation.MyCommand
 $counter++;
 Write-Host ' [Scanning] AdwCleaner ' -F darkgreen -B black
 wget https://downloads.malwarebytes.com/file/adwcleaner -o $Env:programdata\adwcleaner.exe | Out-Null
@@ -2210,7 +2219,7 @@ engine;};
 
 #Clean Database of WinSxS
 function chck68{
-cmd /c if exist %programdata%\ET\chck68.lbool del %programdata%\ET\chck68.lbool
+CleanFlag $MyInvocation.MyCommand
 $counter++;
 Write-Host ' [Clean] WinSxS Folder ' -F yellow -B black
 DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase | Out-Null
@@ -2219,101 +2228,60 @@ engine;};
 
 #Set Split Threshold for Svchost
 function chck3{
-cmd /c if exist %programdata%\ET\chck3.lbool del %programdata%\ET\chck3.lbool
+CleanFlag $MyInvocation.MyCommand
 $counter++;
-Write-Host ' [Setting] Split Threshold for Svchost ' -F blue -B black
-$NomRAM = wmic computersystem get totalphysicalmemory | findstr /r "[0-9]"
-
-# Default Hexa:380000
-
-# Convert into KB from Bytes and add into SvcHost registry
-$clcrm = ([regex]::Match((Get-content 'NumRAM.txt'), '\d+')).Value; $clcrm=$clcrm/1024; 
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control /v SvcHostSplitThresholdInKB /t REG_DWORD /d $clcrm /f | Out-Null
-
-cmd /c if exist NumRAM.txt del NumRAM.txt
-
+Write-Host ' [Setting] Split Threshold for Svchost (Can break XboxGipSvc) ' -F blue -B black
+$ram = (Get-CimInstance -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1kb
+Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control' -Name 'SvcHostSplitThresholdInKB' -Type DWord -Value $ram -Force | Out-Null
 engine;};
+
+function CleanFlag
+{
+    Param
+    (
+         [Parameter(Mandatory=$true, Position=0)]
+         [string] $func
+    )
+
+    $filePath = $Env:programdata + '\ET\' + $func + '.lbool'
+    if (Test-Path $filePath) { Remove-Item $filePath }
+};
+
+function GetFunctionNameToExecute
+{
+    Param
+    (
+         [Parameter(Mandatory=$true, Position=0)]
+         [string] $prefix
+    )
+
+    $name = Get-ChildItem -Path $Env:programdata\ET\$prefix*.lbool -Name | Sort-Object {[int]$_.Replace($prefix, '').Replace('.lbool','')} | Select-Object -first 1
+    if ($name -ne '')
+    {
+        return $name.Replace('.lbool','').Trim()
+    }
+    else
+    {
+        return $null
+    }
+};
 
 #Quit if no files .lbool or other errors
 function error_exit { exit };
 
-# Main Start Hamster-Engine (that amount of "if" is AWESOME)
-	function engine 
-	{	
+# Main Start Hamster-Engine (that amount of "if" is AWESOME) => Not anymore ;)
+function engine 
+{	
 	$percentcomplete = $counter/$alltodo*100
 	$showpercent = [math]::Round($percentcomplete)
-    Write-Progress -Activity "Script in Progress" -Status "$showpercent% Complete:" -PercentComplete $showpercent
-			if (Get-Item -Path $Env:programdata\ET\chck1.lbool) {chck1;} 
-			if (Get-Item -Path $Env:programdata\ET\chck2.lbool) {chck2;} 
-			if (Get-Item -Path $Env:programdata\ET\chck3.lbool) {chck3;} 
-			if (Get-Item -Path $Env:programdata\ET\chck4.lbool) {chck4;} 
-			if (Get-Item -Path $Env:programdata\ET\chck5.lbool) {chck5;} 
-			if (Get-Item -Path $Env:programdata\ET\chck6.lbool) {chck6;} 
-			if (Get-Item -Path $Env:programdata\ET\chck7.lbool) {chck7;} 
-			if (Get-Item -Path $Env:programdata\ET\chck8.lbool) {chck8;} 
-			if (Get-Item -Path $Env:programdata\ET\chck9.lbool) {chck9;} 
-			if (Get-Item -Path $Env:programdata\ET\chck10.lbool) {chck10;} 
-			if (Get-Item -Path $Env:programdata\ET\chck11.lbool) {chck11;} 
-			if (Get-Item -Path $Env:programdata\ET\chck12.lbool) {chck12;} 
-			if (Get-Item -Path $Env:programdata\ET\chck13.lbool) {chck13;} 
-			if (Get-Item -Path $Env:programdata\ET\chck14.lbool) {chck14;} 
-			if (Get-Item -Path $Env:programdata\ET\chck15.lbool) {chck15;} 
-			if (Get-Item -Path $Env:programdata\ET\chck16.lbool) {chck16;} 
-			if (Get-Item -Path $Env:programdata\ET\chck17.lbool) {chck17;} 
-			if (Get-Item -Path $Env:programdata\ET\chck18.lbool) {chck18;} 
-			if (Get-Item -Path $Env:programdata\ET\chck18.lbool) {chck18;} 
-			if (Get-Item -Path $Env:programdata\ET\chck19.lbool) {chck19;} 
-			if (Get-Item -Path $Env:programdata\ET\chck20.lbool) {chck20;} 
-			if (Get-Item -Path $Env:programdata\ET\chck21.lbool) {chck21;} 
-			if (Get-Item -Path $Env:programdata\ET\chck22.lbool) {chck22;} 
-			if (Get-Item -Path $Env:programdata\ET\chck23.lbool) {chck23;} 
-			if (Get-Item -Path $Env:programdata\ET\chck24.lbool) {chck24;} 
-			if (Get-Item -Path $Env:programdata\ET\chck25.lbool) {chck25;} 
-			if (Get-Item -Path $Env:programdata\ET\chck26.lbool) {chck26;} 
-			if (Get-Item -Path $Env:programdata\ET\chck27.lbool) {chck27;} 
-			if (Get-Item -Path $Env:programdata\ET\chck28.lbool) {chck28;} 
-			if (Get-Item -Path $Env:programdata\ET\chck29.lbool) {chck29;} 
-			if (Get-Item -Path $Env:programdata\ET\chck30.lbool) {chck30;} 
-			if (Get-Item -Path $Env:programdata\ET\chck31.lbool) {chck31;} 
-			if (Get-Item -Path $Env:programdata\ET\chck32.lbool) {chck32;} 
-			if (Get-Item -Path $Env:programdata\ET\chck33.lbool) {chck33;} 
-			if (Get-Item -Path $Env:programdata\ET\chck34.lbool) {chck34;} 
-			if (Get-Item -Path $Env:programdata\ET\chck35.lbool) {chck35;} 
-			if (Get-Item -Path $Env:programdata\ET\chck36.lbool) {chck36;} 
-			if (Get-Item -Path $Env:programdata\ET\chck37.lbool) {chck37;} 
-			if (Get-Item -Path $Env:programdata\ET\chck38.lbool) {chck38;} 
-			if (Get-Item -Path $Env:programdata\ET\chck39.lbool) {chck39;} 
-			if (Get-Item -Path $Env:programdata\ET\chck40.lbool) {chck40;} 
-			if (Get-Item -Path $Env:programdata\ET\chck41.lbool) {chck41;} 
-			if (Get-Item -Path $Env:programdata\ET\chck42.lbool) {chck42;} 
-			if (Get-Item -Path $Env:programdata\ET\chck43.lbool) {chck43;} 
-			if (Get-Item -Path $Env:programdata\ET\chck44.lbool) {chck44;} 
-			if (Get-Item -Path $Env:programdata\ET\chck45.lbool) {chck45;} 
-			if (Get-Item -Path $Env:programdata\ET\chck46.lbool) {chck46;} 
-			if (Get-Item -Path $Env:programdata\ET\chck47.lbool) {chck47;} 
-			if (Get-Item -Path $Env:programdata\ET\chck48.lbool) {chck48;} 
-			if (Get-Item -Path $Env:programdata\ET\chck49.lbool) {chck49;} 
-			if (Get-Item -Path $Env:programdata\ET\chck50.lbool) {chck50;} 
-			if (Get-Item -Path $Env:programdata\ET\chck51.lbool) {chck51;} 
-			if (Get-Item -Path $Env:programdata\ET\chck52.lbool) {chck52;} 
-			if (Get-Item -Path $Env:programdata\ET\chck53.lbool) {chck53;} 
-			if (Get-Item -Path $Env:programdata\ET\chck54.lbool) {chck54;} 
-			if (Get-Item -Path $Env:programdata\ET\chck55.lbool) {chck55;} 
-			if (Get-Item -Path $Env:programdata\ET\chck56.lbool) {chck56;} 
-			if (Get-Item -Path $Env:programdata\ET\chck57.lbool) {chck57;} 
-			if (Get-Item -Path $Env:programdata\ET\chck58.lbool) {chck58;} 
-			if (Get-Item -Path $Env:programdata\ET\chck59.lbool) {chck59;} 
-			if (Get-Item -Path $Env:programdata\ET\chck60.lbool) {chck60;} 
-			if (Get-Item -Path $Env:programdata\ET\chck61.lbool) {chck61;} 
-			if (Get-Item -Path $Env:programdata\ET\chck62.lbool) {chck62;} 
-			if (Get-Item -Path $Env:programdata\ET\chck63.lbool) {chck63;} 
-			if (Get-Item -Path $Env:programdata\ET\chck64.lbool) {chck64;} 
-			if (Get-Item -Path $Env:programdata\ET\chck65.lbool) {chck65;} 
-			if (Get-Item -Path $Env:programdata\ET\chck66.lbool) {chck66;} 
-			if (Get-Item -Path $Env:programdata\ET\chck67.lbool) {} 
-			if (Get-Item -Path $Env:programdata\ET\chck68.lbool) {chck68;} 
-			if (Get-Item -Path $Env:programdata\ET\chck69.lbool) {} 
-	};
+	Write-Progress -Activity "Script in Progress" -Status "$showpercent% Complete:" -PercentComplete $showpercent
+ 	
+  	$function = GetFunctionNameToExecute 'chck'
+        if ($function -ne $null)
+        {
+            Invoke-Expression $function
+        }
+};
 
 cls
 if (-not(Test-Path $Env:programdata\ET\*.lbool)) { error_exit; }
