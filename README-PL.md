@@ -227,12 +227,8 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 | Usługa Adobe FlashPlayer | `adobeflashplayerupdatesvc` | Ręczny |
 
 </br>
-<li>Usuwanie Bloatware (Preinstalowanych):</li>  
-<ul></br>
+<li>Usuwanie Bloatware (Preinstalowanych)</li>  
 
-`3DBuilder` `Automate` `Appconnector` `Microsoft3DViewer` `MicrosoftPowerBIForWindows` `Print3D` `XboxApp` `GetHelp` `WindowsFeedbackHub` `BingFoodAndDrink` `BingHealthAndFitness` `BingTravel` `WindowsReadingList` `MixedReality.Portal` `ScreenSketch` `YourPhone` `PicsArt-PhotoStudio` `EclipseManager` `PolarrPhotoEditorAcademicEdition` `Wunderlist` `LinkedInforWindows` `AutodeskSketchBook` `DisneyMagicKingdoms` `MarchofEmpires` `ActiproSoftwareLLC` `Plex` `iHeartRadio` `FarmVille2CountryEscape` `Duolingo` `CyberLinkMediaSuiteEssentials` `DolbyAccess` `DrawboardPDF` `FitbitCoach` `Flipboard` `Asphalt8Airborne`   `Keeper` `BingNews` `COOKINGFEVER` `PandoraMediaInc` `CaesarsSlotsFreeCasino` `Shazam` `PhototasticCollage` `TuneInRadio` `WinZipUniversal` `XING` `RoyalRevolt2` `CandyCrushSodaSaga` `BubbleWitch3Saga` `CandyCrushSaga` `Getstarted` `WindowsAlarms` `bing` `MicrosoftOfficeHub` `OneNote` `WindowsPhone` `SkypeApp`  `windowscommunicationsapps` `WindowsMaps` `Sway` `CommsPhone` `ConnectivityStore` `Twitter` `Drawboard PDF` `Sketchable` `Clipchamp` `Prime Videos` `TikTok` `ToDo` `Family` `NewVoiceNote` `SamsungNotes` `SamsungFlux` `StudioPlus` `SamsungWelcome` `SamsungQuickSearch` `SamsungPCCleaner` `SamsungCloudBluetoothSync` `PCGallery` `OnlineSupportSService` `HPJumpStarts` `HPPCHardwareDiagnosticsWindows` `HPPowerManager` `HPPrivacySettings` `HPSupportAssistant` `HPSureShieldAI` `HPSystemInformation` `HPQuickDrop` `HPWorkWell` `myHP` `HPDesktopSupportUtilities` `HPQuickTouch` `HPEasyClean` `HPSystemInformation` `ACGMediaPlayer` `AdobePhotoshopExpress` `HiddenCity` `Hulu` `Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe` `Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe` `MicrosoftSolitaireCollection` `MicrosoftStickyNotes` `Microsoft.People` `Microsoft.Wallet` `MinecraftUWP` `Todos` `Viber` `bingsports`
- 
-</ul>
 </br>
 <li>Wyłączanie niepotrzebnych aplikacji startowowych:</li>
 <ul></br>
