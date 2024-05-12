@@ -94,6 +94,13 @@ $whitelistapps = @(
     "MicrosoftWindows.Client.CBS"
 	"Microsoft.VCLibs.140.00"
 	"Microsoft.Windows.CloudExperienceHost"
+ "SpotifyAB.SpotifyMusic"
+ "Microsoft.SkypeApp"
+ "5319275A.WhatsAppDesktop"
+ "FACEBOOK.317180B0BB486"
+ "TelegramMessengerLLP.TelegramDesktop"
+ "4DF9E0F8.Netflix"
+ "Discord"
 )
 
 $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name
