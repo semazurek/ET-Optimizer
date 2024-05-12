@@ -1062,7 +1062,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 18.02.2024                '
+Write-Host '                          [-] Last update: 12.05.2024                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -1845,10 +1845,124 @@ CleanFlag $MyInvocation.MyCommand
 # Remove Bloatware Apps (Preinstalled) 108 apps
 Write-Host ' [Remove] Bloatware Apps ' -F red -B black
 $counter++;
-$listofbloatware = @('3DBuilder','Automate','Appconnector','Microsoft3DViewer','MicrosoftPowerBIForWindows','MicrosoftPowerBIForWindows','Print3D','XboxApp','GetHelp','WindowsFeedbackHub','BingFoodAndDrink','BingHealthAndFitness','BingTravel','WindowsReadingList','MixedReality.Portal','ScreenSketch','YourPhone','PicsArt-PhotoStudio','EclipseManager','PolarrPhotoEditorAcademicEdition','Wunderlist','LinkedInforWindows','AutodeskSketchBook','Twitter','DisneyMagicKingdoms','MarchofEmpires','ActiproSoftwareLLC','Plex','iHeartRadio','FarmVille2CountryEscape','Duolingo','CyberLinkMediaSuiteEssentials','DolbyAccess','DrawboardPDF','FitbitCoach','Flipboard','Asphalt8Airborne','Keeper','BingNews','COOKINGFEVER','PandoraMediaInc','CaesarsSlotsFreeCasino','Shazam','PhototasticCollage','TuneInRadio','WinZipUniversal','XING','RoyalRevolt2','CandyCrushSodaSaga','BubbleWitch3Saga','CandyCrushSaga','Getstarted','bing','MicrosoftOfficeHub','OneNote','WindowsPhone','SkypeApp','windowscommunicationsapps','WindowsMaps','Sway','CommsPhone','ConnectivityStore','Hotspot','Sketchable','Clipchamp','Prime','TikTok','ToDo','Family','NewVoiceNote','SamsungNotes','SamsungFlux','StudioPlus','SamsungWelcome','SamsungQuickSearch','SamsungPCCleaner','SamsungCloudBluetoothSync','PCGallery','OnlineSupportSService','HPJumpStarts','HPPCHardwareDiagnosticsWindows','HPPowerManager','HPPrivacySettings','HPSupportAssistant','HPSureShieldAI','HPSystemInformation','HPQuickDrop','HPWorkWell','myHP','HPDesktopSupportUtilities','HPQuickTouch','HPEasyClean','HPSystemInformation','MicrosoftTeams','ACGMediaPlayer','AdobePhotoshopExpress','HiddenCity','Hulu','Microsoft.Advertising.Xaml_10.1712.5.0_x64__8wekyb3d8bbwe','Microsoft.Advertising.Xaml_10.1712.5.0_x86__8wekyb3d8bbwe','MicrosoftSolitaireCollection','MicrosoftStickyNotes','Microsoft.People','Microsoft.Wallet','MinecraftUWP','Todos','Viber','bingsports')
-foreach ($d in $listofbloatware) {
+$whitelistapps = @(
+    # Whitelist apps
+    "Microsoft.MicrosoftOfficeHub"
+    "Microsoft.Office.OneNote"
+    "Microsoft.WindowsAlarms"
+    "Microsoft.WindowsCalculator"
+    "Microsoft.WindowsCamera"
+    "microsoft.windowscommunicationsapps"
+	"Microsoft.NET.Native.Framework.2.2"
+	"Microsoft.NET.Native.Framework.2.0"
+	"Microsoft.NET.Native.Runtime.2.2"
+	"Microsoft.NET.Native.Runtime.2.0"
+	"Microsoft.UI.Xaml.2.7"
+	"Microsoft.UI.Xaml.2.0"
+	"Microsoft.WindowsAppRuntime.1.3"
+	"Microsoft.NET.Native.Framework.1.7"
+	"MicrosoftWindows.Client.Core"
+	"Microsoft.LockApp"
+	"Microsoft.ECApp"
+	"Microsoft.Windows.ContentDeliveryManager"
+	"Microsoft.Windows.Search"
+	"Microsoft.Windows.OOBENetworkCaptivePortal"    
+	"Microsoft.Windows.SecHealthUI"
+	"Microsoft.SecHealthUI"
+	"Microsoft.WindowsAppRuntime.CBS"
+	"Microsoft.VCLibs.140.00.UWPDesktop"
+	"Microsoft.VCLibs.120.00.UWPDesktop"
+	"Microsoft.VCLibs.110.00.UWPDesktop"
+	"Microsoft.DirectXRuntime"
+	"Microsoft.XboxGameOverlay"
+	"Microsoft.XboxGamingOverlay"
+	"Microsoft.GamingApp"
+	"Microsoft.GamingServices"
+	"Microsoft.XboxIdentityProvider"
+	"Microsoft.Xbox.TCUI"
+	"Microsoft.AccountsControl"
+	"Microsoft.WindowsStore"
+	"Microsoft.StorePurchaseApp"
+	"Microsoft.VP9VideoExtensions"
+	"Microsoft.RawImageExtension"
+	"Microsoft.HEIFImageExtension"
+	"Microsoft.HEIFImageExtension"
+	"Microsoft.WebMediaExtensions"
+	"RealtekSemiconductorCorp.RealtekAudioControl"
+	"Microsoft.MicrosoftEdge"
+	"Microsoft.MicrosoftEdge.Stable"
+	"MicrosoftWindows.Client.FileExp"
+	"NVIDIACorp.NVIDIAControlPanel"
+    "AppUp.IntelGraphicsExperience"
+    "Microsoft.Paint"
+    "Microsoft.Messaging"
+	"Microsoft.AsyncTextService"
+	"Microsoft.CredDialogHost"
+	"Microsoft.Win32WebViewHost"
+	"Microsoft.MicrosoftEdgeDevToolsClient"
+	"Microsoft.Windows.OOBENetworkConnectionFlow"
+	"Microsoft.Windows.PeopleExperienceHost"
+	"Microsoft.Windows.PinningConfirmationDialog"
+	"Microsoft.Windows.SecondaryTileExperience"
+	"Microsoft.Windows.SecureAssessmentBrowser"
+	"Microsoft.Windows.ShellExperienceHost"
+	"Microsoft.Windows.StartMenuExperienceHost"
+	"Microsoft.Windows.XGpuEjectDialog"
+	"Microsoft.XboxGameCallableUI"
+	"MicrosoftWindows.UndockedDevKit"
+	"NcsiUwpApp"
+	"Windows.CBSPreview"
+	"Windows.MiracastView"
+	"Windows.ContactSupport"
+	"Windows.PrintDialog"
+	"c5e2524a-ea46-4f67-841f-6a9465d9d515"
+	"windows.immersivecontrolpanel"
+	"WinRAR.ShellExtension"
+	"Microsoft.WindowsNotepad"
+	"MicrosoftWindows.Client.WebExperience"
+	"Microsoft.ZuneMusic"
+	"Microsoft.ZuneVideo"
+	"Microsoft.OutlookForWindows"
+	"MicrosoftWindows.Ai.Copilot.Provider"
+	"Microsoft.WindowsTerminal"
+	"Microsoft.Winget.Source"
+	"Microsoft.DesktopAppInstaller"
+	"Microsoft.Services.Store.Engagement"
+	"Microsoft.HEVCVideoExtension"
+	"Microsoft.WebpImageExtension"
+	"MicrosoftWindows.CrossDevice"
+    "NotepadPlusPlus"
+    "MicrosoftCorporationII.WinAppRuntime.Main.1.5"
+    "Microsoft.WindowsAppRuntime.1.5"
+    "MicrosoftCorporationII.WinAppRuntime.Singleton"
+    "Microsoft.WindowsSoundRecorder"
+    "MicrosoftCorporationII.WinAppRuntime.Main.1.4"
+    "MicrosoftWindows.Client.LKG"
+    "MicrosoftWindows.Client.CBS"
+	"Microsoft.VCLibs.140.00"
+	"Microsoft.Windows.CloudExperienceHost"
+ "SpotifyAB.SpotifyMusic"
+ "Microsoft.SkypeApp"
+ "5319275A.WhatsAppDesktop"
+ "FACEBOOK.317180B0BB486"
+ "TelegramMessengerLLP.TelegramDesktop"
+ "4DF9E0F8.Netflix"
+ "Discord"
+)
 
-PowerShell -Command "Get-AppxPackage -allusers *$d* | Remove-AppxPackage" | Out-Null
+$RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name
+
+ForEach($TargetApp in $RemoveAppPkgs)
+{
+    If($whitelistapps -notcontains $TargetApp)
+    {
+
+        Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+
+        Get-AppXProvisionedPackage -Online |
+            Where-Object DisplayName -EQ $TargetApp |
+            Remove-AppxProvisionedPackage -Online | Out-Null
+    }
 }
 
 engine;};
