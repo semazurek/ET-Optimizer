@@ -15,7 +15,7 @@ Last tested/updated on:
 </ul> 
 </br>
 
-Download link: <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.ps1" target="_blank">ET-Optimizer.ps1</a> or <a href="https://github.com/semazurek/ET-Optimizer/releases/download/5.3/ET-Optimizer.exe" target="_blank">ET-Optimizer.exe</a>
+<a href="https://github.com/semazurek/ET-Optimizer/releases" target="_blank">Download</a>
 </br></br>Command before running .ps1:
 ```PowerShell
 Set-ExecutionPolicy RemoteSigned
