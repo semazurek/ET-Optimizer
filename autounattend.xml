@@ -1,0 +1,995 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Interactive&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&TimeZoneMode=Implicit&PartitionMode=Interactive&WindowsEditionMode=Interactive&UserAccountMode=Interactive&PasswordExpirationMode=Unlimited&LockoutMode=Default&DisableSystemRestore=true&EnableLongPaths=true&AllowPowerShellScripts=true&DisableLastAccess=true&DisableAppSuggestions=true&DisableWidgets=true&WifiMode=Skip&ExpressSettings=DisableAll&Remove3DViewer=true&RemoveBingSearch=true&RemoveClipchamp=true&RemoveCopilot=true&RemoveCortana=true&RemoveDevHome=true&RemoveFamily=true&RemoveFeedbackHub=true&RemoveGetHelp=true&RemoveMailCalendar=true&RemoveMaps=true&RemoveMathInputPanel=true&RemoveNews=true&RemoveOffice365=true&RemoveOneDrive=true&RemoveOneNote=true&RemoveOpenSSHClient=true&RemoveOutlook=true&RemovePaint=true&RemovePaint3D=true&RemovePeople=true&RemovePowerAutomate=true&RemoveQuickAssist=true&RemoveSkype=true&RemoveSnippingTool=true&RemoveSolitaire=true&RemoveStepsRecorder=true&RemoveStickyNotes=true&RemoveTeams=true&RemoveGetStarted=true&RemoveToDo=true&RemoveVoiceRecorder=true&RemoveWeather=true&RemoveYourPhone=true&FirstLogonScript0=reg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+%22HideFileExt%22+%2Ft++REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CThemes%5CPersonalize%22+%2Fv+%22EnableTransparency%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CThemes%5CPersonalize%22+%2Fv+%22EnableTransparency%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%22+%2Fv+VisualFXSetting++%2Ft+REG_DWORD+%2Fd+3+%2Ff%0D%0Apowercfg+-hibernate+off%0D%0AREG+ADD+%22HKCU%5CControl+Panel%5CDesktop%22+%2Fv+UserPreferencesMask+%2Ft+REG_BINARY+%2Fd+9012078010000000+%2Ff%0D%0AREG+ADD+%22HKCU%5CControl+Panel%5CDesktop%5CWindowMetrics%22+%2Fv+MinAnimate+%2Ft+REG_SZ+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%5CAnimateMinMax%22+%2Fv+DefaultApplied++%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%5CComboBoxAnimation%22+%2Fv+DefaultApplied++%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%5CControlAnimations%22+%2Fv+DefaultApplied++%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%5CMenuAnimation%22+%2Fv+DefaultApplied++%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%5CTaskbarAnimation%22+%2Fv+DefaultApplied++%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CVisualEffects%5CTooltipAnimation%22+%2Fv+DefaultApplied++%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+%22Start_TrackDocs%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CSearch%22+%2Fv+%22SearchboxTaskbarMode%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+%22LaunchTo%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CEdge%22+%2Fv+WebWidgetAllowed+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Apowercfg+-setactive+scheme_min%0D%0Apowercfg+-setactive+e9a42b02-d5df-448d-aa00-03f14749eb61%0D%0Apowercfg+%2FS+ceb6bfc7-d55c-4d56-ae37-ff264aade12d%0D%0Apowercfg+%2FX+standby-timeout-ac+0%0D%0Apowercfg+%2FX+standby-timeout-dc+0%0D%0A%0D%0Apowercfg+-setactive+scheme_min%0D%0Apowercfg+-setactive+e9a42b02-d5df-448d-aa00-03f14749eb61%0D%0Apowercfg+%2FS+ceb6bfc7-d55c-4d56-ae37-ff264aade12d%0D%0Apowercfg+%2FX+standby-timeout-ac+0%0D%0Apowercfg+%2FX+standby-timeout-dc+0%0D%0Abcdedit+%2Fset+timeout+3%0D%0Abcdedit+%2Ftimeout+3%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Ccurrent%5Cdevice%5CSystem%22+%2Fv+%22AllowExperimentation%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CSystem%5CAllowExperimentation%22+%2Fv+%22value%22+%2Ft+%22REG_DWORD%22+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+%22Start_TrackProgs%22+%2Fd+%220%22+%2Ft+REG_DWORD+%2Ff%0D%0Areg+add+%22HKLM%5CSYSTEM%5CCurrentControlSet%5CControl%5CPower%5CPowerThrottling%22+%2Fv+%22PowerThrottlingOff%22+%2Ft+REG_DWORD+%2Fd+%221%22+%2Ff%0D%0AREG+ADD+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CBackgroundAccessApplications%22+%2Fv+GlobalUserDisabled++%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CSearch%22+%2Fv+BackgroundAppGlobalToggle+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CControl+Panel%5CAccessibility%5CStickyKeys%22+%2Fv+%22Flags%22+%2Ft+REG_SZ+%2Fd+506+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CSystem%22+%2Fv+%22PublishUserActivities%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindowsStore%22+%2Fv+%22AutoDownload%22+%2Ft+REG_DWORD+%2Fd+2+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CAppHost%22+%2Fv+EnableWebContentEvaluation+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CControl+Panel%5CInternational%5CUser+Profile%22+%2Fv+HttpAcceptLanguageOptOut+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CClasses%5CLocal+Settings%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CAppContainer%5CStorage%5Cmicrosoft.microsoftedge_8wekyb3d8bbwe%5CMicrosoftEdge%5CMain%22+%2Fv+DoNotTrack+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CClasses%5CLocal+Settings%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CAppContainer%5CStorage%5Cmicrosoft.microsoftedge_8wekyb3d8bbwe%5CMicrosoftEdge%5CUser%5CDefault%5CSearchScopes%22+%2Fv+ShowSearchSuggestionsGlobal+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CClasses%5CLocal+Settings%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CAppContainer%5CStorage%5Cmicrosoft.microsoftedge_8wekyb3d8bbwe%5CMicrosoftEdge%5CFlipAhead%22+%2Fv+FPEnabled+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CClasses%5CLocal+Settings%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CAppContainer%5CStorage%5Cmicrosoft.microsoftedge_8wekyb3d8bbwe%5CMicrosoftEdge%5CPhishingFilter%22+%2Fv+EnabledV9+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CServices%5Cusbxhci%5CParameters%22+%2Fv+ThreadPriority+%2Ft+REG_DWORD+%2Fd+31+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CServices%5CUSBHUB3%5CParameters%22+%2Fv+ThreadPriority+%2Ft+REG_DWORD+%2Fd+31+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CServices%5CNDIS%5CParameters%22+%2Fv+ThreadPriority+%2Ft+REG_DWORD+%2Fd+31+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CServices%5Cnvlddmkm%5CParameters%22+%2Fv+ThreadPriority+%2Ft+REG_DWORD+%2Fd+31+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CMemory+Management%22+%2Fv+FeatureSettingsOverride+%2Ft+REG_DWORD+%2Fd+3+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CMemory+Management%22+%2Fv+FeatureSettingsOverrideMask+%2Ft+REG_DWORD+%2Fd+3+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CSensor%5CPermissions%5C%7BBFA794E4-F964-4FDB-90F6-51056BFE4B44%7D%22+%2Fv+SensorPermissionState+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CPolicyManager%5Cdefault%5CWiFi%5CAllowWiFiHotSpotReporting%22+%2Fv+value+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CPolicyManager%5Cdefault%5CWiFi%5CAllowAutoConnectToWiFiSenseHotspots%22+%2Fv+value+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CWindowsUpdate%5CUX%5CSettings%22+%2Fv+UxOption+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDeliveryOptimization%5CConfig%22+%2Fv+DODownloadMode+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%22+%2Fv+%22WaitToKillServiceTimeout%22+%2Ft+REG_SZ+%2Fd+2000+%2Ff%0D%0ASET+DEVMGR_SHOW_NONPRESENT_DEVICES%3D1%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-310093Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-314559Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-314563Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338387Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338388Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338389Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338393Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-353698Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CUserProfileEngagement%22+%2Fv+%22ScoobeSystemSettingEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CCloudContent%22+%2Fv+%22DisableWindowsConsumerFeatures%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22ContentDeliveryAllowed%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22OemPreInstalledAppsEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22PreInstalledAppsEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22PreInstalledAppsEverEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SilentInstalledAppsEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22FeatureManagementEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SoftLandingEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22RemediationRequired%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContentEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-310093Enabled%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338388Enabled%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338389Enabled%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338393Enabled%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-353694Enabled%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-353696Enabled%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CPolicies%5CMicrosoft%5CPushToInstall%22+%2Fv+%22DisablePushToInstall%22+%2Ft+REG_DWORD+%2Fd+%221%22+%2Ff%0D%0Areg+delete+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%5CSubscriptions%22+%2Ff%0D%0Areg+delete+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%5CSuggestedApps%22+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SystemPaneSuggestionsEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+%22ShowSyncProviderNotifications%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22RotatingLockScreenEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22RotatingLockScreenOverlayEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CContentDeliveryManager%22+%2Fv+%22SubscribedContent-338387Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CPolicyManager%5Cdefault%5CWindowsInkWorkspace%5CAllowSuggestedAppsInWindowsInkWorkspace%22+%2Fv+%22value%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CWindows+Defender%5CWindows+Defender+Scheduled+Scan%22+%2FRL+LIMITED%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CAppID%5CSmartScreenSpecific%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CApplication+Experience%5CMicrosoft+Compatibility+Appraiser%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CApplication+Experience%5CProgramDataUpdater%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CApplication+Experience%5CStartupAppTask%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CCustomer+Experience+Improvement+Program%5CConsolidator%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CCustomer+Experience+Improvement+Program%5CKernelCeipTask%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CCustomer+Experience+Improvement+Program%5CUsbCeip%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CDiskDiagnostic%5CMicrosoft-Windows-DiskDiagnosticDataCollector%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CMemoryDiagnostic%5CProcessMemoryDiagnosticEvent%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CPower+Efficiency+Diagnostics%5CAnalyzeSystem%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CCustomer+Experience+Improvement+Program%5CUploader%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CShell%5CFamilySafetyUpload%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COfficeTelemetryAgentLogOn%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COfficeTelemetryAgentFallBack%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COfficeTelemetryAgentFallBack2016%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COfficeTelemetryAgentLogOn2016%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COffice+15+Subscription+Heartbeat%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COffice+16+Subscription+Heartbeat%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CWindows+Error+Reporting%5CQueueReporting%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5CWindows%5CWindowsUpdate%5CAutomatic+App+Update%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22NIUpdateServiceStartupTask%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22CCleaner+Update%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22CCleanerCrashReportings%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22CCleanerSkipUAC+-+%24env%3Ausername%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22updater%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Adobe+Acrobat+Update+Task%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22MicrosoftEdgeUpdateTaskMachineCore%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22MicrosoftEdgeUpdateTaskMachineUA%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22MiniToolPartitionWizard%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22AMDLinkUpdate%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COffice+Automatic+Updates+2.0%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COffice+Feature+Updates%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22Microsoft%5COffice%5COffice+Feature+Updates+Logon%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22GoogleUpdateTaskMachineCore%22+%2FDisable%0D%0Aschtasks+%2FChange+%2FTN+%22GoogleUpdateTaskMachineUA%22+%2FDisable%0D%0Aschtasks+%2FDELETE+%2FTN+%22AMDInstallLauncher%22+%2Ff%0D%0Aschtasks+%2FDELETE+%2FTN+%22AMDLinkUpdate%22+%2Ff%0D%0Aschtasks+%2FDELETE+%2FTN+%22AMDRyzenMasterSDKTask%22+%2Ff%0D%0Aschtasks+%2FDELETE+%2FTN+%22DUpdaterTask%22+%2Ff%0D%0Aschtasks+%2FDELETE+%2FTN+%22ModifyLinkUpdate%22+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CNVIDIA+Corporation%5CNvControlPanel2%5CClient%22+%2Fv+OptInOrOutPreference+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CNVIDIA+Corporation%5CGlobal%5CFTS%22+%2Fv+EnableRID44231+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CNVIDIA+Corporation%5CGlobal%5CFTS%22+%2Fv+EnableRID64640+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CNVIDIA+Corporation%5CGlobal%5CFTS%22+%2Fv+EnableRID66610+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CServices%5CNvTelemetryContainer%22+%2Fv+Start+%2Ft+REG_DWORD+%2Fd+4+%2Ff%0D%0A%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CPolicies%5CExplorer%22+%2Fv+NoInstrumentation+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CPolicies%5CExplorer%22+%2Fv+NoInstrumentation+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CHandwritingErrorReports%22+%2Fv+PreventHandwritingErrorReports+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CDataCollection%22+%2Fv+DoNotShowFeedbackNotifications+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CDataCollection%22+%2Fv+AllowDeviceNameInTelemetry+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%22+%2Fv+SmartScreenEnabled+%2Ft+REG_SZ+%2Fd+%22Off%22+%2Ff%0D%0AREG+ADD+%22HKEY_CURRENT_USER%5CSOFTWARE%5CClasses%5CLocal+Settings%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CAppContainer%5CStorage%5Cmicrosoft.microsoftedge_8wekyb3d8bbwe%5CMicrosoftEdge%5CPhishingFilter%22+%2Fv+EnabledV9+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_CURRENT_USER%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CExplorer%22+%2Fv+HideRecentlyAddedApps+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CAssistance%5CClient%5C1.0%22+%2Fv+NoActiveHelp+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0A%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CCurrentControlSet%5CControl%5CCrashControl%5CStorageTelemetry%22+%2Fv+DeviceDumpEnabled+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CImage+File+Execution+Options%5CCompatTelRunner.exe%22+%2Fv+Debugger+%2Ft+REG_SZ+%2Fd+%22%25windir%25%5CSystem32%5Ctaskkill.exe%22+%2Ff%0D%0AREG+ADD+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CImage+File+Execution+Options%5CDeviceCensus.exe%22+%2Fv+Debugger+%2Ft+REG_SZ+%2Fd+%22%25windir%25%5CSystem32%5Ctaskkill.exe%22+%2Ff%0D%0A%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CDevice+Metadata%22+%2Fv+PreventDeviceMetadataFromNetwork+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CPolicies%5CDataCollection%22+%2Fv+%22AllowTelemetry%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CPolicies%5CMicrosoft%5CWindows%5CDataCollection%22+%2Fv+%22AllowTelemetry%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CMRT%22+%2Fv+DontOfferThroughWUAU+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CSQMClient%5CWindows%22+%2Fv+%22CEIPEnable%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CAppCompat%22+%2Fv+%22AITEnable%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CAppCompat%22+%2Fv+%22DisableUAR%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CDataCollection%22+%2Fv+%22AllowTelemetry%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSYSTEM%5CCurrentControlSet%5CControl%5CWMI%5CAutoLogger%5CAutoLogger-Diagtrack-Listener%22+%2Fv+%22Start%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSYSTEM%5CCurrentControlSet%5CControl%5CWMI%5CAutoLogger%5CSQMLogger%22+%2Fv+%22Start%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CPrivacy%22+%2Fv+%22TailoredExperiencesWithDiagnosticDataEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSYSTEM%5CControlSet001%5CControl%5CWMI%5CAutologger%5CAutoLogger-Diagtrack-Listener%22+%2Fv+%22Start%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSYSTEM%5CControlSet001%5CServices%5Cdmwappushservice%22+%2Fv+%22Start%22+%2Ft+REG_DWORD+%2Fd+4+%2Ff%0D%0Areg+add+%22HKLM%5CSYSTEM%5CControlSet001%5CServices%5CDiagTrack%22+%2Fv+%22Start%22+%2Ft+REG_DWORD+%2Fd+4+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5CCommon%5CClientTelemetry%22+%2Fv+%22DisableTelemetry%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5CCommon%5CClientTelemetry%22+%2Fv+%22DisableTelemetry%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C17.0%5CCommon%5CClientTelemetry%22+%2Fv+%22DisableTelemetry%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5CCommon%5CClientTelemetry%22+%2Fv+%22VerboseLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5CCommon%5CClientTelemetry%22+%2Fv+%22VerboseLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C15.0%5COutlook%5COptions%5CMail%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5COutlook%5COptions%5CMail%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C15.0%5COutlook%5COptions%5CCalendar%22+%2Fv+%22EnableCalendarLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5COutlook%5COptions%5CCalendar%22+%2Fv+%22EnableCalendarLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C15.0%5CWord%5COptions%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5CWord%5COptions%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C17.0%5CWord%5COptions%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CPolicies%5CMicrosoft%5COffice%5C15.0%5COSM%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CPolicies%5CMicrosoft%5COffice%5C16.0%5COSM%22+%2Fv+%22EnableLogging%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CPolicies%5CMicrosoft%5COffice%5C15.0%5COSM%22+%2Fv+%22EnableUpload%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CPolicies%5CMicrosoft%5COffice%5C16.0%5COSM%22+%2Fv+%22EnableUpload%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CPolicies%5CMicrosoft%5COffice%5C17.0%5COSM%22+%2Fv+%22EnableUpload%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C15.0%5CCommon%5CFeedback%22+%2Fv+%22Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5CCommon%5CFeedback%22+%2Fv+%22Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C15.0%5CCommon%22+%2Fv+%22QMEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C16.0%5CCommon%22+%2Fv+%22QMEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5COffice%5C17.0%5CCommon%22+%2Fv+%22QMEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0A%0D%0Asc+stop+VSStandardCollectorService150%0D%0Asc+config+VSStandardCollectorService150+start%3D+disabled+%0D%0Areg+add+%22HKLM%5CSoftware%5CWow6432Node%5CMicrosoft%5CVSCommon%5C14.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CWow6432Node%5CMicrosoft%5CVSCommon%5C15.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CWow6432Node%5CMicrosoft%5CVSCommon%5C16.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CWow6432Node%5CMicrosoft%5CVSCommon%5C17.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CVSCommon%5C14.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CVSCommon%5C15.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CVSCommon%5C16.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CVSCommon%5C17.0%5CSQM%22+%2Fv+%22OptIn%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CVisualStudio%5CTelemetry%22+%2Fv+%22TurnOffSwitch%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CPolicies%5CMicrosoft%5CVisualStudio%5CFeedback%22+%2Fv+%22DisableFeedbackDialog%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CPolicies%5CMicrosoft%5CVisualStudio%5CFeedback%22+%2Fv+%22DisableEmailInput%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CPolicies%5CMicrosoft%5CVisualStudio%5CFeedback%22+%2Fv+%22DisableScreenshotCapture%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0A%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CGoogle%5CChrome%22+%2Fv+%22MetricsReportingEnabled%22+%2Ft+REG_SZ+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CGoogle%5CChrome%22+%2Fv+%22ChromeCleanupEnabled%22+%2Ft+REG_SZ+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CGoogle%5CChrome%22+%2Fv+%22ChromeCleanupReportingEnabled%22+%2Ft+REG_SZ+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CGoogle%5CChrome%22+%2Fv+%22MetricsReportingEnabled%22+%2Ft+REG_SZ+%2Fd+0+%2Ff%0D%0A%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22HomeScreen%22+%2Ft+REG_SZ+%2Fd+2+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22Monitoring%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22HelpImproveCCleaner%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22SystemMonitoring%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22UpdateAuto%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22UpdateCheck%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22CheckTrialOffer%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22%28Cfg%29HealthCheck%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22%28Cfg%29QuickClean%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22%28Cfg%29QuickCleanIpm%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22%28Cfg%29SoftwareUpdater%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CPiriform%5CCCleaner%22+%2Fv+%22%28Cfg%29SoftwareUpdaterIpm%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Asetx+POWERSHELL_TELEMETRY_OPTOUT+1%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CTracing%5CWPPMediaPerApp%5CSkype%5CETW%22+%2Fv+%22TraceLevelThreshold%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CTracing%5CWPPMediaPerApp%5CSkype%22+%2Fv+%22EnableTracing%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CTracing%5CWPPMediaPerApp%5CSkype%5CETW%22+%2Fv+%22EnableTracing%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CTracing%5CWPPMediaPerApp%5CSkype%22+%2Fv+%22WPPFilePath%22+%2Ft+REG_SZ+%2Fd+%22%25%25SYSTEMDRIVE%25%25%5CTEMP%5CTracing%5CWPPMedia%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CTracing%5CWPPMediaPerApp%5CSkype%5CETW%22+%2Fv+%22WPPFilePath%22+%2Ft+REG_SZ+%2Fd+%22%25%25SYSTEMDRIVE%25%25%5CTEMP%5CWPPMedia%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CMediaPlayer%5CPreferences%22+%2Fv+%22UsageTracking%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+HKLM%5CSOFTWARE%5CPolicies%5CMozilla%5CFirefox+%2Fv+%22DisableTelemetry%22+%2Ft+REG_DWORD+%2Fd+%222%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CAdvertisingInfo%22+%2Fv+Enabled+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CCPSS%5CStore%5CAdvertisingInfo%22+%2Fv+%22Value%22+%2Ft+REG_DWORD+%2Fd+%220%22+%2Ff%0D%0Areg+add+%22HKLM%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CCapabilityAccessManager%5CConsentStore%5CappDiagnostics%22+%2Fv+%22Value%22+%2Ft+REG_SZ+%2Fd+%22Deny%22+%2Ff%0D%0Areg+add+%22HKCU%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CCapabilityAccessManager%5CConsentStore%5CappDiagnostics%22+%2Fv+%22Value%22+%2Ft+REG_SZ+%2Fd+%22Deny%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CInput%5CTIPC%22+%2Fv+Enabled+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CInputPersonalization%22+%2Fv+RestrictImplicitInkCollection+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CInputPersonalization%22+%2Fv+RestrictImplicitTextCollection+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows+Defender%5CReporting%22+%2Fv+%22DisableGenericReports%22+%2Ft+REG_DWORD+%2Fd+%222%22+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CMRT%22+%2Fv+%22DontReportInfectionInformation%22+%2Ft+REG_DWORD+%2Fd+%222%22+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows+Defender%5CSpynet%22+%2Fv+%22LocalSettingOverrideSpynetReporting%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows+Defender%5CSpynet%22+%2Fv+%22SpynetReporting%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKLM%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows+Defender%5CSpynet%22+%2Fv+%22SubmitSamplesConsent%22+%2Ft+REG_DWORD+%2Fd+%222%22+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CPersonalization%5CSettings%22+%2Fv+AcceptedPrivacyPolicy+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKCU%5CSOFTWARE%5CMicrosoft%5CInputPersonalization%5CTrainedDataStore%22+%2Fv+HarvestContacts+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindows+Search%22+%2Fv+%22AllowCortana%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CGameDVR%22+%2Fv+%22AppCaptureEnabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSystem%5CGameConfigStore%22+%2Fv+%22GameDVR_Enabled%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CPolicies%5CMicrosoft%5CWindows%5CWindows+Feeds%22+%2Fv+EnableFeeds+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+TaskbarDa+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Awinget+uninstall+%22windows+web+experience+pack%22+%2D%2Daccept-source-agreements%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CWOW6432Node%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22SunJavaUpdateSched%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22SunJavaUpdateSched%22+%2Ff%0D%0A%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22MTPW%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CWOW6432Node%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22TeamsMachineInstaller%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22TeamsMachineInstaller%22+%2Ff%0D%0A%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22CiscoMeetingDaemon%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CWOW6432Node%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Adobe+Reader+Speed+Launcher%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Adobe+Reader+Speed+Launcher%22+%2Ff%0D%0A%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22CCleaner+Smart+Cleaning%22+%2Ff%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22CCleaner+Monitor%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Spotify+Web+Helper%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Gaijin.Net+Updater%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22com.squirrel.Teams.Teams%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Google+Update%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22BitTorrent+Bleep%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Skype%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22adobeAAMUpdater-1.0%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22AdobeAAMUpdater%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22iTunesHelper%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22UpdatePPShortCut%22+%2Ff+%3ENUL+2%3Enul%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CWow6432Node%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Live+Update%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Live+Update%22+%2Ff%0D%0A%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CWow6432Node%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Wondershare+Helper+Compact%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Wondershare+Helper+Compact%22+%2Ff%0D%0A%0D%0A%0D%0A%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CWOW6432Node%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Cisco+AnyConnect+Secure+Mobility+Agent+for+Windows%22+%2Ff%0D%0Areg+delete+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Cisco+AnyConnect+Secure+Mobility+Agent+for+Windows%22+%2Ff%0D%0A%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Opera+Browser+Assistant%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Steam%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22EADM%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22EpicGamesLauncher%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22GogGalaxy%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Skype+for+Desktop%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Wargaming.net+Game+Center%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22ut%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Lync%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKLM%5CSOFTWARE%5CMicrosoft%5CActive+Setup%5CInstalled+Components%22+%2Fv+%22Google+Chrome%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKLM%5CSOFTWARE%5CMicrosoft%5CActive+Setup%5CInstalled+Components%22+%2Fv+%22Microsoft+Edge%22+%2Ff%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22MicrosoftEdgeAutoLaunch_E9C49D8E9BDC4095F482C844743B9E82%22+%2Ff%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22MicrosoftEdgeAutoLaunch_D3AB3F7FBB44621987441AECEC1156AD%22+%2Ff%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22MicrosoftEdgeAutoLaunch%22+%2Ff%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Microsoft+Edge+Update%22+%2Ff%0D%0Areg+delete+%22HKEY_CURRENT_USER%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E%22+%2Ff%0D%0A%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Discord%22+%2Ff%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22Ubisoft+Game+Launcher%22+%2Ff%0D%0A%0D%0Areg+delete+%22HKCU%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CRun%22+%2Fv+%22com.blitz.app%22+%2Ff%0D%0A&FirstLogonScriptType0=Cmd&FirstLogonScript1=%24ErrorActionPreference+%3D+%22silentlycontinue%22%0D%0A%24NetworkIDS+%3D+%40%28%0D%0A%28Get-ItemProperty+-Path+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CServices%5CTcpip%5CParameters%5CInterfaces%5C*%22%29.PSChildName%0D%0A%29%0D%0Aforeach+%28%24NetworkID+in+%24NetworkIDS%29+%7B%0D%0ASet-ItemProperty+-Path+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CServices%5CTcpip%5CParameters%5CInterfaces%5C%24NetworkID%22+-Name+%22TcpAckFrequency%22+-Type+DWord+-Value+1%0D%0ASet-ItemProperty+-Path+%22HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CServices%5CTcpip%5CParameters%5CInterfaces%5C%24NetworkID%22+-Name+%22TCPNoDelay%22+-Type+DWord+-Value+1%0D%0A%7D%0D%0A%24components+%3D+%40%28%27Printing-PrintToPDFServices-Features%27%2C%27Printing-XPSServices-Features%27%2C%27Xps-Foundation-Xps-Viewer%27%29%0D%0Aforeach+%28%24a+in+%24components%29+%7B%0D%0Adisable-windowsoptionalfeature+-online+-featureName+%24a+-NoRestart%0D%0A%7D%0D%0ASet-ProcessMitigation+-System+-Disable+CFG%0D%0A%24toDisable+%3D+%40%28%27DiagTrack%27%2C%27diagnosticshub.standardcollector.service%27%2C%27dmwappushservice%27%2C%27RemoteRegistry%27%2C%27RemoteAccess%27%2C%27SCardSvr%27%2C%27SCPolicySvc%27%2C%27fax%27%2C%27WerSvc%27%2C%27NvTelemetryContainer%27%2C%27gadjservice%27%2C%27AdobeARMservice%27%2C%27PSI_SVC_2%27%2C%27lfsvc%27%2C%27WalletService%27%2C%27RetailDemo%27%2C%27SEMgrSvc%27%2C%27diagsvc%27%2C%27AJRouter%27%2C%27amdfendr%27%2C%27amdfendrmgr%27%29%0D%0Aforeach+%28%24b+in+%24toDisable%29+%7B%0D%0A+++sc+stop+%24b%0D%0A+++sc+config+%24b+start%3D+disabled%0D%0A%7D%0D%0A%23Disable+Network+Diagnostic+Usage+Service%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSYSTEM%5CControlSet001%5CServices%5CNdu%22+%2Fv+%22Start%22+%2Ft+REG_DWORD+%2Fd+4+%2Ff%0D%0A%0D%0A%23+Manuall%0D%0AWrite-Host+%27+%5BSetting%5D+Services+to%3A+Manuall+Mode+%27+-F+blue+-B+black%0D%0A%24toManuall+%3D+%40%28%27BITS%27%2C%27SamSs%27%2C%27TapiSrv%27%2C%27seclogon%27%2C%27wuauserv%27%2C%27PhoneSvc%27%2C%27lmhosts%27%2C%27iphlpsvc%27%2C%27gupdate%27%2C%27gupdatem%27%2C%27edgeupdate%27%2C%27edgeupdatem%27%2C%27MapsBroker%27%2C%27PnkBstrA%27%2C%27brave%27%2C%27bravem%27%2C%27asus%27%2C%27asusm%27%2C%27adobeupdateservice%27%2C%27adobeflashplayerupdatesvc%27%2C%27WSearch%27%2C%27CCleanerPerformanceOptimizerService%27%29%0D%0Aforeach+%28%24c+in+%24toManuall%29+%7B%0D%0A+++sc+config+%24c+start%3D+demand%0D%0A%7D%0D%0A%24whitelistapps+%3D+%40%28%0D%0A++++%23+Whitelist+apps%0D%0A%22Microsoft.MicrosoftOfficeHub%22%0D%0A%22Microsoft.Office.OneNote%22%0D%0A%22Microsoft.WindowsAlarms%22%0D%0A%22Microsoft.WindowsCalculator%22%0D%0A%22Microsoft.WindowsCamera%22%0D%0A%22microsoft.windowscommunicationsapps%22%0D%0A%22Microsoft.NET.Native.Framework.2.2%22%0D%0A%22Microsoft.NET.Native.Framework.2.0%22%0D%0A%22Microsoft.NET.Native.Runtime.2.2%22%0D%0A%22Microsoft.NET.Native.Runtime.2.0%22%0D%0A%22Microsoft.UI.Xaml.2.7%22%0D%0A%22Microsoft.UI.Xaml.2.0%22%0D%0A%22Microsoft.WindowsAppRuntime.1.3%22%0D%0A%22Microsoft.NET.Native.Framework.1.7%22%0D%0A%22MicrosoftWindows.Client.Core%22%0D%0A%22Microsoft.LockApp%22%0D%0A%22Microsoft.ECApp%22%0D%0A%22Microsoft.Windows.ContentDeliveryManager%22%0D%0A%22Microsoft.Windows.Search%22%0D%0A%22Microsoft.Windows.OOBENetworkCaptivePortal%22++++%0D%0A%22Microsoft.Windows.SecHealthUI%22%0D%0A%22Microsoft.SecHealthUI%22%0D%0A%22Microsoft.WindowsAppRuntime.CBS%22%0D%0A%22Microsoft.VCLibs.140.00.UWPDesktop%22%0D%0A%22Microsoft.VCLibs.120.00.UWPDesktop%22%0D%0A%22Microsoft.VCLibs.110.00.UWPDesktop%22%0D%0A%22Microsoft.DirectXRuntime%22%0D%0A%22Microsoft.XboxGameOverlay%22%0D%0A%22Microsoft.XboxGamingOverlay%22%0D%0A%22Microsoft.GamingApp%22%0D%0A%22Microsoft.GamingServices%22%0D%0A%22Microsoft.XboxIdentityProvider%22%0D%0A%22Microsoft.Xbox.TCUI%22%0D%0A%22Microsoft.AccountsControl%22%0D%0A%22Microsoft.WindowsStore%22%0D%0A%22Microsoft.StorePurchaseApp%22%0D%0A%22Microsoft.VP9VideoExtensions%22%0D%0A%22Microsoft.RawImageExtension%22%0D%0A%22Microsoft.HEIFImageExtension%22%0D%0A%22Microsoft.HEIFImageExtension%22%0D%0A%22Microsoft.WebMediaExtensions%22%0D%0A%22RealtekSemiconductorCorp.RealtekAudioControl%22%0D%0A%22Microsoft.MicrosoftEdge%22%0D%0A%22Microsoft.MicrosoftEdge.Stable%22%0D%0A%22MicrosoftWindows.Client.FileExp%22%0D%0A%22NVIDIACorp.NVIDIAControlPanel%22%0D%0A%22AppUp.IntelGraphicsExperience%22%0D%0A%22Microsoft.Paint%22%0D%0A%22Microsoft.Messaging%22%0D%0A%22Microsoft.AsyncTextService%22%0D%0A%22Microsoft.CredDialogHost%22%0D%0A%22Microsoft.Win32WebViewHost%22%0D%0A%22Microsoft.MicrosoftEdgeDevToolsClient%22%0D%0A%22Microsoft.Windows.OOBENetworkConnectionFlow%22%0D%0A%22Microsoft.Windows.PeopleExperienceHost%22%0D%0A%22Microsoft.Windows.PinningConfirmationDialog%22%0D%0A%22Microsoft.Windows.SecondaryTileExperience%22%0D%0A%22Microsoft.Windows.SecureAssessmentBrowser%22%0D%0A%22Microsoft.Windows.ShellExperienceHost%22%0D%0A%22Microsoft.Windows.StartMenuExperienceHost%22%0D%0A%22Microsoft.Windows.XGpuEjectDialog%22%0D%0A%22Microsoft.XboxGameCallableUI%22%0D%0A%22MicrosoftWindows.UndockedDevKit%22%0D%0A%22NcsiUwpApp%22%0D%0A%22Windows.CBSPreview%22%0D%0A%22Windows.MiracastView%22%0D%0A%22Windows.ContactSupport%22%0D%0A%22Windows.PrintDialog%22%0D%0A%22c5e2524a-ea46-4f67-841f-6a9465d9d515%22%0D%0A%22windows.immersivecontrolpanel%22%0D%0A%22WinRAR.ShellExtension%22%0D%0A%22Microsoft.WindowsNotepad%22%0D%0A%22MicrosoftWindows.Client.WebExperience%22%0D%0A%22Microsoft.ZuneMusic%22%0D%0A%22Microsoft.ZuneVideo%22%0D%0A%22Microsoft.OutlookForWindows%22%0D%0A%22MicrosoftWindows.Ai.Copilot.Provider%22%0D%0A%22Microsoft.WindowsTerminal%22%0D%0A%22Microsoft.Windows.Terminal%22%0D%0A%22WindowsTerminal%22%0D%0A%22Microsoft.Winget.Source%22%0D%0A%22Microsoft.DesktopAppInstaller%22%0D%0A%22Microsoft.Services.Store.Engagement%22%0D%0A%22Microsoft.HEVCVideoExtension%22%0D%0A%22Microsoft.WebpImageExtension%22%0D%0A%22MicrosoftWindows.CrossDevice%22%0D%0A%22NotepadPlusPlus%22%0D%0A%22MicrosoftCorporationII.WinAppRuntime.Main.1.5%22%0D%0A%22Microsoft.WindowsAppRuntime.1.5%22%0D%0A%22MicrosoftCorporationII.WinAppRuntime.Singleton%22%0D%0A%22Microsoft.WindowsSoundRecorder%22%0D%0A%22MicrosoftCorporationII.WinAppRuntime.Main.1.4%22%0D%0A%22MicrosoftWindows.Client.LKG%22%0D%0A%22MicrosoftWindows.Client.CBS%22%0D%0A%22Microsoft.VCLibs.140.00%22%0D%0A%22Microsoft.Windows.CloudExperienceHost%22%0D%0A+%22SpotifyAB.SpotifyMusic%22%0D%0A+%22Microsoft.SkypeApp%22%0D%0A+%225319275A.WhatsAppDesktop%22%0D%0A+%22FACEBOOK.317180B0BB486%22%0D%0A+%22TelegramMessengerLLP.TelegramDesktop%22%0D%0A+%224DF9E0F8.Netflix%22%0D%0A+%22Discord%22%0D%0A+%22Paint%22%0D%0A+%22mspaint%22%0D%0A+%22Microsoft.Windows.Paint%22%0D%0A%29%0D%0A%0D%0A%24RemoveAppPkgs+%3D+%28Get-AppxPackage+-AllUsers%29.Name%0D%0A%0D%0AForEach%28%24TargetApp+in+%24RemoveAppPkgs%29%0D%0A%7B%0D%0A++++If%28%24whitelistapps+-notcontains+%24TargetApp%29%0D%0A++++%7B%0D%0A%0D%0A++++++++Get-AppxPackage+-Name+%24TargetApp+-AllUsers+%7C+Remove-AppxPackage+-AllUsers+-ErrorAction+SilentlyContinue%0D%0A%0D%0A++++++++Get-AppXProvisionedPackage+-Online+%7C%0D%0A++++++++++++Where-Object+DisplayName+-EQ+%24TargetApp+%7C%0D%0A++++++++++++Remove-AppxProvisionedPackage+-Online%0D%0A++++%7D%0D%0A%7D%0D%0A&FirstLogonScriptType1=Ps1&FirstLogonScript2=%24NOLP+%3D+wmic+cpu+get+NumberOfLogicalProcessors+%7C+findstr+%2Fr+%22%5B0-9%5D%22%0D%0Abcdedit+%2Fset+%7Bcurrent%7D+numproc+%24NOLP%0D%0Aif+%28wmic+cpu+get+name+%7C+findstr+%2Fr+%22Intel%22%29+%7B%0D%0A%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+Affinity+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22Background+Only%22+%2Ft+REG_SZ+%2Fd+%22False%22+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22Clock+Rate%22+%2Ft+REG_DWORD+%2Fd+10000+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22Scheduling+Category%22+%2Ft+REG_SZ+%2Fd+%22High%22+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22SFIO+Priority%22+%2Ft+REG_SZ+%2Fd+%22High%22+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22GPU+Priority%22+%2Ft+REG_DWORD+%2Fd+8+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22Priority%22+%2Ft+REG_DWORD+%2Fd+6+%2Ff%0D%0A%7D%0D%0Aelse%0D%0A%7B%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22GPU+Priority%22+%2Ft+REG_DWORD+%2Fd+8+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22Priority%22+%2Ft+REG_DWORD+%2Fd+6+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22Scheduling+Category%22+%2Ft+REG_SZ+%2Fd+%22High%22+%2Ff%0D%0Areg+add+%22HKEY_LOCAL_MACHINE%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CMultimedia%5CSystemProfile%5CTasks%5CGames%22+%2Fv+%22SFIO+Priority%22+%2Ft+REG_SZ+%2Fd+%22High%22+%2Ff%0D%0A%7D%0D%0AGet-AppxPackage+*XboxGamingOverlay*+%7C+Remove-AppxPackage%0D%0AGet-AppxPackage+*XboxGameOverlay*+%7C+Remove-AppxPackage%0D%0AGet-AppxPackage+*XboxSpeechToTextOverlay*+%7C+Remove-AppxPackage&FirstLogonScriptType2=Ps1&FirstLogonScript3=%24ram+%3D+%28Get-CimInstance+-ClassName+Win32_PhysicalMemory+%7C+Measure-Object+-Property+Capacity+-Sum%29.Sum+%2F+1kb%0D%0ASet-ItemProperty+-Path+%27HKLM%3A%5CSYSTEM%5CCurrentControlSet%5CControl%27+-Name+%27SvcHostSplitThresholdInKB%27+-Type+DWord+-Value+%24ram+-Force&FirstLogonScriptType3=Ps1&WdacMode=Skip-->
+	<settings pass="offlineServicing"></settings>
+	<settings pass="windowsPE">
+		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<UserData>
+				<ProductKey>
+					<Key>00000-00000-00000-00000-00000</Key>
+				</ProductKey>
+				<AcceptEula>true</AcceptEula>
+			</UserData>
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassDiskCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+	</settings>
+	<settings pass="generalize"></settings>
+	<settings pass="specialize">
+		<component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<RunSynchronous>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Runonce" /v "UninstallCopilot" /t REG_SZ /d "powershell.exe -NoProfile -Command \"Get-AppxPackage -Name 'Microsoft.Windows.Ai.Copilot.Provider' | Remove-AppxPackage;\"" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot" /v TurnOffWindowsCopilot /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Path>reg.exe delete "HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>7</Order>
+					<Path>cmd.exe /c "del "C:\Users\Default\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\OneDrive.lnk""</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>8</Order>
+					<Path>cmd.exe /c "del "C:\Windows\System32\OneDriveSetup.exe""</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>9</Order>
+					<Path>cmd.exe /c "del "C:\Windows\SysWOW64\OneDriveSetup.exe""</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>10</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>11</Order>
+					<Path>reg.exe delete "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Run" /v OneDriveSetup /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>12</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>13</Order>
+					<Path>reg.exe delete "HKLM\SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>14</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications" /v ConfigureChatAutoInstall /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>15</Order>
+					<Path>powershell.exe -NoProfile -Command "$xml = [xml]::new(); $xml.Load('C:\Windows\Panther\unattend.xml'); $sb = [scriptblock]::Create( $xml.unattend.Extensions.ExtractScript ); Invoke-Command -ScriptBlock $sb -ArgumentList $xml;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Path>powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Temp\remove-packages.ps1' -Raw | Invoke-Expression;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>17</Order>
+					<Path>powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Temp\remove-caps.ps1' -Raw | Invoke-Expression;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>18</Order>
+					<Path>powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Temp\remove-features.ps1' -Raw | Invoke-Expression;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>19</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start" /v ConfigureStartPins /t REG_SZ /d "{ \"pinnedList\": [] }" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>20</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start" /v ConfigureStartPins_ProviderSet /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>21</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start" /v ConfigureStartPins_WinningProvider /t REG_SZ /d B5292708-1619-419B-9923-E5D9F3925E71 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>22</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start" /v ConfigureStartPins /t REG_SZ /d "{ \"pinnedList\": [] }" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>23</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Microsoft\PolicyManager\providers\B5292708-1619-419B-9923-E5D9F3925E71\default\Device\Start" /v ConfigureStartPins_LastWrite /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>24</Order>
+					<Path>net.exe accounts /maxpwage:UNLIMITED</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>25</Order>
+					<Path>reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>26</Order>
+					<Path>powershell.exe -NoProfile -Command "Set-ExecutionPolicy -Scope 'LocalMachine' -ExecutionPolicy 'RemoteSigned' -Force;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>27</Order>
+					<Path>fsutil.exe behavior set disableLastAccess 1</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>28</Order>
+					<Path>reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Dsh" /v AllowNewsAndInterests /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>29</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>30</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>31</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>32</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OEMPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>33</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>34</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>35</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>36</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>37</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>38</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>39</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>40</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>41</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>42</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>43</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353698Enabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>44</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>45</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>46</Order>
+					<Path>reg.exe add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 0 /f</Path>
+				</RunSynchronousCommand>
+			</RunSynchronous>
+		</component>
+	</settings>
+	<settings pass="auditSystem"></settings>
+	<settings pass="auditUser"></settings>
+	<settings pass="oobeSystem">
+		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+			<OOBE>
+				<ProtectYourPC>3</ProtectYourPC>
+				<HideEULAPage>true</HideEULAPage>
+				<HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+			</OOBE>
+			<FirstLogonCommands>
+				<SynchronousCommand wcm:action="add">
+					<Order>1</Order>
+					<CommandLine>powershell.exe -NoProfile -Command "Disable-ComputerRestore -Drive 'C:\';"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<CommandLine>cmd.exe /c "C:\Windows\Setup\Scripts\unattend-01.cmd &gt;&gt;"C:\Windows\Setup\Scripts\unattend-01.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-02.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-02.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-03.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-03.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-04.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-04.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+			</FirstLogonCommands>
+		</component>
+	</settings>
+	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
+		<ExtractScript>
+param(
+    [xml] $Document
+);
+
+$scriptsDir = 'C:\Windows\Setup\Scripts\';
+foreach( $file in $Document.unattend.Extensions.File ) {
+    $path = [System.Environment]::ExpandEnvironmentVariables(
+        $file.GetAttribute( 'path' )
+    );
+    if( $path.StartsWith( $scriptsDir ) ) {
+        mkdir -Path $scriptsDir -ErrorAction 'SilentlyContinue';
+    }
+    $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
+        { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
+        { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
+        default { [System.Text.Encoding]::Default; }
+    };
+    [System.IO.File]::WriteAllBytes( $path, ( $encoding.GetPreamble() + $encoding.GetBytes( $file.InnerText.Trim() ) ) );
+}
+		</ExtractScript>
+		<File path="C:\Windows\Temp\remove-packages.ps1">
+$selectors = @(
+	'Microsoft.Microsoft3DViewer';
+	'Microsoft.BingSearch';
+	'Clipchamp.Clipchamp';
+	'Microsoft.549981C3F5F10';
+	'Microsoft.Windows.DevHome';
+	'MicrosoftCorporationII.MicrosoftFamily';
+	'Microsoft.WindowsFeedbackHub';
+	'Microsoft.GetHelp';
+	'Microsoft.Getstarted';
+	'microsoft.windowscommunicationsapps';
+	'Microsoft.WindowsMaps';
+	'Microsoft.BingNews';
+	'Microsoft.MicrosoftOfficeHub';
+	'Microsoft.Office.OneNote';
+	'Microsoft.OutlookForWindows';
+	'Microsoft.Paint';
+	'Microsoft.MSPaint';
+	'Microsoft.People';
+	'Microsoft.PowerAutomateDesktop';
+	'MicrosoftCorporationII.QuickAssist';
+	'Microsoft.SkypeApp';
+	'Microsoft.ScreenSketch';
+	'Microsoft.MicrosoftSolitaireCollection';
+	'Microsoft.MicrosoftStickyNotes';
+	'MSTeams';
+	'Microsoft.Todos';
+	'Microsoft.WindowsSoundRecorder';
+	'Microsoft.BingWeather';
+	'Microsoft.YourPhone';
+);
+$getCommand = { Get-AppxProvisionedPackage -Online; };
+$filterCommand = { $_.DisplayName -eq $selector; };
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Remove-AppxProvisionedPackage -AllUsers -Online -ErrorAction 'Continue';
+  }
+};
+$type = 'Package';
+$logfile = 'C:\Windows\Temp\remove-packages.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Temp\remove-caps.ps1">
+$selectors = @(
+	'MathRecognizer';
+	'OpenSSH.Client';
+	'Microsoft.Windows.MSPaint';
+	'App.Support.QuickAssist';
+	'Microsoft.Windows.SnippingTool';
+	'App.StepsRecorder';
+);
+$getCommand = { Get-WindowsCapability -Online; };
+$filterCommand = { ($_.Name -split '~')[0] -eq $selector; };
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Remove-WindowsCapability -Online -ErrorAction 'Continue';
+  }
+};
+$type = 'Capability';
+$logfile = 'C:\Windows\Temp\remove-caps.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Windows\Temp\remove-features.ps1">
+$selectors = @(
+	'Microsoft-SnippingTool';
+);
+$getCommand = { Get-WindowsOptionalFeature -Online; };
+$filterCommand = { $_.FeatureName -eq $selector; };
+$removeCommand = {
+  [CmdletBinding()]
+  param(
+    [Parameter( Mandatory, ValueFromPipeline )]
+    $InputObject
+  );
+  process {
+    $InputObject | Disable-WindowsOptionalFeature -Online -Remove -NoRestart -ErrorAction 'Continue';
+  }
+};
+$type = 'Feature';
+$logfile = 'C:\Windows\Temp\remove-features.log';
+&amp; {
+	$installed = &amp; $getCommand;
+	foreach( $selector in $selectors ) {
+		$result = [ordered] @{
+			Selector = $selector;
+		};
+		$found = $installed | Where-Object -FilterScript $filterCommand;
+		if( $found ) {
+			$result.Output = $found | &amp; $removeCommand;
+			if( $? ) {
+				$result.Message = "$type removed.";
+			} else {
+				$result.Message = "$type not removed.";
+				$result.Error = $Error[0];
+			}
+		} else {
+			$result.Message = "$type not installed.";
+		}
+		$result | ConvertTo-Json -Depth 3 -Compress;
+	}
+} *&gt;&amp;1 &gt;&gt; $logfile;
+		</File>
+		<File path="C:\Users\Default\AppData\Local\Microsoft\Windows\Shell\LayoutModification.xml"><![CDATA[
+<LayoutModificationTemplate Version="1" xmlns="http://schemas.microsoft.com/Start/2014/LayoutModification">
+	<LayoutOptions StartTileGroupCellWidth="6" />
+	<DefaultLayoutOverride>
+		<StartLayoutCollection>
+			<StartLayout GroupCellWidth="6" xmlns="http://schemas.microsoft.com/Start/2014/FullDefaultLayout" />
+		</StartLayoutCollection>
+	</DefaultLayoutOverride>
+</LayoutModificationTemplate>
+		]]></File>
+		<File path="C:\Windows\Setup\Scripts\unattend-01.cmd">
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "HideFileExt" /t  REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v VisualFXSetting  /t REG_DWORD /d 3 /f
+powercfg -hibernate off
+REG ADD "HKCU\Control Panel\Desktop" /v UserPreferencesMask /t REG_BINARY /d 9012078010000000 /f
+REG ADD "HKCU\Control Panel\Desktop\WindowMetrics" /v MinAnimate /t REG_SZ /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\AnimateMinMax" /v DefaultApplied  /t REG_DWORD /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ComboBoxAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\ControlAnimations" /v DefaultApplied  /t REG_DWORD /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\MenuAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TaskbarAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f
+REG ADD "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation" /v DefaultApplied  /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 1 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d 1 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Edge" /v WebWidgetAllowed /t REG_DWORD /d 0 /f
+powercfg -setactive scheme_min
+powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
+powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d
+powercfg /X standby-timeout-ac 0
+powercfg /X standby-timeout-dc 0
+
+powercfg -setactive scheme_min
+powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61
+powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d
+powercfg /X standby-timeout-ac 0
+powercfg /X standby-timeout-dc 0
+bcdedit /set timeout 3
+bcdedit /timeout 3
+reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System" /v "AllowExperimentation" /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowExperimentation" /v "value" /t "REG_DWORD" /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /d "0" /t REG_DWORD /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling" /v "PowerThrottlingOff" /t REG_DWORD /d "1" /f
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v GlobalUserDisabled  /t REG_DWORD /d 1 /f
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Search" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d 506 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\WindowsStore" /v "AutoDownload" /t REG_DWORD /d 2 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost" /v EnableWebContentEvaluation /t REG_DWORD /d 0 /f
+reg add "HKCU\Control Panel\International\User Profile" /v HttpAcceptLanguageOptOut /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main" /v DoNotTrack /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\User\Default\SearchScopes" /v ShowSearchSuggestionsGlobal /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead" /v FPEnabled /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v EnabledV9 /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\usbxhci\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\USBHUB3\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NDIS\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters" /v ThreadPriority /t REG_DWORD /d 31 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverride /t REG_DWORD /d 3 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v FeatureSettingsOverrideMask /t REG_DWORD /d 3 /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v SensorPermissionState /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v value /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v value /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings" /v UxOption /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v DODownloadMode /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control" /v "WaitToKillServiceTimeout" /t REG_SZ /d 2000 /f
+SET DEVMGR_SHOW_NONPRESENT_DEVICES=1
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314559Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-314563Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353698Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" /v "ScoobeSystemSettingEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsConsumerFeatures" /t REG_DWORD /d 1 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RemediationRequired" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace" /v "value" /t REG_DWORD /d 0 /f
+schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /RL LIMITED
+schtasks /Change /TN "Microsoft\Windows\AppID\SmartScreenSpecific" /Disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\KernelCeipTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable
+schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable
+schtasks /Change /TN "Microsoft\Windows\MemoryDiagnostic\ProcessMemoryDiagnosticEvent" /Disable
+schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
+schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Uploader" /Disable
+schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyUpload" /Disable
+schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn" /Disable
+schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack" /Disable
+schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentFallBack2016" /Disable
+schtasks /Change /TN "Microsoft\Office\OfficeTelemetryAgentLogOn2016" /Disable
+schtasks /Change /TN "Microsoft\Office\Office 15 Subscription Heartbeat" /Disable
+schtasks /Change /TN "Microsoft\Office\Office 16 Subscription Heartbeat" /Disable
+schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" /Disable
+schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Automatic App Update" /Disable
+schtasks /Change /TN "NIUpdateServiceStartupTask" /Disable
+schtasks /Change /TN "CCleaner Update" /Disable
+schtasks /Change /TN "CCleanerCrashReportings" /Disable
+schtasks /Change /TN "CCleanerSkipUAC - $env:username" /Disable
+schtasks /Change /TN "updater" /Disable
+schtasks /Change /TN "Adobe Acrobat Update Task" /Disable
+schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineCore" /Disable
+schtasks /Change /TN "MicrosoftEdgeUpdateTaskMachineUA" /Disable
+schtasks /Change /TN "MiniToolPartitionWizard" /Disable
+schtasks /Change /TN "AMDLinkUpdate" /Disable
+schtasks /Change /TN "Microsoft\Office\Office Automatic Updates 2.0" /Disable
+schtasks /Change /TN "Microsoft\Office\Office Feature Updates" /Disable
+schtasks /Change /TN "Microsoft\Office\Office Feature Updates Logon" /Disable
+schtasks /Change /TN "GoogleUpdateTaskMachineCore" /Disable
+schtasks /Change /TN "GoogleUpdateTaskMachineUA" /Disable
+schtasks /DELETE /TN "AMDInstallLauncher" /f
+schtasks /DELETE /TN "AMDLinkUpdate" /f
+schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
+schtasks /DELETE /TN "DUpdaterTask" /f
+schtasks /DELETE /TN "ModifyLinkUpdate" /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\NvControlPanel2\Client" /v OptInOrOutPreference /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\FTS" /v EnableRID44231 /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\FTS" /v EnableRID64640 /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\NVIDIA Corporation\Global\FTS" /v EnableRID66610 /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\NvTelemetryContainer" /v Start /t REG_DWORD /d 4 /f
+
+REG ADD "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoInstrumentation /t REG_DWORD /d 1 /f
+REG ADD "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v NoInstrumentation /t REG_DWORD /d 1 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\HandwritingErrorReports" /v PreventHandwritingErrorReports /t REG_DWORD /d 1 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v DoNotShowFeedbackNotifications /t REG_DWORD /d 1 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v AllowDeviceNameInTelemetry /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v SmartScreenEnabled /t REG_SZ /d "Off" /f
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter" /v EnabledV9 /t REG_DWORD /d 0 /f
+REG ADD "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v HideRecentlyAddedApps /t REG_DWORD /d 1 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Assistance\Client\1.0" /v NoActiveHelp /t REG_DWORD /d 1 /f
+
+REG ADD "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\CrashControl\StorageTelemetry" /v DeviceDumpEnabled /t REG_DWORD /d 0 /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
+REG ADD "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe" /v Debugger /t REG_SZ /d "%windir%\System32\taskkill.exe" /f
+
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v DontOfferThroughWUAU /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat" /v "DisableUAR" /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger" /v "Start" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d 0 /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\dmwappushservice" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKLM\SYSTEM\ControlSet001\Services\DiagTrack" /v "Start" /t REG_DWORD /d 4 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\Common\ClientTelemetry" /v "DisableTelemetry" /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry" /v "DisableTelemetry" /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\17.0\Common\ClientTelemetry" /v "DisableTelemetry" /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\Common\ClientTelemetry" /v "VerboseLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry" /v "VerboseLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Mail" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Mail" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Calendar" /v "EnableCalendarLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Calendar" /v "EnableCalendarLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\17.0\Word\Options" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Office\15.0\OSM" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\OSM" /v "EnableLogging" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Office\15.0\OSM" /v "EnableUpload" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\OSM" /v "EnableUpload" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Policies\Microsoft\Office\17.0\OSM" /v "EnableUpload" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\15.0\Common\Feedback" /v "Enabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Common\Feedback" /v "Enabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\15.0\Common" /v "QMEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\16.0\Common" /v "QMEnabled" /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\Office\17.0\Common" /v "QMEnabled" /t REG_DWORD /d 0 /f
+
+sc stop VSStandardCollectorService150
+sc config VSStandardCollectorService150 start= disabled 
+reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\14.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\15.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\16.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\VSCommon\17.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\VSCommon\14.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\VSCommon\15.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\VSCommon\16.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\VSCommon\17.0\SQM" /v "OptIn" /t REG_DWORD /d 0 /f
+reg add "HKLM\Software\Microsoft\VisualStudio\Telemetry" /v "TurnOffSwitch" /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\VisualStudio\Feedback" /v "DisableFeedbackDialog" /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\VisualStudio\Feedback" /v "DisableEmailInput" /t REG_DWORD /d 1 /f
+reg add "HKLM\Software\Policies\Microsoft\VisualStudio\Feedback" /v "DisableScreenshotCapture" /t REG_DWORD /d 1 /f
+
+reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "MetricsReportingEnabled" /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "ChromeCleanupEnabled" /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "ChromeCleanupReportingEnabled" /t REG_SZ /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Google\Chrome" /v "MetricsReportingEnabled" /t REG_SZ /d 0 /f
+
+reg add "HKCU\Software\Piriform\CCleaner" /v "HomeScreen" /t REG_SZ /d 2 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "Monitoring" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "HelpImproveCCleaner" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "SystemMonitoring" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "UpdateAuto" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "UpdateCheck" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "CheckTrialOffer" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "(Cfg)HealthCheck" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "(Cfg)QuickClean" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "(Cfg)QuickCleanIpm" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "(Cfg)SoftwareUpdater" /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Piriform\CCleaner" /v "(Cfg)SoftwareUpdaterIpm" /t REG_DWORD /d 0 /f
+setx POWERSHELL_TELEMETRY_OPTOUT 1
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "TraceLevelThreshold" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype" /v "EnableTracing" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "EnableTracing" /t REG_DWORD /d "0" /f
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype" /v "WPPFilePath" /t REG_SZ /d "%%SYSTEMDRIVE%%\TEMP\Tracing\WPPMedia" /f
+reg add "HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW" /v "WPPFilePath" /t REG_SZ /d "%%SYSTEMDRIVE%%\TEMP\WPPMedia" /f
+reg add "HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences" /v "UsageTracking" /t REG_DWORD /d "0" /f
+reg add HKLM\SOFTWARE\Policies\Mozilla\Firefox /v "DisableTelemetry" /t REG_DWORD /d "2" /f
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v Enabled /t REG_DWORD /d 0 /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
+reg add "HKCU\SOFTWARE\Microsoft\Input\TIPC" /v Enabled /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitInkCollection /t REG_DWORD /d 1 /f
+reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization" /v RestrictImplicitTextCollection /t REG_DWORD /d 1 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting" /v "DisableGenericReports" /t REG_DWORD /d "2" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "2" /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "LocalSettingOverrideSpynetReporting" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SpynetReporting" /t REG_DWORD /d 0 /f
+reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet" /v "SubmitSamplesConsent" /t REG_DWORD /d "2" /f
+reg add "HKCU\SOFTWARE\Microsoft\Personalization\Settings" /v AcceptedPrivacyPolicy /t REG_DWORD /d 0 /f
+reg add "HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore" /v HarvestContacts /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\System\GameConfigStore" /v "GameDVR_Enabled" /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds" /v EnableFeeds /t REG_DWORD /d 0 /f
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v TaskbarDa /t REG_DWORD /d 0 /f
+winget uninstall "windows web experience pack" --accept-source-agreements
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "SunJavaUpdateSched" /f
+
+
+
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MTPW" /f
+
+
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "TeamsMachineInstaller" /f
+
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CiscoMeetingDaemon" /f
+
+
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Adobe Reader Speed Launcher" /f
+
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CCleaner Smart Cleaning" /f
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "CCleaner Monitor" /f
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Spotify Web Helper" /f
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Gaijin.Net Updater" /f
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "com.squirrel.Teams.Teams" /f
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Google Update" /f
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "BitTorrent Bleep" /f
+
+
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Skype" /f
+
+
+reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "adobeAAMUpdater-1.0" /f
+reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "AdobeAAMUpdater" /f
+
+
+reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "iTunesHelper" /f
+
+
+reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "UpdatePPShortCut" /f &gt;NUL 2&gt;nul
+
+
+reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Live Update" /f
+reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "Live Update" /f
+
+
+
+reg delete "HKEY_LOCAL_MACHINE\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Wondershare Helper Compact" /f
+reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run" /v "Wondershare Helper Compact" /f
+
+
+
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Cisco AnyConnect Secure Mobility Agent for Windows" /f
+
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Opera Browser Assistant" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EADM" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "EpicGamesLauncher" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "GogGalaxy" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Skype for Desktop" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Wargaming.net Game Center" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "ut" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Lync" /f
+
+
+reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Google Chrome" /f
+
+
+reg delete "HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components" /v "Microsoft Edge" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_E9C49D8E9BDC4095F482C844743B9E82" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_D3AB3F7FBB44621987441AECEC1156AD" /f
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch" /f
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "Microsoft Edge Update" /f
+reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run" /v "MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E" /f
+
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /f
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "Ubisoft Game Launcher" /f
+
+reg delete "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v "com.blitz.app" /f
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-02.ps1">
+$ErrorActionPreference = "silentlycontinue"
+$NetworkIDS = @(
+(Get-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\*").PSChildName
+)
+foreach ($NetworkID in $NetworkIDS) {
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TcpAckFrequency" -Type DWord -Value 1
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters\Interfaces\$NetworkID" -Name "TCPNoDelay" -Type DWord -Value 1
+}
+$components = @('Printing-PrintToPDFServices-Features','Printing-XPSServices-Features','Xps-Foundation-Xps-Viewer')
+foreach ($a in $components) {
+disable-windowsoptionalfeature -online -featureName $a -NoRestart
+}
+Set-ProcessMitigation -System -Disable CFG
+$toDisable = @('DiagTrack','diagnosticshub.standardcollector.service','dmwappushservice','RemoteRegistry','RemoteAccess','SCardSvr','SCPolicySvc','fax','WerSvc','NvTelemetryContainer','gadjservice','AdobeARMservice','PSI_SVC_2','lfsvc','WalletService','RetailDemo','SEMgrSvc','diagsvc','AJRouter','amdfendr','amdfendrmgr')
+foreach ($b in $toDisable) {
+   sc stop $b
+   sc config $b start= disabled
+}
+#Disable Network Diagnostic Usage Service
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\Ndu" /v "Start" /t REG_DWORD /d 4 /f
+
+# Manuall
+Write-Host ' [Setting] Services to: Manuall Mode ' -F blue -B black
+$toManuall = @('BITS','SamSs','TapiSrv','seclogon','wuauserv','PhoneSvc','lmhosts','iphlpsvc','gupdate','gupdatem','edgeupdate','edgeupdatem','MapsBroker','PnkBstrA','brave','bravem','asus','asusm','adobeupdateservice','adobeflashplayerupdatesvc','WSearch','CCleanerPerformanceOptimizerService')
+foreach ($c in $toManuall) {
+   sc config $c start= demand
+}
+$whitelistapps = @(
+    # Whitelist apps
+"Microsoft.MicrosoftOfficeHub"
+"Microsoft.Office.OneNote"
+"Microsoft.WindowsAlarms"
+"Microsoft.WindowsCalculator"
+"Microsoft.WindowsCamera"
+"microsoft.windowscommunicationsapps"
+"Microsoft.NET.Native.Framework.2.2"
+"Microsoft.NET.Native.Framework.2.0"
+"Microsoft.NET.Native.Runtime.2.2"
+"Microsoft.NET.Native.Runtime.2.0"
+"Microsoft.UI.Xaml.2.7"
+"Microsoft.UI.Xaml.2.0"
+"Microsoft.WindowsAppRuntime.1.3"
+"Microsoft.NET.Native.Framework.1.7"
+"MicrosoftWindows.Client.Core"
+"Microsoft.LockApp"
+"Microsoft.ECApp"
+"Microsoft.Windows.ContentDeliveryManager"
+"Microsoft.Windows.Search"
+"Microsoft.Windows.OOBENetworkCaptivePortal"    
+"Microsoft.Windows.SecHealthUI"
+"Microsoft.SecHealthUI"
+"Microsoft.WindowsAppRuntime.CBS"
+"Microsoft.VCLibs.140.00.UWPDesktop"
+"Microsoft.VCLibs.120.00.UWPDesktop"
+"Microsoft.VCLibs.110.00.UWPDesktop"
+"Microsoft.DirectXRuntime"
+"Microsoft.XboxGameOverlay"
+"Microsoft.XboxGamingOverlay"
+"Microsoft.GamingApp"
+"Microsoft.GamingServices"
+"Microsoft.XboxIdentityProvider"
+"Microsoft.Xbox.TCUI"
+"Microsoft.AccountsControl"
+"Microsoft.WindowsStore"
+"Microsoft.StorePurchaseApp"
+"Microsoft.VP9VideoExtensions"
+"Microsoft.RawImageExtension"
+"Microsoft.HEIFImageExtension"
+"Microsoft.HEIFImageExtension"
+"Microsoft.WebMediaExtensions"
+"RealtekSemiconductorCorp.RealtekAudioControl"
+"Microsoft.MicrosoftEdge"
+"Microsoft.MicrosoftEdge.Stable"
+"MicrosoftWindows.Client.FileExp"
+"NVIDIACorp.NVIDIAControlPanel"
+"AppUp.IntelGraphicsExperience"
+"Microsoft.Paint"
+"Microsoft.Messaging"
+"Microsoft.AsyncTextService"
+"Microsoft.CredDialogHost"
+"Microsoft.Win32WebViewHost"
+"Microsoft.MicrosoftEdgeDevToolsClient"
+"Microsoft.Windows.OOBENetworkConnectionFlow"
+"Microsoft.Windows.PeopleExperienceHost"
+"Microsoft.Windows.PinningConfirmationDialog"
+"Microsoft.Windows.SecondaryTileExperience"
+"Microsoft.Windows.SecureAssessmentBrowser"
+"Microsoft.Windows.ShellExperienceHost"
+"Microsoft.Windows.StartMenuExperienceHost"
+"Microsoft.Windows.XGpuEjectDialog"
+"Microsoft.XboxGameCallableUI"
+"MicrosoftWindows.UndockedDevKit"
+"NcsiUwpApp"
+"Windows.CBSPreview"
+"Windows.MiracastView"
+"Windows.ContactSupport"
+"Windows.PrintDialog"
+"c5e2524a-ea46-4f67-841f-6a9465d9d515"
+"windows.immersivecontrolpanel"
+"WinRAR.ShellExtension"
+"Microsoft.WindowsNotepad"
+"MicrosoftWindows.Client.WebExperience"
+"Microsoft.ZuneMusic"
+"Microsoft.ZuneVideo"
+"Microsoft.OutlookForWindows"
+"MicrosoftWindows.Ai.Copilot.Provider"
+"Microsoft.WindowsTerminal"
+"Microsoft.Windows.Terminal"
+"WindowsTerminal"
+"Microsoft.Winget.Source"
+"Microsoft.DesktopAppInstaller"
+"Microsoft.Services.Store.Engagement"
+"Microsoft.HEVCVideoExtension"
+"Microsoft.WebpImageExtension"
+"MicrosoftWindows.CrossDevice"
+"NotepadPlusPlus"
+"MicrosoftCorporationII.WinAppRuntime.Main.1.5"
+"Microsoft.WindowsAppRuntime.1.5"
+"MicrosoftCorporationII.WinAppRuntime.Singleton"
+"Microsoft.WindowsSoundRecorder"
+"MicrosoftCorporationII.WinAppRuntime.Main.1.4"
+"MicrosoftWindows.Client.LKG"
+"MicrosoftWindows.Client.CBS"
+"Microsoft.VCLibs.140.00"
+"Microsoft.Windows.CloudExperienceHost"
+ "SpotifyAB.SpotifyMusic"
+ "Microsoft.SkypeApp"
+ "5319275A.WhatsAppDesktop"
+ "FACEBOOK.317180B0BB486"
+ "TelegramMessengerLLP.TelegramDesktop"
+ "4DF9E0F8.Netflix"
+ "Discord"
+ "Paint"
+ "mspaint"
+ "Microsoft.Windows.Paint"
+)
+
+$RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name
+
+ForEach($TargetApp in $RemoveAppPkgs)
+{
+    If($whitelistapps -notcontains $TargetApp)
+    {
+
+        Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+
+        Get-AppXProvisionedPackage -Online |
+            Where-Object DisplayName -EQ $TargetApp |
+            Remove-AppxProvisionedPackage -Online
+    }
+}
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-03.ps1">
+$NOLP = wmic cpu get NumberOfLogicalProcessors | findstr /r "[0-9]"
+bcdedit /set {current} numproc $NOLP
+if (wmic cpu get name | findstr /r "Intel") {
+
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v Affinity /t REG_DWORD /d 0 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Background Only" /t REG_SZ /d "False" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Clock Rate" /t REG_DWORD /d 10000 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f
+}
+else
+{
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "GPU Priority" /t REG_DWORD /d 8 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Priority" /t REG_DWORD /d 6 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "Scheduling Category" /t REG_SZ /d "High" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games" /v "SFIO Priority" /t REG_SZ /d "High" /f
+}
+Get-AppxPackage *XboxGamingOverlay* | Remove-AppxPackage
+Get-AppxPackage *XboxGameOverlay* | Remove-AppxPackage
+Get-AppxPackage *XboxSpeechToTextOverlay* | Remove-AppxPackage
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-04.ps1">
+$ram = (Get-CimInstance -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1kb
+Set-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Control' -Name 'SvcHostSplitThresholdInKB' -Type DWord -Value $ram -Force
+		</File>
+	</Extensions>
+</unattend>
