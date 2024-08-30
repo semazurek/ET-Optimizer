@@ -964,7 +964,7 @@ if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Val
 if (($ParentItem.Value) -is [System.Windows.Forms.ToolStripItem]) 
 { ($ParentItem.Value).DropDownItems.Add($private:menuItem); } 
 return $private:menuItem; }; 
-function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null}; 
+function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null;reg export HKLM $env:systemdrive\RegBackup-ET.reg >$null 2>$null}; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
 $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml($menubackcolor);
 $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
@@ -1076,6 +1076,7 @@ if (!(Test-Path $Env:programdata\Run-ET.log))
 	$OriginalPref = $ProgressPreference # Default is 'Continue'
 	$ProgressPreference = "SilentlyContinue"
 	Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS" -WarningAction SilentlyContinue
+    reg export HKLM $env:systemdrive\RegBackup-ET.reg >$null 2>$null
 	$ProgressPreference = $OriginalPref
 }
 
