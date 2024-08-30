@@ -31,10 +31,11 @@ if ((Test-Admin) -eq $false)  {
 elseif (!(Test-Path $Env:programdata\Run-ET.log))
 {
     # speeds up powershell startup time by 10x
-    Write-Host "Loading please wait, dont close." -F Orange -B Black
+    Write-Host "Loading please wait..."
+    Write-Host ""
     $env:path = "$([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory());" + $env:path
     [AppDomain]::CurrentDomain.GetAssemblies().Location | ? {$_} | % {
-        #Write-Host "NGENing: $(Split-Path $_ -Leaf)" -F Orange -B Black
+        Write-Host "NGENing: $(Split-Path $_ -Leaf)"
         ngen install $_ | Out-Null
     }
 }
