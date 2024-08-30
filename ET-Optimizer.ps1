@@ -31,9 +31,10 @@ if ((Test-Admin) -eq $false)  {
 elseif (!(Test-Path $Env:programdata\Run-ET.log))
 {
     # speeds up powershell startup time by 10x
+    Write-Host "Loading please wait, dont close." -F Orange -B Black
     $env:path = "$([Runtime.InteropServices.RuntimeEnvironment]::GetRuntimeDirectory());" + $env:path
     [AppDomain]::CurrentDomain.GetAssemblies().Location | ? {$_} | % {
-        Write-Host "NGENing: $(Split-Path $_ -Leaf)" -F Orange -B Black
+        #Write-Host "NGENing: $(Split-Path $_ -Leaf)" -F Orange -B Black
         ngen install $_ | Out-Null
     }
 }
@@ -1062,7 +1063,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 12.05.2024                '
+Write-Host '                          [-] Last update: 30.08.2024                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
