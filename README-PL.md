@@ -12,6 +12,7 @@ Ostatnio testowane/aktualizowane na:
 <li>Windows 10 Home 23H2</li>
 <li>Windows 11 Ent 23H2</li>
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
+<li>Windows 7 (nie zalecane)</li>
 </ul> 
 </br>
 
@@ -248,3 +249,17 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
 <p align="center">
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
 </p>
+
+## Udostępnienia społęczności
+
+https://www.youtube.com/watch?v=vIzWJ7OjgXA
+
+https://www.youtube.com/watch?v=BM_AirabkB8
+
+https://rsload.net/soft/optimization/39444-et-optimizer.html
+
+https://filecr.com/windows/semazurek-et-optimizer/
+
+https://www.softpedia.com/get/Tweak/System-Tweak/ET-All-in-One-Optimization-Script.shtml
+
+https://scloud.ws/blog/optimization/5370.html
