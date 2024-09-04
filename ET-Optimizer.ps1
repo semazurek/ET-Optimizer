@@ -7,7 +7,7 @@ function Test-Admin {
 }
 
 if ((Test-Admin) -eq $false)  {
-    if ($elevated) {
+    if ($Elevated) {
         # tried to elevate, did not work, aborting
 		#MsgBox information
 		Add-Type -AssemblyName PresentationCore,PresentationFramework
@@ -17,7 +17,7 @@ if ((Test-Admin) -eq $false)  {
 		$msgImage = 'Error'
 		$Result = [System.Windows.MessageBox]::Show($msgBody,$msgTitle,$msgButton,$msgImage)
     } else {
-		if (Get-Item -Path $Env:programdata\Run-ET.log) {
+		if (Test-Path $Env:programdata\Run-ET.log) {
 			Start-Process powershell.exe -Verb RunAs -ArgumentList ('-noprofile -file "{0}" -elevated' -f ($myinvocation.MyCommand.Definition))
 		} 
 		else 
@@ -939,17 +939,20 @@ $aboutForm.Add_Load($aboutForm_Load);
 $aboutFormNameLabel.Font = New-Object Drawing.Font('Consolas', 9, [System.Drawing.FontStyle]::Bold); 
 $aboutFormNameLabel.Location = '110, 10'; 
 $aboutFormNameLabel.Size = '200, 18'; 
-$aboutFormNameLabel.Text = '   E.T. Optimizer'; 
+$aboutFormNameLabel.Text = '  E.T. Optimizer'; 
 $aboutForm.Controls.Add($aboutFormNameLabel); 
 $aboutFormText.Location = '100, 30'; 
 $aboutFormText.Size = '300, 20'; $aboutFormText.Text = '         Sebastian Mazurek'; 
 $aboutForm.Controls.Add($aboutFormText); 
 $aboutFormText2.Location = '100, 50'; 
 $aboutFormText2.Size = '300, 20';  
-$aboutFormText2.Text = '       Github.com/semazurek'; 
+$aboutFormText2.Text = '       github.com/semazurek'; 
+$aboutFormText2.add_click({start http://github.com/semazurek});
 $aboutForm.Controls.Add($aboutFormText2); 
 $aboutFormExit.Location = '138, 75'; 
 $aboutFormExit.Text = 'OK'; 
+$aboutFormExit.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainbackcolor);
+$aboutFormExit.BackColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
 $aboutFormExit.FlatStyle = 'Flat'
 $aboutForm.Icon = [System.Drawing.Icon]::FromHandle((new-object System.Drawing.Bitmap -argument $ims).GetHIcon())
 $aboutForm.Controls.Add($aboutFormExit); 
@@ -964,7 +967,7 @@ if (($ParentItem.Value) -is [System.Windows.Forms.MenuStrip]) { ($ParentItem.Val
 if (($ParentItem.Value) -is [System.Windows.Forms.ToolStripItem]) 
 { ($ParentItem.Value).DropDownItems.Add($private:menuItem); } 
 return $private:menuItem; }; 
-function Backup{[Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null;reg export HKLM $env:systemdrive\RegBackup-ET.reg >$null 2>$null}; 
+function Backup{vssadmin delete shadows /all /quiet; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 1) | Out-Null;Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS"; reg export HKLM $env:systemdrive\RegBackup-ET.reg; [Console.Window]::ShowWindow([Console.Window]::GetConsoleWindow(), 0) | Out-Null}; 
 [System.Windows.Forms.MenuStrip]$mainMenu=New-Object System.Windows.Forms.MenuStrip; $form.Controls.Add($mainMenu); 
 $mainMenu.BackColor = [System.Drawing.ColorTranslator]::FromHtml($menubackcolor);
 $mainMenu.ForeColor = [System.Drawing.ColorTranslator]::FromHtml($mainforecolor);
@@ -1064,7 +1067,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 30.08.2024                '
+Write-Host '                          [-] Last update: 04.09.2024                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -1075,8 +1078,9 @@ if (!(Test-Path $Env:programdata\Run-ET.log))
 	Enable-ComputerRestore -Drive $env:systemdrive >$null 2>$null
 	$OriginalPref = $ProgressPreference # Default is 'Continue'
 	$ProgressPreference = "SilentlyContinue"
+    vssadmin delete shadows /all /quiet >$null 2>$null
 	Checkpoint-Computer -Description "ET-RestorePoint" -RestorePointType "MODIFY_SETTINGS" -WarningAction SilentlyContinue
-    reg export HKLM $env:systemdrive\RegBackup-ET.reg >$null 2>$null
+    #reg export HKLM $env:systemdrive\RegBackup-ET.reg >$null 2>$null
 	$ProgressPreference = $OriginalPref
 }
 
