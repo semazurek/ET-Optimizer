@@ -2250,19 +2250,6 @@ cmd /c Del "%AppData%\Opera Software\Opera Stable\Jump List IconsOld\Jump List I
 
 cmd /c Del "%LocalAppData%\Vivaldi\User Data\Default\Cache" /F /Q /S >$null 2>$null
 
-Write-Host ' [Clean] Windows Defender Cache/Logs ' -F yellow -B black
-
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Network Inspection System\Support\*.log" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\CacheManager" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\ReportLatency\Latency" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Service\*.log" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\MetaStore" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Support" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Quick" /F /Q /S >$null 2>$null
-cmd /c Del "%ProgramData%\Microsoft\Windows Defender\Scans\History\Results\Resource" /F /Q /S >$null 2>$null
-
-taskkill /f /im explorer.exe >$null 2>$null
-
 Write-Host ' [Clean] Windows Font Cache ' -F yellow -B black
 
 cmd /c net stop FontCache >$null 2>$null
@@ -2279,7 +2266,7 @@ Write-Host ' [Clean] Windows Icon Cache ' -F yellow -B black
 %WinDir%\System32\ie4uinit.exe -show >$null 2>$null
 cmd /c Del %LocalAppData%\IconCache.db /F /Q /S >$null 2>$null
 cmd /c Del "%LocalAppData%\Microsoft\Windows\Explorer\iconcache_*.db" /F /Q /S >$null 2>$null
-start explorer.exe >$null 2>$null
+
 engine;};
 
 # Remove OneDrive
