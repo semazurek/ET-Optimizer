@@ -1,7 +1,0 @@
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.AssemblyReference.cache
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\bin\Debug\ET-Optimizer.exe.config
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\bin\Debug\ET-Optimizer.exe
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\bin\Debug\ET-Optimizer.pdb
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\obj\Debug\ET-Optimizer.exe
-C:\Users\Rikey\Desktop\Projekt Lazarus\VS\ConsoleApp1\obj\Debug\ET-Optimizer.pdb
