@@ -104,8 +104,8 @@ $PSDefaultParameterValues['*:Encoding'] = 'utf8'
 # https://github.com/semazurek/ET-Optimizer
 # https://www.paypal.com/paypalme/rikey
 
-$versionPS="E.T. ver 5.3   -   "+$ProcessorType+" "+[math]::round($RAMGet)+" GB RAM";
-$versionRAW="E.T. ver 5.3"
+$versionPS="E.T. ver 5.4   -   "+$ProcessorType+" "+[math]::round($RAMGet)+" GB RAM";
+$versionRAW="E.T. ver 5.4"
 $HOST.UI.RAWUI.WINDOWTITLE = $versionRAW
 [reflection.assembly]::LoadWithPartialName( 'System.Windows.Forms'); 
 [reflection.assembly]::loadwithpartialname('System.Drawing'); 
@@ -840,7 +840,7 @@ $chck51 = New-CheckBox -Location '0,80' -Size '270,25' -Text 'Disable MRU lists 
 $chck51.add_click({count_v})
 $panel3.controls.add($chck51); 
 
-$chck52 = New-CheckBox -Location '0,105' -Size '270,25' -Text 'Set Search Box to Icon Only)' -TabID '51' -Check '$true'
+$chck52 = New-CheckBox -Location '0,105' -Size '270,25' -Text 'Set Search Box to Icon Only' -TabID '51' -Check '$true'
 $chck52.add_click({count_v})
 $panel3.controls.add($chck52);
 
@@ -1067,7 +1067,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 04.09.2024                '
+Write-Host '                          [-] Last update: 06.09.2024                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''
@@ -2130,11 +2130,11 @@ cmd /c Del /S /F /Q %windir%\Prefetch >$null 2>$null
 cmd /c Del %AppData%\vstelemetry >$null 2>$null
 cmd /c Del %LocalAppData%\Microsoft\VSApplicationInsights /F /Q /S >$null 2>$null
 cmd /c Del %ProgramData%\Microsoft\VSApplicationInsights  /F /Q /S >$null 2>$null
-cmd /c Del %Temp%\Microsoft\VSApplicationInsights  /F /Q /S >$null 2>$null
-cmd /c Del %Temp%\VSFaultInfo  /F /Q /S >$null 2>$null
-cmd /c Del %Temp%\VSFeedbackPerfWatsonData  /F /Q /S >$null 2>$null
-cmd /c Del %Temp%\VSFeedbackVSRTCLogs  /F /Q /S >$null 2>$null
-cmd /c Del %Temp%\VSRemoteControl  /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\Microsoft\VSApplicationInsights /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSFaultInfo /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSFeedbackPerfWatsonData /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSFeedbackVSRTCLogs /F /Q /S >$null 2>$null
+cmd /c Del %Temp%\VSRemoteControl /F /Q /S >$null 2>$null
 cmd /c Del %Temp%\VSTelem /F /Q /S >$null 2>$null
 cmd /c Del %Temp%\VSTelem.Out /F /Q /S >$null 2>$null
 
