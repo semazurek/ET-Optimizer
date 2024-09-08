@@ -1612,13 +1612,13 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C start $env:systemroot\\SysWOW64\\OneDriveSetup.exe /uninstall";
+                            startInfo.Arguments = "/C IF EXIST %programdata%\\SysWOW64\\OneDriveSetup.exe start %programdata%\\SysWOW64\\OneDriveSetup.exe /uninstall";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C start $env:systemroot\\System32\\OneDriveSetup.exe /uninstall";
+                            startInfo.Arguments = "/C IF EXIST %programdata%\\System32\\OneDriveSetup.exe start %programdata%\\System32\\OneDriveSetup.exe /uninstall";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
