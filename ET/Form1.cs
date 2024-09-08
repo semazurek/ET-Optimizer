@@ -1530,7 +1530,13 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C start %programdata%\\adwcleaner.exe /eula /clean /noreboot && del %programdata%\\adwcleaner.exe";
+                            startInfo.Arguments = "/C start %programdata%\\adwcleaner.exe /eula /clean /noreboot";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C del %programdata%\\adwcleaner.exe";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
