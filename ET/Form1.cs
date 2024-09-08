@@ -825,7 +825,12 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C bcdedit /set timeout 3 && bcdedit /timeout 3";
+                            startInfo.Arguments = "/C bcdedit /set timeout 3";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C bcdedit /timeout 3";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -1126,7 +1131,19 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C net stop wsearch /y; esentutl /d %programdata%\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb; net start wsearch; pause";
+                            startInfo.Arguments = "/C net stop wsearch /y";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C esentutl /d %programdata%\\ProgramData\\Microsoft\\Search\\Data\\Applications\\Windows\\Windows.edb";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C net start wsearch";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
