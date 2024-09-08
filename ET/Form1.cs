@@ -293,7 +293,7 @@ namespace ET
             CheckBox chck13 = new CheckBox();
             chck13.Location = new System.Drawing.Point(10, 280);
             chck13.Size = new System.Drawing.Size(275, 25);
-            chck13.Text = "SmartScreen Filter for Apps: Disable";
+            chck13.Text = "SmartScreen Filter for Apps Disable";
             chck13.Checked = true;
             chck13.Click += c_p;
             chck13.TabIndex = 13;
@@ -901,7 +901,7 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
-                        case "SmartScreen Filter for Apps: Disable":
+                        case "SmartScreen Filter for Apps Disable":
                             Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
