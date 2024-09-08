@@ -1067,7 +1067,7 @@ Write-Host ''
 Write-Host '                          [-] Version: '$versionShort
 Write-Host '                          [-] Build: Public                          '
 Write-Host '                          [-] Created by: Rikey                      '
-Write-Host '                          [-] Last update: 06.09.2024                '
+Write-Host '                          [-] Last update: 08.09.2024                '
 Write-Host ''
 Write-Host '                        - Always have a backup plan. - '
 Write-Host '';Write-Host '';Write-Host '';Write-Host '';Write-Host ''

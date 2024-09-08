@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.InteropServices;
+using System.Drawing.Drawing2D;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -1604,7 +1606,19 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C taskkill /F /IM OneDrive.exe && $env:systemroot\\SysWOW64\\OneDriveSetup.exe /uninstall && $env:systemroot\\System32\\OneDriveSetup.exe /uninstall";
+                            startInfo.Arguments = "/C taskkill /F /IM OneDrive.exe";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C start $env:systemroot\\SysWOW64\\OneDriveSetup.exe /uninstall";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C start $env:systemroot\\System32\\OneDriveSetup.exe /uninstall";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
@@ -1646,7 +1660,7 @@ namespace ET
             {
                 if (alltodo == done)
                 {
-                    this.Hide();
+                    progressBar1.Visible = false;
                     DialogResult dialogResult = MessageBox.Show("Everything has been done. Reboot is recommended.", "E.T. ver 5.4", MessageBoxButtons.OK);
                     this.Close();
                 }

@@ -65,8 +65,8 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -448,21 +448,22 @@
             this.toolStripButton5.Text = "Exit";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(110, 400);
-            this.progressBar1.Maximum = 67;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(670, 50);
-            this.progressBar1.TabIndex = 7;
-            this.progressBar1.Visible = false;
-            // 
             // toolStripLabel1
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(216, 28);
             this.toolStripLabel1.Text = "Build: Public | 08.09.2024";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.progressBar1.Location = new System.Drawing.Point(110, 400);
+            this.progressBar1.Maximum = 67;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(670, 50);
+            this.progressBar1.TabIndex = 7;
+            this.progressBar1.Visible = false;
             // 
             // Form1
             // 
