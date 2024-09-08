@@ -1522,11 +1522,17 @@ namespace ET
                         case "Scan for Adware (AdwCleaner)":
                             Console.WriteLine(checkBox.Text); done++;
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command wget https://downloads.malwarebytes.com/file/adwcleaner -o $Env:programdata\\adwcleaner.exe; start /WAIT $Env:programdata\\adwcleaner.exe /eula /clean /noreboot; del $Env:programdata\\adwcleaner.exe";
+                            startInfo.Arguments = "-Command wget https://downloads.malwarebytes.com/file/adwcleaner -o $Env:programdata\\adwcleaner.exe";
                             process.StartInfo = startInfo;
-                            process.Start();
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C start /WAIT %programdata%\\adwcleaner.exe /eula /clean /noreboot; del %programdata%\\adwcleaner.exe";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
                             break;
                         case "Clean WinSxS Folder":
                             Console.WriteLine(checkBox.Text); done++;
