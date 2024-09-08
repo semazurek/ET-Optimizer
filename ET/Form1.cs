@@ -12,6 +12,10 @@ using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Runtime.InteropServices;
 
+// Created by Rikey
+// https://github.com/semazurek/ET-Optimizer
+// https://www.paypal.com/paypalme/rikey
+
 namespace ET
 {
     public partial class Form1 : Form
@@ -99,7 +103,20 @@ namespace ET
             {
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             }
-
+            int allc = ci + cu + cy + ct;
+            if (allc == 63) 
+            {
+                selecall++;
+                button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
+                button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+                button4.Text = "Unselect All";
+            }
+            else
+            {
+                button4.BackColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+                button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
+                button4.Text = "Select All";
+            }
         }
 
         public Form1()
@@ -188,7 +205,7 @@ namespace ET
             CheckBox chck2 = new CheckBox();
             chck2.Location = new System.Drawing.Point(10, 30);
             chck2.Size = new System.Drawing.Size(275, 25);
-            chck2.Text = "Power Option to Ultimate Performance";
+            chck2.Text = "Power Option to Ultimate Perform.";
             chck2.Checked = true;
             chck2.Click += c_p;
             chck2.TabIndex = 2;
@@ -299,8 +316,8 @@ namespace ET
             panel1.Controls.Add(chck15);
             CheckBox chck64 = new CheckBox();
             chck64.Location = new System.Drawing.Point(10, 355);
-            chck64.Size = new System.Drawing.Size(270, 25);
-            chck64.Text = "Disable Nagle''s Alg. (Delayed ACKs)";
+            chck64.Size = new System.Drawing.Size(275, 25);
+            chck64.Text = "Disable Nagle's Alg. (Delayed ACKs)";
             chck64.Checked = true;
             chck64.Click += c_p;
             chck64.TabIndex = 64;
@@ -436,13 +453,13 @@ namespace ET
             CheckBox chck66 = new CheckBox();
             chck66.Location = new System.Drawing.Point(10, 80);
             chck66.Size = new System.Drawing.Size(260, 25);
-            chck66.Text = "Disable Spectre/Meltdown Protection";
+            chck66.Text = "Disable Spectre/Meltdown";
             chck66.Click += c_p;
             chck66.TabIndex = 66;
             panel5.Controls.Add(chck66);
             CheckBox chck31 = new CheckBox();
             chck31.Location = new System.Drawing.Point(10, 05);
-            chck31.Size = new System.Drawing.Size(250, 25);
+            chck31.Size = new System.Drawing.Size(270, 25);
             chck31.Text = "Disable Telemetry Scheduled Tasks";
             chck31.Checked = true;
             chck31.Click += c_p;
@@ -474,7 +491,7 @@ namespace ET
             panel2.Controls.Add(chck34);
             CheckBox chck35 = new CheckBox();
             chck35.Location = new System.Drawing.Point(10, 105);
-            chck35.Size = new System.Drawing.Size(250, 25);
+            chck35.Size = new System.Drawing.Size(270, 25);
             chck35.Text = "Disable Media Player Usage Reports";
             chck35.Checked = true;
             chck35.Click += c_p;
@@ -498,8 +515,8 @@ namespace ET
             panel2.Controls.Add(chck37);
             CheckBox chck38 = new CheckBox();
             chck38.Location = new System.Drawing.Point(10, 180);
-            chck38.Size = new System.Drawing.Size(250, 25);
-            chck38.Text = "Disable Send Info About How I Write";
+            chck38.Size = new System.Drawing.Size(270, 25);
+            chck38.Text = "Disable Send Info About Writing";
             chck38.Checked = true;
             chck38.Click += c_p;
             chck38.TabIndex = 38;
@@ -538,7 +555,7 @@ namespace ET
             panel2.Controls.Add(chck42);
             CheckBox chck43 = new CheckBox();
             chck43.Location = new System.Drawing.Point(10, 305);
-            chck43.Size = new System.Drawing.Size(250, 25);
+            chck43.Size = new System.Drawing.Size(270, 25);
             chck43.Text = "Disable Spynet Defender Reporting";
             chck43.Checked = true;
             chck43.Click += c_p;
@@ -666,7 +683,7 @@ namespace ET
             panel4.Controls.Add(chck58);
             CheckBox chck59 = new CheckBox();
             chck59.Location = new System.Drawing.Point(10, 130);
-            chck59.Size = new System.Drawing.Size(255, 25);
+            chck59.Size = new System.Drawing.Size(263, 25);
             chck59.Text = "Remove News and Interests/Widgets";
             chck59.Click += c_p;
             chck59.TabIndex = 59;
@@ -727,20 +744,66 @@ namespace ET
 
         private void button5_Click(object sender, EventArgs e)
         {
+            button5.Enabled = false;
             //DO START ENGINE
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            int alltodo = 0; //max 67
+            int done = 0;
+            foreach (CheckBox checkbox in panel1.Controls)
+            {
+                if (checkbox.Checked)
+                {
+                    alltodo++;
+                }
+            }
+            foreach (CheckBox checkbox in panel2.Controls)
+            {
+                if (checkbox.Checked)
+                {
+                    alltodo++;
+                }
+            }
+            foreach (CheckBox checkbox in panel3.Controls)
+            {
+                if (checkbox.Checked)
+                {
+                    alltodo++;
+                }
+            }
+            foreach (CheckBox checkbox in panel4.Controls)
+            {
+                if (checkbox.Checked)
+                {
+                    alltodo++;
+                }
+            }
+            foreach (CheckBox checkbox in panel5.Controls)
+            {
+                if (checkbox.Checked)
+                {
+                    alltodo++;
+                }
+            }
+            progressBar1.Visible = true;
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = alltodo;
+            progressBar1.Value = done;
+
             //Perforamnce Panel
             foreach (CheckBox checkBox in panel1.Controls)
             {
+                progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
+                    checkBox.Checked = false;
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
                     {
                         case "Disable Edge WebWidget":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -748,8 +811,8 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
-                        case "Power Option to Ultimate Performance":
-                            Console.WriteLine(checkBox.Text);
+                        case "Power Option to Ultimate Perform.":
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -758,7 +821,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Dual Boot Timeout 3sec":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -767,7 +830,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Hibernation/Fast Startup":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -776,7 +839,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Windows Insider Experiments":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -785,7 +848,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable App Launch Tracking":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -800,10 +863,10 @@ namespace ET
                             startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\" /v \"PowerThrottlingOff\" /t REG_DWORD /d \"1\" /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
                             break;
                         case "Turn Off Background Apps":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -812,7 +875,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Sticky Keys Prompt":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -821,7 +884,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Activity History":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -830,7 +893,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Updates for MS Store Apps":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -839,7 +902,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "SmartScreen Filter for Apps: Disable":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -848,7 +911,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Let Websites Provide Locally":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -857,7 +920,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Fix Microsoft Edge Settings":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -865,8 +928,8 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
-                        case "Disable Nagle''s Alg. (Delayed ACKs)":
-                            Console.WriteLine(checkBox.Text);
+                        case "Disable Nagle's Alg. (Delayed ACKs)":
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -875,7 +938,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "CPU Priority Tweaks":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -933,7 +996,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Location Sensors":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -942,7 +1005,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable WiFi HotSpot Auto-Sharing":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -951,7 +1014,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Shared HotSpot Connect":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -960,7 +1023,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Updates Notify to Sched. Restart":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -969,7 +1032,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "P2P Update Setting to LAN (local)":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -978,7 +1041,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Set Lower Shutdown Time (2sec)":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -987,7 +1050,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Remove Old Device Drivers":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -996,7 +1059,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Get Even More Out of...":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1005,7 +1068,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Installing Suggested Apps":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1014,7 +1077,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Start Menu Ads/Suggestions":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1023,7 +1086,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Suggest Apps WindowsInk":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1032,7 +1095,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Unnecessary Components":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -1041,7 +1104,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Defender Scheduled Scan Nerf":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1050,7 +1113,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Process Mitigation":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -1059,7 +1122,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Defragment Indexing Service File":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1068,7 +1131,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Enable Service Tweaks":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             string[] toDisable = {"DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr" };
                             string[] toManuall = {"BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService" };
@@ -1099,7 +1162,7 @@ namespace ET
                             }
                             break;
                         case "Remove Bloatware (Preinstalled)":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             string[] whitelistapps = { "Microsoft.MicrosoftOfficeHub", "Microsoft.Office.OneNote", "Microsoft.WindowsAlarms", "Microsoft.WindowsCalculator", "Microsoft.WindowsCamera", "microsoft.windowscommunicationsapps", "Microsoft.NET.Native.Framework.2.2", "Microsoft.NET.Native.Framework.2.0", "Microsoft.NET.Native.Runtime.2.2", "Microsoft.NET.Native.Runtime.2.0", "Microsoft.UI.Xaml.2.7", "Microsoft.UI.Xaml.2.0", "Microsoft.WindowsAppRuntime.1.3", "Microsoft.NET.Native.Framework.1.7", "MicrosoftWindows.Client.Core", "Microsoft.LockApp", "Microsoft.ECApp", "Microsoft.Windows.ContentDeliveryManager", "Microsoft.Windows.Search", "Microsoft.Windows.OOBENetworkCaptivePortal", "Microsoft.Windows.SecHealthUI", "Microsoft.SecHealthUI", "Microsoft.WindowsAppRuntime.CBS", "Microsoft.VCLibs.140.00.UWPDesktop", "Microsoft.VCLibs.120.00.UWPDesktop", "Microsoft.VCLibs.110.00.UWPDesktop", "Microsoft.DirectXRuntime", "Microsoft.XboxGameOverlay", "Microsoft.XboxGamingOverlay", "Microsoft.GamingApp", "Microsoft.GamingServices", "Microsoft.XboxIdentityProvider", "Microsoft.Xbox.TCUI", "Microsoft.AccountsControl", "Microsoft.WindowsStore", "Microsoft.StorePurchaseApp", "Microsoft.VP9VideoExtensions", "Microsoft.RawImageExtension", "Microsoft.HEIFImageExtension", "Microsoft.HEIFImageExtension", "Microsoft.WebMediaExtensions", "RealtekSemiconductorCorp.RealtekAudioControl", "Microsoft.MicrosoftEdge", "Microsoft.MicrosoftEdge.Stable", "MicrosoftWindows.Client.FileExp", "NVIDIACorp.NVIDIAControlPanel", "AppUp.IntelGraphicsExperience", "Microsoft.Paint", "Microsoft.Messaging", "Microsoft.AsyncTextService", "Microsoft.CredDialogHost", "Microsoft.Win32WebViewHost", "Microsoft.MicrosoftEdgeDevToolsClient", "Microsoft.Windows.OOBENetworkConnectionFlow", "Microsoft.Windows.PeopleExperienceHost", "Microsoft.Windows.PinningConfirmationDialog", "Microsoft.Windows.SecondaryTileExperience", "Microsoft.Windows.SecureAssessmentBrowser", "Microsoft.Windows.ShellExperienceHost", "Microsoft.Windows.StartMenuExperienceHost", "Microsoft.Windows.XGpuEjectDialog", "Microsoft.XboxGameCallableUI", "MicrosoftWindows.UndockedDevKit", "NcsiUwpApp", "Windows.CBSPreview", "Windows.MiracastView", "Windows.ContactSupport", "Windows.PrintDialog", "c5e2524a-ea46-4f67-841f-6a9465d9d515", "windows.immersivecontrolpanel", "WinRAR.ShellExtension", "Microsoft.WindowsNotepad", "MicrosoftWindows.Client.WebExperience", "Microsoft.ZuneMusic", "Microsoft.ZuneVideo", "Microsoft.OutlookForWindows", "MicrosoftWindows.Ai.Copilot.Provider", "Microsoft.WindowsTerminal", "Microsoft.Windows.Terminal", "WindowsTerminal", "Microsoft.Winget.Source", "Microsoft.DesktopAppInstaller", "Microsoft.Services.Store.Engagement", "Microsoft.HEVCVideoExtension", "Microsoft.WebpImageExtension", "MicrosoftWindows.CrossDevice", "NotepadPlusPlus", "MicrosoftCorporationII.WinAppRuntime.Main.1.5", "Microsoft.WindowsAppRuntime.1.5", "MicrosoftCorporationII.WinAppRuntime.Singleton", "Microsoft.WindowsSoundRecorder", "MicrosoftCorporationII.WinAppRuntime.Main.1.4", "MicrosoftWindows.Client.LKG", "MicrosoftWindows.Client.CBS", "Microsoft.VCLibs.140.00", "Microsoft.Windows.CloudExperienceHost", "SpotifyAB.SpotifyMusic", "Microsoft.SkypeApp", "5319275A.WhatsAppDesktop", "FACEBOOK.317180B0BB486", "TelegramMessengerLLP.TelegramDesktop", "4DF9E0F8.Netflix", "Discord", "Paint", "mspaint", "Microsoft.Windows.Paint" };
 
@@ -1110,7 +1173,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Unnecessary Startup Apps":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1125,14 +1188,16 @@ namespace ET
             //Privacy Panel
             foreach (CheckBox checkBox in panel2.Controls)
             {
+                progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
+                    checkBox.Checked = false;
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
                     {
                         case "Disable Telemetry Scheduled Tasks":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1141,7 +1206,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Remove Telemetry/Data Collection":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1156,7 +1221,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable PowerShell Telemetry":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1165,7 +1230,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Skype Telemetry":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1174,7 +1239,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Media Player Usage Reports":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1183,7 +1248,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Mozilla Telemetry":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1192,7 +1257,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Apps Use My Advertising ID":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1200,8 +1265,8 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
-                        case "Disable Send Info About How I Write":
-                            Console.WriteLine(checkBox.Text);
+                        case "Disable Send Info About Writing":
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1210,7 +1275,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Handwriting Recognition":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1219,7 +1284,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Watson Malware Reports":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1228,7 +1293,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Malware Diagnostic Data":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1237,7 +1302,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Reporting to MS MAPS":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1246,7 +1311,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Spynet Defender Reporting":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1255,7 +1320,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Do Not Send Malware Samples":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1264,7 +1329,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Sending Typing Samples":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1273,7 +1338,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Sending Contacts to MS":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1282,7 +1347,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Cortana":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1298,14 +1363,16 @@ namespace ET
             //Visual Panel
             foreach (CheckBox checkBox in panel3.Controls)
             {
+                progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
+                    checkBox.Checked = false;
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
                     {
                         case "Show File Extensions in Explorer":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1314,7 +1381,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Transparency on Taskbar":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1323,7 +1390,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Windows Animations":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1332,7 +1399,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable MRU lists (jump lists)":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1341,7 +1408,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Set Search Box to Icon Only":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1350,7 +1417,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Explorer on Start on This PC":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1366,14 +1433,16 @@ namespace ET
             //Others Panel
             foreach (CheckBox checkBox in panel4.Controls)
             {
+                progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
+                    checkBox.Checked = false;
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
                     {
                         case "Split Threshold for Svchost":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -1382,7 +1451,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Remove Windows Game Bar/DVR":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1397,7 +1466,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Clean Temp/Cache/Prefetch/Logs":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1428,15 +1497,15 @@ namespace ET
                             startInfo.Arguments = "/C Del /S /F /Q %windir%\\Prefetch && Del %AppData%\vstelemetry && Del %LocalAppData%\\Microsoft\\VSApplicationInsights /F /Q /S && Del %ProgramData%\\Microsoft\\VSApplicationInsights /F /Q /S && Del %Temp%\\Microsoft\\VSApplicationInsights /F /Q /S && Del %Temp%\\VSFaultInfo /F /Q /S && Del %Temp%\\VSFeedbackPerfWatsonData /F /Q /S && Del %Temp%\\VSFeedbackVSRTCLogs /F /Q /S && Del %Temp%\\VSRemoteControl /F /Q /S && Del %Temp%\\VSTelem /F /Q /S && Del %Temp%\\VSTelem.Out /F /Q /S && Del %localappdata%\\Yarn\\Cache /F /Q /S && Del %appdata%\\Microsoft\\Teams\\Cache /F /Q /S && Del %programdata%\\GOG.com\\Galaxy\\webcache /F /Q /S && Del %programdata%\\GOG.com\\Galaxy\\logs /F /Q /S && Del %localappdata%\\Microsoft\\Windows\\WebCache /F /Q /S";
                             process.StartInfo = startInfo;
                             process.Start(); 
-                            break;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del \"%SystemDrive%\\*.log\" /F /Q && Del \"%WinDir%\\Directx.log\" /F /Q && Del \"%WinDir%\\SchedLgU.txt\" /F /Q && Del \"%WinDir%\\*.log\" /F /Q && Del \"%WinDir%\\security\\logs\\*.old\" /F /Q && Del \"%WinDir%\\security\\logs\\*.log\" /F /Q && Del \"%WinDir%\\Debug\\*.log\" /F /Q && Del \"%WinDir%\\Debug\\UserMode\\*.bak\" /F /Q && Del \"%WinDir%\\Debug\\UserMode\\*.log\" /F /Q && Del \"%WinDir%\\*.bak\" /F /Q && Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q && Del \"%WinDir%\\OEWABLog.txt\" /F /Q && Del \"%WinDir%\\setuplog.txt\" /F /Q && Del \"%WinDir%\\Logs\\DISM\\*.log\" /F /Q && Del \"%WinDir%\\*.log.txt\" /F /Q && Del \"%WinDir%\\APPLOG\\*.*\" /F /Q && Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q && Del \"%WinDir%\\system32\\wbem\\Logs\\*.lo_\" /F /Q && Del \"%WinDir%\\Logs\\DPX\\*.log\" /F /Q && Del \"%WinDir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\*.log\" /F /Q && Del \"%WinDir%\\Logs\\*.log\" /F /Q && Del \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\*.log\" /F /Q && Del \"%WinDir%\\Panther\\cbs.log\" /F /Q && Del \"%WinDir%\\Panther\\DDACLSys.log\" /F /Q && Del \"%WinDir%\\repair\\setup.log\" /F /Q && Del \"%WinDir%\\Panther\\UnattendGC\\diagerr.xml\" /F /Q && Del \"%WinDir%\\Panther\\UnattendGC\\diagwrn.xml\" /F /Q && Del \"%WinDir%\\inf\\setupapi.offline.log\" /F /Q && Del \"%WinDir%\\inf\\setupapi.app.log\" /F /Q && Del \"%WinDir%\\debug\\WIA\\*.log\" /F /Q && Del \"%SystemDrive%\\PerfLogs\\System\\Diagnostics\\*.*\" /F /Q && Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q && Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q && Del \"%WinDir%\\Logs\\WindowsBackup\\*.etl\" /F /Q && Del \"%WinDir%\\System32\\LogFiles\\HTTPERR\\*.*\" /F /Q && Del \"%WinDir%\\SysNative\\SleepStudy\\*.etl\" /F /Q && Del \"%WinDir%\\SysNative\\SleepStudy\\ScreenOn\\*.etl\" /F /Q && Del \"%WinDir%\\System32\\SleepStudy\\*.etl\" /F /Q && Del \"%WinDir%\\System32\\SleepStudy\\ScreenOn\\*.etl\" /F /Q && Del \"%WinDir%\\Logs\" /F /Q && Del \"%WinDir%\\DISM\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\*.chk\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\*.log\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\.jrs\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\*.txt\" /F /Q && start cleanmgr.exe /sagerun:5 && net stop FontCache && net stop FontCache3.0.0.0 && Del \"%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat\" /F /Q /S && Del \"%WinDir%\\SysNative\\FNTCACHE.DAT\" /F /Q /S && Del \"%WinDir%\\System32\\FNTCACHE.DAT\" /F /Q /S && net start FontCache && net start FontCache3.0.0.0 && %WinDir%\\SysNative\\ie4uinit.exe -show && %WinDir%\\System32\\ie4uinit.exe -show && Del %LocalAppData%\\IconCache.db /F /Q /S && Del \"%LocalAppData%\\Microsoft\\Windows\\Explorer\\iconcache_*.db\" /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
+                            break;
                         case "Remove News and Interests/Widgets":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1451,16 +1520,16 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Scan for Adware (AdwCleaner)":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command wget https://downloads.malwarebytes.com/file/adwcleaner -o $Env:programdata\adwcleaner.exe; start /WAIT $Env:programdata\adwcleaner.exe /eula /clean /noreboot; del $Env:programdata\adwcleaner.exe";
                             process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
+                            process.Start();
                             break;
                         case "Clean WinSxS Folder":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1475,14 +1544,16 @@ namespace ET
             //Expert Panel
             foreach (CheckBox checkBox in panel5.Controls)
             {
+                progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
+                    checkBox.Checked = false;
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
                     {
-                        case "Disable Spectre/Meltdown Protection":
-                            Console.WriteLine(checkBox.Text);
+                        case "Disable Spectre/Meltdown":
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1491,7 +1562,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Remove Microsoft OneDrive":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1506,7 +1577,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Xbox Services":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1515,7 +1586,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Enable Fast/Secure DNS (1.1.1.1)":
-                            Console.WriteLine(checkBox.Text);
+                            Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1526,6 +1597,23 @@ namespace ET
                     }
                 }
             }
+
+            if (alltodo == 0)
+            {
+                progressBar1.Visible = false;
+                button5.Enabled = true;
+                DialogResult dialogResult = MessageBox.Show("No option selected.", "E.T. ver 5.4", MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (alltodo == done)
+                {
+                    this.Hide();
+                    DialogResult dialogResult = MessageBox.Show("Everything has been done. Reboot is recommended.", "E.T. ver 5.4", MessageBoxButtons.OK);
+                    this.Close();
+                }
+            }
+
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -1721,7 +1809,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start https://www.buymeacoffee.com/semazurek";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -1732,7 +1820,7 @@ namespace ET
             startInfo.FileName = "powershell.exe";
             startInfo.Arguments = "/C [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void diskDefragmenterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1743,7 +1831,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start dfrgui.exe";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void cleanmgrToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1754,7 +1842,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start cleanmgr.exe";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void msconfigToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1765,7 +1853,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start msconfig";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void controlPanelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1776,7 +1864,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start control";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void deviceManagerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1787,7 +1875,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start devmgmt.msc";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void uACSettingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1798,7 +1886,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start UserAccountControlSettings.exe";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void msinfo32ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1809,7 +1897,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start msinfo32";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void servicesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1820,7 +1908,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start services.msc";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void remoteDesktopToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1831,7 +1919,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start mstsc";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void eventViewerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1842,7 +1930,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start eventvwr.msc";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void resetNetworkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1853,7 +1941,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C netsh winsock reset && netsh int ipv4 reset;netsh int ipv6 reset && ipconfig /release;ipconfig /renew && ipconfig /flushdns";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void updateApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1864,7 +1952,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C Winget upgrade --all";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void rebootToBIOSToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1875,7 +1963,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C shutdown /r /fw /t 1";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void windowsLicenseKeyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1886,7 +1974,7 @@ namespace ET
             startInfo.FileName = "powershell.exe";
             startInfo.Arguments = "/C [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; wmic path softwarelicensingservice get OA3xOriginalProductKey | findstr /c:'-';pause";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void toolStripButton3_Click(object sender, EventArgs e)
@@ -1897,7 +1985,7 @@ namespace ET
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C start https://www.github.com/semazurek";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
     }
 }
