@@ -1,6 +1,6 @@
 # ET Optimizer
 
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/Wersja-v5.3-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/Wersja-v5.4-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
@@ -25,7 +25,7 @@ Set-ExecutionPolicy RemoteSigned
 <a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://github.com/semazurek/ET-Optimizer/assets/85984736/d2cc35a1-cac2-40a7-a467-b1ee08167eec" width="600">
+<img src="https://github.com/user-attachments/assets/8ff5c9ea-792d-43fb-b473-5a7d3d1c2815" width="600">
 </p>
 
 
