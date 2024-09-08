@@ -1524,7 +1524,7 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
                             startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command wget https://downloads.malwarebytes.com/file/adwcleaner -o $Env:programdata\adwcleaner.exe; start /WAIT $Env:programdata\adwcleaner.exe /eula /clean /noreboot; del $Env:programdata\adwcleaner.exe";
+                            startInfo.Arguments = "-Command wget https://downloads.malwarebytes.com/file/adwcleaner -o $Env:programdata\adwcleaner.exe; pause; start /WAIT $Env:programdata\adwcleaner.exe /eula /clean /noreboot;pause; del $Env:programdata\adwcleaner.exe";
                             process.StartInfo = startInfo;
                             process.Start();
                             break;
