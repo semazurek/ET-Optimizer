@@ -45,6 +45,12 @@ namespace ET
         string unselectionc = "#ecf0f1";
         string expercolor = "#e74c3c";
 
+        public string selectall0 = "Select All";
+        public string selectall1 = "Unselect All";
+
+        public string msgend = "Everything has been done. Reboot is recommended.";
+        public string msgerror = "No option selected.";
+
         //Function c_p to count and mark by color that groupbox of function are fully (all) marked
         public void c_p(object sender, EventArgs e)
         {
@@ -120,23 +126,26 @@ namespace ET
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             }
             int allc = ci + cu + cy + ct;
+            
             if (allc == 63) 
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
                 button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-                button4.Text = "Unselect All";
+                button4.Text = selectall1;
+                
             }
             else
             {
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
-                button4.Text = "Select All";
+                button4.Text = selectall0;
             }
         }
 
-        public Form1()
+        public Form1(string[] args)
         {
+
             InitializeComponent();
             toolStrip1.Renderer = new MySR();
             this.Size = new System.Drawing.Size(895, 500);
@@ -198,6 +207,51 @@ namespace ET
             toolStrip1.Size = new System.Drawing.Size(802, 25);
             textBox1.Location = new System.Drawing.Point(10, 30);
             textBox1.Size = new System.Drawing.Size(860,360);
+
+            //Language change function
+            CultureInfo ci = CultureInfo.InstalledUICulture;
+
+            if (ci.Name == "pl-PL")
+            {
+                Console.WriteLine("Wykryto Polski");
+                groupBox1.Text = "Poprawki Wydajności (34)";
+                groupBox2.Text = "Prywatność (17)";
+                groupBox3.Text = "Poprawki Wizualne (6)";
+                groupBox4.Text = "Inne (6)";
+                groupBox5.Text = "Tryb Eksperta (4)";
+
+                button1.Text = "Wydajność";
+                button2.Text = "Wizualne";
+                button3.Text = "Prywatność";
+                selectall0 = "Zaznacz Wszystko";
+                selectall1 = "Odznacz Wszystko";
+
+                button4.Text = "Zaznacz Wszystko";
+                button4.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                toolStripButton2.Text = "Kopia Zapasowa";
+                toolStripButton1.Text = "Przywracanie";
+                toolStripButton3.Text = "O mnie";
+                toolStripButton4.Text = "Wsparcie";
+                toolStripButton5.Text = "Wyjdź";
+                toolStripDropDownButton1.Text = "Dodatki";
+                diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
+                controlPanelToolStripMenuItem.Text = "Panel Sterowania";
+                deviceManagerToolStripMenuItem.Text = "Menedżer Urządzeń";
+                uACSettingsToolStripMenuItem.Text = "Ustawienia UAC";
+                servicesToolStripMenuItem.Text = "Usługi";
+                remoteDesktopToolStripMenuItem.Text = "Pulpit Zdalny";
+                eventViewerToolStripMenuItem.Text = "Podgląd Zdarzeń";
+                resetNetworkToolStripMenuItem.Text = "Reset Ustawień Sieci";
+                updateApplicationsToolStripMenuItem.Text = "Aktualizuj Aplikacje";
+                windowsLicenseKeyToolStripMenuItem.Text = "Pokaż Klucz Windows";
+                rebootToBIOSToolStripMenuItem.Text = "Uruchom do BIOSu";
+
+                msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
+                msgerror = "Nie wybrano żadnej opcji.";
+
+                toolStripLabel1.Text = "Wersja: Publiczna | 11.09.2024";
+            }
 
             panel1.VerticalScroll.Enabled = false;
             panel1.VerticalScroll.Visible = false;
@@ -754,6 +808,12 @@ namespace ET
             groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
             button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+            if (args.Equals("-auto") || args.Equals("auto") || args.Equals("/auto") || args.Equals("*auto"))
+            {
+                doengine();
+                Console.WriteLine(args);
+            }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -761,7 +821,7 @@ namespace ET
 
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        public void doengine()
         {
             Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
             button5.Enabled = false;
@@ -811,7 +871,7 @@ namespace ET
             progressBar1.Minimum = 0;
             progressBar1.Maximum = alltodo;
             progressBar1.Value = done;
-            
+
             //Perforamnce Panel
             foreach (CheckBox checkBox in panel1.Controls)
             {
@@ -1000,22 +1060,22 @@ namespace ET
                             startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\usbxhci\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f && reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\USBHUB3\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f && reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NDIS\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f && reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\nvlddmkm\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            
+
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C wmic cpu get NumberOfLogicalProcessors | findstr /r \"[0-9]\" > NOLP.txt";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            
+
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             string NOLP = File.ReadAllText("NOLP.txt");
-                            startInfo.Arguments = "/C bcdedit /set {current} numproc "+NOLP;
+                            startInfo.Arguments = "/C bcdedit /set {current} numproc " + NOLP;
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            
+
 
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -1023,11 +1083,11 @@ namespace ET
                             startInfo.Arguments = "/C wmic cpu get name | findstr /r \"Intel\" > NOLPi.txt";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            
+
 
                             string NOLPi = File.ReadAllText("NOLPi.txt");
-                            if (NOLPi is null) 
-                            { 
+                            if (NOLPi is null)
+                            {
                                 Console.WriteLine("amd");
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
@@ -1035,8 +1095,8 @@ namespace ET
                                 process.StartInfo = startInfo;
                                 process.Start(); process.WaitForExit();
                             }
-                            else 
-                            { 
+                            else
+                            {
                                 Console.WriteLine("intel");
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
@@ -1200,21 +1260,21 @@ namespace ET
                         case "Enable Service Tweaks":
                             Console.WriteLine(checkBox.Text); done++;
 
-                            string[] toDisable = {"DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr" };
-                            string[] toManuall = {"BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService" };
+                            string[] toDisable = { "DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr" };
+                            string[] toManuall = { "BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService" };
 
                             foreach (string s in toDisable)
                             {
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
-                                startInfo.Arguments = "/C sc stop "+s;
+                                startInfo.Arguments = "/C sc stop " + s;
                                 process.StartInfo = startInfo;
                                 process.Start(); process.WaitForExit();
-                                
+
 
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
-                                startInfo.Arguments = "/C sc config "+s+" start= disabled";
+                                startInfo.Arguments = "/C sc config " + s + " start= disabled";
                                 process.StartInfo = startInfo;
                                 process.Start(); process.WaitForExit();
                             }
@@ -1551,25 +1611,25 @@ namespace ET
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C del /q \"%temp%\\NVIDIA Corporation\\NV_Cache\\*\" && del /q \"%programdata%\\NVIDIA Corporation\\NV_Cache\\*\"";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C del /s /f /q \"%userprofile%\\Recent\\*.*\"";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command erase /f /s /q \"%systemdrive%\\Windows\\SoftwareDistribution\\*.*\"";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C rmdir /s /q \"%systemdrive%\\Windows\\SoftwareDistribution\"";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1581,13 +1641,13 @@ namespace ET
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %programdata%\\GOG.com\\Galaxy\\logs /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %programdata%\\GOG.com\\Galaxy\\webcache /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1599,73 +1659,73 @@ namespace ET
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %localappdata%\\Yarn\\Cache /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\VSTelem.Out /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\VSTelem /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\VSRemoteControl /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\VSFeedbackVSRTCLogs /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\VSFeedbackPerfWatsonData /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\VSFaultInfo /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %Temp%\\Microsoft\\VSApplicationInsights /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %ProgramData%\\Microsoft\\VSApplicationInsights /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %LocalAppData%\\Microsoft\\VSApplicationInsights /F /Q /S";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del %AppData%\vstelemetry";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del /S /F /Q %windir%\\Prefetch";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1707,31 +1767,31 @@ namespace ET
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\.jrs\" /F /Q";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.log\" /F /Q";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.chk\" /F /Q";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del \"%WinDir%\\DISM\" /F /Q";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C Del \"%WinDir%\\Logs\" /F /Q";
                             process.StartInfo = startInfo;
-                            process.Start(); 
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2141,7 +2201,7 @@ namespace ET
             {
                 progressBar1.Visible = false;
                 button5.Enabled = true;
-                DialogResult dialogResult = MessageBox.Show("No option selected.", "E.T. ver 5.4", MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show(msgerror, "E.T. ver 5.4", MessageBoxButtons.OK);
             }
             else
             {
@@ -2149,11 +2209,14 @@ namespace ET
                 {
                     progressBar1.Visible = false;
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-                    DialogResult dialogResult = MessageBox.Show("Everything has been done. Reboot is recommended.", "E.T. ver 5.4", MessageBoxButtons.OK);
+                    DialogResult dialogResult = MessageBox.Show(msgend, "E.T. ver 5.4", MessageBoxButtons.OK);
                     this.Close();
                 }
             }
-
+        }
+        private void button5_Click(object sender, EventArgs e)
+        {
+            doengine();
         }
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -2248,13 +2311,13 @@ namespace ET
         private void button4_Click(object sender, EventArgs e)
         {
             this.Click += c_p;
-            selecall++;
+            selecall++;  
             if (selecall % 2 == 0) 
             {
                 visua++; priva++; perf++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
                 button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-                button4.Text = "Unselect All";
+                button4.Text = selectall1;
 
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 foreach (CheckBox checkBox in panel4.Controls)
@@ -2291,7 +2354,7 @@ namespace ET
             {
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
-                button4.Text = "Select All";
+                button4.Text = selectall0;
 
                 groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button2.BackColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
