@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.IO;
@@ -13,6 +14,10 @@ using System.Security.Cryptography.X509Certificates;
 using System.Runtime.InteropServices;
 using System.Drawing.Drawing2D;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System.Globalization;
+using System.Security.Policy;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -191,6 +196,9 @@ namespace ET
             toolStrip1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             toolStrip1.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
             toolStrip1.Size = new System.Drawing.Size(802, 25);
+            textBox1.Location = new System.Drawing.Point(10, 30);
+            textBox1.Size = new System.Drawing.Size(860,360);
+
             panel1.VerticalScroll.Enabled = false;
             panel1.VerticalScroll.Visible = false;
             
@@ -755,7 +763,9 @@ namespace ET
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
             button5.Enabled = false;
+            textBox1.Visible = true;
             //DO START ENGINE
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -801,14 +811,19 @@ namespace ET
             progressBar1.Minimum = 0;
             progressBar1.Maximum = alltodo;
             progressBar1.Value = done;
-
+            
             //Perforamnce Panel
             foreach (CheckBox checkBox in panel1.Controls)
             {
+
                 progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
                     checkBox.Checked = false;
+                    string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
+                    textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
+                    textBox1.SelectionStart = textBox1.TextLength;
+                    textBox1.ScrollToCaret();
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
@@ -1220,6 +1235,10 @@ namespace ET
                 if (checkBox.Checked)
                 {
                     checkBox.Checked = false;
+                    string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
+                    textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
+                    textBox1.SelectionStart = textBox1.TextLength;
+                    textBox1.ScrollToCaret();
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
@@ -1395,6 +1414,10 @@ namespace ET
                 if (checkBox.Checked)
                 {
                     checkBox.Checked = false;
+                    string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
+                    textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
+                    textBox1.SelectionStart = textBox1.TextLength;
+                    textBox1.ScrollToCaret();
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
@@ -1465,6 +1488,10 @@ namespace ET
                 if (checkBox.Checked)
                 {
                     checkBox.Checked = false;
+                    string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
+                    textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
+                    textBox1.SelectionStart = textBox1.TextLength;
+                    textBox1.ScrollToCaret();
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
@@ -1588,6 +1615,10 @@ namespace ET
                 if (checkBox.Checked)
                 {
                     checkBox.Checked = false;
+                    string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
+                    textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
+                    textBox1.SelectionStart = textBox1.TextLength;
+                    textBox1.ScrollToCaret();
                     string caseSwitch = checkBox.Text;
 
                     switch (caseSwitch)
@@ -1661,6 +1692,7 @@ namespace ET
                 if (alltodo == done)
                 {
                     progressBar1.Visible = false;
+                    Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                     DialogResult dialogResult = MessageBox.Show("Everything has been done. Reboot is recommended.", "E.T. ver 5.4", MessageBoxButtons.OK);
                     this.Close();
                 }
