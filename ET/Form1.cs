@@ -842,7 +842,31 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C powercfg -setactive scheme_min && powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61 && powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d && powercfg /X standby-timeout-ac 0 && powercfg /X standby-timeout-dc 0";
+                            startInfo.Arguments = "/C powercfg -setactive scheme_min";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C powercfg -setactive e9a42b02-d5df-448d-aa00-03f14749eb61";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C powercfg /S ceb6bfc7-d55c-4d56-ae37-ff264aade12d";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C powercfg /X standby-timeout-ac 0";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C powercfg /X standby-timeout-dc 0";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -1549,13 +1573,445 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del /S /F /Q %windir%\\Prefetch && Del %AppData%\vstelemetry && Del %LocalAppData%\\Microsoft\\VSApplicationInsights /F /Q /S && Del %ProgramData%\\Microsoft\\VSApplicationInsights /F /Q /S && Del %Temp%\\Microsoft\\VSApplicationInsights /F /Q /S && Del %Temp%\\VSFaultInfo /F /Q /S && Del %Temp%\\VSFeedbackPerfWatsonData /F /Q /S && Del %Temp%\\VSFeedbackVSRTCLogs /F /Q /S && Del %Temp%\\VSRemoteControl /F /Q /S && Del %Temp%\\VSTelem /F /Q /S && Del %Temp%\\VSTelem.Out /F /Q /S && Del %localappdata%\\Yarn\\Cache /F /Q /S && Del %appdata%\\Microsoft\\Teams\\Cache /F /Q /S && Del %programdata%\\GOG.com\\Galaxy\\webcache /F /Q /S && Del %programdata%\\GOG.com\\Galaxy\\logs /F /Q /S && Del %localappdata%\\Microsoft\\Windows\\WebCache /F /Q /S";
+                            startInfo.Arguments = "/C Del %localappdata%\\Microsoft\\Windows\\WebCache /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %programdata%\\GOG.com\\Galaxy\\logs /F /Q /S";
                             process.StartInfo = startInfo;
                             process.Start(); 
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%SystemDrive%\\*.log\" /F /Q && Del \"%WinDir%\\Directx.log\" /F /Q && Del \"%WinDir%\\SchedLgU.txt\" /F /Q && Del \"%WinDir%\\*.log\" /F /Q && Del \"%WinDir%\\security\\logs\\*.old\" /F /Q && Del \"%WinDir%\\security\\logs\\*.log\" /F /Q && Del \"%WinDir%\\Debug\\*.log\" /F /Q && Del \"%WinDir%\\Debug\\UserMode\\*.bak\" /F /Q && Del \"%WinDir%\\Debug\\UserMode\\*.log\" /F /Q && Del \"%WinDir%\\*.bak\" /F /Q && Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q && Del \"%WinDir%\\OEWABLog.txt\" /F /Q && Del \"%WinDir%\\setuplog.txt\" /F /Q && Del \"%WinDir%\\Logs\\DISM\\*.log\" /F /Q && Del \"%WinDir%\\*.log.txt\" /F /Q && Del \"%WinDir%\\APPLOG\\*.*\" /F /Q && Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q && Del \"%WinDir%\\system32\\wbem\\Logs\\*.lo_\" /F /Q && Del \"%WinDir%\\Logs\\DPX\\*.log\" /F /Q && Del \"%WinDir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\*.log\" /F /Q && Del \"%WinDir%\\Logs\\*.log\" /F /Q && Del \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\*.log\" /F /Q && Del \"%WinDir%\\Panther\\cbs.log\" /F /Q && Del \"%WinDir%\\Panther\\DDACLSys.log\" /F /Q && Del \"%WinDir%\\repair\\setup.log\" /F /Q && Del \"%WinDir%\\Panther\\UnattendGC\\diagerr.xml\" /F /Q && Del \"%WinDir%\\Panther\\UnattendGC\\diagwrn.xml\" /F /Q && Del \"%WinDir%\\inf\\setupapi.offline.log\" /F /Q && Del \"%WinDir%\\inf\\setupapi.app.log\" /F /Q && Del \"%WinDir%\\debug\\WIA\\*.log\" /F /Q && Del \"%SystemDrive%\\PerfLogs\\System\\Diagnostics\\*.*\" /F /Q && Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q && Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q && Del \"%WinDir%\\Logs\\WindowsBackup\\*.etl\" /F /Q && Del \"%WinDir%\\System32\\LogFiles\\HTTPERR\\*.*\" /F /Q && Del \"%WinDir%\\SysNative\\SleepStudy\\*.etl\" /F /Q && Del \"%WinDir%\\SysNative\\SleepStudy\\ScreenOn\\*.etl\" /F /Q && Del \"%WinDir%\\System32\\SleepStudy\\*.etl\" /F /Q && Del \"%WinDir%\\System32\\SleepStudy\\ScreenOn\\*.etl\" /F /Q && Del \"%WinDir%\\Logs\" /F /Q && Del \"%WinDir%\\DISM\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\*.chk\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\*.log\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\.jrs\" /F /Q && Del \"%WinDir%\\System32\\catroot2\\*.txt\" /F /Q && start cleanmgr.exe /sagerun:5 && net stop FontCache && net stop FontCache3.0.0.0 && Del \"%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat\" /F /Q /S && Del \"%WinDir%\\SysNative\\FNTCACHE.DAT\" /F /Q /S && Del \"%WinDir%\\System32\\FNTCACHE.DAT\" /F /Q /S && net start FontCache && net start FontCache3.0.0.0 && %WinDir%\\SysNative\\ie4uinit.exe -show && %WinDir%\\System32\\ie4uinit.exe -show && Del %LocalAppData%\\IconCache.db /F /Q /S && Del \"%LocalAppData%\\Microsoft\\Windows\\Explorer\\iconcache_*.db\" /F /Q /S";
+                            startInfo.Arguments = "/C Del %programdata%\\GOG.com\\Galaxy\\webcache /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %appdata%\\Microsoft\\Teams\\Cache /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %localappdata%\\Yarn\\Cache /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\VSTelem.Out /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\VSTelem /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\VSRemoteControl /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\VSFeedbackVSRTCLogs /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\VSFeedbackPerfWatsonData /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\VSFaultInfo /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %Temp%\\Microsoft\\VSApplicationInsights /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %ProgramData%\\Microsoft\\VSApplicationInsights /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %LocalAppData%\\Microsoft\\VSApplicationInsights /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %AppData%\vstelemetry";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del /S /F /Q %windir%\\Prefetch";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C %WinDir%\\SysNative\\ie4uinit.exe -show";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C %WinDir%\\System32\\ie4uinit.exe -show";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del %LocalAppData%\\IconCache.db /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%LocalAppData%\\Microsoft\\Windows\\Explorer\\iconcache_*.db\" /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.txt\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.txt\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\.jrs\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.chk\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\DISM\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); 
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\SleepStudy\\ScreenOn\\*.etl\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\SleepStudy\\*.etl\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\SysNative\\SleepStudy\\ScreenOn\\*.etl\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\SysNative\\SleepStudy\\*.etl\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\LogFiles\\HTTPERR\\*.*\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\WindowsBackup\\*.etl\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%SystemDrive%\\PerfLogs\\System\\Diagnostics\\*.*\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\debug\\WIA\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\inf\\setupapi.app.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\inf\\setupapi.offline.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C net stop FontCache3.0.0.0";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C net stop FontCache";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat\" /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\SysNative\\FNTCACHE.DAT\" /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\FNTCACHE.DAT\" /F /Q /S";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C net start FontCache";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C net start FontCache3.0.0.0";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\UnattendGC\\diagwrn.xml\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\UnattendGC\\diagerr.xml\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\repair\\setup.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\DDACLSys.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\cbs.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\DPX\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\system32\\wbem\\Logs\\*.lo_\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\APPLOG\\*.*\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\*.log.txt\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\DISM\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\setuplog.txt\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\OEWABLog.txt\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\*.bak\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Debug\\UserMode\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Debug\\UserMode\\*.bak\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Debug\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\security\\logs\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\security\\logs\\*.old\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\SchedLgU.txt\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%WinDir%\\Directx.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Del \"%SystemDrive%\\*.log\" /F /Q";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C start cleanmgr.exe /sagerun:5";
                             process.StartInfo = startInfo;
                             process.Start();
                             break;
