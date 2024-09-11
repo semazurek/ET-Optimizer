@@ -267,3 +267,5 @@ https://www.softpedia.com/get/Tweak/System-Tweak/ET-All-in-One-Optimization-Scri
 https://scloud.ws/blog/optimization/5370.html
 
 https://rsload.net/soft/optimization/39444-et-optimizer.html
+
+https://www.yasdl.com/tag/%D8%AF%D8%A7%D9%86%D9%84%D9%88%D8%AF-et-optimizer
