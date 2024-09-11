@@ -260,6 +260,8 @@ https://www.majorgeeks.com/files/details/et_all_in_one_optimization_script.html
 
 https://filecr.com/windows/semazurek-et-optimizer/
 
+https://en.taiwebs.com/windows/download-et-optimizer-9574.html
+
 https://www.softpedia.com/get/Tweak/System-Tweak/ET-All-in-One-Optimization-Script.shtml
 
 https://scloud.ws/blog/optimization/5370.html
