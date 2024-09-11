@@ -2201,6 +2201,7 @@ namespace ET
             {
                 progressBar1.Visible = false;
                 button5.Enabled = true;
+                textBox1.Visible = false;
                 DialogResult dialogResult = MessageBox.Show(msgerror, "E.T. ver 5.4", MessageBoxButtons.OK);
             }
             else
