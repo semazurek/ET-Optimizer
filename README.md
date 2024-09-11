@@ -254,10 +254,12 @@ https://www.youtube.com/watch?v=vIzWJ7OjgXA
 
 https://www.youtube.com/watch?v=BM_AirabkB8
 
-https://rsload.net/soft/optimization/39444-et-optimizer.html
+https://www.youtube.com/watch?v=FFKeJuXC4HA
 
 https://filecr.com/windows/semazurek-et-optimizer/
 
 https://www.softpedia.com/get/Tweak/System-Tweak/ET-All-in-One-Optimization-Script.shtml
 
 https://scloud.ws/blog/optimization/5370.html
+
+https://rsload.net/soft/optimization/39444-et-optimizer.html
