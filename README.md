@@ -9,8 +9,8 @@ Optimize performance, improve privacy, and remove bloatware with 1 click.
 
 Last tested/updated on:
 <ul>
-<li>Windows 10 Home 23H2</li>
-<li>Windows 11 Enterprise 23H2</li>
+<li>Windows 10 23H2</li>
+<li>Windows 11 24H2</li>
 <li>Windows 8.1 Build 9600 (partial support)</li>
 <li>Windows 7 (not recommended)</li>
 </ul> 
