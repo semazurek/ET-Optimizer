@@ -209,9 +209,9 @@ namespace ET
             textBox1.Size = new System.Drawing.Size(860,360);
 
             //Language change function
-            CultureInfo ci = CultureInfo.InstalledUICulture;
+            CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
-            if (ci.Name == "pl-PL")
+            if (cinfo.Name == "pl-PL")
             {
                 Console.WriteLine("Wykryto Polski");
                 groupBox1.Text = "Poprawki Wydajności (34)";
@@ -251,6 +251,52 @@ namespace ET
                 msgerror = "Nie wybrano żadnej opcji.";
 
                 toolStripLabel1.Text = "Wersja: Publiczna | 12.09.2024";
+            } 
+
+            if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
+            {
+                Console.WriteLine("Russian detected");
+                groupBox1.Text = "Настройки производительности (34)";
+                groupBox2.Text = "Конфиденциальность (17)";
+                groupBox3.Text = "Визуальные настройки (6)";
+                groupBox4.Text = "Другие (6)";
+                groupBox5.Text = "Экспертный режим (4)";
+
+                button1.Text = "Производительность";
+                button1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                button2.Text = "Визуальные настройки";
+                button2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                button3.Text = "Конфиденциальность";
+                button3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                button5.Text = "Применить";
+                selectall0 = "Выбрать все";
+                selectall1 = "Отменить всё";
+
+                button4.Text = "Выбрать все";
+                button4.Font = new Font("Consolas", 13, FontStyle.Regular);
+
+                toolStripButton2.Text = "Резервная копия";
+                toolStripButton1.Text = "Восстановление";
+                toolStripButton3.Text = "О программе";
+                toolStripButton4.Text = "Пожертвовать";
+                toolStripButton5.Text = "Выход";
+                toolStripDropDownButton1.Text = "Дополнительно";
+                diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
+                controlPanelToolStripMenuItem.Text = "Панель управления";
+                deviceManagerToolStripMenuItem.Text = "Диспетчер устройств";
+                uACSettingsToolStripMenuItem.Text = "Настройки UAC";
+                servicesToolStripMenuItem.Text = "Услуги";
+                remoteDesktopToolStripMenuItem.Text = "Удаленный рабочий стол";
+                eventViewerToolStripMenuItem.Text = "Просмотр событий";
+                resetNetworkToolStripMenuItem.Text = "Сброс сетевых настроек";
+                updateApplicationsToolStripMenuItem.Text = "Обновление приложений";
+                windowsLicenseKeyToolStripMenuItem.Text = "Показать лицензионный ключ Windows";
+                rebootToBIOSToolStripMenuItem.Text = "Запуск BIOS";
+
+                msgend = "Завершено. Рекомендуется перезапуск.";
+                msgerror = "Ни один вариант не был выбран.";
+
+                toolStripLabel1.Text = "Build: Public | 12.09.2024";
             }
 
             panel1.VerticalScroll.Enabled = false;
@@ -2191,6 +2237,7 @@ namespace ET
                 progressBar1.Visible = false;
                 button5.Enabled = true;
                 textBox1.Visible = false;
+                Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 DialogResult dialogResult = MessageBox.Show(msgerror, "E.T. ver 5.4", MessageBoxButtons.OK);
             }
             else
@@ -2565,7 +2612,7 @@ namespace ET
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "/C [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; wmic path softwarelicensingservice get OA3xOriginalProductKey | findstr /c:'-';pause";
+            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; (Get-WmiObject –query 'select * from SoftwareLicensingService').OA3xOriginalProductKey ;pause";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -2576,7 +2623,7 @@ namespace ET
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C start https://www.github.com/semazurek";
+            startInfo.Arguments = "/C start https://github.com/semazurek/ET-Optimizer";
             process.StartInfo = startInfo;
             process.Start();
         }
