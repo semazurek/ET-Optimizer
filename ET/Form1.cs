@@ -1057,26 +1057,19 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C wmic cpu get NumberOfLogicalProcessors | findstr /r \"[0-9]\" > NOLP.txt";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\usbxhci\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f && reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\USBHUB3\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f && reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\NDIS\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f && reg add \"HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\nvlddmkm\\Parameters\" /v ThreadPriority /t REG_DWORD /d 31 /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
-                            string NOLP = File.ReadAllText("NOLP.txt");
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C bcdedit /set {current} numproc " + NOLP;
+                            startInfo.Arguments = "/C bcdedit /set {current} numproc %NUMBER_OF_PROCESSORS%";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C wmic cpu get name | findstr /r \"Intel\" > NOLPi.txt";
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Get-WmiObject win32_Processor | findstr /r \"Intel\" > NOLPi.txt";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
@@ -2418,7 +2411,7 @@ namespace ET
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "/C [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
+            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
             process.StartInfo = startInfo;
             process.Start();
         }
