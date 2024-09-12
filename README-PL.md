@@ -9,8 +9,8 @@ Optymalizacja wydajności, poprawa prywatności i usuwanie bloatware'u za pomoc�
 
 Ostatnio testowane/aktualizowane na:
 <ul>
-<li>Windows 10 Home 23H2</li>
-<li>Windows 11 Ent 23H2</li>
+<li>Windows 10 23H2</li>
+<li>Windows 11 24H2</li>
 <li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
 <li>Windows 7 (nie zalecane)</li>
 </ul> 
