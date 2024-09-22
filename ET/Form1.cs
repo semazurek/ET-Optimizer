@@ -2671,8 +2671,6 @@ namespace ET
                 string strBattery = strBatteryStatus.TrimStart(MyCharCut);
                 // 0,95 - 95
 
-                if (strBatteryStatus == "1") { BatteryStatus = "100"; }
-                else { BatteryStatus = strBattery; }
                 if (strBattery == "9") { BatteryStatus = "90"; }
                 if (strBattery == "8") { BatteryStatus = "80"; }
                 if (strBattery == "7") { BatteryStatus = "70"; }
@@ -2682,7 +2680,9 @@ namespace ET
                 if (strBattery == "3") { BatteryStatus = "30"; }
                 if (strBattery == "2") { BatteryStatus = "20"; }
                 if (strBattery == "1") { BatteryStatus = "10"; }
-                
+                if (strBatteryStatus == "1") { BatteryStatus = "100"; }
+                else { BatteryStatus = strBattery; }
+
                 toolStripLabel3.Text = "Battery: " + BatteryStatus + " % ";
             });
             toolStripLabel2.Visible = true;

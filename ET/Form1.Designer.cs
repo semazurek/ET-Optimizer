@@ -298,7 +298,7 @@
             this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(68, 28);
+            this.toolStripButton1.Size = new System.Drawing.Size(63, 28);
             this.toolStripButton1.Text = "Restore";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
@@ -323,105 +323,105 @@
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(70, 28);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(62, 28);
             this.toolStripDropDownButton1.Text = "Extras";
             this.toolStripDropDownButton1.ToolTipText = "Extras";
             // 
             // diskDefragmenterToolStripMenuItem
             // 
             this.diskDefragmenterToolStripMenuItem.Name = "diskDefragmenterToolStripMenuItem";
-            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
             this.diskDefragmenterToolStripMenuItem.Click += new System.EventHandler(this.diskDefragmenterToolStripMenuItem_Click);
             // 
             // cleanmgrToolStripMenuItem
             // 
             this.cleanmgrToolStripMenuItem.Name = "cleanmgrToolStripMenuItem";
-            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.cleanmgrToolStripMenuItem.Text = "Cleanmgr";
             this.cleanmgrToolStripMenuItem.Click += new System.EventHandler(this.cleanmgrToolStripMenuItem_Click);
             // 
             // msconfigToolStripMenuItem
             // 
             this.msconfigToolStripMenuItem.Name = "msconfigToolStripMenuItem";
-            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.msconfigToolStripMenuItem.Text = "Msconfig";
             this.msconfigToolStripMenuItem.Click += new System.EventHandler(this.msconfigToolStripMenuItem_Click);
             // 
             // controlPanelToolStripMenuItem
             // 
             this.controlPanelToolStripMenuItem.Name = "controlPanelToolStripMenuItem";
-            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.controlPanelToolStripMenuItem.Text = "Control Panel";
             this.controlPanelToolStripMenuItem.Click += new System.EventHandler(this.controlPanelToolStripMenuItem_Click);
             // 
             // deviceManagerToolStripMenuItem
             // 
             this.deviceManagerToolStripMenuItem.Name = "deviceManagerToolStripMenuItem";
-            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.deviceManagerToolStripMenuItem.Text = "Device Manager";
             this.deviceManagerToolStripMenuItem.Click += new System.EventHandler(this.deviceManagerToolStripMenuItem_Click);
             // 
             // uACSettingsToolStripMenuItem
             // 
             this.uACSettingsToolStripMenuItem.Name = "uACSettingsToolStripMenuItem";
-            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.uACSettingsToolStripMenuItem.Text = "UAC Settings";
             this.uACSettingsToolStripMenuItem.Click += new System.EventHandler(this.uACSettingsToolStripMenuItem_Click);
             // 
             // msinfo32ToolStripMenuItem
             // 
             this.msinfo32ToolStripMenuItem.Name = "msinfo32ToolStripMenuItem";
-            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.msinfo32ToolStripMenuItem.Text = "Msinfo32";
             this.msinfo32ToolStripMenuItem.Click += new System.EventHandler(this.msinfo32ToolStripMenuItem_Click);
             // 
             // servicesToolStripMenuItem
             // 
             this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
-            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.servicesToolStripMenuItem.Text = "Services";
             this.servicesToolStripMenuItem.Click += new System.EventHandler(this.servicesToolStripMenuItem_Click);
             // 
             // remoteDesktopToolStripMenuItem
             // 
             this.remoteDesktopToolStripMenuItem.Name = "remoteDesktopToolStripMenuItem";
-            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.remoteDesktopToolStripMenuItem.Text = "Remote Desktop";
             this.remoteDesktopToolStripMenuItem.Click += new System.EventHandler(this.remoteDesktopToolStripMenuItem_Click);
             // 
             // eventViewerToolStripMenuItem
             // 
             this.eventViewerToolStripMenuItem.Name = "eventViewerToolStripMenuItem";
-            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.eventViewerToolStripMenuItem.Text = "Event Viewer";
             this.eventViewerToolStripMenuItem.Click += new System.EventHandler(this.eventViewerToolStripMenuItem_Click);
             // 
             // resetNetworkToolStripMenuItem
             // 
             this.resetNetworkToolStripMenuItem.Name = "resetNetworkToolStripMenuItem";
-            this.resetNetworkToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.resetNetworkToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.resetNetworkToolStripMenuItem.Text = "Reset  Network";
             this.resetNetworkToolStripMenuItem.Click += new System.EventHandler(this.resetNetworkToolStripMenuItem_Click);
             // 
             // updateApplicationsToolStripMenuItem
             // 
             this.updateApplicationsToolStripMenuItem.Name = "updateApplicationsToolStripMenuItem";
-            this.updateApplicationsToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.updateApplicationsToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.updateApplicationsToolStripMenuItem.Text = "Update Applications";
             this.updateApplicationsToolStripMenuItem.Click += new System.EventHandler(this.updateApplicationsToolStripMenuItem_Click);
             // 
             // windowsLicenseKeyToolStripMenuItem
             // 
             this.windowsLicenseKeyToolStripMenuItem.Name = "windowsLicenseKeyToolStripMenuItem";
-            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
             this.windowsLicenseKeyToolStripMenuItem.Click += new System.EventHandler(this.windowsLicenseKeyToolStripMenuItem_Click);
             // 
             // rebootToBIOSToolStripMenuItem
             // 
             this.rebootToBIOSToolStripMenuItem.Name = "rebootToBIOSToolStripMenuItem";
-            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(233, 26);
             this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
             this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
             // 
@@ -431,7 +431,7 @@
             this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton3.Size = new System.Drawing.Size(54, 28);
             this.toolStripButton3.Text = "About";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -441,7 +441,7 @@
             this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
             this.toolStripButton4.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton4.Size = new System.Drawing.Size(62, 28);
             this.toolStripButton4.Text = "Donate";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -451,7 +451,7 @@
             this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(44, 28);
+            this.toolStripButton5.Size = new System.Drawing.Size(37, 28);
             this.toolStripButton5.Text = "Exit";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
@@ -459,7 +459,7 @@
             // 
             this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(104, 28);
+            this.toolStripLabel3.Size = new System.Drawing.Size(87, 28);
             this.toolStripLabel3.Text = "Battery: 0 %";
             this.toolStripLabel3.Visible = false;
             // 
@@ -475,7 +475,7 @@
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(216, 28);
+            this.toolStripLabel1.Size = new System.Drawing.Size(172, 28);
             this.toolStripLabel1.Text = "Build: Public | 22.09.2024";
             // 
             // progressBar1
