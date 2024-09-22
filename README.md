@@ -24,8 +24,9 @@ Set-ExecutionPolicy RemoteSigned
 <a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
 
 <p align="center">
-<img src="https://github.com/user-attachments/assets/8ff5c9ea-792d-43fb-b473-5a7d3d1c2815" width="600">
+<img src="https://github.com/user-attachments/assets/1c34f60e-8820-4003-88cf-e1e2aab6b77f" width="600">
 </p>
+
 
 
 ```diff
