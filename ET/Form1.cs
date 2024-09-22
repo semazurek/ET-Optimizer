@@ -19,6 +19,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Globalization;
 using System.Security.Policy;
 using System.Management;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -28,6 +29,27 @@ namespace ET
 {
     public partial class Form1 : Form
     {
+        // Import the necessary functions from the Windows API
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HTCAPTION = 0x2;
+
+        // Import the necessary function from the gdi32.dll library for rounded corners
+        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+        private static extern IntPtr CreateRoundRectRgn(
+            int nLeftRect,      // x-coordinate of the upper-left corner
+            int nTopRect,       // y-coordinate of the upper-left corner
+            int nRightRect,     // x-coordinate of the lower-right corner
+            int nBottomRect,    // y-coordinate of the lower-right corner
+            int nWidthEllipse,  // width of the ellipse used for corners
+            int nHeightEllipse  // height of the ellipse used for corners
+        );
+
         public class MySR : ToolStripSystemRenderer
         {
             public MySR() { }
@@ -148,10 +170,19 @@ namespace ET
         {
 
             InitializeComponent();
+            button6.Location = new System.Drawing.Point(845, 5);
+            button6.FlatAppearance.BorderSize = 0;
+            this.MouseDown += new MouseEventHandler(Form1_MouseDown);
+            this.MouseDown += new MouseEventHandler(ToolStrip1_MouseDown);
+            this.MouseDown += new MouseEventHandler(panelmain_MouseDown);
+            this.MouseDown += new MouseEventHandler(label1_MouseDown);
+
+            this.Load += new EventHandler(Form1_Load);
+
             toolStrip1.Renderer = new MySR();
-            this.Size = new System.Drawing.Size(895, 500);
+            this.Size = new System.Drawing.Size(880, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            //this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -170,43 +201,44 @@ namespace ET
             process.Start(); process.WaitForExit();
 
             this.Text = "E.T. ver 5.4   -   "+CPUL;
+            label1.Text = "E.T. ver 5.4   -   " + CPUL;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
-            button5.Location = new System.Drawing.Point(660, 400);
+            button5.Location = new System.Drawing.Point(660, 440);
             button5.Size = new System.Drawing.Size(120, 50);
             button5.FlatAppearance.BorderSize = 0;
-            button4.Location = new System.Drawing.Point(510, 400);
+            button4.Location = new System.Drawing.Point(510, 440);
             button4.Size = new System.Drawing.Size(140, 50);
             button4.FlatAppearance.BorderSize = 0;
-            button3.Location = new System.Drawing.Point(380, 400);
+            button3.Location = new System.Drawing.Point(380, 440);
             button3.Size = new System.Drawing.Size(120, 50);
             button3.FlatAppearance.BorderSize = 0;
-            button2.Location = new System.Drawing.Point(250, 400);
+            button2.Location = new System.Drawing.Point(250, 440);
             button2.Size = new System.Drawing.Size(120, 50);
             button2.FlatAppearance.BorderSize = 0;
-            button1.Location = new System.Drawing.Point(110, 400);
+            button1.Location = new System.Drawing.Point(110, 440);
             button1.Size = new System.Drawing.Size(130, 50);
             button1.FlatAppearance.BorderSize = 0;
-            groupBox1.Location = new System.Drawing.Point(10, 30);
+            groupBox1.Location = new System.Drawing.Point(10, 70);
             groupBox1.Size = new System.Drawing.Size(570, 180);
             groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox2.Location = new System.Drawing.Point(585, 30);
+            groupBox2.Location = new System.Drawing.Point(585, 70);
             groupBox2.Size = new System.Drawing.Size(285, 180);
             groupBox2.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox3.Location = new System.Drawing.Point(10, 210);
+            groupBox3.Location = new System.Drawing.Point(10, 250);
             groupBox3.Size = new System.Drawing.Size(285, 180);
             groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox4.Location = new System.Drawing.Point(302, 210);
+            groupBox4.Location = new System.Drawing.Point(302, 250);
             groupBox4.Size = new System.Drawing.Size(278, 180);
             groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox5.Location = new System.Drawing.Point(585, 210);
+            groupBox5.Location = new System.Drawing.Point(585, 250);
             groupBox5.Size = new System.Drawing.Size(285, 180);
             groupBox5.ForeColor = System.Drawing.ColorTranslator.FromHtml(expercolor);
             toolStrip1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             toolStrip1.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
             toolStrip1.Size = new System.Drawing.Size(802, 25);
-            textBox1.Location = new System.Drawing.Point(10, 30);
+            textBox1.Location = new System.Drawing.Point(10, 70);
             textBox1.Size = new System.Drawing.Size(860,360);
 
             //Language change function
@@ -865,7 +897,67 @@ namespace ET
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Create a region with rounded corners
+            IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
 
+            // Apply the region to the form
+            //this.Region = Region.FromHrgn(regionHandle);
+        }
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void ToolStrip1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void label1_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void label1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+
+        private void panelmain_MouseDown(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
         }
 
         public void doengine()
@@ -2259,7 +2351,7 @@ namespace ET
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-
+            
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -2665,29 +2757,59 @@ namespace ET
             {
                 PowerStatus pwr = SystemInformation.PowerStatus;
                 String strBatteryStatus;
-                String BatteryStatus;
                 strBatteryStatus = pwr.BatteryLifePercent.ToString();
-                char[] MyCharCut = { '0', ',', '.', ' ' };
+                char[] MyCharCut = { ',', '.', ' ' };
                 string strBattery = strBatteryStatus.TrimStart(MyCharCut);
                 // 0,95 - 95
-
-                if (strBattery == "9") { BatteryStatus = "90"; }
-                if (strBattery == "8") { BatteryStatus = "80"; }
-                if (strBattery == "7") { BatteryStatus = "70"; }
-                if (strBattery == "6") { BatteryStatus = "60"; }
-                if (strBattery == "5") { BatteryStatus = "50"; }
-                if (strBattery == "4") { BatteryStatus = "40"; }
-                if (strBattery == "3") { BatteryStatus = "30"; }
-                if (strBattery == "2") { BatteryStatus = "20"; }
-                if (strBattery == "1") { BatteryStatus = "10"; }
-                if (strBatteryStatus == "1") { BatteryStatus = "100"; }
-                else { BatteryStatus = strBattery; }
-
-                toolStripLabel3.Text = "Battery: " + BatteryStatus + " % ";
+                if (strBattery == "1") { strBattery = "100"; }
+                toolStripLabel3.Text = "Battery: " + strBattery + " % ";
             });
             toolStripLabel2.Visible = true;
             toolStripLabel3.Visible = true;
 
+        }
+
+        private void panelmain_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void panelmain_MouseUp(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void label1_MouseMove_1(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void toolStrip1_MouseMove(object sender, MouseEventArgs e)
+        {
+            // Check if the left mouse button was pressed
+            if (e.Button == MouseButtons.Left)
+            {
+                // Release the mouse capture and send the message to start dragging
+                ReleaseCapture();
+                SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
+            }
         }
     }
 }
