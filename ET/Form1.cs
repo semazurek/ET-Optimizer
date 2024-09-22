@@ -18,6 +18,7 @@ using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 using System.Globalization;
 using System.Security.Policy;
+using System.Management;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -250,7 +251,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 12.09.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 22.09.2024";
             } 
 
             if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
@@ -296,7 +297,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 12.09.2024";
+                toolStripLabel1.Text = "Build: Public | 22.09.2024";
             }
 
             panel1.VerticalScroll.Enabled = false;
@@ -2626,6 +2627,67 @@ namespace ET
             startInfo.Arguments = "/C start https://github.com/semazurek/ET-Optimizer";
             process.StartInfo = startInfo;
             process.Start();
+        }
+
+        public static string GetUsedRAM()
+        {
+            PerformanceCounter RAMCounter;
+            RAMCounter = new PerformanceCounter();
+            RAMCounter.CategoryName = "Memory";
+            RAMCounter.CounterName = "% Committed Bytes In Use";
+            return String.Format("{0:0.00}", RAMCounter.NextValue());
+        }
+
+
+        public static string GetUsedCPU()
+        {
+            PerformanceCounter CPUCounter;
+            CPUCounter = new PerformanceCounter();
+            CPUCounter.CategoryName = "Processor";
+            CPUCounter.CounterName = "% Processor Time";
+            CPUCounter.InstanceName = "_Total";
+            CPUCounter.NextValue();
+            System.Threading.Thread.Sleep(1000);
+            return String.Format("{0:0.00}", CPUCounter.NextValue());
+        }
+
+        private async void timer1_Tick(object sender, EventArgs e)
+        {
+            await Task.Run(() =>
+            {
+                toolStripLabel1.Text = "CPU: " + GetUsedCPU() + " %";
+            });
+            await Task.Run(() =>
+            {
+                toolStripLabel2.Text = "RAM: " + GetUsedRAM() + " %";
+            });
+            await Task.Run(() =>
+            {
+                PowerStatus pwr = SystemInformation.PowerStatus;
+                String strBatteryStatus;
+                String BatteryStatus;
+                strBatteryStatus = pwr.BatteryLifePercent.ToString();
+                char[] MyCharCut = { '0', ',', '.', ' ' };
+                string strBattery = strBatteryStatus.TrimStart(MyCharCut);
+                // 0,95 - 95
+
+                if (strBatteryStatus == "1") { BatteryStatus = "100"; }
+                else { BatteryStatus = strBattery; }
+                if (strBattery == "9") { BatteryStatus = "90"; }
+                if (strBattery == "8") { BatteryStatus = "80"; }
+                if (strBattery == "7") { BatteryStatus = "70"; }
+                if (strBattery == "6") { BatteryStatus = "60"; }
+                if (strBattery == "5") { BatteryStatus = "50"; }
+                if (strBattery == "4") { BatteryStatus = "40"; }
+                if (strBattery == "3") { BatteryStatus = "30"; }
+                if (strBattery == "2") { BatteryStatus = "20"; }
+                if (strBattery == "1") { BatteryStatus = "10"; }
+                
+                toolStripLabel3.Text = "Battery: " + BatteryStatus + " % ";
+            });
+            toolStripLabel2.Visible = true;
+            toolStripLabel3.Visible = true;
+
         }
     }
 }
