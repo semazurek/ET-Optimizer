@@ -283,7 +283,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 22.09.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 27.09.2024";
             } 
 
             if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
@@ -329,7 +329,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 22.09.2024";
+                toolStripLabel1.Text = "Build: Public | 27.09.2024";
             }
 
             panel1.VerticalScroll.Enabled = false;
@@ -2751,7 +2751,11 @@ namespace ET
             });
             await Task.Run(() =>
             {
-                toolStripLabel2.Text = "RAM: " + GetUsedRAM() + " %";
+                string RAMs = GetUsedRAM();
+                float flRAM = float.Parse(RAMs);
+                
+
+                toolStripLabel2.Text = "RAM: " + (int)flRAM + " %";
             });
             await Task.Run(() =>
             {
@@ -2761,8 +2765,11 @@ namespace ET
                 char[] MyCharCut = { ',', '.', ' ' };
                 string strBattery = strBatteryStatus.TrimStart(MyCharCut);
                 // 0,95 - 95
-                if (strBattery == "1") { strBattery = "100"; }
-                toolStripLabel3.Text = "Battery: " + strBattery + " % ";
+
+                float flBattery = float.Parse(strBattery);
+                flBattery = flBattery * 100;
+                toolStripLabel3.Text = "Battery: " + flBattery + " % ";
+
             });
             toolStripLabel2.Visible = true;
             toolStripLabel3.Visible = true;
