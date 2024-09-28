@@ -20,6 +20,7 @@ using System.Globalization;
 using System.Security.Policy;
 using System.Management;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using Microsoft.Win32;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -67,6 +68,8 @@ namespace ET
         string selectioncolor2 = "#246c9d";
         string unselectionc = "#ecf0f1";
         string expercolor = "#e74c3c";
+
+        string ETVersion = "E.T. ver 5.4";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -200,8 +203,8 @@ namespace ET
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
 
-            this.Text = "E.T. ver 5.4   -   "+CPUL;
-            label1.Text = "E.T. ver 5.4   -   " + CPUL;
+            this.Text = ETVersion+"   -   " +CPUL;
+            label1.Text = ETVersion+"   -   " + CPUL;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
@@ -240,6 +243,7 @@ namespace ET
             toolStrip1.Size = new System.Drawing.Size(802, 25);
             textBox1.Location = new System.Drawing.Point(10, 70);
             textBox1.Size = new System.Drawing.Size(860,360);
+            toolStripButton5.Visible = false;
 
             //Language change function
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
@@ -251,7 +255,7 @@ namespace ET
                 groupBox2.Text = "Prywatność (17)";
                 groupBox3.Text = "Poprawki Wizualne (6)";
                 groupBox4.Text = "Inne (6)";
-                groupBox5.Text = "Tryb Eksperta (4)";
+                groupBox5.Text = "Tryb Eksperta (5)";
 
                 button1.Text = "Wydajność";
                 button2.Text = "Wizualne";
@@ -266,7 +270,8 @@ namespace ET
                 toolStripButton1.Text = "Przywracanie";
                 toolStripButton3.Text = "O mnie";
                 toolStripButton4.Text = "Wsparcie";
-                toolStripButton5.Text = "Wyjdź";
+                //toolStripButton5.Text = "Tryb Awaryjny";
+                rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
                 toolStripDropDownButton1.Text = "Dodatki";
                 diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
                 controlPanelToolStripMenuItem.Text = "Panel Sterowania";
@@ -283,7 +288,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 27.09.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 28.09.2024";
             } 
 
             if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
@@ -293,7 +298,7 @@ namespace ET
                 groupBox2.Text = "Конфиденциальность (17)";
                 groupBox3.Text = "Визуальные настройки (6)";
                 groupBox4.Text = "Другие (6)";
-                groupBox5.Text = "Экспертный режим (4)";
+                groupBox5.Text = "Экспертный режим (5)";
 
                 button1.Text = "Производительность";
                 button1.Font = new Font("Consolas", 12, FontStyle.Regular);
@@ -312,7 +317,8 @@ namespace ET
                 toolStripButton1.Text = "Восстановление";
                 toolStripButton3.Text = "О программе";
                 toolStripButton4.Text = "Пожертвовать";
-                toolStripButton5.Text = "Выход";
+                //toolStripButton5.Text = "безопасный режим";
+                rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
                 toolStripDropDownButton1.Text = "Дополнительно";
                 diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
                 controlPanelToolStripMenuItem.Text = "Панель управления";
@@ -329,7 +335,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 27.09.2024";
+                toolStripLabel1.Text = "Build: Public | 28.09.2024";
             }
 
             panel1.VerticalScroll.Enabled = false;
@@ -609,6 +615,13 @@ namespace ET
             chck66.Click += c_p;
             chck66.TabIndex = 66;
             panel5.Controls.Add(chck66);
+            CheckBox chck67 = new CheckBox();
+            chck67.Location = new System.Drawing.Point(10, 105);
+            chck67.Size = new System.Drawing.Size(260, 25);
+            chck67.Text = "Disable Windows Defender";
+            chck67.Click += c_p;
+            chck67.TabIndex = 67;
+            panel5.Controls.Add(chck67);
             CheckBox chck31 = new CheckBox();
             chck31.Location = new System.Drawing.Point(10, 05);
             chck31.Size = new System.Drawing.Size(270, 25);
@@ -892,7 +905,6 @@ namespace ET
                 doengine();
                 Console.WriteLine(args);
             }
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -902,6 +914,15 @@ namespace ET
 
             // Apply the region to the form
             //this.Region = Region.FromHrgn(regionHandle);
+
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C bcdedit /deletevalue {current} safeboot";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -969,7 +990,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            int alltodo = 0; //max 67
+            int alltodo = 0; //max 68
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -2217,6 +2238,18 @@ namespace ET
                             startInfo.Arguments = "-Command winget uninstall \"windows web experience pack\" --accept-source-agreements";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Get-AppxPackage -AllUsers | Where-Object {$_.Name -like \"*WebExperience*\"} | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Get-AppxProvisionedPackage -online | Where-Object {$_.Name -like \"*WebExperience*\"}| Remove-AppxProvisionedPackage -online –Verbose";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
                             break;
                         case "Scan for Adware (AdwCleaner)":
                             Console.WriteLine(checkBox.Text); done++;
@@ -2267,6 +2300,255 @@ namespace ET
 
                     switch (caseSwitch)
                     {
+                        case "Disable Windows Defender":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\MsSecFlt\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\SecurityHealthService\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\Sense\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\WdBoot\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\WdFilter\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\WdNisDrv\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\WdNisSvc\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\WinDefend\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg delete \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"SecurityHealth\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\SgrmAgent\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\SgrmBroker\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\webthreatdefsvc\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\webthreatdefusersvc\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C for /f %%i in ('reg query \"HKLM\\SYSTEM\\ControlSet001\\Services\" /s /k \"webthreatdefusersvc\" /f 2^>nul ^| find /i \"webthreatdefusersvc\" ') do (reg add \"%%i\" /v \"Start\" /t REG_DWORD /d \"4\" /f)\r\n";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\smartscreen.exe\" /v \"Debugger\" /t REG_SZ /d \"%%windir%%\\System32\\taskkill.exe\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Associations\" /v \"DefaultFileTypeRisk\" /t REG_DWORD /d \"6152\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\" /v \"SaveZoneInformation\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Associations\" /v \"LowRiskFileTypes\" /t REG_SZ /d \".avi;.bat;.com;.cmd;.exe;.htm;.html;.lnk;.mpg;.mpeg;.mov;.mp3;.msi;.m3u;.rar;.reg;.txt;.vbs;.wav;.zip;\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Associations\" /v \"ModRiskFileTypes\" /t REG_SZ /d \".bat;.exe;.reg;.vbs;.chm;.msi;.js;.cmd\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\" /v \"SmartScreenEnabled\" /t REG_SZ /d \"Off\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /v \"ConfigureAppInstallControlEnabled\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /v \"ConfigureAppInstallControl\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows Defender\\SmartScreen\" /v \"EnableSmartScreen\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKCU\\Software\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter\" /v \"EnabledV9\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\Software\\Policies\\Microsoft\\MicrosoftEdge\\PhishingFilter\" /v \"EnabledV9\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\System\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderApiLogger\" /v \"Start\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\System\\CurrentControlSet\\Control\\WMI\\Autologger\\DefenderAuditLogger\" /v \"Start\" /t REG_DWORD /d \"0\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C schtasks /Change /TN \"Microsoft\\Windows\\ExploitGuard\\ExploitGuard MDM policy Refresh\" /Disable";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender Cache Maintenance\" /Disable";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender Cleanup\" /Disable";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender Scheduled Scan\" /Disable";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender Verification\" /Disable";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg delete \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\StartupApproved\\Run\" /v \"SecurityHealth\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg delete \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\" /v \"SecurityHealth\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg delete \"HKCR\\*\\shellex\\ContextMenuHandlers\\EPP\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg delete \"HKCR\\Directory\\shellex\\ContextMenuHandlers\\EPP\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg delete \"HKCR\\Drive\\shellex\\ContextMenuHandlers\\EPP\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\System\\CurrentControlSet\\Services\\WdFilter\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\System\\CurrentControlSet\\Services\\WdNisDrv\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\System\\CurrentControlSet\\Services\\WdNisSvc\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\System\\CurrentControlSet\\Services\\WinDefend\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+                            break;
                         case "Disable Spectre/Meltdown":
                             Console.WriteLine(checkBox.Text); done++;
 
@@ -2302,6 +2584,12 @@ namespace ET
                             startInfo.Arguments = "-Command Get-AppxPackage -allusers *Microsoft.OneDriveSync* | Remove-AppxPackage";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command winget uninstall onedrive";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
                             break;
                         case "Disable Xbox Services":
                             Console.WriteLine(checkBox.Text); done++;
@@ -2331,7 +2619,7 @@ namespace ET
                 button5.Enabled = true;
                 textBox1.Visible = false;
                 Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-                DialogResult dialogResult = MessageBox.Show(msgerror, "E.T. ver 5.4", MessageBoxButtons.OK);
+                DialogResult dialogResult = MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK);
             }
             else
             {
@@ -2339,7 +2627,7 @@ namespace ET
                 {
                     progressBar1.Visible = false;
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-                    DialogResult dialogResult = MessageBox.Show(msgend, "E.T. ver 5.4", MessageBoxButtons.OK);
+                    DialogResult dialogResult = MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK);
                     this.Close();
                 }
             }
@@ -2356,7 +2644,7 @@ namespace ET
 
         private void toolStripButton5_Click(object sender, EventArgs e)
         {
-            this.Close();
+
         }
 
         int perf = 0;
@@ -2817,6 +3105,29 @@ namespace ET
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
+        }
+
+        private void rebootToSafeModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C bcdedit /set {current} safeboot network";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+            //Open the registry key for startup programs, create a registry key, then save your program path
+            RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
+            // Specify the name and path of your application executable, add the application to the startup
+            reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C shutdown /r /t 5";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+            this.Close();
         }
     }
 }
