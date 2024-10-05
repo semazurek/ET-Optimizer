@@ -26,7 +26,7 @@ Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetes
 
 > 💡 **Pro Tip**: Zaleca się wykonanie własnej dodatkowej kopii zapasowej.
 
-## Test wydajności
+## 📊 Test wydajności
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/198885777-a93d6aec-50ec-4a05-be55-620cc016dfa1.png" width="400">
 
@@ -34,7 +34,7 @@ Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetes
 </p>
 Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: java, winrar, office 2016, redisturable c++ itp.</br>Po uruchomieniu (2:00 czas działania)</br></br>
 
-## Co robi skrypt
+## 🛠 Co robi skrypt
 
 **Każda część skryptu ET jest opatrzona komentarzem i może być dowolnie edytowana.**
 
@@ -237,7 +237,7 @@ Przetestowano po zainstalowaniu wszystkich aktualizacji i sterowników, w tym: j
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
 </p>
 
-## Udostępnienia społęczności
+## 👏 Udostępnienia społęczności
 
 https://www.youtube.com/watch?v=vIzWJ7OjgXA
 
