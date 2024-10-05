@@ -9,7 +9,7 @@ ET Optimizer
 <a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
 </p>
 <p align="center">
-<img src="https://github.com/user-attachments/assets/1c34f60e-8820-4003-88cf-e1e2aab6b77f" width="600">
+<img src="https://github.com/user-attachments/assets/f89b7b2e-6404-4464-8dd0-35d4838b9ef8" width="600">
 </p>
 
 <p align="center">Optimize performance, improve privacy, and remove bloatware with 1 click.</p>
