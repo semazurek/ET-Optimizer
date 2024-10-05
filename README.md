@@ -1,4 +1,5 @@
-<h1 align="center"> ET Optimizer
+<h1 align="center"> <img src="https://github.com/user-attachments/assets/d50d77b0-57ec-4d23-9e0c-13541e024f02" width="48">
+ET Optimizer
 </h1>
 <p align="center">
 <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.4-blue?style=for-the-badge&"></a>
