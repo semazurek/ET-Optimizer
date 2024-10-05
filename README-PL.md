@@ -1,45 +1,29 @@
-# ET Optimizer
-
+<h1 align="center"> ET Optimizer
+</h1>
+<p align="center">
 <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/Wersja-v5.4-blue?style=for-the-badge&"></a>
-<a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
+<a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
+<a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
-
-Optymalizacja wydajności, poprawa prywatności i usuwanie bloatware'u za pomocą 1 kliknięcia.
-
-Ostatnio testowane/aktualizowane na:
-<ul>
-<li>Windows 10 23H2</li>
-<li>Windows 11 24H2</li>
-<li>Windows 8.1 Build 9600 (częściowe wsparcie)</li>
-<li>Windows 7 (nie zalecane)</li>
-</ul> 
-</br>
-
-<a href="https://github.com/semazurek/ET-Optimizer/releases" target="_blank">Pobierz</a>
-</br></br>Komenda przed uruchomieniem .ps1:
-```PowerShell
-Set-ExecutionPolicy RemoteSigned
-```
-
-<a href="https://github.com/semazurek/ET-All-in-One"><img src="https://user-images.githubusercontent.com/85984736/160146091-bb329e65-3781-4f03-b72d-b4cd096be201.png" width="50px" style="border: 1px solid black"></a>
-
+</p>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/85ec4504-fbf1-4bba-b066-d9bca415c996" width="600">
 </p>
 
+<p align="center">Optymalizacja wydajności, poprawa prywatności i usuwanie bloatware'u za pomocą 1 kliknięcia.</p>
+ 
 
 
 
 
-```diff
 
-# Zaleca się wykonanie własnej dodatkowej kopii zapasowej. #
-# Niektóre programy antywirusowe mogą fałszywie wykrywać to jako zagrożenie. #
-# Zalecane jest wyłączenie antywirusa w trakcie działania. #
 
-```
+
+
 Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
+
+> 💡 **Pro Tip**: Zaleca się wykonanie własnej dodatkowej kopii zapasowej.
 
 ## Test wydajności
 <p align="center">
