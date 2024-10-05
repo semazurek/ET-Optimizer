@@ -24,7 +24,7 @@ Script developed from many sources found on the Internet, tested and updated for
 
 > 💡 **Pro Tip**: It's recommended to make a own extra backup.
 
-## Benchmark
+## 📊 Benchmark
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/198885777-a93d6aec-50ec-4a05-be55-620cc016dfa1.png" width="400">
 
@@ -32,7 +32,7 @@ Script developed from many sources found on the Internet, tested and updated for
 </p>
 Tested after installing all updates & drivers, including: Java, WinRAR, Office 2016, Visual C++ Redistributable, etc.</br>After startup (2:00 up time).</br></br>
 
-## What it does 
+## 🛠 What it does 
 
 **Each part of the ET Script has a comment and can be edited freely.**
 
@@ -235,7 +235,7 @@ Tested after installing all updates & drivers, including: Java, WinRAR, Office 2
   <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
 </p>
 
-## Community Shares
+## 👏 Community Shares
 
 https://www.youtube.com/watch?v=vIzWJ7OjgXA
 
