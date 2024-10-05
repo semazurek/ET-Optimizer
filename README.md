@@ -1,42 +1,27 @@
-# ET Optimizer
-
+<h1 align="center"> ET Optimizer
+</h1>
+<p align="center">
 <a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v5.4-blue?style=for-the-badge&"></a>
-<a href="#"><img src="https://img.shields.io/badge/batch-4D4D4D?style=for-the-badge&logo=windows%20terminal&logoColor=white"></a>
+<a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
+<a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
-
-Optimize performance, improve privacy, and remove bloatware with 1 click.
-
-Last tested/updated on:
-<ul>
-<li>Windows 10 23H2</li>
-<li>Windows 11 24H2</li>
-<li>Windows 8.1 Build 9600 (partial support)</li>
-<li>Windows 7 (not recommended)</li>
-</ul> 
-</br>
-
-<a href="https://github.com/semazurek/ET-Optimizer/releases" target="_blank">Download</a>
-</br></br>Command before running .ps1:
-```PowerShell
-Set-ExecutionPolicy RemoteSigned
-```
-<a href="https://github.com/semazurek/ET-All-in-One/blob/master/README-PL.md"><img src="https://user-images.githubusercontent.com/85984736/160295447-6638c9d9-d553-4ea3-a192-4e5ef63f8961.png" width="50px" style="border: 1px solid black"></a>
-
+</p>
 <p align="center">
 <img src="https://github.com/user-attachments/assets/1c34f60e-8820-4003-88cf-e1e2aab6b77f" width="600">
 </p>
 
+<p align="center">Optimize performance, improve privacy, and remove bloatware with 1 click.</p>
 
 
-```diff
 
-# It's recommended to make a own extra backup. #
-# Some antiviruses may falsely detecting it as a threat. #
-# It is recommended to disable the antivirus while it is running. #
 
-```
+
+
+
 Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
+
+> 💡 **Pro Tip**: It's recommended to make a own extra backup.
 
 ## Benchmark
 <p align="center">
