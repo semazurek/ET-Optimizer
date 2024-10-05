@@ -69,7 +69,7 @@ namespace ET
         string unselectionc = "#ecf0f1";
         string expercolor = "#e74c3c";
 
-        string ETVersion = "E.T. ver 5.4";
+        string ETVersion = "E.T. ver 5.4.1";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -288,7 +288,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 28.09.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 05.10.2024";
             } 
 
             if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
@@ -335,7 +335,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 28.09.2024";
+                toolStripLabel1.Text = "Build: Public | 05.10.2024";
             }
 
             panel1.VerticalScroll.Enabled = false;

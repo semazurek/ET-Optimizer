@@ -63,8 +63,10 @@
             this.updateApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsLicenseKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
@@ -77,8 +79,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -251,7 +251,7 @@
             this.groupBox5.Size = new System.Drawing.Size(200, 100);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Expert Mode (4)";
+            this.groupBox5.Text = "Expert Mode (5)";
             // 
             // panel5
             // 
@@ -439,6 +439,13 @@
             this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
             this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
             // 
+            // rebootToSafeModeToolStripMenuItem
+            // 
+            this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
+            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
+            this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
+            this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
+            // 
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -458,6 +465,16 @@
             this.toolStripButton4.Size = new System.Drawing.Size(60, 28);
             this.toolStripButton4.Text = "Donate";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(44, 28);
+            this.toolStripButton5.Text = "Exit";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
             // toolStripLabel3
             // 
@@ -480,7 +497,7 @@
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
             this.toolStripLabel1.Size = new System.Drawing.Size(216, 28);
-            this.toolStripLabel1.Text = "Build: Public | 28.09.2024";
+            this.toolStripLabel1.Text = "Build: Public | 05.10.2024";
             // 
             // progressBar1
             // 
@@ -530,13 +547,13 @@
             // 
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
             this.button6.Location = new System.Drawing.Point(758, 5);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(30, 30);
             this.button6.TabIndex = 10;
-            this.button6.Text = "X";
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -566,9 +583,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(47, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 25);
+            this.label1.Size = new System.Drawing.Size(110, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 5.4";
+            this.label1.Text = "E.T. ver 5.4.1";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -580,23 +597,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(44, 28);
-            this.toolStripButton5.Text = "Exit";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
-            // 
-            // rebootToSafeModeToolStripMenuItem
-            // 
-            this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
-            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(242, 26);
-            this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
-            this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
             // 
             // Form1
             // 
