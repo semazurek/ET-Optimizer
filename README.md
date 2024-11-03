@@ -27,6 +27,7 @@ Script developed from many sources found on the Internet, tested and updated for
 <a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Download-0078D6?style=for-the-badge&logo=windows&logoColor=white"></a>
 </p>
 ## 📊 Benchmark
+
 <p align="center">
 <img src="https://user-images.githubusercontent.com/85984736/198885777-a93d6aec-50ec-4a05-be55-620cc016dfa1.png" width="400">
 
@@ -36,7 +37,6 @@ Tested after installing all updates & drivers, including: Java, WinRAR, Office 2
 
 ## 🛠 What it does 
 
-**Each part of the ET Script has a comment and can be edited freely.**
 
 </br>
  <table style="width: 100%">

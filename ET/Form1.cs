@@ -288,7 +288,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 05.10.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 03.11.2024";
             } 
 
             if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
@@ -335,7 +335,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 05.10.2024";
+                toolStripLabel1.Text = "Build: Public | 03.11.2024";
             }
 
             panel1.VerticalScroll.Enabled = false;
@@ -1403,6 +1403,12 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C net start wsearch";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Get-Volume | Optimize-Volume -defrag -ReTrim";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -3004,7 +3010,7 @@ namespace ET
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C start https://github.com/semazurek/ET-Optimizer";
+            startInfo.Arguments = "/C start https://semazurek.github.io";
             process.StartInfo = startInfo;
             process.Start();
         }
