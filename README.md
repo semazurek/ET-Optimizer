@@ -26,6 +26,7 @@ Script developed from many sources found on the Internet, tested and updated for
 <p align="center">
 <a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Download-0078D6?style=for-the-badge&logo=windows&logoColor=white"></a>
 </p>
+
 ## 📊 Benchmark
 
 <p align="center">
