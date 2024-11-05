@@ -496,8 +496,8 @@
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(216, 28);
-            this.toolStripLabel1.Text = "Build: Public | 03.11.2024";
+            this.toolStripLabel1.Size = new System.Drawing.Size(136, 28);
+            this.toolStripLabel1.Text = "Build: Public | ";
             // 
             // progressBar1
             // 
