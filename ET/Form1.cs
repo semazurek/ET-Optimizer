@@ -870,7 +870,7 @@ namespace ET
             chck63.Text = "Scan for Adware (AdwCleaner)";
             chck68.Text = "Clean WinSxS Folder";
 
-            toolStripLabel1.Text = "Build: Public | 05.11.2024";
+            toolStripLabel1.Text = "Build: Public | 06.12.2024";
 
             if (cinfo.Name == "pl-PL")
             {
@@ -912,7 +912,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 05.11.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 06.12.2024";
 
                 chck1.Text = "Wyłącz WebWidget Edge";
                 chck2.Text = "Opcja zasilania: Max wydajność";
@@ -1029,7 +1029,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 05.11.2024";
+                toolStripLabel1.Text = "Build: Public | 06.12.2024";
             }
 
 
@@ -1044,11 +1044,35 @@ namespace ET
             groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
             button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            if (args.Equals("-auto") || args.Equals("auto") || args.Equals("/auto") || args.Equals("*auto"))
-            {
-                doengine();
-                Console.WriteLine(args);
-            }
+
+                if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
+                {
+                    button5_Click(null, EventArgs.Empty);//RUN Start Button (doengine() func the same)
+                    //Auto run
+                }
+                else
+                {
+                    if (args.Contains("/all") || args.Contains("-all") || args.Contains("all"))
+                    {
+                        button4_Click(null, EventArgs.Empty);//Select All
+                        button5_Click(null, EventArgs.Empty);//RUN
+                    }
+                    else
+                    {
+                        if (args.Contains("/expert") || args.Contains("-expert") || args.Contains("expert"))
+                        {
+                            chck61.Checked = true;
+                            chck62.Checked = true;
+                            chck60.Checked = true;
+                            chck66.Checked = true;
+                            chck67.Checked = true;
+                            button4_Click(null, EventArgs.Empty);//Select All
+                            button5_Click(null, EventArgs.Empty);//RUN
+
+                        }
+
+                    }
+                }
         }
 
         private void Form1_Load(object sender, EventArgs e)
