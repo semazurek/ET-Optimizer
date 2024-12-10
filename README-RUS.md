@@ -25,7 +25,7 @@ ET Optimizer
 
 > 💡 **Совет**: Рекомендуется создать дополнительную резервную копию.
 <p align="center">
-<a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Скачать-0078D6?style=for-the-badge&logo=windows&logoColor=white"></a>
+<a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Скачать-0078D6?style=for-the-badge&logo=windows&logoColor=white" width="120"></a>
 </p>
 
 ## 📊 Тест производительности
