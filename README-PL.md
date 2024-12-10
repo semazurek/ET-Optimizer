@@ -27,7 +27,7 @@ Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetes
 
 > 💡 **Pro Tip**: Zaleca się wykonanie własnej dodatkowej kopii zapasowej.
 <p align="center">
-<a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Pobierz-0078D6?style=for-the-badge&logo=windows&logoColor=white"></a>
+<a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Pobierz-0078D6?style=for-the-badge&logo=windows&logoColor=white"  width="120"></a>
 </p>
 
 ## 📊 Test wydajności
