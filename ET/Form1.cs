@@ -31,6 +31,21 @@ namespace ET
 {
     public partial class Form1 : Form
     {
+
+        [DllImport("KERNEL32.DLL", EntryPoint =
+   "SetProcessWorkingSetSize", SetLastError = true,
+   CallingConvention = CallingConvention.StdCall)]
+        internal static extern bool SetProcessWorkingSetSize32Bit
+   (IntPtr pProcess, int dwMinimumWorkingSetSize,
+   int dwMaximumWorkingSetSize);
+
+        [DllImport("KERNEL32.DLL", EntryPoint =
+           "SetProcessWorkingSetSize", SetLastError = true,
+           CallingConvention = CallingConvention.StdCall)]
+        internal static extern bool SetProcessWorkingSetSize64Bit
+           (IntPtr pProcess, long dwMinimumWorkingSetSize,
+           long dwMaximumWorkingSetSize);
+
         // Import the necessary functions from the Windows API
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
@@ -51,6 +66,26 @@ namespace ET
             int nWidthEllipse,  // width of the ellipse used for corners
             int nHeightEllipse  // height of the ellipse used for corners
         );
+
+        public void FlushMem()
+      {
+         GC.Collect();
+
+         GC.WaitForPendingFinalizers();
+
+         if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+         {
+
+            SetProcessWorkingSetSize32Bit(System.Diagnostics
+               .Process.GetCurrentProcess().Handle, -1, -1);
+
+         }
+
+         // if (Environment.Is64BitProcess)//
+         //    Console.WriteLine("64-bit process");//
+         // else//
+         //    Console.WriteLine("32-bit process");//
+      }
 
         public class MySR : ToolStripSystemRenderer
         {
@@ -870,7 +905,7 @@ namespace ET
             chck63.Text = "Scan for Adware (AdwCleaner)";
             chck68.Text = "Clean WinSxS Folder";
 
-            toolStripLabel1.Text = "Build: Public | 06.12.2024";
+            toolStripLabel1.Text = "Build: Public | 10.12.2024";
 
             if (cinfo.Name == "pl-PL")
             {
@@ -912,7 +947,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 06.12.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | 10.12.2024";
 
                 chck1.Text = "Wyłącz WebWidget Edge";
                 chck2.Text = "Opcja zasilania: Max wydajność";
@@ -1029,7 +1064,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 06.12.2024";
+                toolStripLabel1.Text = "Build: Public | 10.12.2024";
             }
 
 
@@ -1151,6 +1186,7 @@ namespace ET
 
         public void doengine()
         {
+            FlushMem();
             Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
             button5.Enabled = false;
             textBox1.Visible = true;
@@ -2822,6 +2858,7 @@ namespace ET
                     this.Close();
                 }
             }
+            FlushMem();
         }
         private void button5_Click(object sender, EventArgs e)
         {
