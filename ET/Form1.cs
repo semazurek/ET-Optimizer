@@ -105,7 +105,11 @@ namespace ET
         string unselectionc = "#ecf0f1";
         string expercolor = "#e74c3c";
 
+        public bool isswitch = false;
+
         string ETVersion = "E.T. ver 5.4.1";
+        string ETBuild = "11.12.2024";
+        int runcount = 0;
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -230,7 +234,6 @@ namespace ET
             startInfo.Arguments = "-Command $ProcessorType=Get-WMIObject win32_Processor | select Name | findstr /c:AMD /c:Intel; $ProcessorType = $ProcessorType.Replace('(R)','').Replace('(TM)','') > CPUL.txt";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
-            
 
             string CPUL = File.ReadAllText("CPUL.txt");
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -905,7 +908,7 @@ namespace ET
             chck63.Text = "Scan for Adware (AdwCleaner)";
             chck68.Text = "Clean WinSxS Folder";
 
-            toolStripLabel1.Text = "Build: Public | 10.12.2024";
+            toolStripLabel1.Text = "Build: Public | "+ETBuild;
 
             if (cinfo.Name == "pl-PL")
             {
@@ -947,7 +950,7 @@ namespace ET
                 msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                 msgerror = "Nie wybrano żadnej opcji.";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | 10.12.2024";
+                toolStripLabel1.Text = "Wersja: Publiczna | " + ETBuild;
 
                 chck1.Text = "Wyłącz WebWidget Edge";
                 chck2.Text = "Opcja zasilania: Max wydajność";
@@ -1064,7 +1067,7 @@ namespace ET
                 msgend = "Завершено. Рекомендуется перезапуск.";
                 msgerror = "Ни один вариант не был выбран.";
 
-                toolStripLabel1.Text = "Build: Public | 10.12.2024";
+                toolStripLabel1.Text = "Build: Public | "+ETBuild;
             }
 
 
@@ -1080,8 +1083,10 @@ namespace ET
             button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
             button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
 
+
                 if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
                 {
+                    isswitch = true;
                     button5_Click(null, EventArgs.Empty);//RUN Start Button (doengine() func the same)
                     //Auto run
                 }
@@ -1089,13 +1094,16 @@ namespace ET
                 {
                     if (args.Contains("/all") || args.Contains("-all") || args.Contains("all"))
                     {
+                        isswitch = true;
                         button4_Click(null, EventArgs.Empty);//Select All
                         button5_Click(null, EventArgs.Empty);//RUN
+                        
                     }
                     else
                     {
                         if (args.Contains("/expert") || args.Contains("-expert") || args.Contains("expert"))
                         {
+                            isswitch = true;
                             chck61.Checked = true;
                             chck62.Checked = true;
                             chck60.Checked = true;
@@ -1187,12 +1195,26 @@ namespace ET
         public void doengine()
         {
             FlushMem();
-            Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
-            button5.Enabled = false;
-            textBox1.Visible = true;
+
+            Cursor.Current = Cursors.WaitCursor;
             //DO START ENGINE
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            if (runcount == 0)
+            {
+                //Auto BackUP - Creating Restore Point
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "powershell.exe";
+                startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
+                process.StartInfo = startInfo;
+                process.Start(); process.WaitForExit();
+            }
+            Cursor.Current = Cursors.Default;
+            runcount += 1;
+
+            Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
+            button5.Enabled = false;
+            textBox1.Visible = true;
 
             int alltodo = 0; //max 68
             int done = 0;
@@ -2855,7 +2877,15 @@ namespace ET
                     progressBar1.Visible = false;
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                     DialogResult dialogResult = MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK);
-                    this.Close();
+                    if (isswitch == true)
+                    {
+                        this.Close();
+                    }
+                    c_p(null, null);
+                    textBox1.Text = "";
+                    button5.Enabled = true;
+                    textBox1.Visible = false;
+                    this.TopMost = false;
                 }
             }
             FlushMem();
