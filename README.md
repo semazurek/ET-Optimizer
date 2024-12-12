@@ -23,7 +23,7 @@ ET Optimizer
 
 Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
 
-> 💡 **Pro Tip**: It's recommended to make a own extra backup.
+> 💡 **Pro Tip**: It's recommended to make a own extra backup. I am not responsible for any damage caused.
 <p align="center">
 <a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Download-0078D6?style=for-the-badge&logo=windows&logoColor=white" width="130"></a>
 </p>
