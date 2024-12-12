@@ -23,6 +23,12 @@ ET Optimizer
 
 Скрипт разработан на основе множества интернет-источников, протестирован и обновлен для разных версий системы. </br>Весь скрипт находится в одном файле и использует: командную строку, PowerShell, настройки энергопотребления, загрузочные параметры, изменения в реестре, конфигурацию сетевых интерфейсов и встроенные инструменты Windows.
 
+<p align="center">
+<a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-PL.md"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
+<a href="https://github.com/semazurek/ET-Optimizer"><img src="https://github.com/user-attachments/assets/177f0eb1-f371-4cdd-bbce-9f451e47431d"width="48"></a>
+<a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-RUS.md"><img src="https://github.com/user-attachments/assets/c0d4749d-4647-4506-a78c-7a092dd5836c"width="48"></a>
+</p>
+
 > 💡 **Совет**: Рекомендуется создать дополнительную резервную копию. Я не несу ответственности за любой причиненный ущерб.
 <p align="center">
 <a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Скачать-0078D6?style=for-the-badge&logo=windows&logoColor=white" width="120"></a>
