@@ -13,6 +13,7 @@ ET Optimizer
 <img src="https://github.com/user-attachments/assets/f89b7b2e-6404-4464-8dd0-35d4838b9ef8" width="600">
 </p>
 
+
 <p align="center">Optimize performance, improve privacy, and remove bloatware with 1 click.</p>
 
 
@@ -22,6 +23,12 @@ ET Optimizer
 
 
 Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
+
+<p align="center">
+<a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-PL.md"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
+<a href="https://github.com/semazurek/ET-Optimizer"><img src="https://github.com/user-attachments/assets/177f0eb1-f371-4cdd-bbce-9f451e47431d"width="48"></a>
+<a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-RUS.md"><img src="https://github.com/user-attachments/assets/c0d4749d-4647-4506-a78c-7a092dd5836c"width="48"></a>
+</p>
 
 > 💡 **Pro Tip**: It's recommended to make a own extra backup. I am not responsible for any damage caused.
 <p align="center">
