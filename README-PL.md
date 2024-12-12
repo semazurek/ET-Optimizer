@@ -25,7 +25,7 @@ ET Optimizer
 
 Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
 
-> 💡 **Pro Tip**: Zaleca się wykonanie własnej dodatkowej kopii zapasowej.
+> 💡 **Pro Tip**: Zaleca się wykonanie własnej dodatkowej kopii zapasowej. Nie biorę odpowiedzialności za wyrządzone szkody.
 <p align="center">
 <a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Pobierz-0078D6?style=for-the-badge&logo=windows&logoColor=white"  width="120"></a>
 </p>
