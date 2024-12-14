@@ -108,7 +108,7 @@ namespace ET
         public bool isswitch = false;
 
         string ETVersion = "E.T. ver 5.4.1";
-        string ETBuild = "11.12.2024";
+        string ETBuild = "14.12.2024";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -1996,6 +1996,12 @@ namespace ET
                             process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Get-EventLog -LogName * | % { Clear-EventLog -LogName $_.Log }";
+                            process.StartInfo = startInfo;
+                            process.Start();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C del /s /f /q \"%userprofile%\\Recent\\*.*\"";
                             process.StartInfo = startInfo;
@@ -2611,6 +2617,48 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\webthreatdefusersvc\" /v \"Start\" /t REG_DWORD /d \"4\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v \"DisableAntiSpyware\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v \"DisableAntiVirus\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v \"DisableRealtimeMonitoring\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v \"DisableSpecialRunningModes\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\" /v \"DisableRoutinelyTakingAction\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Signature Updates\" /v \"ForceUpdateFromMU\" /t REG_DWORD /d \"1\" /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\" /v \"DisableBlockAtFirstSeen\" /t REG_DWORD /d \"1\" /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
