@@ -25,6 +25,7 @@ using System.Media;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
+// https://buymeacoffee.com/semazurek
 // https://www.paypal.com/paypalme/rikey
 
 namespace ET
@@ -107,7 +108,7 @@ namespace ET
 
         public bool isswitch = false;
 
-        string ETVersion = "E.T. ver 5.4.1";
+        string ETVersion = "E.T. ver 5.5";
         string ETBuild = "17.12.2024";
         int runcount = 0;
 
@@ -830,14 +831,35 @@ namespace ET
             CheckBox chck68 = new CheckBox();
             chck68.Location = new System.Drawing.Point(10, 105);
             chck68.Size = new System.Drawing.Size(255, 25);
-            chck68.Text = "Clean WinSxS Folder";
             chck68.Tag = "Clean WinSxS Folder";
             chck68.Click += c_p;
             chck68.TabIndex = 68;
             panel4.Controls.Add(chck68);
+            CheckBox chck69 = new CheckBox();
+            chck69.Location = new System.Drawing.Point(10, 430);
+            chck69.Size = new System.Drawing.Size(250, 25);
+            chck69.Tag = "Disable Copilot";
+            chck69.Checked = true;
+            chck69.Click += c_p;
+            chck69.TabIndex = 69;
+            panel2.Controls.Add(chck69);
+            CheckBox chck70 = new CheckBox();
+            chck70.Location = new System.Drawing.Point(10, 155);
+            chck70.Size = new System.Drawing.Size(260, 25);
+            chck70.Tag = "Remove Learn about this photo";
+            chck70.Checked = true;
+            chck70.Click += c_p;
+            chck70.TabIndex = 70;
+            panel3.Controls.Add(chck70);
 
             //Language change function
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
+
+            groupBox1.Text = "Performance Tweaks (34)";
+            groupBox2.Text = "Privacy (18)";
+            groupBox3.Text = "Visual Tweaks (7)";
+            groupBox4.Text = "Other (6)";
+            groupBox5.Text = "Expert Mode (5)";
 
             chck1.Text = "Disable Edge WebWidget";
             chck2.Text = "Power Option to Ultimate Perform.";
@@ -907,6 +929,8 @@ namespace ET
             chck62.Text = "Enable Fast/Secure DNS (1.1.1.1)";
             chck63.Text = "Scan for Adware (AdwCleaner)";
             chck68.Text = "Clean WinSxS Folder";
+            chck69.Text = "Disable Copilot";
+            chck70.Text = "Remove Learn about this photo";
 
             toolStripLabel1.Text = "Build: Public | "+ETBuild;
 
@@ -914,8 +938,8 @@ namespace ET
             {
                 Console.WriteLine("Wykryto Polski");
                 groupBox1.Text = "Poprawki Wydajności (34)";
-                groupBox2.Text = "Prywatność (17)";
-                groupBox3.Text = "Poprawki Wizualne (6)";
+                groupBox2.Text = "Prywatność (18)";
+                groupBox3.Text = "Poprawki Wizualne (7)";
                 groupBox4.Text = "Inne (6)";
                 groupBox5.Text = "Tryb Eksperta (5)";
 
@@ -1020,6 +1044,8 @@ namespace ET
                 chck62.Text = "Włącz szybki/bezpieczny DNS";
                 chck63.Text = "Skanowanie AdwCleaner";
                 chck68.Text = "Wyczyść folder WinSxS";
+                chck69.Text = "Wyłącz Copilot";
+                chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
 
             }
 
@@ -1027,8 +1053,8 @@ namespace ET
             {
                 Console.WriteLine("Russian detected");
                 groupBox1.Text = "Настройки производительности (34)";
-                groupBox2.Text = "Конфиденциальность (17)";
-                groupBox3.Text = "Визуальные настройки (6)";
+                groupBox2.Text = "Конфиденциальность (18)";
+                groupBox3.Text = "Визуальные настройки (7)";
                 groupBox4.Text = "Другие (6)";
                 groupBox5.Text = "Экспертный режим (5)";
 
@@ -1216,7 +1242,7 @@ namespace ET
             button5.Enabled = false;
             textBox1.Visible = true;
 
-            int alltodo = 0; //max 68
+            int alltodo = 0; //max 70
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -1258,7 +1284,7 @@ namespace ET
             progressBar1.Maximum = alltodo;
             progressBar1.Value = done;
 
-            //Perforamnce Panel
+            //Performance Panel
             foreach (CheckBox checkBox in panel1.Controls)
             {
 
@@ -1868,6 +1894,39 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
+                        case "Disable Copilot":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows\\WindowsCopilot\" /v \"TurnOffWindowsCopilot\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows\\WindowsCopilot\" /v \"TurnOffWindowsCopilot\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Edge\" /v \"HubsSidebarEnabled\" /t REG_DWORD /d 0 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer\" /v \"DisableSearchBoxSuggestions\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer\" /v \"DisableSearchBoxSuggestions\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+                            break;
 
                     }
                 }
@@ -1939,6 +1998,15 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"LaunchTo\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+                            break;
+                        case "Remove Learn about this photo":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\HideDesktopIcons\\NewStartPanel\" / v \"{2cc5ca98-6485-489a-920e-b3e88a6ccce3}\" /t REG_DWORD /d 1 /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;

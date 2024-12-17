@@ -211,7 +211,7 @@
             this.groupBox3.Size = new System.Drawing.Size(273, 100);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Visual Tweaks (6)";
+            this.groupBox3.Text = "Visual Tweaks (7)";
             // 
             // panel3
             // 
@@ -246,7 +246,7 @@
             // 
             this.groupBox5.Controls.Add(this.panel5);
             this.groupBox5.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.groupBox5.Location = new System.Drawing.Point(588, 265);
+            this.groupBox5.Location = new System.Drawing.Point(587, 265);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(200, 100);
             this.groupBox5.TabIndex = 0;
@@ -583,9 +583,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(47, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 25);
+            this.label1.Size = new System.Drawing.Size(96, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 5.4.1";
+            this.label1.Text = "E.T. ver 5.5";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
