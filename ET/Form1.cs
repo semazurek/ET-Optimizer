@@ -109,7 +109,7 @@ namespace ET
         public bool isswitch = false;
 
         string ETVersion = "E.T. ver 5.5";
-        string ETBuild = "17.12.2024";
+        string ETBuild = "18.12.2024";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -146,7 +146,7 @@ namespace ET
 
                 if (checkBox.Checked == true) { cy++; }
             }
-            if (cy == 17)
+            if (cy == 18)
             {
                 groupBox2.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button3.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -165,7 +165,7 @@ namespace ET
 
                 if (checkBox.Checked == true) { cu++; }
             }
-            if (cu == 6)
+            if (cu == 7)
             {
                 groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button2.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
