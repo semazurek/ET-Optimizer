@@ -194,7 +194,7 @@ namespace ET
             }
             int allc = ci + cu + cy + ct;
             
-            if (allc == 63) 
+            if (allc == 65) 
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
