@@ -108,8 +108,8 @@ namespace ET
 
         public bool isswitch = false;
 
-        string ETVersion = "E.T. ver 5.5";
-        string ETBuild = "18.12.2024";
+        string ETVersion = "E.T. ver 5.5.1";
+        string ETBuild = "20.12.2024";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -838,7 +838,7 @@ namespace ET
             CheckBox chck69 = new CheckBox();
             chck69.Location = new System.Drawing.Point(10, 430);
             chck69.Size = new System.Drawing.Size(250, 25);
-            chck69.Tag = "Disable Copilot";
+            chck69.Tag = "Remove Copilot";
             chck69.Checked = true;
             chck69.Click += c_p;
             chck69.TabIndex = 69;
@@ -929,7 +929,7 @@ namespace ET
             chck62.Text = "Enable Fast/Secure DNS (1.1.1.1)";
             chck63.Text = "Scan for Adware (AdwCleaner)";
             chck68.Text = "Clean WinSxS Folder";
-            chck69.Text = "Disable Copilot";
+            chck69.Text = "Remove Copilot";
             chck70.Text = "Remove Learn about this photo";
 
             toolStripLabel1.Text = "Build: Public | "+ETBuild;
@@ -1044,7 +1044,7 @@ namespace ET
                 chck62.Text = "Włącz szybki/bezpieczny DNS";
                 chck63.Text = "Skanowanie AdwCleaner";
                 chck68.Text = "Wyczyść folder WinSxS";
-                chck69.Text = "Wyłącz Copilot";
+                chck69.Text = "Usuń Copilot";
                 chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
 
             }
@@ -1894,12 +1894,18 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
-                        case "Disable Copilot":
+                        case "Remove Copilot":
                             Console.WriteLine(checkBox.Text); done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows\\WindowsCopilot\" /v \"TurnOffWindowsCopilot\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\" /v \"ShowCopilotButton\" /t REG_DWORD /d 0 /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
@@ -1924,6 +1930,24 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Policies\\Microsoft\\Windows\\Explorer\" /v \"DisableSearchBoxSuggestions\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_CURRENT_USER\\Software\\Policies\\Microsoft\\Windows\\WindowsAI\" /v \"DisableAIDataAnalysis\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\WindowsAI\" /v \"DisableAIDataAnalysis\" /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Get-AppxPackage -AllUsers | Where-Object {$_.Name -Like '*Microsoft.Copilot*'} | Remove-AppxPackage -AllUsers -ErrorAction Continue";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -2555,6 +2579,12 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command Get-AppxProvisionedPackage -online | Where-Object {$_.Name -like \"*WebExperience*\"}| Remove-AppxProvisionedPackage -online –Verbose";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command winget uninstall \"windows web experience pack\"";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
