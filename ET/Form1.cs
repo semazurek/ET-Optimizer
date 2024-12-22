@@ -109,7 +109,7 @@ namespace ET
         public bool isswitch = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "20.12.2024";
+        string ETBuild = "22.12.2024";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -958,6 +958,8 @@ namespace ET
                 toolStripButton4.Text = "Wsparcie";
                 //toolStripButton5.Text = "Tryb Awaryjny";
                 rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
+                restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
+                downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
                 toolStripDropDownButton1.Text = "Dodatki";
                 diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
                 controlPanelToolStripMenuItem.Text = "Panel Sterowania";
@@ -1077,6 +1079,8 @@ namespace ET
                 toolStripButton4.Text = "Пожертвовать";
                 //toolStripButton5.Text = "безопасный режим";
                 rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
+                restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
+                downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
                 toolStripDropDownButton1.Text = "Дополнительно";
                 diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
                 controlPanelToolStripMenuItem.Text = "Панель управления";
@@ -1399,6 +1403,18 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications\" /v GlobalUserDisabled  /t REG_DWORD /d 1 /f && REG ADD \"HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\CurrentVersion\\Search\" /v BackgroundAppGlobalToggle /t REG_DWORD /d 0 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\" /v \"BackgroundServicesPriority\" /t REG_DWORD /d 10 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C REG ADD \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\" /v \"SystemResponsiveness\" /t REG_DWORD /d 10 /f";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -3532,6 +3548,138 @@ namespace ET
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
             this.Close();
+        }
+
+        private void restartExplorerexeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C taskkill /f /im explorer.exe";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C start explorer.exe";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+        }
+
+        private void downloadSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mSIAfterburnerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Guru3D.Afterburner  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void vLCMediaPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=VideoLAN.VLC  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void microsoftVisualCRedistributableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=abbodi1406.vcredist  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void notepadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Notepad++.Notepad++  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void javaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Oracle.JavaRuntimeEnvironment  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void zipToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=7zip.7zip  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void mozillaFirefoxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void braveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Brave.Brave  -e";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void googleChromeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Google.Chrome  -e";
+            process.StartInfo = startInfo;
+            process.Start();
         }
     }
 }
