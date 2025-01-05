@@ -28,6 +28,7 @@ Script developed from many sources found on the Internet, tested and updated for
 <a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-PL.md"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
 <a href="https://github.com/semazurek/ET-Optimizer"><img src="https://github.com/user-attachments/assets/177f0eb1-f371-4cdd-bbce-9f451e47431d"width="48"></a>
 <a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-RUS.md"><img src="https://github.com/user-attachments/assets/c0d4749d-4647-4506-a78c-7a092dd5836c"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/ffbb6086-b0da-4a98-a126-02ca92c31758"width="48"></a>
 </p>
 
 > 💡 **Pro Tip**: It's recommended to make a own extra backup. I am not responsible for any damage caused.
