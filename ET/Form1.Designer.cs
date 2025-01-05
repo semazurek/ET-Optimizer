@@ -46,6 +46,18 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panelmain = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button6 = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -61,25 +73,6 @@
             this.eventViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetNetworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.windowsLicenseKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panelmain = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.googleChromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.braveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -90,6 +83,14 @@
             this.microsoftVisualCRedistributableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vLCMediaPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSIAfterburnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.windowsLicenseKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.button7 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -305,6 +306,129 @@
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             this.toolStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStrip1_MouseMove);
             // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(104, 28);
+            this.toolStripLabel3.Text = "Battery: 0 %";
+            this.toolStripLabel3.Visible = false;
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(72, 28);
+            this.toolStripLabel2.Text = "RAM: 0 %";
+            this.toolStripLabel2.Visible = false;
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(136, 28);
+            this.toolStripLabel1.Text = "Build: Public | ";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.progressBar1.Location = new System.Drawing.Point(110, 440);
+            this.progressBar1.Maximum = 67;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(670, 50);
+            this.progressBar1.TabIndex = 7;
+            this.progressBar1.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.textBox1.Location = new System.Drawing.Point(727, 435);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(82, 50);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 3500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // panelmain
+            // 
+            this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.panelmain.Controls.Add(this.button7);
+            this.panelmain.Controls.Add(this.button6);
+            this.panelmain.Controls.Add(this.pictureBox3);
+            this.panelmain.Controls.Add(this.pictureBox2);
+            this.panelmain.Controls.Add(this.label1);
+            this.panelmain.Controls.Add(this.pictureBox1);
+            this.panelmain.Location = new System.Drawing.Point(0, 0);
+            this.panelmain.Name = "panelmain";
+            this.panelmain.Size = new System.Drawing.Size(880, 40);
+            this.panelmain.TabIndex = 9;
+            this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
+            this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(47, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "E.T. ver 5.5.1";
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(758, 5);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(30, 30);
+            this.button6.TabIndex = 10;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(11, 5);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 3;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(11, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(11, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -438,186 +562,6 @@
             this.updateApplicationsToolStripMenuItem.Text = "Update Applications";
             this.updateApplicationsToolStripMenuItem.Click += new System.EventHandler(this.updateApplicationsToolStripMenuItem_Click);
             // 
-            // windowsLicenseKeyToolStripMenuItem
-            // 
-            this.windowsLicenseKeyToolStripMenuItem.Name = "windowsLicenseKeyToolStripMenuItem";
-            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
-            this.windowsLicenseKeyToolStripMenuItem.Click += new System.EventHandler(this.windowsLicenseKeyToolStripMenuItem_Click);
-            // 
-            // rebootToBIOSToolStripMenuItem
-            // 
-            this.rebootToBIOSToolStripMenuItem.Name = "rebootToBIOSToolStripMenuItem";
-            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
-            this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
-            // 
-            // rebootToSafeModeToolStripMenuItem
-            // 
-            this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
-            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
-            this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
-            // 
-            // toolStripButton3
-            // 
-            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
-            this.toolStripButton3.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
-            this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 28);
-            this.toolStripButton3.Text = "About";
-            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
-            // 
-            // toolStripButton4
-            // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(60, 28);
-            this.toolStripButton4.Text = "Donate";
-            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
-            // 
-            // toolStripButton5
-            // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(44, 28);
-            this.toolStripButton5.Text = "Exit";
-            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
-            // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(104, 28);
-            this.toolStripLabel3.Text = "Battery: 0 %";
-            this.toolStripLabel3.Visible = false;
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(72, 28);
-            this.toolStripLabel2.Text = "RAM: 0 %";
-            this.toolStripLabel2.Visible = false;
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(136, 28);
-            this.toolStripLabel1.Text = "Build: Public | ";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.progressBar1.Location = new System.Drawing.Point(110, 440);
-            this.progressBar1.Maximum = 67;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(670, 50);
-            this.progressBar1.TabIndex = 7;
-            this.progressBar1.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.textBox1.Location = new System.Drawing.Point(727, 435);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(82, 50);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Visible = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 3500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // panelmain
-            // 
-            this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.panelmain.Controls.Add(this.button6);
-            this.panelmain.Controls.Add(this.pictureBox3);
-            this.panelmain.Controls.Add(this.pictureBox2);
-            this.panelmain.Controls.Add(this.label1);
-            this.panelmain.Controls.Add(this.pictureBox1);
-            this.panelmain.Location = new System.Drawing.Point(0, 0);
-            this.panelmain.Name = "panelmain";
-            this.panelmain.Size = new System.Drawing.Size(880, 40);
-            this.panelmain.TabIndex = 9;
-            this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
-            this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(758, 5);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(30, 30);
-            this.button6.TabIndex = 10;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(11, 5);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(11, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(47, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 5.5.1";
-            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(11, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // restartExplorerexeToolStripMenuItem
-            // 
-            this.restartExplorerexeToolStripMenuItem.Name = "restartExplorerexeToolStripMenuItem";
-            this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
-            this.restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
-            this.restartExplorerexeToolStripMenuItem.Click += new System.EventHandler(this.restartExplorerexeToolStripMenuItem_Click);
-            // 
             // downloadSoftwareToolStripMenuItem
             // 
             this.downloadSoftwareToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -697,6 +641,79 @@
             this.mSIAfterburnerToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.mSIAfterburnerToolStripMenuItem.Text = "MSI Afterburner";
             this.mSIAfterburnerToolStripMenuItem.Click += new System.EventHandler(this.mSIAfterburnerToolStripMenuItem_Click);
+            // 
+            // windowsLicenseKeyToolStripMenuItem
+            // 
+            this.windowsLicenseKeyToolStripMenuItem.Name = "windowsLicenseKeyToolStripMenuItem";
+            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
+            this.windowsLicenseKeyToolStripMenuItem.Click += new System.EventHandler(this.windowsLicenseKeyToolStripMenuItem_Click);
+            // 
+            // rebootToBIOSToolStripMenuItem
+            // 
+            this.rebootToBIOSToolStripMenuItem.Name = "rebootToBIOSToolStripMenuItem";
+            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
+            this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
+            // 
+            // rebootToSafeModeToolStripMenuItem
+            // 
+            this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
+            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
+            this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
+            // 
+            // restartExplorerexeToolStripMenuItem
+            // 
+            this.restartExplorerexeToolStripMenuItem.Name = "restartExplorerexeToolStripMenuItem";
+            this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
+            this.restartExplorerexeToolStripMenuItem.Click += new System.EventHandler(this.restartExplorerexeToolStripMenuItem_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton3.Text = "About";
+            this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton4.Text = "Donate";
+            this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(44, 28);
+            this.toolStripButton5.Text = "Exit";
+            this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button7.Location = new System.Drawing.Point(659, -1);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(93, 47);
+            this.button7.TabIndex = 11;
+            this.button7.Text = "ENGLISH";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Visible = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // Form1
             // 
@@ -804,6 +821,7 @@
         private System.Windows.Forms.ToolStripMenuItem microsoftVisualCRedistributableToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vLCMediaPlayerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mSIAfterburnerToolStripMenuItem;
+        private System.Windows.Forms.Button button7;
     }
 }
 

@@ -22,6 +22,7 @@ using System.Management;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using Microsoft.Win32;
 using System.Media;
+using System.Xml.Linq;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -109,7 +110,7 @@ namespace ET
         public bool isswitch = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "22.12.2024";
+        string ETBuild = "05.01.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -216,6 +217,9 @@ namespace ET
             InitializeComponent();
             button6.Location = new System.Drawing.Point(845, 5);
             button6.FlatAppearance.BorderSize = 0;
+            button7.Location = new System.Drawing.Point(745, -2);
+            button7.FlatAppearance.BorderSize = 0;
+
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
             this.MouseDown += new MouseEventHandler(ToolStrip1_MouseDown);
             this.MouseDown += new MouseEventHandler(panelmain_MouseDown);
@@ -852,254 +856,384 @@ namespace ET
             chck70.TabIndex = 70;
             panel3.Controls.Add(chck70);
 
-            //Language change function
+            //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
-            groupBox1.Text = "Performance Tweaks (34)";
-            groupBox2.Text = "Privacy (18)";
-            groupBox3.Text = "Visual Tweaks (7)";
-            groupBox4.Text = "Other (6)";
-            groupBox5.Text = "Expert Mode (5)";
-
-            chck1.Text = "Disable Edge WebWidget";
-            chck2.Text = "Power Option to Ultimate Perform.";
-            chck3.Text = "Split Threshold for Svchost";
-            chck4.Text = "Dual Boot Timeout 3sec";
-            chck5.Text = "Disable Hibernation/Fast Startup";
-            chck6.Text = "Disable Windows Insider Experiments";
-            chck7.Text = "Disable App Launch Tracking";
-            chck8.Text = "Disable Powerthrottling (Intel 6gen+)";
-            chck9.Text = "Turn Off Background Apps";
-            chck10.Text = "Disable Sticky Keys Prompt";
-            chck11.Text = "Disable Activity History";
-            chck12.Text = "Disable Updates for MS Store Apps";
-            chck13.Text = "SmartScreen Filter for Apps Disable";
-            chck14.Text = "Let Websites Provide Locally";
-            chck15.Text = "Fix Microsoft Edge Settings";
-            chck64.Text = "Disable Nagle's Alg. (Delayed ACKs)";
-            chck65.Text = "CPU Priority Tweaks";
-            chck16.Text = "Disable Location Sensors";
-            chck17.Text = "Disable WiFi HotSpot Auto-Sharing";
-            chck18.Text = "Disable Shared HotSpot Connect";
-            chck19.Text = "Updates Notify to Sched. Restart";
-            chck20.Text = "P2P Update Setting to LAN (local)";
-            chck21.Text = "Set Lower Shutdown Time (2sec)";
-            chck22.Text = "Remove Old Device Drivers";
-            chck23.Text = "Disable Get Even More Out of...";
-            chck24.Text = "Disable Installing Suggested Apps";
-            chck25.Text = "Disable Start Menu Ads/Suggestions";
-            chck26.Text = "Disable Suggest Apps WindowsInk";
-            chck27.Text = "Disable Unnecessary Components";
-            chck28.Text = "Defender Scheduled Scan Nerf";
-            chck29.Text = "Disable Process Mitigation";
-            chck30.Text = "Defragment Indexing Service File";
-            chck66.Text = "Disable Spectre/Meltdown";
-            chck67.Text = "Disable Windows Defender";
-            chck31.Text = "Disable Telemetry Scheduled Tasks";
-            chck32.Text = "Remove Telemetry/Data Collection";
-            chck33.Text = "Disable PowerShell Telemetry";
-            chck34.Text = "Disable Skype Telemetry";
-            chck35.Text = "Disable Media Player Usage Reports";
-            chck36.Text = "Disable Mozilla Telemetry";
-            chck37.Text = "Disable Apps Use My Advertising ID";
-            chck38.Text = "Disable Send Info About Writing";
-            chck39.Text = "Disable Handwriting Recognition";
-            chck40.Text = "Disable Watson Malware Reports";
-            chck41.Text = "Disable Malware Diagnostic Data";
-            chck42.Text = "Disable Reporting to MS MAPS";
-            chck43.Text = "Disable Spynet Defender Reporting";
-            chck44.Text = "Do Not Send Malware Samples";
-            chck45.Text = "Disable Sending Typing Samples";
-            chck46.Text = "Disable Sending Contacts to MS";
-            chck47.Text = "Disable Cortana";
-            chck48.Text = "Show File Extensions in Explorer";
-            chck49.Text = "Disable Transparency on Taskbar";
-            chck50.Text = "Disable Windows Animations";
-            chck51.Text = "Disable MRU lists (jump lists)";
-            chck52.Text = "Set Search Box to Icon Only";
-            chck53.Text = "Explorer on Start on This PC";
-            chck54.Text = "Remove Windows Game Bar/DVR";
-            chck55.Text = "Enable Service Tweaks";
-            chck56.Text = "Remove Bloatware (Preinstalled)";
-            chck57.Text = "Disable Unnecessary Startup Apps";
-            chck58.Text = "Clean Temp/Cache/Prefetch/Logs";
-            chck59.Text = "Remove News and Interests/Widgets";
-            chck60.Text = "Remove Microsoft OneDrive";
-            chck61.Text = "Disable Xbox Services";
-            chck62.Text = "Enable Fast/Secure DNS (1.1.1.1)";
-            chck63.Text = "Scan for Adware (AdwCleaner)";
-            chck68.Text = "Clean WinSxS Folder";
-            chck69.Text = "Remove Copilot";
-            chck70.Text = "Remove Learn about this photo";
-
-            toolStripLabel1.Text = "Build: Public | "+ETBuild;
-
-            if (cinfo.Name == "pl-PL")
+            void DefaultLang()
             {
-                Console.WriteLine("Wykryto Polski");
-                groupBox1.Text = "Poprawki Wydajności (34)";
-                groupBox2.Text = "Prywatność (18)";
-                groupBox3.Text = "Poprawki Wizualne (7)";
-                groupBox4.Text = "Inne (6)";
-                groupBox5.Text = "Tryb Eksperta (5)";
+                button7.Text = "ENGLISH";
+                groupBox1.Text = "Performance Tweaks (34)";
+                groupBox2.Text = "Privacy (18)";
+                groupBox3.Text = "Visual Tweaks (7)";
+                groupBox4.Text = "Other (6)";
+                groupBox5.Text = "Expert Mode (5)";
 
-                button1.Text = "Wydajność";
-                button2.Text = "Wizualne";
-                button3.Text = "Prywatność";
-                selectall0 = "Zaznacz Wszystko";
-                selectall1 = "Odznacz Wszystko";
+                chck1.Text = "Disable Edge WebWidget";
+                chck2.Text = "Power Option to Ultimate Perform.";
+                chck3.Text = "Split Threshold for Svchost";
+                chck4.Text = "Dual Boot Timeout 3sec";
+                chck5.Text = "Disable Hibernation/Fast Startup";
+                chck6.Text = "Disable Windows Insider Experiments";
+                chck7.Text = "Disable App Launch Tracking";
+                chck8.Text = "Disable Powerthrottling (Intel 6gen+)";
+                chck9.Text = "Turn Off Background Apps";
+                chck10.Text = "Disable Sticky Keys Prompt";
+                chck11.Text = "Disable Activity History";
+                chck12.Text = "Disable Updates for MS Store Apps";
+                chck13.Text = "SmartScreen Filter for Apps Disable";
+                chck14.Text = "Let Websites Provide Locally";
+                chck15.Text = "Fix Microsoft Edge Settings";
+                chck64.Text = "Disable Nagle's Alg. (Delayed ACKs)";
+                chck65.Text = "CPU Priority Tweaks";
+                chck16.Text = "Disable Location Sensors";
+                chck17.Text = "Disable WiFi HotSpot Auto-Sharing";
+                chck18.Text = "Disable Shared HotSpot Connect";
+                chck19.Text = "Updates Notify to Sched. Restart";
+                chck20.Text = "P2P Update Setting to LAN (local)";
+                chck21.Text = "Set Lower Shutdown Time (2sec)";
+                chck22.Text = "Remove Old Device Drivers";
+                chck23.Text = "Disable Get Even More Out of...";
+                chck24.Text = "Disable Installing Suggested Apps";
+                chck25.Text = "Disable Start Menu Ads/Suggestions";
+                chck26.Text = "Disable Suggest Apps WindowsInk";
+                chck27.Text = "Disable Unnecessary Components";
+                chck28.Text = "Defender Scheduled Scan Nerf";
+                chck29.Text = "Disable Process Mitigation";
+                chck30.Text = "Defragment Indexing Service File";
+                chck66.Text = "Disable Spectre/Meltdown";
+                chck67.Text = "Disable Windows Defender";
+                chck31.Text = "Disable Telemetry Scheduled Tasks";
+                chck32.Text = "Remove Telemetry/Data Collection";
+                chck33.Text = "Disable PowerShell Telemetry";
+                chck34.Text = "Disable Skype Telemetry";
+                chck35.Text = "Disable Media Player Usage Reports";
+                chck36.Text = "Disable Mozilla Telemetry";
+                chck37.Text = "Disable Apps Use My Advertising ID";
+                chck38.Text = "Disable Send Info About Writing";
+                chck39.Text = "Disable Handwriting Recognition";
+                chck40.Text = "Disable Watson Malware Reports";
+                chck41.Text = "Disable Malware Diagnostic Data";
+                chck42.Text = "Disable Reporting to MS MAPS";
+                chck43.Text = "Disable Spynet Defender Reporting";
+                chck44.Text = "Do Not Send Malware Samples";
+                chck45.Text = "Disable Sending Typing Samples";
+                chck46.Text = "Disable Sending Contacts to MS";
+                chck47.Text = "Disable Cortana";
+                chck48.Text = "Show File Extensions in Explorer";
+                chck49.Text = "Disable Transparency on Taskbar";
+                chck50.Text = "Disable Windows Animations";
+                chck51.Text = "Disable MRU lists (jump lists)";
+                chck52.Text = "Set Search Box to Icon Only";
+                chck53.Text = "Explorer on Start on This PC";
+                chck54.Text = "Remove Windows Game Bar/DVR";
+                chck55.Text = "Enable Service Tweaks";
+                chck56.Text = "Remove Bloatware (Preinstalled)";
+                chck57.Text = "Disable Unnecessary Startup Apps";
+                chck58.Text = "Clean Temp/Cache/Prefetch/Logs";
+                chck59.Text = "Remove News and Interests/Widgets";
+                chck60.Text = "Remove Microsoft OneDrive";
+                chck61.Text = "Disable Xbox Services";
+                chck62.Text = "Enable Fast/Secure DNS (1.1.1.1)";
+                chck63.Text = "Scan for Adware (AdwCleaner)";
+                chck68.Text = "Clean WinSxS Folder";
+                chck69.Text = "Remove Copilot";
+                chck70.Text = "Remove Learn about this photo";
 
-                button4.Text = "Zaznacz Wszystko";
-                button4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                toolStripLabel1.Text = "Build: Public | " + ETBuild;
+            }
+            DefaultLang();
 
-                toolStripButton2.Text = "Kopia Zapasowa";
-                toolStripButton1.Text = "Przywracanie";
-                toolStripButton3.Text = "O mnie";
-                toolStripButton4.Text = "Wsparcie";
-                //toolStripButton5.Text = "Tryb Awaryjny";
-                rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
-                restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
-                downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
-                toolStripDropDownButton1.Text = "Dodatki";
-                diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
-                controlPanelToolStripMenuItem.Text = "Panel Sterowania";
-                deviceManagerToolStripMenuItem.Text = "Menedżer Urządzeń";
-                uACSettingsToolStripMenuItem.Text = "Ustawienia UAC";
-                servicesToolStripMenuItem.Text = "Usługi";
-                remoteDesktopToolStripMenuItem.Text = "Pulpit Zdalny";
-                eventViewerToolStripMenuItem.Text = "Podgląd Zdarzeń";
-                resetNetworkToolStripMenuItem.Text = "Reset Ustawień Sieci";
-                updateApplicationsToolStripMenuItem.Text = "Aktualizuj Aplikacje";
-                windowsLicenseKeyToolStripMenuItem.Text = "Pokaż Klucz Windows";
-                rebootToBIOSToolStripMenuItem.Text = "Uruchom do BIOSu";
+            void ChangeLang()
+            {
 
-                msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
-                msgerror = "Nie wybrano żadnej opcji.";
+                if (cinfo.Name == "pl-PL")
+                {
+                    button7.Text = "POLSKI";
+                    Console.WriteLine("Wykryto Polski");
+                    groupBox1.Text = "Poprawki Wydajności (34)";
+                    groupBox2.Text = "Prywatność (18)";
+                    groupBox3.Text = "Poprawki Wizualne (7)";
+                    groupBox4.Text = "Inne (6)";
+                    groupBox5.Text = "Tryb Eksperta (5)";
 
-                toolStripLabel1.Text = "Wersja: Publiczna | " + ETBuild;
+                    button1.Text = "Wydajność";
+                    button2.Text = "Wizualne";
+                    button3.Text = "Prywatność";
+                    selectall0 = "Zaznacz Wszystko";
+                    selectall1 = "Odznacz Wszystko";
 
-                chck1.Text = "Wyłącz WebWidget Edge";
-                chck2.Text = "Opcja zasilania: Max wydajność";
-                chck3.Text = "Podział progowy dla Svchost";
-                chck4.Text = "Czas dual boot - 3 sekundy";
-                chck5.Text = "Wyłącz hibernację/fastboot";
-                chck6.Text = "Wyłącz eksperymenty Windows Insider";
-                chck7.Text = "Wyłącz śledzenie startu aplikacji";
-                chck8.Text = "Wyłącz Powerthrottling (6gen+)";
-                chck9.Text = "Wyłącz aplikacje działające w tle";
-                chck10.Text = "Wyłącz komunikat klawisze trwałe";
-                chck11.Text = "Wyłącz historię aktywności";
-                chck12.Text = "Wyłącz aktualizacje Sklepu MS";
-                chck13.Text = "Wyłącz SmartScreen dla aplikacji";
-                chck14.Text = "Witryny dostarczają dane lokalnie";
-                chck15.Text = "Napraw ustawienia Microsoft Edge";
-                chck64.Text = "Wyłącz algorytm Nagla (ACK)";
-                chck65.Text = "Dostosowanie priorytetów CPU";
-                chck16.Text = "Wyłącz czujniki lokalizacji";
-                chck17.Text = "Wyłącz automatyczny HotSpot";
-                chck18.Text = "Wyłącz współdzielenie połącz.";
-                chck19.Text = "Powiadomienia o aktualizacjach";
-                chck20.Text = "Udost. aktualizacji - lokalnie";
-                chck21.Text = "Skróć czas zamykania systemu";
-                chck22.Text = "Usuń stare sterowniki urządzeń";
-                chck23.Text = "Wyłącz Uzyskaj jeszcze więcej od";
-                chck24.Text = "Wyłącz sugerowane aplikacje";
-                chck25.Text = "Wyłącz reklamy/sugestie w Start";
-                chck26.Text = "Wyłącz sugestie Windows Ink";
-                chck27.Text = "Wyłącz zbędne komponenty";
-                chck28.Text = "Ogranicz zaplan. skany Defendera";
-                chck29.Text = "Wyłącz process Mitigation";
-                chck30.Text = "Defragmentacja pliku indeksowania";
-                chck66.Text = "Wyłącz zabez. Spectre/Meltdown";
-                chck67.Text = "Wyłącz Windows Defender";
-                chck31.Text = "Wyłącz zaplan. zadania telemetrii";
-                chck32.Text = "Usuń zbieranie danych/telemetrii";
-                chck33.Text = "Wyłącz telemetrię PowerShell";
-                chck34.Text = "Wyłącz telemetrię Skype";
-                chck35.Text = "Wyłącz raporty Media Playera";
-                chck36.Text = "Wyłącz telemetrię Mozilla";
-                chck37.Text = "Wyłącz używanie mojego ID reklamowego";
-                chck38.Text = "Wyłącz wysyłanie inform. o pisaniu";
-                chck39.Text = "Wyłącz rozpoznawanie pisma";
-                chck40.Text = "Wyłącz raporty Watsona o malware";
-                chck41.Text = "Wyłącz diagnost. dane o malware";
-                chck42.Text = "Wyłącz raportowanie do MS MAPS";
-                chck43.Text = "Wyłącz raportowanie do Spynet";
-                chck44.Text = "Nie wysyłaj próbek malware";
-                chck45.Text = "Wyłącz wysyłanie próbek pisania";
-                chck46.Text = "Wyłącz wysyłanie kontaktów do MS";
-                chck47.Text = "Wyłącz Cortanę";
-                chck48.Text = "Pokaż rozszerzenia plików";
-                chck49.Text = "Wyłącz przezroczystość na pasku";
-                chck50.Text = "Wyłącz animacje Windows";
-                chck51.Text = "Wyłącz listy szybkiego dostępu";
-                chck52.Text = "Ustaw pole wyszukiwania na ikonę";
-                chck53.Text = "Otwieraj domyśl. na Ten komputer";
-                chck54.Text = "Usuń Pasek Gier Windows/DVR";
-                chck55.Text = "Włącz optymalizację usług";
-                chck56.Text = "Usuń zbędne oprogram. (Bloatware)";
-                chck57.Text = "Wyłącz zbędne aplikacje startowe";
-                chck58.Text = "Wyczyść Temp/Cache/Prefetch/Logi";
-                chck59.Text = "Usuń Wiadomości i Zaint./Widżety";
-                chck60.Text = "Usuń Microsoft OneDrive";
-                chck61.Text = "Wyłącz usługi Xbox";
-                chck62.Text = "Włącz szybki/bezpieczny DNS";
-                chck63.Text = "Skanowanie AdwCleaner";
-                chck68.Text = "Wyczyść folder WinSxS";
-                chck69.Text = "Usuń Copilot";
-                chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
+                    button4.Text = "Zaznacz Wszystko";
+                    button4.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    toolStripButton2.Text = "Kopia Zapasowa";
+                    toolStripButton1.Text = "Przywracanie";
+                    toolStripButton3.Text = "O mnie";
+                    toolStripButton4.Text = "Wsparcie";
+                    //toolStripButton5.Text = "Tryb Awaryjny";
+                    rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
+                    restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
+                    downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
+                    toolStripDropDownButton1.Text = "Dodatki";
+                    diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
+                    controlPanelToolStripMenuItem.Text = "Panel Sterowania";
+                    deviceManagerToolStripMenuItem.Text = "Menedżer Urządzeń";
+                    uACSettingsToolStripMenuItem.Text = "Ustawienia UAC";
+                    servicesToolStripMenuItem.Text = "Usługi";
+                    remoteDesktopToolStripMenuItem.Text = "Pulpit Zdalny";
+                    eventViewerToolStripMenuItem.Text = "Podgląd Zdarzeń";
+                    resetNetworkToolStripMenuItem.Text = "Reset Ustawień Sieci";
+                    updateApplicationsToolStripMenuItem.Text = "Aktualizuj Aplikacje";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Pokaż Klucz Windows";
+                    rebootToBIOSToolStripMenuItem.Text = "Uruchom do BIOSu";
+
+                    msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
+                    msgerror = "Nie wybrano żadnej opcji.";
+
+                    toolStripLabel1.Text = "Wersja: Publiczna | " + ETBuild;
+
+                    chck1.Text = "Wyłącz WebWidget Edge";
+                    chck2.Text = "Opcja zasilania: Max wydajność";
+                    chck3.Text = "Podział progowy dla Svchost";
+                    chck4.Text = "Czas dual boot - 3 sekundy";
+                    chck5.Text = "Wyłącz hibernację/fastboot";
+                    chck6.Text = "Wyłącz eksperymenty Windows Insider";
+                    chck7.Text = "Wyłącz śledzenie startu aplikacji";
+                    chck8.Text = "Wyłącz Powerthrottling (6gen+)";
+                    chck9.Text = "Wyłącz aplikacje działające w tle";
+                    chck10.Text = "Wyłącz komunikat klawisze trwałe";
+                    chck11.Text = "Wyłącz historię aktywności";
+                    chck12.Text = "Wyłącz aktualizacje Sklepu MS";
+                    chck13.Text = "Wyłącz SmartScreen dla aplikacji";
+                    chck14.Text = "Witryny dostarczają dane lokalnie";
+                    chck15.Text = "Napraw ustawienia Microsoft Edge";
+                    chck64.Text = "Wyłącz algorytm Nagla (ACK)";
+                    chck65.Text = "Dostosowanie priorytetów CPU";
+                    chck16.Text = "Wyłącz czujniki lokalizacji";
+                    chck17.Text = "Wyłącz automatyczny HotSpot";
+                    chck18.Text = "Wyłącz współdzielenie połącz.";
+                    chck19.Text = "Powiadomienia o aktualizacjach";
+                    chck20.Text = "Udost. aktualizacji - lokalnie";
+                    chck21.Text = "Skróć czas zamykania systemu";
+                    chck22.Text = "Usuń stare sterowniki urządzeń";
+                    chck23.Text = "Wyłącz Uzyskaj jeszcze więcej od";
+                    chck24.Text = "Wyłącz sugerowane aplikacje";
+                    chck25.Text = "Wyłącz reklamy/sugestie w Start";
+                    chck26.Text = "Wyłącz sugestie Windows Ink";
+                    chck27.Text = "Wyłącz zbędne komponenty";
+                    chck28.Text = "Ogranicz zaplan. skany Defendera";
+                    chck29.Text = "Wyłącz process Mitigation";
+                    chck30.Text = "Defragmentacja pliku indeksowania";
+                    chck66.Text = "Wyłącz zabez. Spectre/Meltdown";
+                    chck67.Text = "Wyłącz Windows Defender";
+                    chck31.Text = "Wyłącz zaplan. zadania telemetrii";
+                    chck32.Text = "Usuń zbieranie danych/telemetrii";
+                    chck33.Text = "Wyłącz telemetrię PowerShell";
+                    chck34.Text = "Wyłącz telemetrię Skype";
+                    chck35.Text = "Wyłącz raporty Media Playera";
+                    chck36.Text = "Wyłącz telemetrię Mozilla";
+                    chck37.Text = "Wyłącz używanie mojego ID reklamowego";
+                    chck38.Text = "Wyłącz wysyłanie inform. o pisaniu";
+                    chck39.Text = "Wyłącz rozpoznawanie pisma";
+                    chck40.Text = "Wyłącz raporty Watsona o malware";
+                    chck41.Text = "Wyłącz diagnost. dane o malware";
+                    chck42.Text = "Wyłącz raportowanie do MS MAPS";
+                    chck43.Text = "Wyłącz raportowanie do Spynet";
+                    chck44.Text = "Nie wysyłaj próbek malware";
+                    chck45.Text = "Wyłącz wysyłanie próbek pisania";
+                    chck46.Text = "Wyłącz wysyłanie kontaktów do MS";
+                    chck47.Text = "Wyłącz Cortanę";
+                    chck48.Text = "Pokaż rozszerzenia plików";
+                    chck49.Text = "Wyłącz przezroczystość na pasku";
+                    chck50.Text = "Wyłącz animacje Windows";
+                    chck51.Text = "Wyłącz listy szybkiego dostępu";
+                    chck52.Text = "Ustaw pole wyszukiwania na ikonę";
+                    chck53.Text = "Otwieraj domyśl. na Ten komputer";
+                    chck54.Text = "Usuń Pasek Gier Windows/DVR";
+                    chck55.Text = "Włącz optymalizację usług";
+                    chck56.Text = "Usuń zbędne oprogram. (Bloatware)";
+                    chck57.Text = "Wyłącz zbędne aplikacje startowe";
+                    chck58.Text = "Wyczyść Temp/Cache/Prefetch/Logi";
+                    chck59.Text = "Usuń Wiadomości i Zaint./Widżety";
+                    chck60.Text = "Usuń Microsoft OneDrive";
+                    chck61.Text = "Wyłącz usługi Xbox";
+                    chck62.Text = "Włącz szybki/bezpieczny DNS";
+                    chck63.Text = "Skanowanie AdwCleaner";
+                    chck68.Text = "Wyczyść folder WinSxS";
+                    chck69.Text = "Usuń Copilot";
+                    chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
+
+                }
+
+                if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
+                {
+                    button7.Text = "РУССКИЙ";
+                    Console.WriteLine("Russian detected");
+                    groupBox1.Text = "Настройки производительности (34)";
+                    groupBox2.Text = "Конфиденциальность (18)";
+                    groupBox3.Text = "Визуальные настройки (7)";
+                    groupBox4.Text = "Другие (6)";
+                    groupBox5.Text = "Экспертный режим (5)";
+
+                    button1.Text = "Производительность";
+                    button1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    button2.Text = "Визуальные настройки";
+                    button2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    button3.Text = "Конфиденциальность";
+                    button3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    button5.Text = "Применить";
+                    selectall0 = "Выбрать все";
+                    selectall1 = "Отменить всё";
+
+                    button4.Text = "Выбрать все";
+                    button4.Font = new Font("Consolas", 13, FontStyle.Regular);
+
+                    toolStripButton2.Text = "Резервная копия";
+                    toolStripButton1.Text = "Восстановление";
+                    toolStripButton3.Text = "О программе";
+                    toolStripButton4.Text = "Пожертвовать";
+                    //toolStripButton5.Text = "безопасный режим";
+                    rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
+                    restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
+                    downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
+                    toolStripDropDownButton1.Text = "Дополнительно";
+                    diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
+                    controlPanelToolStripMenuItem.Text = "Панель управления";
+                    deviceManagerToolStripMenuItem.Text = "Диспетчер устройств";
+                    uACSettingsToolStripMenuItem.Text = "Настройки UAC";
+                    servicesToolStripMenuItem.Text = "Услуги";
+                    remoteDesktopToolStripMenuItem.Text = "Удаленный рабочий стол";
+                    eventViewerToolStripMenuItem.Text = "Просмотр событий";
+                    resetNetworkToolStripMenuItem.Text = "Сброс сетевых настроек";
+                    updateApplicationsToolStripMenuItem.Text = "Обновление приложений";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Показать лицензионный ключ Windows";
+                    rebootToBIOSToolStripMenuItem.Text = "Запуск BIOS";
+
+                    msgend = "Завершено. Рекомендуется перезапуск.";
+                    msgerror = "Ни один вариант не был выбран.";
+
+                    toolStripLabel1.Text = "Build: Public | " + ETBuild;
+                }
+
+                if (cinfo.Name == "de-DE")
+                {
+                    button7.Text = "DEUTSCH";
+                    Console.WriteLine("German detected");
+                    groupBox1.Text = "Leistungs-Optim. (34)";
+                    groupBox2.Text = "Privatsphäre (18)";
+                    groupBox3.Text = "Visuelle Tweaks (7)";
+                    groupBox4.Text = "Andere (6)";
+                    groupBox5.Text = "Expertenmodus (5)";
+
+                    button1.Text = "Leistung";
+                    button1.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    button2.Text = "Visuelle";
+                    button2.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    button3.Text = "Privatsphäre";
+                    button3.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    selectall0 = "Alle auswählen";
+                    selectall1 = "Alle abwählen";
+
+                    button4.Text = "Alle auswählen";
+                    button4.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    toolStripButton2.Text = "Backup";
+                    toolStripButton1.Text = "Wiederherst.";
+                    toolStripButton3.Text = "Über mich";
+                    toolStripButton4.Text = "Support";
+
+                    rebootToSafeModeToolStripMenuItem.Text = "Im abges. Modus starten";
+                    restartExplorerexeToolStripMenuItem.Text = "Explorer.exe neu starten";
+                    downloadSoftwareToolStripMenuItem.Text = "Die Software herunterladen";
+                    toolStripDropDownButton1.Text = "Extras";
+                    diskDefragmenterToolStripMenuItem.Text = "Defragmentierung";
+                    controlPanelToolStripMenuItem.Text = "Systemsteuerung";
+                    deviceManagerToolStripMenuItem.Text = "Geräte-Manager";
+                    uACSettingsToolStripMenuItem.Text = "UAC-Einstell.";
+                    servicesToolStripMenuItem.Text = "Dienste";
+                    remoteDesktopToolStripMenuItem.Text = "Remotedesktop";
+                    eventViewerToolStripMenuItem.Text = "Ereignisanzeige";
+                    resetNetworkToolStripMenuItem.Text = "Netzwerk zurücksetzen";
+                    updateApplicationsToolStripMenuItem.Text = "Apps aktualis.";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Windows-Key anzeigen";
+                    rebootToBIOSToolStripMenuItem.Text = "In BIOS starten";
+
+                    msgend = "Abgeschlossen. Neustart empfohlen.";
+                    msgerror = "Keine Option gewählt.";
+
+                    chck1.Text = "Edge-WebWidget aus";
+                    chck2.Text = "Ultimate Power-Modus";
+                    chck3.Text = "Svchost-Schwelle teilen";
+                    chck4.Text = "Dualboot Timeout 3 Sek.";
+                    chck5.Text = "Ruhezustand/Schnellstart aus";
+                    chck6.Text = "Windows-Insider-Programm aus";
+                    chck7.Text = "App-Tracking aus";
+                    chck8.Text = "Powerthrottle (6 Gen+) aus";
+                    chck9.Text = "Hintergrundapps aus";
+                    chck10.Text = "Sticky-Keys-Hinweis aus";
+                    chck11.Text = "Aktivitätsverlauf aus";
+                    chck12.Text = "Microsoft-Store-Updates aus";
+                    chck13.Text = "SmartScreen-Apps aus";
+                    chck14.Text = "Berechtigungen für Websites erlau.";
+                    chck15.Text = "Edge-Einstellungen wiederherstell.";
+                    chck64.Text = "Nagling (ACKs) aus";
+                    chck65.Text = "CPU-Priorität optimieren";
+                    chck16.Text = "Standortsensoren aus";
+                    chck17.Text = "HotSpot automatisch teilen aus";
+                    chck18.Text = "HotSpot teilen aus";
+                    chck19.Text = "Update: Neustart planen";
+                    chck20.Text = "P2P auf LAN setzen";
+                    chck21.Text = "Shutdown-Zeit 2 Sek.";
+                    chck22.Text = "Alte Treiber löschen";
+                    chck23.Text = "„Mehr erfahren“ aus";
+                    chck24.Text = "Vorgeschlagene Apps aus";
+                    chck25.Text = "Startmenu Werbung aus";
+                    chck26.Text = "Windows-Ink-App Vorschläge aus";
+                    chck27.Text = "Unnötige Komponene aus";
+                    chck28.Text = "Defender-Scan begrenzen";
+                    chck29.Text = "Prozessschutz aus";
+                    chck30.Text = "Index Defragmentaion";
+                    chck66.Text = "Spectre/Meltdown aus";
+                    chck67.Text = "Defender deaktivieren";
+                    chck31.Text = "Telemetrie-Tasks aus";
+                    chck32.Text = "Daten/Telemtrie sammeln aus";
+                    chck33.Text = "PowerShell Telemetrie aus";
+                    chck34.Text = "Skype-Telemetrie aus";
+                    chck35.Text = "MediaPlayer Berichte aus";
+                    chck36.Text = "Mozilla-Telemetrie aus";
+                    chck37.Text = "Werbe-ID-Nutzung aus";
+                    chck38.Text = "Schreibdaten aus";
+                    chck39.Text = "Handschrift aus";
+                    chck40.Text = "Watson-Malware aus";
+                    chck41.Text = "Malware-Daten aus";
+                    chck42.Text = "Berichte an MAPS aus";
+                    chck43.Text = "SpyNet-Defender aus";
+                    chck44.Text = "Malware-Proben aus";
+                    chck45.Text = "Tipp-Proben aus";
+                    chck46.Text = "Kontakte senden aus";
+                    chck47.Text = "Cortana deaktivieren";
+                    chck48.Text = "Dateiendungen zeigen";
+                    chck49.Text = "Taskbar-Transparent aus";
+                    chck50.Text = "Animationen aus";
+                    chck51.Text = "Sprunglisten aus";
+                    chck52.Text = "Suche: Nur Icon";
+                    chck53.Text = "Explorer auf 'Dieser PC' ";
+                    chck54.Text = "Game Bar/DVR entfernen";
+                    chck55.Text = "Dienste optimieren";
+                    chck56.Text = "Bloatware entfernen";
+                    chck57.Text = "Autostart-Apps aus";
+                    chck58.Text = "Temp/Cache säubern";
+                    chck59.Text = "News/Widgets aus";
+                    chck60.Text = "OneDrive entfernen";
+                    chck61.Text = "Xbox-Dienste aus";
+                    chck62.Text = "Sichere DNS aktiv.";
+                    chck63.Text = "Adware scannen (AdwCl)";
+                    chck68.Text = "WinSxS Ordner säubern";
+                    chck69.Text = "Copilot löschen";
+                    chck70.Text = "'Über Bild mehr erfahren' aus";
+                }
 
             }
-
-            if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
-            {
-                Console.WriteLine("Russian detected");
-                groupBox1.Text = "Настройки производительности (34)";
-                groupBox2.Text = "Конфиденциальность (18)";
-                groupBox3.Text = "Визуальные настройки (7)";
-                groupBox4.Text = "Другие (6)";
-                groupBox5.Text = "Экспертный режим (5)";
-
-                button1.Text = "Производительность";
-                button1.Font = new Font("Consolas", 12, FontStyle.Regular);
-                button2.Text = "Визуальные настройки";
-                button2.Font = new Font("Consolas", 12, FontStyle.Regular);
-                button3.Text = "Конфиденциальность";
-                button3.Font = new Font("Consolas", 12, FontStyle.Regular);
-                button5.Text = "Применить";
-                selectall0 = "Выбрать все";
-                selectall1 = "Отменить всё";
-
-                button4.Text = "Выбрать все";
-                button4.Font = new Font("Consolas", 13, FontStyle.Regular);
-
-                toolStripButton2.Text = "Резервная копия";
-                toolStripButton1.Text = "Восстановление";
-                toolStripButton3.Text = "О программе";
-                toolStripButton4.Text = "Пожертвовать";
-                //toolStripButton5.Text = "безопасный режим";
-                rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
-                restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
-                downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
-                toolStripDropDownButton1.Text = "Дополнительно";
-                diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
-                controlPanelToolStripMenuItem.Text = "Панель управления";
-                deviceManagerToolStripMenuItem.Text = "Диспетчер устройств";
-                uACSettingsToolStripMenuItem.Text = "Настройки UAC";
-                servicesToolStripMenuItem.Text = "Услуги";
-                remoteDesktopToolStripMenuItem.Text = "Удаленный рабочий стол";
-                eventViewerToolStripMenuItem.Text = "Просмотр событий";
-                resetNetworkToolStripMenuItem.Text = "Сброс сетевых настроек";
-                updateApplicationsToolStripMenuItem.Text = "Обновление приложений";
-                windowsLicenseKeyToolStripMenuItem.Text = "Показать лицензионный ключ Windows";
-                rebootToBIOSToolStripMenuItem.Text = "Запуск BIOS";
-
-                msgend = "Завершено. Рекомендуется перезапуск.";
-                msgerror = "Ни один вариант не был выбран.";
-
-                toolStripLabel1.Text = "Build: Public | "+ETBuild;
-            }
-
+            ChangeLang();
 
             groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             button2.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -3680,6 +3814,11 @@ namespace ET
             startInfo.Arguments = "/C winget install --id=Google.Chrome  -e";
             process.StartInfo = startInfo;
             process.Start();
+        }
+
+        public void button7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
