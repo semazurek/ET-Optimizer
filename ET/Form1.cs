@@ -108,9 +108,10 @@ namespace ET
         string expercolor = "#e74c3c";
 
         public bool isswitch = false;
+        public bool issillent = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "05.01.2025";
+        string ETBuild = "24.02.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -1277,6 +1278,17 @@ namespace ET
                             button5_Click(null, EventArgs.Empty);//RUN
 
                         }
+                        else
+                        {
+                        if (args.Contains("/sillent") || args.Contains("-sillent") || args.Contains("sillent"))
+                            {
+                            isswitch = true;
+                            issillent = true;
+                            button5_Click(null, EventArgs.Empty);
+                            //RUN Start Button (doengine() func the same)
+                            //Auto run sillent
+                        }
+                    }
 
                     }
                 }
@@ -3154,6 +3166,14 @@ namespace ET
             {
                 if (alltodo == done)
                 {
+                    if (issillent == true)
+                    {
+                        FlushMem();
+                        Environment.Exit(0);
+                        this.Close();
+                        String my_name_process = Process.GetCurrentProcess().ProcessName;
+                        Process.Start("cmd.exe", "/c taskkill /F /IM " + my_name_process + ".exe /T");
+                    }
                     string OSpath = Path.GetPathRoot(Environment.SystemDirectory);
                     if (File.Exists(OSpath + "Windows\\Media\\Windows Proximity Notification.wav"))
                     {
@@ -3175,6 +3195,7 @@ namespace ET
                     DialogResult dialogResult = MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK);
                     if (isswitch == true)
                     {
+                        FlushMem();
                         this.Close();
                     }
                     c_p(null, null);
