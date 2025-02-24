@@ -276,24 +276,24 @@ New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
 Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-01.cmd">
-if exist A:\ET-Optimizer.exe A:\ET-Optimizer.exe /auto
-if exist B:\ET-Optimizer.exe B:\ET-Optimizer.exe /auto
-if exist C:\ET-Optimizer.exe C:\ET-Optimizer.exe /auto
-if exist D:\ET-Optimizer.exe D:\ET-Optimizer.exe /auto
-if exist E:\ET-Optimizer.exe E:\ET-Optimizer.exe /auto
-if exist F:\ET-Optimizer.exe F:\ET-Optimizer.exe /auto
-if exist G:\ET-Optimizer.exe G:\ET-Optimizer.exe /auto
-if exist H:\ET-Optimizer.exe H:\ET-Optimizer.exe /auto
-if exist I:\ET-Optimizer.exe I:\ET-Optimizer.exe /auto
-if exist J:\ET-Optimizer.exe J:\ET-Optimizer.exe /auto
-if exist K:\ET-Optimizer.exe K:\ET-Optimizer.exe /auto
-if exist L:\ET-Optimizer.exe L:\ET-Optimizer.exe /auto
-if exist M:\ET-Optimizer.exe M:\ET-Optimizer.exe /auto
-if exist N:\ET-Optimizer.exe N:\ET-Optimizer.exe /auto
-if exist X:\ET-Optimizer.exe X:\ET-Optimizer.exe /auto
-if exist Z:\ET-Optimizer.exe Z:\ET-Optimizer.exe /auto
-if exist Y:\ET-Optimizer.exe Y:\ET-Optimizer.exe /auto
-if exist ET-Optimizer.exe ET-Optimizer.exe /auto
+if exist A:\ET-Optimizer.exe A:\ET-Optimizer.exe /sillent
+if exist B:\ET-Optimizer.exe B:\ET-Optimizer.exe /sillent
+if exist C:\ET-Optimizer.exe C:\ET-Optimizer.exe /sillent
+if exist D:\ET-Optimizer.exe D:\ET-Optimizer.exe /sillent
+if exist E:\ET-Optimizer.exe E:\ET-Optimizer.exe /sillent
+if exist F:\ET-Optimizer.exe F:\ET-Optimizer.exe /sillent
+if exist G:\ET-Optimizer.exe G:\ET-Optimizer.exe /sillent
+if exist H:\ET-Optimizer.exe H:\ET-Optimizer.exe /sillent
+if exist I:\ET-Optimizer.exe I:\ET-Optimizer.exe /sillent
+if exist J:\ET-Optimizer.exe J:\ET-Optimizer.exe /sillent
+if exist K:\ET-Optimizer.exe K:\ET-Optimizer.exe /sillent
+if exist L:\ET-Optimizer.exe L:\ET-Optimizer.exe /sillent
+if exist M:\ET-Optimizer.exe M:\ET-Optimizer.exe /sillent
+if exist N:\ET-Optimizer.exe N:\ET-Optimizer.exe /sillent
+if exist X:\ET-Optimizer.exe X:\ET-Optimizer.exe /sillent
+if exist Z:\ET-Optimizer.exe Z:\ET-Optimizer.exe /sillent
+if exist Y:\ET-Optimizer.exe Y:\ET-Optimizer.exe /sillent
+if exist ET-Optimizer.exe ET-Optimizer.exe /sillent
 		</File>
 		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
 start C:\Windows\Resources\Themes\dark.theme | Out-Null
