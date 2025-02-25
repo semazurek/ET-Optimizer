@@ -254,6 +254,8 @@ https://www.youtube.com/watch?v=BM_AirabkB8
 
 https://www.youtube.com/watch?v=FFKeJuXC4HA
 
+https://www.youtube.com/watch?v=G048P3g8bGM
+
 https://www.majorgeeks.com/files/details/et_all_in_one_optimization_script.html
 
 https://filecr.com/windows/semazurek-et-optimizer/
