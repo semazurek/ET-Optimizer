@@ -106,7 +106,6 @@ $selectors = @(
 	'Microsoft.BingNews';
 	'Microsoft.MicrosoftOfficeHub';
 	'Microsoft.OutlookForWindows';
-	'Microsoft.MSPaint';
 	'Microsoft.People';
 	'Microsoft.PowerAutomateDesktop';
 	'MicrosoftCorporationII.QuickAssist';
@@ -276,6 +275,7 @@ New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
 Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-01.cmd">
+powershell -command wget https://github.com/semazurek/ET-Optimizer/releases/download/5.5.1/ET-Optimizer.exe -o ET-Optimizer.exe
 if exist A:\ET-Optimizer.exe A:\ET-Optimizer.exe /sillent
 if exist B:\ET-Optimizer.exe B:\ET-Optimizer.exe /sillent
 if exist C:\ET-Optimizer.exe C:\ET-Optimizer.exe /sillent
@@ -294,9 +294,9 @@ if exist X:\ET-Optimizer.exe X:\ET-Optimizer.exe /sillent
 if exist Z:\ET-Optimizer.exe Z:\ET-Optimizer.exe /sillent
 if exist Y:\ET-Optimizer.exe Y:\ET-Optimizer.exe /sillent
 if exist ET-Optimizer.exe ET-Optimizer.exe /sillent
+start C:\Windows\Resources\Themes\dark.theme
 		</File>
 		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
-start C:\Windows\Resources\Themes\dark.theme | Out-Null
 $scripts = @(
 	{
 		reg.exe add "HKLM\SYSTEM\Setup\MoSetup" /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1 /f;
@@ -395,6 +395,7 @@ $scripts = @(
 } *&gt;&amp;1 &gt;&gt; "C:\Windows\Setup\Scripts\Specialize.log";
 		</File>
 		<File path="C:\Windows\Setup\Scripts\UserOnce.ps1">
+start C:\Windows\Resources\Themes\dark.theme
 $scripts = @(
 	{
 		Get-AppxPackage -Name 'Microsoft.Windows.Ai.Copilot.Provider' | Remove-AppxPackage;
@@ -476,6 +477,7 @@ $scripts = @(
 $scripts = @(
 	{
 		cmd.exe /c "rmdir C:\Windows.old";
+		cmd.exe /c "start C:\Windows\Resources\Themes\dark.theme"
 	};
 );
 
