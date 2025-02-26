@@ -41,15 +41,15 @@ Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetes
 
 ## 📷 Screenshots
 <details>
-  <summary> First Look </summary>
+  <summary> Menu Aplikacji </summary>
   <img src="https://github.com/user-attachments/assets/6d3b3f1f-ce89-475c-be0a-5d81d4aa2d3a"/>
 </details>
 <details>
-  <summary> During Operation </summary>
+  <summary> Podczas Operacji </summary>
   <img src="https://github.com/user-attachments/assets/473a8ec7-0038-44d8-9628-8ccfe6199daf"/>
 </details>
 <details>
-  <summary> Extras </summary>
+  <summary> Dodatki </summary>
   <img src="https://github.com/user-attachments/assets/8f8a9d54-42f7-41c5-bee6-0a0a5a5430d7"/>
 </details>
 
