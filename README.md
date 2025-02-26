@@ -270,6 +270,8 @@ https://filecr.com/windows/semazurek-et-optimizer/
 
 https://en.taiwebs.com/windows/download-et-optimizer-9574.html
 
+https://www.essential-freebies.de/board/viewtopic.php?t=19662
+
 https://www.softpedia.com/get/Tweak/System-Tweak/ET-All-in-One-Optimization-Script.shtml
 
 https://scloud.ws/blog/optimization/5370.html
