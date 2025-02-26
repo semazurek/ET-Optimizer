@@ -30,19 +30,26 @@ ET Optimizer
 <a href="#"><img src="https://github.com/user-attachments/assets/ffbb6086-b0da-4a98-a126-02ca92c31758"width="48"></a>
 </p>
 
-> 💡 **Совет**: Рекомендуется создать дополнительную резервную копию. Я не несу ответственности за любой причиненный ущерб.
+> [!WARNING]  
+>  Рекомендуется создать дополнительную резервную копию. Я не несу ответственности за любой причиненный ущерб.
+</br>
 <p align="center">
 <a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Скачать-0078D6?style=for-the-badge&logo=windows&logoColor=white" width="120"></a>
 </p>
 
-## 📊 Тест производительности
-
-<p align="center">
-<img src="https://user-images.githubusercontent.com/85984736/198885777-a93d6aec-50ec-4a05-be55-620cc016dfa1.png" width="400">
-
-<img src="https://user-images.githubusercontent.com/85984736/198885788-50f9ed4d-4987-40a4-b621-4271b620893d.png" width="400">
-</p>
-Тест проведен после установки всех обновлений и драйверов, включая Java, WinRAR, Office 2016, Visual C++ Redistributable и т. д. </br>Выполнено после запуска системы (время работы: 2:00).</br></br>
+## 📷 Screenshots
+<details>
+  <summary> First Look </summary>
+  <img src="https://github.com/user-attachments/assets/6d3b3f1f-ce89-475c-be0a-5d81d4aa2d3a"/>
+</details>
+<details>
+  <summary> During Operation </summary>
+  <img src="https://github.com/user-attachments/assets/473a8ec7-0038-44d8-9628-8ccfe6199daf"/>
+</details>
+<details>
+  <summary> Extras </summary>
+  <img src="https://github.com/user-attachments/assets/8f8a9d54-42f7-41c5-bee6-0a0a5a5430d7"/>
+</details>
 
 ## 🛠 Описание функций
 
