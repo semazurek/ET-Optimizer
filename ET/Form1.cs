@@ -111,7 +111,7 @@ namespace ET
         public bool issillent = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "24.02.2025";
+        string ETBuild = "08.03.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -129,7 +129,7 @@ namespace ET
                 
                 if (checkBox.Checked == true) { ct++; }
             }
-            if (ct == 34) 
+            if (ct == 33) 
             {
                 groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -545,15 +545,14 @@ namespace ET
             chck28.TabIndex = 28;
             panel1.Controls.Add(chck28);
             CheckBox chck29 = new CheckBox();
-            chck29.Location = new System.Drawing.Point(285, 330);
+            chck29.Location = new System.Drawing.Point(10, 130);
             chck29.Size = new System.Drawing.Size(260, 25);
             chck29.Tag = "Disable Process Mitigation";
-            chck29.Checked = true;
             chck29.Click += c_p;
             chck29.TabIndex = 29;
-            panel1.Controls.Add(chck29);
+            panel5.Controls.Add(chck29);
             CheckBox chck30 = new CheckBox();
-            chck30.Location = new System.Drawing.Point(285, 355);
+            chck30.Location = new System.Drawing.Point(285, 330);
             chck30.Size = new System.Drawing.Size(260, 25);
             chck30.Tag = "Defragment Indexing Service File";
             chck30.Checked = true;
@@ -775,7 +774,7 @@ namespace ET
             chck55.TabIndex = 55;
             panel1.Controls.Add(chck55);
             CheckBox chck56 = new CheckBox();
-            chck56.Location = new System.Drawing.Point(285, 380);
+            chck56.Location = new System.Drawing.Point(285, 355);
             chck56.Size = new System.Drawing.Size(260, 25);
             chck56.Tag = "Remove Bloatware (Preinstalled)";
             chck56.Checked = true;
@@ -783,7 +782,7 @@ namespace ET
             chck56.TabIndex = 56;
             panel1.Controls.Add(chck56);
             CheckBox chck57 = new CheckBox();
-            chck57.Location = new System.Drawing.Point(285, 405);
+            chck57.Location = new System.Drawing.Point(285, 380);
             chck57.Size = new System.Drawing.Size(260, 25);
             chck57.Tag = "Disable Unnecessary Startup Apps";
             chck57.Checked = true;
@@ -863,11 +862,11 @@ namespace ET
             void DefaultLang()
             {
                 button7.Text = "ENGLISH";
-                groupBox1.Text = "Performance Tweaks (34)";
+                groupBox1.Text = "Performance Tweaks (33)";
                 groupBox2.Text = "Privacy (18)";
                 groupBox3.Text = "Visual Tweaks (7)";
                 groupBox4.Text = "Other (6)";
-                groupBox5.Text = "Expert Mode (5)";
+                groupBox5.Text = "Expert Mode (6)";
 
                 chck1.Text = "Disable Edge WebWidget";
                 chck2.Text = "Power Option to Ultimate Perform.";
@@ -951,11 +950,11 @@ namespace ET
                 {
                     button7.Text = "POLSKI";
                     Console.WriteLine("Wykryto Polski");
-                    groupBox1.Text = "Poprawki Wydajności (34)";
+                    groupBox1.Text = "Poprawki Wydajności (33)";
                     groupBox2.Text = "Prywatność (18)";
                     groupBox3.Text = "Poprawki Wizualne (7)";
                     groupBox4.Text = "Inne (6)";
-                    groupBox5.Text = "Tryb Eksperta (5)";
+                    groupBox5.Text = "Tryb Eksperta (6)";
 
                     button1.Text = "Wydajność";
                     button2.Text = "Wizualne";
@@ -1069,11 +1068,11 @@ namespace ET
                 {
                     button7.Text = "РУССКИЙ";
                     Console.WriteLine("Russian detected");
-                    groupBox1.Text = "Настройки производительности (34)";
+                    groupBox1.Text = "Настройки производительности (33)";
                     groupBox2.Text = "Конфиденциальность (18)";
                     groupBox3.Text = "Визуальные настройки (7)";
                     groupBox4.Text = "Другие (6)";
-                    groupBox5.Text = "Экспертный режим (5)";
+                    groupBox5.Text = "Экспертный режим (6)";
 
                     button1.Text = "Производительность";
                     button1.Font = new Font("Consolas", 12, FontStyle.Regular);
@@ -1119,11 +1118,11 @@ namespace ET
                 {
                     button7.Text = "DEUTSCH";
                     Console.WriteLine("German detected");
-                    groupBox1.Text = "Leistungs-Optim. (34)";
+                    groupBox1.Text = "Leistungs-Optim. (33)";
                     groupBox2.Text = "Privatsphäre (18)";
                     groupBox3.Text = "Visuelle Tweaks (7)";
                     groupBox4.Text = "Andere (6)";
-                    groupBox5.Text = "Expertenmodus (5)";
+                    groupBox5.Text = "Expertenmodus (6)";
 
                     button1.Text = "Leistung";
                     button1.Font = new Font("Consolas", 11, FontStyle.Regular);
@@ -1233,6 +1232,107 @@ namespace ET
                     chck70.Text = "'Über Bild mehr erfahren' aus";
                 }
 
+                if (cinfo.Name == "pt-BR")
+                {
+                    button7.Text = "Portuguese BR";
+                    Console.WriteLine("Portuguese - Brazil detected");
+                    toolStripButton2.Text = "Backup";
+                    toolStripButton1.Text = "Restaurando";
+                    toolStripDropDownButton1.Text = "Extras";
+                    toolStripButton3.Text = "Sobre mim";
+                    toolStripButton4.Text = "Doar";
+
+                    button1.Text = "Desempehno";
+                    button2.Text = "Visuais";
+                    button3.Text = "Privacidade";
+                    button3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    selectall0 = "Selecione Tudo";
+                    selectall1 = "Desmarcar Tudo";
+
+                    button4.Text = "Selecione Tudo";
+                    button4.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    groupBox1.Text = "Ajustes de desempenho (33)";
+                    groupBox2.Text = "Privacidade (18)";
+                    groupBox3.Text = "Ajustes visuais (7)";
+                    groupBox4.Text = "Outros (6)";
+                    groupBox5.Text = "Modo especialista (6)";
+
+                    chck1.Text = "Desabilitar WebWidget Edge";
+                    chck2.Text = "Energia: desempenho máximo";
+                    chck3.Text = "Limite p/ divisão proc. Svchost";
+                    chck4.Text = "Tempo limite inic. dupla: 3s";
+                    chck5.Text = "Desabilitar hibernação/inic. ráp.";
+                    chck6.Text = "Desabilitar exp. Windows Insider";
+                    chck7.Text = "Desabilitar rastreamento inic. app";
+                    chck8.Text = "Desabilitar PowerThrottling Intel";
+                    chck9.Text = "Desabilitar apps 2º plano";
+                    chck10.Text = "Desabilitar teclas aderência";
+                    chck11.Text = "Desabilitar histórico atividades";
+                    chck12.Text = "Desabilitar updates MS Store";
+                    chck13.Text = "Desabilitar filtro SmartScreen";
+                    chck14.Text = "Permitir conteúdo local sites";
+                    chck15.Text = "Corrigir config. Microsoft Edge";
+                    chck64.Text = "Desabilitar alg. Nagle (ACKs)";
+                    chck65.Text = "Ajustar prioridade CPU";
+                    chck16.Text = "Desabilitar sensores localização";
+                    chck17.Text = "Desabilitar Auto HotSpot WiFi";
+                    chck18.Text = "Desabilitar HotSpot Compartilhado";
+                    chck19.Text = "Notificação updates reinício";
+                    chck20.Text = "Update P2P apenas LAN";
+                    chck21.Text = "Desligamento rápido (2s)";
+                    chck22.Text = "Remover drivers antigos";
+                    chck23.Text = "Desabilitar 'Aproveite Mais'";
+                    chck24.Text = "Desabilitar apps sugeridos";
+                    chck25.Text = "Desabilitar anúncios menu iniciar";
+                    chck26.Text = "Desabilitar apps sugeridos Ink";
+                    chck27.Text = "Desabilitar componentes extras";
+                    chck28.Text = "Reduzir prioridade verifs. Defender";
+                    chck29.Text = "Desabilitar mitigação processos";
+                    chck30.Text = "Desfragmentar serviço indexação";
+                    chck66.Text = "Desabilitar Spectre/Meltdown";
+                    chck67.Text = "Desabilitar Windows Defender";
+                    chck31.Text = "Desabilitar tarefas telemetria";
+                    chck32.Text = "Remover telemetria/coleta dados";
+                    chck33.Text = "Desab. telemetria PowerShell";
+                    chck34.Text = "Desabilitar telemetria Skype";
+                    chck35.Text = "Desabilitar rel. uso Media Player";
+                    chck36.Text = "Desabilitar telemetria Mozilla";
+                    chck37.Text = "Desativar apps c/ ID publicidade";
+                    chck38.Text = "Desabilitar envio info. escrita";
+                    chck39.Text = "Desabilitar reconhecimento escrita";
+                    chck40.Text = "Desabilitar rel. malware Watson";
+                    chck41.Text = "Desabilitar dados diag. malware";
+                    chck42.Text = "Desabilitar relatórios MS MAPS";
+                    chck43.Text = "Desabilitar rel. Spynet Defender";
+                    chck44.Text = "Não enviar amostras malware";
+                    chck45.Text = "Desabilitar envio amostras digitação";
+                    chck46.Text = "Desabilitar envio contatos MS";
+                    chck47.Text = "Desabilitar Cortana";
+                    chck48.Text = "Mostrar extensões arquivos";
+                    chck49.Text = "Desabilitar transparência barra";
+                    chck50.Text = "Desabilitar animações Windows";
+                    chck51.Text = "Desabilitar listas MRU (atalhos)";
+                    chck52.Text = "Definir pesquisa só ícones";
+                    chck53.Text = "'Explorer' iniciar neste PC";
+                    chck54.Text = "Remover barra jogos/DVR";
+                    chck55.Text = "Habilitar ajustes serviço";
+                    chck56.Text = "Remover bloatware pré-instalado";
+                    chck57.Text = "Desativar apps inicialização inúteis";
+                    chck58.Text = "Limpar temp/cache/pré-busca/logs";
+                    chck59.Text = "Remover widgets notícias";
+                    chck60.Text = "Remover Microsoft OneDrive";
+                    chck61.Text = "Desabilitar serviços Xbox";
+                    chck62.Text = "Habilitar DNS rápido/seguro";
+                    chck63.Text = "Verificar adware (AdwCleaner)";
+                    chck68.Text = "Limpar pasta WinSxS";
+                    chck69.Text = "Remover Copilot";
+                    chck70.Text = "Remover 'Saiba mais foto'";
+
+
+
+                }
+
             }
             ChangeLang();
 
@@ -1273,6 +1373,7 @@ namespace ET
                             chck62.Checked = true;
                             chck60.Checked = true;
                             chck66.Checked = true;
+                            chck29.Checked = true;
                             chck67.Checked = true;
                             button4_Click(null, EventArgs.Empty);//Select All
                             button5_Click(null, EventArgs.Empty);//RUN
@@ -1788,15 +1889,6 @@ namespace ET
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C schtasks /Change /TN \"Microsoft\\Windows\\Windows Defender\\Windows Defender Scheduled Scan\" /RL LIMITED";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-                            break;
-                        case "Disable Process Mitigation":
-                            Console.WriteLine(checkBox.Text); done++;
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command Set-ProcessMitigation -System -Disable CFG";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -3141,6 +3233,15 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
+                        case "Disable Process Mitigation":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Set-ProcessMitigation -System -Disable CFG";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+                            break;
                         case "Enable Fast/Secure DNS (1.1.1.1)":
                             Console.WriteLine(checkBox.Text); done++;
 
@@ -3840,6 +3941,43 @@ namespace ET
         public void button7_Click(object sender, EventArgs e)
         {
 
+        }
+
+
+        private void makeETISOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C mkdir Copy_To_ISO";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/autounattend.xml -OutFile Copy_To_ISO/autounattend.xml";
+            process.StartInfo = startInfo;
+            process.Start();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/HowTo-ISO.png -OutFile Copy_To_ISO/HowTo-ISO.png";
+            process.StartInfo = startInfo;
+            process.Start();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command wget https://github.com/semazurek/ET-Optimizer/releases/download/5.5.1/ET-Optimizer.exe -OutFile Copy_To_ISO/ET-Optimizer.exe";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command explorer.exe \"Copy_To_ISO\"";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
         }
     }
 }

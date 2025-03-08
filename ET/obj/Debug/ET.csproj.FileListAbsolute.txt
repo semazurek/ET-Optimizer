@@ -38,3 +38,13 @@ C:\Users\User\Downloads\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.
 C:\Users\User\Downloads\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.CoreCompileInputs.cache
 C:\Users\User\Downloads\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\User\Downloads\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.pdb
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.exe.config
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.exe
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.pdb
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.AssemblyReference.cache
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Properties.Resources.resources
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.GenerateResource.cache
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.CoreCompileInputs.cache
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe
+C:\Users\Think\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.pdb

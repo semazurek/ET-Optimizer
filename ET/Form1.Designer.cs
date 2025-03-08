@@ -46,18 +46,6 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panelmain = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
@@ -90,7 +78,20 @@
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripLabel3 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panelmain = new System.Windows.Forms.Panel();
             this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.makeETISOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -306,129 +307,6 @@
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             this.toolStrip1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.toolStrip1_MouseMove);
             // 
-            // toolStripLabel3
-            // 
-            this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(104, 28);
-            this.toolStripLabel3.Text = "Battery: 0 %";
-            this.toolStripLabel3.Visible = false;
-            // 
-            // toolStripLabel2
-            // 
-            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(72, 28);
-            this.toolStripLabel2.Text = "RAM: 0 %";
-            this.toolStripLabel2.Visible = false;
-            // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(136, 28);
-            this.toolStripLabel1.Text = "Build: Public | ";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.progressBar1.Location = new System.Drawing.Point(110, 440);
-            this.progressBar1.Maximum = 67;
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(670, 50);
-            this.progressBar1.TabIndex = 7;
-            this.progressBar1.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.textBox1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.textBox1.Location = new System.Drawing.Point(727, 435);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(82, 50);
-            this.textBox1.TabIndex = 8;
-            this.textBox1.Visible = false;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 3500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // panelmain
-            // 
-            this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.panelmain.Controls.Add(this.button7);
-            this.panelmain.Controls.Add(this.button6);
-            this.panelmain.Controls.Add(this.pictureBox3);
-            this.panelmain.Controls.Add(this.pictureBox2);
-            this.panelmain.Controls.Add(this.label1);
-            this.panelmain.Controls.Add(this.pictureBox1);
-            this.panelmain.Location = new System.Drawing.Point(0, 0);
-            this.panelmain.Name = "panelmain";
-            this.panelmain.Size = new System.Drawing.Size(880, 40);
-            this.panelmain.TabIndex = 9;
-            this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
-            this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label1.Location = new System.Drawing.Point(47, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(110, 25);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 5.5.1";
-            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
-            // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(758, 5);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(30, 30);
-            this.button6.TabIndex = 10;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(11, 5);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 3;
-            this.pictureBox3.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(11, 5);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(11, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // toolStripButton2
             // 
             this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -470,7 +348,8 @@
             this.windowsLicenseKeyToolStripMenuItem,
             this.rebootToBIOSToolStripMenuItem,
             this.rebootToSafeModeToolStripMenuItem,
-            this.restartExplorerexeToolStripMenuItem});
+            this.restartExplorerexeToolStripMenuItem,
+            this.makeETISOToolStripMenuItem});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -481,84 +360,84 @@
             // diskDefragmenterToolStripMenuItem
             // 
             this.diskDefragmenterToolStripMenuItem.Name = "diskDefragmenterToolStripMenuItem";
-            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
             this.diskDefragmenterToolStripMenuItem.Click += new System.EventHandler(this.diskDefragmenterToolStripMenuItem_Click);
             // 
             // cleanmgrToolStripMenuItem
             // 
             this.cleanmgrToolStripMenuItem.Name = "cleanmgrToolStripMenuItem";
-            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.cleanmgrToolStripMenuItem.Text = "Cleanmgr";
             this.cleanmgrToolStripMenuItem.Click += new System.EventHandler(this.cleanmgrToolStripMenuItem_Click);
             // 
             // msconfigToolStripMenuItem
             // 
             this.msconfigToolStripMenuItem.Name = "msconfigToolStripMenuItem";
-            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.msconfigToolStripMenuItem.Text = "Msconfig";
             this.msconfigToolStripMenuItem.Click += new System.EventHandler(this.msconfigToolStripMenuItem_Click);
             // 
             // controlPanelToolStripMenuItem
             // 
             this.controlPanelToolStripMenuItem.Name = "controlPanelToolStripMenuItem";
-            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.controlPanelToolStripMenuItem.Text = "Control Panel";
             this.controlPanelToolStripMenuItem.Click += new System.EventHandler(this.controlPanelToolStripMenuItem_Click);
             // 
             // deviceManagerToolStripMenuItem
             // 
             this.deviceManagerToolStripMenuItem.Name = "deviceManagerToolStripMenuItem";
-            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.deviceManagerToolStripMenuItem.Text = "Device Manager";
             this.deviceManagerToolStripMenuItem.Click += new System.EventHandler(this.deviceManagerToolStripMenuItem_Click);
             // 
             // uACSettingsToolStripMenuItem
             // 
             this.uACSettingsToolStripMenuItem.Name = "uACSettingsToolStripMenuItem";
-            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.uACSettingsToolStripMenuItem.Text = "UAC Settings";
             this.uACSettingsToolStripMenuItem.Click += new System.EventHandler(this.uACSettingsToolStripMenuItem_Click);
             // 
             // msinfo32ToolStripMenuItem
             // 
             this.msinfo32ToolStripMenuItem.Name = "msinfo32ToolStripMenuItem";
-            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.msinfo32ToolStripMenuItem.Text = "Msinfo32";
             this.msinfo32ToolStripMenuItem.Click += new System.EventHandler(this.msinfo32ToolStripMenuItem_Click);
             // 
             // servicesToolStripMenuItem
             // 
             this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
-            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.servicesToolStripMenuItem.Text = "Services";
             this.servicesToolStripMenuItem.Click += new System.EventHandler(this.servicesToolStripMenuItem_Click);
             // 
             // remoteDesktopToolStripMenuItem
             // 
             this.remoteDesktopToolStripMenuItem.Name = "remoteDesktopToolStripMenuItem";
-            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.remoteDesktopToolStripMenuItem.Text = "Remote Desktop";
             this.remoteDesktopToolStripMenuItem.Click += new System.EventHandler(this.remoteDesktopToolStripMenuItem_Click);
             // 
             // eventViewerToolStripMenuItem
             // 
             this.eventViewerToolStripMenuItem.Name = "eventViewerToolStripMenuItem";
-            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.eventViewerToolStripMenuItem.Text = "Event Viewer";
             this.eventViewerToolStripMenuItem.Click += new System.EventHandler(this.eventViewerToolStripMenuItem_Click);
             // 
             // resetNetworkToolStripMenuItem
             // 
             this.resetNetworkToolStripMenuItem.Name = "resetNetworkToolStripMenuItem";
-            this.resetNetworkToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.resetNetworkToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.resetNetworkToolStripMenuItem.Text = "Reset  Network";
             this.resetNetworkToolStripMenuItem.Click += new System.EventHandler(this.resetNetworkToolStripMenuItem_Click);
             // 
             // updateApplicationsToolStripMenuItem
             // 
             this.updateApplicationsToolStripMenuItem.Name = "updateApplicationsToolStripMenuItem";
-            this.updateApplicationsToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.updateApplicationsToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.updateApplicationsToolStripMenuItem.Text = "Update Applications";
             this.updateApplicationsToolStripMenuItem.Click += new System.EventHandler(this.updateApplicationsToolStripMenuItem_Click);
             // 
@@ -575,7 +454,7 @@
             this.vLCMediaPlayerToolStripMenuItem,
             this.mSIAfterburnerToolStripMenuItem});
             this.downloadSoftwareToolStripMenuItem.Name = "downloadSoftwareToolStripMenuItem";
-            this.downloadSoftwareToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.downloadSoftwareToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.downloadSoftwareToolStripMenuItem.Text = "Download Software";
             this.downloadSoftwareToolStripMenuItem.Click += new System.EventHandler(this.downloadSoftwareToolStripMenuItem_Click);
             // 
@@ -645,28 +524,28 @@
             // windowsLicenseKeyToolStripMenuItem
             // 
             this.windowsLicenseKeyToolStripMenuItem.Name = "windowsLicenseKeyToolStripMenuItem";
-            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
             this.windowsLicenseKeyToolStripMenuItem.Click += new System.EventHandler(this.windowsLicenseKeyToolStripMenuItem_Click);
             // 
             // rebootToBIOSToolStripMenuItem
             // 
             this.rebootToBIOSToolStripMenuItem.Name = "rebootToBIOSToolStripMenuItem";
-            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
             this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
             // 
             // rebootToSafeModeToolStripMenuItem
             // 
             this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
-            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
             this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
             // 
             // restartExplorerexeToolStripMenuItem
             // 
             this.restartExplorerexeToolStripMenuItem.Name = "restartExplorerexeToolStripMenuItem";
-            this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(250, 26);
+            this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
             this.restartExplorerexeToolStripMenuItem.Click += new System.EventHandler(this.restartExplorerexeToolStripMenuItem_Click);
             // 
@@ -700,6 +579,74 @@
             this.toolStripButton5.Text = "Exit";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
+            // toolStripLabel3
+            // 
+            this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel3.Name = "toolStripLabel3";
+            this.toolStripLabel3.Size = new System.Drawing.Size(104, 28);
+            this.toolStripLabel3.Text = "Battery: 0 %";
+            this.toolStripLabel3.Visible = false;
+            // 
+            // toolStripLabel2
+            // 
+            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.Size = new System.Drawing.Size(72, 28);
+            this.toolStripLabel2.Text = "RAM: 0 %";
+            this.toolStripLabel2.Visible = false;
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(136, 28);
+            this.toolStripLabel1.Text = "Build: Public | ";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.progressBar1.Location = new System.Drawing.Point(110, 440);
+            this.progressBar1.Maximum = 67;
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(670, 50);
+            this.progressBar1.TabIndex = 7;
+            this.progressBar1.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.textBox1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.textBox1.Location = new System.Drawing.Point(727, 435);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(1);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(82, 50);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Visible = false;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 3500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // panelmain
+            // 
+            this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.panelmain.Controls.Add(this.button7);
+            this.panelmain.Controls.Add(this.button6);
+            this.panelmain.Controls.Add(this.pictureBox3);
+            this.panelmain.Controls.Add(this.pictureBox2);
+            this.panelmain.Controls.Add(this.label1);
+            this.panelmain.Controls.Add(this.pictureBox1);
+            this.panelmain.Location = new System.Drawing.Point(0, 0);
+            this.panelmain.Name = "panelmain";
+            this.panelmain.Size = new System.Drawing.Size(880, 40);
+            this.panelmain.TabIndex = 9;
+            this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
+            this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
+            // 
             // button7
             // 
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
@@ -714,6 +661,68 @@
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(758, 5);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(30, 30);
+            this.button6.TabIndex = 10;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.Location = new System.Drawing.Point(11, 5);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 3;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(11, 5);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label1.Location = new System.Drawing.Point(47, 10);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "E.T. ver 5.5.1";
+            this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(11, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(30, 30);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // makeETISOToolStripMenuItem
+            // 
+            this.makeETISOToolStripMenuItem.Name = "makeETISOToolStripMenuItem";
+            this.makeETISOToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            this.makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
+            this.makeETISOToolStripMenuItem.Click += new System.EventHandler(this.makeETISOToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -822,6 +831,7 @@
         private System.Windows.Forms.ToolStripMenuItem vLCMediaPlayerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mSIAfterburnerToolStripMenuItem;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.ToolStripMenuItem makeETISOToolStripMenuItem;
     }
 }
 
