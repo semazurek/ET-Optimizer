@@ -293,6 +293,24 @@ if exist X:\ET-Optimizer.exe X:\ET-Optimizer.exe /sillent
 if exist Z:\ET-Optimizer.exe Z:\ET-Optimizer.exe /sillent
 if exist Y:\ET-Optimizer.exe Y:\ET-Optimizer.exe /sillent
 if exist ET-Optimizer.exe ET-Optimizer.exe /sillent
+if exist A:\ET.exe A:\ET.exe /sillent
+if exist B:\ET.exe B:\ET.exe /sillent
+if exist C:\ET.exe C:\ET.exe /sillent
+if exist D:\ET.exe D:\ET.exe /sillent
+if exist E:\ET.exe E:\ET.exe /sillent
+if exist F:\ET.exe F:\ET.exe /sillent
+if exist G:\ET.exe G:\ET.exe /sillent
+if exist H:\ET.exe H:\ET.exe /sillent
+if exist I:\ET.exe I:\ET.exe /sillent
+if exist J:\ET.exe J:\ET.exe /sillent
+if exist K:\ET.exe K:\ET.exe /sillent
+if exist L:\ET.exe L:\ET.exe /sillent
+if exist M:\ET.exe M:\ET.exe /sillent
+if exist N:\ET.exe N:\ET.exe /sillent
+if exist X:\ET.exe X:\ET.exe /sillent
+if exist Z:\ET.exe Z:\ET.exe /sillent
+if exist Y:\ET.exe Y:\ET.exe /sillent
+if exist ET.exe ET.exe /sillent
 		</File>
 		<File path="C:\Windows\Setup\Scripts\Specialize.ps1">
 $scripts = @(
