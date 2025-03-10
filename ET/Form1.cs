@@ -111,7 +111,7 @@ namespace ET
         public bool issillent = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "08.03.2025";
+        string ETBuild = "10.03.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -3198,7 +3198,7 @@ namespace ET
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C taskkill /F /IM OneDrive.exe";
                             process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
+                            process.Start();
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
