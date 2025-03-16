@@ -30,6 +30,7 @@ Script developed from many sources found on the Internet, tested and updated for
 <a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-RUS.md"><img src="https://github.com/user-attachments/assets/c0d4749d-4647-4506-a78c-7a092dd5836c"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/ffbb6086-b0da-4a98-a126-02ca92c31758"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/9d8c5679-233b-4416-8371-067f6fc4e114"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/63bd6170-82ec-49cc-b798-a6b0f3a90a8d"width="48"></a>
 </p>
 
 > [!WARNING]  
