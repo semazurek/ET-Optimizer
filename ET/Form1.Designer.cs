@@ -75,6 +75,7 @@
             this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.makeETISOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -91,7 +92,6 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.makeETISOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -549,6 +549,13 @@
             this.restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
             this.restartExplorerexeToolStripMenuItem.Click += new System.EventHandler(this.restartExplorerexeToolStripMenuItem_Click);
             // 
+            // makeETISOToolStripMenuItem
+            // 
+            this.makeETISOToolStripMenuItem.Name = "makeETISOToolStripMenuItem";
+            this.makeETISOToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            this.makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
+            this.makeETISOToolStripMenuItem.Click += new System.EventHandler(this.makeETISOToolStripMenuItem_Click);
+            // 
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -651,13 +658,13 @@
             // 
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button7.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.button7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.button7.Location = new System.Drawing.Point(659, -1);
+            this.button7.Location = new System.Drawing.Point(687, -1);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(93, 47);
+            this.button7.Size = new System.Drawing.Size(65, 47);
             this.button7.TabIndex = 11;
-            this.button7.Text = "ENGLISH";
+            this.button7.Text = "en-US";
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -716,13 +723,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // makeETISOToolStripMenuItem
-            // 
-            this.makeETISOToolStripMenuItem.Name = "makeETISOToolStripMenuItem";
-            this.makeETISOToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
-            this.makeETISOToolStripMenuItem.Click += new System.EventHandler(this.makeETISOToolStripMenuItem_Click);
             // 
             // Form1
             // 

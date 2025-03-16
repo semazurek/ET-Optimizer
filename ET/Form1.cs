@@ -111,7 +111,7 @@ namespace ET
         public bool issillent = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "10.03.2025";
+        string ETBuild = "16.03.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -218,7 +218,7 @@ namespace ET
             InitializeComponent();
             button6.Location = new System.Drawing.Point(845, 5);
             button6.FlatAppearance.BorderSize = 0;
-            button7.Location = new System.Drawing.Point(745, -2);
+            button7.Location = new System.Drawing.Point(780, -2);
             button7.FlatAppearance.BorderSize = 0;
 
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
@@ -861,7 +861,7 @@ namespace ET
 
             void DefaultLang()
             {
-                button7.Text = "ENGLISH";
+                button7.Text = "en-US";
                 groupBox1.Text = "Performance Tweaks (33)";
                 groupBox2.Text = "Privacy (18)";
                 groupBox3.Text = "Visual Tweaks (7)";
@@ -943,12 +943,13 @@ namespace ET
             }
             DefaultLang();
 
+
             void ChangeLang()
             {
 
                 if (cinfo.Name == "pl-PL")
                 {
-                    button7.Text = "POLSKI";
+                    button7.Text = "pl-PL";
                     Console.WriteLine("Wykryto Polski");
                     groupBox1.Text = "Poprawki Wydajności (33)";
                     groupBox2.Text = "Prywatność (18)";
@@ -969,7 +970,7 @@ namespace ET
                     toolStripButton1.Text = "Przywracanie";
                     toolStripButton3.Text = "O mnie";
                     toolStripButton4.Text = "Wsparcie";
-                    //toolStripButton5.Text = "Tryb Awaryjny";
+
                     rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
                     restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
@@ -1066,7 +1067,7 @@ namespace ET
 
                 if (cinfo.Name == "ru-RU" || cinfo.Name == "be-BY")
                 {
-                    button7.Text = "РУССКИЙ";
+                    button7.Text = "ru-RU";
                     Console.WriteLine("Russian detected");
                     groupBox1.Text = "Настройки производительности (33)";
                     groupBox2.Text = "Конфиденциальность (18)";
@@ -1116,7 +1117,7 @@ namespace ET
 
                 if (cinfo.Name == "de-DE")
                 {
-                    button7.Text = "DEUTSCH";
+                    button7.Text = "de-DE";
                     Console.WriteLine("German detected");
                     groupBox1.Text = "Leistungs-Optim. (33)";
                     groupBox2.Text = "Privatsphäre (18)";
@@ -1234,7 +1235,7 @@ namespace ET
 
                 if (cinfo.Name == "pt-BR")
                 {
-                    button7.Text = "Portuguese BR";
+                    button7.Text = "pt-BR";
                     Console.WriteLine("Portuguese - Brazil detected");
                     toolStripButton2.Text = "Backup";
                     toolStripButton1.Text = "Restaurando";
@@ -1329,10 +1330,123 @@ namespace ET
                     chck69.Text = "Remover Copilot";
                     chck70.Text = "Remover 'Saiba mais foto'";
 
-
-
                 }
+                if (cinfo.Name == "fr-FR")
+                {
+                    button7.Text = "fr-FR";
+                    Console.WriteLine("French detected");
+                    groupBox1.Text = "Améliorations de Performance (33)";
+                    groupBox2.Text = "Confidentialité (18)";
+                    groupBox3.Text = "Améliorations Visuelles (7)";
+                    groupBox4.Text = "Autres (6)";
+                    groupBox5.Text = "Mode Expert (6)";
 
+                    button1.Text = "Performance";
+                    button2.Text = "Visuel";
+                    button3.Text = "Confid.";
+                    selectall0 = "Tout Sélectionner";
+                    selectall1 = "Tout Désélectionner";
+
+                    button4.Text = "Tout Sélectionner";
+                    button4.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    toolStripButton2.Text = "Sauvegarde";
+                    toolStripButton1.Text = "Restauration";
+                    toolStripButton3.Text = "À propos";
+                    toolStripButton4.Text = "Support";
+
+                    rebootToSafeModeToolStripMenuItem.Text = "Redémarrer en Mode Sans Échec";
+                    restartExplorerexeToolStripMenuItem.Text = "Redémarrer Explorer.exe";
+                    downloadSoftwareToolStripMenuItem.Text = "Télécharger le Logiciel";
+                    toolStripDropDownButton1.Text = "Compléments";
+                    diskDefragmenterToolStripMenuItem.Text = "Défragmentation du Disque";
+                    controlPanelToolStripMenuItem.Text = "Panneau de Configuration";
+                    deviceManagerToolStripMenuItem.Text = "Gestionnaire de Périphériques";
+                    uACSettingsToolStripMenuItem.Text = "Paramètres UAC";
+                    servicesToolStripMenuItem.Text = "Services";
+                    remoteDesktopToolStripMenuItem.Text = "Bureau à Distance";
+                    eventViewerToolStripMenuItem.Text = "Observateur d'Événements";
+                    resetNetworkToolStripMenuItem.Text = "Réinitialiser le Réseau";
+                    updateApplicationsToolStripMenuItem.Text = "Mettre à Jour les Applications";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Afficher la Clé Windows";
+                    rebootToBIOSToolStripMenuItem.Text = "Démarrer dans le BIOS";
+
+                    msgend = "Terminé. Un redémarrage est recommandé.";
+                    msgerror = "Aucune option sélectionnée.";
+
+                    toolStripLabel1.Text = "Version : Publique | " + ETBuild;
+
+                    chck1.Text = "Désactiver WebWidget Edge";
+                    chck2.Text = "Alimentation : Perf. maximale";
+                    chck3.Text = "Division seuil pour Svchost";
+                    chck4.Text = "Double démarrage - 3 sec";
+                    chck5.Text = "Désactiver hibernation/fastboot";
+                    chck6.Text = "Désactiver exp. Windows Insider";
+                    chck7.Text = "Désactiver suivi démarrage applis";
+                    chck8.Text = "Désactiver Powerthrottling";
+                    chck9.Text = "Désactiver applis arrière-plan";
+                    chck10.Text = "Désactiver alerte touches";
+                    chck11.Text = "Désactiver hist. activités";
+                    chck12.Text = "Désactiver maj Microsoft Store";
+                    chck13.Text = "Désactiver SmartScreen applis";
+                    chck14.Text = "Sites fournissent données locale";
+                    chck15.Text = "Réparer paramètres Edge";
+                    chck64.Text = "Désactiver algorithme Nagle";
+                    chck65.Text = "Ajuster priorités CPU";
+                    chck16.Text = "Désactiver capteurs localisation";
+                    chck17.Text = "Désactiver HotSpot auto";
+                    chck18.Text = "Désactiver partage connexion";
+                    chck19.Text = "Notifications mise à jour";
+                    chck20.Text = "Partage maj - local";
+                    chck21.Text = "Réduire temps arrêt système";
+                    chck22.Text = "Supprimer anciens pilotes";
+                    chck23.Text = "Désactiver 'Encore plus de...'";
+                    chck24.Text = "Désactiver applis suggérées";
+                    chck25.Text = "Désactiver pubs/sugg. Start";
+                    chck26.Text = "Désactiver sugg. Windows Ink";
+                    chck27.Text = "Désactiver composants inutiles";
+                    chck28.Text = "Limiter analyses Defender";
+                    chck29.Text = "Désactiver mitigation processus";
+                    chck30.Text = "Défragmenter fichier index";
+                    chck66.Text = "Désactiver prot. Spectre/Meltdown";
+                    chck67.Text = "Désactiver Windows Defender";
+                    chck31.Text = "Désactiver tâches télémétrie";
+                    chck32.Text = "Supprimer collecte données";
+                    chck33.Text = "Désactiver télémétrie PowerShell";
+                    chck34.Text = "Désactiver télémétrie Skype";
+                    chck35.Text = "Désactiver rapports Media Player";
+                    chck36.Text = "Désactiver télémétrie Mozilla";
+                    chck37.Text = "Désactiver ID publicitaire";
+                    chck38.Text = "Désactiver envoi frappe";
+                    chck39.Text = "Désactiver reco. écriture";
+                    chck40.Text = "Désactiver rapports Watson";
+                    chck41.Text = "Désactiver diag. malwares";
+                    chck42.Text = "Désactiver rapports MS MAPS";
+                    chck43.Text = "Désactiver rapports Spynet";
+                    chck44.Text = "Ne pas envoyer échantillons";
+                    chck45.Text = "Désactiver échantillons frappe";
+                    chck46.Text = "Désactiver envoi contacts MS";
+                    chck47.Text = "Désactiver Cortana";
+                    chck48.Text = "Afficher extensions fichiers";
+                    chck49.Text = "Désactiver transparence barre";
+                    chck50.Text = "Désactiver animations Windows";
+                    chck51.Text = "Désactiver listes accès rapide";
+                    chck52.Text = "Recherche en icône";
+                    chck53.Text = "Ouvrir par défaut 'Ce PC'";
+                    chck54.Text = "Supprimer Barre Jeux Windows";
+                    chck55.Text = "Activer optimisation services";
+                    chck56.Text = "Supprimer logiciels inutiles";
+                    chck57.Text = "Désactiver applis démarrage";
+                    chck58.Text = "Nettoyer Temp/Cache/Logs";
+                    chck59.Text = "Supprimer Actu. et Widgets";
+                    chck60.Text = "Supprimer Microsoft OneDrive";
+                    chck61.Text = "Désactiver services Xbox";
+                    chck62.Text = "Activer DNS rapide/sécurisé";
+                    chck63.Text = "Analyse AdwCleaner";
+                    chck68.Text = "Nettoyer dossier WinSxS";
+                    chck69.Text = "Supprimer Copilot";
+                    chck70.Text = "Désactiver 'En savoir plus'";
+                }
             }
             ChangeLang();
 
@@ -3835,7 +3949,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=Guru3D.Afterburner  -e";
             process.StartInfo = startInfo;
@@ -3847,7 +3961,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=VideoLAN.VLC  -e";
             process.StartInfo = startInfo;
@@ -3859,7 +3973,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=abbodi1406.vcredist  -e";
             process.StartInfo = startInfo;
@@ -3871,7 +3985,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=Notepad++.Notepad++  -e";
             process.StartInfo = startInfo;
@@ -3883,7 +3997,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=Oracle.JavaRuntimeEnvironment  -e";
             process.StartInfo = startInfo;
@@ -3895,7 +4009,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=7zip.7zip  -e";
             process.StartInfo = startInfo;
@@ -3907,7 +4021,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=Mozilla.Firefox  -e";
             process.StartInfo = startInfo;
@@ -3919,7 +4033,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=Brave.Brave  -e";
             process.StartInfo = startInfo;
@@ -3931,7 +4045,7 @@ namespace ET
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=Google.Chrome  -e";
             process.StartInfo = startInfo;
@@ -3940,7 +4054,7 @@ namespace ET
 
         public void button7_Click(object sender, EventArgs e)
         {
-
+            
         }
 
 
