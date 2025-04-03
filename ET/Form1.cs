@@ -109,9 +109,10 @@ namespace ET
 
         public bool isswitch = false;
         public bool issillent = false;
+        public bool engforced = false;
 
         string ETVersion = "E.T. ver 5.5.1";
-        string ETBuild = "16.03.2025";
+        string ETBuild = "03.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -868,6 +869,40 @@ namespace ET
                 groupBox4.Text = "Other (6)";
                 groupBox5.Text = "Expert Mode (6)";
 
+                button1.Text = "Performance";
+                button2.Text = "Visual";
+                button3.Text = "Privacy";
+                selectall0 = "Select All";
+                selectall1 = "Unselect All";
+
+                button4.Text = "Select All";
+                button4.Font = new Font("Consolas", 13, FontStyle.Regular);
+
+                toolStripButton2.Text = "Backup";
+                toolStripButton1.Text = "Restore";
+                toolStripButton3.Text = "About";
+                toolStripButton4.Text = "Donate";
+
+                 msgend = "Everything has been done. Reboot is recommended.";
+                 msgerror = "No option selected.";
+
+                rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
+                restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
+                downloadSoftwareToolStripMenuItem.Text = "Download Software";
+                toolStripDropDownButton1.Text = "Extras";
+                diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
+                controlPanelToolStripMenuItem.Text = "Control Panel";
+                deviceManagerToolStripMenuItem.Text = "Device Manager";
+                uACSettingsToolStripMenuItem.Text = "UAC Settings";
+                servicesToolStripMenuItem.Text = "Services";
+                remoteDesktopToolStripMenuItem.Text = "Remote Desktop";
+                eventViewerToolStripMenuItem.Text = "Event Viewer";
+                resetNetworkToolStripMenuItem.Text = "Reset Network";
+                updateApplicationsToolStripMenuItem.Text = "Update Applications";
+                windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
+                rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
+                makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
+
                 chck1.Text = "Disable Edge WebWidget";
                 chck2.Text = "Power Option to Ultimate Perform.";
                 chck3.Text = "Split Threshold for Svchost";
@@ -986,6 +1021,7 @@ namespace ET
                     updateApplicationsToolStripMenuItem.Text = "Aktualizuj Aplikacje";
                     windowsLicenseKeyToolStripMenuItem.Text = "Pokaż Klucz Windows";
                     rebootToBIOSToolStripMenuItem.Text = "Uruchom do BIOSu";
+                    makeETISOToolStripMenuItem.Text = "Stwórz Zoptimizowane .ISO z ET";
 
                     msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                     msgerror = "Nie wybrano żadnej opcji.";
@@ -1108,6 +1144,7 @@ namespace ET
                     updateApplicationsToolStripMenuItem.Text = "Обновление приложений";
                     windowsLicenseKeyToolStripMenuItem.Text = "Показать лицензионный ключ Windows";
                     rebootToBIOSToolStripMenuItem.Text = "Запуск BIOS";
+                    makeETISOToolStripMenuItem.Text = "Сделать ET-оптимизированный .ISO";
 
                     msgend = "Завершено. Рекомендуется перезапуск.";
                     msgerror = "Ни один вариант не был выбран.";
@@ -1157,6 +1194,7 @@ namespace ET
                     updateApplicationsToolStripMenuItem.Text = "Apps aktualis.";
                     windowsLicenseKeyToolStripMenuItem.Text = "Windows-Key anzeigen";
                     rebootToBIOSToolStripMenuItem.Text = "In BIOS starten";
+                    makeETISOToolStripMenuItem.Text = "Erstellen Sie eine ET-optimierte .ISO-Datei";
 
                     msgend = "Abgeschlossen. Neustart empfohlen.";
                     msgerror = "Keine Option gewählt.";
@@ -1370,6 +1408,7 @@ namespace ET
                     updateApplicationsToolStripMenuItem.Text = "Mettre à Jour les Applications";
                     windowsLicenseKeyToolStripMenuItem.Text = "Afficher la Clé Windows";
                     rebootToBIOSToolStripMenuItem.Text = "Démarrer dans le BIOS";
+                    makeETISOToolStripMenuItem.Text = "Créer un fichier ISO optimisé avec ET";
 
                     msgend = "Terminé. Un redémarrage est recommandé.";
                     msgerror = "Aucune option sélectionnée.";
@@ -1446,6 +1485,11 @@ namespace ET
                     chck68.Text = "Nettoyer dossier WinSxS";
                     chck69.Text = "Supprimer Copilot";
                     chck70.Text = "Désactiver 'En savoir plus'";
+                }
+                if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
+                {
+                    engforced = true;
+                    DefaultLang();
                 }
             }
             ChangeLang();
@@ -4054,7 +4098,36 @@ namespace ET
 
         public void button7_Click(object sender, EventArgs e)
         {
-            
+            if (engforced == true)
+            {
+                Hide();
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+                Console.WriteLine(Application.ExecutablePath);
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = "/C start " + Application.ExecutablePath;
+                process.StartInfo = startInfo;
+                process.Start();
+                Close();
+            }
+            else
+            {
+                //Application.Restart();
+                Hide();
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+                Console.WriteLine(Application.ExecutablePath);
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "cmd.exe";
+                startInfo.Arguments = "/C start " + Application.ExecutablePath + " /english";
+                process.StartInfo = startInfo;
+                process.Start();
+                Close();
+            }
+
         }
 
 
