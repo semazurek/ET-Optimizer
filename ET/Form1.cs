@@ -1086,7 +1086,7 @@ namespace ET
                     updateApplicationsToolStripMenuItem.Text = "Aktualizuj Aplikacje";
                     windowsLicenseKeyToolStripMenuItem.Text = "Pokaż Klucz Windows";
                     rebootToBIOSToolStripMenuItem.Text = "Uruchom do BIOSu";
-                    makeETISOToolStripMenuItem.Text = "Stwórz Zoptimizowane .ISO z ET";
+                    makeETISOToolStripMenuItem.Text = "Stwórz Zoptymalizowane .ISO z ET";
 
                     msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                     msgerror = "Nie wybrano żadnej opcji.";
@@ -3639,7 +3639,7 @@ namespace ET
             var searcher = new ManagementObjectSearcher("SELECT OA3xOriginalProductKey FROM SoftwareLicensingService");
             foreach (var obj in searcher.Get())
             {
-                MessageBox.Show("Klucz produktu: " + obj["OA3xOriginalProductKey"], "Windows Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(" " + obj["OA3xOriginalProductKey"], "Windows Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
