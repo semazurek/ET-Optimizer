@@ -3072,14 +3072,8 @@ namespace ET
                             startInfo.Arguments = "-Command winget install --id=Malwarebytes.AdwCleaner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-
-                            System.Diagnostics.Process process2 = new System.Diagnostics.Process();
-                            System.Diagnostics.ProcessStartInfo startInfo2 = new System.Diagnostics.ProcessStartInfo();
-                            startInfo2.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo2.FileName = "adwcleaner";
-                            startInfo2.Arguments = "/eula /clean /noreboot";
-                            process2.StartInfo = startInfo2;
-                            process2.Start(); process2.WaitForExit();
+                            System.Threading.Thread.Sleep(1000);
+                            Process.Start("adwcleaner", "/eula /clean /noreboot");
 
                             break;
                         case "Clean WinSxS Folder":
@@ -3802,7 +3796,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Guru3D.Afterburner  -e";
+            startInfo.Arguments = "/C winget install --id=Guru3D.Afterburner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3814,7 +3808,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=VideoLAN.VLC  -e";
+            startInfo.Arguments = "/C winget install --id=VideoLAN.VLC --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3826,7 +3820,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=abbodi1406.vcredist  -e";
+            startInfo.Arguments = "/C winget install --id=abbodi1406.vcredist --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3838,7 +3832,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Notepad++.Notepad++  -e";
+            startInfo.Arguments = "/C winget install --id=Notepad++.Notepad++ --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3850,7 +3844,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Oracle.JavaRuntimeEnvironment  -e";
+            startInfo.Arguments = "/C winget install --id=Oracle.JavaRuntimeEnvironment --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3862,7 +3856,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=7zip.7zip  -e";
+            startInfo.Arguments = "/C winget install --id=7zip.7zip --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3874,7 +3868,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox  -e";
+            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3886,7 +3880,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Brave.Brave  -e";
+            startInfo.Arguments = "/C winget install --id=Brave.Brave --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -3898,7 +3892,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Google.Chrome  -e";
+            startInfo.Arguments = "/C winget install --id=Google.Chrome --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
