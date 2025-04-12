@@ -141,7 +141,7 @@ namespace ET
                 }
                 else
                 {
-                    Console.WriteLine($"Nieznana gałąź rejestru: {hivePath}");
+                    Console.WriteLine($"Yknown registry tree: {hivePath}");
                     return;
                 }
 
@@ -152,26 +152,9 @@ namespace ET
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Błąd ustawiania: {hivePath}\\{name}: {ex.Message}");
+                Console.WriteLine($"Settings Error: {hivePath}\\{name}: {ex.Message}");
             }
         }
-
-        public void KillProcess(string name)
-{
-    try
-    {
-        foreach (var proc in Process.GetProcessesByName(name))
-        {
-            proc.Kill();
-            proc.WaitForExit(); // czeka aż się zakończy
-        }
-    }
-    catch (Exception ex)
-    {
-        // Dla debugowania:
-        Console.WriteLine("Błąd przy zamykaniu procesu: " + ex.Message);
-    }
-}
 
         public void StopService(string serviceName)
         {
@@ -3263,7 +3246,7 @@ namespace ET
                         case "Remove Microsoft OneDrive":
                             Console.WriteLine(checkBox.Text); done++;
 
-                            KillProcess("OneDrive.exe");
+                            Process.Start("cmd.exe", "/c taskkill /F /IM OneDrive.exe /T");
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
