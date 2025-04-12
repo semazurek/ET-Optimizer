@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
 [assembly: AssemblyTitle("ET-Optimizer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Optimize performance, improve privacy, and remove bloatware.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sebastian Mazurek")]
 [assembly: AssemblyProduct("ET-Optimizer")]
-[assembly: AssemblyCopyright("Sebastian Mazurek Copyright ©  2024")]
+[assembly: AssemblyCopyright("Sebastian Mazurek Copyright ©  2025")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,6 +30,6 @@ using System.Runtime.InteropServices;
 //      Numer kompilacji
 //      Poprawka
 //
-[assembly: AssemblyVersion("5.5.1.0")]
-[assembly: AssemblyFileVersion("5.5.1.0")]
+[assembly: AssemblyVersion("5.6.0.0")]
+[assembly: AssemblyFileVersion("5.6.0.0")]
 [assembly: NeutralResourcesLanguage("en")]
