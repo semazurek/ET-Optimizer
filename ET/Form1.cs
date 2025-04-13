@@ -113,7 +113,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 5.6";
-        string ETBuild = "12.04.2025";
+        string ETBuild = "13.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -1900,6 +1900,8 @@ namespace ET
                             SetRegistryValue(@"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\FlipAhead\", "FPEnabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\PhishingFilter\", "EnabledV9", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\\SOFTWARE\Policies\Microsoft\Edge\", "HideFirstRunExperience", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Nagle's Alg. (Delayed ACKs)":
                             Console.WriteLine(checkBox.Text); done++;
@@ -2161,6 +2163,8 @@ namespace ET
                             break;
                         case "Remove Bloatware (Preinstalled)":
                             Console.WriteLine(checkBox.Text); done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications\", "ConfigureChatAutoInstall", 0, RegistryValueKind.DWord);
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -2438,6 +2442,8 @@ namespace ET
                             Console.WriteLine(checkBox.Text); done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\Windows\WindowsCopilot\", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot\", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "ShowCopilotButton", 0, RegistryValueKind.DWord);
 
@@ -3040,6 +3046,8 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds\", "EnableFeeds", 0, RegistryValueKind.DWord);
 
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Dsh\", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
+
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command winget uninstall \"windows web experience pack\" --accept-source-agreements";
@@ -3146,6 +3154,16 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates\", "ForceUpdateFromMU", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\", "DisableBlockAtFirstSeen", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Systray", "HideSystray", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components\", "ServiceEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components\", "NotifyMalicious", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components\", "NotifyPasswordReuse", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\WTDS\Components\", "NotifyUnsafeApp", 0, RegistryValueKind.DWord);
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
