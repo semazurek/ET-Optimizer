@@ -226,7 +226,7 @@ namespace ET
 
                 if (checkBox.Checked == true) { cu++; }
             }
-            if (cu == 7)
+            if (cu == 8)
             {
                 groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button2.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -255,7 +255,7 @@ namespace ET
             }
             int allc = ci + cu + cy + ct;
             //all without expert mode
-            if (allc == 65) 
+            if (allc == 66) 
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -927,8 +927,16 @@ namespace ET
             chck71.Tag = "Enable Long Paths";
             chck71.Checked = true;
             chck71.Click += c_p;
-            chck71.TabIndex = 57;
+            chck71.TabIndex = 71;
             panel1.Controls.Add(chck71);
+            CheckBox chck72 = new CheckBox();
+            chck72.Location = new System.Drawing.Point(10, 180);
+            chck72.Size = new System.Drawing.Size(260, 25);
+            chck72.Tag = "Enable Old Context Menu";
+            chck72.Checked = true;
+            chck72.Click += c_p;
+            chck72.TabIndex = 72;
+            panel3.Controls.Add(chck72);
 
             //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
@@ -938,7 +946,7 @@ namespace ET
                 button7.Text = "en-US";
                 groupBox1.Text = "Performance Tweaks (34)";
                 groupBox2.Text = "Privacy (18)";
-                groupBox3.Text = "Visual Tweaks (7)";
+                groupBox3.Text = "Visual Tweaks (8)";
                 groupBox4.Text = "Other (6)";
                 groupBox5.Text = "Expert Mode (6)";
 
@@ -1047,6 +1055,7 @@ namespace ET
                 chck69.Text = "Remove Copilot";
                 chck70.Text = "Remove Learn about this photo";
                 chck71.Text = "Enable Long System Paths";
+                chck72.Text = "Enable Old Context Menu";
 
                 toolStripLabel1.Text = "Build: Public | " + ETBuild;
             }
@@ -1062,7 +1071,7 @@ namespace ET
                     Console.WriteLine("Wykryto Polski");
                     groupBox1.Text = "Poprawki Wydajności (34)";
                     groupBox2.Text = "Prywatność (18)";
-                    groupBox3.Text = "Poprawki Wizualne (7)";
+                    groupBox3.Text = "Poprawki Wizualne (8)";
                     groupBox4.Text = "Inne (6)";
                     groupBox5.Text = "Tryb Eksperta (6)";
 
@@ -1173,6 +1182,7 @@ namespace ET
                     chck69.Text = "Usuń Copilot";
                     chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
                     chck71.Text = "Włącz długie ścieżki systemowe";
+                    chck72.Text = "Włącz stare menu kontekstowe";
 
                 }
 
@@ -1182,7 +1192,7 @@ namespace ET
                     Console.WriteLine("Russian detected");
                     groupBox1.Text = "Настройки производительности (34)";
                     groupBox2.Text = "Конфиденциальность (18)";
-                    groupBox3.Text = "Визуальные настройки (7)";
+                    groupBox3.Text = "Визуальные настройки (8)";
                     groupBox4.Text = "Другие (6)";
                     groupBox5.Text = "Экспертный режим (6)";
 
@@ -1233,7 +1243,7 @@ namespace ET
                     Console.WriteLine("German detected");
                     groupBox1.Text = "Leistungs-Optim. (33)";
                     groupBox2.Text = "Privatsphäre (18)";
-                    groupBox3.Text = "Visuelle Tweaks (7)";
+                    groupBox3.Text = "Visuelle Tweaks (8)";
                     groupBox4.Text = "Andere (6)";
                     groupBox5.Text = "Expertenmodus (6)";
 
@@ -1345,6 +1355,7 @@ namespace ET
                     chck69.Text = "Copilot löschen";
                     chck70.Text = "'Über Bild mehr erfahren' aus";
                     chck71.Text = "Lange Pfade aktivieren";
+                    chck72.Text = "Altes Kontextmenü aktivieren";
                 }
 
                 if (cinfo.Name == "pt-BR")
@@ -1369,7 +1380,7 @@ namespace ET
 
                     groupBox1.Text = "Ajustes de desempenho (33)";
                     groupBox2.Text = "Privacidade (18)";
-                    groupBox3.Text = "Ajustes visuais (7)";
+                    groupBox3.Text = "Ajustes visuais (8)";
                     groupBox4.Text = "Outros (6)";
                     groupBox5.Text = "Modo especialista (6)";
 
@@ -1444,15 +1455,16 @@ namespace ET
                     chck69.Text = "Remover Copilot";
                     chck70.Text = "Remover 'Saiba mais foto'";
                     chck71.Text = "Ativar caminhos longos";
+                    chck72.Text = "Habilitar menu de contexto antigo";
 
                 }
                 if (cinfo.Name == "fr-FR")
                 {
                     button7.Text = "fr-FR";
                     Console.WriteLine("French detected");
-                    groupBox1.Text = "Améliorations de Performance (33)";
+                    groupBox1.Text = "Améliorations de Performance (34)";
                     groupBox2.Text = "Confidentialité (18)";
-                    groupBox3.Text = "Améliorations Visuelles (7)";
+                    groupBox3.Text = "Améliorations Visuelles (8)";
                     groupBox4.Text = "Autres (6)";
                     groupBox5.Text = "Mode Expert (6)";
 
@@ -1563,6 +1575,7 @@ namespace ET
                     chck69.Text = "Supprimer Copilot";
                     chck70.Text = "Désactiver 'En savoir plus'";
                     chck71.Text = "Activer les chemins longs";
+                    chck72.Text = "Activer l'ancien menu contextuel";
                 }
                 if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
                 {
@@ -1729,7 +1742,7 @@ namespace ET
             button5.Enabled = false;
             textBox1.Visible = true;
 
-            int alltodo = 0; //max 70
+            int alltodo = 0; //max 72
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -2373,9 +2386,9 @@ namespace ET
                         case "Disable Skype Telemetry":
                             Console.WriteLine(checkBox.Text); done++;
 
-                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW\", "WPPFilePath", @"%%SYSTEMDRIVE%%\TEMP\WPPMedia\", RegistryValueKind.String);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW\", "WPPFilePath", @"%SYSTEMDRIVE%\TEMP\WPPMedia\", RegistryValueKind.String);
 
-                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\", "WPPFilePath", @"%%SYSTEMDRIVE%%\TEMP\Tracing\WPPMedia\", RegistryValueKind.String);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\", "WPPFilePath", @"%SYSTEMDRIVE%\TEMP\Tracing\WPPMedia\", RegistryValueKind.String);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW\", "EnableTracing", 0, RegistryValueKind.DWord);
 
@@ -2555,6 +2568,11 @@ namespace ET
                             Console.WriteLine(checkBox.Text); done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel\", "{2cc5ca98-6485-489a-920e-b3e88a6ccce3}", 1, RegistryValueKind.DWord);
+                            break;
+                        case "Enable Old Context Menu":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", @"", @"", RegistryValueKind.String);
                             break;
 
                     }
@@ -3189,7 +3207,7 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
-                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe\", "Debugger", @"%%windir%%\System32\taskkill.exe", RegistryValueKind.String);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\smartscreen.exe\", "Debugger", @"%windir%\System32\taskkill.exe", RegistryValueKind.String);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations\", "DefaultFileTypeRisk", 6152, RegistryValueKind.DWord);
 
@@ -3675,6 +3693,11 @@ namespace ET
             var searcher = new ManagementObjectSearcher("SELECT OA3xOriginalProductKey FROM SoftwareLicensingService");
             foreach (var obj in searcher.Get())
             {
+                string productKeycopy = obj["OA3xOriginalProductKey"]?.ToString();
+                if (!string.IsNullOrEmpty(productKeycopy))
+                {
+                    Clipboard.SetText(productKeycopy);
+                }
                 MessageBox.Show(" " + obj["OA3xOriginalProductKey"], "Windows Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }

@@ -224,7 +224,7 @@
             this.groupBox3.Size = new System.Drawing.Size(273, 100);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Visual Tweaks (7)";
+            this.groupBox3.Text = "Visual Tweaks (8)";
             // 
             // panel3
             // 
