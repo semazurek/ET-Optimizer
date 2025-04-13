@@ -188,7 +188,7 @@ namespace ET
                 
                 if (checkBox.Checked == true) { ct++; }
             }
-            if (ct == 33) 
+            if (ct == 34) 
             {
                 groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -254,7 +254,7 @@ namespace ET
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             }
             int allc = ci + cu + cy + ct;
-            
+            //all without expert mode
             if (allc == 65) 
             {
                 selecall++;
@@ -921,6 +921,14 @@ namespace ET
             chck70.Click += c_p;
             chck70.TabIndex = 70;
             panel3.Controls.Add(chck70);
+            CheckBox chck71 = new CheckBox();
+            chck71.Location = new System.Drawing.Point(285, 405);
+            chck71.Size = new System.Drawing.Size(260, 25);
+            chck71.Tag = "Enable Long Paths";
+            chck71.Checked = true;
+            chck71.Click += c_p;
+            chck71.TabIndex = 57;
+            panel1.Controls.Add(chck71);
 
             //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
@@ -928,7 +936,7 @@ namespace ET
             void DefaultLang()
             {
                 button7.Text = "en-US";
-                groupBox1.Text = "Performance Tweaks (33)";
+                groupBox1.Text = "Performance Tweaks (34)";
                 groupBox2.Text = "Privacy (18)";
                 groupBox3.Text = "Visual Tweaks (7)";
                 groupBox4.Text = "Other (6)";
@@ -1038,6 +1046,7 @@ namespace ET
                 chck68.Text = "Clean WinSxS Folder";
                 chck69.Text = "Remove Copilot";
                 chck70.Text = "Remove Learn about this photo";
+                chck71.Text = "Enable Long System Paths";
 
                 toolStripLabel1.Text = "Build: Public | " + ETBuild;
             }
@@ -1051,7 +1060,7 @@ namespace ET
                 {
                     button7.Text = "pl-PL";
                     Console.WriteLine("Wykryto Polski");
-                    groupBox1.Text = "Poprawki Wydajności (33)";
+                    groupBox1.Text = "Poprawki Wydajności (34)";
                     groupBox2.Text = "Prywatność (18)";
                     groupBox3.Text = "Poprawki Wizualne (7)";
                     groupBox4.Text = "Inne (6)";
@@ -1163,6 +1172,7 @@ namespace ET
                     chck68.Text = "Wyczyść folder WinSxS";
                     chck69.Text = "Usuń Copilot";
                     chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
+                    chck71.Text = "Włącz długie ścieżki systemowe";
 
                 }
 
@@ -1170,7 +1180,7 @@ namespace ET
                 {
                     button7.Text = "ru-RU";
                     Console.WriteLine("Russian detected");
-                    groupBox1.Text = "Настройки производительности (33)";
+                    groupBox1.Text = "Настройки производительности (34)";
                     groupBox2.Text = "Конфиденциальность (18)";
                     groupBox3.Text = "Визуальные настройки (7)";
                     groupBox4.Text = "Другие (6)";
@@ -1334,6 +1344,7 @@ namespace ET
                     chck68.Text = "WinSxS Ordner säubern";
                     chck69.Text = "Copilot löschen";
                     chck70.Text = "'Über Bild mehr erfahren' aus";
+                    chck71.Text = "Lange Pfade aktivieren";
                 }
 
                 if (cinfo.Name == "pt-BR")
@@ -1432,6 +1443,7 @@ namespace ET
                     chck68.Text = "Limpar pasta WinSxS";
                     chck69.Text = "Remover Copilot";
                     chck70.Text = "Remover 'Saiba mais foto'";
+                    chck71.Text = "Ativar caminhos longos";
 
                 }
                 if (cinfo.Name == "fr-FR")
@@ -1550,6 +1562,7 @@ namespace ET
                     chck68.Text = "Nettoyer dossier WinSxS";
                     chck69.Text = "Supprimer Copilot";
                     chck70.Text = "Désactiver 'En savoir plus'";
+                    chck71.Text = "Activer les chemins longs";
                 }
                 if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
                 {
@@ -2260,6 +2273,11 @@ namespace ET
                                     Console.WriteLine($"Error when deleting {entry}: {ex.Message}");
                                 }
                             }
+                            break;
+                            case "Enable Long Paths":
+                                Console.WriteLine(checkBox.Text); done++;
+
+                                SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\", "LongPathsEnabled", 1, RegistryValueKind.DWord);
                             break;
                     }
                 }

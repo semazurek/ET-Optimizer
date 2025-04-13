@@ -264,7 +264,7 @@
             this.groupBox5.Size = new System.Drawing.Size(200, 100);
             this.groupBox5.TabIndex = 0;
             this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Expert Mode (5)";
+            this.groupBox5.Text = "Expert Mode (6)";
             // 
             // panel5
             // 
