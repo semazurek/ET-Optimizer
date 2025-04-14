@@ -28,7 +28,6 @@ using System.Xml.Linq;
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
 // https://buymeacoffee.com/semazurek
-// https://www.paypal.com/paypalme/rikey
 
 namespace ET
 {
@@ -1647,10 +1646,11 @@ namespace ET
         private void Form1_Load(object sender, EventArgs e)
         {
             // Create a region with rounded corners
-            IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
+            //IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
+            this.FormBorderStyle = FormBorderStyle.None;       
+            //this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
+            //this.Opacity = 0.95;
 
-            // Apply the region to the form
-            //this.Region = Region.FromHrgn(regionHandle);
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -1882,6 +1882,8 @@ namespace ET
                             break;
                         case "Turn Off Background Apps":
                             Console.WriteLine(checkBox.Text); done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\", "LetAppsRunInBackground", 2, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\", "GlobalUserDisabled", 1, RegistryValueKind.DWord);
 
@@ -2170,7 +2172,6 @@ namespace ET
                                 process.StartInfo = startInfo;
                                 process.Start(); process.WaitForExit();
 
-
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                                 startInfo.FileName = "cmd.exe";
                                 startInfo.Arguments = "/C sc config " + s + " start= disabled";
@@ -2186,6 +2187,8 @@ namespace ET
                                 process.StartInfo = startInfo;
                                 process.Start(); process.WaitForExit();
                             }
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\GameBar\", "AutoGameModeEnabled", 1, RegistryValueKind.DWord);
                             break;
                         case "Remove Bloatware (Preinstalled)":
                             Console.WriteLine(checkBox.Text); done++;
@@ -3397,12 +3400,6 @@ namespace ET
                             Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run\", true)?.DeleteValue("SecurityHealth", false);
 
                             Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Software\Microsoft\Windows\CurrentVersion\Run\", true)?.DeleteValue("SecurityHealth", false);
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C reg delete \"HKCR\\*\\shellex\\ContextMenuHandlers\\EPP\" /f";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
 
                             Registry.ClassesRoot.DeleteSubKeyTree(@"Directory\shellex\ContextMenuHandlers\EPP\", false);
                             Registry.ClassesRoot.DeleteSubKeyTree(@"Drive\shellex\ContextMenuHandlers\EPP\", false);
