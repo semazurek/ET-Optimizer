@@ -113,7 +113,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 5.6";
-        string ETBuild = "13.04.2025";
+        string ETBuild = "14.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -3116,7 +3116,7 @@ namespace ET
                             startInfo.Arguments = "-Command winget install --id=Malwarebytes.AdwCleaner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            System.Threading.Thread.Sleep(1000);
+                            System.Threading.Thread.Sleep(8000);
                             Process.Start("adwcleaner", "/eula /clean /noreboot");
 
                             break;
