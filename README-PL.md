@@ -25,6 +25,11 @@ ET Optimizer
 
 Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
 
+Początkowo ET był prostym plikiem wsadowym (.bat), który z czasem ewoluował w plik .bat z implementacjami vbs i powershell, a następnie został całkowicie przepisał na powershell. Z biegiem lat stał się niemal w pełni rozwiniętą aplikacją C#.
+
+Pierwsza wersja pojawiła się w prostej wersji do użytku osobistego w 2021 roku.
+Do tej pory projekt rozrósł się do: 4161 linii kodu, 860+ commitów, przetłumaczonego na 6 języków i jest dalej rozwijany z pasją.
+
 <p align="center">
 <a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-PL.md"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
 <a href="https://github.com/semazurek/ET-Optimizer"><img src="https://github.com/user-attachments/assets/177f0eb1-f371-4cdd-bbce-9f451e47431d"width="48"></a>
