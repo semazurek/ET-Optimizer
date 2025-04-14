@@ -2329,11 +2329,142 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
+
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\CompatTelRunner.exe\" /v Debugger /t REG_SZ /d \"%windir%\\System32\\taskkill.exe\" /f && REG ADD \"HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\DeviceCensus.exe\" /v Debugger /t REG_SZ /d \"%windir%\\System32\\taskkill.exe\" /f && reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Device Metadata\" /v PreventDeviceMetadataFromNetwork /t REG_DWORD /d 1 /f && reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\MRT\" /v DontOfferThroughWUAU /t REG_DWORD /d 1 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\SQMClient\\Windows\" /v \"CEIPEnable\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v \"AITEnable\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\AppCompat\" /v \"DisableUAR\" /t REG_DWORD /d 1 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection\" /v \"AllowTelemetry\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\AutoLogger-Diagtrack-Listener\" /v \"Start\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\WMI\\AutoLogger\\SQMLogger\" /v \"Start\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Privacy\" /v \"TailoredExperiencesWithDiagnosticDataEnabled\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SYSTEM\\ControlSet001\\Control\\WMI\\Autologger\\AutoLogger-Diagtrack-Listener\" /v \"Start\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\dmwappushservice\" /v \"Start\" /t REG_DWORD /d 4 /f && reg add \"HKLM\\SYSTEM\\ControlSet001\\Services\\DiagTrack\" /v \"Start\" /t REG_DWORD /d 4 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\Common\\ClientTelemetry\" /v \"DisableTelemetry\" /t REG_DWORD /d 1 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ClientTelemetry\" /v \"DisableTelemetry\" /t REG_DWORD /d 1 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\17.0\\Common\\ClientTelemetry\" /v \"DisableTelemetry\" /t REG_DWORD /d 1 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\Common\\ClientTelemetry\" /v \"VerboseLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ClientTelemetry\" /v \"VerboseLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\15.0\\Outlook\\Options\\Mail\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Outlook\\Options\\Mail\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\15.0\\Outlook\\Options\\Calendar\" /v \"EnableCalendarLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Outlook\\Options\\Calendar\" /v \"EnableCalendarLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\15.0\\Word\\Options\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Word\\Options\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\17.0\\Word\\Options\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Office\\15.0\\OSM\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Office\\16.0\\OSM\" /v \"EnableLogging\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Office\\15.0\\OSM\" /v \"EnableUpload\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Office\\16.0\\OSM\" /v \"EnableUpload\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Policies\\Microsoft\\Office\\17.0\\OSM\" /v \"EnableUpload\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\15.0\\Common\\Feedback\" /v \"Enabled\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Common\\Feedback\" /v \"Enabled\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\15.0\\Common\" /v \"QMEnabled\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Common\" /v \"QMEnabled\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\SOFTWARE\\Microsoft\\Office\\17.0\\Common\" /v \"QMEnabled\" /t REG_DWORD /d 0 /f && sc stop VSStandardCollectorService150 && sc config VSStandardCollectorService150 start= disabled && reg add \"HKLM\\Software\\Wow6432Node\\Microsoft\\VSCommon\\14.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Wow6432Node\\Microsoft\\VSCommon\\15.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Wow6432Node\\Microsoft\\VSCommon\\16.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Wow6432Node\\Microsoft\\VSCommon\\17.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Microsoft\\VSCommon\\14.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Microsoft\\VSCommon\\15.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Microsoft\\VSCommon\\16.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Microsoft\\VSCommon\\17.0\\SQM\" /v \"OptIn\" /t REG_DWORD /d 0 /f && reg add \"HKLM\\Software\\Microsoft\\VisualStudio\\Telemetry\" /v \"TurnOffSwitch\" /t REG_DWORD /d 1 /f && reg add \"HKLM\\Software\\Policies\\Microsoft\\VisualStudio\\Feedback\" /v \"DisableFeedbackDialog\" /t REG_DWORD /d 1 /f && reg add \"HKLM\\Software\\Policies\\Microsoft\\VisualStudio\\Feedback\" /v \"DisableEmailInput\" /t REG_DWORD /d 1 /f && reg add \"HKLM\\Software\\Policies\\Microsoft\\VisualStudio\\Feedback\" /v \"DisableScreenshotCapture\" /t REG_DWORD /d 1 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Google\\Chrome\" /v \"MetricsReportingEnabled\" /t REG_SZ /d 0 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Google\\Chrome\" /v \"ChromeCleanupEnabled\" /t REG_SZ /d 0 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Google\\Chrome\" /v \"ChromeCleanupReportingEnabled\" /t REG_SZ /d 0 /f && reg add \"HKLM\\SOFTWARE\\Policies\\Google\\Chrome\" /v \"MetricsReportingEnabled\" /t REG_SZ /d 0 /f && cmd /c taskkill /f /im ccleaner.exe && cmd /c taskkill /f /im ccleaner64.exe && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"HomeScreen\" /t REG_SZ /d 2 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"Monitoring\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"HelpImproveCCleaner\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"SystemMonitoring\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"UpdateAuto\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"UpdateCheck\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"CheckTrialOffer\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"(Cfg)HealthCheck\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"(Cfg)QuickClean\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"(Cfg)QuickCleanIpm\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"(Cfg)SoftwareUpdater\" /t REG_DWORD /d 0 /f && reg add \"HKCU\\Software\\Piriform\\CCleaner\" /v \"(Cfg)SoftwareUpdaterIpm\" /t REG_DWORD /d 0 /f";
+                            startInfo.Arguments = "/C sc stop VSStandardCollectorService150 && sc config VSStandardCollectorService150 start= disabled && taskkill /f /im ccleaner.exe && cmd /c taskkill /f /im ccleaner64.exe";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)SoftwareUpdaterIpm", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)SoftwareUpdater", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)QuickCleanIpm", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)QuickClean", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)HealthCheck", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "CheckTrialOffer", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "UpdateCheck", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "UpdateAuto", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "SystemMonitoring", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "HelpImproveCCleaner", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "Monitoring", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", "HomeScreen", 2, RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Google\Chrome\", "MetricsReportingEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Google\Chrome\", "ChromeCleanupReportingEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Google\Chrome\", "ChromeCleanupEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Google\Chrome\", "MetricsReportingEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Policies\Microsoft\VisualStudio\Feedback\", "DisableScreenshotCapture", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Policies\Microsoft\VisualStudio\Feedback\", "DisableEmailInput", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Policies\Microsoft\VisualStudio\Feedback\", "DisableFeedbackDialog", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Microsoft\VisualStudio\Telemetry\", "TurnOffSwitch", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Microsoft\VSCommon\17.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Microsoft\VSCommon\16.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Microsoft\VSCommon\15.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Microsoft\VSCommon\14.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Wow6432Node\Microsoft\VSCommon\17.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Wow6432Node\Microsoft\VSCommon\16.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Wow6432Node\Microsoft\VSCommon\15.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Wow6432Node\Microsoft\VSCommon\14.0\SQM\", "OptIn", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\17.0\Common\", "QMEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Common\", "QMEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\15.0\Common\", "QMEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Common\Feedback\", "Enabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\15.0\Common\Feedback\", "Enabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Office\17.0\OSM\", "EnableUpload", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\OSM\", "EnableUpload", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Office\15.0\OSM\", "EnableUpload", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\OSM\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Office\15.0\OSM\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\17.0\Word\Options\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Word\Options\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\15.0\Word\Options\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Calendar\", "EnableCalendarLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Calendar\", "EnableCalendarLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Outlook\Options\Mail\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Mail\", "EnableLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ClientTelemetry\", "VerboseLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\Common\ClientTelemetry\", "VerboseLogging", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\17.0\Common\ClientTelemetry\", "DisableTelemetry", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry\", "DisableTelemetry", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\Common\ClientTelemetry\", "DisableTelemetry", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Services\DiagTrack\", "Start", 4, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Services\dmwappushservice\", "Start", 4, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener\", "Start", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Microsoft\Windows\CurrentVersion\Privacy\", "TailoredExperiencesWithDiagnosticDataEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\SQMLogger\", "Start", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\WMI\AutoLogger\AutoLogger-Diagtrack-Listener\", "Start", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection\", "AllowTelemetry", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat\", "DisableUAR", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat\", "AITEnable", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\SQMClient\Windows\", "CEIPEnable", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\MRT\", "DontOfferThroughWUAU", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\Software\Policies\Microsoft\Windows\DataCollection\", "AllowTelemetry", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection\", "AllowTelemetry", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata\", "PreventDeviceMetadataFromNetwork", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\DeviceCensus.exe\", "Debugger", @"%windir%\System32\taskkill.exe", RegistryValueKind.String);
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl\StorageTelemetry\", "DeviceDumpEnabled", 0, RegistryValueKind.DWord);
 
