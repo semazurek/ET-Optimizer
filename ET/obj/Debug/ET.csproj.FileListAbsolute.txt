@@ -208,3 +208,33 @@ C:\Users\Rikey\Desktop\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\
 C:\Users\Rikey\Desktop\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.csproj.Up2Date
 C:\Users\Rikey\Desktop\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\Rikey\Desktop\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.pdb
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\ET.exe.config
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\ET.exe
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\ET.pdb
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\Microsoft.Win32.TaskScheduler.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\System.Security.AccessControl.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\System.Security.Permissions.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\Microsoft.Win32.TaskScheduler.xml
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\System.Security.AccessControl.xml
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\System.Security.Permissions.xml
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\de\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\es\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\fr\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\it\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\ja\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\pl\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\ru\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\sv\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\tr\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\bin\Debug\zh-Hant\Microsoft.Win32.TaskScheduler.resources.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.csproj.AssemblyReference.cache
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.Properties.Resources.resources
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.csproj.GenerateResource.cache
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.csproj.CoreCompileInputs.cache
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.csproj.Up2Date
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.exe
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.pdb
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
