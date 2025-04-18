@@ -23,7 +23,7 @@ ET Optimizer
 
 
 
-Skrypt rozwijany na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
+Aplikacja rozwijana na podstawie wielu źródeł znalezionych w Internecie, przetestowanych i aktualizowanych dla różnych wersji systemu. </br>Cały skrypt zawiera się w 1 pliku, w celu jego działania wykorzystano komendy: wiersza poleceń, powershell, konfiguracji planu zasilania, konfiguracji rozruchu, zmiany rejestru, konfiguracji interfejsów sieciowych, wbudowanych narzędzi windows itp.
 
 Początkowo ET był prostym plikiem wsadowym (.bat), który z czasem ewoluował w plik .bat z implementacjami vbs i powershell, a następnie został całkowicie przepisany do powershell. Z biegiem lat stał się niemal w pełni rozwiniętą aplikacją C#.
 
