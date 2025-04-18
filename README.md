@@ -22,9 +22,9 @@ ET Optimizer
 
 
 
-Script developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
+Application developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
 
-Originally ET was a batch bat file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
+Originally ET was a batch script file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
 
 The first version appeared in a simple version for personal use in 2021.
 So far the project has grown to: 4161 lines of code, 860+ commits, translated into 6 languages ​​and is being developed further with love.
