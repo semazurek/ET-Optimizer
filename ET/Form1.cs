@@ -1,36 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+﻿using Microsoft.Win32;
+using System;
 using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Runtime.InteropServices;
-using System.Drawing.Drawing2D;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Windows.Forms.VisualStyles;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using System.Drawing;
 using System.Globalization;
-using System.Security.Policy;
+using System.IO;
+using System.Linq;
 using System.Management;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-using Microsoft.Win32;
 using System.Media;
-using System.ServiceProcess;
-using System.Xml.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.ServiceProcess;
 using System.Text.Json;
-using System.Deployment.Application;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 // Created by Rikey
-// https://github.com/semazurek/ET-Optimizer
-// https://buymeacoffee.com/semazurek
+// https://semazurek.github.io
 
 namespace ET
 {
@@ -73,24 +59,24 @@ namespace ET
         );
 
         public void FlushMem()
-      {
-         GC.Collect();
+        {
+            GC.Collect();
 
-         GC.WaitForPendingFinalizers();
+            GC.WaitForPendingFinalizers();
 
-         if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-         {
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+            {
 
-            SetProcessWorkingSetSize32Bit(System.Diagnostics
-               .Process.GetCurrentProcess().Handle, -1, -1);
+                SetProcessWorkingSetSize32Bit(System.Diagnostics
+                   .Process.GetCurrentProcess().Handle, -1, -1);
 
-         }
+            }
 
-         // if (Environment.Is64BitProcess)//
-         //    Console.WriteLine("64-bit process");//
-         // else//
-         //    Console.WriteLine("32-bit process");//
-      }
+            // if (Environment.Is64BitProcess)//
+            //    Console.WriteLine("64-bit process");//
+            // else//
+            //    Console.WriteLine("32-bit process");//
+        }
 
         public class MySR : ToolStripSystemRenderer
         {
@@ -188,10 +174,10 @@ namespace ET
             int ct = 0;
             foreach (CheckBox checkBox in panel1.Controls)
             {
-                
+
                 if (checkBox.Checked == true) { ct++; }
             }
-            if (ct == 34) 
+            if (ct == 35)
             {
                 groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -258,13 +244,13 @@ namespace ET
             }
             int allc = ci + cu + cy + ct;
             //all without expert mode
-            if (allc == 66) 
+            if (allc == 67)
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
                 button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button4.Text = selectall1;
-                
+
             }
             else
             {
@@ -318,8 +304,8 @@ namespace ET
             }
 
 
-            this.Text = ETVersion+"   -   " +CPUL;
-            label1.Text = ETVersion+"   -   " + CPUL;
+            this.Text = ETVersion + "   -   " + CPUL;
+            label1.Text = ETVersion + "   -   " + CPUL;
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
@@ -357,12 +343,12 @@ namespace ET
             toolStrip1.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
             toolStrip1.Size = new System.Drawing.Size(802, 25);
             textBox1.Location = new System.Drawing.Point(10, 70);
-            textBox1.Size = new System.Drawing.Size(860,360);
+            textBox1.Size = new System.Drawing.Size(860, 360);
             toolStripButton5.Visible = false;
 
             panel1.VerticalScroll.Enabled = false;
             panel1.VerticalScroll.Visible = false;
-            
+
             panel2.VerticalScroll.Enabled = false;
             panel2.VerticalScroll.Visible = false;
 
@@ -941,6 +927,14 @@ namespace ET
             chck72.Click += c_p;
             chck72.TabIndex = 72;
             panel3.Controls.Add(chck72);
+            CheckBox chck73 = new CheckBox();
+            chck73.Location = new System.Drawing.Point(10, 430);
+            chck73.Size = new System.Drawing.Size(260, 25);
+            chck73.Tag = "Disable Fullscreen Optimizations";
+            chck73.Checked = true;
+            chck73.Click += c_p;
+            chck73.TabIndex = 73;
+            panel1.Controls.Add(chck73);
 
             //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
@@ -948,7 +942,7 @@ namespace ET
             void DefaultLang()
             {
                 button7.Text = "en-US";
-                groupBox1.Text = "Performance Tweaks (34)";
+                groupBox1.Text = "Performance Tweaks (35)";
                 groupBox2.Text = "Privacy (18)";
                 groupBox3.Text = "Visual Tweaks (8)";
                 groupBox4.Text = "Other (6)";
@@ -968,9 +962,9 @@ namespace ET
                 toolStripButton3.Text = "About";
                 toolStripButton4.Text = "Donate";
 
-                 msgend = "Everything has been done. Reboot is recommended.";
-                 msgerror = "No option selected.";
-                 msgupdate = "A newer version of the application is available on GitHub!";
+                msgend = "Everything has been done. Reboot is recommended.";
+                msgerror = "No option selected.";
+                msgupdate = "A newer version of the application is available on GitHub!";
 
                 rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
                 restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
@@ -1061,6 +1055,7 @@ namespace ET
                 chck70.Text = "Remove Learn about this photo";
                 chck71.Text = "Enable Long System Paths";
                 chck72.Text = "Enable Old Context Menu";
+                chck73.Text = "Disable Fullscreen Optimizations";
 
                 toolStripLabel1.Text = "Build: Public | " + ETBuild;
             }
@@ -1074,7 +1069,7 @@ namespace ET
                 {
                     button7.Text = "pl-PL";
                     Console.WriteLine("Wykryto Polski");
-                    groupBox1.Text = "Poprawki Wydajności (34)";
+                    groupBox1.Text = "Poprawki Wydajności (35)";
                     groupBox2.Text = "Prywatność (18)";
                     groupBox3.Text = "Poprawki Wizualne (8)";
                     groupBox4.Text = "Inne (6)";
@@ -1189,6 +1184,7 @@ namespace ET
                     chck70.Text = "Wyłącz Dowiedz się o tym zdjęciu";
                     chck71.Text = "Włącz długie ścieżki systemowe";
                     chck72.Text = "Włącz stare menu kontekstowe";
+                    chck73.Text = "Wył. optymalizacje pełnoekranowe";
 
                 }
 
@@ -1196,7 +1192,7 @@ namespace ET
                 {
                     button7.Text = "ru-RU";
                     Console.WriteLine("Russian detected");
-                    groupBox1.Text = "Настройки производительности (34)";
+                    groupBox1.Text = "Настройки производительности (35)";
                     groupBox2.Text = "Конфиденциальность (18)";
                     groupBox3.Text = "Визуальные настройки (8)";
                     groupBox4.Text = "Другие (6)";
@@ -1248,7 +1244,7 @@ namespace ET
                 {
                     button7.Text = "de-DE";
                     Console.WriteLine("German detected");
-                    groupBox1.Text = "Leistungs-Optim. (33)";
+                    groupBox1.Text = "Leistungs-Optim. (35)";
                     groupBox2.Text = "Privatsphäre (18)";
                     groupBox3.Text = "Visuelle Tweaks (8)";
                     groupBox4.Text = "Andere (6)";
@@ -1364,6 +1360,7 @@ namespace ET
                     chck70.Text = "'Über Bild mehr erfahren' aus";
                     chck71.Text = "Lange Pfade aktivieren";
                     chck72.Text = "Altes Kontextmenü aktivieren";
+                    chck73.Text = "Vollbild-Opt. deaktivieren";
                 }
 
                 if (cinfo.Name == "pt-BR")
@@ -1386,7 +1383,7 @@ namespace ET
                     button4.Text = "Selecione Tudo";
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
-                    groupBox1.Text = "Ajustes de desempenho (33)";
+                    groupBox1.Text = "Ajustes de desempenho (35)";
                     groupBox2.Text = "Privacidade (18)";
                     groupBox3.Text = "Ajustes visuais (8)";
                     groupBox4.Text = "Outros (6)";
@@ -1468,13 +1465,14 @@ namespace ET
                     chck70.Text = "Remover 'Saiba mais foto'";
                     chck71.Text = "Ativar caminhos longos";
                     chck72.Text = "Habilitar menu de contexto antigo";
+                    chck73.Text = "Desat. otim. tela cheia";
 
                 }
                 if (cinfo.Name == "fr-FR")
                 {
                     button7.Text = "fr-FR";
                     Console.WriteLine("French detected");
-                    groupBox1.Text = "Améliorations de Performance (34)";
+                    groupBox1.Text = "Améliorations de Performance (35)";
                     groupBox2.Text = "Confidentialité (18)";
                     groupBox3.Text = "Améliorations Visuelles (8)";
                     groupBox4.Text = "Autres (6)";
@@ -1589,6 +1587,7 @@ namespace ET
                     chck70.Text = "Désactiver 'En savoir plus'";
                     chck71.Text = "Activer les chemins longs";
                     chck72.Text = "Activer l'ancien menu contextuel";
+                    chck73.Text = "Désact. opt. plein écran";
                 }
                 if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
                 {
@@ -1611,40 +1610,40 @@ namespace ET
             button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
 
 
-                if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
+            if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
+            {
+                isswitch = true;
+                button5_Click(null, EventArgs.Empty);//RUN Start Button (doengine() func the same)
+                                                     //Auto run
+            }
+            else
+            {
+                if (args.Contains("/all") || args.Contains("-all") || args.Contains("all"))
                 {
                     isswitch = true;
-                    button5_Click(null, EventArgs.Empty);//RUN Start Button (doengine() func the same)
-                    //Auto run
+                    button4_Click(null, EventArgs.Empty);//Select All
+                    button5_Click(null, EventArgs.Empty);//RUN
+
                 }
                 else
                 {
-                    if (args.Contains("/all") || args.Contains("-all") || args.Contains("all"))
+                    if (args.Contains("/expert") || args.Contains("-expert") || args.Contains("expert"))
                     {
                         isswitch = true;
+                        chck61.Checked = true;
+                        chck62.Checked = true;
+                        chck60.Checked = true;
+                        chck66.Checked = true;
+                        chck29.Checked = true;
+                        chck67.Checked = true;
                         button4_Click(null, EventArgs.Empty);//Select All
                         button5_Click(null, EventArgs.Empty);//RUN
-                        
+
                     }
                     else
                     {
-                        if (args.Contains("/expert") || args.Contains("-expert") || args.Contains("expert"))
-                        {
-                            isswitch = true;
-                            chck61.Checked = true;
-                            chck62.Checked = true;
-                            chck60.Checked = true;
-                            chck66.Checked = true;
-                            chck29.Checked = true;
-                            chck67.Checked = true;
-                            button4_Click(null, EventArgs.Empty);//Select All
-                            button5_Click(null, EventArgs.Empty);//RUN
-
-                        }
-                        else
-                        {
                         if (args.Contains("/sillent") || args.Contains("-sillent") || args.Contains("sillent"))
-                            {
+                        {
                             isswitch = true;
                             issillent = true;
                             button5_Click(null, EventArgs.Empty);
@@ -1653,8 +1652,8 @@ namespace ET
                         }
                     }
 
-                    }
                 }
+            }
         }
 
         //Check for update func.
@@ -1663,31 +1662,31 @@ namespace ET
             var client = new HttpClient();
             client.DefaultRequestHeaders.UserAgent.ParseAdd("check-app");
 
-                var response = await client.GetStringAsync($"https://api.github.com/repos/semazurek/ET-Optimizer");
-                var json = JsonDocument.Parse(response);
-                var updatedAt = DateTime.Parse(json.RootElement.GetProperty("updated_at").GetString()).ToLocalTime();
+            var response = await client.GetStringAsync($"https://api.github.com/repos/semazurek/ET-Optimizer");
+            var json = JsonDocument.Parse(response);
+            var updatedAt = DateTime.Parse(json.RootElement.GetProperty("updated_at").GetString()).ToLocalTime();
 
-                var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
-                if (updatedAt > localDate)
-                {
+            if (updatedAt > localDate)
+            {
                 var resultUET = MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
                 if (resultUET == DialogResult.OK)
-                    {
-                        Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
-                    }
-                }
-                else
                 {
+                    Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
                 }
-            
+            }
+            else
+            {
+            }
+
         }
 
         private async void Form1_Load(object sender, EventArgs e)
         {
             // Create a region with rounded corners
             //IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
-            this.FormBorderStyle = FormBorderStyle.None;       
+            this.FormBorderStyle = FormBorderStyle.None;
             //this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
             //this.Opacity = 0.95;
 
@@ -1701,7 +1700,7 @@ namespace ET
             process.Start(); process.WaitForExit();
 
             await CheckUpdateET();
-        
+
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -1784,7 +1783,7 @@ namespace ET
             button5.Enabled = false;
             textBox1.Visible = true;
 
-            int alltodo = 0; //max 72
+            int alltodo = 0; //max 73
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -1964,35 +1963,35 @@ namespace ET
                             Console.WriteLine(checkBox.Text); done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WalletDonationEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "CryptoWalletEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeAssetDeliveryServiceEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "DiagnosticData", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WebWidgetAllowed", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "ShowMicrosoftRewards", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "MicrosoftEdgeInsiderPromotionEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeShoppingAssistantEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeFollowEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeCollectionsEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "AlternateErrorPagesEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "ConfigureDoNotTrack", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "UserFeedbackAllowed", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeEnhanceImagesEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "PersonalizationReportingEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "ShowRecommendationsEnabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main\", "DoNotTrack", 1, RegistryValueKind.DWord);
@@ -2050,7 +2049,7 @@ namespace ET
                             else
                             {
                                 Console.WriteLine("intel");
- 
+
                                 SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games\", "Affinity", 0, RegistryValueKind.DWord);
 
                                 SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games\", "Background Only", @"False", RegistryValueKind.String);
@@ -2209,7 +2208,7 @@ namespace ET
                             Console.WriteLine(checkBox.Text); done++;
 
                             StopService("wsearch");
-                            
+
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2256,6 +2255,12 @@ namespace ET
                             }
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\GameBar\", "AutoGameModeEnabled", 1, RegistryValueKind.DWord);
+                            break;
+                        case "Disable Fullscreen Optimizations":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            SetRegistryValue(@"HKCU\System\GameConfigStore\", "GameDVR_DXGIHonorFSEWindowsCompatible", 1, RegistryValueKind.DWord);
+
                             break;
                         case "Remove Bloatware (Preinstalled)":
                             Console.WriteLine(checkBox.Text); done++;
@@ -2359,10 +2364,10 @@ namespace ET
                             }
 
                             break;
-                            case "Enable Long Paths":
-                                Console.WriteLine(checkBox.Text); done++;
+                        case "Enable Long Paths":
+                            Console.WriteLine(checkBox.Text); done++;
 
-                                SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\", "LongPathsEnabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\", "LongPathsEnabled", 1, RegistryValueKind.DWord);
                             break;
                     }
                 }
@@ -2569,7 +2574,7 @@ namespace ET
                             SetRegistryValue(@"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\", "NoInstrumentation", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\CompatTelRunner.exe", "Debugger", @"%windir%\System32\taskkill.exe", RegistryValueKind.String);
-                            
+
                             SetRegistryValue(@"HKCU\Software\Piriform\CCleaner", "Monitoring", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "AllowTelemetry", 0, RegistryValueKind.DWord);
@@ -3586,7 +3591,7 @@ namespace ET
                         process.StartInfo = startInfo;
                         process.Start();
                     }
-                    
+
                     this.TopMost = true;
                     progressBar1.Visible = false;
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
@@ -3612,7 +3617,7 @@ namespace ET
 
         private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            
+
         }
 
         private void toolStripButton5_Click(object sender, EventArgs e)
@@ -3702,8 +3707,8 @@ namespace ET
         private void button4_Click(object sender, EventArgs e)
         {
             this.Click += c_p;
-            selecall++;  
-            if (selecall % 2 == 0) 
+            selecall++;
+            if (selecall % 2 == 0)
             {
                 visua++; priva++; perf++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -3741,7 +3746,7 @@ namespace ET
                 }
 
             }
-            else 
+            else
             {
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
@@ -3797,7 +3802,7 @@ namespace ET
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            
+
             Process.Start("https://www.buymeacoffee.com/semazurek");
         }
 
@@ -3940,7 +3945,7 @@ namespace ET
             {
                 string RAMs = GetUsedRAM();
                 float flRAM = float.Parse(RAMs);
-                
+
 
                 toolStripLabel2.Text = "RAM: " + (int)flRAM + " %";
             });
@@ -3976,7 +3981,7 @@ namespace ET
 
         private void panelmain_MouseUp(object sender, MouseEventArgs e)
         {
-            
+
         }
 
         private void label1_MouseMove_1(object sender, MouseEventArgs e)
@@ -4166,7 +4171,7 @@ namespace ET
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
                 Console.WriteLine(Application.ExecutablePath);
-                
+
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
                 startInfo.Arguments = "/C start " + Application.ExecutablePath;
@@ -4182,7 +4187,7 @@ namespace ET
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
                 Console.WriteLine(Application.ExecutablePath);
-                
+
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "cmd.exe";
                 startInfo.Arguments = "/C start " + Application.ExecutablePath + " /english";
