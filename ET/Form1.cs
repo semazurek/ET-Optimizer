@@ -10,7 +10,8 @@ using System.Media;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
@@ -1659,28 +1660,35 @@ namespace ET
         //Check for update func.
         private async Task CheckUpdateET()
         {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.UserAgent.ParseAdd("check-app");
-
-            var response = await client.GetStringAsync($"https://api.github.com/repos/semazurek/ET-Optimizer");
-            var json = JsonDocument.Parse(response);
-            var updatedAt = DateTime.Parse(json.RootElement.GetProperty("updated_at").GetString()).ToLocalTime();
-
-            var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-            if (updatedAt > localDate)
+            using (var client = new HttpClient())
             {
-                var resultUET = MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                if (resultUET == DialogResult.OK)
+                client.DefaultRequestHeaders.UserAgent.ParseAdd("check-app");
+
+                try
                 {
-                    Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
+                    var response = await client.GetStringAsync("https://api.github.com/repos/semazurek/ET-Optimizer");
+                    var json = JObject.Parse(response);
+
+                    var updatedAt = DateTime.Parse(json["updated_at"]?.ToString() ?? "").ToLocalTime();
+                    var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+                    if (updatedAt > localDate)
+                    {
+                        var resultUET = MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        if (resultUET == DialogResult.OK)
+                        {
+                            Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // opcjonalnie: loguj błąd
+                    Debug.WriteLine("Update check failed: " + ex.Message);
                 }
             }
-            else
-            {
-            }
-
         }
+
 
         private async void Form1_Load(object sender, EventArgs e)
         {
@@ -4224,7 +4232,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command wget https://github.com/semazurek/ET-Optimizer/releases/download/5.6/ET-Optimizer.exe -OutFile Copy_To_ISO/ET-Optimizer.exe";
+            startInfo.Arguments = "-Command wget https://github.com/semazurek/ET-Optimizer/releases/download/6.0/ET-Optimizer.exe -OutFile Copy_To_ISO/ET-Optimizer.exe";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
 

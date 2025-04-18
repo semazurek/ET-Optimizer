@@ -208,6 +208,10 @@ C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.csproj.Up2Date
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.pdb
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.AssemblyReference.cache
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Properties.Resources.resources
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.GenerateResource.cache
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.exe.config
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.exe
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.pdb
@@ -250,11 +254,9 @@ C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\sv\M
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\tr\Microsoft.Win32.TaskScheduler.resources.dll
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\zh-CN\Microsoft.Win32.TaskScheduler.resources.dll
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\zh-Hant\Microsoft.Win32.TaskScheduler.resources.dll
-C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.AssemblyReference.cache
-C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
-C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Properties.Resources.resources
-C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.GenerateResource.cache
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.CoreCompileInputs.cache
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.Up2Date
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.pdb
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\Newtonsoft.Json.xml
