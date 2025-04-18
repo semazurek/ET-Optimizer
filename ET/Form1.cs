@@ -24,7 +24,9 @@ using Microsoft.Win32;
 using System.Media;
 using System.ServiceProcess;
 using System.Xml.Linq;
-
+using System.Net.Http;
+using System.Text.Json;
+using System.Deployment.Application;
 
 // Created by Rikey
 // https://github.com/semazurek/ET-Optimizer
@@ -113,7 +115,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 5.6";
-        string ETBuild = "15.04.2025";
+        string ETBuild = "18.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -121,6 +123,7 @@ namespace ET
 
         public string msgend = "Everything has been done. Reboot is recommended.";
         public string msgerror = "No option selected.";
+        public string msgupdate = "A newer version of the application is available on GitHub!";
 
         public void SetRegistryValue(string hivePath, string name, object value, RegistryValueKind kind)
         {
@@ -275,6 +278,7 @@ namespace ET
         {
 
             InitializeComponent();
+
             button6.Location = new System.Drawing.Point(845, 5);
             button6.FlatAppearance.BorderSize = 0;
             button7.Location = new System.Drawing.Point(780, -2);
@@ -1108,6 +1112,7 @@ namespace ET
 
                     msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                     msgerror = "Nie wybrano żadnej opcji.";
+                    msgupdate = "Jest nowsza wersja aplikacji na GitHubie!";
 
                     toolStripLabel1.Text = "Wersja: Publiczna | " + ETBuild;
 
@@ -1233,6 +1238,7 @@ namespace ET
 
                     msgend = "Завершено. Рекомендуется перезапуск.";
                     msgerror = "Ни один вариант не был выбран.";
+                    msgupdate = "На GitHub доступна более новая версия приложения!";
 
                     toolStripLabel1.Text = "Build: Public | " + ETBuild;
                 }
@@ -1283,6 +1289,7 @@ namespace ET
 
                     msgend = "Abgeschlossen. Neustart empfohlen.";
                     msgerror = "Keine Option gewählt.";
+                    msgupdate = "Eine neuere Version der Anwendung ist auf GitHub verfügbar!";
 
                     chck1.Text = "Edge-WebWidget aus";
                     chck2.Text = "Ultimate Power-Modus";
@@ -1383,6 +1390,10 @@ namespace ET
                     groupBox3.Text = "Ajustes visuais (8)";
                     groupBox4.Text = "Outros (6)";
                     groupBox5.Text = "Modo especialista (6)";
+
+                    msgend = "Tudo foi concluído. É recomendável reiniciar.";
+                    msgerror = "Nenhuma opção selecionada.";
+                    msgupdate = "Uma nova versão do aplicativo está disponível no GitHub!";
 
                     chck1.Text = "Desabilitar WebWidget Edge";
                     chck2.Text = "Energia: desempenho máximo";
@@ -1501,6 +1512,7 @@ namespace ET
 
                     msgend = "Terminé. Un redémarrage est recommandé.";
                     msgerror = "Aucune option sélectionnée.";
+                    msgupdate = "Une nouvelle version de l'application est disponible sur GitHub !";
 
                     toolStripLabel1.Text = "Version : Publique | " + ETBuild;
 
@@ -1644,7 +1656,30 @@ namespace ET
                 }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        //Check for update func.
+        private async Task CheckUpdateET()
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.UserAgent.ParseAdd("check-app");
+
+                var response = await client.GetStringAsync($"https://api.github.com/repos/semazurek/ET-Optimizer");
+                var json = JsonDocument.Parse(response);
+                var updatedAt = DateTime.Parse(json.RootElement.GetProperty("updated_at").GetString()).ToLocalTime();
+
+                var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+                if (updatedAt > localDate)
+                {
+                MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
+            }
+                else
+                {
+                }
+            
+        }
+
+        private async void Form1_Load(object sender, EventArgs e)
         {
             // Create a region with rounded corners
             //IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
@@ -1660,6 +1695,8 @@ namespace ET
             startInfo.Arguments = "/C bcdedit /deletevalue {current} safeboot";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
+
+            await CheckUpdateET();
 
         }
 
