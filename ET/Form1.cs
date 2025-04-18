@@ -114,7 +114,7 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 5.6";
+        string ETVersion = "E.T. ver 6.0";
         string ETBuild = "18.04.2025";
         int runcount = 0;
 
@@ -970,6 +970,7 @@ namespace ET
 
                  msgend = "Everything has been done. Reboot is recommended.";
                  msgerror = "No option selected.";
+                 msgupdate = "A newer version of the application is available on GitHub!";
 
                 rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
                 restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
@@ -1670,9 +1671,12 @@ namespace ET
 
                 if (updatedAt > localDate)
                 {
-                MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
-            }
+                var resultUET = MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                if (resultUET == DialogResult.OK)
+                    {
+                        Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
+                    }
+                }
                 else
                 {
                 }
@@ -1697,7 +1701,7 @@ namespace ET
             process.Start(); process.WaitForExit();
 
             await CheckUpdateET();
-
+        
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -1958,6 +1962,38 @@ namespace ET
                             break;
                         case "Fix Microsoft Edge Settings":
                             Console.WriteLine(checkBox.Text); done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WalletDonationEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "CryptoWalletEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeAssetDeliveryServiceEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "DiagnosticData", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WebWidgetAllowed", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "ShowMicrosoftRewards", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "MicrosoftEdgeInsiderPromotionEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeShoppingAssistantEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeFollowEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeCollectionsEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "AlternateErrorPagesEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "ConfigureDoNotTrack", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "UserFeedbackAllowed", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "EdgeEnhanceImagesEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "PersonalizationReportingEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "ShowRecommendationsEnabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppContainer\Storage\microsoft.microsoftedge_8wekyb3d8bbwe\MicrosoftEdge\Main\", "DoNotTrack", 1, RegistryValueKind.DWord);
 
@@ -2638,6 +2674,10 @@ namespace ET
                             break;
                         case "Remove Copilot":
                             Console.WriteLine(checkBox.Text); done++;
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat\", "IsUserEligible", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\", "AutoOpenCopilotLargeScreens", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\Windows\WindowsCopilot\", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
 
