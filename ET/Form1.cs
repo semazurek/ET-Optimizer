@@ -178,7 +178,7 @@ namespace ET
 
                 if (checkBox.Checked == true) { ct++; }
             }
-            if (ct == 35)
+            if (ct == 36)
             {
                 groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -245,7 +245,7 @@ namespace ET
             }
             int allc = ci + cu + cy + ct;
             //all without expert mode
-            if (allc == 67)
+            if (allc == 68)
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -492,7 +492,7 @@ namespace ET
             CheckBox chck65 = new CheckBox();
             chck65.Location = new System.Drawing.Point(10, 380);
             chck65.Size = new System.Drawing.Size(275, 25);
-            chck65.Tag = "CPU Priority Tweaks";
+            chck65.Tag = "CPU/GPU Priority Tweaks";
             chck65.Checked = true;
             chck65.Click += c_p;
             chck65.TabIndex = 65;
@@ -936,6 +936,14 @@ namespace ET
             chck73.Click += c_p;
             chck73.TabIndex = 73;
             panel1.Controls.Add(chck73);
+            CheckBox chck74 = new CheckBox();
+            chck74.Location = new System.Drawing.Point(285, 430);
+            chck74.Size = new System.Drawing.Size(260, 25);
+            chck74.Tag = "RAM Memory Tweaks";
+            chck74.Checked = true;
+            chck74.Click += c_p;
+            chck74.TabIndex = 74;
+            panel1.Controls.Add(chck74);
 
             //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
@@ -943,7 +951,7 @@ namespace ET
             void DefaultLang()
             {
                 button7.Text = "en-US";
-                groupBox1.Text = "Performance Tweaks (35)";
+                groupBox1.Text = "Performance Tweaks (36)";
                 groupBox2.Text = "Privacy (18)";
                 groupBox3.Text = "Visual Tweaks (8)";
                 groupBox4.Text = "Other (6)";
@@ -1000,7 +1008,7 @@ namespace ET
                 chck14.Text = "Let Websites Provide Locally";
                 chck15.Text = "Fix Microsoft Edge Settings";
                 chck64.Text = "Disable Nagle's Alg. (Delayed ACKs)";
-                chck65.Text = "CPU Priority Tweaks";
+                chck65.Text = "CPU/GPU Priority Tweaks";
                 chck16.Text = "Disable Location Sensors";
                 chck17.Text = "Disable WiFi HotSpot Auto-Sharing";
                 chck18.Text = "Disable Shared HotSpot Connect";
@@ -1057,6 +1065,7 @@ namespace ET
                 chck71.Text = "Enable Long System Paths";
                 chck72.Text = "Enable Old Context Menu";
                 chck73.Text = "Disable Fullscreen Optimizations";
+                chck74.Text = "Enable RAM Memory Tweaks";
 
                 toolStripLabel1.Text = "Build: Public | " + ETBuild;
             }
@@ -1070,7 +1079,7 @@ namespace ET
                 {
                     button7.Text = "pl-PL";
                     Console.WriteLine("Wykryto Polski");
-                    groupBox1.Text = "Poprawki Wydajności (35)";
+                    groupBox1.Text = "Poprawki Wydajności (36)";
                     groupBox2.Text = "Prywatność (18)";
                     groupBox3.Text = "Poprawki Wizualne (8)";
                     groupBox4.Text = "Inne (6)";
@@ -1129,7 +1138,7 @@ namespace ET
                     chck14.Text = "Witryny dostarczają dane lokalnie";
                     chck15.Text = "Napraw ustawienia Microsoft Edge";
                     chck64.Text = "Wyłącz algorytm Nagla (ACK)";
-                    chck65.Text = "Dostosowanie priorytetów CPU";
+                    chck65.Text = "Dostosowanie priorytetów CPU/GPU";
                     chck16.Text = "Wyłącz czujniki lokalizacji";
                     chck17.Text = "Wyłącz automatyczny HotSpot";
                     chck18.Text = "Wyłącz współdzielenie połącz.";
@@ -1186,6 +1195,7 @@ namespace ET
                     chck71.Text = "Włącz długie ścieżki systemowe";
                     chck72.Text = "Włącz stare menu kontekstowe";
                     chck73.Text = "Wył. optymalizacje pełnoekranowe";
+                    chck74.Text = "Włącz optymalizacje pamięci RAM";
 
                 }
 
@@ -1193,7 +1203,7 @@ namespace ET
                 {
                     button7.Text = "ru-RU";
                     Console.WriteLine("Russian detected");
-                    groupBox1.Text = "Настройки производительности (35)";
+                    groupBox1.Text = "Настройки производительности (36)";
                     groupBox2.Text = "Конфиденциальность (18)";
                     groupBox3.Text = "Визуальные настройки (8)";
                     groupBox4.Text = "Другие (6)";
@@ -1245,7 +1255,7 @@ namespace ET
                 {
                     button7.Text = "de-DE";
                     Console.WriteLine("German detected");
-                    groupBox1.Text = "Leistungs-Optim. (35)";
+                    groupBox1.Text = "Leistungs-Optim. (36)";
                     groupBox2.Text = "Privatsphäre (18)";
                     groupBox3.Text = "Visuelle Tweaks (8)";
                     groupBox4.Text = "Andere (6)";
@@ -1305,7 +1315,7 @@ namespace ET
                     chck14.Text = "Berechtigungen für Websites erlau.";
                     chck15.Text = "Edge-Einstellungen wiederherstell.";
                     chck64.Text = "Nagling (ACKs) aus";
-                    chck65.Text = "CPU-Priorität optimieren";
+                    chck65.Text = "CPU/GPU-Priorität optimieren";
                     chck16.Text = "Standortsensoren aus";
                     chck17.Text = "HotSpot automatisch teilen aus";
                     chck18.Text = "HotSpot teilen aus";
@@ -1362,6 +1372,7 @@ namespace ET
                     chck71.Text = "Lange Pfade aktivieren";
                     chck72.Text = "Altes Kontextmenü aktivieren";
                     chck73.Text = "Vollbild-Opt. deaktivieren";
+                    chck74.Text = "RAM-Speicheranpassungen";
                 }
 
                 if (cinfo.Name == "pt-BR")
@@ -1384,7 +1395,7 @@ namespace ET
                     button4.Text = "Selecione Tudo";
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
-                    groupBox1.Text = "Ajustes de desempenho (35)";
+                    groupBox1.Text = "Ajustes de desempenho (36)";
                     groupBox2.Text = "Privacidade (18)";
                     groupBox3.Text = "Ajustes visuais (8)";
                     groupBox4.Text = "Outros (6)";
@@ -1410,7 +1421,7 @@ namespace ET
                     chck14.Text = "Permitir conteúdo local sites";
                     chck15.Text = "Corrigir config. Microsoft Edge";
                     chck64.Text = "Desabilitar alg. Nagle (ACKs)";
-                    chck65.Text = "Ajustar prioridade CPU";
+                    chck65.Text = "Ajustar prioridade CPU/GPU";
                     chck16.Text = "Desabilitar sensores localização";
                     chck17.Text = "Desabilitar Auto HotSpot WiFi";
                     chck18.Text = "Desabilitar HotSpot Compartilhado";
@@ -1467,13 +1478,14 @@ namespace ET
                     chck71.Text = "Ativar caminhos longos";
                     chck72.Text = "Habilitar menu de contexto antigo";
                     chck73.Text = "Desat. otim. tela cheia";
+                    chck74.Text = "Ajustes de Memória RAM";
 
                 }
                 if (cinfo.Name == "fr-FR")
                 {
                     button7.Text = "fr-FR";
                     Console.WriteLine("French detected");
-                    groupBox1.Text = "Améliorations de Performance (35)";
+                    groupBox1.Text = "Améliorations de Performance (36)";
                     groupBox2.Text = "Confidentialité (18)";
                     groupBox3.Text = "Améliorations Visuelles (8)";
                     groupBox4.Text = "Autres (6)";
@@ -1532,7 +1544,7 @@ namespace ET
                     chck14.Text = "Sites fournissent données locale";
                     chck15.Text = "Réparer paramètres Edge";
                     chck64.Text = "Désactiver algorithme Nagle";
-                    chck65.Text = "Ajuster priorités CPU";
+                    chck65.Text = "Ajuster priorités CPU/GPU";
                     chck16.Text = "Désactiver capteurs localisation";
                     chck17.Text = "Désactiver HotSpot auto";
                     chck18.Text = "Désactiver partage connexion";
@@ -1589,6 +1601,7 @@ namespace ET
                     chck71.Text = "Activer les chemins longs";
                     chck72.Text = "Activer l'ancien menu contextuel";
                     chck73.Text = "Désact. opt. plein écran";
+                    chck74.Text = "Optimisations de la RAM";
                 }
                 if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
                 {
@@ -1791,7 +1804,7 @@ namespace ET
             button5.Enabled = false;
             textBox1.Visible = true;
 
-            int alltodo = 0; //max 73
+            int alltodo = 0; //max 74
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -2017,7 +2030,7 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\Software\Microsoft\MSMQ\Parameters\", "TcpNoDelay", 1, RegistryValueKind.DWord);
                             break;
-                        case "CPU Priority Tweaks":
+                        case "CPU/GPU Priority Tweaks":
                             Console.WriteLine(checkBox.Text); done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\usbxhci\Parameters\", "ThreadPriority", 31, RegistryValueKind.DWord);
@@ -2075,6 +2088,85 @@ namespace ET
                             {
                                 File.Delete("NOLPi.txt");
                             }
+
+                            // Win processes
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dwm.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dwm.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\wininit.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+
+                            // Apps
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Battle.net.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Agent.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Steam.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EpicGamesLauncher.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EADesktop.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\QtWebEngineProcess.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\QtWebEngineProcess.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\steamwebhelper.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\steamservice.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\steamwebhelper.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EABackgroundService.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EABackgroundService.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
+
+                            // Large Pages (It reduces a little overhead in the RAM management routines (uses less RAM) and reduces PageFaults by a lot)
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\explorer.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dllhost.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Intelligent standby list cleaner ISLC.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Overwatch.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\VALORANT-Win64-Shipping.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\starwarsbattlefrontii.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\bfv.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ModernWarfare.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BF2042.exe", "UseLargePages", 4, RegistryValueKind.DWord);
+
+                            // Threads Priority (Hex)
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters", "ThreadPriority", "0x0000001", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters", "ThreadPriority", "0x0000001", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters", "ThreadPriority", "0x0000001", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl\Parameters", "ThreadPriority", "0x0000000", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBHUB3\Parameters", "ThreadPriority", "0x0000000", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBXHCI\Parameters", "ThreadPriority", "0x0000000", RegistryValueKind.DWord);
+
+                            // Optimize CPU resources and priorities
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "AlwaysOn", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "IdleDetectionCycles", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NoLazyMode", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "LazyModeTimeout", 10000, RegistryValueKind.DWord);
+
+
+                            // Fix Task Manager not responding when exit
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DiagLog", "Start", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WdiContextLog", "Start", 4, RegistryValueKind.DWord);
+
+                            // Kernel tweaks
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcWatchdogProfileOffset", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MaximumSharedReadyQueueSize", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DisableAutoBoost", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcTimeout", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "IdealDpcRate", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MaximumDpcQueueDepth", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MinimumDpcRate", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "ThreadDpcEnable", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "AdjustDpcThreshold", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcWatchdogPeriod", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "GlobalTimerResolutionRequests", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "SplitLargeCaches", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DistributeTimers", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "InterruptSteeringDisabled", 4, RegistryValueKind.DWord);
+
+                            // Tweak I/O worker
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System", "PassiveIntRealTimeWorkerPriority", 18, RegistryValueKind.DWord);
+
+                            // Enable threaded dpc on sr-iov
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mlx4_bus\Parameters", "ThreadDpcEnable", 4, RegistryValueKind.DWord);
+
                             break;
                         case "Disable Location Sensors":
                             Console.WriteLine(checkBox.Text); done++;
@@ -2268,6 +2360,60 @@ namespace ET
                             Console.WriteLine(checkBox.Text); done++;
 
                             SetRegistryValue(@"HKCU\System\GameConfigStore\", "GameDVR_DXGIHonorFSEWindowsCompatible", 1, RegistryValueKind.DWord);
+
+                            break;
+                        case "RAM Memory Tweaks":
+                            Console.WriteLine(checkBox.Text); done++;
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Disable-MMAgent -MemoryCompression -PageCombining";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Enable-MMAgent -ApplicationPreLaunch";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            // Disallow drivers to get paged into virtual memory.
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingExecutive", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager", "DisablePagingExecutive", 1, RegistryValueKind.DWord);
+
+                            // Use big system memory caching to improve microstuttering.
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 1, RegistryValueKind.DWord);
+
+                            // Disable FTH (Fault Tolerant Heap)
+                            SetRegistryValue(@"HKLM\Software\Microsoft\FTH", "Enabled", 0, RegistryValueKind.DWord);
+                            Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Microsoft\FTH\State\", false);
+
+                            // Disable PageCombining
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePageCombining", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingCombining", 1, RegistryValueKind.DWord);
+
+                            // Disable IOPageLock
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "IoPageLockLimit", @"ffffffff", RegistryValueKind.DWord);
+
+                            // Free Unused RAM - need testing
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager", "HeapDeCommitFreeBlockThreshold", 40000, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "CacheUnmapBehindLengthInMB", 100, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "ModifiedWriteMaximum", 20, RegistryValueKind.DWord);
+
+                            // More mem tweaks
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "SystemPages", @"ffffffff", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "ClearPageFileAtShutdown", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolQuota", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolSize", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "PagedPoolQuota", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "PagedPoolSize", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "SecondLevelDataCache", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "PhysicalAddressExtension", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "SimulateCommitSavings", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "TrackLockedPages", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "TrackPtes", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager", "AlpcWakePolicy", 1, RegistryValueKind.DWord);
 
                             break;
                         case "Remove Bloatware (Preinstalled)":

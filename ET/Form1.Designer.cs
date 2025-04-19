@@ -184,7 +184,7 @@
             this.groupBox1.Size = new System.Drawing.Size(569, 247);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Performance Tweaks (35)";
+            this.groupBox1.Text = "Performance Tweaks (36)";
             // 
             // panel1
             // 
