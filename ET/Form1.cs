@@ -102,7 +102,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "18.04.2025";
+        string ETBuild = "19.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -3336,8 +3336,12 @@ namespace ET
                             startInfo.Arguments = "-Command winget install --id=Malwarebytes.AdwCleaner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            System.Threading.Thread.Sleep(8000);
-                            Process.Start("adwcleaner", "/eula /clean /noreboot");
+                            System.Threading.Thread.Sleep(5000);
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C start adwcleaner.exe /eula /clean /noreboot";
+                            process.StartInfo = startInfo;
+                            process.Start();
 
                             break;
                         case "Clean WinSxS Folder":
