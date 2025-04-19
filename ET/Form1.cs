@@ -3575,7 +3575,7 @@ namespace ET
                 button5.Enabled = true;
                 textBox1.Visible = false;
                 Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-                DialogResult dialogResult = MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK);
+                MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
@@ -3607,7 +3607,7 @@ namespace ET
                     this.TopMost = true;
                     progressBar1.Visible = false;
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
-                    DialogResult dialogResult = MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK);
+                    MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (isswitch == true)
                     {
                         FlushMem();
