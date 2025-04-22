@@ -21,7 +21,7 @@ ET Optimizer
 
 
 
-Application developed from many sources found on the Internet, tested and updated for different versions of the system. </br>The whole script is contained in 1 file, it uses: command prompt, powershell, power plan configuration, boot configuration, registry changes, network interface configuration, built-in windows tools, etc.
+Application developed from many sources found on the Internet, tested and updated for different versions of the system. </br>ET-Optimizer uses: built-in windows tools, contains 356 registry values and 136 calls to the system shell like cmd - so you can answer for yourself whether 4000+ lines of code is little or a lot for what ET does.
 
 Originally ET was a batch script file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
 
