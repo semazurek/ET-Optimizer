@@ -29,9 +29,9 @@ The first version appeared in a simple version for personal use in 2021.
 So far the project has grown to: 4161 lines of code, 860+ commits, translated into 6 languages ​​and is being developed further with love.
 
 <p align="center">
-<a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-PL.md"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
-<a href="https://github.com/semazurek/ET-Optimizer"><img src="https://github.com/user-attachments/assets/177f0eb1-f371-4cdd-bbce-9f451e47431d"width="48"></a>
-<a href="https://github.com/semazurek/ET-Optimizer/blob/master/README-RUS.md"><img src="https://github.com/user-attachments/assets/c0d4749d-4647-4506-a78c-7a092dd5836c"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/177f0eb1-f371-4cdd-bbce-9f451e47431d"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/c0d4749d-4647-4506-a78c-7a092dd5836c"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/ffbb6086-b0da-4a98-a126-02ca92c31758"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/9d8c5679-233b-4416-8371-067f6fc4e114"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/63bd6170-82ec-49cc-b798-a6b0f3a90a8d"width="48"></a>
