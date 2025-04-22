@@ -37,7 +37,8 @@ So far the project has grown to: 4161 lines of code, 860+ commits, translated in
 <a href="#"><img src="https://github.com/user-attachments/assets/63bd6170-82ec-49cc-b798-a6b0f3a90a8d"width="48"></a>
 </p>
 
-> [!WARNING]  
+> [!WARNING]
+> Antiviruses may falsely detect as a threat.</br>
 > It's recommended to make a own extra backup. I am not responsible for any damage caused.
 </br>
 <p align="center">
@@ -46,229 +47,195 @@ So far the project has grown to: 4161 lines of code, 860+ commits, translated in
 
 ## 📷 Screenshots
 <details>
-  <summary> First Look </summary>
-  <img src="https://github.com/user-attachments/assets/6d3b3f1f-ce89-475c-be0a-5d81d4aa2d3a"/>
+  <summary> <b>First Look</b> </summary>
+  <img src="https://github.com/user-attachments/assets/e264ad08-e2fa-4ef9-95c2-94e6836ad2d7" width="750"/>
 </details>
 <details>
-  <summary> During Operation </summary>
-  <img src="https://github.com/user-attachments/assets/473a8ec7-0038-44d8-9628-8ccfe6199daf"/>
+  <summary> <b>During Operation</b> </summary>
+  <img src="https://github.com/user-attachments/assets/4c0d07af-fffb-4cc8-bc0b-0383524f9b66" width="750"/>
 </details>
 <details>
-  <summary> Extras </summary>
-  <img src="https://github.com/user-attachments/assets/8f8a9d54-42f7-41c5-bee6-0a0a5a5430d7"/>
+  <summary> <b>Extras</b> </summary>
+  <img src="https://github.com/user-attachments/assets/43fae74c-77d3-4196-a303-36645b6e9282" width="750"/>
 </details>
 
 ## 🛠 What it does 
 
+ <details>
+  <summary> 🔧 <b>Performance Tweaks</b> </summary>
 
-</br>
- <table style="width: 100%">
-  <tr>
-    <td>Enable file extensions in Explorer  </td>
-    <td>Disable location sensor  </td>
-  </tr>
-  <tr>
-   <td>Disable Edge Web Widget</td>
-   <td>WiFi: HotSpot Sharing: Disable</td>
-  </tr>
-  <tr>
-   <td>Disable windows animations and start menu.</td>
-   <td>WiFi: Shared HotSpot Auto-Connect: Disable</td>
-  </tr>
-  <tr>
-   <td>Disable powerthrottling (Intel 6gen and higher)</td>
-   <td>Windows Updates to "Notify to schedule restart"</td>
-  </tr>
-  <tr>
-   <td>Remove Widgets</td>
-   <td>Disable downloading P2P updates outside the local network</td>
-  </tr>
-  <tr>
-   <td>Hide the search box from taskbar.</td>
-   <td>Disable Windows Defender</td>
-  </tr>
-  <tr>
-   <td>Disable Hibernation</td>
-   <td>Disable News and Interests on Taskbar</td>
-  </tr>
-  <tr>
-   <td>Turn Off Background Apps</td>
-   <td>Disable MRU lists (jump lists) of XAML apps</td>
-  </tr>
-  <tr>
-   <td>Disable unnecessary startup apps</td>
-   <td>Windows Explorer on start on This PC</td>
-  </tr>
-  <tr>
-   <td>Disable Telemetry & Data Collection </td>
-   <td>Disable Get Even More Out of Windows Screen</td>
-  </tr>
-  <tr>
-   <td>Disable Let apps use my advertising ID</td>
-   <td>Disable automatically installing suggested apps</td>
-  </tr>
-  <tr>
-   <td>SmartScreen Filter for Store Apps: Disable</td>
-   <td>Disable Start Menu Ads/Suggestions</td>
-  </tr>
-  <tr>
-   <td>Let websites provide locally</td>
-   <td>Set shorter shutdown time</td>
-  </tr>
-  <tr>
-   <td>Disable: Send Microsoft info about how I write</td>
-   <td>Turning Off Windows Game Bar/DVR</td>
-  </tr>
-  <tr>
-   <td>Prevents sending speech, typing samples to MS</td>
-   <td>Prevents sending contacts to MS</td>
-  </tr>
-  <tr>
-   <td>Microsoft Edge privacy settings</td>
-   <td>Remove Windows Game Bar</td>
-  </tr>
-  <tr>
-   <td>Disable Process Mitigation</td>
-   <td>Disable Sticky Keys prompt</td>
-  </tr>
-  <tr>
-  <td>Disable Activity History</td>
-  <td>Disable Automatic Updates for Microsoft Store apps</td>
- </tr>
-  <tr>
-	<td>Set dual boot timeout 3sec</td>
-	<td>Disable windows insider experiments</td>
- </tr>
-   <tr>
-	<td>Disable app launch tracking</td>
-	<td>Disable windows media player usage reports</td>
- </tr>
-    <tr>
-	<td>Disable mozilla telemetry</td>
-	<td>Disable watson malware reports</td>
- </tr>
-   <tr>
-	<td>Disable malware diagnostic data </td>
-	<td>Disable setting override for reporting to Microsoft MAPS</td>
- </tr>
-   <tr>
-	<td>Disable spynet Defender reporting</td>
-	<td>Do not send malware samples for further analysis</td>
- </tr>
-     <tr>
-	<td>Remove Old Device Drivers</td>
-	<td>Disable Skype Telemetry</td>
- </tr>
- <tr>
-	<td>Disable PowerShell Telemetry</td>
-	<td>Remove OneDrive</td>
- </tr>
-<tr>
-	<td>Defragment Database Indexing Service File</td>
-	<td>Disable transparency in taskbar/menu start</td>
-</tr>
-<tr>
-	<td>Enable Fast/Secure DNS (1.1.1.1)</td>
-	<td>Scheduled Windows Defender Scan from highest to normal priority</td>
-</tr>	
-<tr>
-	<td>Scan for adware (adwcleaner)</td>
-	<td>Disable Nagel's Algorithm (Delayed ACK).</td>
-</tr>	
-<tr>
-	<td>Disable Sleep Mode Timeouts</td>
-	<td>Power Option to Ultimate Performance</td>
-</tr>
-<tr>
-	<td>Disable Spectre/Meltdown Protection</td>
-	<td>Remove Microsoft Edge</td>
-</tr>
-<tr>
-	<td>Clean WinSxS Folder</td>
-	<td>Split Threshold for Svchost</td>
-</tr>
-</table>
-</br>
-<li>Unnecessary services set to disabled/manual mode: </li>  
+<ol>
+<li>Disable Edge WebWidget – removes the unnecessary Edge browser widget.</li>
 
-  </br>
+<li>Set Power Plan to Ultimate Performance – configures Windows to favor maximum performance.</li>
 
+<li>Lower svchost split threshold – optimizes how system services are handled.</li>
 
-| Display name  | Service name  | Mode |
-| ------------- | ------------- | ---- |
-| Collecting data  | `DiagTrack` `diagnosticshub` `dmwappushservice`  | Disabled |
-| Remote Registry  | `Remote Registry`  | Disabled |
-| Remote Access | `Remote Access`  | Disabled |
-| Smart Card | `SCardSvr`  | Disabled |
-| Smart Card Removal Policy Service | `SCPolicySvc`  | Disabled |
-| Fax | `Fax`  | Disabled |
-| Xbox Live Auth Manager | `XblAuthManager`  | Disabled |
-| Xbox Live Networking Service | `XboxNetApiSvc`  | Disabled |
-| Xbox Live Game Save Service | `XblGameSave`  | Disabled |
-| Windows Reporting Service | `WerSvc`  | Disabled |
-| Nvidia Telemetry collector | `NvTelemetryContainer`  | Disabled |
-| Gigabyte Adjust Service (EasyTune) | `gadjservice`  | Disabled |
-| Adobe Updater Service | `AdobeARMservice`  | Disabled |
-| Corel License Validation Service | `PSI_SVC_2`  | Disabled |
-| Geolocation service | `lfsvc` | Disabled |
-| WalletService | `WalletService`  | Disabled |
-| Microsoft Retail Demo experience | `RetailDemo`  | Disabled |
-| Management of payments and NFC | `SEMgrSvc`  | Disabled |
-| Executes diagnostic actions for troubleshooting support | `diagsvc`  | Disabled |
-| Alljoyn Router Service | `AJRouter`  | Disabled |
-| Network Diagnostic Usage | `NDU`  | Disabled |
-| AMD Crash Defender Driver | `amdfendr`  | Disabled |
-| AMD Crash Defender Service | `amdfendrmgr`  | Disabled |
-| Windows Search | `WSearch`  | Manual |
-| Background Intelligent Transfer Service | `BITS`  | Manual |
-| Security Accounts Manager | `SamSs` | Manual |  
-| Telephony | `TapiSrv` | Manual |  
-| Secondary Logon | `seclogon` | Manual | 
-| Windows Update | `wuauserv`| Manual | 
-| Telephony state on the device | `PhoneSvc` | Manual | 
-| TCP/IP NetBIOS Helper | `lmhosts` | Manual | 
-| IP Helper | `iphlpsvc` | Manual | 
-| Google Update service | `gupdate` `gupdatem` | Manual | 
-| Microsoft Edge Update Service | `edgeupdate` `edgeupdatem` | Manual | 
-| Downloaded Windows Maps Manager | `MapsBroker` | Manual | 
-| PunkBuster (Game anti-cheat EA) | `PnkBstrA` | Manual |  
-| Brave Update service | `brave` `bravem` | Manual |
-| ASUS Update service | `asus` `asusm` | Manual |
-| Adobe Update Service | `adobeupdateservice` | Manual |
-| Adobe FlashPlayer Service | `adobeflashplayerupdatesvc` | Manual |
+<li>Dual boot timeout: 3 seconds – speeds up boot time in multi-OS setups.</li>
 
-</br>
-<li>Remove Bloatware Apps (Preinstalled)</li>  
+<li>Disable Hibernation and Fast Startup – frees up disk space and may fix sleep issues.</li>
 
-</br>
-<li>Disable Unnecessary StartUp Applications:</li>
-<ul></br>
+<li>Disable Windows Insider Experiments – ensures system stability by avoiding test features.</li>
 
- `Java Update Checker x64` `Mini Partition Tool Wizard Updater` `Teams Machine Installer` `Cisco Meeting Daemon` `Adobe Reader Speed Launcher` `CCleaner Smart Cleaning/Monitor` `Spotify Web Helper` `Gaijin.Net Updater` `Microsoft Teams Update` `Google Update` `Microsoft Edge Update` `BitTorrent Bleep` `Skype` `Adobe Update Startup Utility` `iTunes Helper` `CyberLink Update Utility` `MSI Live Update` `Wondershare Helper Compact` `Cisco AnyConnect Secure Mobility Agent` `Wargaming.net Game Center` `Skype for Desktop` `Gog Galaxy` `Epic Games Launcher` `Origin` `Steam` `Opera Browser Assistant` `uTorrent` `Skype for Business` `Google Chrome Installer` `Microsoft Edge Installer` `Discord Update` `Bliz`
- 
-</ul>
-</ul></br>
-<li>Disables unnecessary components:</li>
-<ul></br>
+<li>Disable App Launch Tracking – increases privacy and slightly boosts performance.</li>
 
-`Printing-PrintToPDFServices-Features` `Printing-XPSServices-Features` `Xps-Foundation-Xps-Viewer`
+<li>Disable PowerThrottling (Intel 6th gen+) – gives apps full CPU access.</li>
 
-</ul>
+<li>Turn Off Background Apps – reduces CPU and RAM usage.</li>
 
-*<p align="center">The script has a function to restore to the previous settings.</p>*
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/85984736/155862049-d6fa04f4-2e10-4aaf-9072-0a6b0ddec0a7.png" />
-</p>
+<li>Disable Sticky Keys Prompt – avoids annoying popup messages.</li>
+
+<li>Disable Activity History – stops Windows from tracking user activity.</li>
+
+<li>Disable Updates for Microsoft Store Apps – reduces system background activity.</li>
+
+<li>Disable SmartScreen for Apps – speeds up app launches and reduces interruptions.</li>
+
+<li>Allow Websites to Provide Local Content – improves browser speed and relevance.</li>
+
+<li>Fix Microsoft Edge Settings – resets and restores default Edge settings.</li>
+
+<li>Disable Location Sensors – saves battery and enhances privacy.</li>
+
+<li>Disable Auto-Sharing WiFi Hotspot – prevents unwanted network sharing.</li>
+
+<li>Disable Shared HotSpot Connections – stops auto-joining shared hotspots.</li>
+
+<li>Updates Notify for Scheduled Restart – prevents sudden reboots.</li>
+
+<li>Set P2P Updates to LAN Only – reduces external bandwidth usage.</li>
+
+<li>Set Lower Shutdown Time (2 seconds) – speeds up shutdown process.</li>
+
+<li>Remove Old Device Drivers – frees up space and avoids conflicts.</li>
+
+<li>Disable “Get Even More Out of Windows” prompt – removes nagging suggestions.</li>
+
+<li>Disable Installing Suggested Apps – keeps your Start menu clean.</li>
+
+<li>Disable Start Menu Ads/Suggestions – cleaner and faster Start experience.</li>
+
+<li>Disable Suggested Apps in Windows Ink Workspace.</li>
+
+<li>Disable Unnecessary Windows Components – lightens the system.</li>
+
+<li>Defender Scheduled Scan Nerf – limits its system impact.</li>
+
+<li>Defragment Indexing Service File – speeds up Windows Search.</li>
+
+<li>Disable Nagle’s Algorithm (Delayed ACKs) – improves network latency.</li>
+
+<li>CPU/GPU Priority Tweaks – ensures smoother performance.</li>
+
+<li>Enable Service Tweaks – optimizes how system services are run.</li>
+
+<li>Remove Preinstalled Bloatware – clears space and removes distractions.</li>
+
+<li>Disable Unnecessary Startup Apps – boosts system boot speed.</li>
+
+<li>Enable Long System Paths – supports deeper folder structures.</li>
+
+<li>Disable Fullscreen Optimizations + Enable RAM Tweaks – improves game and system responsiveness.</li>
+</ol>
+</details>
+<details>
+  <summary> 🔐 <b>Privacy</b> </summary>
+  <ol>
+<li>Disable Telemetry Scheduled Tasks – prevents Windows from auto-collecting background data.</li>
+
+<li>Remove Telemetry/Data Collection Components – strips out system parts responsible for tracking.</li>
+
+<li>Disable PowerShell Telemetry – stops Microsoft from logging script usage.</li>
+
+<li>Disable Skype Telemetry – removes built-in tracking within Skype.</li>
+
+<li>Disable Media Player Usage Reports – stops sending data on how media is played.</li>
+
+<li>Disable Mozilla Telemetry – blocks Firefox from reporting user behavior.</li>
+
+<li>Disable Apps from Using My Advertising ID – limits ad personalization and tracking.</li>
+
+<li>Disable Sending Info About Writing (typing) – prevents data collection related to typing.</li>
+
+<li>Disable Handwriting Recognition – improves privacy for stylus users.</li>
+
+<li>Disable Watson Malware Reports – prevents sending malware incident reports.</li>
+
+<li>Disable Malware Diagnostic Data Collection – blocks background logging of threats.</li>
+
+<li>Disable Reporting to Microsoft MAPS – avoids participation in MS malware alert network.</li>
+
+<li>Disable Spynet Defender Reporting – stops Defender from reporting to Microsoft cloud.</li>
+
+<li>Do Not Send Malware Samples Automatically – full control over what’s submitted.</li>
+
+<li>Disable Sending Typing Samples – more privacy for physical and on-screen keyboard use.</li>
+
+<li>Disable Sending Contacts to Microsoft – keeps your contacts offline and private.</li>
+
+<li>Disable Cortana – disables Microsoft’s digital assistant.</li>
+
+<li>Remove Copilot – removes the AI-powered assistant introduced in newer Windows builds.</li>
+  </ol>
+</details>
+<details>
+  <summary> 🎨 <b>Visual Tweaks</b> </summary>
+  <ol>
+<li>Show File Extensions in File Explorer – improves clarity when working with files.</li>
+
+<li>Disable Transparency on Taskbar – speeds up UI and improves battery life.</li>
+
+<li>Disable Windows Animations – makes UI snappier and faster.</li>
+
+<li>Disable MRU Lists (Jump Lists) – keeps the Start menu and taskbar tidy.</li>
+
+<li>Set Search Box to Icon Only – minimizes visual clutter.</li>
+
+<li>Open File Explorer to This PC – skips “Quick Access” and goes directly to drives.</li>
+
+<li>Remove “Learn about this photo” Feature – cleaner photo viewer interface.</li>
+
+<li>Enable Old Context Menu – restores classic right-click menu (Windows 11 style fix).</li>
+  </ol>
+</details>
+<details>
+  <summary> 📦 <b>Other</b> </summary>
+  <ol>
+<li>Remove Game Bar / Xbox DVR – eliminates background game-related services.</li>
+
+<li>Clean Temp, Cache, Prefetch, Logs – frees up disk space and improves speed.</li>
+
+<li>Scan for Adware (AdwCleaner) – detects and removes potentially unwanted software.</li>
+
+<li>Clean WinSxS Folder – reduces size of the Windows component store.</li>
+
+<li>Remove News & Interests / Widgets – removes taskbar widgets in Windows 10/11.</li>
+
+<li>Tweak Unnecessary Services Behavior – disables or adjusts unused system services.</li>
+  </ol>
+</details>
+<details>
+  <summary> ⚙️ <b>Expert Mode</b> </summary>
+  <ol>
+<li>Disable Spectre/Meltdown Mitigations – improves performance at the cost of security.</li>
+
+<li>Disable Windows Defender – removes built-in antivirus completely.</li>
+
+<li>Disable Xbox Services – shuts down Xbox-related background processes.</li>
+
+<li>Remove OneDrive – fully uninstalls Microsoft's cloud sync tool.</li>
+
+<li>Enable Fast/Secure DNS (1.1.1.1) – improves DNS speed and privacy using Cloudflare.</li>
+
+<li>Disable Process Mitigations – lifts certain OS-level security limits for advanced tweaks.</li>
+  </ol>
+</details>
+
+*<p align="center">The application has a function to restore to the previous settings.</p>*
 
 ## 👏 Community Shares
 
-https://www.youtube.com/watch?v=vIzWJ7OjgXA
-
-https://www.youtube.com/watch?v=BM_AirabkB8
-
-https://www.youtube.com/watch?v=FFKeJuXC4HA
-
-https://www.youtube.com/watch?v=G048P3g8bGM
+https://programyzadarmo.net.pl/threads/et-optimizer.52612/
 
 https://www.majorgeeks.com/files/details/et_all_in_one_optimization_script.html
 
@@ -285,3 +252,12 @@ https://scloud.ws/blog/optimization/5370.html
 https://rsload.net/soft/optimization/39444-et-optimizer.html
 
 https://www.yasdl.com/tag/%D8%AF%D8%A7%D9%86%D9%84%D9%88%D8%AF-et-optimizer
+
+https://www.youtube.com/watch?v=vIzWJ7OjgXA
+
+https://www.youtube.com/watch?v=BM_AirabkB8
+
+https://www.youtube.com/watch?v=FFKeJuXC4HA
+
+https://www.youtube.com/watch?v=G048P3g8bGM
+
