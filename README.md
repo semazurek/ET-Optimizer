@@ -26,7 +26,7 @@ Application developed from many sources found on the Internet, tested and update
 Originally ET was a batch script file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
 
 The first version appeared in a simple version for personal use in 2021.
-So far the project has grown to: 4161 lines of code, 860+ commits, translated into 6 languages ​​and is being developed further with love.
+So far the project has grown to: 4161 lines of code, 860+ commits, translated into 6 languages ​​and is being developed further with love ❤️
 
 <p align="center">
 <a href="#"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
