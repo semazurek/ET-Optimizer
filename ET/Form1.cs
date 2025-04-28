@@ -102,7 +102,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "24.04.2025";
+        string ETBuild = "28.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -129,9 +129,14 @@ namespace ET
                     baseKey = Registry.CurrentUser;
                     subKeyPath = hivePath.Substring(5);
                 }
+                else if (hivePath.StartsWith("HKU"))
+                {
+                    baseKey = Registry.Users;
+                    subKeyPath = hivePath.Substring(4);
+                }
                 else
                 {
-                    Console.WriteLine($"Yknown registry tree: {hivePath}");
+                    Console.WriteLine($"Uknown registry tree: {hivePath}");
                     return;
                 }
 
@@ -1791,11 +1796,14 @@ namespace ET
             if (runcount == 0)
             {
                 //Auto BackUP - Creating Restore Point
+                
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "powershell.exe";
                 startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
                 process.StartInfo = startInfo;
                 process.Start(); process.WaitForExit();
+                
+
             }
             Cursor.Current = Cursors.Default;
             runcount += 1;
@@ -1864,13 +1872,13 @@ namespace ET
                     switch (caseSwitch)
                     {
                         case "Disable Edge WebWidget":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WebWidgetAllowed", 0, RegistryValueKind.DWord);
 
                             break;
                         case "Power Option to Ultimate Perform.":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1903,7 +1911,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Dual Boot Timeout 3sec":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1917,7 +1925,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Hibernation/Fast Startup":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -1926,24 +1934,24 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Windows Insider Experiments":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\System\", "AllowExperimentation", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\default\System\AllowExperimentation\", "value", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable App Launch Tracking":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "Start_TrackProgs", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Powerthrottling (Intel 6gen+)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling\", "PowerThrottlingOff", 1, RegistryValueKind.DWord);
                             break;
                         case "Turn Off Background Apps":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy\", "LetAppsRunInBackground", 2, RegistryValueKind.DWord);
 
@@ -1956,32 +1964,32 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\", "SystemResponsiveness", 10, RegistryValueKind.DWord);
                             break;
                         case "Disable Sticky Keys Prompt":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Control Panel\Accessibility\StickyKeys\", "Flags", @"506", RegistryValueKind.String);
                             break;
                         case "Disable Activity History":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System\", "PublishUserActivities", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Updates for MS Store Apps":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\WindowsStore\", "AutoDownload", 2, RegistryValueKind.DWord);
                             break;
                         case "SmartScreen Filter for Apps Disable":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AppHost\", "EnableWebContentEvaluation", 0, RegistryValueKind.DWord);
                             break;
                         case "Let Websites Provide Locally":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Control Panel\International\User Profile\", "HttpAcceptLanguageOptOut", 1, RegistryValueKind.DWord);
                             break;
                         case "Fix Microsoft Edge Settings":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WalletDonationEnabled", 0, RegistryValueKind.DWord);
 
@@ -2026,12 +2034,12 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "HideFirstRunExperience", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Nagle's Alg. (Delayed ACKs)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\Software\Microsoft\MSMQ\Parameters\", "TcpNoDelay", 1, RegistryValueKind.DWord);
                             break;
                         case "CPU/GPU Priority Tweaks":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\usbxhci\Parameters\", "ThreadPriority", 31, RegistryValueKind.DWord);
 
@@ -2126,12 +2134,12 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BF2042.exe", "UseLargePages", 4, RegistryValueKind.DWord);
 
                             // Threads Priority (Hex)
-                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters", "ThreadPriority", "0x0000001", RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters", "ThreadPriority", "0x0000001", RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters", "ThreadPriority", "0x0000001", RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl\Parameters", "ThreadPriority", "0x0000000", RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBHUB3\Parameters", "ThreadPriority", "0x0000000", RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBXHCI\Parameters", "ThreadPriority", "0x0000000", RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters", "ThreadPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters", "ThreadPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters", "ThreadPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl\Parameters", "ThreadPriority", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBHUB3\Parameters", "ThreadPriority", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBXHCI\Parameters", "ThreadPriority", 0, RegistryValueKind.DWord);
 
                             // Optimize CPU resources and priorities
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "AlwaysOn", 4, RegistryValueKind.DWord);
@@ -2169,37 +2177,37 @@ namespace ET
 
                             break;
                         case "Disable Location Sensors":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Permissions\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}\", "SensorPermissionState", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable WiFi HotSpot Auto-Sharing":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting\", "value", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Shared HotSpot Connect":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots\", "value", 0, RegistryValueKind.DWord);
                             break;
                         case "Updates Notify to Sched. Restart":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\", "UxOption", 1, RegistryValueKind.DWord);
                             break;
                         case "P2P Update Setting to LAN (local)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config\", "DODownloadMode", 0, RegistryValueKind.DWord);
                             break;
                         case "Set Lower Shutdown Time (2sec)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\", "WaitToKillServiceTimeout", @"2000", RegistryValueKind.String);
                             break;
                         case "Remove Old Device Drivers":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2208,7 +2216,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Get Even More Out of...":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-310093Enabled", 0, RegistryValueKind.DWord);
 
@@ -2231,7 +2239,7 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement\", "ScoobeSystemSettingEnabled", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Installing Suggested Apps":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions", false);
                             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps", false);
@@ -2269,7 +2277,7 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "FeatureManagementEnabled", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Start Menu Ads/Suggestions":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-338387Enabled", 0, RegistryValueKind.DWord);
 
@@ -2282,12 +2290,12 @@ namespace ET
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "ShowSyncProviderNotifications", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Suggest Apps WindowsInk":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\default\WindowsInkWorkspace\AllowSuggestedAppsInWindowsInkWorkspace\", "value", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Unnecessary Components":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -2296,7 +2304,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Defender Scheduled Scan Nerf":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2305,7 +2313,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Defragment Indexing Service File":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             StopService("wsearch");
 
@@ -2325,7 +2333,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Enable Service Tweaks":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             string[] toDisable = { "DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr" };
                             string[] toManuall = { "BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService" };
@@ -2357,13 +2365,13 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\GameBar\", "AutoGameModeEnabled", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Fullscreen Optimizations":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\System\GameConfigStore\", "GameDVR_DXGIHonorFSEWindowsCompatible", 1, RegistryValueKind.DWord);
 
                             break;
                         case "RAM Memory Tweaks":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -2392,16 +2400,12 @@ namespace ET
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePageCombining", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingCombining", 1, RegistryValueKind.DWord);
 
-                            // Disable IOPageLock
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "IoPageLockLimit", @"ffffffff", RegistryValueKind.DWord);
-
                             // Free Unused RAM - need testing
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager", "HeapDeCommitFreeBlockThreshold", 40000, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "CacheUnmapBehindLengthInMB", 100, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "ModifiedWriteMaximum", 20, RegistryValueKind.DWord);
 
                             // More mem tweaks
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "SystemPages", @"ffffffff", RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "ClearPageFileAtShutdown", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolQuota", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolSize", 0, RegistryValueKind.DWord);
@@ -2417,7 +2421,7 @@ namespace ET
 
                             break;
                         case "Remove Bloatware (Preinstalled)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications\", "ConfigureChatAutoInstall", 0, RegistryValueKind.DWord);
 
@@ -2429,7 +2433,7 @@ namespace ET
 
                             break;
                         case "Disable Unnecessary Startup Apps":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             string[] keysToClean =
                             {
@@ -2519,7 +2523,7 @@ namespace ET
 
                             break;
                         case "Enable Long Paths":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem\", "LongPathsEnabled", 1, RegistryValueKind.DWord);
                             break;
@@ -2543,7 +2547,7 @@ namespace ET
                     switch (caseSwitch)
                     {
                         case "Disable Telemetry Scheduled Tasks":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2552,7 +2556,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Remove Telemetry/Data Collection":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2657,7 +2661,7 @@ namespace ET
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\15.0\Outlook\Options\Mail\", "EnableLogging", 0, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKCU\\SOFTWARE\\Microsoft\\Office\\16.0\\Common\\ClientTelemetry\", "VerboseLogging", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\16.0\Common\ClientTelemetry\", "VerboseLogging", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Office\Common\ClientTelemetry\", "VerboseLogging", 0, RegistryValueKind.DWord);
 
@@ -2737,7 +2741,7 @@ namespace ET
 
                             break;
                         case "Disable PowerShell Telemetry":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -2746,7 +2750,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Skype Telemetry":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW\", "WPPFilePath", @"%SYSTEMDRIVE%\TEMP\WPPMedia\", RegistryValueKind.String);
 
@@ -2759,17 +2763,17 @@ namespace ET
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Tracing\WPPMediaPerApp\Skype\ETW\", "TraceLevelThreshold", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Media Player Usage Reports":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\MediaPlayer\Preferences\", "UsageTracking", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Mozilla Telemetry":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Mozilla\Firefox", "DisableTelemetry", 2, RegistryValueKind.DWord);
                             break;
                         case "Disable Apps Use My Advertising ID":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics\", "Value", @"Deny", RegistryValueKind.String);
 
@@ -2780,67 +2784,65 @@ namespace ET
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo\", "Enabled", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Send Info About Writing":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Input\TIPC\", "Enabled", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Handwriting Recognition":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\InputPersonalization\", "RestrictImplicitTextCollection", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\InputPersonalization\", "RestrictImplicitInkCollection", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Watson Malware Reports":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Reporting\", "DisableGenericReports", 2, RegistryValueKind.DWord);
                             break;
                         case "Disable Malware Diagnostic Data":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\MRT\", "DontReportInfectionInformation", 2, RegistryValueKind.DWord);
                             break;
                         case "Disable Reporting to MS MAPS":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\\Microsoft\Windows Defender\Spynet\", "LocalSettingOverrideSpynetReporting", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Spynet Defender Reporting":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\", "SpynetReporting", 0, RegistryValueKind.DWord);
                             break;
                         case "Do Not Send Malware Samples":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\", "SubmitSamplesConsent", 2, RegistryValueKind.DWord);
                             break;
                         case "Disable Sending Typing Samples":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Personalization\Settings\", "AcceptedPrivacyPolicy", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Sending Contacts to MS":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\InputPersonalization\TrainedDataStore\", "HarvestContacts", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Cortana":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search\", "AllowCortana", 0, RegistryValueKind.DWord);
                             break;
                         case "Remove Copilot":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat\", "IsUserEligible", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\", "AutoOpenCopilotLargeScreens", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\Windows\WindowsCopilot\", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
-
-                            SetRegistryValue(@"HKU\DefaultUser\Software\Policies\Microsoft\Windows\WindowsCopilot\", "TurnOffWindowsCopilot", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "ShowCopilotButton", 0, RegistryValueKind.DWord);
 
@@ -2883,19 +2885,19 @@ namespace ET
                     switch (caseSwitch)
                     {
                         case "Show File Extensions in Explorer":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "HideFileExt", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Transparency on Taskbar":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize\", "EnableTransparency", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\Themes\Personalize\", "EnableTransparency", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Windows Animations":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\TooltipAnimation\", "DefaultApplied", 0, RegistryValueKind.DWord);
 
@@ -2911,32 +2913,30 @@ namespace ET
 
                             SetRegistryValue(@"HKCU\Control Panel\Desktop\WindowMetrics\", "MinAnimate", 0, RegistryValueKind.String);
 
-                            SetRegistryValue(@"HKCU\Control Panel\Desktop\", "UserPreferencesMask", 9012078010000000, RegistryValueKind.Binary);
-
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\", "VisualFXSetting", 3, RegistryValueKind.DWord);
                             break;
                         case "Disable MRU lists (jump lists)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "Start_TrackDocs", 0, RegistryValueKind.DWord);
                             break;
                         case "Set Search Box to Icon Only":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search\", "SearchboxTaskbarMode", 1, RegistryValueKind.DWord);
                             break;
                         case "Explorer on Start on This PC":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "LaunchTo", 1, RegistryValueKind.DWord);
                             break;
                         case "Remove Learn about this photo":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel\", "{2cc5ca98-6485-489a-920e-b3e88a6ccce3}", 1, RegistryValueKind.DWord);
                             break;
                         case "Enable Old Context Menu":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", @"", @"", RegistryValueKind.String);
                             break;
@@ -2961,7 +2961,7 @@ namespace ET
                     switch (caseSwitch)
                     {
                         case "Split Threshold for Svchost":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -2970,7 +2970,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Remove Windows Game Bar/DVR":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\System\GameConfigStore\", "GameDVR_Enabled", 0, RegistryValueKind.DWord);
 
@@ -2983,7 +2983,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Clean Temp/Cache/Prefetch/Logs":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -3442,7 +3442,7 @@ namespace ET
                             process.Start();
                             break;
                         case "Remove News and Interests/Widgets":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "TaskbarDa", 0, RegistryValueKind.DWord);
 
@@ -3475,7 +3475,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Scan for Adware (AdwCleaner)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -3493,7 +3493,7 @@ namespace ET
                             
                             break;
                         case "Clean WinSxS Folder":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -3521,7 +3521,7 @@ namespace ET
                     switch (caseSwitch)
                     {
                         case "Disable Windows Defender":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Services\MsSecFlt\", "Start", 4, RegistryValueKind.DWord);
 
@@ -3651,14 +3651,14 @@ namespace ET
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Services\WinDefend\", "Start", 4, RegistryValueKind.DWord);
                             break;
                         case "Disable Spectre/Meltdown":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\", "FeatureSettingsOverrideMask", 3, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management\", "FeatureSettingsOverride", 3, RegistryValueKind.DWord);
                             break;
                         case "Remove Microsoft OneDrive":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             Process.Start("cmd.exe", "/c taskkill /F /IM OneDrive.exe /T");
 
@@ -3687,7 +3687,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Xbox Services":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -3696,7 +3696,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Disable Process Mitigation":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -3705,7 +3705,7 @@ namespace ET
                             process.Start(); process.WaitForExit();
                             break;
                         case "Enable Fast/Secure DNS (1.1.1.1)":
-                            Console.WriteLine(checkBox.Text); done++;
+                            done++;
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -4393,6 +4393,18 @@ namespace ET
             startInfo.Arguments = "-Command explorer.exe \"Copy_To_ISO\"";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
+        }
+
+        private void uniGetUIWingetGUIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
         }
     }
 }
