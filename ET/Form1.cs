@@ -4402,7 +4402,7 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            startInfo.Arguments = "/C winget install --id=MartiCliment.UniGetUI --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
