@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.Threading;
 
 // Created by Rikey
 // https://semazurek.github.io
@@ -94,7 +95,6 @@ namespace ET
         string menubackcolor = "#323232";
         string selectioncolor = "#3498db";
         string selectioncolor2 = "#246c9d";
-        string unselectionc = "#ecf0f1";
         string expercolor = "#e74c3c";
 
         public bool isswitch = false;
@@ -102,7 +102,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "28.04.2025";
+        string ETBuild = "30.04.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -111,6 +111,55 @@ namespace ET
         public string msgend = "Everything has been done. Reboot is recommended.";
         public string msgerror = "No option selected.";
         public string msgupdate = "A newer version of the application is available on GitHub!";
+        public void CreateRestorePoint(string description, int restorePointType)
+        {
+            try
+            {
+                ManagementClass mc = new ManagementClass(@"\\localhost\root\default:SystemRestore");
+                ManagementBaseObject parameters = mc.GetMethodParameters("CreateRestorePoint");
+
+                parameters["Description"] = description;
+                parameters["EventType"] = 100;
+                parameters["RestorePointType"] = restorePointType;
+
+                mc.InvokeMethod("CreateRestorePoint", parameters, null);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("BackUp Error: " + ex.Message);
+            }
+        }
+
+        //Function to make BackUp/RestorePoint
+        private async Task BackItUp()
+        {
+            await Task.Run(() =>
+            {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+                
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "powershell.exe";
+                startInfo.Arguments = "-Command Enable-ComputerRestore -Drive $env:systemdrive";
+                startInfo.UseShellExecute = false;
+                startInfo.CreateNoWindow = true;
+                process.StartInfo = startInfo;
+                process.Start(); process.WaitForExit();
+                
+                CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
+                CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
+                CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
+                
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET_BACKUP-POWERSHELL\" -RestorePointType \"MODIFY_SETTINGS\"";
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            });
+        }
 
         public void SetRegistryValue(string hivePath, string name, object value, RegistryValueKind kind)
         {
@@ -270,6 +319,8 @@ namespace ET
         {
 
             InitializeComponent();
+            this.Opacity = 0;
+            this.Enabled = false;
 
             button6.Location = new System.Drawing.Point(845, 5);
             button6.FlatAppearance.BorderSize = 0;
@@ -1701,24 +1752,132 @@ namespace ET
                 }
                 catch (Exception ex)
                 {
-                    // opcjonalnie: loguj błąd
                     Debug.WriteLine("Update check failed: " + ex.Message);
                 }
             }
         }
 
+        // Hello/Loading/SplashForm func build form
+        public Form BuildSplashForm()
+        {
+            Form splash = new Form();
+            splash.FormBorderStyle = FormBorderStyle.None;
+            splash.StartPosition = FormStartPosition.CenterScreen;
+            splash.BackColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
+            splash.Width = 400;
+            splash.Height = 240;
+            splash.TopMost = true;
+            splash.ShowInTaskbar = false;
+            splash.ControlBox = false;
 
+            PictureBox logoBox = new PictureBox()
+            {
+                Image = Properties.Resources.ET_LOGO_BIG,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                Size = new Size(150, 150),
+                Location = new Point((splash.ClientSize.Width - 150) / 2, 30)
+            };
+            splash.Controls.Add(logoBox);
+            
+            
+            ProgressBar progressBar = new ProgressBar()
+            {
+                Style = ProgressBarStyle.Marquee,
+                MarqueeAnimationSpeed = 30,
+                Size = new Size(400, 20),
+                Location = new Point(0, 220),
+                ForeColor = Color.FromArgb(52, 152, 219)
+            };
+            splash.Controls.Add(progressBar);
+            
+
+            return splash;
+        }
+
+        private Form splashForm; //splashscreen Form Construct
         private async void Form1_Load(object sender, EventArgs e)
         {
+            this.Hide();
+            
             // Create a region with rounded corners
             //IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
             this.FormBorderStyle = FormBorderStyle.None;
+            
+            this.ShowInTaskbar = false;
             //this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
             //this.Opacity = 0.95;
 
+            //SplashScreen lunch + check if there is ET-lunched.txt
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            string programDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            string fileName = "ET-lunched.txt";
+            string fullPath = Path.Combine(programDataPath, fileName);
+            if (!File.Exists(fullPath))
+            {
+                File.WriteAllText(fullPath, "This file indicates for ET doesnt need to create more restorepoints.");
+
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "vssadmin";
+                startInfo.Arguments = "delete shadows /all /quiet";
+                process.StartInfo = startInfo;
+                process.Start(); process.WaitForExit();
+
+                if (issillent == false)
+                {
+                    Thread splashThread = new Thread(new ThreadStart(() =>
+                    {
+                        splashForm = BuildSplashForm();
+                        Application.Run(splashForm);
+                    }));
+
+                    splashThread.SetApartmentState(ApartmentState.STA);
+                    splashThread.Start();
+
+                    await Task.Delay(500);
+
+                    await Task.Run(() => BackItUp());
+
+                    if (splashForm != null && !splashForm.IsDisposed)
+                    {
+                        splashForm.Invoke(new Action(() =>
+                        {
+                            splashForm.Close();
+
+                        }));
+                    }
+
+                    System.Threading.Thread.Sleep(1000);
+                    this.Show();
+                    
+                    this.Opacity = 1;
+                    this.Enabled = true;
+                    this.BringToFront();
+                    this.Activate();
+                    this.ShowInTaskbar = true;
+                }
+                else
+                {
+                    //BackItUp              
+                    CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
+                    CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
+                    CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
+
+                }
+            }
+            else
+            {
+                this.Show();
+                
+                this.Opacity = 1;
+                this.Enabled = true;
+                this.BringToFront();
+                this.Activate();
+                this.ShowInTaskbar = true;
+            }
+
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C bcdedit /deletevalue {current} safeboot";
@@ -1789,27 +1948,22 @@ namespace ET
         {
             FlushMem();
 
-            Cursor.Current = Cursors.WaitCursor;
             //DO START ENGINE
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            if (runcount == 0)
-            {
-                //Auto BackUP - Creating Restore Point
-                
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "powershell.exe";
-                startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
-                process.StartInfo = startInfo;
-                process.Start(); process.WaitForExit();
-                
-
-            }
-            Cursor.Current = Cursors.Default;
-            runcount += 1;
 
             Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
             button5.Enabled = false;
+            groupBox1.Visible = false;
+            groupBox2.Visible = false;
+            groupBox3.Visible = false;
+            groupBox4.Visible = false;
+            groupBox5.Visible = false;
+            button1.Visible = false;
+            button2.Visible = false;
+            button3.Visible = false;
+            button4.Visible = false;
+            button5.Visible = false;
             textBox1.Visible = true;
 
             int alltodo = 0; //max 74
@@ -3721,6 +3875,16 @@ namespace ET
             {
                 progressBar1.Visible = false;
                 button5.Enabled = true;
+                groupBox1.Visible = true;
+                groupBox2.Visible = true;
+                groupBox3.Visible = true;
+                groupBox4.Visible = true;
+                groupBox5.Visible = true;
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
+                button4.Visible = true;
+                button5.Visible = true;
                 textBox1.Visible = false;
                 Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -3753,8 +3917,7 @@ namespace ET
                     }
 
                     this.TopMost = true;
-                    progressBar1.Visible = false;
-                    Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
+                    
                     MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (isswitch == true)
                     {
@@ -3764,8 +3927,20 @@ namespace ET
                     c_p(null, null);
                     textBox1.Text = "";
                     button5.Enabled = true;
+                    progressBar1.Visible = false;
+                    groupBox1.Visible = true;
+                    groupBox2.Visible = true;
+                    groupBox3.Visible = true;
+                    groupBox4.Visible = true;
+                    groupBox5.Visible = true;
+                    button1.Visible = true;
+                    button2.Visible = true;
+                    button3.Visible = true;
+                    button4.Visible = true;
+                    button5.Visible = true;
                     textBox1.Visible = false;
                     this.TopMost = false;
+                    Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 }
             }
             FlushMem();
@@ -3970,11 +4145,14 @@ namespace ET
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET-RestorePoint\" -RestorePointType \"MODIFY_SETTINGS\"";
+            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET_BACKUP-POWERSHELL\" -RestorePointType \"MODIFY_SETTINGS\"";
+            startInfo.UseShellExecute = false;
+            startInfo.CreateNoWindow = true;
             process.StartInfo = startInfo;
-            process.Start();
+            process.Start(); process.WaitForExit();
         }
 
         private void diskDefragmenterToolStripMenuItem_Click(object sender, EventArgs e)

@@ -59,5 +59,15 @@ namespace ET.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ET_LOGO_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ET_LOGO_BIG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
