@@ -149,15 +149,6 @@ namespace ET
                 CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
                 CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
                 CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
-                
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET_BACKUP-POWERSHELL\" -RestorePointType \"MODIFY_SETTINGS\"";
-            startInfo.UseShellExecute = false;
-            startInfo.CreateNoWindow = true;
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
-
             });
         }
 
