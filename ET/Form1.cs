@@ -102,7 +102,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "30.04.2025";
+        string ETBuild = "06.05.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -1065,7 +1065,7 @@ namespace ET
                 chck22.Text = "Remove Old Device Drivers";
                 chck23.Text = "Disable Get Even More Out of...";
                 chck24.Text = "Disable Installing Suggested Apps";
-                chck25.Text = "Disable Start Menu Ads/Suggestions";
+                chck25.Text = "Disable Start Menu Ads/Suggest";
                 chck26.Text = "Disable Suggest Apps WindowsInk";
                 chck27.Text = "Disable Unnecessary Components";
                 chck28.Text = "Defender Scheduled Scan Nerf";
@@ -2375,11 +2375,15 @@ namespace ET
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-338389Enabled", 0, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-338389Enabled", 0, RegistryValueKind.DWord);
-
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-338393Enabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-353698Enabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-338388Enabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-338389Enabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SubscribedContent-353694Enabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement\", "ScoobeSystemSettingEnabled", 0, RegistryValueKind.DWord);
                             break;
@@ -2433,6 +2437,12 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\", "SystemPaneSuggestionsEnabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "ShowSyncProviderNotifications", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Start\", "HideRecommendedSection", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Education\", "IsEducationEnvoironment", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Explorer\", "HideRecommendedSection", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Suggest Apps WindowsInk":
                             done++;
@@ -3059,6 +3069,8 @@ namespace ET
                             SetRegistryValue(@"HKCU\Control Panel\Desktop\WindowMetrics\", "MinAnimate", 0, RegistryValueKind.String);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\", "VisualFXSetting", 3, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Control Panel\Desktop\", "AnimationDuration", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable MRU lists (jump lists)":
                             done++;
