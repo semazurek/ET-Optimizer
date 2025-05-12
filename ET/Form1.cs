@@ -102,7 +102,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "06.05.2025";
+        string ETBuild = "12.05.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -2391,6 +2391,7 @@ namespace ET
                             done++;
 
                             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions", false);
+
                             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps", false);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableWindowsConsumerFeatures", 1, RegistryValueKind.DWord);
@@ -2443,6 +2444,8 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Education\", "IsEducationEnvoironment", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Explorer\", "HideRecommendedSection", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Policies\Microsoft\Windows\Explorer\", "HideRecommendedSection", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Suggest Apps WindowsInk":
                             done++;
@@ -2636,7 +2639,69 @@ namespace ET
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|Discord",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|Ubisoft Game Launcher",
-    @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|com.blitz.app"
+    @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|com.blitz.app",
+    @"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SearchIndexer.exe",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|searchapp.exe",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|CoolWebSearch",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|Crossrider",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|MediaNewTab",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|Vosteran",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SweetIM",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SweetPacks",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|BabylonToolbar",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|ico8ca4.exe",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|ShopperPro",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|ASCTray",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|ASC",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SAntivirus",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|Segurazo",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|WinZipDriverUpdater",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SlimDrivers",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|DriverMax",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SuperOptimizer",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|PCOptimizerPro",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|WebCompanion",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|Wajam",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|MyWebSearch",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|FunWebProducts",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|rk.exe",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|RelevantKnowledge",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|DriverBooster",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|SearchProtect",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|AnyDesk",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|TeamViewer",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|EdgeUI",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SearchIndexer.exe",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|searchapp.exe",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|CoolWebSearch",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|Crossrider",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|MediaNewTab",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|Vosteran",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SweetIM",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SweetPacks",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|BabylonToolbar",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|ico8ca4.exe",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|ShopperPro",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|ASCTray",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|ASC",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SAntivirus",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|Segurazo",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|WinZipDriverUpdater",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SlimDrivers",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|DriverMax",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SuperOptimizer",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|PCOptimizerPro",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|WebCompanion",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|Wajam",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|MyWebSearch",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|FunWebProducts",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|rk.exe",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|RelevantKnowledge",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|DriverBooster",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SearchProtect",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|AnyDesk",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|TeamViewer",
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|EdgeUI"
 };
 
                             foreach (var entry in keysToClean)
@@ -3068,9 +3133,13 @@ namespace ET
 
                             SetRegistryValue(@"HKCU\Control Panel\Desktop\WindowMetrics\", "MinAnimate", 0, RegistryValueKind.String);
 
-                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\", "VisualFXSetting", 3, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects\", "VisualFXSetting", 2, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Control Panel\Desktop\", "AnimationDuration", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Control Panel\Desktop\", "UserPreferencesMask", 9012038010000000, RegistryValueKind.Binary);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "TaskbarAnimations", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable MRU lists (jump lists)":
                             done++;
