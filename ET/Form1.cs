@@ -2634,6 +2634,7 @@ namespace ET
     @"HKLM\SOFTWARE\Microsoft\Active Setup\Installed Components|Microsoft Edge",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch_E9C49D8E9BDC4095F482C844743B9E82",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch_D3AB3F7FBB44621987441AECEC1156AD",
+    @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|Microsoft Edge Update",
     @"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3E",
@@ -3672,6 +3673,8 @@ namespace ET
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "TaskbarDa", 0, RegistryValueKind.DWord);
 
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds\", "ShellFeedsTaskbarViewMode", 2, RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Feeds\", "EnableFeeds", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Dsh\", "AllowNewsAndInterests", 0, RegistryValueKind.DWord);
@@ -3875,6 +3878,8 @@ namespace ET
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Services\WdNisSvc\", "Start", 4, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Services\WinDefend\", "Start", 4, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications\", "DisableEnhancedNotifications", 1, RegistryValueKind.DWord);
                             break;
                         case "Disable Spectre/Meltdown":
                             done++;

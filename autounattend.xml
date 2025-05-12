@@ -274,7 +274,7 @@ New-Item -Path $key -ItemType 'Directory' -ErrorAction 'SilentlyContinue';
 Set-ItemProperty -LiteralPath $key -Name 'ConfigureStartPins' -Value $json -Type 'String';
 		</File>
 		<File path="C:\Windows\Setup\Scripts\unattend-01.cmd">
-powershell -command wget https://github.com/semazurek/ET-Optimizer/releases/download/5.5.1/ET-Optimizer.exe -o ET-Optimizer.exe
+powershell -command wget https://github.com/semazurek/ET-Optimizer/releases/download/6.0/ET-Optimizer.exe -o ET-Optimizer.exe
 if exist A:\ET-Optimizer.exe A:\ET-Optimizer.exe /sillent
 if exist B:\ET-Optimizer.exe B:\ET-Optimizer.exe /sillent
 if exist C:\ET-Optimizer.exe C:\ET-Optimizer.exe /sillent
@@ -319,6 +319,9 @@ $scripts = @(
 	};
 	{
 		reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OOBE" /v BypassNRO /t REG_DWORD /d 1 /f;
+	};
+	{
+		start ms-cxh:localonly
 	};
 	{
 		Remove-Item -LiteralPath 'Registry::HKLM\Software\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate' -Force -ErrorAction 'SilentlyContinue';
