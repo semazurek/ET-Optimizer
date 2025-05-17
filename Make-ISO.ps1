@@ -9,12 +9,12 @@ $tempFolder = "C:\iso_temp"
 $newFile = "Copy_To_ISO\ET-Optimizer.exe"
 $newFile2 = "Copy_To_ISO\autounattend.xml"
 
+cls
 [console]::WindowWidth = 120
 [console]::WindowHeight = 40
 $Host.UI.RawUI.BackgroundColor = 'Blue'
 $Host.UI.RawUI.ForegroundColor = 'White'
 $host.ui.RawUI.WindowTitle = "ET-Optimizer ISO Creator"
-cls
 
 # === Instalacja narzędzi z winget ===
 winget install --id=7zip.7zip -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements
