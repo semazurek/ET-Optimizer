@@ -283,18 +283,26 @@ function New-ISOFile {
 
 
         ## Add these to our image
-        Write-Verbose ("Adding items to image.")
+Write-Verbose ("Adding items to image.")
 
-        foreach($sourceItem in $sourceItems) {
+$totalItems = $sourceItems.Count
+$currentItem = 0
 
-            try {
-                $image.Root.AddTree($sourceItem.FullName, $true)
-            } # try
-            catch {
-                throw ("Failed to add " + $sourceItem.fullname + ". " + $_.exception.message)
-            } # catch
+foreach($sourceItem in $sourceItems) {
+    $currentItem++
+    $percent = [math]::Round(($currentItem / $totalItems) * 100)
 
-        } # foreach
+    Write-Progress -Activity "Tworzenie obrazu ISO" `
+                   -Status "Adding $($sourceItem.Name) ($currentItem z $totalItems)" `
+                   -PercentComplete $percent
+
+    try {
+        $image.Root.AddTree($sourceItem.FullName, $true)
+    } # try
+    catch {
+        throw ("Failed to add " + $sourceItem.fullname + ". " + $_.exception.message)
+    } # catch
+}
 
         ## Add boot file, if specified
         if ($boot) {
