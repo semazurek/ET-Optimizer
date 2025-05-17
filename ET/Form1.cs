@@ -102,7 +102,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "12.05.2025";
+        string ETBuild = "17.05.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -4613,12 +4613,13 @@ namespace ET
 
         }
 
-
+        public string isoPath;
+        public string scriptPath = @"Copy_To_ISO\Make-ISO.ps1";
         private void makeETISOToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
+            
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C mkdir Copy_To_ISO";
@@ -4633,15 +4634,66 @@ namespace ET
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/HowTo-ISO.png -OutFile Copy_To_ISO/HowTo-ISO.png";
-            process.StartInfo = startInfo;
-            process.Start();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "powershell.exe";
             startInfo.Arguments = "-Command wget https://github.com/semazurek/ET-Optimizer/releases/download/6.0/ET-Optimizer.exe -OutFile Copy_To_ISO/ET-Optimizer.exe";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Pliki ISO (*.iso)|*.iso";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    isoPath = openFileDialog.FileName;
+
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "powershell.exe";
+                    startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/Make-ISO.ps1 -OutFile Copy_To_ISO/Make-ISO.ps1";
+                    process.StartInfo = startInfo;
+                    process.Start(); process.WaitForExit();
+
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                    startInfo.FileName = "powershell.exe";
+                    startInfo.Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\" -isoPath \"{isoPath}\"";
+                    process.StartInfo = startInfo;
+                    process.Start(); process.WaitForExit();
+
+                    if (File.Exists(Path.Combine("Copy_To_ISO", "ET-Optimizer.exe")))
+                    {
+                        File.Delete(Path.Combine("Copy_To_ISO", "ET-Optimizer.exe"));
+                    }
+
+                    if (File.Exists(Path.Combine("Copy_To_ISO", "autounattend.xml")))
+                    {
+                        File.Delete(Path.Combine("Copy_To_ISO", "autounattend.xml"));
+                    }
+
+                    if (File.Exists(Path.Combine("Copy_To_ISO", "HowTo-ISO.png")))
+                    {
+                        File.Delete(Path.Combine("Copy_To_ISO", "HowTo-ISO.png"));
+                    }
+                }
+                else
+                {
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                    startInfo.FileName = "powershell.exe";
+                    startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/HowTo-ISO.png -OutFile Copy_To_ISO/HowTo-ISO.png";
+                    process.StartInfo = startInfo;
+                    process.Start(); process.WaitForExit();
+                }
+            }
+
+            if (File.Exists(Path.Combine("Copy_To_ISO", "Make-ISO.ps1")))
+            {
+                File.Delete(Path.Combine("Copy_To_ISO", "Make-ISO.ps1"));
+            }
+
+            string folderPathisotemp = @"C:\iso_temp";
+
+            if (Directory.Exists(folderPathisotemp))
+            {
+                    Directory.Delete(folderPathisotemp, recursive: true);
+            }
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "powershell.exe";
