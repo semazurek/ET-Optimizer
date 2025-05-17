@@ -6,8 +6,8 @@
       )
 #$isoPath = "pl-pl_windows_11_consumer_editions_version_24h2_updated_april_2025_x64_dvd_ea86301d.iso"
 $tempFolder = "C:\iso_temp"
-$newFile = "ET-Optimizer.exe"
-$newFile2 = "autounattend.xml"
+$newFile = "Copy_To_ISO\ET-Optimizer.exe"
+$newFile2 = "Copy_To_ISO\autounattend.xml"
 
 # === Instalacja narzędzi z winget ===
 winget install --id=7zip.7zip -e --disable-interactivity --silent --accept-source-agreements --accept-package-agreements
@@ -328,4 +328,4 @@ function New-ISOFile {
 
 } # function
 
-New-ISOFile -source $tempFolder -destinationIso ET-OS.iso -bootfile $tempFolder\efi\microsoft\boot\efisys_noprompt.bin -title "ET-OS" -Verbose
+New-ISOFile -source $tempFolder -destinationIso Copy_To_ISO\ET-OS.iso -bootfile $tempFolder\efi\microsoft\boot\efisys_noprompt.bin -title "ET-OS" -Verbose
