@@ -181,6 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <None Include="Resources\Make-ISO.txt" />
+    <None Include="Resources\HowTo-ISO.png" />
+    <None Include="Resources\autounattend.xml" />
     <None Include="ET-LOGO-BIG.png" />
     <None Include="Resources\ET-BIG-LOGO.png" />
     <EmbeddedResource Include="Newtonsoft.Json.dll" />

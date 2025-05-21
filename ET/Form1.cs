@@ -1,21 +1,23 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Management;
 using System.Media;
 using System.Net.Http;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using System.Threading;
 
 // Created by Rikey
 // https://semazurek.github.io
@@ -89,7 +91,7 @@ namespace ET
                 //base.OnRenderToolStripBorder(e);
             }
         }
-
+        public string systemDrive = Environment.GetEnvironmentVariable("SystemDrive");
         string mainforecolor = "#eeeeee";
         string mainbackcolor = "#252525";
         string menubackcolor = "#323232";
@@ -101,8 +103,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.0";
-        string ETBuild = "17.05.2025";
+        string ETVersion = "E.T. ver 6.05.21";
+        string ETBuild = "21.05.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -145,7 +147,22 @@ namespace ET
                 startInfo.CreateNoWindow = true;
                 process.StartInfo = startInfo;
                 process.Start(); process.WaitForExit();
-                
+
+                string backupPath = System.IO.Path.Combine(systemDrive + @"\", "Backup");
+
+                if (!Directory.Exists(backupPath))
+                {
+                    Directory.CreateDirectory(backupPath);
+                }
+
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                startInfo.FileName = "powershell.exe";
+                startInfo.Arguments = "-Command reg export \"HKLM\\SOFTWARE\" \"$env:SystemDrive\\backup\\HKLM_SOFTWARE.reg\" /y; reg export \"HKLM\\SYSTEM\" \"$env:SystemDrive\\Backup\\HKLM_SYSTEM.reg\" /y; reg export \"HKCU\\Software\" \"$env:SystemDrive\\Backup\\HKCU_SOFTWARE.reg\" /y; reg export \"HKCU\\System\" \"$env:SystemDrive\\Backup\\HKCU_SYSTEM.reg\" /y; reg export \"HKCU\\Control Panel\" \"$env:SystemDrive\\Backup\\HKCU_ControlPanel.reg\" /y";
+                startInfo.UseShellExecute = false;
+                startInfo.CreateNoWindow = true;
+                process.StartInfo = startInfo;
+                process.Start(); process.WaitForExit();
+
                 CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
                 CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
                 CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
@@ -1014,7 +1031,9 @@ namespace ET
                 button4.Font = new Font("Consolas", 13, FontStyle.Regular);
 
                 toolStripButton2.Text = "Backup";
-                toolStripButton1.Text = "Restore";
+                toolStripDropDownButton2.Text = "Restore";
+                registryRestoreToolStripMenuItem.Text = "Registry Restore";
+                restorePointToolStripMenuItem.Text = "Restore Point"; 
                 toolStripButton3.Text = "About";
                 toolStripButton4.Text = "Donate";
 
@@ -1142,7 +1161,9 @@ namespace ET
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
                     toolStripButton2.Text = "Kopia Zapasowa";
-                    toolStripButton1.Text = "Przywracanie";
+                    toolStripDropDownButton2.Text = "Przywracanie";
+                    registryRestoreToolStripMenuItem.Text = "Przywracanie rejestru"; 
+                    restorePointToolStripMenuItem.Text = "Punkt przywracania";
                     toolStripButton3.Text = "O mnie";
                     toolStripButton4.Text = "Wsparcie";
 
@@ -1270,7 +1291,9 @@ namespace ET
                     button4.Font = new Font("Consolas", 13, FontStyle.Regular);
 
                     toolStripButton2.Text = "Резервная копия";
-                    toolStripButton1.Text = "Восстановление";
+                    toolStripDropDownButton2.Text = "Восстановление";
+                    registryRestoreToolStripMenuItem.Text = "Восстановление реестра";
+                    restorePointToolStripMenuItem.Text = "Точка восстановления";
                     toolStripButton3.Text = "О программе";
                     toolStripButton4.Text = "Пожертвовать";
                     //toolStripButton5.Text = "безопасный режим";
@@ -1321,7 +1344,9 @@ namespace ET
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
                     toolStripButton2.Text = "Backup";
-                    toolStripButton1.Text = "Wiederherst.";
+                    toolStripDropDownButton2.Text = "Wiederherst.";
+                    registryRestoreToolStripMenuItem.Text = "Registrierung wiederherstellen";
+                    restorePointToolStripMenuItem.Text = "Wiederherstellungspunkt";
                     toolStripButton3.Text = "Über mich";
                     toolStripButton4.Text = "Support";
 
@@ -1427,7 +1452,9 @@ namespace ET
                     button7.Text = "pt-BR";
                     Console.WriteLine("Portuguese - Brazil detected");
                     toolStripButton2.Text = "Backup";
-                    toolStripButton1.Text = "Restaurando";
+                    toolStripDropDownButton2.Text = "Restaurando";
+                    registryRestoreToolStripMenuItem.Text = "Restauração do Registro";
+                    restorePointToolStripMenuItem.Text = "Ponto de Restauração";
                     toolStripDropDownButton1.Text = "Extras";
                     toolStripButton3.Text = "Sobre mim";
                     toolStripButton4.Text = "Doar";
@@ -1548,7 +1575,9 @@ namespace ET
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
                     toolStripButton2.Text = "Sauvegarde";
-                    toolStripButton1.Text = "Restauration";
+                    toolStripDropDownButton2.Text = "Restauration";
+                    registryRestoreToolStripMenuItem.Text = "Restauration du registre";
+                    restorePointToolStripMenuItem.Text = "Point de restauration";
                     toolStripButton3.Text = "À propos";
                     toolStripButton4.Text = "Support";
 
@@ -1769,8 +1798,7 @@ namespace ET
                 Location = new Point((splash.ClientSize.Width - 150) / 2, 30)
             };
             splash.Controls.Add(logoBox);
-            
-            
+
             ProgressBar progressBar = new ProgressBar()
             {
                 Style = ProgressBarStyle.Marquee,
@@ -4204,14 +4232,6 @@ namespace ET
 
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            // System.Diagnostics.Process.Start("CMD.EXE", "/K rstrui.exe");
-            Process.Start(Path.Combine(Environment.SystemDirectory, "rstrui.exe"));
-            //Process.Start("C:\\Windows\\System32\\rstrui.exe");
-
-        }
-
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
 
@@ -4220,16 +4240,14 @@ namespace ET
 
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-            startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command [console]::WindowWidth=80;[console]::WindowHeight=23;[console]::BufferWidth = [console]::WindowWidth; Enable-ComputerRestore -Drive $env:systemdrive; Checkpoint-Computer -Description \"ET_BACKUP-POWERSHELL\" -RestorePointType \"MODIFY_SETTINGS\"";
-            startInfo.UseShellExecute = false;
-            startInfo.CreateNoWindow = true;
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            string programDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
+            string fileName = "ET-lunched.txt";
+            string fullPath = Path.Combine(programDataPath, fileName);
+            if (File.Exists(fullPath))
+            {
+                File.Delete(fullPath);
+            }
+            Application.Restart();
         }
 
         private void diskDefragmenterToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4619,38 +4637,56 @@ namespace ET
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-            
+
+            if (!Directory.Exists("Copy_To_ISO"))
+            {
+                Directory.CreateDirectory("Copy_To_ISO");
+            }
+
+            // EXE Folder Dir
+            string exeDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            //Save AutoUnattend
+            string FileNameToSave = "autounattend.xml";
+
+            string outputPath = Path.Combine(exeDir+ "Copy_To_ISO/", FileNameToSave);
+
+            string ContentToGet = Properties.Resources.autounattend;
+
+            File.WriteAllText(outputPath, ContentToGet);
+
+            //Save Make-ISO script to txt
+            FileNameToSave = "Make-ISO.txt";
+
+            outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
+
+            ContentToGet = Properties.Resources.Make_ISO;
+
+            File.WriteAllText(outputPath, ContentToGet);
+
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C mkdir Copy_To_ISO";
+            startInfo.Arguments = "/C move Copy_To_ISO\\Make-ISO.txt Copy_To_ISO\\Make-ISO.ps1";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/autounattend.xml -OutFile Copy_To_ISO/autounattend.xml";
-            process.StartInfo = startInfo;
-            process.Start();
+            //Copy ET-Optimizer.exe
+            string exePath = Assembly.GetExecutingAssembly().Location;
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command wget https://github.com/semazurek/ET-Optimizer/releases/download/6.0/ET-Optimizer.exe -OutFile Copy_To_ISO/ET-Optimizer.exe";
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            string targetDir = Path.Combine(exeDirectory, "Copy_To_ISO");
+            string targetPath = Path.Combine(targetDir, "ET-Optimizer.exe");
+
+            File.Copy(exePath, targetPath, overwrite: true);
 
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "Pliki ISO (*.iso)|*.iso";
+                openFileDialog.Filter = "ISO (*.iso)|*.iso";
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     isoPath = openFileDialog.FileName;
-
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "powershell.exe";
-                    startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/Make-ISO.ps1 -OutFile Copy_To_ISO/Make-ISO.ps1";
-                    process.StartInfo = startInfo;
-                    process.Start(); process.WaitForExit();
 
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
                     startInfo.FileName = "powershell.exe";
@@ -4675,20 +4711,22 @@ namespace ET
                 }
                 else
                 {
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                    startInfo.FileName = "powershell.exe";
-                    startInfo.Arguments = "-Command wget https://raw.githubusercontent.com/semazurek/ET-Optimizer/refs/heads/master/HowTo-ISO.png -OutFile Copy_To_ISO/HowTo-ISO.png";
-                    process.StartInfo = startInfo;
-                    process.Start(); process.WaitForExit();
+                    FileNameToSave = "HowTo-ISO.png";
+
+                    outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
+
+                    Image img = Properties.Resources.HowTo_ISO;
+                    img.Save(outputPath, ImageFormat.Png);
+
                 }
             }
-
+            
             if (File.Exists(Path.Combine("Copy_To_ISO", "Make-ISO.ps1")))
             {
                 File.Delete(Path.Combine("Copy_To_ISO", "Make-ISO.ps1"));
             }
-
-            string folderPathisotemp = @"C:\iso_temp";
+            
+            string folderPathisotemp = System.IO.Path.Combine(systemDrive + @"\", "iso_temp");
 
             if (Directory.Exists(folderPathisotemp))
             {
@@ -4712,6 +4750,28 @@ namespace ET
             startInfo.Arguments = "/C winget install --id=MartiCliment.UniGetUI --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
+        }
+
+        private void restorePointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start(Path.Combine(Environment.SystemDirectory, "rstrui.exe"));
+        }
+
+        private void registryRestoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            string backupPath = System.IO.Path.Combine(systemDrive + @"\", "Backup");
+            if (Directory.Exists(backupPath))
+            {
+                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+                startInfo.FileName = "powershell.exe";
+                startInfo.Arguments = "-Command Get-ChildItem -Path \"$env:SystemDrive\\backup\" -Filter *.reg | ForEach-Object { reg import $_.FullName }";
+                process.StartInfo = startInfo;
+                process.Start();
+            }
+
         }
     }
 }

@@ -47,7 +47,9 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton2 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.restorePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registryRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.diskDefragmenterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cleanmgrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -288,7 +290,7 @@
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton2,
-            this.toolStripButton1,
+            this.toolStripDropDownButton2,
             this.toolStripDropDownButton1,
             this.toolStripButton3,
             this.toolStripButton4,
@@ -319,15 +321,31 @@
             this.toolStripButton2.ToolTipText = "Restore";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
-            // toolStripButton1
+            // toolStripDropDownButton2
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(68, 28);
-            this.toolStripButton1.Text = "Restore";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolStripDropDownButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripDropDownButton2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restorePointToolStripMenuItem,
+            this.registryRestoreToolStripMenuItem});
+            this.toolStripDropDownButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton2.Image")));
+            this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
+            this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(78, 28);
+            this.toolStripDropDownButton2.Text = "Restore";
+            // 
+            // restorePointToolStripMenuItem
+            // 
+            this.restorePointToolStripMenuItem.Name = "restorePointToolStripMenuItem";
+            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.restorePointToolStripMenuItem.Text = "Restore Point";
+            this.restorePointToolStripMenuItem.Click += new System.EventHandler(this.restorePointToolStripMenuItem_Click);
+            // 
+            // registryRestoreToolStripMenuItem
+            // 
+            this.registryRestoreToolStripMenuItem.Name = "registryRestoreToolStripMenuItem";
+            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.registryRestoreToolStripMenuItem.Text = "Registry Restore";
+            this.registryRestoreToolStripMenuItem.Click += new System.EventHandler(this.registryRestoreToolStripMenuItem_Click);
             // 
             // toolStripDropDownButton1
             // 
@@ -717,9 +735,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(47, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 25);
+            this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.0";
+            this.label1.Text = "E.T. ver 6.05.21";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -787,7 +805,6 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
@@ -840,6 +857,9 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.ToolStripMenuItem makeETISOToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uniGetUIWingetGUIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton2;
+        private System.Windows.Forms.ToolStripMenuItem restorePointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registryRestoreToolStripMenuItem;
     }
 }
 

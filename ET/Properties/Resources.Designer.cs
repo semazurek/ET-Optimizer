@@ -61,12 +61,63 @@ namespace ET.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;unattend xmlns=&quot;urn:schemas-microsoft-com:unattend&quot; xmlns:wcm=&quot;http://schemas.microsoft.com/WMIConfig/2002/State&quot;&gt;
+        ///	&lt;settings pass=&quot;offlineServicing&quot;&gt;&lt;/settings&gt;
+        ///	&lt;settings pass=&quot;windowsPE&quot;&gt;
+        ///		&lt;component name=&quot;Microsoft-Windows-Setup&quot; processorArchitecture=&quot;amd64&quot; publicKeyToken=&quot;31bf3856ad364e35&quot; language=&quot;neutral&quot; versionScope=&quot;nonSxS&quot;&gt;
+        ///			&lt;UserData&gt;
+        ///				&lt;ProductKey&gt;
+        ///					&lt;Key&gt;00000-00000-00000-00000-00000&lt;/Key&gt;
+        ///					&lt;WillShowUI&gt;Always&lt;/WillShowUI&gt;
+        ///				&lt;/Pr [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string autounattend {
+            get {
+                return ResourceManager.GetString("autounattend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ET_LOGO_BIG {
             get {
                 object obj = ResourceManager.GetObject("ET_LOGO_BIG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap HowTo_ISO {
+            get {
+                object obj = ResourceManager.GetObject("HowTo_ISO", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact=&quot;Low&quot;)]
+        ///    Param
+        ///    (
+        ///        [parameter(Mandatory=$true,ValueFromPipeline=$false)]
+        ///        [string]$isoPath
+        ///      )
+        ///#$isoPath = &quot;pl-pl_windows_11_consumer_editions_version_24h2_updated_april_2025_x64_dvd_ea86301d.iso&quot;
+        ///$tempFolder = &quot;$env:SystemDrive\iso_temp&quot;
+        ///$newFile = &quot;Copy_To_ISO\ET-Optimizer.exe&quot;
+        ///$newFile2 = &quot;Copy_To_ISO\autounattend.xml&quot;
+        ///
+        ///cls
+        ///[console]::WindowWidth = 120
+        ///[console]::WindowHeight = 40
+        ///$Host.UI.RawUI.BackgroundColor [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string Make_ISO {
+            get {
+                return ResourceManager.GetString("Make_ISO", resourceCulture);
             }
         }
     }
