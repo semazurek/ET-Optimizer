@@ -81,6 +81,26 @@ namespace ET.Properties {
         /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap battery_charge {
+            get {
+                object obj = ResourceManager.GetObject("battery_charge", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap cpu_tower {
+            get {
+                object obj = ResourceManager.GetObject("cpu_tower", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ET_LOGO_BIG {
             get {
                 object obj = ResourceManager.GetObject("ET_LOGO_BIG", resourceCulture);
@@ -118,6 +138,16 @@ namespace ET.Properties {
         internal static string Make_ISO {
             get {
                 return ResourceManager.GetString("Make_ISO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ram {
+            get {
+                object obj = ResourceManager.GetObject("ram", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
     }

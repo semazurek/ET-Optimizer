@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
@@ -12,12 +11,14 @@ using System.Management;
 using System.Media;
 using System.Net.Http;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using ContentAlignment = System.Drawing.ContentAlignment;
 
 // Created by Rikey
 // https://semazurek.github.io
@@ -62,6 +63,38 @@ namespace ET
             int nHeightEllipse  // height of the ellipse used for corners
         );
 
+        private bool mouseClicked = false;
+
+        //Function for wait for mouse click at end msgend
+        private void Form_MouseClick(object sender, MouseEventArgs e)
+        {
+            mouseClicked = true;
+        }
+        public void WaitForMouseClick()
+        {
+            this.MouseClick += Form_MouseClick;
+            foreach (Control control in this.Controls)
+            {
+                control.MouseClick += Form_MouseClick;
+            }
+
+            // wait for user click
+            while (!mouseClicked)
+            {
+                Application.DoEvents(); // app continue
+                Thread.Sleep(10);       
+            }
+
+            // Wyczyść po zakończeniu
+            this.MouseClick -= Form_MouseClick;
+            foreach (Control control in this.Controls)
+            {
+                control.MouseClick -= Form_MouseClick;
+            }
+
+            mouseClicked = false; // Reset
+        }
+
         public void FlushMem()
         {
             GC.Collect();
@@ -103,8 +136,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.05.21";
-        string ETBuild = "21.05.2025";
+        string ETVersion = "E.T. ver 6.05.25";
+        string ETBuild = "29.05.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -137,9 +170,9 @@ namespace ET
         {
             await Task.Run(() =>
             {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-                
+                System.Diagnostics.Process process = new System.Diagnostics.Process();
+                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                 startInfo.FileName = "powershell.exe";
                 startInfo.Arguments = "-Command Enable-ComputerRestore -Drive $env:systemdrive";
@@ -1009,6 +1042,31 @@ namespace ET
             chck74.TabIndex = 74;
             panel1.Controls.Add(chck74);
 
+            //Icons dynamicly
+
+            diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap();
+            cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap();
+            msconfigToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msconfig.exe").ToBitmap();
+            controlPanelToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap();
+            deviceManagerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\devmgmt.msc").ToBitmap();
+            uACSettingsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\UserAccountControlSettings.exe").ToBitmap();
+            msinfo32ToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msinfo32.exe").ToBitmap();
+            servicesToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\services.msc").ToBitmap();
+            remoteDesktopToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\mstsc.exe").ToBitmap();
+            eventViewerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\eventvwr.exe").ToBitmap();
+            resetNetworkToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap();
+            makeETISOToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\oobe\\Setup.exe").ToBitmap();
+            updateApplicationsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap();
+            downloadSoftwareToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap();
+            windowsLicenseKeyToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\slui.exe").ToBitmap();
+            rebootToBIOSToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap();
+            rebootToSafeModeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap();
+            restartExplorerexeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\explorer.exe").ToBitmap();
+
+
+            restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap();
+            registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap();
+
             //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
@@ -1033,7 +1091,7 @@ namespace ET
                 toolStripButton2.Text = "Backup";
                 toolStripDropDownButton2.Text = "Restore";
                 registryRestoreToolStripMenuItem.Text = "Registry Restore";
-                restorePointToolStripMenuItem.Text = "Restore Point"; 
+                restorePointToolStripMenuItem.Text = "Restore Point";
                 toolStripButton3.Text = "About";
                 toolStripButton4.Text = "Donate";
 
@@ -1137,7 +1195,6 @@ namespace ET
             }
             DefaultLang();
 
-
             void ChangeLang()
             {
 
@@ -1162,10 +1219,10 @@ namespace ET
 
                     toolStripButton2.Text = "Kopia Zapasowa";
                     toolStripDropDownButton2.Text = "Przywracanie";
-                    registryRestoreToolStripMenuItem.Text = "Przywracanie rejestru"; 
+                    registryRestoreToolStripMenuItem.Text = "Przywracanie rejestru";
                     restorePointToolStripMenuItem.Text = "Punkt przywracania";
                     toolStripButton3.Text = "O mnie";
-                    toolStripButton4.Text = "Wsparcie";
+                    toolStripButton4.Text = "Wesprzyj";
 
                     rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
                     restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
@@ -1686,6 +1743,9 @@ namespace ET
                 }
             }
             ChangeLang();
+            label2.Left = (this.ClientSize.Width - label2.Width) / 2 / 2;
+            label2.Text = msgend;
+            label2.BringToFront();
 
             groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             button2.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -1758,7 +1818,7 @@ namespace ET
                     var response = await client.GetStringAsync("https://api.github.com/repos/semazurek/ET-Optimizer");
                     var json = JObject.Parse(response);
 
-                    var updatedAt = DateTime.Parse(json["updated_at"]?.ToString() ?? "").ToLocalTime();
+                    var updatedAt = DateTime.Parse(json["pushed_at"]?.ToString() ?? "").ToLocalTime();
                     var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
                     if (updatedAt > localDate)
@@ -1808,7 +1868,7 @@ namespace ET
                 ForeColor = Color.FromArgb(52, 152, 219)
             };
             splash.Controls.Add(progressBar);
-            
+
 
             return splash;
         }
@@ -1817,11 +1877,11 @@ namespace ET
         private async void Form1_Load(object sender, EventArgs e)
         {
             this.Hide();
-            
+
             // Create a region with rounded corners
             //IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
             this.FormBorderStyle = FormBorderStyle.None;
-            
+
             this.ShowInTaskbar = false;
             //this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
             //this.Opacity = 0.95;
@@ -1870,7 +1930,7 @@ namespace ET
 
                     System.Threading.Thread.Sleep(1000);
                     this.Show();
-                    
+
                     this.Opacity = 1;
                     this.Enabled = true;
                     this.BringToFront();
@@ -1889,7 +1949,7 @@ namespace ET
             else
             {
                 this.Show();
-                
+
                 this.Opacity = 1;
                 this.Enabled = true;
                 this.BringToFront();
@@ -2613,7 +2673,8 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name; $whitelistapps = @('Microsoft.MicrosoftOfficeHub','Microsoft.Office.OneNote','Microsoft.WindowsAlarms','Microsoft.WindowsCalculator','Microsoft.WindowsCamera','microsoft.windowscommunicationsapps','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.0','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.0','Microsoft.WindowsAppRuntime.1.3','Microsoft.NET.Native.Framework.1.7','MicrosoftWindows.Client.Core','Microsoft.LockApp','Microsoft.ECApp','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.Search','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.SecHealthUI','Microsoft.SecHealthUI','Microsoft.WindowsAppRuntime.CBS','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.120.00.UWPDesktop','Microsoft.VCLibs.110.00.UWPDesktop','Microsoft.DirectXRuntime','Microsoft.XboxGameOverlay','Microsoft.XboxGamingOverlay','Microsoft.GamingApp','Microsoft.GamingServices','Microsoft.XboxIdentityProvider','Microsoft.Xbox.TCUI','Microsoft.AccountsControl','Microsoft.WindowsStore','Microsoft.StorePurchaseApp','Microsoft.VP9VideoExtensions','Microsoft.RawImageExtension','Microsoft.HEIFImageExtension','Microsoft.HEIFImageExtension','Microsoft.WebMediaExtensions','RealtekSemiconductorCorp.RealtekAudioControl','Microsoft.MicrosoftEdge','Microsoft.MicrosoftEdge.Stable','MicrosoftWindows.Client.FileExp','NVIDIACorp.NVIDIAControlPanel','AppUp.IntelGraphicsExperience','Microsoft.Paint','Microsoft.Messaging','Microsoft.AsyncTextService','Microsoft.CredDialogHost','Microsoft.Win32WebViewHost','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.SecondaryTileExperience','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','Windows.MiracastView','Windows.ContactSupport','Windows.PrintDialog','c5e2524a-ea46-4f67-841f-6a9465d9d515','windows.immersivecontrolpanel','WinRAR.ShellExtension','Microsoft.WindowsNotepad','MicrosoftWindows.Client.WebExperience','Microsoft.ZuneMusic','Microsoft.ZuneVideo','Microsoft.OutlookForWindows','MicrosoftWindows.Ai.Copilot.Provider','Microsoft.WindowsTerminal','Microsoft.Windows.Terminal','WindowsTerminal','Microsoft.Winget.Source','Microsoft.DesktopAppInstaller','Microsoft.Services.Store.Engagement','Microsoft.HEVCVideoExtension','Microsoft.WebpImageExtension','MicrosoftWindows.CrossDevice','NotepadPlusPlus','MicrosoftCorporationII.WinAppRuntime.Main.1.5','Microsoft.WindowsAppRuntime.1.5','MicrosoftCorporationII.WinAppRuntime.Singleton','Microsoft.WindowsSoundRecorder','MicrosoftCorporationII.WinAppRuntime.Main.1.4','MicrosoftWindows.Client.LKG','MicrosoftWindows.Client.CBS','Microsoft.VCLibs.140.00','Microsoft.Windows.CloudExperienceHost','SpotifyAB.SpotifyMusic','Microsoft.SkypeApp','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486','TelegramMessengerLLP.TelegramDesktop','4DF9E0F8.Netflix','Discord','Paint','mspaint','Microsoft.Windows.Paint','Microsoft.MicrosoftEdge.Stable','1527c705-839a-4832-9118-54d4Bd6a0c89','c5e2524a-ea46-4f67-841f-6a9465d9d515','E2A4F912-2574-4A75-9BB0-0D023378592B','F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE','Microsoft.AAD.BrokerPlugin','Microsoft.AccountsControl','Microsoft.AsyncTextService','Microsoft.BioEnrollment','Microsoft.CredDialogHost','Microsoft.ECApp','Microsoft.LockApp','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.UI.Xaml.CBS','Microsoft.Win32WebViewHost','Microsoft.Windows.Apprep.ChxApp','Microsoft.Windows.AssignedAccessLockApp','Microsoft.Windows.CapturePicker','Microsoft.Windows.CloudExperienceHost','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.NarratorQuickStart','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.ParentalControls','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.PrintQueueActionCenter','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.Client.AIX','MicrosoftWindows.Client.FileExp','MicrosoftWindows.Client.OOBE','MicrosoftWindows.LKG.Search','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','windows.immersivecontrolpanel','Windows.PrintDialog','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.SecHealthUI','Microsoft.Services.Store.Engagement','Microsoft.UI.Xaml.2.8','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.140.00','Microsoft.VCLibs.140.00','Microsoft.WindowsAppRuntime.1.3','Microsoft.WindowsCamera','Microsoft.XboxIdentityProvider','Microsoft.ZuneMusic','RealtekSemiconductorCorp.RealtekAudioControl','DolbyLaboratories.DolbyAudioPremium','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.0','AppUp.IntelGraphicsExperience','Microsoft.NET.Native.Runtime.2.0','Microsoft.Windows.AugLoop.CBS','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.WindowsAppRuntime.CBS.1.6','Microsoft.WindowsAppRuntime.CBS','MicrosoftWindows.Client.CBS','MicrosoftWindows.Client.Core','MicrosoftWindows.Client.Photon','MicrosoftWindows.LKG.AccountsService','MicrosoftWindows.LKG.DesktopSpotlight','MicrosoftWindows.LKG.IrisService','MicrosoftWindows.LKG.RulesEngine','MicrosoftWindows.LKG.SpeechRuntime','MicrosoftWindows.LKG.TwinSxS','Microsoft.VCLibs.140.00','Microsoft.Copilot','Microsoft.OneDriveSync','Microsoft.OutlookForWindows','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.WindowsAppRuntime.1.5','Microsoft.WindowsAppRuntime.1.5','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.Windows.DevHome','Microsoft.UI.Xaml.2.8','Microsoft.Paint','MicrosoftWindows.Client.WebExperience','Microsoft.WindowsStore','Microsoft.WindowsNotepad','Microsoft.WidgetsPlatformRuntime','Microsoft.Xbox.TCUI','Microsoft.WebpImageExtension','Microsoft.WebMediaExtensions','Microsoft.RawImageExtension','Microsoft.HEVCVideoExtension','Microsoft.HEIFImageExtension','Microsoft.WindowsTerminal','Microsoft.DesktopAppInstaller','Microsoft.StartExperiencesApp','Microsoft.StorePurchaseApp','Microsoft.GamingApp','Microsoft.VP9VideoExtensions','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.7','Microsoft.XboxGamingOverlay','Microsoft.WindowsCalculator','Microsoft.WindowsSoundRecorder','Microsoft.WindowsAlarms','Microsoft.MicrosoftOfficeHub','Microsoft.WindowsAppRuntime.1.6','Microsoft.WindowsAppRuntime.1.6','MicrosoftWindows.CrossDevice','Microsoft.Windows.Photos','Microsoft.MinecraftUWP','minecraft','Linux','Ubuntu','Kali','Debian','kali-linux','WSL','WSL2','Docker','Xbox','Microsoft.LanguageExperiencePack','Microsoft.LanguageExperiencePacken-US','Microsoft.LanguageExperiencePackpl-PL','Microsoft.Lovika','Microsoft.4297127D64EC6','Microsoft.Winget.Source','26737FrancescoSorge.Dockerun','CanonicalGroupLimited.Ubuntu','KaliLinux.54290C8133FEE','TheDebianProject.DebianGNULinux','Crystalnix.Termius','OpenAI.ChatGPT-Desktop','Disney.37853FC22B2CE','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486'); ForEach($TargetApp in $RemoveAppPkgs){ If( $whitelistapps -notcontains $TargetApp) { Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $TargetApp | Remove-AppxProvisionedPackage -Online }}";
+                            //startInfo.Arguments = "-Command $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name; $whitelistapps = @('Microsoft.MicrosoftOfficeHub','Microsoft.Office.OneNote','Microsoft.WindowsAlarms','Microsoft.WindowsCalculator','Microsoft.WindowsCamera','microsoft.windowscommunicationsapps','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.0','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.0','Microsoft.WindowsAppRuntime.1.3','Microsoft.NET.Native.Framework.1.7','MicrosoftWindows.Client.Core','Microsoft.LockApp','Microsoft.ECApp','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.Search','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.SecHealthUI','Microsoft.SecHealthUI','Microsoft.WindowsAppRuntime.CBS','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.120.00.UWPDesktop','Microsoft.VCLibs.110.00.UWPDesktop','Microsoft.DirectXRuntime','Microsoft.XboxGameOverlay','Microsoft.XboxGamingOverlay','Microsoft.GamingApp','Microsoft.GamingServices','Microsoft.XboxIdentityProvider','Microsoft.Xbox.TCUI','Microsoft.AccountsControl','Microsoft.WindowsStore','Microsoft.StorePurchaseApp','Microsoft.VP9VideoExtensions','Microsoft.RawImageExtension','Microsoft.HEIFImageExtension','Microsoft.HEIFImageExtension','Microsoft.WebMediaExtensions','RealtekSemiconductorCorp.RealtekAudioControl','Microsoft.MicrosoftEdge','Microsoft.MicrosoftEdge.Stable','MicrosoftWindows.Client.FileExp','NVIDIACorp.NVIDIAControlPanel','AppUp.IntelGraphicsExperience','Microsoft.Paint','Microsoft.Messaging','Microsoft.AsyncTextService','Microsoft.CredDialogHost','Microsoft.Win32WebViewHost','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.SecondaryTileExperience','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','Windows.MiracastView','Windows.ContactSupport','Windows.PrintDialog','c5e2524a-ea46-4f67-841f-6a9465d9d515','windows.immersivecontrolpanel','WinRAR.ShellExtension','Microsoft.WindowsNotepad','MicrosoftWindows.Client.WebExperience','Microsoft.ZuneMusic','Microsoft.ZuneVideo','Microsoft.OutlookForWindows','MicrosoftWindows.Ai.Copilot.Provider','Microsoft.WindowsTerminal','Microsoft.Windows.Terminal','WindowsTerminal','Microsoft.Winget.Source','Microsoft.DesktopAppInstaller','Microsoft.Services.Store.Engagement','Microsoft.HEVCVideoExtension','Microsoft.WebpImageExtension','MicrosoftWindows.CrossDevice','NotepadPlusPlus','MicrosoftCorporationII.WinAppRuntime.Main.1.5','Microsoft.WindowsAppRuntime.1.5','MicrosoftCorporationII.WinAppRuntime.Singleton','Microsoft.WindowsSoundRecorder','MicrosoftCorporationII.WinAppRuntime.Main.1.4','MicrosoftWindows.Client.LKG','MicrosoftWindows.Client.CBS','Microsoft.VCLibs.140.00','Microsoft.Windows.CloudExperienceHost','SpotifyAB.SpotifyMusic','Microsoft.SkypeApp','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486','TelegramMessengerLLP.TelegramDesktop','4DF9E0F8.Netflix','Discord','Paint','mspaint','Microsoft.Windows.Paint','Microsoft.MicrosoftEdge.Stable','1527c705-839a-4832-9118-54d4Bd6a0c89','c5e2524a-ea46-4f67-841f-6a9465d9d515','E2A4F912-2574-4A75-9BB0-0D023378592B','F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE','Microsoft.AAD.BrokerPlugin','Microsoft.AccountsControl','Microsoft.AsyncTextService','Microsoft.BioEnrollment','Microsoft.CredDialogHost','Microsoft.ECApp','Microsoft.LockApp','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.UI.Xaml.CBS','Microsoft.Win32WebViewHost','Microsoft.Windows.Apprep.ChxApp','Microsoft.Windows.AssignedAccessLockApp','Microsoft.Windows.CapturePicker','Microsoft.Windows.CloudExperienceHost','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.NarratorQuickStart','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.ParentalControls','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.PrintQueueActionCenter','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.Client.AIX','MicrosoftWindows.Client.FileExp','MicrosoftWindows.Client.OOBE','MicrosoftWindows.LKG.Search','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','windows.immersivecontrolpanel','Windows.PrintDialog','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.SecHealthUI','Microsoft.Services.Store.Engagement','Microsoft.UI.Xaml.2.8','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.140.00','Microsoft.VCLibs.140.00','Microsoft.WindowsAppRuntime.1.3','Microsoft.WindowsCamera','Microsoft.XboxIdentityProvider','Microsoft.ZuneMusic','RealtekSemiconductorCorp.RealtekAudioControl','DolbyLaboratories.DolbyAudioPremium','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.0','AppUp.IntelGraphicsExperience','Microsoft.NET.Native.Runtime.2.0','Microsoft.Windows.AugLoop.CBS','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.WindowsAppRuntime.CBS.1.6','Microsoft.WindowsAppRuntime.CBS','MicrosoftWindows.Client.CBS','MicrosoftWindows.Client.Core','MicrosoftWindows.Client.Photon','MicrosoftWindows.LKG.AccountsService','MicrosoftWindows.LKG.DesktopSpotlight','MicrosoftWindows.LKG.IrisService','MicrosoftWindows.LKG.RulesEngine','MicrosoftWindows.LKG.SpeechRuntime','MicrosoftWindows.LKG.TwinSxS','Microsoft.VCLibs.140.00','Microsoft.Copilot','Microsoft.OneDriveSync','Microsoft.OutlookForWindows','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.WindowsAppRuntime.1.5','Microsoft.WindowsAppRuntime.1.5','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.Windows.DevHome','Microsoft.UI.Xaml.2.8','Microsoft.Paint','MicrosoftWindows.Client.WebExperience','Microsoft.WindowsStore','Microsoft.WindowsNotepad','Microsoft.WidgetsPlatformRuntime','Microsoft.Xbox.TCUI','Microsoft.WebpImageExtension','Microsoft.WebMediaExtensions','Microsoft.RawImageExtension','Microsoft.HEVCVideoExtension','Microsoft.HEIFImageExtension','Microsoft.WindowsTerminal','Microsoft.DesktopAppInstaller','Microsoft.StartExperiencesApp','Microsoft.StorePurchaseApp','Microsoft.GamingApp','Microsoft.VP9VideoExtensions','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.7','Microsoft.XboxGamingOverlay','Microsoft.WindowsCalculator','Microsoft.WindowsSoundRecorder','Microsoft.WindowsAlarms','Microsoft.MicrosoftOfficeHub','Microsoft.WindowsAppRuntime.1.6','Microsoft.WindowsAppRuntime.1.6','MicrosoftWindows.CrossDevice','Microsoft.Windows.Photos','Microsoft.MinecraftUWP','minecraft','Linux','Ubuntu','Kali','Debian','kali-linux','WSL','WSL2','Docker','Xbox','Microsoft.LanguageExperiencePack','Microsoft.LanguageExperiencePacken-US','Microsoft.LanguageExperiencePackpl-PL','Microsoft.Lovika','Microsoft.4297127D64EC6','Microsoft.Winget.Source','26737FrancescoSorge.Dockerun','CanonicalGroupLimited.Ubuntu','KaliLinux.54290C8133FEE','TheDebianProject.DebianGNULinux','Crystalnix.Termius','OpenAI.ChatGPT-Desktop','Disney.37853FC22B2CE','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486'); if (Test-Path 'whitelist.txt') { $fileEntries = Get-Content 'whitelist.txt' | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() } $whitelistapps += $fileEntries }; ForEach($TargetApp in $RemoveAppPkgs){ If( $whitelistapps -notcontains $TargetApp) { Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $TargetApp | Remove-AppxProvisionedPackage -Online }}";
+                            startInfo.Arguments = "-Command $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name; $whitelistappsZ = @('Microsoft.MicrosoftOfficeHub','Microsoft.Office.OneNote','Microsoft.WindowsAlarms','Microsoft.WindowsCalculator','Microsoft.WindowsCamera','microsoft.windowscommunicationsapps','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.0','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.0','Microsoft.WindowsAppRuntime.1.3','Microsoft.NET.Native.Framework.1.7','MicrosoftWindows.Client.Core','Microsoft.LockApp','Microsoft.ECApp','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.Search','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.SecHealthUI','Microsoft.SecHealthUI','Microsoft.WindowsAppRuntime.CBS','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.120.00.UWPDesktop','Microsoft.VCLibs.110.00.UWPDesktop','Microsoft.DirectXRuntime','Microsoft.XboxGameOverlay','Microsoft.XboxGamingOverlay','Microsoft.GamingApp','Microsoft.GamingServices','Microsoft.XboxIdentityProvider','Microsoft.Xbox.TCUI','Microsoft.AccountsControl','Microsoft.WindowsStore','Microsoft.StorePurchaseApp','Microsoft.VP9VideoExtensions','Microsoft.RawImageExtension','Microsoft.HEIFImageExtension','Microsoft.HEIFImageExtension','Microsoft.WebMediaExtensions','RealtekSemiconductorCorp.RealtekAudioControl','Microsoft.MicrosoftEdge','Microsoft.MicrosoftEdge.Stable','MicrosoftWindows.Client.FileExp','NVIDIACorp.NVIDIAControlPanel','AppUp.IntelGraphicsExperience','Microsoft.Paint','Microsoft.Messaging','Microsoft.AsyncTextService','Microsoft.CredDialogHost','Microsoft.Win32WebViewHost','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.SecondaryTileExperience','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','Windows.MiracastView','Windows.ContactSupport','Windows.PrintDialog','c5e2524a-ea46-4f67-841f-6a9465d9d515','windows.immersivecontrolpanel','WinRAR.ShellExtension','Microsoft.WindowsNotepad','MicrosoftWindows.Client.WebExperience','Microsoft.ZuneMusic','Microsoft.ZuneVideo','Microsoft.OutlookForWindows','MicrosoftWindows.Ai.Copilot.Provider','Microsoft.WindowsTerminal','Microsoft.Windows.Terminal','WindowsTerminal','Microsoft.Winget.Source','Microsoft.DesktopAppInstaller','Microsoft.Services.Store.Engagement','Microsoft.HEVCVideoExtension','Microsoft.WebpImageExtension','MicrosoftWindows.CrossDevice','NotepadPlusPlus','MicrosoftCorporationII.WinAppRuntime.Main.1.5','Microsoft.WindowsAppRuntime.1.5','MicrosoftCorporationII.WinAppRuntime.Singleton','Microsoft.WindowsSoundRecorder','MicrosoftCorporationII.WinAppRuntime.Main.1.4','MicrosoftWindows.Client.LKG','MicrosoftWindows.Client.CBS','Microsoft.VCLibs.140.00','Microsoft.Windows.CloudExperienceHost','SpotifyAB.SpotifyMusic','Microsoft.SkypeApp','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486','TelegramMessengerLLP.TelegramDesktop','4DF9E0F8.Netflix','Discord','Paint','mspaint','Microsoft.Windows.Paint','Microsoft.MicrosoftEdge.Stable','1527c705-839a-4832-9118-54d4Bd6a0c89','c5e2524a-ea46-4f67-841f-6a9465d9d515','E2A4F912-2574-4A75-9BB0-0D023378592B','F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE','Microsoft.AAD.BrokerPlugin','Microsoft.AccountsControl','Microsoft.AsyncTextService','Microsoft.BioEnrollment','Microsoft.CredDialogHost','Microsoft.ECApp','Microsoft.LockApp','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.UI.Xaml.CBS','Microsoft.Win32WebViewHost','Microsoft.Windows.Apprep.ChxApp','Microsoft.Windows.AssignedAccessLockApp','Microsoft.Windows.CapturePicker','Microsoft.Windows.CloudExperienceHost','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.NarratorQuickStart','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.ParentalControls','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.PrintQueueActionCenter','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.Client.AIX','MicrosoftWindows.Client.FileExp','MicrosoftWindows.Client.OOBE','MicrosoftWindows.LKG.Search','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','windows.immersivecontrolpanel','Windows.PrintDialog','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.SecHealthUI','Microsoft.Services.Store.Engagement','Microsoft.UI.Xaml.2.8','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.140.00','Microsoft.VCLibs.140.00','Microsoft.WindowsAppRuntime.1.3','Microsoft.WindowsCamera','Microsoft.XboxIdentityProvider','Microsoft.ZuneMusic','RealtekSemiconductorCorp.RealtekAudioControl','DolbyLaboratories.DolbyAudioPremium','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.0','AppUp.IntelGraphicsExperience','Microsoft.NET.Native.Runtime.2.0','Microsoft.Windows.AugLoop.CBS','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.WindowsAppRuntime.CBS.1.6','Microsoft.WindowsAppRuntime.CBS','MicrosoftWindows.Client.CBS','MicrosoftWindows.Client.Core','MicrosoftWindows.Client.Photon','MicrosoftWindows.LKG.AccountsService','MicrosoftWindows.LKG.DesktopSpotlight','MicrosoftWindows.LKG.IrisService','MicrosoftWindows.LKG.RulesEngine','MicrosoftWindows.LKG.SpeechRuntime','MicrosoftWindows.LKG.TwinSxS','Microsoft.VCLibs.140.00','Microsoft.Copilot','Microsoft.OneDriveSync','Microsoft.OutlookForWindows','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.WindowsAppRuntime.1.5','Microsoft.WindowsAppRuntime.1.5','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.Windows.DevHome','Microsoft.UI.Xaml.2.8','Microsoft.Paint','MicrosoftWindows.Client.WebExperience','Microsoft.WindowsStore','Microsoft.WindowsNotepad','Microsoft.WidgetsPlatformRuntime','Microsoft.Xbox.TCUI','Microsoft.WebpImageExtension','Microsoft.WebMediaExtensions','Microsoft.RawImageExtension','Microsoft.HEVCVideoExtension','Microsoft.HEIFImageExtension','Microsoft.WindowsTerminal','Microsoft.DesktopAppInstaller','Microsoft.StartExperiencesApp','Microsoft.StorePurchaseApp','Microsoft.GamingApp','Microsoft.VP9VideoExtensions','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.7','Microsoft.XboxGamingOverlay','Microsoft.WindowsCalculator','Microsoft.WindowsSoundRecorder','Microsoft.WindowsAlarms','Microsoft.MicrosoftOfficeHub','Microsoft.WindowsAppRuntime.1.6','Microsoft.WindowsAppRuntime.1.6','MicrosoftWindows.CrossDevice','Microsoft.Windows.Photos','Microsoft.MinecraftUWP','minecraft','Linux','Ubuntu','Kali','Debian','kali-linux','WSL','WSL2','Docker','Xbox','Microsoft.LanguageExperiencePack','Microsoft.LanguageExperiencePacken-US','Microsoft.LanguageExperiencePackpl-PL','Microsoft.Lovika','Microsoft.4297127D64EC6','Microsoft.Winget.Source','26737FrancescoSorge.Dockerun','CanonicalGroupLimited.Ubuntu','KaliLinux.54290C8133FEE','TheDebianProject.DebianGNULinux','Crystalnix.Termius','OpenAI.ChatGPT-Desktop','Disney.37853FC22B2CE','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486'); if (Test-Path 'whitelist.txt') { $fileEntries = Get-Content 'whitelist.txt' -Encoding UTF8 | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() } $whitelistappsZ += $fileEntries }; $whitelistapps = $whitelistappsZ | ForEach-Object { $_.ToLowerInvariant().Trim() }; ForEach($TargetApp in $RemoveAppPkgs){ If( $whitelistapps -notcontains $TargetApp) { Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $TargetApp | Remove-AppxProvisionedPackage -Online }}";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
@@ -3739,7 +3800,7 @@ namespace ET
                             startInfo.Arguments = "-Command winget install --id=Malwarebytes.AdwCleaner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements; adwcleaner.exe /eula /clean /noreboot";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            
+
                             System.Threading.Thread.Sleep(2000);
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -3747,7 +3808,7 @@ namespace ET
                             startInfo.Arguments = "-Command winget uninstall --id=Malwarebytes.AdwCleaner --disable-interactivity --silent";
                             process.StartInfo = startInfo;
                             process.Start();
-                            
+
                             break;
                         case "Clean WinSxS Folder":
                             done++;
@@ -4022,14 +4083,21 @@ namespace ET
                     }
 
                     this.TopMost = true;
+
+                    label2.Visible = true;
                     
-                    MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     if (isswitch == true)
                     {
+                        MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FlushMem();
                         this.Close();
                     }
-                    c_p(null, null);
+                    else
+                    {
+                        WaitForMouseClick();
+                    }
+                        c_p(null, null);
                     textBox1.Text = "";
                     button5.Enabled = true;
                     progressBar1.Visible = false;
@@ -4044,6 +4112,7 @@ namespace ET
                     button4.Visible = true;
                     button5.Visible = true;
                     textBox1.Visible = false;
+                    label2.Visible = false;
                     this.TopMost = false;
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 }
@@ -4250,6 +4319,7 @@ namespace ET
             Application.Restart();
         }
 
+
         private void diskDefragmenterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("dfrgui.exe");
@@ -4372,15 +4442,16 @@ namespace ET
         {
             await Task.Run(() =>
             {
-                toolStripLabel1.Text = "CPU: " + GetUsedCPU() + " %";
+                toolStripLabel1.Image = Properties.Resources.cpu_tower;
+                toolStripLabel1.Text = "CPU " + GetUsedCPU() + "% ";
             });
             await Task.Run(() =>
             {
                 string RAMs = GetUsedRAM();
                 float flRAM = float.Parse(RAMs);
 
-
-                toolStripLabel2.Text = "RAM: " + (int)flRAM + " %";
+                toolStripLabel2.Image = Properties.Resources.ram;
+                toolStripLabel2.Text = "RAM " + (int)flRAM + "% ";
             });
             await Task.Run(() =>
             {
@@ -4393,7 +4464,9 @@ namespace ET
 
                 float flBattery = float.Parse(strBattery);
                 flBattery = flBattery * 100;
-                toolStripLabel3.Text = "Battery: " + flBattery + " % ";
+
+                toolStripLabel3.Image = Properties.Resources.battery_charge;
+                toolStripLabel3.Text = "" + flBattery + "% ";
 
             });
             toolStripLabel2.Visible = true;
@@ -4649,7 +4722,7 @@ namespace ET
             //Save AutoUnattend
             string FileNameToSave = "autounattend.xml";
 
-            string outputPath = Path.Combine(exeDir+ "Copy_To_ISO/", FileNameToSave);
+            string outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
 
             string ContentToGet = Properties.Resources.autounattend;
 
@@ -4720,17 +4793,17 @@ namespace ET
 
                 }
             }
-            
+
             if (File.Exists(Path.Combine("Copy_To_ISO", "Make-ISO.ps1")))
             {
                 File.Delete(Path.Combine("Copy_To_ISO", "Make-ISO.ps1"));
             }
-            
+
             string folderPathisotemp = System.IO.Path.Combine(systemDrive + @"\", "iso_temp");
 
             if (Directory.Exists(folderPathisotemp))
             {
-                    Directory.Delete(folderPathisotemp, recursive: true);
+                Directory.Delete(folderPathisotemp, recursive: true);
             }
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -4771,6 +4844,15 @@ namespace ET
                 process.StartInfo = startInfo;
                 process.Start();
             }
+            else
+            {
+
+            }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }
