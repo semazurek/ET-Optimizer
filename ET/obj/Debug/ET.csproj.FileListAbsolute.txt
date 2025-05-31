@@ -500,5 +500,5 @@ C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debu
 C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.csproj.Up2Date
 C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.pdb
-C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe.config
 C:\Users\Rikey\Downloads\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe.config
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe.config

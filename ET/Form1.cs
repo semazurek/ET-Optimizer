@@ -1038,6 +1038,10 @@ namespace ET
             restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap();
             registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap();
 
+            label2.Left = (this.ClientSize.Width - label2.Width) / 2 / 2;
+            label2.Text = msgend;
+            label2.BringToFront();
+
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
             void DefaultLang()
@@ -1055,6 +1059,8 @@ namespace ET
                 selectall0 = "Select All";
                 selectall1 = "Unselect All";
 
+                button5.Text = "Start";
+
                 button4.Text = "Select All";
                 button4.Font = new Font("Consolas", 13, FontStyle.Regular);
 
@@ -1064,6 +1070,23 @@ namespace ET
                 restorePointToolStripMenuItem.Text = "Restore Point";
                 toolStripButton3.Text = "About";
                 toolStripButton4.Text = "Donate";
+
+                button1.Font = new Font("Consolas", 13, FontStyle.Regular);
+                button2.Font = new Font("Consolas", 13, FontStyle.Regular);
+                button3.Font = new Font("Consolas", 13, FontStyle.Regular);
+                button4.Font = new Font("Consolas", 13, FontStyle.Regular);
+                button5.Font = new Font("Consolas", 13, FontStyle.Regular);
+                panel1.Font = new Font("Consolas", 8, FontStyle.Regular);
+                panel2.Font = new Font("Consolas", 8, FontStyle.Regular);
+                panel3.Font = new Font("Consolas", 8, FontStyle.Regular);
+                panel4.Font = new Font("Consolas", 8, FontStyle.Regular);
+                panel5.Font = new Font("Consolas", 8, FontStyle.Regular);
+                groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                toolStrip1.Font = new Font("Consolas", 9, FontStyle.Regular);
 
                 msgend = "Everything has been done. Reboot is recommended.";
                 msgerror = "No option selected.";
@@ -1711,12 +1734,12 @@ namespace ET
                     Console.WriteLine("Korean detected");
                     groupBox1.Text = "성능 조정 (36)";
                     groupBox2.Text = "개인 정보 (18)";
-                    groupBox3.Text = "시각효과 조정 (8)";
+                    groupBox3.Text = "시각 효과 조정 (8)";
                     groupBox4.Text = "기타 (6)";
                     groupBox5.Text = "전문가 모드 (6)";
 
                     button1.Text = "성능";
-                    button2.Text = "시각효과";
+                    button2.Text = "시각 효과";
                     button3.Text = "개인 정보";
                     selectall0 = "모두 선택";
                     selectall1 = "모두 해제";
@@ -1724,7 +1747,22 @@ namespace ET
                     button4.Text = "모두 선택";
                     button5.Text = "시작";
 
-                    button4.Font = new Font("Consolas", 13, FontStyle.Regular);
+                    button1.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button2.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button3.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button4.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button5.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    panel1.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
 
                     toolStripButton2.Text = "백업";
                     toolStripDropDownButton2.Text = "복원";
@@ -1732,6 +1770,8 @@ namespace ET
                     restorePointToolStripMenuItem.Text = "복원 지점";
                     toolStripButton3.Text = "정보";
                     toolStripButton4.Text = "기부하기";
+
+                    label2.Left = (this.ClientSize.Width - label2.Width) / 2;
 
                     msgend = "모든 작업이 완료되었습니다. 재부팅을 권장합니다.";
                     msgerror = "선택된 옵션이 없습니다.";
@@ -1761,24 +1801,24 @@ namespace ET
                     chck5.Text = "최대 절전 모드/빠른 시작 비활성화";
                     chck6.Text = "Windows 참가자 실험 비활성화";
                     chck7.Text = "앱 실행 추적 비활성화";
-                    chck8.Text = "전원 스로틀링 비활성화(인텔 6세대 이상)";
+                    chck8.Text = "전원 제한 끔 (인텔 6세대↑)";
                     chck9.Text = "백그라운드 앱 끄기";
                     chck10.Text = "고정 키 프롬프트 비활성화";
                     chck11.Text = "활동 기록 비활성화";
                     chck12.Text = "MS Store 앱 업데이트 비활성화";
                     chck13.Text = "앱용 SmartScreen 필터 비활성화";
-                    chck14.Text = "웹사이트에서 내 언어 관련 콘텐츠 제공 비활성화";
+                    chck14.Text = "웹에서 내 언어 콘텐츠 끔";
                     chck15.Text = "Microsoft Edge 설정 수정";
-                    chck64.Text = "Nagle 알고리즘 비활성화(지연된 ACK)";
+                    chck64.Text = "Nagle 끔 (지연 ACK)";
                     chck65.Text = "CPU/GPU 우선순위 조정";
                     chck16.Text = "위치 센서 비활성화";
                     chck17.Text = "WiFi 핫스팟 자동 공유 비활성화";
                     chck18.Text = "공유 핫스팟 연결 비활성화";
                     chck19.Text = "업데이트 일정 재시작 알림";
-                    chck20.Text = "LAN(로컬)에 대한 P2P 업데이트 설정";
+                    chck20.Text = "로컬 P2P 업데이트 설정";
                     chck21.Text = "더 빠른 종료시간 설정(2초)";
                     chck22.Text = "오래된 장치 드라이버 제거";
-                    chck23.Text = "'더 많은 기능을 누리세요' 화면 비활성화";
+                    chck23.Text = "기능 홍보 화면 끔";
                     chck24.Text = "추천 앱 설치 비활성화";
                     chck25.Text = "시작 메뉴 광고/제안 비활성화";
                     chck26.Text = "추천 앱 Windows Ink 비활성화";
@@ -1792,7 +1832,7 @@ namespace ET
                     chck32.Text = "원격 분석/데이터 수집 제거";
                     chck33.Text = "PowerShell 원격 분석 비활성화";
                     chck34.Text = "Skype 원격 분석 비활성화";
-                    chck35.Text = "Media Player사용 보고서 비활성화";
+                    chck35.Text = "미디어 사용 보고 끔";
                     chck36.Text = "Mozilla 원격 분석 비활성화";
                     chck37.Text = "앱이 내 광고 ID를 사용 비활성화";
                     chck38.Text = "글쓰기에 대한 정보 전송 비활성화";
@@ -1800,7 +1840,7 @@ namespace ET
                     chck40.Text = "Watson 악성코드 보고 비활성화";
                     chck41.Text = "악성코드 진단 데이터 비활성화";
                     chck42.Text = "MS MAPS에 대한 보고 비활성화";
-                    chck43.Text = "Spynet Defender 보고 비활성화";
+                    chck43.Text = "Spynet 보고 끔";
                     chck44.Text = "악성코드 샘플 전송 안 함";
                     chck45.Text = "타이핑 샘플 전송 비활성화";
                     chck46.Text = "MS로 연락처 전송 비활성화";
@@ -1810,7 +1850,7 @@ namespace ET
                     chck50.Text = "창 애니메이션 비활성화";
                     chck51.Text = "MRU 목록(점프 목록) 비활성화";
                     chck52.Text = "검색 상자를 아이콘으로만 설정";
-                    chck53.Text = "내 PC 시작 시 빠른 실행 아닌 드라이브 표시";
+                    chck53.Text = "시작 시 드라이브 표시";
                     chck54.Text = "Windows 게임 바/DVR 제거";
                     chck55.Text = "서비스 조정 활성화";
                     chck56.Text = "블로트웨어(사전 설치 앱) 제거";
@@ -1842,9 +1882,6 @@ namespace ET
                 }
             }
             ChangeLang();
-            label2.Left = (this.ClientSize.Width - label2.Width) / 2 / 2;
-            label2.Text = msgend;
-            label2.BringToFront();
 
             groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             button2.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -4143,6 +4180,7 @@ namespace ET
                     this.TopMost = true;
 
                     label2.Visible = true;
+                    label2.Text = msgend;
 
 
                     if (isswitch == true)
