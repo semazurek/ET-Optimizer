@@ -11,17 +11,12 @@ using System.Management;
 using System.Media;
 using System.Net.Http;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using ContentAlignment = System.Drawing.ContentAlignment;
-
-// Created by Rikey
-// https://semazurek.github.io
 
 namespace ET
 {
@@ -42,7 +37,6 @@ namespace ET
            (IntPtr pProcess, long dwMinimumWorkingSetSize,
            long dwMaximumWorkingSetSize);
 
-        // Import the necessary functions from the Windows API
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
@@ -52,20 +46,18 @@ namespace ET
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
 
-        // Import the necessary function from the gdi32.dll library for rounded corners
         [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn(
-            int nLeftRect,      // x-coordinate of the upper-left corner
-            int nTopRect,       // y-coordinate of the upper-left corner
-            int nRightRect,     // x-coordinate of the lower-right corner
-            int nBottomRect,    // y-coordinate of the lower-right corner
-            int nWidthEllipse,  // width of the ellipse used for corners
-            int nHeightEllipse  // height of the ellipse used for corners
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHeightEllipse
         );
 
         private bool mouseClicked = false;
 
-        //Function for wait for mouse click at end msgend
         private void Form_MouseClick(object sender, MouseEventArgs e)
         {
             mouseClicked = true;
@@ -78,21 +70,19 @@ namespace ET
                 control.MouseClick += Form_MouseClick;
             }
 
-            // wait for user click
             while (!mouseClicked)
             {
-                Application.DoEvents(); // app continue
-                Thread.Sleep(10);       
+                Application.DoEvents();
+                Thread.Sleep(10);
             }
 
-            // Wyczyść po zakończeniu
             this.MouseClick -= Form_MouseClick;
             foreach (Control control in this.Controls)
             {
                 control.MouseClick -= Form_MouseClick;
             }
 
-            mouseClicked = false; // Reset
+            mouseClicked = false;
         }
 
         public void FlushMem()
@@ -100,19 +90,6 @@ namespace ET
             GC.Collect();
 
             GC.WaitForPendingFinalizers();
-
-            if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-            {
-
-                SetProcessWorkingSetSize32Bit(System.Diagnostics
-                   .Process.GetCurrentProcess().Handle, -1, -1);
-
-            }
-
-            // if (Environment.Is64BitProcess)//
-            //    Console.WriteLine("64-bit process");//
-            // else//
-            //    Console.WriteLine("32-bit process");//
         }
 
         public class MySR : ToolStripSystemRenderer
@@ -121,7 +98,7 @@ namespace ET
 
             protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
             {
-                //base.OnRenderToolStripBorder(e);
+
             }
         }
         public string systemDrive = Environment.GetEnvironmentVariable("SystemDrive");
@@ -136,8 +113,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.05.25";
-        string ETBuild = "29.05.2025";
+        string ETVersion = "E.T. ver 6.05.30";
+        string ETBuild = "31.05.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -164,8 +141,6 @@ namespace ET
                 Console.WriteLine("BackUp Error: " + ex.Message);
             }
         }
-
-        //Function to make BackUp/RestorePoint
         private async Task BackItUp()
         {
             await Task.Run(() =>
@@ -264,7 +239,6 @@ namespace ET
             { }
         }
 
-        //Function c_p to count and mark by color that groupbox of function are fully (all) marked
         public void c_p(object sender, EventArgs e)
         {
             int ct = 0;
@@ -339,7 +313,7 @@ namespace ET
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             }
             int allc = ci + cu + cy + ct;
-            //all without expert mode
+
             if (allc == 68)
             {
                 selecall++;
@@ -378,7 +352,6 @@ namespace ET
             toolStrip1.Renderer = new MySR();
             this.Size = new System.Drawing.Size(880, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
-            //this.FormBorderStyle = FormBorderStyle.FixedDialog;
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -1042,8 +1015,6 @@ namespace ET
             chck74.TabIndex = 74;
             panel1.Controls.Add(chck74);
 
-            //Icons dynamicly
-
             diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap();
             cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap();
             msconfigToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msconfig.exe").ToBitmap();
@@ -1067,7 +1038,6 @@ namespace ET
             restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap();
             registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap();
 
-            //Language change func part
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
             void DefaultLang()
@@ -1353,7 +1323,6 @@ namespace ET
                     restorePointToolStripMenuItem.Text = "Точка восстановления";
                     toolStripButton3.Text = "О программе";
                     toolStripButton4.Text = "Пожертвовать";
-                    //toolStripButton5.Text = "безопасный режим";
                     rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
@@ -1736,10 +1705,140 @@ namespace ET
                     chck73.Text = "Désact. opt. plein écran";
                     chck74.Text = "Optimisations de la RAM";
                 }
+                if (cinfo.Name == "ko-KR")
+                {
+                    button7.Text = "ko-KR";
+                    Console.WriteLine("Korean detected");
+                    groupBox1.Text = "성능 조정 (36)";
+                    groupBox2.Text = "개인 정보 (18)";
+                    groupBox3.Text = "시각효과 조정 (8)";
+                    groupBox4.Text = "기타 (6)";
+                    groupBox5.Text = "전문가 모드 (6)";
+
+                    button1.Text = "성능";
+                    button2.Text = "시각효과";
+                    button3.Text = "개인 정보";
+                    selectall0 = "모두 선택";
+                    selectall1 = "모두 해제";
+
+                    button4.Text = "모두 선택";
+                    button5.Text = "시작";
+
+                    button4.Font = new Font("Consolas", 13, FontStyle.Regular);
+
+                    toolStripButton2.Text = "백업";
+                    toolStripDropDownButton2.Text = "복원";
+                    registryRestoreToolStripMenuItem.Text = "레지스트리 복원";
+                    restorePointToolStripMenuItem.Text = "복원 지점";
+                    toolStripButton3.Text = "정보";
+                    toolStripButton4.Text = "기부하기";
+
+                    msgend = "모든 작업이 완료되었습니다. 재부팅을 권장합니다.";
+                    msgerror = "선택된 옵션이 없습니다.";
+                    msgupdate = "이 애플리케이션의 최신 버전을 GitHub에서 이용할 수 있습니다!";
+
+                    rebootToSafeModeToolStripMenuItem.Text = "안전 모드로 재부팅";
+                    restartExplorerexeToolStripMenuItem.Text = "Explorer.exe 재시작";
+                    downloadSoftwareToolStripMenuItem.Text = "소프트웨어 다운로드";
+                    toolStripDropDownButton1.Text = "추가 기능";
+                    diskDefragmenterToolStripMenuItem.Text = "디스크 조각 모음";
+                    controlPanelToolStripMenuItem.Text = "제어판";
+                    deviceManagerToolStripMenuItem.Text = "장치 관리자";
+                    uACSettingsToolStripMenuItem.Text = "UAC 설정";
+                    servicesToolStripMenuItem.Text = "서비스";
+                    remoteDesktopToolStripMenuItem.Text = "원격 데스크톱";
+                    eventViewerToolStripMenuItem.Text = "이벤트 뷰어";
+                    resetNetworkToolStripMenuItem.Text = "네트워크 재설정";
+                    updateApplicationsToolStripMenuItem.Text = "애플리케이션 업데이트";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Windows 라이선스 키";
+                    rebootToBIOSToolStripMenuItem.Text = "BIOS로 재부팅";
+                    makeETISOToolStripMenuItem.Text = "ET-최적화된 .ISO 만들기";
+
+                    chck1.Text = "Edge WebWidget 비활성화";
+                    chck2.Text = "전원 옵션을 고성능으로 설정";
+                    chck3.Text = "Svchost에 대한 분할 임계값";
+                    chck4.Text = "듀얼 부팅 시간 초과 3초";
+                    chck5.Text = "최대 절전 모드/빠른 시작 비활성화";
+                    chck6.Text = "Windows 참가자 실험 비활성화";
+                    chck7.Text = "앱 실행 추적 비활성화";
+                    chck8.Text = "전원 스로틀링 비활성화(인텔 6세대 이상)";
+                    chck9.Text = "백그라운드 앱 끄기";
+                    chck10.Text = "고정 키 프롬프트 비활성화";
+                    chck11.Text = "활동 기록 비활성화";
+                    chck12.Text = "MS Store 앱 업데이트 비활성화";
+                    chck13.Text = "앱용 SmartScreen 필터 비활성화";
+                    chck14.Text = "웹사이트에서 내 언어 관련 콘텐츠 제공 비활성화";
+                    chck15.Text = "Microsoft Edge 설정 수정";
+                    chck64.Text = "Nagle 알고리즘 비활성화(지연된 ACK)";
+                    chck65.Text = "CPU/GPU 우선순위 조정";
+                    chck16.Text = "위치 센서 비활성화";
+                    chck17.Text = "WiFi 핫스팟 자동 공유 비활성화";
+                    chck18.Text = "공유 핫스팟 연결 비활성화";
+                    chck19.Text = "업데이트 일정 재시작 알림";
+                    chck20.Text = "LAN(로컬)에 대한 P2P 업데이트 설정";
+                    chck21.Text = "더 빠른 종료시간 설정(2초)";
+                    chck22.Text = "오래된 장치 드라이버 제거";
+                    chck23.Text = "'더 많은 기능을 누리세요' 화면 비활성화";
+                    chck24.Text = "추천 앱 설치 비활성화";
+                    chck25.Text = "시작 메뉴 광고/제안 비활성화";
+                    chck26.Text = "추천 앱 Windows Ink 비활성화";
+                    chck27.Text = "불필요한 구성 요소 비활성화";
+                    chck28.Text = "Defender 예약 검사 완화";
+                    chck29.Text = "프로세스 완화 비활성화";
+                    chck30.Text = "인덱싱 서비스 파일 조각 모음";
+                    chck66.Text = "스펙터/멜트다운 비활성화";
+                    chck67.Text = "Windows Defender 비활성화";
+                    chck31.Text = "원격 분석 예약 작업 비활성화";
+                    chck32.Text = "원격 분석/데이터 수집 제거";
+                    chck33.Text = "PowerShell 원격 분석 비활성화";
+                    chck34.Text = "Skype 원격 분석 비활성화";
+                    chck35.Text = "Media Player사용 보고서 비활성화";
+                    chck36.Text = "Mozilla 원격 분석 비활성화";
+                    chck37.Text = "앱이 내 광고 ID를 사용 비활성화";
+                    chck38.Text = "글쓰기에 대한 정보 전송 비활성화";
+                    chck39.Text = "필기 인식 비활성화";
+                    chck40.Text = "Watson 악성코드 보고 비활성화";
+                    chck41.Text = "악성코드 진단 데이터 비활성화";
+                    chck42.Text = "MS MAPS에 대한 보고 비활성화";
+                    chck43.Text = "Spynet Defender 보고 비활성화";
+                    chck44.Text = "악성코드 샘플 전송 안 함";
+                    chck45.Text = "타이핑 샘플 전송 비활성화";
+                    chck46.Text = "MS로 연락처 전송 비활성화";
+                    chck47.Text = "Cortana 비활성화";
+                    chck48.Text = "탐색기에 파일 확장자 표시";
+                    chck49.Text = "작업 표시줄의 투명도 비활성화";
+                    chck50.Text = "창 애니메이션 비활성화";
+                    chck51.Text = "MRU 목록(점프 목록) 비활성화";
+                    chck52.Text = "검색 상자를 아이콘으로만 설정";
+                    chck53.Text = "내 PC 시작 시 빠른 실행 아닌 드라이브 표시";
+                    chck54.Text = "Windows 게임 바/DVR 제거";
+                    chck55.Text = "서비스 조정 활성화";
+                    chck56.Text = "블로트웨어(사전 설치 앱) 제거";
+                    chck57.Text = "불필요한 시작 앱 비활성화";
+                    chck58.Text = "임시/캐시/프리페치/로그 정리";
+                    chck59.Text = "뉴스 및 관심사/위젯 제거";
+                    chck60.Text = "Microsoft OneDrive 제거";
+                    chck61.Text = "Xbox 서비스 비활성화";
+                    chck62.Text = "Cloudflare DNS(1.1.1.1) 설정";
+                    chck63.Text = "애드웨어 스캔 (AdwCleaner)";
+                    chck68.Text = "WinSxS 폴더 정리";
+                    chck69.Text = "Copilot 제거";
+                    chck70.Text = "이 사진에 대해 자세히 알아보기 제거";
+                    chck71.Text = "긴 시스템 경로 활성화";
+                    chck72.Text = "이전 컨텍스트 메뉴 활성화";
+                    chck73.Text = "전체 화면 최적화 비활성화";
+                    chck74.Text = "RAM 메모리 조정 활성화";
+
+                    toolStripLabel1.Text = "빌드: 공개 | " + ETBuild;
+                }
                 if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
                 {
                     engforced = true;
                     DefaultLang();
+                }
+                if (cinfo.Name != "pl-PL" && cinfo.Name != "ru-RU" && cinfo.Name != "be-BY" && cinfo.Name != "de-DE" && cinfo.Name != "pt-BR" && cinfo.Name != "fr-FR" && cinfo.Name != "ko-KR")
+                {
+                    button7.Enabled = false;
                 }
             }
             ChangeLang();
@@ -1763,16 +1862,15 @@ namespace ET
             if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
             {
                 isswitch = true;
-                button5_Click(null, EventArgs.Empty);//RUN Start Button (doengine() func the same)
-                                                     //Auto run
+                button5_Click(null, EventArgs.Empty);
             }
             else
             {
                 if (args.Contains("/all") || args.Contains("-all") || args.Contains("all"))
                 {
                     isswitch = true;
-                    button4_Click(null, EventArgs.Empty);//Select All
-                    button5_Click(null, EventArgs.Empty);//RUN
+                    button4_Click(null, EventArgs.Empty);
+                    button5_Click(null, EventArgs.Empty);
 
                 }
                 else
@@ -1786,8 +1884,8 @@ namespace ET
                         chck66.Checked = true;
                         chck29.Checked = true;
                         chck67.Checked = true;
-                        button4_Click(null, EventArgs.Empty);//Select All
-                        button5_Click(null, EventArgs.Empty);//RUN
+                        button4_Click(null, EventArgs.Empty);
+                        button5_Click(null, EventArgs.Empty);
 
                     }
                     else
@@ -1797,8 +1895,6 @@ namespace ET
                             isswitch = true;
                             issillent = true;
                             button5_Click(null, EventArgs.Empty);
-                            //RUN Start Button (doengine() func the same)
-                            //Auto run sillent
                         }
                     }
 
@@ -1806,7 +1902,6 @@ namespace ET
             }
         }
 
-        //Check for update func.
         private async Task CheckUpdateET()
         {
             using (var client = new HttpClient())
@@ -1836,8 +1931,6 @@ namespace ET
                 }
             }
         }
-
-        // Hello/Loading/SplashForm func build form
         public Form BuildSplashForm()
         {
             Form splash = new Form();
@@ -1873,20 +1966,14 @@ namespace ET
             return splash;
         }
 
-        private Form splashForm; //splashscreen Form Construct
+        private Form splashForm;
         private async void Form1_Load(object sender, EventArgs e)
         {
             this.Hide();
 
-            // Create a region with rounded corners
-            //IntPtr regionHandle = CreateRoundRectRgn(0, 0, this.Width, this.Height, 20, 20); // 50 is the radius for the corners
             this.FormBorderStyle = FormBorderStyle.None;
 
             this.ShowInTaskbar = false;
-            //this.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, this.Width, this.Height, 10, 10));
-            //this.Opacity = 0.95;
-
-            //SplashScreen lunch + check if there is ET-lunched.txt
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -1939,7 +2026,6 @@ namespace ET
                 }
                 else
                 {
-                    //BackItUp              
                     CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
                     CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
                     CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
@@ -1969,10 +2055,8 @@ namespace ET
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -1980,10 +2064,8 @@ namespace ET
 
         private void ToolStrip1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -1991,10 +2073,8 @@ namespace ET
 
         private void label1_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -2002,10 +2082,8 @@ namespace ET
 
         private void label1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -2014,10 +2092,8 @@ namespace ET
 
         private void panelmain_MouseDown(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -2027,7 +2103,6 @@ namespace ET
         {
             FlushMem();
 
-            //DO START ENGINE
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -2099,7 +2174,6 @@ namespace ET
                     textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
                     textBox1.SelectionStart = textBox1.TextLength;
                     textBox1.ScrollToCaret();
-                    //string caseSwitch = checkBox.Text;
                     string caseSwitch = checkBox.Tag as string;
 
                     switch (caseSwitch)
@@ -2330,7 +2404,6 @@ namespace ET
                                 File.Delete("NOLPi.txt");
                             }
 
-                            // Win processes
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\csrss.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dwm.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
@@ -2341,7 +2414,6 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
 
-                            // Apps
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Battle.net.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Agent.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Steam.exe\PerfOptions", "CpuPriorityClass", 5, RegistryValueKind.DWord);
@@ -2355,7 +2427,6 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EABackgroundService.exe\PerfOptions", "CpuPriorityClass", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\EABackgroundService.exe\PerfOptions", "IoPriority", 4, RegistryValueKind.DWord);
 
-                            // Large Pages (It reduces a little overhead in the RAM management routines (uses less RAM) and reduces PageFaults by a lot)
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\explorer.exe", "UseLargePages", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\dllhost.exe", "UseLargePages", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\Intelligent standby list cleaner ISLC.exe", "UseLargePages", 4, RegistryValueKind.DWord);
@@ -2366,7 +2437,6 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ModernWarfare.exe", "UseLargePages", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\BF2042.exe", "UseLargePages", 4, RegistryValueKind.DWord);
 
-                            // Threads Priority (Hex)
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mouclass\Parameters", "ThreadPriority", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\kbdclass\Parameters", "ThreadPriority", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters", "ThreadPriority", 1, RegistryValueKind.DWord);
@@ -2374,7 +2444,6 @@ namespace ET
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBHUB3\Parameters", "ThreadPriority", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\USBXHCI\Parameters", "ThreadPriority", 0, RegistryValueKind.DWord);
 
-                            // Optimize CPU resources and priorities
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "AlwaysOn", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "IdleDetectionCycles", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", 4, RegistryValueKind.DWord);
@@ -2382,11 +2451,9 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "LazyModeTimeout", 10000, RegistryValueKind.DWord);
 
 
-                            // Fix Task Manager not responding when exit
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\DiagLog", "Start", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\WMI\Autologger\WdiContextLog", "Start", 4, RegistryValueKind.DWord);
 
-                            // Kernel tweaks
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DpcWatchdogProfileOffset", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "MaximumSharedReadyQueueSize", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DisableAutoBoost", 4, RegistryValueKind.DWord);
@@ -2402,10 +2469,8 @@ namespace ET
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "DistributeTimers", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel", "InterruptSteeringDisabled", 4, RegistryValueKind.DWord);
 
-                            // Tweak I/O worker
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System", "PassiveIntRealTimeWorkerPriority", 18, RegistryValueKind.DWord);
 
-                            // Enable threaded dpc on sr-iov
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mlx4_bus\Parameters", "ThreadDpcEnable", 4, RegistryValueKind.DWord);
 
                             break;
@@ -2631,27 +2696,21 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
-                            // Disallow drivers to get paged into virtual memory.
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingExecutive", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager", "DisablePagingExecutive", 1, RegistryValueKind.DWord);
 
-                            // Use big system memory caching to improve microstuttering.
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 1, RegistryValueKind.DWord);
 
-                            // Disable FTH (Fault Tolerant Heap)
                             SetRegistryValue(@"HKLM\Software\Microsoft\FTH", "Enabled", 0, RegistryValueKind.DWord);
                             Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Microsoft\FTH\State\", false);
 
-                            // Disable PageCombining
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePageCombining", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingCombining", 1, RegistryValueKind.DWord);
 
-                            // Free Unused RAM - need testing
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager", "HeapDeCommitFreeBlockThreshold", 40000, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "CacheUnmapBehindLengthInMB", 100, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "ModifiedWriteMaximum", 20, RegistryValueKind.DWord);
 
-                            // More mem tweaks
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "ClearPageFileAtShutdown", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolQuota", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolSize", 0, RegistryValueKind.DWord);
@@ -2673,7 +2732,6 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
-                            //startInfo.Arguments = "-Command $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name; $whitelistapps = @('Microsoft.MicrosoftOfficeHub','Microsoft.Office.OneNote','Microsoft.WindowsAlarms','Microsoft.WindowsCalculator','Microsoft.WindowsCamera','microsoft.windowscommunicationsapps','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.0','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.0','Microsoft.WindowsAppRuntime.1.3','Microsoft.NET.Native.Framework.1.7','MicrosoftWindows.Client.Core','Microsoft.LockApp','Microsoft.ECApp','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.Search','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.SecHealthUI','Microsoft.SecHealthUI','Microsoft.WindowsAppRuntime.CBS','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.120.00.UWPDesktop','Microsoft.VCLibs.110.00.UWPDesktop','Microsoft.DirectXRuntime','Microsoft.XboxGameOverlay','Microsoft.XboxGamingOverlay','Microsoft.GamingApp','Microsoft.GamingServices','Microsoft.XboxIdentityProvider','Microsoft.Xbox.TCUI','Microsoft.AccountsControl','Microsoft.WindowsStore','Microsoft.StorePurchaseApp','Microsoft.VP9VideoExtensions','Microsoft.RawImageExtension','Microsoft.HEIFImageExtension','Microsoft.HEIFImageExtension','Microsoft.WebMediaExtensions','RealtekSemiconductorCorp.RealtekAudioControl','Microsoft.MicrosoftEdge','Microsoft.MicrosoftEdge.Stable','MicrosoftWindows.Client.FileExp','NVIDIACorp.NVIDIAControlPanel','AppUp.IntelGraphicsExperience','Microsoft.Paint','Microsoft.Messaging','Microsoft.AsyncTextService','Microsoft.CredDialogHost','Microsoft.Win32WebViewHost','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.SecondaryTileExperience','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','Windows.MiracastView','Windows.ContactSupport','Windows.PrintDialog','c5e2524a-ea46-4f67-841f-6a9465d9d515','windows.immersivecontrolpanel','WinRAR.ShellExtension','Microsoft.WindowsNotepad','MicrosoftWindows.Client.WebExperience','Microsoft.ZuneMusic','Microsoft.ZuneVideo','Microsoft.OutlookForWindows','MicrosoftWindows.Ai.Copilot.Provider','Microsoft.WindowsTerminal','Microsoft.Windows.Terminal','WindowsTerminal','Microsoft.Winget.Source','Microsoft.DesktopAppInstaller','Microsoft.Services.Store.Engagement','Microsoft.HEVCVideoExtension','Microsoft.WebpImageExtension','MicrosoftWindows.CrossDevice','NotepadPlusPlus','MicrosoftCorporationII.WinAppRuntime.Main.1.5','Microsoft.WindowsAppRuntime.1.5','MicrosoftCorporationII.WinAppRuntime.Singleton','Microsoft.WindowsSoundRecorder','MicrosoftCorporationII.WinAppRuntime.Main.1.4','MicrosoftWindows.Client.LKG','MicrosoftWindows.Client.CBS','Microsoft.VCLibs.140.00','Microsoft.Windows.CloudExperienceHost','SpotifyAB.SpotifyMusic','Microsoft.SkypeApp','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486','TelegramMessengerLLP.TelegramDesktop','4DF9E0F8.Netflix','Discord','Paint','mspaint','Microsoft.Windows.Paint','Microsoft.MicrosoftEdge.Stable','1527c705-839a-4832-9118-54d4Bd6a0c89','c5e2524a-ea46-4f67-841f-6a9465d9d515','E2A4F912-2574-4A75-9BB0-0D023378592B','F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE','Microsoft.AAD.BrokerPlugin','Microsoft.AccountsControl','Microsoft.AsyncTextService','Microsoft.BioEnrollment','Microsoft.CredDialogHost','Microsoft.ECApp','Microsoft.LockApp','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.UI.Xaml.CBS','Microsoft.Win32WebViewHost','Microsoft.Windows.Apprep.ChxApp','Microsoft.Windows.AssignedAccessLockApp','Microsoft.Windows.CapturePicker','Microsoft.Windows.CloudExperienceHost','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.NarratorQuickStart','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.ParentalControls','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.PrintQueueActionCenter','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.Client.AIX','MicrosoftWindows.Client.FileExp','MicrosoftWindows.Client.OOBE','MicrosoftWindows.LKG.Search','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','windows.immersivecontrolpanel','Windows.PrintDialog','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.SecHealthUI','Microsoft.Services.Store.Engagement','Microsoft.UI.Xaml.2.8','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.140.00','Microsoft.VCLibs.140.00','Microsoft.WindowsAppRuntime.1.3','Microsoft.WindowsCamera','Microsoft.XboxIdentityProvider','Microsoft.ZuneMusic','RealtekSemiconductorCorp.RealtekAudioControl','DolbyLaboratories.DolbyAudioPremium','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.0','AppUp.IntelGraphicsExperience','Microsoft.NET.Native.Runtime.2.0','Microsoft.Windows.AugLoop.CBS','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.WindowsAppRuntime.CBS.1.6','Microsoft.WindowsAppRuntime.CBS','MicrosoftWindows.Client.CBS','MicrosoftWindows.Client.Core','MicrosoftWindows.Client.Photon','MicrosoftWindows.LKG.AccountsService','MicrosoftWindows.LKG.DesktopSpotlight','MicrosoftWindows.LKG.IrisService','MicrosoftWindows.LKG.RulesEngine','MicrosoftWindows.LKG.SpeechRuntime','MicrosoftWindows.LKG.TwinSxS','Microsoft.VCLibs.140.00','Microsoft.Copilot','Microsoft.OneDriveSync','Microsoft.OutlookForWindows','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.WindowsAppRuntime.1.5','Microsoft.WindowsAppRuntime.1.5','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.Windows.DevHome','Microsoft.UI.Xaml.2.8','Microsoft.Paint','MicrosoftWindows.Client.WebExperience','Microsoft.WindowsStore','Microsoft.WindowsNotepad','Microsoft.WidgetsPlatformRuntime','Microsoft.Xbox.TCUI','Microsoft.WebpImageExtension','Microsoft.WebMediaExtensions','Microsoft.RawImageExtension','Microsoft.HEVCVideoExtension','Microsoft.HEIFImageExtension','Microsoft.WindowsTerminal','Microsoft.DesktopAppInstaller','Microsoft.StartExperiencesApp','Microsoft.StorePurchaseApp','Microsoft.GamingApp','Microsoft.VP9VideoExtensions','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.7','Microsoft.XboxGamingOverlay','Microsoft.WindowsCalculator','Microsoft.WindowsSoundRecorder','Microsoft.WindowsAlarms','Microsoft.MicrosoftOfficeHub','Microsoft.WindowsAppRuntime.1.6','Microsoft.WindowsAppRuntime.1.6','MicrosoftWindows.CrossDevice','Microsoft.Windows.Photos','Microsoft.MinecraftUWP','minecraft','Linux','Ubuntu','Kali','Debian','kali-linux','WSL','WSL2','Docker','Xbox','Microsoft.LanguageExperiencePack','Microsoft.LanguageExperiencePacken-US','Microsoft.LanguageExperiencePackpl-PL','Microsoft.Lovika','Microsoft.4297127D64EC6','Microsoft.Winget.Source','26737FrancescoSorge.Dockerun','CanonicalGroupLimited.Ubuntu','KaliLinux.54290C8133FEE','TheDebianProject.DebianGNULinux','Crystalnix.Termius','OpenAI.ChatGPT-Desktop','Disney.37853FC22B2CE','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486'); if (Test-Path 'whitelist.txt') { $fileEntries = Get-Content 'whitelist.txt' | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() } $whitelistapps += $fileEntries }; ForEach($TargetApp in $RemoveAppPkgs){ If( $whitelistapps -notcontains $TargetApp) { Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $TargetApp | Remove-AppxProvisionedPackage -Online }}";
                             startInfo.Arguments = "-Command $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name; $whitelistappsZ = @('Microsoft.MicrosoftOfficeHub','Microsoft.Office.OneNote','Microsoft.WindowsAlarms','Microsoft.WindowsCalculator','Microsoft.WindowsCamera','microsoft.windowscommunicationsapps','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.0','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.0','Microsoft.WindowsAppRuntime.1.3','Microsoft.NET.Native.Framework.1.7','MicrosoftWindows.Client.Core','Microsoft.LockApp','Microsoft.ECApp','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.Search','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.SecHealthUI','Microsoft.SecHealthUI','Microsoft.WindowsAppRuntime.CBS','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.120.00.UWPDesktop','Microsoft.VCLibs.110.00.UWPDesktop','Microsoft.DirectXRuntime','Microsoft.XboxGameOverlay','Microsoft.XboxGamingOverlay','Microsoft.GamingApp','Microsoft.GamingServices','Microsoft.XboxIdentityProvider','Microsoft.Xbox.TCUI','Microsoft.AccountsControl','Microsoft.WindowsStore','Microsoft.StorePurchaseApp','Microsoft.VP9VideoExtensions','Microsoft.RawImageExtension','Microsoft.HEIFImageExtension','Microsoft.HEIFImageExtension','Microsoft.WebMediaExtensions','RealtekSemiconductorCorp.RealtekAudioControl','Microsoft.MicrosoftEdge','Microsoft.MicrosoftEdge.Stable','MicrosoftWindows.Client.FileExp','NVIDIACorp.NVIDIAControlPanel','AppUp.IntelGraphicsExperience','Microsoft.Paint','Microsoft.Messaging','Microsoft.AsyncTextService','Microsoft.CredDialogHost','Microsoft.Win32WebViewHost','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.SecondaryTileExperience','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','Windows.MiracastView','Windows.ContactSupport','Windows.PrintDialog','c5e2524a-ea46-4f67-841f-6a9465d9d515','windows.immersivecontrolpanel','WinRAR.ShellExtension','Microsoft.WindowsNotepad','MicrosoftWindows.Client.WebExperience','Microsoft.ZuneMusic','Microsoft.ZuneVideo','Microsoft.OutlookForWindows','MicrosoftWindows.Ai.Copilot.Provider','Microsoft.WindowsTerminal','Microsoft.Windows.Terminal','WindowsTerminal','Microsoft.Winget.Source','Microsoft.DesktopAppInstaller','Microsoft.Services.Store.Engagement','Microsoft.HEVCVideoExtension','Microsoft.WebpImageExtension','MicrosoftWindows.CrossDevice','NotepadPlusPlus','MicrosoftCorporationII.WinAppRuntime.Main.1.5','Microsoft.WindowsAppRuntime.1.5','MicrosoftCorporationII.WinAppRuntime.Singleton','Microsoft.WindowsSoundRecorder','MicrosoftCorporationII.WinAppRuntime.Main.1.4','MicrosoftWindows.Client.LKG','MicrosoftWindows.Client.CBS','Microsoft.VCLibs.140.00','Microsoft.Windows.CloudExperienceHost','SpotifyAB.SpotifyMusic','Microsoft.SkypeApp','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486','TelegramMessengerLLP.TelegramDesktop','4DF9E0F8.Netflix','Discord','Paint','mspaint','Microsoft.Windows.Paint','Microsoft.MicrosoftEdge.Stable','1527c705-839a-4832-9118-54d4Bd6a0c89','c5e2524a-ea46-4f67-841f-6a9465d9d515','E2A4F912-2574-4A75-9BB0-0D023378592B','F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE','Microsoft.AAD.BrokerPlugin','Microsoft.AccountsControl','Microsoft.AsyncTextService','Microsoft.BioEnrollment','Microsoft.CredDialogHost','Microsoft.ECApp','Microsoft.LockApp','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.UI.Xaml.CBS','Microsoft.Win32WebViewHost','Microsoft.Windows.Apprep.ChxApp','Microsoft.Windows.AssignedAccessLockApp','Microsoft.Windows.CapturePicker','Microsoft.Windows.CloudExperienceHost','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.NarratorQuickStart','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.ParentalControls','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.PrintQueueActionCenter','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.Client.AIX','MicrosoftWindows.Client.FileExp','MicrosoftWindows.Client.OOBE','MicrosoftWindows.LKG.Search','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','windows.immersivecontrolpanel','Windows.PrintDialog','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.SecHealthUI','Microsoft.Services.Store.Engagement','Microsoft.UI.Xaml.2.8','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.140.00','Microsoft.VCLibs.140.00','Microsoft.WindowsAppRuntime.1.3','Microsoft.WindowsCamera','Microsoft.XboxIdentityProvider','Microsoft.ZuneMusic','RealtekSemiconductorCorp.RealtekAudioControl','DolbyLaboratories.DolbyAudioPremium','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.0','AppUp.IntelGraphicsExperience','Microsoft.NET.Native.Runtime.2.0','Microsoft.Windows.AugLoop.CBS','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.WindowsAppRuntime.CBS.1.6','Microsoft.WindowsAppRuntime.CBS','MicrosoftWindows.Client.CBS','MicrosoftWindows.Client.Core','MicrosoftWindows.Client.Photon','MicrosoftWindows.LKG.AccountsService','MicrosoftWindows.LKG.DesktopSpotlight','MicrosoftWindows.LKG.IrisService','MicrosoftWindows.LKG.RulesEngine','MicrosoftWindows.LKG.SpeechRuntime','MicrosoftWindows.LKG.TwinSxS','Microsoft.VCLibs.140.00','Microsoft.Copilot','Microsoft.OneDriveSync','Microsoft.OutlookForWindows','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.WindowsAppRuntime.1.5','Microsoft.WindowsAppRuntime.1.5','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.Windows.DevHome','Microsoft.UI.Xaml.2.8','Microsoft.Paint','MicrosoftWindows.Client.WebExperience','Microsoft.WindowsStore','Microsoft.WindowsNotepad','Microsoft.WidgetsPlatformRuntime','Microsoft.Xbox.TCUI','Microsoft.WebpImageExtension','Microsoft.WebMediaExtensions','Microsoft.RawImageExtension','Microsoft.HEVCVideoExtension','Microsoft.HEIFImageExtension','Microsoft.WindowsTerminal','Microsoft.DesktopAppInstaller','Microsoft.StartExperiencesApp','Microsoft.StorePurchaseApp','Microsoft.GamingApp','Microsoft.VP9VideoExtensions','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.7','Microsoft.XboxGamingOverlay','Microsoft.WindowsCalculator','Microsoft.WindowsSoundRecorder','Microsoft.WindowsAlarms','Microsoft.MicrosoftOfficeHub','Microsoft.WindowsAppRuntime.1.6','Microsoft.WindowsAppRuntime.1.6','MicrosoftWindows.CrossDevice','Microsoft.Windows.Photos','Microsoft.MinecraftUWP','minecraft','Linux','Ubuntu','Kali','Debian','kali-linux','WSL','WSL2','Docker','Xbox','Microsoft.LanguageExperiencePack','Microsoft.LanguageExperiencePacken-US','Microsoft.LanguageExperiencePackpl-PL','Microsoft.Lovika','Microsoft.4297127D64EC6','Microsoft.Winget.Source','26737FrancescoSorge.Dockerun','CanonicalGroupLimited.Ubuntu','KaliLinux.54290C8133FEE','TheDebianProject.DebianGNULinux','Crystalnix.Termius','OpenAI.ChatGPT-Desktop','Disney.37853FC22B2CE','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486'); if (Test-Path 'whitelist.txt') { $fileEntries = Get-Content 'whitelist.txt' -Encoding UTF8 | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() } $whitelistappsZ += $fileEntries }; $whitelistapps = $whitelistappsZ | ForEach-Object { $_.ToLowerInvariant().Trim() }; ForEach($TargetApp in $RemoveAppPkgs){ If( $whitelistapps -notcontains $TargetApp) { Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $TargetApp | Remove-AppxProvisionedPackage -Online }}";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
@@ -2817,7 +2875,7 @@ namespace ET
                                     }
                                     else
                                     {
-                                        continue; // non-work-error-continue
+                                        continue;
                                     }
 
                                     using (var keydel = baseKey.OpenSubKey(subKeyPath, writable: true))
@@ -4085,7 +4143,7 @@ namespace ET
                     this.TopMost = true;
 
                     label2.Visible = true;
-                    
+
 
                     if (isswitch == true)
                     {
@@ -4097,7 +4155,7 @@ namespace ET
                     {
                         WaitForMouseClick();
                     }
-                        c_p(null, null);
+                    c_p(null, null);
                     textBox1.Text = "";
                     button5.Enabled = true;
                     progressBar1.Visible = false;
@@ -4442,8 +4500,8 @@ namespace ET
         {
             await Task.Run(() =>
             {
-                toolStripLabel1.Image = Properties.Resources.cpu_tower;
                 toolStripLabel1.Text = "CPU " + GetUsedCPU() + "% ";
+                toolStripLabel1.Image = Properties.Resources.cpu_tower;
             });
             await Task.Run(() =>
             {
@@ -4460,7 +4518,6 @@ namespace ET
                 strBatteryStatus = pwr.BatteryLifePercent.ToString();
                 char[] MyCharCut = { ',', '.', ' ' };
                 string strBattery = strBatteryStatus.TrimStart(MyCharCut);
-                // 0,95 - 95
 
                 float flBattery = float.Parse(strBattery);
                 flBattery = flBattery * 100;
@@ -4476,10 +4533,8 @@ namespace ET
 
         private void panelmain_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -4492,10 +4547,8 @@ namespace ET
 
         private void label1_MouseMove_1(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -4508,10 +4561,8 @@ namespace ET
 
         private void toolStrip1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Check if the left mouse button was pressed
             if (e.Button == MouseButtons.Left)
             {
-                // Release the mouse capture and send the message to start dragging
                 ReleaseCapture();
                 SendMessage(this.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0);
             }
@@ -4527,9 +4578,7 @@ namespace ET
             startInfo.Arguments = "/C bcdedit /set {current} safeboot network";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
-            //Open the registry key for startup programs, create a registry key, then save your program path
             RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
-            // Specify the name and path of your application executable, add the application to the startup
             reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -4687,7 +4736,6 @@ namespace ET
             }
             else
             {
-                //Application.Restart();
                 Hide();
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -4716,10 +4764,8 @@ namespace ET
                 Directory.CreateDirectory("Copy_To_ISO");
             }
 
-            // EXE Folder Dir
             string exeDir = AppDomain.CurrentDomain.BaseDirectory;
 
-            //Save AutoUnattend
             string FileNameToSave = "autounattend.xml";
 
             string outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
@@ -4728,7 +4774,6 @@ namespace ET
 
             File.WriteAllText(outputPath, ContentToGet);
 
-            //Save Make-ISO script to txt
             FileNameToSave = "Make-ISO.txt";
 
             outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
@@ -4743,7 +4788,6 @@ namespace ET
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
 
-            //Copy ET-Optimizer.exe
             string exePath = Assembly.GetExecutingAssembly().Location;
 
             string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
