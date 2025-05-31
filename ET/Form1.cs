@@ -1076,11 +1076,11 @@ namespace ET
                 button3.Font = new Font("Consolas", 13, FontStyle.Regular);
                 button4.Font = new Font("Consolas", 13, FontStyle.Regular);
                 button5.Font = new Font("Consolas", 13, FontStyle.Regular);
-                panel1.Font = new Font("Consolas", 8, FontStyle.Regular);
-                panel2.Font = new Font("Consolas", 8, FontStyle.Regular);
-                panel3.Font = new Font("Consolas", 8, FontStyle.Regular);
-                panel4.Font = new Font("Consolas", 8, FontStyle.Regular);
-                panel5.Font = new Font("Consolas", 8, FontStyle.Regular);
+                panel1.Font = new Font("Consolas", 9, FontStyle.Regular);
+                panel2.Font = new Font("Consolas", 9, FontStyle.Regular);
+                panel3.Font = new Font("Consolas", 9, FontStyle.Regular);
+                panel4.Font = new Font("Consolas", 9, FontStyle.Regular);
+                panel5.Font = new Font("Consolas", 9, FontStyle.Regular);
                 groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
                 groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
                 groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
