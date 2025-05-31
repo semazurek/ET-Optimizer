@@ -35,6 +35,8 @@ So far the project has grown to: 4161 lines of code, 860+ commits, translated in
 <a href="#"><img src="https://github.com/user-attachments/assets/ffbb6086-b0da-4a98-a126-02ca92c31758"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/9d8c5679-233b-4416-8371-067f6fc4e114"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/63bd6170-82ec-49cc-b798-a6b0f3a90a8d"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/c188ac6f-dc5e-4f7b-9e01-90575167ebd1"width="48"></a>
+
 </p>
 
 > [!WARNING]
