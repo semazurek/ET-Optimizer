@@ -1915,6 +1915,7 @@ namespace ET
                     selectall1 = "Tüm Seçimi Kaldır";
 
                     button4.Text = "Tümünü Seç";
+                    button5.Text = "Başlat";
 
                     toolStripButton2.Text = "Yedekle";
                     toolStripDropDownButton2.Text = "Geri Yükle";
