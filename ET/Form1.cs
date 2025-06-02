@@ -11,12 +11,15 @@ using System.Management;
 using System.Media;
 using System.Net.Http;
 using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ProgressBar = System.Windows.Forms.ProgressBar;
 
 namespace ET
 {
@@ -114,7 +117,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.05.30";
-        string ETBuild = "31.05.2025";
+        string ETBuild = "02.06.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -156,25 +159,48 @@ namespace ET
                 process.StartInfo = startInfo;
                 process.Start(); process.WaitForExit();
 
-                string backupPath = System.IO.Path.Combine(systemDrive + @"\", "Backup");
+                string backupPath = System.IO.Path.Combine(systemDrive + @"\", @"Backup");
 
                 if (!Directory.Exists(backupPath))
                 {
                     Directory.CreateDirectory(backupPath);
                 }
 
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "powershell.exe";
-                startInfo.Arguments = "-Command reg export \"HKLM\\SOFTWARE\" \"$env:SystemDrive\\backup\\HKLM_SOFTWARE.reg\" /y; reg export \"HKLM\\SYSTEM\" \"$env:SystemDrive\\Backup\\HKLM_SYSTEM.reg\" /y; reg export \"HKCU\\Software\" \"$env:SystemDrive\\Backup\\HKCU_SOFTWARE.reg\" /y; reg export \"HKCU\\System\" \"$env:SystemDrive\\Backup\\HKCU_SYSTEM.reg\" /y; reg export \"HKCU\\Control Panel\" \"$env:SystemDrive\\Backup\\HKCU_ControlPanel.reg\" /y";
-                startInfo.UseShellExecute = false;
-                startInfo.CreateNoWindow = true;
-                process.StartInfo = startInfo;
-                process.Start(); process.WaitForExit();
+                string backupPathcmd = Environment.ExpandEnvironmentVariables(@"%SystemDrive%\Backup\");
+
+                string[] commands = new[]
+        {
+            $"reg export \"HKLM\\SOFTWARE\" \"{backupPathcmd}HKLM_SOFTWARE.reg\" /y",
+            $"reg export \"HKLM\\SYSTEM\" \"{backupPathcmd}HKLM_SYSTEM.reg\" /y",
+            $"reg export \"HKCU\\Software\" \"{backupPathcmd}HKCU_SOFTWARE.reg\" /y",
+            $"reg export \"HKCU\\System\" \"{backupPathcmd}HKCU_SYSTEM.reg\" /y",
+            $"reg export \"HKCU\\Control Panel\" \"{backupPathcmd}HKCU_ControlPanel.reg\" /y"
+        };
+
+                foreach (string command in commands)
+                {
+                    RunRegExport(command);
+                }
 
                 CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
                 CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
                 CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
             });
+        }
+
+        static void RunRegExport(string arguments)
+        {
+            using (Process process = new Process())
+            {
+                process.StartInfo.FileName = "cmd.exe";
+                process.StartInfo.Arguments = "/c " + arguments;
+                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+
+                process.Start();
+                process.WaitForExit();
+            }
         }
 
         public void SetRegistryValue(string hivePath, string name, object value, RegistryValueKind kind)
@@ -1871,14 +1897,141 @@ namespace ET
 
                     toolStripLabel1.Text = "빌드: 공개 | " + ETBuild;
                 }
-                if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
+                if (cinfo.Name == "tr-TR")
+                {
+                    button7.Text = "tr-TR";
+                    Console.WriteLine("Turkish detected");
+
+                    groupBox1.Text = "Performans Ayarları(36)";
+                    groupBox2.Text = "Gizlilik(18)";
+                    groupBox3.Text = "Görsel Ayarları(8)";
+                    groupBox4.Text = "Diğer(6)";
+                    groupBox5.Text = "Uzman Modu(6)";
+
+                    button1.Text = "Performans";
+                    button2.Text = "Görsel";
+                    button3.Text = "Gizlilik";
+                    selectall0 = "Tümünü Seç";
+                    selectall1 = "Tüm Seçimi Kaldır";
+
+                    button4.Text = "Tümünü Seç";
+
+                    toolStripButton2.Text = "Yedekle";
+                    toolStripDropDownButton2.Text = "Geri Yükle";
+                    registryRestoreToolStripMenuItem.Text = "Kayıt Defterini Geri Yükle";
+                    restorePointToolStripMenuItem.Text = "Geri Yükleme Noktası";
+                    toolStripButton3.Text = "Hakkında";
+                    toolStripButton4.Text = "Bağış Yap";
+
+                    msgend = "Her şey tamamlandı.Yeniden başlatmanız önerilir.";
+                    msgerror = "Hiçbir seçenek seçilmedi.";
+                    msgupdate = "GitHub'da uygulamanın daha yeni bir sürümü mevcut!";
+
+                    rebootToSafeModeToolStripMenuItem.Text = "Güvenli Modda Yeniden Başlat";
+                    restartExplorerexeToolStripMenuItem.Text = "Explorer.exe'yi Yeniden Başlat";
+                    downloadSoftwareToolStripMenuItem.Text = "Yazılımı İndir";
+
+                    toolStripDropDownButton1.Text = "Ekstralar";
+                    diskDefragmenterToolStripMenuItem.Text = "Disk Birleştirici";
+                    controlPanelToolStripMenuItem.Text = "Denetim Masası";
+                    deviceManagerToolStripMenuItem.Text = "Aygıt Yöneticisi";
+                    uACSettingsToolStripMenuItem.Text = "UAC Ayarları";
+                    servicesToolStripMenuItem.Text = "Hizmetler";
+                    remoteDesktopToolStripMenuItem.Text = "Uzak Masaüstü";
+                    eventViewerToolStripMenuItem.Text = "Olay Görüntüleyicisi";
+                    resetNetworkToolStripMenuItem.Text = "Ağı Sıfırla";
+
+                    updateApplicationsToolStripMenuItem.Text = "Uygulamaları Güncelle";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Windows Lisans Anahtarı";
+                    rebootToBIOSToolStripMenuItem.Text = "BIOS Yeniden Başlat";
+                    makeETISOToolStripMenuItem.Text = "ET Optimizer Uygulanmış.ISO Oluştur";
+
+                    chck1.Text = "Edge WebWidget'ı Devre Dışı Bırak";
+                    chck2.Text = "En Üst Düzey Performans Güç Seçen.";
+                    chck3.Text = "Svchost için Eşik Bölme";
+                    chck4.Text = "Çift Önyükleme Zaman Aşımı 3 sn";
+                    chck5.Text = "Hazırda Bekletme/Hızlı Bşl Kapat";
+                    chck6.Text = "Windows Insider Deneyler Kapat";
+                    chck7.Text = "Uygulama Başlatma İzleme Kapat";
+                    chck8.Text = "Güç Kısıtlama Kapat (Intel 6gen+)";
+                    chck9.Text = "Arka Plan Uygulamalarını Kapat";
+                    chck10.Text = "Yapışkan Tuşlar İstemi Kapat";
+                    chck11.Text = "Etkinlik Geçmişini Kapat";
+                    chck12.Text = "MS Store Uygulama Güncel. Kapat";
+                    chck13.Text = "Uygulamalar SmartScreen Kapat";
+                    chck14.Text = "Web Sitesi Yerel Sağlama İzin Ver";
+                    chck15.Text = "Microsoft Edge Ayarlarını Düzelt";
+                    chck16.Text = "Konum Sensörlerini Kapat";
+                    chck17.Text = "WiFi HotSpot Otomatik Paylaş Kapat";
+                    chck18.Text = "Paylaşılan HotSpot Bağlantı Kapat";
+                    chck19.Text = "Güncelleme Planlanmış Yeniden";
+                    chck20.Text = "P2P Güncelleme LAN (yerel) Yap";
+                    chck21.Text = "Daha Düşük Kapatma Süresi 2sn";
+                    chck22.Text = "Eski Aygıt Sürücülerini Kaldır";
+                    chck23.Text = "Daha Fazlasını Al. Özellik Kapat";
+                    chck24.Text = "Önerilen Uygulama Yükleme Kapat";
+                    chck25.Text = "Başlat Menüsü Reklamları Kapat";
+                    chck26.Text = "WindowsInk Uygulama Öneri Kapat";
+                    chck27.Text = "Gereksiz Bileşenleri Kapat";
+                    chck28.Text = "Defender Zamanlanmış Tarama";
+                    chck29.Text = "İşlem Azaltmayı Kapat";
+                    chck30.Text = "Dizin Oluşturma Hizmeti Birleştir";
+                    chck31.Text = "Telemetri Zamanlanmış Görev Kap";
+                    chck32.Text = "Telemetri/Veri Toplamayı Kaldır";
+                    chck33.Text = "PowerShell Telemetrisini Kapat";
+                    chck34.Text = "Skype Telemetrisini Kapat";
+                    chck35.Text = "Medya Oynatıcı Kullanım Rap Kapat";
+                    chck36.Text = "Mozilla Telemetrisini Kapat";
+                    chck37.Text = "Reklam Kimliğimi Kullanım Kapat";
+                    chck38.Text = "Yazma Hakkında Bilgi Gönder Kapat";
+                    chck39.Text = "El Yazısı Tanımayı Kapat";
+                    chck40.Text = "Watson Kötü Yazılım Rapor Kapat";
+                    chck41.Text = "Kötü Yazılım Teşhis Veri Kapat";
+                    chck42.Text = "MS MAPS'e Raporlamayı Kapat";
+                    chck43.Text = "Spynet Defender Rapor Kapat";
+                    chck44.Text = "Kötü Yazılım Örneklerini Gönderme";
+                    chck45.Text = "Yazma Örneklerini Gönderme Kapat";
+                    chck46.Text = "MS'ye Kişi Göndermeyi Kapat";
+                    chck47.Text = "Cortana'yı Kapat";
+                    chck48.Text = "Explorer'da Dosya Uzantısı Göster";
+                    chck49.Text = "Görev Çubuğu Şeffaflığı Kapat";
+                    chck50.Text = "Windows Animasyonlarını Kapat";
+                    chck51.Text = "MRU listelerini (atlama) Kapat";
+                    chck52.Text = "Arama Kutusu Yalnızca Simge";
+                    chck53.Text = "Bu Bilgisayarda Explorer Açık";
+                    chck54.Text = "Windows Oyun Çubuğu/DVR Kaldır";
+                    chck55.Text = "Hizmet Ayarlamalarını Etkinleştir";
+                    chck56.Text = "Bloatware'i (Önceden Yük) Kaldır";
+                    chck57.Text = "Gereksiz Başlangıç Uygulamaları";
+                    chck58.Text = "Geçici Dosya/Önbellek/Günlük Tmz.";
+                    chck59.Text = "Haberler ve İlgi/Widget Kaldır";
+                    chck60.Text = "Microsoft OneDrive'ı kaldır";
+                    chck61.Text = "Xbox Hizmetlerini devre dışı bırak";
+                    chck62.Text = "Hızlı/Güvenli DNS (1.1.1.1)";
+                    chck63.Text = "Reklam Yazılımları Tara (AdwCl)";
+                    chck64.Text = "Nagle's Alg. (Gecikmeli ACK) Kapat";
+                    chck65.Text = "CPU/GPU Öncelik Ayarlamaları";
+                    chck66.Text = "Spectre/Meltdown'u Kapat";
+                    chck67.Text = "Windows Defender'ı Kapat";
+                    chck68.Text = "WinSxS Klasörünü Temizle";
+                    chck69.Text = "Copilot'u kaldır";
+                    chck70.Text = "Bu fotoğraf hakkında bilgi kald";
+                    chck71.Text = "Uzun Sistem Yollarını Etkinleştir";
+                    chck72.Text = "Eski Bağlam Menüsünü Etkinleştir";
+                    chck73.Text = "Tam Ekran Optimizasyonları Kapat";
+                    chck74.Text = "RAM Bellek Ayarlarını Etkinleştir";
+
+                    toolStripLabel1.Text = "Derleme: Genel | " +ETBuild;
+                }
+                    if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
                 {
                     engforced = true;
                     DefaultLang();
                 }
-                if (cinfo.Name != "pl-PL" && cinfo.Name != "ru-RU" && cinfo.Name != "be-BY" && cinfo.Name != "de-DE" && cinfo.Name != "pt-BR" && cinfo.Name != "fr-FR" && cinfo.Name != "ko-KR")
+                if (cinfo.Name != "pl-PL" && cinfo.Name != "ru-RU" && cinfo.Name != "be-BY" && cinfo.Name != "de-DE" && cinfo.Name != "pt-BR" && cinfo.Name != "fr-FR" && cinfo.Name != "ko-KR" && cinfo.Name != "tr-TR")
                 {
                     button7.Enabled = false;
+                    button7.Visible = false;
                 }
             }
             ChangeLang();
