@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v6.05.30-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v6.06.10-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -26,7 +26,7 @@ Application developed from many sources found on the Internet, tested and update
 Originally ET was a batch script file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
 
 The first version appeared in a simple version for personal use in 2021.
-So far the project has grown to: 4161 lines of code, 860+ commits, translated into 6 languages ​​and is being developed further with love ❤️
+So far the project has grown to: 5000+ lines of code, 900+ commits, translated into 8 languages ​​and is being developed further with love ❤️
 
 <p align="center">
 <a href="#"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
@@ -52,15 +52,15 @@ So far the project has grown to: 4161 lines of code, 860+ commits, translated in
 ## 📷 Screenshots
 <details>
   <summary> <b>First Look</b> </summary>
-  <img src="https://github.com/user-attachments/assets/513b7803-0359-46e3-aa72-d4ad461c8ca0" width="750"/>
+  <img src="https://github.com/user-attachments/assets/204b0436-1c11-40be-a255-a6b9025f4444" width="750"/>
 </details>
 <details>
   <summary> <b>During Operation</b> </summary>
-  <img src="https://github.com/user-attachments/assets/e1d23474-fe91-467c-aaa3-d09ddbde5989" width="750"/>
+  <img src="https://github.com/user-attachments/assets/bc99bece-8611-4190-82a0-7b8171793d53" width="750"/>
 </details>
 <details>
   <summary> <b>Extras</b> </summary>
-  <img src="https://github.com/user-attachments/assets/b6681ab2-7d3b-4536-9973-42497303bf16" width="750"/>
+  <img src="https://github.com/user-attachments/assets/8577c35c-1a92-41ac-99c5-b0a2c508e175" width="750"/>
 </details>
 
 ## 🛠 What it does 
