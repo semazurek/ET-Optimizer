@@ -209,7 +209,6 @@ C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.pdb
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.AssemblyReference.cache
-C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Properties.Resources.resources
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.csproj.GenerateResource.cache
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\bin\Debug\ET.exe.config
@@ -501,4 +500,5 @@ C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debu
 C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.exe
 C:\Users\Rikey\Downloads\ET-Optimizer-master (1)\ET-Optimizer-master\ET\obj\Debug\ET.pdb
 C:\Users\Rikey\Downloads\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe.config
+C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.Form1.resources
 C:\Users\Rikey\Desktop\ET-Optimizer-master\ET-Optimizer-master\ET\obj\Debug\ET.exe.config

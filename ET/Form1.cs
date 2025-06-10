@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -11,35 +12,18 @@ using System.Management;
 using System.Media;
 using System.Net.Http;
 using System.Reflection;
-using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ProgressBar = System.Windows.Forms.ProgressBar;
 
 namespace ET
 {
     public partial class Form1 : Form
     {
-
-        [DllImport("KERNEL32.DLL", EntryPoint =
-   "SetProcessWorkingSetSize", SetLastError = true,
-   CallingConvention = CallingConvention.StdCall)]
-        internal static extern bool SetProcessWorkingSetSize32Bit
-   (IntPtr pProcess, int dwMinimumWorkingSetSize,
-   int dwMaximumWorkingSetSize);
-
-        [DllImport("KERNEL32.DLL", EntryPoint =
-           "SetProcessWorkingSetSize", SetLastError = true,
-           CallingConvention = CallingConvention.StdCall)]
-        internal static extern bool SetProcessWorkingSetSize64Bit
-           (IntPtr pProcess, long dwMinimumWorkingSetSize,
-           long dwMaximumWorkingSetSize);
-
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
@@ -49,22 +33,417 @@ namespace ET
         public const int WM_NCLBUTTONDOWN = 0xA1;
         public const int HTCAPTION = 0x2;
 
-        [DllImport("gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
-        private static extern IntPtr CreateRoundRectRgn(
-            int nLeftRect,
-            int nTopRect,
-            int nRightRect,
-            int nBottomRect,
-            int nWidthEllipse,
-            int nHeightEllipse
-        );
-
         private bool mouseClicked = false;
 
         private void Form_MouseClick(object sender, MouseEventArgs e)
         {
             mouseClicked = true;
         }
+
+        public class ColoredGroupBox : GroupBox
+        {
+            public Color InnerBackColor { get; set; } = Color.FromArgb(32, 32, 32);
+
+            protected override void OnPaint(PaintEventArgs e)
+            {
+                base.OnPaint(e);
+
+                e.Graphics.Clear(Parent.BackColor);
+
+                Rectangle rect = new Rectangle(ClientRectangle.X + 1, ClientRectangle.Y + 12,
+                                               ClientRectangle.Width - 2, ClientRectangle.Height - 13);
+                using (SolidBrush brush = new SolidBrush(InnerBackColor))
+                {
+                    e.Graphics.FillRectangle(brush, rect);
+                }
+
+                Size textSize = TextRenderer.MeasureText(Text, Font);
+                Rectangle textRect = new Rectangle(6, 0, textSize.Width + 2, textSize.Height);
+
+                ControlPaint.DrawBorder(e.Graphics, rect, ForeColor, ButtonBorderStyle.Solid);
+                e.Graphics.FillRectangle(new SolidBrush(Parent.BackColor), textRect);
+                TextRenderer.DrawText(e.Graphics, Text, Font, textRect.Location, ForeColor);
+            }
+        }
+
+        private void DeleteFilesByPattern(string folder, string pattern)
+        {
+            if (!Directory.Exists(folder)) return;
+
+            try
+            {
+                foreach (var file in Directory.GetFiles(folder, pattern, SearchOption.AllDirectories))
+                {
+                    TryDeleteFile(file);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Loguj błąd lub ignoruj
+            }
+        }
+
+        private void DeleteFolder(string path)
+        {
+            try
+            {
+                if (Directory.Exists(path))
+                    Directory.Delete(path, true);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting folder {path}: {ex.Message}");
+            }
+        }
+
+        private void TryDeleteFile(string file)
+        {
+            try
+            {
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
+            catch
+            {
+                Console.WriteLine($"Error deleting file {file}");
+            }
+        }
+
+        private void DeleteFilesInFolder(string path)
+        {
+            if (!Directory.Exists(path)) return;
+
+            try
+            {
+                foreach (var file in Directory.GetFiles(path, "*", SearchOption.AllDirectories))
+                {
+                    TryDeleteFile(file);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting files in folder {path}: {ex.Message}");
+            }
+        }
+
+        private void LoadAppxPackages()
+        {
+
+            var whitelistapps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                            {
+                                "Microsoft.MicrosoftOfficeHub",
+                                "Microsoft.Office.OneNote",
+                                "Microsoft.WindowsAlarms",
+                                "Microsoft.WindowsCalculator",
+                                "Microsoft.WindowsCamera",
+                                "microsoft.windowscommunicationsapps",
+                                "Microsoft.NET.Native.Framework.2.2",
+                                "Microsoft.NET.Native.Framework.2.0",
+                                "Microsoft.NET.Native.Runtime.2.2",
+                                "Microsoft.NET.Native.Runtime.2.0",
+                                "Microsoft.UI.Xaml.2.7",
+                                "Microsoft.UI.Xaml.2.0",
+                                "Microsoft.WindowsAppRuntime.1.3",
+                                "Microsoft.NET.Native.Framework.1.7",
+                                "MicrosoftWindows.Client.Core",
+                                "Microsoft.LockApp",
+                                "Microsoft.ECApp",
+                                "Microsoft.Windows.ContentDeliveryManager",
+                                "Microsoft.Windows.Search",
+                                "Microsoft.Windows.OOBENetworkCaptivePortal",
+                                "Microsoft.Windows.SecHealthUI",
+                                "Microsoft.SecHealthUI",
+                                "Microsoft.WindowsAppRuntime.CBS",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.VCLibs.120.00.UWPDesktop",
+                                "Microsoft.VCLibs.110.00.UWPDesktop",
+                                "Microsoft.DirectXRuntime",
+                                "Microsoft.XboxGameOverlay",
+                                "Microsoft.XboxGamingOverlay",
+                                "Microsoft.GamingApp",
+                                "Microsoft.GamingServices",
+                                "Microsoft.XboxIdentityProvider",
+                                "Microsoft.Xbox.TCUI",
+                                "Microsoft.AccountsControl",
+                                "Microsoft.WindowsStore",
+                                "Microsoft.StorePurchaseApp",
+                                "Microsoft.VP9VideoExtensions",
+                                "Microsoft.RawImageExtension",
+                                "Microsoft.HEIFImageExtension",
+                                "Microsoft.HEIFImageExtension",
+                                "Microsoft.WebMediaExtensions",
+                                "RealtekSemiconductorCorp.RealtekAudioControl",
+                                "Microsoft.MicrosoftEdge",
+                                "Microsoft.MicrosoftEdge.Stable",
+                                "MicrosoftWindows.Client.FileExp",
+                                "NVIDIACorp.NVIDIAControlPanel",
+                                "AppUp.IntelGraphicsExperience",
+                                "Microsoft.Paint",
+                                "Microsoft.Messaging",
+                                "Microsoft.AsyncTextService",
+                                "Microsoft.CredDialogHost",
+                                "Microsoft.Win32WebViewHost",
+                                "Microsoft.MicrosoftEdgeDevToolsClient",
+                                "Microsoft.Windows.OOBENetworkConnectionFlow",
+                                "Microsoft.Windows.PeopleExperienceHost",
+                                "Microsoft.Windows.PinningConfirmationDialog",
+                                "Microsoft.Windows.SecondaryTileExperience",
+                                "Microsoft.Windows.SecureAssessmentBrowser",
+                                "Microsoft.Windows.ShellExperienceHost",
+                                "Microsoft.Windows.StartMenuExperienceHost",
+                                "Microsoft.Windows.XGpuEjectDialog",
+                                "Microsoft.XboxGameCallableUI",
+                                "MicrosoftWindows.UndockedDevKit",
+                                "NcsiUwpApp",
+                                "Windows.CBSPreview",
+                                "Windows.MiracastView",
+                                "Windows.ContactSupport",
+                                "Windows.PrintDialog",
+                                "c5e2524a-ea46-4f67-841f-6a9465d9d515",
+                                "windows.immersivecontrolpanel",
+                                "WinRAR.ShellExtension",
+                                "Microsoft.WindowsNotepad",
+                                "MicrosoftWindows.Client.WebExperience",
+                                "Microsoft.ZuneMusic",
+                                "Microsoft.ZuneVideo",
+                                "Microsoft.OutlookForWindows",
+                                "MicrosoftWindows.Ai.Copilot.Provider",
+                                "Microsoft.WindowsTerminal",
+                                "Microsoft.Windows.Terminal",
+                                "WindowsTerminal",
+                                "Microsoft.Winget.Source",
+                                "Microsoft.DesktopAppInstaller",
+                                "Microsoft.Services.Store.Engagement",
+                                "Microsoft.HEVCVideoExtension",
+                                "Microsoft.WebpImageExtension",
+                                "MicrosoftWindows.CrossDevice",
+                                "NotepadPlusPlus",
+                                "MicrosoftCorporationII.WinAppRuntime.Main.1.5",
+                                "Microsoft.WindowsAppRuntime.1.5",
+                                "MicrosoftCorporationII.WinAppRuntime.Singleton",
+                                "Microsoft.WindowsSoundRecorder",
+                                "MicrosoftCorporationII.WinAppRuntime.Main.1.4",
+                                "MicrosoftWindows.Client.LKG",
+                                "MicrosoftWindows.Client.CBS",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.Windows.CloudExperienceHost",
+                                "SpotifyAB.SpotifyMusic",
+                                "Microsoft.SkypeApp",
+                                "5319275A.WhatsAppDesktop",
+                                "FACEBOOK.317180B0BB486",
+                                "TelegramMessengerLLP.TelegramDesktop",
+                                "4DF9E0F8.Netflix",
+                                "Discord",
+                                "Paint",
+                                "mspaint",
+                                "Microsoft.Windows.Paint",
+                                "Microsoft.MicrosoftEdge.Stable",
+                                "1527c705-839a-4832-9118-54d4Bd6a0c89",
+                                "c5e2524a-ea46-4f67-841f-6a9465d9d515",
+                                "E2A4F912-2574-4A75-9BB0-0D023378592B",
+                                "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE",
+                                "Microsoft.AAD.BrokerPlugin",
+                                "Microsoft.AccountsControl",
+                                "Microsoft.AsyncTextService",
+                                "Microsoft.BioEnrollment",
+                                "Microsoft.CredDialogHost",
+                                "Microsoft.ECApp",
+                                "Microsoft.LockApp",
+                                "Microsoft.MicrosoftEdgeDevToolsClient",
+                                "Microsoft.UI.Xaml.CBS",
+                                "Microsoft.Win32WebViewHost",
+                                "Microsoft.Windows.Apprep.ChxApp",
+                                "Microsoft.Windows.AssignedAccessLockApp",
+                                "Microsoft.Windows.CapturePicker",
+                                "Microsoft.Windows.CloudExperienceHost",
+                                "Microsoft.Windows.ContentDeliveryManager",
+                                "Microsoft.Windows.NarratorQuickStart",
+                                "Microsoft.Windows.OOBENetworkCaptivePortal",
+                                "Microsoft.Windows.OOBENetworkConnectionFlow",
+                                "Microsoft.Windows.ParentalControls",
+                                "Microsoft.Windows.PeopleExperienceHost",
+                                "Microsoft.Windows.PinningConfirmationDialog",
+                                "Microsoft.Windows.PrintQueueActionCenter",
+                                "Microsoft.Windows.SecureAssessmentBrowser",
+                                "Microsoft.Windows.XGpuEjectDialog",
+                                "Microsoft.XboxGameCallableUI",
+                                "MicrosoftWindows.Client.AIX",
+                                "MicrosoftWindows.Client.FileExp",
+                                "MicrosoftWindows.Client.OOBE",
+                                "MicrosoftWindows.LKG.Search",
+                                "MicrosoftWindows.UndockedDevKit",
+                                "NcsiUwpApp",
+                                "Windows.CBSPreview",
+                                "windows.immersivecontrolpanel",
+                                "Windows.PrintDialog",
+                                "Microsoft.NET.Native.Framework.2.2",
+                                "Microsoft.NET.Native.Framework.2.2",
+                                "Microsoft.NET.Native.Runtime.2.2",
+                                "Microsoft.NET.Native.Runtime.2.2",
+                                "Microsoft.SecHealthUI",
+                                "Microsoft.Services.Store.Engagement",
+                                "Microsoft.UI.Xaml.2.8",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.WindowsAppRuntime.1.3",
+                                "Microsoft.WindowsCamera",
+                                "Microsoft.XboxIdentityProvider",
+                                "Microsoft.ZuneMusic",
+                                "RealtekSemiconductorCorp.RealtekAudioControl",
+                                "DolbyLaboratories.DolbyAudioPremium",
+                                "Microsoft.NET.Native.Framework.2.0",
+                                "Microsoft.NET.Native.Framework.2.0",
+                                "Microsoft.NET.Native.Runtime.2.0",
+                                "AppUp.IntelGraphicsExperience",
+                                "Microsoft.NET.Native.Runtime.2.0",
+                                "Microsoft.Windows.AugLoop.CBS",
+                                "Microsoft.Windows.ShellExperienceHost",
+                                "Microsoft.Windows.StartMenuExperienceHost",
+                                "Microsoft.WindowsAppRuntime.CBS.1.6",
+                                "Microsoft.WindowsAppRuntime.CBS",
+                                "MicrosoftWindows.Client.CBS",
+                                "MicrosoftWindows.Client.Core",
+                                "MicrosoftWindows.Client.Photon",
+                                "MicrosoftWindows.LKG.AccountsService",
+                                "MicrosoftWindows.LKG.DesktopSpotlight",
+                                "MicrosoftWindows.LKG.IrisService",
+                                "MicrosoftWindows.LKG.RulesEngine",
+                                "MicrosoftWindows.LKG.SpeechRuntime",
+                                "MicrosoftWindows.LKG.TwinSxS",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.Copilot",
+                                "Microsoft.OneDriveSync",
+                                "Microsoft.OutlookForWindows",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.WindowsAppRuntime.1.5",
+                                "Microsoft.WindowsAppRuntime.1.5",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.Windows.DevHome",
+                                "Microsoft.UI.Xaml.2.8",
+                                "Microsoft.Paint",
+                                "MicrosoftWindows.Client.WebExperience",
+                                "Microsoft.WindowsStore",
+                                "Microsoft.WindowsNotepad",
+                                "Microsoft.WidgetsPlatformRuntime",
+                                "Microsoft.Xbox.TCUI",
+                                "Microsoft.WebpImageExtension",
+                                "Microsoft.WebMediaExtensions",
+                                "Microsoft.RawImageExtension",
+                                "Microsoft.HEVCVideoExtension",
+                                "Microsoft.HEIFImageExtension",
+                                "Microsoft.WindowsTerminal",
+                                "Microsoft.DesktopAppInstaller",
+                                "Microsoft.StartExperiencesApp",
+                                "Microsoft.StorePurchaseApp",
+                                "Microsoft.GamingApp",
+                                "Microsoft.VP9VideoExtensions",
+                                "Microsoft.UI.Xaml.2.7",
+                                "Microsoft.UI.Xaml.2.7",
+                                "Microsoft.XboxGamingOverlay",
+                                "Microsoft.WindowsCalculator",
+                                "Microsoft.WindowsSoundRecorder",
+                                "Microsoft.WindowsAlarms",
+                                "Microsoft.MicrosoftOfficeHub",
+                                "Microsoft.WindowsAppRuntime.1.6",
+                                "Microsoft.WindowsAppRuntime.1.6",
+                                "MicrosoftWindows.CrossDevice",
+                                "Microsoft.Windows.Photos",
+                                "Microsoft.MinecraftUWP",
+                                "minecraft",
+                                "Linux",
+                                "Ubuntu",
+                                "Kali",
+                                "Debian",
+                                "kali-linux",
+                                "WSL",
+                                "WSL2",
+                                "Docker",
+                                "Xbox",
+                                "Microsoft.LanguageExperiencePack",
+                                "Microsoft.LanguageExperiencePacken-US",
+                                "Microsoft.LanguageExperiencePackpl-PL",
+                                "Microsoft.Lovika",
+                                "Microsoft.4297127D64EC6",
+                                "Microsoft.Winget.Source",
+                                "26737FrancescoSorge.Dockerun",
+                                "CanonicalGroupLimited.Ubuntu",
+                                "KaliLinux.54290C8133FEE",
+                                "TheDebianProject.DebianGNULinux",
+                                "Crystalnix.Termius",
+                                "OpenAI.ChatGPT-Desktop",
+                                "Disney.37853FC22B2CE",
+                                "5319275A.WhatsAppDesktop",
+                                "FACEBOOK.317180B0BB486",
+                                "MicrosoftWindows.55182690.Taskbar",
+                                "Microsoft.WindowsAppRuntime.1.7",
+                                "Microsoft.VCLibs.120.00"
+                            };
+
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = "-Command \"Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select -ExpandProperty Name\"",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process p = Process.Start(psi))
+                using (StreamReader reader = p.StandardOutput)
+                {
+                    string line;
+                    int top = 5;
+                    int tabIndex = 0;
+
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        string appName = line.Trim();
+
+                        if (string.IsNullOrWhiteSpace(appName)) continue;
+
+                        if (whitelistapps.Contains(appName)) continue;
+
+                        CheckBox cb = new CheckBox
+                        {
+                            Text = appName,
+                            AutoSize = true,
+                            Top = top,
+                            Left = 10,
+                            Checked = true,
+                            TabIndex = tabIndex++
+                        };
+
+                        panel6.Controls.Add(cb);
+                        top += 25;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error getching packets:\n" + ex.Message);
+            }
+        }
+
+        private void SaveUncheckedToWhitelist()
+        {
+            string whitelistPath = "whitelist.txt";
+
+            using (StreamWriter writer = new StreamWriter(whitelistPath, false, System.Text.Encoding.UTF8))
+            {
+                foreach (Control ctrl in panel6.Controls)
+                {
+                    if (ctrl is CheckBox cb && !cb.Checked)
+                    {
+                        writer.WriteLine(cb.Text.Trim());
+                    }
+                }
+            }
+
+        }
+
         public void WaitForMouseClick()
         {
             this.MouseClick += Form_MouseClick;
@@ -88,21 +467,10 @@ namespace ET
             mouseClicked = false;
         }
 
-        public void FlushMem()
-        {
-            GC.Collect();
-
-            GC.WaitForPendingFinalizers();
-        }
-
         public class MySR : ToolStripSystemRenderer
         {
             public MySR() { }
 
-            protected override void OnRenderToolStripBorder(ToolStripRenderEventArgs e)
-            {
-
-            }
         }
         public string systemDrive = Environment.GetEnvironmentVariable("SystemDrive");
         string mainforecolor = "#eeeeee";
@@ -116,8 +484,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.05.30";
-        string ETBuild = "02.06.2025";
+        string ETVersion = "E.T. ver 6.06.10";
+        string ETBuild = "10.06.2025";
         int runcount = 0;
 
         public string selectall0 = "Select All";
@@ -151,13 +519,18 @@ namespace ET
                 System.Diagnostics.Process process = new System.Diagnostics.Process();
                 System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "powershell.exe";
-                startInfo.Arguments = "-Command Enable-ComputerRestore -Drive $env:systemdrive";
-                startInfo.UseShellExecute = false;
-                startInfo.CreateNoWindow = true;
-                process.StartInfo = startInfo;
-                process.Start(); process.WaitForExit();
+                try
+                {
+                    using (ManagementClass mc = new ManagementClass("SystemRestore"))
+                    {
+                        mc.InvokeMethod("Enable", new object[] { systemDrive });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error enabling System Restore: " + ex.Message);
+                }
+
 
                 string backupPath = System.IO.Path.Combine(systemDrive + @"\", @"Backup");
 
@@ -179,28 +552,20 @@ namespace ET
 
                 foreach (string command in commands)
                 {
-                    RunRegExport(command);
+                    process.StartInfo.FileName = "cmd.exe";
+                    process.StartInfo.Arguments = "/c " + command;
+                    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+
+                    process.Start();
+                    process.WaitForExit();
                 }
 
                 CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
                 CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
                 CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
             });
-        }
-
-        static void RunRegExport(string arguments)
-        {
-            using (Process process = new Process())
-            {
-                process.StartInfo.FileName = "cmd.exe";
-                process.StartInfo.Arguments = "/c " + arguments;
-                process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-
-                process.Start();
-                process.WaitForExit();
-            }
         }
 
         public void SetRegistryValue(string hivePath, string name, object value, RegistryValueKind kind)
@@ -267,32 +632,26 @@ namespace ET
 
         public void c_p(object sender, EventArgs e)
         {
-            int ct = 0;
-            foreach (CheckBox checkBox in panel1.Controls)
-            {
-
-                if (checkBox.Checked == true) { ct++; }
-            }
-            if (ct == 36)
+            int ct = panel1.Controls.OfType<CheckBox>().Count();
+            int checkedCt = panel1.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
+            if (checkedCt == ct)
             {
                 groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
+                groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
                 button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             }
             else
             {
                 groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+                groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button1.BackColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
                 button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
             }
 
-            int cy = 0;
-            foreach (CheckBox checkBox in panel2.Controls)
-            {
-
-                if (checkBox.Checked == true) { cy++; }
-            }
-            if (cy == 18)
+            int cy = panel2.Controls.OfType<CheckBox>().Count();
+            int checkedCy = panel2.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
+            if (checkedCy == cy)
             {
                 groupBox2.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button3.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -305,13 +664,9 @@ namespace ET
                 button3.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
             }
 
-            int cu = 0;
-            foreach (CheckBox checkBox in panel3.Controls)
-            {
-
-                if (checkBox.Checked == true) { cu++; }
-            }
-            if (cu == 8)
+            int cu = panel3.Controls.OfType<CheckBox>().Count();
+            int checkedCu = panel3.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
+            if (checkedCu == cu)
             {
                 groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
                 button2.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -324,13 +679,9 @@ namespace ET
                 button2.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
             }
 
-            int ci = 0;
-            foreach (CheckBox checkBox in panel4.Controls)
-            {
-
-                if (checkBox.Checked == true) { ci++; }
-            }
-            if (ci == 6)
+            int ci = panel4.Controls.OfType<CheckBox>().Count();
+            int checkedCi = panel4.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
+            if (checkedCi == ci)
             {
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             }
@@ -338,7 +689,7 @@ namespace ET
             {
                 groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             }
-            int allc = ci + cu + cy + ct;
+            int allc = checkedCi + checkedCu + checkedCy + checkedCt;
 
             if (allc == 68)
             {
@@ -360,12 +711,13 @@ namespace ET
         {
 
             InitializeComponent();
+            LoadAppxPackages();
             this.Opacity = 0;
             this.Enabled = false;
 
-            button6.Location = new System.Drawing.Point(845, 5);
+            button6.Location = new System.Drawing.Point(910, 5);
             button6.FlatAppearance.BorderSize = 0;
-            button7.Location = new System.Drawing.Point(780, -2);
+            button7.Location = new System.Drawing.Point(845, -2);
             button7.FlatAppearance.BorderSize = 0;
 
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
@@ -376,7 +728,7 @@ namespace ET
             this.Load += new EventHandler(Form1_Load);
 
             toolStrip1.Renderer = new MySR();
-            this.Size = new System.Drawing.Size(880, 500);
+            this.Size = new System.Drawing.Size(945, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
@@ -406,41 +758,64 @@ namespace ET
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
-            button5.Location = new System.Drawing.Point(660, 440);
+            button5.Location = new System.Drawing.Point(680, 440);
             button5.Size = new System.Drawing.Size(120, 50);
             button5.FlatAppearance.BorderSize = 0;
-            button4.Location = new System.Drawing.Point(510, 440);
+            button4.Location = new System.Drawing.Point(530, 440);
             button4.Size = new System.Drawing.Size(140, 50);
             button4.FlatAppearance.BorderSize = 0;
-            button3.Location = new System.Drawing.Point(380, 440);
+            button3.Location = new System.Drawing.Point(400, 440);
             button3.Size = new System.Drawing.Size(120, 50);
             button3.FlatAppearance.BorderSize = 0;
-            button2.Location = new System.Drawing.Point(250, 440);
+            button2.Location = new System.Drawing.Point(270, 440);
             button2.Size = new System.Drawing.Size(120, 50);
             button2.FlatAppearance.BorderSize = 0;
-            button1.Location = new System.Drawing.Point(110, 440);
+            button1.Location = new System.Drawing.Point(130, 440);
             button1.Size = new System.Drawing.Size(130, 50);
             button1.FlatAppearance.BorderSize = 0;
             groupBox1.Location = new System.Drawing.Point(10, 70);
-            groupBox1.Size = new System.Drawing.Size(570, 180);
+            groupBox1.Size = new System.Drawing.Size(305, 180);
             groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox2.Location = new System.Drawing.Point(585, 70);
-            groupBox2.Size = new System.Drawing.Size(285, 180);
+            groupBox2.Location = new System.Drawing.Point(320, 70);
+            groupBox2.Size = new System.Drawing.Size(305, 180);
             groupBox2.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox3.Location = new System.Drawing.Point(10, 250);
-            groupBox3.Size = new System.Drawing.Size(285, 180);
+            groupBox3.Location = new System.Drawing.Point(630, 70);
+            groupBox3.Size = new System.Drawing.Size(305, 180);
             groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox4.Location = new System.Drawing.Point(302, 250);
-            groupBox4.Size = new System.Drawing.Size(278, 180);
+            groupBox4.Location = new System.Drawing.Point(320, 250);
+            groupBox4.Size = new System.Drawing.Size(305, 180);
             groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox5.Location = new System.Drawing.Point(585, 250);
-            groupBox5.Size = new System.Drawing.Size(285, 180);
+            groupBox5.Location = new System.Drawing.Point(630, 250);
+            groupBox5.Size = new System.Drawing.Size(305, 180);
             groupBox5.ForeColor = System.Drawing.ColorTranslator.FromHtml(expercolor);
+
+            groupBox6.Location = new System.Drawing.Point(10, 250);
+            groupBox6.Size = new System.Drawing.Size(305, 180);
+            groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+            groupBox6.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
+            panel6.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
+            panel6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+            ColoredGroupBox customGroup6 = new ColoredGroupBox
+            {
+                Text = groupBox6.Text,
+                InnerBackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor),
+                Bounds = groupBox6.Bounds,
+                Font = groupBox6.Font,
+                ForeColor = groupBox6.ForeColor
+            };
+
+            while (groupBox6.Controls.Count > 0)
+                customGroup6.Controls.Add(groupBox6.Controls[0]);
+
+            Controls.Remove(groupBox6);
+            Controls.Add(customGroup6);
+
+
             toolStrip1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             toolStrip1.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
-            toolStrip1.Size = new System.Drawing.Size(802, 25);
+            toolStrip1.Size = new System.Drawing.Size(945, 25);
             textBox1.Location = new System.Drawing.Point(10, 70);
-            textBox1.Size = new System.Drawing.Size(860, 360);
+            textBox1.Size = new System.Drawing.Size(925, 360);
             toolStripButton5.Visible = false;
 
             panel1.VerticalScroll.Enabled = false;
@@ -457,6 +832,10 @@ namespace ET
 
             panel5.VerticalScroll.Enabled = false;
             panel5.VerticalScroll.Visible = false;
+
+            panel6.VerticalScroll.Enabled = false;
+            panel6.VerticalScroll.Visible = false;
+
             CheckBox chck1 = new CheckBox();
             chck1.Location = new System.Drawing.Point(10, 5);
             chck1.Size = new System.Drawing.Size(270, 25);
@@ -594,7 +973,7 @@ namespace ET
             chck65.TabIndex = 65;
             panel1.Controls.Add(chck65);
             CheckBox chck16 = new CheckBox();
-            chck16.Location = new System.Drawing.Point(285, 05);
+            chck16.Location = new System.Drawing.Point(10, 455);
             chck16.Size = new System.Drawing.Size(260, 25);
             chck16.Tag = "Disable Location Sensors";
             chck16.Checked = true;
@@ -602,7 +981,7 @@ namespace ET
             chck16.TabIndex = 16;
             panel1.Controls.Add(chck16);
             CheckBox chck17 = new CheckBox();
-            chck17.Location = new System.Drawing.Point(285, 30);
+            chck17.Location = new System.Drawing.Point(10, 480);
             chck17.Size = new System.Drawing.Size(260, 25);
             chck17.Tag = "Disable WiFi HotSpot Auto-Sharing";
             chck17.Checked = true;
@@ -610,7 +989,7 @@ namespace ET
             chck17.TabIndex = 17;
             panel1.Controls.Add(chck17);
             CheckBox chck18 = new CheckBox();
-            chck18.Location = new System.Drawing.Point(285, 55);
+            chck18.Location = new System.Drawing.Point(10, 505);
             chck18.Size = new System.Drawing.Size(260, 25);
             chck18.Tag = "Disable Shared HotSpot Connect";
             chck18.Checked = true;
@@ -618,7 +997,7 @@ namespace ET
             chck18.TabIndex = 18;
             panel1.Controls.Add(chck18);
             CheckBox chck19 = new CheckBox();
-            chck19.Location = new System.Drawing.Point(285, 80);
+            chck19.Location = new System.Drawing.Point(10, 530);
             chck19.Size = new System.Drawing.Size(260, 25);
             chck19.Tag = "Updates Notify to Sched. Restart";
             chck19.Checked = true;
@@ -626,7 +1005,7 @@ namespace ET
             chck19.TabIndex = 19;
             panel1.Controls.Add(chck19);
             CheckBox chck20 = new CheckBox();
-            chck20.Location = new System.Drawing.Point(285, 105);
+            chck20.Location = new System.Drawing.Point(10, 555);
             chck20.Size = new System.Drawing.Size(260, 25);
             chck20.Tag = "P2P Update Setting to LAN (local)";
             chck20.Checked = true;
@@ -634,7 +1013,7 @@ namespace ET
             chck20.TabIndex = 20;
             panel1.Controls.Add(chck20);
             CheckBox chck21 = new CheckBox();
-            chck21.Location = new System.Drawing.Point(285, 130);
+            chck21.Location = new System.Drawing.Point(10, 580);
             chck21.Size = new System.Drawing.Size(260, 25);
             chck21.Tag = "Set Lower Shutdown Time (2sec)";
             chck21.Checked = true;
@@ -642,7 +1021,7 @@ namespace ET
             chck21.TabIndex = 21;
             panel1.Controls.Add(chck21);
             CheckBox chck22 = new CheckBox();
-            chck22.Location = new System.Drawing.Point(285, 155);
+            chck22.Location = new System.Drawing.Point(10, 605);
             chck22.Size = new System.Drawing.Size(260, 25);
             chck22.Tag = "Remove Old Device Drivers";
             chck22.Checked = true;
@@ -650,7 +1029,7 @@ namespace ET
             chck22.TabIndex = 22;
             panel1.Controls.Add(chck22);
             CheckBox chck23 = new CheckBox();
-            chck23.Location = new System.Drawing.Point(285, 180);
+            chck23.Location = new System.Drawing.Point(10, 630);
             chck23.Size = new System.Drawing.Size(260, 25);
             chck23.Tag = "Disable Get Even More Out of...";
             chck23.Checked = true;
@@ -658,7 +1037,7 @@ namespace ET
             chck23.TabIndex = 23;
             panel1.Controls.Add(chck23);
             CheckBox chck24 = new CheckBox();
-            chck24.Location = new System.Drawing.Point(285, 205);
+            chck24.Location = new System.Drawing.Point(10, 655);
             chck24.Size = new System.Drawing.Size(260, 25);
             chck24.Tag = "Disable Installing Suggested Apps";
             chck24.Checked = true;
@@ -666,7 +1045,7 @@ namespace ET
             chck24.TabIndex = 24;
             panel1.Controls.Add(chck24);
             CheckBox chck25 = new CheckBox();
-            chck25.Location = new System.Drawing.Point(285, 230);
+            chck25.Location = new System.Drawing.Point(10, 680);
             chck25.Size = new System.Drawing.Size(260, 25);
             chck25.Tag = "Disable Start Menu Ads/Suggestions";
             chck25.Checked = true;
@@ -674,7 +1053,7 @@ namespace ET
             chck25.TabIndex = 25;
             panel1.Controls.Add(chck25);
             CheckBox chck26 = new CheckBox();
-            chck26.Location = new System.Drawing.Point(285, 255);
+            chck26.Location = new System.Drawing.Point(10, 705);
             chck26.Size = new System.Drawing.Size(260, 25);
             chck26.Tag = "Disable Suggest Apps WindowsInk";
             chck26.Checked = true;
@@ -682,7 +1061,7 @@ namespace ET
             chck26.TabIndex = 26;
             panel1.Controls.Add(chck26);
             CheckBox chck27 = new CheckBox();
-            chck27.Location = new System.Drawing.Point(285, 280);
+            chck27.Location = new System.Drawing.Point(10, 730);
             chck27.Size = new System.Drawing.Size(260, 25);
             chck27.Tag = "Disable Unnecessary Components";
             chck27.Checked = true;
@@ -690,7 +1069,7 @@ namespace ET
             chck27.TabIndex = 27;
             panel1.Controls.Add(chck27);
             CheckBox chck28 = new CheckBox();
-            chck28.Location = new System.Drawing.Point(285, 305);
+            chck28.Location = new System.Drawing.Point(10, 755);
             chck28.Size = new System.Drawing.Size(260, 25);
             chck28.Tag = "Defender Scheduled Scan Nerf";
             chck28.Checked = true;
@@ -705,7 +1084,7 @@ namespace ET
             chck29.TabIndex = 29;
             panel5.Controls.Add(chck29);
             CheckBox chck30 = new CheckBox();
-            chck30.Location = new System.Drawing.Point(285, 330);
+            chck30.Location = new System.Drawing.Point(10, 780);
             chck30.Size = new System.Drawing.Size(260, 25);
             chck30.Tag = "Defragment Indexing Service File";
             chck30.Checked = true;
@@ -927,15 +1306,27 @@ namespace ET
             chck55.TabIndex = 55;
             panel1.Controls.Add(chck55);
             CheckBox chck56 = new CheckBox();
-            chck56.Location = new System.Drawing.Point(285, 355);
+            chck56.Location = new System.Drawing.Point(10, 805);
             chck56.Size = new System.Drawing.Size(260, 25);
             chck56.Tag = "Remove Bloatware (Preinstalled)";
             chck56.Checked = true;
             chck56.Click += c_p;
+            chck56.CheckedChanged += (s, e) =>
+            {
+                panel6.Enabled = chck56.Checked;
+                if (chck56.Checked)
+                {
+                    groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
+                }
+                else
+                {
+                    groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+                }
+            };
             chck56.TabIndex = 56;
             panel1.Controls.Add(chck56);
             CheckBox chck57 = new CheckBox();
-            chck57.Location = new System.Drawing.Point(285, 380);
+            chck57.Location = new System.Drawing.Point(10, 830);
             chck57.Size = new System.Drawing.Size(260, 25);
             chck57.Tag = "Disable Unnecessary Startup Apps";
             chck57.Checked = true;
@@ -1009,7 +1400,7 @@ namespace ET
             chck70.TabIndex = 70;
             panel3.Controls.Add(chck70);
             CheckBox chck71 = new CheckBox();
-            chck71.Location = new System.Drawing.Point(285, 405);
+            chck71.Location = new System.Drawing.Point(10, 855);
             chck71.Size = new System.Drawing.Size(260, 25);
             chck71.Tag = "Enable Long Paths";
             chck71.Checked = true;
@@ -1033,7 +1424,7 @@ namespace ET
             chck73.TabIndex = 73;
             panel1.Controls.Add(chck73);
             CheckBox chck74 = new CheckBox();
-            chck74.Location = new System.Drawing.Point(285, 430);
+            chck74.Location = new System.Drawing.Point(10, 880);
             chck74.Size = new System.Drawing.Size(260, 25);
             chck74.Tag = "RAM Memory Tweaks";
             chck74.Checked = true;
@@ -1041,28 +1432,28 @@ namespace ET
             chck74.TabIndex = 74;
             panel1.Controls.Add(chck74);
 
-            diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap();
-            cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap();
-            msconfigToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msconfig.exe").ToBitmap();
-            controlPanelToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap();
-            deviceManagerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\devmgmt.msc").ToBitmap();
-            uACSettingsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\UserAccountControlSettings.exe").ToBitmap();
-            msinfo32ToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msinfo32.exe").ToBitmap();
-            servicesToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\services.msc").ToBitmap();
-            remoteDesktopToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\mstsc.exe").ToBitmap();
-            eventViewerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\eventvwr.exe").ToBitmap();
-            resetNetworkToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap();
-            makeETISOToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\oobe\\Setup.exe").ToBitmap();
-            updateApplicationsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap();
-            downloadSoftwareToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap();
-            windowsLicenseKeyToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\slui.exe").ToBitmap();
-            rebootToBIOSToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap();
-            rebootToSafeModeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap();
-            restartExplorerexeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\explorer.exe").ToBitmap();
+            if (File.Exists(systemDrive + "\\Windows\\System32\\dfrgui.exe")) { diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\cleanmgr.exe")) { cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\msconfig.exe")) { msconfigToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msconfig.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\control.exe")) { controlPanelToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\devmgmt.msc")) { deviceManagerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\devmgmt.msc").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\UserAccountControlSettings.exe")) { uACSettingsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\UserAccountControlSettings.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\msinfo32.exe")) { msinfo32ToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msinfo32.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\services.msc")) { servicesToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\services.msc").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\mstsc.exe")) { remoteDesktopToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\mstsc.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\eventvwr.exe")) { eventViewerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\eventvwr.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\control.exe")) { resetNetworkToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\oobe\\Setup.exe")) { makeETISOToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\oobe\\Setup.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe")) { updateApplicationsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe")) { downloadSoftwareToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\slui.exe")) { windowsLicenseKeyToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\slui.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\cmd.exe")) { rebootToBIOSToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\System32\\cmd.exe")) { rebootToSafeModeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\explorer.exe")) { restartExplorerexeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\explorer.exe").ToBitmap(); }
 
 
-            restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap();
-            registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap();
+            if (File.Exists(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe")) { restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap(); }
+            if (File.Exists(systemDrive + "\\Windows\\regedit.exe")) { registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap(); }
 
             label2.Left = (this.ClientSize.Width - label2.Width) / 2 / 2;
             label2.Text = msgend;
@@ -2022,18 +2413,23 @@ namespace ET
                     chck73.Text = "Tam Ekran Optimizasyonları Kapat";
                     chck74.Text = "RAM Bellek Ayarlarını Etkinleştir";
 
-                    toolStripLabel1.Text = "Derleme: Genel | " +ETBuild;
+                    toolStripLabel1.Text = "Derleme: Genel | " + ETBuild;
                 }
-                    if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
+                if (args != null && args.Length > 0)
                 {
-                    engforced = true;
-                    DefaultLang();
+                    if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
+                    {
+                        engforced = true;
+                        DefaultLang();
+                    }
                 }
                 if (cinfo.Name != "pl-PL" && cinfo.Name != "ru-RU" && cinfo.Name != "be-BY" && cinfo.Name != "de-DE" && cinfo.Name != "pt-BR" && cinfo.Name != "fr-FR" && cinfo.Name != "ko-KR" && cinfo.Name != "tr-TR")
                 {
                     button7.Enabled = false;
                     button7.Visible = false;
                 }
+                groupBox6.Text = chck56.Text;
+                customGroup6.Text = chck56.Text;
             }
             ChangeLang();
 
@@ -2048,6 +2444,9 @@ namespace ET
             groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
             button1.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
             button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+
+            groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
+            customGroup6.ForeColor = System.Drawing.ColorTranslator.FromHtml("#bdc3c7");
 
 
             if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
@@ -2176,12 +2575,6 @@ namespace ET
             {
                 File.WriteAllText(fullPath, "This file indicates for ET doesnt need to create more restorepoints.");
 
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "vssadmin";
-                startInfo.Arguments = "delete shadows /all /quiet";
-                process.StartInfo = startInfo;
-                process.Start(); process.WaitForExit();
-
                 if (issillent == false)
                 {
                     Thread splashThread = new Thread(new ThreadStart(() =>
@@ -2292,8 +2685,6 @@ namespace ET
 
         public void doengine()
         {
-            FlushMem();
-
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -2304,6 +2695,7 @@ namespace ET
             groupBox3.Visible = false;
             groupBox4.Visible = false;
             groupBox5.Visible = false;
+            groupBox6.Visible = false;
             button1.Visible = false;
             button2.Visible = false;
             button3.Visible = false;
@@ -2918,15 +3310,309 @@ namespace ET
                             break;
                         case "Remove Bloatware (Preinstalled)":
                             done++;
-
+                            SaveUncheckedToWhitelist();
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications\", "ConfigureChatAutoInstall", 0, RegistryValueKind.DWord);
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command $RemoveAppPkgs = (Get-AppxPackage -AllUsers).Name; $whitelistappsZ = @('Microsoft.MicrosoftOfficeHub','Microsoft.Office.OneNote','Microsoft.WindowsAlarms','Microsoft.WindowsCalculator','Microsoft.WindowsCamera','microsoft.windowscommunicationsapps','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.0','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.0','Microsoft.WindowsAppRuntime.1.3','Microsoft.NET.Native.Framework.1.7','MicrosoftWindows.Client.Core','Microsoft.LockApp','Microsoft.ECApp','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.Search','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.SecHealthUI','Microsoft.SecHealthUI','Microsoft.WindowsAppRuntime.CBS','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.120.00.UWPDesktop','Microsoft.VCLibs.110.00.UWPDesktop','Microsoft.DirectXRuntime','Microsoft.XboxGameOverlay','Microsoft.XboxGamingOverlay','Microsoft.GamingApp','Microsoft.GamingServices','Microsoft.XboxIdentityProvider','Microsoft.Xbox.TCUI','Microsoft.AccountsControl','Microsoft.WindowsStore','Microsoft.StorePurchaseApp','Microsoft.VP9VideoExtensions','Microsoft.RawImageExtension','Microsoft.HEIFImageExtension','Microsoft.HEIFImageExtension','Microsoft.WebMediaExtensions','RealtekSemiconductorCorp.RealtekAudioControl','Microsoft.MicrosoftEdge','Microsoft.MicrosoftEdge.Stable','MicrosoftWindows.Client.FileExp','NVIDIACorp.NVIDIAControlPanel','AppUp.IntelGraphicsExperience','Microsoft.Paint','Microsoft.Messaging','Microsoft.AsyncTextService','Microsoft.CredDialogHost','Microsoft.Win32WebViewHost','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.SecondaryTileExperience','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','Windows.MiracastView','Windows.ContactSupport','Windows.PrintDialog','c5e2524a-ea46-4f67-841f-6a9465d9d515','windows.immersivecontrolpanel','WinRAR.ShellExtension','Microsoft.WindowsNotepad','MicrosoftWindows.Client.WebExperience','Microsoft.ZuneMusic','Microsoft.ZuneVideo','Microsoft.OutlookForWindows','MicrosoftWindows.Ai.Copilot.Provider','Microsoft.WindowsTerminal','Microsoft.Windows.Terminal','WindowsTerminal','Microsoft.Winget.Source','Microsoft.DesktopAppInstaller','Microsoft.Services.Store.Engagement','Microsoft.HEVCVideoExtension','Microsoft.WebpImageExtension','MicrosoftWindows.CrossDevice','NotepadPlusPlus','MicrosoftCorporationII.WinAppRuntime.Main.1.5','Microsoft.WindowsAppRuntime.1.5','MicrosoftCorporationII.WinAppRuntime.Singleton','Microsoft.WindowsSoundRecorder','MicrosoftCorporationII.WinAppRuntime.Main.1.4','MicrosoftWindows.Client.LKG','MicrosoftWindows.Client.CBS','Microsoft.VCLibs.140.00','Microsoft.Windows.CloudExperienceHost','SpotifyAB.SpotifyMusic','Microsoft.SkypeApp','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486','TelegramMessengerLLP.TelegramDesktop','4DF9E0F8.Netflix','Discord','Paint','mspaint','Microsoft.Windows.Paint','Microsoft.MicrosoftEdge.Stable','1527c705-839a-4832-9118-54d4Bd6a0c89','c5e2524a-ea46-4f67-841f-6a9465d9d515','E2A4F912-2574-4A75-9BB0-0D023378592B','F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE','Microsoft.AAD.BrokerPlugin','Microsoft.AccountsControl','Microsoft.AsyncTextService','Microsoft.BioEnrollment','Microsoft.CredDialogHost','Microsoft.ECApp','Microsoft.LockApp','Microsoft.MicrosoftEdgeDevToolsClient','Microsoft.UI.Xaml.CBS','Microsoft.Win32WebViewHost','Microsoft.Windows.Apprep.ChxApp','Microsoft.Windows.AssignedAccessLockApp','Microsoft.Windows.CapturePicker','Microsoft.Windows.CloudExperienceHost','Microsoft.Windows.ContentDeliveryManager','Microsoft.Windows.NarratorQuickStart','Microsoft.Windows.OOBENetworkCaptivePortal','Microsoft.Windows.OOBENetworkConnectionFlow','Microsoft.Windows.ParentalControls','Microsoft.Windows.PeopleExperienceHost','Microsoft.Windows.PinningConfirmationDialog','Microsoft.Windows.PrintQueueActionCenter','Microsoft.Windows.SecureAssessmentBrowser','Microsoft.Windows.XGpuEjectDialog','Microsoft.XboxGameCallableUI','MicrosoftWindows.Client.AIX','MicrosoftWindows.Client.FileExp','MicrosoftWindows.Client.OOBE','MicrosoftWindows.LKG.Search','MicrosoftWindows.UndockedDevKit','NcsiUwpApp','Windows.CBSPreview','windows.immersivecontrolpanel','Windows.PrintDialog','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Framework.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.NET.Native.Runtime.2.2','Microsoft.SecHealthUI','Microsoft.Services.Store.Engagement','Microsoft.UI.Xaml.2.8','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.VCLibs.140.00','Microsoft.VCLibs.140.00','Microsoft.WindowsAppRuntime.1.3','Microsoft.WindowsCamera','Microsoft.XboxIdentityProvider','Microsoft.ZuneMusic','RealtekSemiconductorCorp.RealtekAudioControl','DolbyLaboratories.DolbyAudioPremium','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Framework.2.0','Microsoft.NET.Native.Runtime.2.0','AppUp.IntelGraphicsExperience','Microsoft.NET.Native.Runtime.2.0','Microsoft.Windows.AugLoop.CBS','Microsoft.Windows.ShellExperienceHost','Microsoft.Windows.StartMenuExperienceHost','Microsoft.WindowsAppRuntime.CBS.1.6','Microsoft.WindowsAppRuntime.CBS','MicrosoftWindows.Client.CBS','MicrosoftWindows.Client.Core','MicrosoftWindows.Client.Photon','MicrosoftWindows.LKG.AccountsService','MicrosoftWindows.LKG.DesktopSpotlight','MicrosoftWindows.LKG.IrisService','MicrosoftWindows.LKG.RulesEngine','MicrosoftWindows.LKG.SpeechRuntime','MicrosoftWindows.LKG.TwinSxS','Microsoft.VCLibs.140.00','Microsoft.Copilot','Microsoft.OneDriveSync','Microsoft.OutlookForWindows','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.WindowsAppRuntime.1.5','Microsoft.WindowsAppRuntime.1.5','Microsoft.VCLibs.140.00.UWPDesktop','Microsoft.Windows.DevHome','Microsoft.UI.Xaml.2.8','Microsoft.Paint','MicrosoftWindows.Client.WebExperience','Microsoft.WindowsStore','Microsoft.WindowsNotepad','Microsoft.WidgetsPlatformRuntime','Microsoft.Xbox.TCUI','Microsoft.WebpImageExtension','Microsoft.WebMediaExtensions','Microsoft.RawImageExtension','Microsoft.HEVCVideoExtension','Microsoft.HEIFImageExtension','Microsoft.WindowsTerminal','Microsoft.DesktopAppInstaller','Microsoft.StartExperiencesApp','Microsoft.StorePurchaseApp','Microsoft.GamingApp','Microsoft.VP9VideoExtensions','Microsoft.UI.Xaml.2.7','Microsoft.UI.Xaml.2.7','Microsoft.XboxGamingOverlay','Microsoft.WindowsCalculator','Microsoft.WindowsSoundRecorder','Microsoft.WindowsAlarms','Microsoft.MicrosoftOfficeHub','Microsoft.WindowsAppRuntime.1.6','Microsoft.WindowsAppRuntime.1.6','MicrosoftWindows.CrossDevice','Microsoft.Windows.Photos','Microsoft.MinecraftUWP','minecraft','Linux','Ubuntu','Kali','Debian','kali-linux','WSL','WSL2','Docker','Xbox','Microsoft.LanguageExperiencePack','Microsoft.LanguageExperiencePacken-US','Microsoft.LanguageExperiencePackpl-PL','Microsoft.Lovika','Microsoft.4297127D64EC6','Microsoft.Winget.Source','26737FrancescoSorge.Dockerun','CanonicalGroupLimited.Ubuntu','KaliLinux.54290C8133FEE','TheDebianProject.DebianGNULinux','Crystalnix.Termius','OpenAI.ChatGPT-Desktop','Disney.37853FC22B2CE','5319275A.WhatsAppDesktop','FACEBOOK.317180B0BB486'); if (Test-Path 'whitelist.txt') { $fileEntries = Get-Content 'whitelist.txt' -Encoding UTF8 | Where-Object { $_ -ne '' } | ForEach-Object { $_.Trim() } $whitelistappsZ += $fileEntries }; $whitelistapps = $whitelistappsZ | ForEach-Object { $_.ToLowerInvariant().Trim() }; ForEach($TargetApp in $RemoveAppPkgs){ If( $whitelistapps -notcontains $TargetApp) { Get-AppxPackage -Name $TargetApp -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue; Get-AppXProvisionedPackage -Online | Where-Object DisplayName -EQ $TargetApp | Remove-AppxProvisionedPackage -Online }}";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
+                            var whitelistapps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+                            {
+                                "Microsoft.MicrosoftOfficeHub",
+                                "Microsoft.Office.OneNote",
+                                "Microsoft.WindowsAlarms",
+                                "Microsoft.WindowsCalculator",
+                                "Microsoft.WindowsCamera",
+                                "microsoft.windowscommunicationsapps",
+                                "Microsoft.NET.Native.Framework.2.2",
+                                "Microsoft.NET.Native.Framework.2.0",
+                                "Microsoft.NET.Native.Runtime.2.2",
+                                "Microsoft.NET.Native.Runtime.2.0",
+                                "Microsoft.UI.Xaml.2.7",
+                                "Microsoft.UI.Xaml.2.0",
+                                "Microsoft.WindowsAppRuntime.1.3",
+                                "Microsoft.NET.Native.Framework.1.7",
+                                "MicrosoftWindows.Client.Core",
+                                "Microsoft.LockApp",
+                                "Microsoft.ECApp",
+                                "Microsoft.Windows.ContentDeliveryManager",
+                                "Microsoft.Windows.Search",
+                                "Microsoft.Windows.OOBENetworkCaptivePortal",
+                                "Microsoft.Windows.SecHealthUI",
+                                "Microsoft.SecHealthUI",
+                                "Microsoft.WindowsAppRuntime.CBS",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.VCLibs.120.00.UWPDesktop",
+                                "Microsoft.VCLibs.110.00.UWPDesktop",
+                                "Microsoft.DirectXRuntime",
+                                "Microsoft.XboxGameOverlay",
+                                "Microsoft.XboxGamingOverlay",
+                                "Microsoft.GamingApp",
+                                "Microsoft.GamingServices",
+                                "Microsoft.XboxIdentityProvider",
+                                "Microsoft.Xbox.TCUI",
+                                "Microsoft.AccountsControl",
+                                "Microsoft.WindowsStore",
+                                "Microsoft.StorePurchaseApp",
+                                "Microsoft.VP9VideoExtensions",
+                                "Microsoft.RawImageExtension",
+                                "Microsoft.HEIFImageExtension",
+                                "Microsoft.HEIFImageExtension",
+                                "Microsoft.WebMediaExtensions",
+                                "RealtekSemiconductorCorp.RealtekAudioControl",
+                                "Microsoft.MicrosoftEdge",
+                                "Microsoft.MicrosoftEdge.Stable",
+                                "MicrosoftWindows.Client.FileExp",
+                                "NVIDIACorp.NVIDIAControlPanel",
+                                "AppUp.IntelGraphicsExperience",
+                                "Microsoft.Paint",
+                                "Microsoft.Messaging",
+                                "Microsoft.AsyncTextService",
+                                "Microsoft.CredDialogHost",
+                                "Microsoft.Win32WebViewHost",
+                                "Microsoft.MicrosoftEdgeDevToolsClient",
+                                "Microsoft.Windows.OOBENetworkConnectionFlow",
+                                "Microsoft.Windows.PeopleExperienceHost",
+                                "Microsoft.Windows.PinningConfirmationDialog",
+                                "Microsoft.Windows.SecondaryTileExperience",
+                                "Microsoft.Windows.SecureAssessmentBrowser",
+                                "Microsoft.Windows.ShellExperienceHost",
+                                "Microsoft.Windows.StartMenuExperienceHost",
+                                "Microsoft.Windows.XGpuEjectDialog",
+                                "Microsoft.XboxGameCallableUI",
+                                "MicrosoftWindows.UndockedDevKit",
+                                "NcsiUwpApp",
+                                "Windows.CBSPreview",
+                                "Windows.MiracastView",
+                                "Windows.ContactSupport",
+                                "Windows.PrintDialog",
+                                "c5e2524a-ea46-4f67-841f-6a9465d9d515",
+                                "windows.immersivecontrolpanel",
+                                "WinRAR.ShellExtension",
+                                "Microsoft.WindowsNotepad",
+                                "MicrosoftWindows.Client.WebExperience",
+                                "Microsoft.ZuneMusic",
+                                "Microsoft.ZuneVideo",
+                                "Microsoft.OutlookForWindows",
+                                "MicrosoftWindows.Ai.Copilot.Provider",
+                                "Microsoft.WindowsTerminal",
+                                "Microsoft.Windows.Terminal",
+                                "WindowsTerminal",
+                                "Microsoft.Winget.Source",
+                                "Microsoft.DesktopAppInstaller",
+                                "Microsoft.Services.Store.Engagement",
+                                "Microsoft.HEVCVideoExtension",
+                                "Microsoft.WebpImageExtension",
+                                "MicrosoftWindows.CrossDevice",
+                                "NotepadPlusPlus",
+                                "MicrosoftCorporationII.WinAppRuntime.Main.1.5",
+                                "Microsoft.WindowsAppRuntime.1.5",
+                                "MicrosoftCorporationII.WinAppRuntime.Singleton",
+                                "Microsoft.WindowsSoundRecorder",
+                                "MicrosoftCorporationII.WinAppRuntime.Main.1.4",
+                                "MicrosoftWindows.Client.LKG",
+                                "MicrosoftWindows.Client.CBS",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.Windows.CloudExperienceHost",
+                                "SpotifyAB.SpotifyMusic",
+                                "Microsoft.SkypeApp",
+                                "5319275A.WhatsAppDesktop",
+                                "FACEBOOK.317180B0BB486",
+                                "TelegramMessengerLLP.TelegramDesktop",
+                                "4DF9E0F8.Netflix",
+                                "Discord",
+                                "Paint",
+                                "mspaint",
+                                "Microsoft.Windows.Paint",
+                                "Microsoft.MicrosoftEdge.Stable",
+                                "1527c705-839a-4832-9118-54d4Bd6a0c89",
+                                "c5e2524a-ea46-4f67-841f-6a9465d9d515",
+                                "E2A4F912-2574-4A75-9BB0-0D023378592B",
+                                "F46D4000-FD22-4DB4-AC8E-4E1DDDE828FE",
+                                "Microsoft.AAD.BrokerPlugin",
+                                "Microsoft.AccountsControl",
+                                "Microsoft.AsyncTextService",
+                                "Microsoft.BioEnrollment",
+                                "Microsoft.CredDialogHost",
+                                "Microsoft.ECApp",
+                                "Microsoft.LockApp",
+                                "Microsoft.MicrosoftEdgeDevToolsClient",
+                                "Microsoft.UI.Xaml.CBS",
+                                "Microsoft.Win32WebViewHost",
+                                "Microsoft.Windows.Apprep.ChxApp",
+                                "Microsoft.Windows.AssignedAccessLockApp",
+                                "Microsoft.Windows.CapturePicker",
+                                "Microsoft.Windows.CloudExperienceHost",
+                                "Microsoft.Windows.ContentDeliveryManager",
+                                "Microsoft.Windows.NarratorQuickStart",
+                                "Microsoft.Windows.OOBENetworkCaptivePortal",
+                                "Microsoft.Windows.OOBENetworkConnectionFlow",
+                                "Microsoft.Windows.ParentalControls",
+                                "Microsoft.Windows.PeopleExperienceHost",
+                                "Microsoft.Windows.PinningConfirmationDialog",
+                                "Microsoft.Windows.PrintQueueActionCenter",
+                                "Microsoft.Windows.SecureAssessmentBrowser",
+                                "Microsoft.Windows.XGpuEjectDialog",
+                                "Microsoft.XboxGameCallableUI",
+                                "MicrosoftWindows.Client.AIX",
+                                "MicrosoftWindows.Client.FileExp",
+                                "MicrosoftWindows.Client.OOBE",
+                                "MicrosoftWindows.LKG.Search",
+                                "MicrosoftWindows.UndockedDevKit",
+                                "NcsiUwpApp",
+                                "Windows.CBSPreview",
+                                "windows.immersivecontrolpanel",
+                                "Windows.PrintDialog",
+                                "Microsoft.NET.Native.Framework.2.2",
+                                "Microsoft.NET.Native.Framework.2.2",
+                                "Microsoft.NET.Native.Runtime.2.2",
+                                "Microsoft.NET.Native.Runtime.2.2",
+                                "Microsoft.SecHealthUI",
+                                "Microsoft.Services.Store.Engagement",
+                                "Microsoft.UI.Xaml.2.8",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.WindowsAppRuntime.1.3",
+                                "Microsoft.WindowsCamera",
+                                "Microsoft.XboxIdentityProvider",
+                                "Microsoft.ZuneMusic",
+                                "RealtekSemiconductorCorp.RealtekAudioControl",
+                                "DolbyLaboratories.DolbyAudioPremium",
+                                "Microsoft.NET.Native.Framework.2.0",
+                                "Microsoft.NET.Native.Framework.2.0",
+                                "Microsoft.NET.Native.Runtime.2.0",
+                                "AppUp.IntelGraphicsExperience",
+                                "Microsoft.NET.Native.Runtime.2.0",
+                                "Microsoft.Windows.AugLoop.CBS",
+                                "Microsoft.Windows.ShellExperienceHost",
+                                "Microsoft.Windows.StartMenuExperienceHost",
+                                "Microsoft.WindowsAppRuntime.CBS.1.6",
+                                "Microsoft.WindowsAppRuntime.CBS",
+                                "MicrosoftWindows.Client.CBS",
+                                "MicrosoftWindows.Client.Core",
+                                "MicrosoftWindows.Client.Photon",
+                                "MicrosoftWindows.LKG.AccountsService",
+                                "MicrosoftWindows.LKG.DesktopSpotlight",
+                                "MicrosoftWindows.LKG.IrisService",
+                                "MicrosoftWindows.LKG.RulesEngine",
+                                "MicrosoftWindows.LKG.SpeechRuntime",
+                                "MicrosoftWindows.LKG.TwinSxS",
+                                "Microsoft.VCLibs.140.00",
+                                "Microsoft.Copilot",
+                                "Microsoft.OneDriveSync",
+                                "Microsoft.OutlookForWindows",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.WindowsAppRuntime.1.5",
+                                "Microsoft.WindowsAppRuntime.1.5",
+                                "Microsoft.VCLibs.140.00.UWPDesktop",
+                                "Microsoft.Windows.DevHome",
+                                "Microsoft.UI.Xaml.2.8",
+                                "Microsoft.Paint",
+                                "MicrosoftWindows.Client.WebExperience",
+                                "Microsoft.WindowsStore",
+                                "Microsoft.WindowsNotepad",
+                                "Microsoft.WidgetsPlatformRuntime",
+                                "Microsoft.Xbox.TCUI",
+                                "Microsoft.WebpImageExtension",
+                                "Microsoft.WebMediaExtensions",
+                                "Microsoft.RawImageExtension",
+                                "Microsoft.HEVCVideoExtension",
+                                "Microsoft.HEIFImageExtension",
+                                "Microsoft.WindowsTerminal",
+                                "Microsoft.DesktopAppInstaller",
+                                "Microsoft.StartExperiencesApp",
+                                "Microsoft.StorePurchaseApp",
+                                "Microsoft.GamingApp",
+                                "Microsoft.VP9VideoExtensions",
+                                "Microsoft.UI.Xaml.2.7",
+                                "Microsoft.UI.Xaml.2.7",
+                                "Microsoft.XboxGamingOverlay",
+                                "Microsoft.WindowsCalculator",
+                                "Microsoft.WindowsSoundRecorder",
+                                "Microsoft.WindowsAlarms",
+                                "Microsoft.MicrosoftOfficeHub",
+                                "Microsoft.WindowsAppRuntime.1.6",
+                                "Microsoft.WindowsAppRuntime.1.6",
+                                "MicrosoftWindows.CrossDevice",
+                                "Microsoft.Windows.Photos",
+                                "Microsoft.MinecraftUWP",
+                                "minecraft",
+                                "Linux",
+                                "Ubuntu",
+                                "Kali",
+                                "Debian",
+                                "kali-linux",
+                                "WSL",
+                                "WSL2",
+                                "Docker",
+                                "Xbox",
+                                "Microsoft.LanguageExperiencePack",
+                                "Microsoft.LanguageExperiencePacken-US",
+                                "Microsoft.LanguageExperiencePackpl-PL",
+                                "Microsoft.Lovika",
+                                "Microsoft.4297127D64EC6",
+                                "Microsoft.Winget.Source",
+                                "26737FrancescoSorge.Dockerun",
+                                "CanonicalGroupLimited.Ubuntu",
+                                "KaliLinux.54290C8133FEE",
+                                "TheDebianProject.DebianGNULinux",
+                                "Crystalnix.Termius",
+                                "OpenAI.ChatGPT-Desktop",
+                                "Disney.37853FC22B2CE",
+                                "5319275A.WhatsAppDesktop",
+                                "FACEBOOK.317180B0BB486",
+                                "MicrosoftWindows.55182690.Taskbar",
+                                "Microsoft.WindowsAppRuntime.1.7",
+                                "Microsoft.VCLibs.120.00"
+                            };
 
+                            string whitelistFile = "whitelist.txt";
+                            if (File.Exists(whitelistFile))
+                            {
+                                var additional = File.ReadAllLines(whitelistFile)
+                                                     .Where(line => !string.IsNullOrWhiteSpace(line))
+                                                     .Select(line => line.Trim());
+                                foreach (var app in additional)
+                                    whitelistapps.Add(app);
+                            }
+
+                            string psCommand = @"
+$allApps = Get-AppxPackage -AllUsers | Select-Object -ExpandProperty Name;
+$whitelist = @(" + string.Join(",", whitelistapps.Select(w => "'" + w.Replace("'", "''") + "'")) + @");
+$whitelist = $whitelist | ForEach-Object { $_.ToLowerInvariant().Trim() };
+
+foreach ($app in $allApps) {
+    if ($whitelist -notcontains $app.ToLowerInvariant().Trim()) {
+        try {
+            Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue;
+        } catch {}
+        try {
+            Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue;
+        } catch {}
+    }
+}
+";
+
+                            ProcessStartInfo startInfoB = new ProcessStartInfo()
+                            {
+                                FileName = "powershell.exe",
+                                Arguments = $"-Command \"{psCommand}\"",
+                                WindowStyle = ProcessWindowStyle.Hidden,
+                                UseShellExecute = false,
+                                CreateNoWindow = true,
+                                Verb = "runas" 
+                            };
+
+                            using (var processB = new Process())
+                            {
+                                processB.StartInfo = startInfoB;
+                                processB.Start();
+                                processB.WaitForExit();
+                            }
+                            panel6.Controls.Clear();
+                            LoadAppxPackages();
+                            if (File.Exists("whitelist.txt"))
+                            {
+                                File.Delete("whitelist.txt");
+                            }
                             break;
                         case "Disable Unnecessary Startup Apps":
                             done++;
@@ -3550,461 +4236,95 @@ namespace ET
                         case "Clean Temp/Cache/Prefetch/Logs":
                             done++;
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C del /q \"%temp%\\NVIDIA Corporation\\NV_Cache\\*\" && del /q \"%programdata%\\NVIDIA Corporation\\NV_Cache\\*\"";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            DeleteFilesInFolder(Environment.ExpandEnvironmentVariables("%temp%\\NVIDIA Corporation\\NV_Cache"));
+                            DeleteFilesInFolder(Environment.ExpandEnvironmentVariables("%programdata%\\NVIDIA Corporation\\NV_Cache"));
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command Get-EventLog -LogName * | % { Clear-EventLog -LogName $_.Log }";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            DeleteFilesInFolder(Environment.ExpandEnvironmentVariables("%userprofile%\\Recent"));
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C del /s /f /q \"%userprofile%\\Recent\\*.*\"";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            DeleteFilesInFolder(Environment.ExpandEnvironmentVariables("%systemdrive%\\Windows\\SoftwareDistribution"));
+                            DeleteFolder(Environment.ExpandEnvironmentVariables("%systemdrive%\\Windows\\SoftwareDistribution"));
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command erase /f /s /q \"%systemdrive%\\Windows\\SoftwareDistribution\\*.*\"";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            string[] pathsToDelete = new string[]
+                            {
+            "%localappdata%\\Microsoft\\Windows\\WebCache",
+            "%programdata%\\GOG.com\\Galaxy\\logs",
+            "%programdata%\\GOG.com\\Galaxy\\webcache",
+            "%appdata%\\Microsoft\\Teams\\Cache",
+            "%localappdata%\\Yarn\\Cache",
+            "%temp%\\VSTelem.Out",
+            "%temp%\\VSTelem",
+            "%temp%\\VSRemoteControl",
+            "%temp%\\VSFeedbackVSRTCLogs",
+            "%temp%\\VSFeedbackPerfWatsonData",
+            "%temp%\\VSFaultInfo",
+            "%temp%\\Microsoft\\VSApplicationInsights",
+            "%ProgramData%\\Microsoft\\VSApplicationInsights",
+            "%LocalAppData%\\Microsoft\\VSApplicationInsights",
+            "%AppData%\\vstelemetry",
+            "%windir%\\Prefetch",
+            "%LocalAppData%\\IconCache.db",
+            "%LocalAppData%\\Microsoft\\Windows\\Explorer",
+            "%WinDir%\\System32\\catroot2",
+            "%WinDir%\\DISM",
+            "%WinDir%\\Logs",
+            "%WinDir%\\System32\\SleepStudy",
+            "%WinDir%\\SysNative\\SleepStudy",
+            "%WinDir%\\System32\\LogFiles\\HTTPERR",
+            "%WinDir%\\Logs\\WindowsBackup",
+            "%WinDir%\\Logs\\CBS",
+            "%SystemDrive%\\PerfLogs\\System\\Diagnostics",
+            "%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache",
+            "%WinDir%\\debug\\WIA",
+            "%WinDir%\\inf"
+                            };
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C rmdir /s /q \"%systemdrive%\\Windows\\SoftwareDistribution\"";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %localappdata%\\Microsoft\\Windows\\WebCache /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %programdata%\\GOG.com\\Galaxy\\logs /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %programdata%\\GOG.com\\Galaxy\\webcache /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %appdata%\\Microsoft\\Teams\\Cache /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %localappdata%\\Yarn\\Cache /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\VSTelem.Out /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\VSTelem /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\VSRemoteControl /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\VSFeedbackVSRTCLogs /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\VSFeedbackPerfWatsonData /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\VSFaultInfo /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %Temp%\\Microsoft\\VSApplicationInsights /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %ProgramData%\\Microsoft\\VSApplicationInsights /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %LocalAppData%\\Microsoft\\VSApplicationInsights /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %AppData%\vstelemetry";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del /S /F /Q %windir%\\Prefetch";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C %WinDir%\\SysNative\\ie4uinit.exe -show";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C %WinDir%\\System32\\ie4uinit.exe -show";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del %LocalAppData%\\IconCache.db /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%LocalAppData%\\Microsoft\\Windows\\Explorer\\iconcache_*.db\" /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.txt\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.txt\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\.jrs\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\catroot2\\*.chk\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\DISM\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\SleepStudy\\ScreenOn\\*.etl\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\SleepStudy\\*.etl\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\SysNative\\SleepStudy\\ScreenOn\\*.etl\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\SysNative\\SleepStudy\\*.etl\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\LogFiles\\HTTPERR\\*.*\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\WindowsBackup\\*.etl\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\CBS\\*.cab\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%SystemDrive%\\PerfLogs\\System\\Diagnostics\\*.*\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\debug\\WIA\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\inf\\setupapi.app.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\inf\\setupapi.offline.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            foreach (var path in pathsToDelete)
+                            {
+                                var fullPath = Environment.ExpandEnvironmentVariables(path);
+                                if (File.Exists(fullPath))
+                                    TryDeleteFile(fullPath);
+                                else if (Directory.Exists(fullPath))
+                                    DeleteFilesInFolder(fullPath);
+                            }
 
                             StopService("FontCache3.0.0.0");
                             StopService("FontCache");
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache\\*.dat\" /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\SysNative\\FNTCACHE.DAT\" /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\System32\\FNTCACHE.DAT\" /F /Q /S";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\ServiceProfiles\\LocalService\\AppData\\Local\\FontCache"), "*.dat");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\SysNative"), "FNTCACHE.DAT");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\System32"), "FNTCACHE.DAT");
 
                             StartService("FontCache");
                             StartService("FontCache3.0.0.0");
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\UnattendGC\\diagwrn.xml\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Panther\\UnattendGC"), "diagwrn.xml");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Panther\\UnattendGC"), "diagerr.xml");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\repair"), "setup.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Panther"), "DDACLSys.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Panther"), "cbs.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%LocalAppData%\\Microsoft\\Windows\\WebCache"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Logs"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Logs\\DPX"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\system32\\wbem\\Logs"), "*.lo_");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\system32\\wbem\\Logs"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\APPLOG"), "*.*");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "*.log.txt");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Logs\\DISM"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "setuplog.txt");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "OEWABLog.txt");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "*.bak");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Debug\\UserMode"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Debug\\UserMode"), "*.bak");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Debug"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\security\\logs"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\security\\logs"), "*.old");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "*.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "SchedLgU.txt");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "Directx.log");
+                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%SystemDrive%"), "*.log");
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\UnattendGC\\diagerr.xml\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\repair\\setup.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\DDACLSys.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Panther\\cbs.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%LocalAppData%\\Microsoft\\Windows\\WebCache\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\ServiceProfiles\\NetworkService\\AppData\\Local\\Temp\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\DPX\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\system32\\wbem\\Logs\\*.lo_\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\APPLOG\\*.*\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\*.log.txt\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Logs\\DISM\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\setuplog.txt\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\OEWABLog.txt\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\system32\\wbem\\Logs\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\*.bak\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Debug\\UserMode\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Debug\\UserMode\\*.bak\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Debug\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\security\\logs\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\security\\logs\\*.old\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\SchedLgU.txt\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%WinDir%\\Directx.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C Del \"%SystemDrive%\\*.log\" /F /Q";
-                            process.StartInfo = startInfo;
-                            process.Start();
-
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C start cleanmgr.exe /sagerun:5";
-                            process.StartInfo = startInfo;
-                            process.Start();
+                            Process.Start("cleanmgr.exe", "/sagerun:5");
                             break;
                         case "Remove News and Interests/Widgets":
                             done++;
@@ -4295,6 +4615,7 @@ namespace ET
                 groupBox3.Visible = true;
                 groupBox4.Visible = true;
                 groupBox5.Visible = true;
+                groupBox6.Visible = true;
                 button1.Visible = true;
                 button2.Visible = true;
                 button3.Visible = true;
@@ -4310,7 +4631,6 @@ namespace ET
                 {
                     if (issillent == true)
                     {
-                        FlushMem();
                         Environment.Exit(0);
                         this.Close();
                         String my_name_process = Process.GetCurrentProcess().ProcessName;
@@ -4322,25 +4642,15 @@ namespace ET
                         SoundPlayer my_wave_file = new SoundPlayer(OSpath + "Windows\\Media\\Windows Proximity Notification.wav");
                         my_wave_file.Play();
                     }
-                    else
-                    {
-                        startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                        startInfo.FileName = "powershell.exe";
-                        startInfo.Arguments = "-Command Add-Type –AssemblyName System.Speech; (New-Object System.Speech.Synthesis.SpeechSynthesizer).Speak('" + msgend + "');";
-                        process.StartInfo = startInfo;
-                        process.Start();
-                    }
 
                     this.TopMost = true;
 
                     label2.Visible = true;
                     label2.Text = msgend;
 
-
                     if (isswitch == true)
                     {
                         MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        FlushMem();
                         this.Close();
                     }
                     else
@@ -4356,6 +4666,7 @@ namespace ET
                     groupBox3.Visible = true;
                     groupBox4.Visible = true;
                     groupBox5.Visible = true;
+                    groupBox6.Visible = true;
                     button1.Visible = true;
                     button2.Visible = true;
                     button3.Visible = true;
@@ -4367,7 +4678,6 @@ namespace ET
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 }
             }
-            FlushMem();
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -4566,7 +4876,18 @@ namespace ET
             {
                 File.Delete(fullPath);
             }
-            Application.Restart();
+            Hide();
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            Console.WriteLine(Application.ExecutablePath);
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C start " + Application.ExecutablePath;
+            process.StartInfo = startInfo;
+            process.Start();
+            Close();
         }
 
 
@@ -4644,7 +4965,7 @@ namespace ET
 
         private void rebootToBIOSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("shutdown", "/r /fw /t 1") { WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden });
+            Process.Start("shutdown", "/r /fw /t 1");
         }
 
         private void windowsLicenseKeyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4675,7 +4996,6 @@ namespace ET
             return String.Format("{0:0.00}", RAMCounter.NextValue());
         }
 
-
         public static string GetUsedCPU()
         {
             PerformanceCounter CPUCounter;
@@ -4694,6 +5014,7 @@ namespace ET
             {
                 toolStripLabel1.Text = "CPU " + GetUsedCPU() + "% ";
                 toolStripLabel1.Image = Properties.Resources.cpu_tower;
+
             });
             await Task.Run(() =>
             {
@@ -4702,6 +5023,14 @@ namespace ET
 
                 toolStripLabel2.Image = Properties.Resources.ram;
                 toolStripLabel2.Text = "RAM " + (int)flRAM + "% ";
+                if ((int)flRAM >= 80)
+                {
+                    toolStripLabel2.ForeColor = Color.Red;
+                }
+                else
+                {
+                    toolStripLabel2.ForeColor = default(Color);
+                }
             });
             await Task.Run(() =>
             {
@@ -4716,6 +5045,14 @@ namespace ET
 
                 toolStripLabel3.Image = Properties.Resources.battery_charge;
                 toolStripLabel3.Text = "" + flBattery + "% ";
+                if (flBattery <= 25) 
+                { 
+                    toolStripLabel3.ForeColor = Color.Red;
+                }
+                else
+                {
+                    toolStripLabel3.ForeColor = default(Color);
+                }
 
             });
             toolStripLabel2.Visible = true;
@@ -4773,27 +5110,15 @@ namespace ET
             RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
             reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C shutdown /r /t 5";
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            Process.Start("shutdown", "/r /t 5");
             this.Close();
         }
 
         private void restartExplorerexeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C taskkill /f /im explorer.exe";
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
-
+            Process.Start("taskkill", "/f /im explorer.exe");
+            System.Threading.Thread.Sleep(1000);
             Process.Start("explorer.exe");
-
         }
 
         private void downloadSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
@@ -4914,31 +5239,15 @@ namespace ET
             if (engforced == true)
             {
                 Hide();
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-                Console.WriteLine(Application.ExecutablePath);
-
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "/C start " + Application.ExecutablePath;
-                process.StartInfo = startInfo;
-                process.Start();
+                Process.Start(Application.ExecutablePath, "");
                 Close();
             }
             else
             {
                 Hide();
-                System.Diagnostics.Process process = new System.Diagnostics.Process();
-                System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-                Console.WriteLine(Application.ExecutablePath);
-
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                startInfo.FileName = "cmd.exe";
-                startInfo.Arguments = "/C start " + Application.ExecutablePath + " /english";
-                process.StartInfo = startInfo;
-                process.Start();
+                Process.Start(Application.ExecutablePath, "/english");
                 Close();
             }
 
@@ -5082,7 +5391,7 @@ namespace ET
             }
             else
             {
-
+                MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

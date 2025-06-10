@@ -89,14 +89,17 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelmain = new System.Windows.Forms.Panel();
-            this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -108,6 +111,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -198,7 +203,7 @@
             this.panel1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel1.Location = new System.Drawing.Point(3, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(583, 153);
+            this.panel1.Size = new System.Drawing.Size(318, 153);
             this.panel1.TabIndex = 0;
             // 
             // groupBox2
@@ -218,7 +223,7 @@
             this.panel2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel2.Location = new System.Drawing.Point(3, 18);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(298, 153);
+            this.panel2.Size = new System.Drawing.Size(318, 153);
             this.panel2.TabIndex = 0;
             // 
             // groupBox3
@@ -238,7 +243,7 @@
             this.panel3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel3.Location = new System.Drawing.Point(3, 20);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(298, 153);
+            this.panel3.Size = new System.Drawing.Size(318, 153);
             this.panel3.TabIndex = 0;
             // 
             // groupBox4
@@ -258,7 +263,7 @@
             this.panel4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.panel4.Location = new System.Drawing.Point(3, 20);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(291, 153);
+            this.panel4.Size = new System.Drawing.Size(318, 153);
             this.panel4.TabIndex = 0;
             // 
             // groupBox5
@@ -303,11 +308,11 @@
             this.toolStripLabel1});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.toolStrip1.Location = new System.Drawing.Point(0, 40);
-            this.toolStrip1.MinimumSize = new System.Drawing.Size(880, 25);
+            this.toolStrip1.MinimumSize = new System.Drawing.Size(940, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(880, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(945, 31);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -636,7 +641,7 @@
             this.progressBar1.Location = new System.Drawing.Point(-5, 435);
             this.progressBar1.Maximum = 67;
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(894, 80);
+            this.progressBar1.Size = new System.Drawing.Size(954, 80);
             this.progressBar1.TabIndex = 7;
             this.progressBar1.Visible = false;
             // 
@@ -645,7 +650,7 @@
             this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.textBox1.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.textBox1.Location = new System.Drawing.Point(727, 435);
+            this.textBox1.Location = new System.Drawing.Point(725, 440);
             this.textBox1.Margin = new System.Windows.Forms.Padding(1);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
@@ -663,32 +668,18 @@
             // panelmain
             // 
             this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.panelmain.Controls.Add(this.button7);
             this.panelmain.Controls.Add(this.button6);
+            this.panelmain.Controls.Add(this.button7);
             this.panelmain.Controls.Add(this.pictureBox3);
             this.panelmain.Controls.Add(this.pictureBox2);
             this.panelmain.Controls.Add(this.label1);
             this.panelmain.Controls.Add(this.pictureBox1);
             this.panelmain.Location = new System.Drawing.Point(0, 0);
             this.panelmain.Name = "panelmain";
-            this.panelmain.Size = new System.Drawing.Size(880, 40);
+            this.panelmain.Size = new System.Drawing.Size(940, 40);
             this.panelmain.TabIndex = 9;
             this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
             this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.button7.Location = new System.Drawing.Point(687, -1);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(65, 47);
-            this.button7.TabIndex = 11;
-            this.button7.Text = "en-US";
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button6
             // 
@@ -703,6 +694,20 @@
             this.button6.TabIndex = 10;
             this.button6.UseVisualStyleBackColor = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button7.Location = new System.Drawing.Point(687, -1);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(65, 47);
+            this.button7.TabIndex = 11;
+            this.button7.Text = "en-US";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // pictureBox3
             // 
@@ -732,7 +737,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.05.30";
+            this.label1.Text = "E.T. ver 6.06.10";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -749,33 +754,65 @@
             // 
             this.pictureBox4.Location = new System.Drawing.Point(0, 431);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(889, 5);
+            this.pictureBox4.Size = new System.Drawing.Size(959, 5);
             this.pictureBox4.TabIndex = 10;
             this.pictureBox4.TabStop = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.Location = new System.Drawing.Point(349, 405);
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.label2.Font = new System.Drawing.Font("Consolas", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.label2.Location = new System.Drawing.Point(424, 456);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 23);
+            this.label2.Size = new System.Drawing.Size(90, 27);
             this.label2.TabIndex = 11;
             this.label2.Text = "msgend";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label2.Visible = false;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.panel6);
+            this.groupBox6.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.groupBox6.Location = new System.Drawing.Point(806, 262);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(154, 100);
+            this.groupBox6.TabIndex = 12;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Remove Bloatware (List)";
+            // 
+            // panel6
+            // 
+            this.panel6.AutoScroll = true;
+            this.panel6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.panel6.Location = new System.Drawing.Point(3, 20);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(320, 153);
+            this.panel6.TabIndex = 0;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Location = new System.Drawing.Point(0, 63);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(959, 5);
+            this.pictureBox5.TabIndex = 13;
+            this.pictureBox5.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.ClientSize = new System.Drawing.Size(800, 506);
+            this.ClientSize = new System.Drawing.Size(915, 506);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.panelmain);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox3);
@@ -806,6 +843,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,6 +919,9 @@
         private System.Windows.Forms.ToolStripMenuItem registryRestoreToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.PictureBox pictureBox5;
     }
 }
 

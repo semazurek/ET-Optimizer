@@ -9,7 +9,6 @@ namespace ET
         [STAThread]
         static void Main(string[] aargs)
         {
-            //Code of implementing .dll inside .exe
             AppDomain.CurrentDomain.AssemblyResolve += (sender, args) =>
             {
                 var assemblyName = new System.Reflection.AssemblyName(args.Name).Name + ".dll";
@@ -32,7 +31,8 @@ namespace ET
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1(aargs));
+            string[] argsToPass = (aargs != null && aargs.Length > 0) ? aargs : new string[0];
+            Application.Run(new Form1(argsToPass));
 
         }
     }
