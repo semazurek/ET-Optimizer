@@ -1,0 +1,273 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNetCore.Cryptography.Internal</name>
+    </assembly>
+    <members>
+        <member name="T:Microsoft.AspNetCore.Cryptography.Cng.BCryptUtil">
+            <summary>
+            Wraps utility BCRYPT APIs that don't work directly with handles.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.Cng.BCryptUtil.GenRandom(System.Byte*,System.UInt32)">
+            <summary>
+            Fills a buffer with cryptographically secure random data.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Cryptography.Cng.CachedAlgorithmHandles">
+            <summary>
+            Provides cached CNG algorithm provider instances, as calling BCryptOpenAlgorithmProvider is expensive.
+            Callers should use caution never to dispose of the algorithm provider instances returned by this type.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle">
+            <summary>
+            Represents a handle to a BCrypt algorithm provider from which keys and hashes can be created.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.CreateHash">
+            <summary>
+            Creates an unkeyed hash handle from this hash algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.CreateHmac(System.Byte*,System.UInt32)">
+            <summary>
+            Creates an HMAC hash handle from this hash algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.GenerateSymmetricKey(System.Byte*,System.UInt32)">
+            <summary>
+            Imports a key into a symmetric encryption or KDF algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.GetAlgorithmName">
+            <summary>
+            Gets the name of this BCrypt algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.GetCipherBlockLength">
+            <summary>
+            Gets the cipher block length (in bytes) of this block cipher algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.GetHashBlockLength">
+            <summary>
+            Gets the hash block length (in bytes) of this hash algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.GetSupportedKeyLengths">
+            <summary>
+            Gets the key lengths (in bits) supported by this algorithm.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptAlgorithmHandle.GetHashDigestLength">
+            <summary>
+            Gets the digest length (in bytes) of this hash algorithm provider.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptHashHandle.DuplicateHash">
+            <summary>
+            Duplicates this hash handle, including any existing hashed state.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.BCryptHashHandle.HashData(System.Byte*,System.UInt32,System.Byte*,System.UInt32)">
+            <summary>
+            Calculates the cryptographic hash over a set of input data.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Cryptography.SafeHandles.LocalAllocHandle">
+            <summary>
+            Represents a handle returned by LocalAlloc.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Cryptography.SafeHandles.SafeLibraryHandle">
+            <summary>
+            Represents a handle to a Windows module (DLL).
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.SafeLibraryHandle.DoesProcExist(System.String)">
+            <summary>
+            Returns a value stating whether the library exports a given proc.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.SafeLibraryHandle.ForbidUnload">
+            <summary>
+            Forbids this library from being unloaded. The library will remain loaded until process termination,
+            regardless of how many times FreeLibrary is called.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.SafeLibraryHandle.FormatMessage(System.Int32)">
+            <summary>
+            Formats a message string using the resource table in the specified library.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.SafeLibraryHandle.GetProcAddress``1(System.String,System.Boolean)">
+            <summary>
+            Gets a delegate pointing to a given export from this library.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.SafeLibraryHandle.Open(System.String)">
+            <summary>
+            Opens a library. If 'filename' is not a fully-qualified path, the default search path is used.
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNetCore.Cryptography.SafeHandles.SecureLocalAllocHandle">
+            <summary>
+            Represents a handle returned by LocalAlloc.
+            The memory will be zeroed out before it's freed.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.SafeHandles.SecureLocalAllocHandle.Allocate(System.IntPtr)">
+            <summary>
+            Allocates some amount of memory using LocalAlloc.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.UnsafeBufferUtil.SecureZeroMemory(System.Byte*,System.Int32)">
+            <summary>
+            Securely clears a memory buffer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.UnsafeBufferUtil.SecureZeroMemory(System.Byte*,System.UInt32)">
+            <summary>
+            Securely clears a memory buffer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.UnsafeBufferUtil.SecureZeroMemory(System.Byte*,System.UInt64)">
+            <summary>
+            Securely clears a memory buffer.
+            </summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.UnsafeBufferUtil.SecureZeroMemory(System.Byte*,System.IntPtr)">
+            <summary>
+            Securely clears a memory buffer.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Cryptography.Internal.Resources.BCryptAlgorithmHandle_ProviderNotFound">
+            <summary>A provider could not be found for algorithm '{0}'.</summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.Internal.Resources.FormatBCryptAlgorithmHandle_ProviderNotFound(System.Object)">
+            <summary>A provider could not be found for algorithm '{0}'.</summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Cryptography.Internal.Resources.BCRYPT_KEY_LENGTHS_STRUCT_InvalidKeyLength">
+            <summary>The key length {0} is invalid. Valid key lengths are {1} to {2} bits (step size {3}).</summary>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Cryptography.Internal.Resources.FormatBCRYPT_KEY_LENGTHS_STRUCT_InvalidKeyLength(System.Object,System.Object,System.Object,System.Object)">
+            <summary>The key length {0} is invalid. Valid key lengths are {1} to {2} bits (step size {3}).</summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Cryptography.Internal.Resources.Platform_Windows7Required">
+            <summary>This operation requires Windows 7 / Windows Server 2008 R2 or later.</summary>
+        </member>
+        <member name="P:Microsoft.AspNetCore.Cryptography.Internal.Resources.Platform_Windows8Required">
+            <summary>This operation requires Windows 8 / Windows Server 2012 or later.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.AllowNullAttribute">
+            <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DisallowNullAttribute">
+            <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullAttribute">
+            <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullAttribute">
+            <summary>Specifies that an output will not be null even if the corresponding type allows it. Specifies that an input argument was not null when the call returns.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter may be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MaybeNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute">
+            <summary>Specifies that when a method returns <see cref="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue"/>, the parameter will not be null even if the corresponding type allows it.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified return value condition.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute">
+            <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with the associated parameter name.</summary>
+            <param name="parameterName">
+            The associated parameter name.  The output will be non-null if the argument to the parameter specified is non-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.NotNullIfNotNullAttribute.ParameterName">
+            <summary>Gets the associated parameter name.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnAttribute">
+            <summary>Applied to a method that will never return under any circumstance.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute">
+            <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.#ctor(System.Boolean)">
+            <summary>Initializes the attribute with the specified parameter value.</summary>
+            <param name="parameterValue">
+            The condition parameter value. Code after the method will be considered unreachable by diagnostics if the argument to
+            the associated parameter matches this value.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.DoesNotReturnIfAttribute.ParameterValue">
+            <summary>Gets the condition parameter value.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>Initializes the attribute with a field or property member.</summary>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>Initializes the attribute with the list of field and property members.</summary>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="member">
+            The field or property member that is promised to be not-null.
+            </param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>Initializes the attribute with the specified return value condition and list of field and property members.</summary>
+            <param name="returnValue">
+            The return value condition. If the method returns this value, the associated parameter will not be null.
+            </param>
+            <param name="members">
+            The list of field and property members that are promised to be not-null.
+            </param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>Gets the return value condition.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>Gets field or property member names.</summary>
+        </member>
+    </members>
+</doc>
