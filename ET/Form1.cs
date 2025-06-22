@@ -530,8 +530,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.06.15";
-        string ETBuild = "14.06.2025";
+        string ETVersion = "E.T. ver 6.06.20";
+        string ETBuild = "22.06.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -3424,7 +3424,7 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command disable-windowsoptionalfeature -online -featureName Printing-XPSServices-Features -NoRestart; disable-windowsoptionalfeature -online -featureName Xps-Foundation-Xps-Viewer -NoRestart";
+                            startInfo.Arguments = "-Command disable-windowsoptionalfeature -online -featureName Printing-XPSServices-Features -NoRestart; disable-windowsoptionalfeature -online -featureName Xps-Foundation-Xps-Viewer -NoRestart; disable-windowsoptionalfeature -online -featureName Recall -NoRestart";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -4297,9 +4297,6 @@ foreach ($app in $allApps) {
                             DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\Debug"), "*.log");
                             DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\security\\logs"), "*.log");
                             DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%\\security\\logs"), "*.old");
-                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "SchedLgU.txt");
-                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%WinDir%"), "Directx.log");
-                            DeleteFilesByPattern(Environment.ExpandEnvironmentVariables("%SystemDrive%"), "*.log");
 
                             Process.Start("cleanmgr.exe", "/sagerun:5");
                             break;
@@ -4979,77 +4976,92 @@ foreach ($app in $allApps) {
 
         public static string GetUsedRAM()
         {
-            PerformanceCounter RAMCounter;
-            RAMCounter = new PerformanceCounter();
-            RAMCounter.CategoryName = "Memory";
-            RAMCounter.CounterName = "% Committed Bytes In Use";
-            return String.Format("{0:0.00}", RAMCounter.NextValue());
+            try
+            {
+                PerformanceCounter RAMCounter;
+                RAMCounter = new PerformanceCounter();
+                RAMCounter.CategoryName = "Memory";
+                RAMCounter.CounterName = "% Committed Bytes In Use";
+                return String.Format("{0:0.00}", RAMCounter.NextValue());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error retrieving RAM usage: " + ex.Message);
+                return "0.00";
+            }
         }
 
         public static string GetUsedCPU()
         {
-            PerformanceCounter CPUCounter;
-            CPUCounter = new PerformanceCounter();
-            CPUCounter.CategoryName = "Processor";
-            CPUCounter.CounterName = "% Processor Time";
-            CPUCounter.InstanceName = "_Total";
-            CPUCounter.NextValue();
-            System.Threading.Thread.Sleep(1000);
-            return String.Format("{0:0.00}", CPUCounter.NextValue());
+            try
+            {
+                PerformanceCounter CPUCounter;
+                CPUCounter = new PerformanceCounter();
+                CPUCounter.CategoryName = "Processor";
+                CPUCounter.CounterName = "% Processor Time";
+                CPUCounter.InstanceName = "_Total";
+                CPUCounter.NextValue();
+                System.Threading.Thread.Sleep(1000);
+                return String.Format("{0:0.00}", CPUCounter.NextValue());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error retrieving CPU usage: " + ex.Message);
+                return "0.00";
+            }
         }
 
         private async void timer1_Tick(object sender, EventArgs e)
         {
-            await Task.Run(() =>
+            string cpu = await Task.Run(() => GetUsedCPU());
+            if (!IsDisposed) this.Invoke(new MethodInvoker(() =>
             {
-                toolStripLabel1.Text = "CPU " + GetUsedCPU() + "% ";
+                toolStripLabel1.Text = "CPU " + cpu + "% ";
                 toolStripLabel1.Image = Properties.Resources.cpu_tower;
+            }));
 
-            });
+            string ram = await Task.Run(() => GetUsedRAM());
+            if (float.TryParse(ram, out float flRAM) && !IsDisposed)
+            {
+                this.Invoke(new MethodInvoker(() =>
+                {
+                    toolStripLabel2.Image = Properties.Resources.ram;
+                    toolStripLabel2.Text = "RAM " + (int)flRAM + "% ";
+                    toolStripLabel2.ForeColor = (int)flRAM >= 80 ? Color.Red : default;
+                }));
+            }
+
             await Task.Run(() =>
             {
-                string RAMs = GetUsedRAM();
-                float flRAM = float.Parse(RAMs);
+                try
+                {
+                    PowerStatus pwr = SystemInformation.PowerStatus;
+                    float percent = pwr.BatteryLifePercent * 100;
 
-                toolStripLabel2.Image = Properties.Resources.ram;
-                toolStripLabel2.Text = "RAM " + (int)flRAM + "% ";
-                if ((int)flRAM >= 80)
-                {
-                    toolStripLabel2.ForeColor = Color.Red;
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        toolStripLabel3.Image = Properties.Resources.battery_charge;
+                        toolStripLabel3.Text = percent.ToString("0") + "%";
+                        toolStripLabel3.ForeColor = percent <= 25 ? Color.Red : default;
+                    }));
                 }
-                else
+                catch (Exception ex)
                 {
-                    toolStripLabel2.ForeColor = default(Color);
+                    this.Invoke(new MethodInvoker(() =>
+                    {
+                        toolStripLabel3.Image = Properties.Resources.battery_charge;
+                        toolStripLabel3.Text = "0%";
+                    }));
+                    Console.WriteLine("Error retrieving battery status: " + ex.Message);
                 }
             });
-            await Task.Run(() =>
-            {
-                PowerStatus pwr = SystemInformation.PowerStatus;
-                String strBatteryStatus;
-                strBatteryStatus = pwr.BatteryLifePercent.ToString();
-                char[] MyCharCut = { ',', '.', ' ' };
-                string strBattery = strBatteryStatus.TrimStart(MyCharCut);
 
-                float flBattery = float.Parse(strBattery);
-                flBattery = flBattery * 100;
-
-                toolStripLabel3.Image = Properties.Resources.battery_charge;
-                toolStripLabel3.Text = "" + flBattery + "% ";
-                if (flBattery <= 25)
-                {
-                    toolStripLabel3.ForeColor = Color.Red;
-                }
-                else
-                {
-                    toolStripLabel3.ForeColor = default(Color);
-                }
-
-            });
             toolStripLabel2.Visible = true;
             toolStripLabel3.Visible = true;
 
         }
 
+        
         private void panelmain_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -5267,19 +5279,6 @@ foreach ($app in $allApps) {
 
             File.WriteAllText(outputPath, ContentToGet);
 
-            FileNameToSave = "Make-ISO.txt";
-
-            outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
-
-            ContentToGet = Properties.Resources.Make_ISO;
-
-            File.WriteAllText(outputPath, ContentToGet);
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C move Copy_To_ISO\\Make-ISO.txt Copy_To_ISO\\Make-ISO.ps1";
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
 
             string exePath = Assembly.GetExecutingAssembly().Location;
 
@@ -5290,58 +5289,12 @@ foreach ($app in $allApps) {
 
             File.Copy(exePath, targetPath, overwrite: true);
 
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "ISO (*.iso)|*.iso";
-
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    isoPath = openFileDialog.FileName;
-
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-                    startInfo.FileName = "powershell.exe";
-                    startInfo.Arguments = $"-NoProfile -ExecutionPolicy Bypass -File \"{scriptPath}\" -isoPath \"{isoPath}\"";
-                    process.StartInfo = startInfo;
-                    process.Start(); process.WaitForExit();
-
-                    if (File.Exists(Path.Combine("Copy_To_ISO", "ET-Optimizer.exe")))
-                    {
-                        File.Delete(Path.Combine("Copy_To_ISO", "ET-Optimizer.exe"));
-                    }
-
-                    if (File.Exists(Path.Combine("Copy_To_ISO", "autounattend.xml")))
-                    {
-                        File.Delete(Path.Combine("Copy_To_ISO", "autounattend.xml"));
-                    }
-
-                    if (File.Exists(Path.Combine("Copy_To_ISO", "HowTo-ISO.png")))
-                    {
-                        File.Delete(Path.Combine("Copy_To_ISO", "HowTo-ISO.png"));
-                    }
-                }
-                else
-                {
                     FileNameToSave = "HowTo-ISO.png";
 
                     outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
 
                     Image img = Properties.Resources.HowTo_ISO;
                     img.Save(outputPath, ImageFormat.Png);
-
-                }
-            }
-
-            if (File.Exists(Path.Combine("Copy_To_ISO", "Make-ISO.ps1")))
-            {
-                File.Delete(Path.Combine("Copy_To_ISO", "Make-ISO.ps1"));
-            }
-
-            string folderPathisotemp = System.IO.Path.Combine(systemDrive + @"\", "iso_temp");
-
-            if (Directory.Exists(folderPathisotemp))
-            {
-                Directory.Delete(folderPathisotemp, recursive: true);
-            }
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "powershell.exe";

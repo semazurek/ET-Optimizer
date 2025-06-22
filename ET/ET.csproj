@@ -208,7 +208,6 @@
     <None Include="Resources\cpu-tower.png" />
     <None Include="Resources\ram.png" />
     <None Include="Resources\battery-charge.png" />
-    <None Include="Resources\Make-ISO.txt" />
     <None Include="Resources\HowTo-ISO.png" />
     <None Include="Resources\autounattend.xml" />
     <None Include="ET-LOGO-BIG.png" />

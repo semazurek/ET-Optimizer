@@ -119,29 +119,6 @@ namespace ET.Properties {
         }
         
         /// <summary>
-        /// Wyszukuje zlokalizowany ciąg podobny do ciągu [CmdletBinding(SupportsShouldProcess=$true,ConfirmImpact=&quot;Low&quot;)]
-        ///    Param
-        ///    (
-        ///        [parameter(Mandatory=$true,ValueFromPipeline=$false)]
-        ///        [string]$isoPath
-        ///      )
-        ///#$isoPath = &quot;pl-pl_windows_11_consumer_editions_version_24h2_updated_april_2025_x64_dvd_ea86301d.iso&quot;
-        ///$tempFolder = &quot;$env:SystemDrive\iso_temp&quot;
-        ///$newFile = &quot;Copy_To_ISO\ET-Optimizer.exe&quot;
-        ///$newFile2 = &quot;Copy_To_ISO\autounattend.xml&quot;
-        ///
-        ///cls
-        ///[console]::WindowWidth = 120
-        ///[console]::WindowHeight = 40
-        ///$Host.UI.RawUI.BackgroundColor [obcięto pozostałą część ciągu]&quot;;.
-        /// </summary>
-        internal static string Make_ISO {
-            get {
-                return ResourceManager.GetString("Make_ISO", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap ram {
