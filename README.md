@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v6.06.15-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v6.06.20-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -21,7 +21,7 @@ ET Optimizer
 
 
 
-Application developed from many sources found on the Internet, tested and updated. </br>ET-Optimizer uses: built-in windows tools, contains 356 registry values and 136 calls to the system shell like cmd.
+Application developed from many sources found on the Internet, tested and updated. </br>ET-Optimizer uses: built-in windows tools, contains 360+ registry values and 60+ calls to the system shell.
 
 Originally ET was a batch script file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
 
