@@ -243,19 +243,13 @@ https://programyzadarmo.net.pl/threads/et-optimizer.52612/
 
 https://www.majorgeeks.com/files/details/et_all_in_one_optimization_script.html
 
-https://filecr.com/windows/semazurek-et-optimizer/
+https://www.youtube.com/watch?v=GUY4ldvUmiE
 
-https://en.taiwebs.com/windows/download-et-optimizer-9574.html
+https://www.youtube.com/watch?v=k92SOb8HZg4
 
-https://www.essential-freebies.de/board/viewtopic.php?t=19662
+https://www.youtube.com/watch?v=fNXEO0yaS5g
 
-https://www.softpedia.com/get/Tweak/System-Tweak/ET-All-in-One-Optimization-Script.shtml
-
-https://scloud.ws/blog/optimization/5370.html
-
-https://rsload.net/soft/optimization/39444-et-optimizer.html
-
-https://www.yasdl.com/tag/%D8%AF%D8%A7%D9%86%D9%84%D9%88%D8%AF-et-optimizer
+https://www.youtube.com/watch?v=gXAkdxIu8Ls
 
 https://www.youtube.com/watch?v=vIzWJ7OjgXA
 
@@ -265,3 +259,4 @@ https://www.youtube.com/watch?v=FFKeJuXC4HA
 
 https://www.youtube.com/watch?v=G048P3g8bGM
 
+https://www.youtube.com/watch?v=4ul5XVBoPSA
