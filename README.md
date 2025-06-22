@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases"><img src="https://img.shields.io/badge/RELEASE-v6.06.20-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.20-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -46,7 +46,7 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 > It's recommended to make a own extra backup. I am not responsible for any damage caused.
 </br>
 <p align="center">
-<a href="https://github.com/semazurek/ET-Optimizer/releases"><img src="https://img.shields.io/badge/Download-0078D6?style=for-the-badge&logo=windows&logoColor=white" width="130"></a>
+<a href="https://github.com/semazurek/ET-Optimizer/releases/latest"><img src="https://img.shields.io/badge/Download-0078D6?style=for-the-badge&logo=windows&logoColor=white" width="130"></a>
 </p>
 
 ## 📷 Screenshots
