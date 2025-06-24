@@ -52,15 +52,15 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 ## 📷 Screenshots
 <details>
   <summary> <b>First Look</b> </summary>
-  <img src="https://github.com/user-attachments/assets/204b0436-1c11-40be-a255-a6b9025f4444" width="750"/>
+  <img src="https://github.com/user-attachments/assets/83e82f09-82bd-4869-8bea-80599c2aca40" width="750"/>
 </details>
 <details>
   <summary> <b>During Operation</b> </summary>
-  <img src="https://github.com/user-attachments/assets/bc99bece-8611-4190-82a0-7b8171793d53" width="750"/>
+  <img src="https://github.com/user-attachments/assets/23b1deca-b877-4f3c-95de-19da8ee662c6" width="750"/>
 </details>
 <details>
   <summary> <b>Extras</b> </summary>
-  <img src="https://github.com/user-attachments/assets/8577c35c-1a92-41ac-99c5-b0a2c508e175" width="750"/>
+  <img src="https://github.com/user-attachments/assets/78a36c74-060a-48ac-9133-50c3d5fcf724" width="750"/>
 </details>
 
 ## 🛠 What it does 
