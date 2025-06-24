@@ -36,9 +36,6 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.siticoneVerticalScrollBar3 = new SiticoneNetFrameworkUI.SiticoneVerticalScrollBar();
-            this.siticoneVerticalScrollBar2 = new SiticoneNetFrameworkUI.SiticoneVerticalScrollBar();
-            this.siticoneVerticalScrollBar1 = new SiticoneNetFrameworkUI.SiticoneVerticalScrollBar();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -46,7 +43,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.siticoneVerticalScrollBar4 = new SiticoneNetFrameworkUI.SiticoneVerticalScrollBar();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -93,14 +89,13 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelmain = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -108,7 +103,6 @@
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panelmain.SuspendLayout();
@@ -192,10 +186,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.siticoneVerticalScrollBar3);
-            this.groupBox1.Controls.Add(this.siticoneVerticalScrollBar2);
-            this.groupBox1.Controls.Add(this.siticoneVerticalScrollBar1);
             this.groupBox1.Controls.Add(this.panel1);
+            this.groupBox1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Font = new System.Drawing.Font("Consolas", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -205,166 +197,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Performance Tweaks (36)";
             // 
-            // siticoneVerticalScrollBar3
-            // 
-            this.siticoneVerticalScrollBar3.BackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.ButtonArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar3.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.siticoneVerticalScrollBar3.ButtonBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(190)))), ((int)(((byte)(210)))));
-            this.siticoneVerticalScrollBar3.ButtonCornerRadius = 0;
-            this.siticoneVerticalScrollBar3.ButtonHeight = 20;
-            this.siticoneVerticalScrollBar3.ButtonOpacity = 255;
-            this.siticoneVerticalScrollBar3.ButtonUseGradient = false;
-            this.siticoneVerticalScrollBar3.DisabledArrowColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.DisabledButtonColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.DisabledButtonColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.DisabledThumbColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.DisabledThumbColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.DisabledTrackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.DisabledTrackColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.siticoneVerticalScrollBar3.IsDisabled = false;
-            this.siticoneVerticalScrollBar3.LargeChange = 10;
-            this.siticoneVerticalScrollBar3.Location = new System.Drawing.Point(920, 77);
-            this.siticoneVerticalScrollBar3.Margin = new System.Windows.Forms.Padding(0);
-            this.siticoneVerticalScrollBar3.Maximum = 100;
-            this.siticoneVerticalScrollBar3.Minimum = 0;
-            this.siticoneVerticalScrollBar3.MinimumThumbSize = 20;
-            this.siticoneVerticalScrollBar3.Name = "siticoneVerticalScrollBar3";
-            this.siticoneVerticalScrollBar3.ShowButtons = false;
-            this.siticoneVerticalScrollBar3.Size = new System.Drawing.Size(15, 175);
-            this.siticoneVerticalScrollBar3.SmallChange = 1;
-            this.siticoneVerticalScrollBar3.TabIndex = 16;
-            this.siticoneVerticalScrollBar3.ThumbBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar3.ThumbBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar3.ThumbCornerRadius = 0;
-            this.siticoneVerticalScrollBar3.ThumbGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar3.ThumbHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar3.ThumbHoverColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar3.ThumbHoverUseGradient = false;
-            this.siticoneVerticalScrollBar3.ThumbOpacity = 255;
-            this.siticoneVerticalScrollBar3.ThumbPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar3.ThumbPressedColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar3.ThumbPressedUseGradient = false;
-            this.siticoneVerticalScrollBar3.ThumbUseGradient = false;
-            this.siticoneVerticalScrollBar3.TrackBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar3.TrackBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar3.TrackCornerRadius = 0;
-            this.siticoneVerticalScrollBar3.TrackGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar3.TrackMargin = 2;
-            this.siticoneVerticalScrollBar3.TrackOpacity = 255;
-            this.siticoneVerticalScrollBar3.TrackUseGradient = false;
-            this.siticoneVerticalScrollBar3.Value = 0;
-            // 
-            // siticoneVerticalScrollBar2
-            // 
-            this.siticoneVerticalScrollBar2.BackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.ButtonArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar2.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.siticoneVerticalScrollBar2.ButtonBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(190)))), ((int)(((byte)(210)))));
-            this.siticoneVerticalScrollBar2.ButtonCornerRadius = 0;
-            this.siticoneVerticalScrollBar2.ButtonHeight = 20;
-            this.siticoneVerticalScrollBar2.ButtonOpacity = 255;
-            this.siticoneVerticalScrollBar2.ButtonUseGradient = false;
-            this.siticoneVerticalScrollBar2.DisabledArrowColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.DisabledButtonColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.DisabledButtonColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.DisabledThumbColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.DisabledThumbColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.DisabledTrackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.DisabledTrackColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.siticoneVerticalScrollBar2.IsDisabled = false;
-            this.siticoneVerticalScrollBar2.LargeChange = 10;
-            this.siticoneVerticalScrollBar2.Location = new System.Drawing.Point(610, 77);
-            this.siticoneVerticalScrollBar2.Margin = new System.Windows.Forms.Padding(0);
-            this.siticoneVerticalScrollBar2.Maximum = 100;
-            this.siticoneVerticalScrollBar2.Minimum = 0;
-            this.siticoneVerticalScrollBar2.MinimumThumbSize = 20;
-            this.siticoneVerticalScrollBar2.Name = "siticoneVerticalScrollBar2";
-            this.siticoneVerticalScrollBar2.ShowButtons = false;
-            this.siticoneVerticalScrollBar2.Size = new System.Drawing.Size(15, 175);
-            this.siticoneVerticalScrollBar2.SmallChange = 1;
-            this.siticoneVerticalScrollBar2.TabIndex = 15;
-            this.siticoneVerticalScrollBar2.ThumbBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar2.ThumbBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar2.ThumbCornerRadius = 0;
-            this.siticoneVerticalScrollBar2.ThumbGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar2.ThumbHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar2.ThumbHoverColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar2.ThumbHoverUseGradient = false;
-            this.siticoneVerticalScrollBar2.ThumbOpacity = 255;
-            this.siticoneVerticalScrollBar2.ThumbPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar2.ThumbPressedColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar2.ThumbPressedUseGradient = false;
-            this.siticoneVerticalScrollBar2.ThumbUseGradient = false;
-            this.siticoneVerticalScrollBar2.TrackBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar2.TrackBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar2.TrackCornerRadius = 0;
-            this.siticoneVerticalScrollBar2.TrackGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar2.TrackMargin = 2;
-            this.siticoneVerticalScrollBar2.TrackOpacity = 255;
-            this.siticoneVerticalScrollBar2.TrackUseGradient = false;
-            this.siticoneVerticalScrollBar2.Value = 0;
-            // 
-            // siticoneVerticalScrollBar1
-            // 
-            this.siticoneVerticalScrollBar1.BackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.ButtonArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar1.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.siticoneVerticalScrollBar1.ButtonBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(190)))), ((int)(((byte)(210)))));
-            this.siticoneVerticalScrollBar1.ButtonCornerRadius = 0;
-            this.siticoneVerticalScrollBar1.ButtonHeight = 20;
-            this.siticoneVerticalScrollBar1.ButtonOpacity = 255;
-            this.siticoneVerticalScrollBar1.ButtonUseGradient = false;
-            this.siticoneVerticalScrollBar1.DisabledArrowColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.DisabledButtonColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.DisabledButtonColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.DisabledThumbColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.DisabledThumbColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.DisabledTrackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.DisabledTrackColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.siticoneVerticalScrollBar1.IsDisabled = false;
-            this.siticoneVerticalScrollBar1.LargeChange = 10;
-            this.siticoneVerticalScrollBar1.Location = new System.Drawing.Point(300, 77);
-            this.siticoneVerticalScrollBar1.Margin = new System.Windows.Forms.Padding(0);
-            this.siticoneVerticalScrollBar1.Maximum = 100;
-            this.siticoneVerticalScrollBar1.Minimum = 0;
-            this.siticoneVerticalScrollBar1.MinimumThumbSize = 30;
-            this.siticoneVerticalScrollBar1.Name = "siticoneVerticalScrollBar1";
-            this.siticoneVerticalScrollBar1.ShowButtons = false;
-            this.siticoneVerticalScrollBar1.Size = new System.Drawing.Size(15, 175);
-            this.siticoneVerticalScrollBar1.SmallChange = 1;
-            this.siticoneVerticalScrollBar1.TabIndex = 14;
-            this.siticoneVerticalScrollBar1.ThumbBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar1.ThumbBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar1.ThumbCornerRadius = 0;
-            this.siticoneVerticalScrollBar1.ThumbGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar1.ThumbHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar1.ThumbHoverColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar1.ThumbHoverUseGradient = false;
-            this.siticoneVerticalScrollBar1.ThumbOpacity = 255;
-            this.siticoneVerticalScrollBar1.ThumbPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar1.ThumbPressedColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar1.ThumbPressedUseGradient = false;
-            this.siticoneVerticalScrollBar1.ThumbUseGradient = false;
-            this.siticoneVerticalScrollBar1.TrackBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar1.TrackBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar1.TrackCornerRadius = 0;
-            this.siticoneVerticalScrollBar1.TrackGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar1.TrackMargin = 2;
-            this.siticoneVerticalScrollBar1.TrackOpacity = 255;
-            this.siticoneVerticalScrollBar1.TrackUseGradient = false;
-            this.siticoneVerticalScrollBar1.Value = 0;
-            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel1.Location = new System.Drawing.Point(3, 20);
+            this.panel1.Location = new System.Drawing.Point(3, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(318, 153);
+            this.panel1.Size = new System.Drawing.Size(563, 219);
             this.panel1.TabIndex = 0;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             // 
@@ -382,10 +222,11 @@
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel2.Location = new System.Drawing.Point(3, 18);
+            this.panel2.Location = new System.Drawing.Point(3, 25);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(318, 153);
+            this.panel2.Size = new System.Drawing.Size(194, 219);
             this.panel2.TabIndex = 0;
             // 
             // groupBox3
@@ -402,10 +243,11 @@
             // panel3
             // 
             this.panel3.AutoScroll = true;
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel3.Location = new System.Drawing.Point(3, 20);
+            this.panel3.Location = new System.Drawing.Point(3, 25);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(318, 153);
+            this.panel3.Size = new System.Drawing.Size(267, 72);
             this.panel3.TabIndex = 0;
             // 
             // groupBox4
@@ -422,63 +264,12 @@
             // panel4
             // 
             this.panel4.AutoScroll = true;
-            this.panel4.Controls.Add(this.siticoneVerticalScrollBar4);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel4.Location = new System.Drawing.Point(3, 20);
+            this.panel4.Location = new System.Drawing.Point(3, 25);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(318, 153);
+            this.panel4.Size = new System.Drawing.Size(284, 72);
             this.panel4.TabIndex = 0;
-            // 
-            // siticoneVerticalScrollBar4
-            // 
-            this.siticoneVerticalScrollBar4.BackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.ButtonArrowColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar4.ButtonBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(243)))), ((int)(((byte)(243)))));
-            this.siticoneVerticalScrollBar4.ButtonBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(180)))), ((int)(((byte)(190)))), ((int)(((byte)(210)))));
-            this.siticoneVerticalScrollBar4.ButtonCornerRadius = 0;
-            this.siticoneVerticalScrollBar4.ButtonHeight = 20;
-            this.siticoneVerticalScrollBar4.ButtonOpacity = 255;
-            this.siticoneVerticalScrollBar4.ButtonUseGradient = false;
-            this.siticoneVerticalScrollBar4.DisabledArrowColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.DisabledButtonColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.DisabledButtonColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.DisabledThumbColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.DisabledThumbColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.DisabledTrackColor = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.DisabledTrackColorSecondary = System.Drawing.Color.Transparent;
-            this.siticoneVerticalScrollBar4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.siticoneVerticalScrollBar4.IsDisabled = false;
-            this.siticoneVerticalScrollBar4.LargeChange = 10;
-            this.siticoneVerticalScrollBar4.Location = new System.Drawing.Point(300, 150);
-            this.siticoneVerticalScrollBar4.Margin = new System.Windows.Forms.Padding(0);
-            this.siticoneVerticalScrollBar4.Maximum = 100;
-            this.siticoneVerticalScrollBar4.Minimum = 0;
-            this.siticoneVerticalScrollBar4.MinimumThumbSize = 20;
-            this.siticoneVerticalScrollBar4.Name = "siticoneVerticalScrollBar4";
-            this.siticoneVerticalScrollBar4.ShowButtons = false;
-            this.siticoneVerticalScrollBar4.Size = new System.Drawing.Size(15, 175);
-            this.siticoneVerticalScrollBar4.SmallChange = 1;
-            this.siticoneVerticalScrollBar4.TabIndex = 17;
-            this.siticoneVerticalScrollBar4.ThumbBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar4.ThumbBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(171)))), ((int)(((byte)(171)))), ((int)(((byte)(171)))));
-            this.siticoneVerticalScrollBar4.ThumbCornerRadius = 0;
-            this.siticoneVerticalScrollBar4.ThumbGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar4.ThumbHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar4.ThumbHoverColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.siticoneVerticalScrollBar4.ThumbHoverUseGradient = false;
-            this.siticoneVerticalScrollBar4.ThumbOpacity = 255;
-            this.siticoneVerticalScrollBar4.ThumbPressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar4.ThumbPressedColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(96)))), ((int)(((byte)(96)))));
-            this.siticoneVerticalScrollBar4.ThumbPressedUseGradient = false;
-            this.siticoneVerticalScrollBar4.ThumbUseGradient = false;
-            this.siticoneVerticalScrollBar4.TrackBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar4.TrackBackColorSecondary = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(50)))));
-            this.siticoneVerticalScrollBar4.TrackCornerRadius = 0;
-            this.siticoneVerticalScrollBar4.TrackGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Horizontal;
-            this.siticoneVerticalScrollBar4.TrackMargin = 2;
-            this.siticoneVerticalScrollBar4.TrackOpacity = 255;
-            this.siticoneVerticalScrollBar4.TrackUseGradient = false;
-            this.siticoneVerticalScrollBar4.Value = 0;
             // 
             // groupBox5
             // 
@@ -526,7 +317,7 @@
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(945, 31);
+            this.toolStrip1.Size = new System.Drawing.Size(940, 25);
             this.toolStrip1.TabIndex = 6;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -536,9 +327,9 @@
             // 
             this.toolStripButton2.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton2.Size = new System.Drawing.Size(60, 22);
             this.toolStripButton2.Text = "Backup";
-            this.toolStripButton2.ToolTipText = "Restore";
+            this.toolStripButton2.ToolTipText = "Backup";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStripDropDownButton2
@@ -548,7 +339,7 @@
             this.registryRestoreToolStripMenuItem});
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(78, 28);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(78, 22);
             this.toolStripDropDownButton2.Text = "Restore";
             // 
             // restorePointToolStripMenuItem
@@ -588,7 +379,7 @@
             this.makeETISOToolStripMenuItem});
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(70, 28);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(70, 22);
             this.toolStripDropDownButton1.Text = "Extras";
             this.toolStripDropDownButton1.ToolTipText = "Extras";
             // 
@@ -803,7 +594,7 @@
             // 
             this.toolStripButton3.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 28);
+            this.toolStripButton3.Size = new System.Drawing.Size(52, 22);
             this.toolStripButton3.Text = "About";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -811,7 +602,7 @@
             // 
             this.toolStripButton4.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(60, 28);
+            this.toolStripButton4.Size = new System.Drawing.Size(60, 22);
             this.toolStripButton4.Text = "Donate";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -821,7 +612,7 @@
             this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(44, 28);
+            this.toolStripButton5.Size = new System.Drawing.Size(44, 22);
             this.toolStripButton5.Text = "Exit";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
@@ -829,7 +620,7 @@
             // 
             this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(104, 28);
+            this.toolStripLabel3.Size = new System.Drawing.Size(104, 22);
             this.toolStripLabel3.Text = "Battery: 0 %";
             this.toolStripLabel3.Visible = false;
             // 
@@ -837,7 +628,7 @@
             // 
             this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(72, 28);
+            this.toolStripLabel2.Size = new System.Drawing.Size(72, 22);
             this.toolStripLabel2.Text = "RAM: 0 %";
             this.toolStripLabel2.Visible = false;
             // 
@@ -845,7 +636,7 @@
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(136, 28);
+            this.toolStripLabel1.Size = new System.Drawing.Size(136, 22);
             this.toolStripLabel1.Text = "Build: Public | ";
             // 
             // progressBar1
@@ -882,8 +673,8 @@
             // panelmain
             // 
             this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.panelmain.Controls.Add(this.button6);
             this.panelmain.Controls.Add(this.button7);
+            this.panelmain.Controls.Add(this.button6);
             this.panelmain.Controls.Add(this.pictureBox3);
             this.panelmain.Controls.Add(this.pictureBox2);
             this.panelmain.Controls.Add(this.label1);
@@ -895,22 +686,9 @@
             this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
             this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
             // 
-            // button6
-            // 
-            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.Location = new System.Drawing.Point(758, 5);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(30, 30);
-            this.button6.TabIndex = 10;
-            this.button6.UseVisualStyleBackColor = false;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
             // button7
             // 
+            this.button7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button7.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -922,6 +700,21 @@
             this.button7.Text = "en-US";
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Sans Serif Collection", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
+            this.button6.Location = new System.Drawing.Point(758, 5);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(30, 30);
+            this.button6.TabIndex = 10;
+            this.button6.UseVisualStyleBackColor = false;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // pictureBox3
             // 
@@ -951,7 +744,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.06.20";
+            this.label1.Text = "E.T. ver 6.06.25";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -971,20 +764,7 @@
             this.pictureBox4.Size = new System.Drawing.Size(959, 5);
             this.pictureBox4.TabIndex = 10;
             this.pictureBox4.TabStop = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            this.label2.Font = new System.Drawing.Font("Consolas", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.label2.Location = new System.Drawing.Point(424, 456);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(90, 27);
-            this.label2.TabIndex = 11;
-            this.label2.Text = "msgend";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label2.Visible = false;
+            this.pictureBox4.Visible = false;
             // 
             // groupBox6
             // 
@@ -1000,10 +780,11 @@
             // panel6
             // 
             this.panel6.AutoScroll = true;
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel6.Location = new System.Drawing.Point(3, 20);
+            this.panel6.Location = new System.Drawing.Point(3, 25);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(320, 153);
+            this.panel6.Size = new System.Drawing.Size(148, 72);
             this.panel6.TabIndex = 0;
             // 
             // pictureBox5
@@ -1022,7 +803,6 @@
             this.ClientSize = new System.Drawing.Size(915, 506);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.pictureBox5);
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.panelmain);
@@ -1048,7 +828,6 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -1133,14 +912,9 @@
         private System.Windows.Forms.ToolStripMenuItem restorePointToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registryRestoreToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox pictureBox5;
-        private SiticoneNetFrameworkUI.SiticoneVerticalScrollBar siticoneVerticalScrollBar1;
-        private SiticoneNetFrameworkUI.SiticoneVerticalScrollBar siticoneVerticalScrollBar2;
-        private SiticoneNetFrameworkUI.SiticoneVerticalScrollBar siticoneVerticalScrollBar3;
-        private SiticoneNetFrameworkUI.SiticoneVerticalScrollBar siticoneVerticalScrollBar4;
     }
 }
 

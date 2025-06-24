@@ -18,13 +18,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 using ProgressBar = System.Windows.Forms.ProgressBar;
 
 namespace ET
 {
     public partial class Form1 : Form
     {
+        public ColoredGroupBox customGroup6;
+
         [DllImport("user32.dll")]
         public static extern bool ReleaseCapture();
 
@@ -65,6 +66,159 @@ namespace ET
                 e.Graphics.FillRectangle(new SolidBrush(Parent.BackColor), textRect);
                 TextRenderer.DrawText(e.Graphics, Text, Font, textRect.Location, ForeColor);
             }
+        }
+
+        private bool isFullscreen = false;
+        private Rectangle previousBounds;
+
+        private void Relocatecheck(Panel panelD, int spacing = 10, int minHeightForTwoColumns = 318)
+        {
+            int panelHeight = panelD.Height;
+            int panelWidth = panelD.Width;
+            int top = spacing;
+            int left = spacing;
+
+            panelD.AutoScroll = true;
+
+            var checkboxes = panelD.Controls.OfType<CheckBox>().ToList();
+
+            int columnWidth = 275;
+
+            bool twoColumns = panelWidth >= minHeightForTwoColumns;
+
+            int column = 0;
+            foreach (var chb in checkboxes)
+            {
+                chb.AutoSize = true;
+                chb.Dock = DockStyle.None;
+                chb.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                chb.Margin = new Padding(0);
+
+                chb.Location = new Point(left + column * (columnWidth + spacing), top);
+                top += chb.Height + spacing;
+
+                if (twoColumns && top + chb.Height > panelWidth)
+                {
+                    column++;
+                    top = spacing;
+                }
+            }
+        }
+
+        private void centergroup()
+        {
+            int margin = 5;
+            int spacing = 5;
+
+            int columns = 3;
+
+            int formWidth = this.ClientSize.Width;
+            int groupBoxWidth = (formWidth - ((columns + 1) * margin)) / columns;
+
+            GroupBox[] layout =
+            {
+        groupBox1, groupBox2, groupBox3,
+        customGroup6, groupBox4, groupBox5
+    };
+
+            int spacingB = 10;
+            int buttonWidth = 140;
+            int buttonHeight = 50;
+            int buttonCount = 5;
+            int totalWidth = buttonCount * buttonWidth + (buttonCount - 1) * spacingB;
+            int startX = (this.ClientSize.Width - totalWidth) / 2;
+            int buttonY = this.ClientSize.Height - buttonHeight - 5;
+
+            Button[] buttons = { button1, button2, button3, button4, button5 };
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].Size = new Size(buttonWidth, buttonHeight);
+                buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY);
+            }
+
+            int topY = toolStrip1.Bottom + 10;
+            int bottomY = buttons[0].Top - 10;
+            int availableHeight = bottomY - topY;
+
+            int rows = (int)Math.Ceiling(layout.Length / (float)columns);
+            int groupBoxHeight = (availableHeight - (rows - 1) * spacing) / rows;
+
+            for (int i = 0; i < layout.Length; i++)
+            {
+                int col = i % columns;
+                int row = i / columns;
+
+                int x = margin + col * (groupBoxWidth + margin);
+                int y = topY + row * (groupBoxHeight + spacing);
+
+                layout[i].Location = new Point(x, y);
+                layout[i].Size = new Size(groupBoxWidth, groupBoxHeight);
+            }
+
+            progressBar1.Location = new Point(0, this.ClientSize.Height - progressBar1.Height);
+            progressBar1.Width = this.ClientSize.Width;
+            toolStrip1.Size = new Size(this.Width, 25);
+            pictureBox4.Size = new Size(this.Width, 5);
+            pictureBox5.Size = new Size(this.Width, 5);
+            pictureBox4.Location = new Point(0, this.Height - progressBar1.Height - 5);
+            panelmain.Size = new Size(this.Width, 40);
+            textBox1.Size = new Size(this.ClientSize.Width, this.ClientSize.Height - progressBar1.Height - 50);
+            textBox1.Location = new Point(0, toolStrip1.Bottom);
+
+        }
+
+
+        private void Panelmain_DoubleClick(object sender, EventArgs e)
+        {
+            if (!isFullscreen)
+            {
+                previousBounds = this.Bounds;
+                this.FormBorderStyle = FormBorderStyle.None;
+                this.WindowState = FormWindowState.Normal;
+                this.Bounds = Screen.FromHandle(this.Handle).Bounds;
+                centergroup();
+                panel1.Font = new Font("Consolas", 11, FontStyle.Regular);
+                panel2.Font = new Font("Consolas", 11, FontStyle.Regular);
+                panel3.Font = new Font("Consolas", 11, FontStyle.Regular);
+                panel4.Font = new Font("Consolas", 11, FontStyle.Regular);
+                panel5.Font = new Font("Consolas", 11, FontStyle.Regular);
+                groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
+                groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
+
+                isFullscreen = true;
+            }
+            else
+            {
+                this.Bounds = previousBounds;
+                this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+                this.MinimizeBox = false;
+                this.MaximizeBox = false;
+                centergroup();
+                CultureInfo cinfo = CultureInfo.InstalledUICulture;
+                if (cinfo.Name == "ko-KR")
+                { }
+                else
+                {
+                    panel1.Font = new Font("Consolas", 9, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 9, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 9, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 9, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 9, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 9, FontStyle.Regular);
+                }
+                isFullscreen = false;
+
+            }
+
         }
 
         public static void StopOneDriveKFM()
@@ -230,30 +384,6 @@ namespace ET
                     }
                 }
             }
-
-        }
-
-        public void WaitForMouseClick()
-        {
-            this.MouseClick += Form_MouseClick;
-            foreach (Control control in this.Controls)
-            {
-                control.MouseClick += Form_MouseClick;
-            }
-
-            while (!mouseClicked)
-            {
-                Application.DoEvents();
-                Thread.Sleep(10);
-            }
-
-            this.MouseClick -= Form_MouseClick;
-            foreach (Control control in this.Controls)
-            {
-                control.MouseClick -= Form_MouseClick;
-            }
-
-            mouseClicked = false;
         }
 
         public class MySR : ToolStripSystemRenderer
@@ -516,7 +646,11 @@ namespace ET
                                 "Microsoft.ApplicationComatibilityEnhanced",
                                 "Microsoft.AV1VideoExtension",
                                 "Microsoft.AVCEncoderVideoExtension",
-                                "Microsoft.MPEG2VideoExtension"
+                                "Microsoft.MPEG2VideoExtension",
+                                "Microsoft.NET.Native.Runtime.1.3",
+                                "Microsoft.NET.Native.Framework.1.3",
+                                "Microsoft.NET.Native.Runtime.1.6",
+                                "Microsoft.NET.Native.Framework.1.6"
         };
 
         string mainforecolor = "#eeeeee";
@@ -530,8 +664,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.06.20";
-        string ETBuild = "22.06.2025";
+        string ETVersion = "E.T. ver 6.06.25";
+        string ETBuild = "24.06.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -753,82 +887,11 @@ namespace ET
             }
         }
 
-        private void Panel1_MouseWheel(object sender, MouseEventArgs e)
-        {
-            int delta = e.Delta > 0 ? -30 : 30;
-
-            panel1.AutoScrollPosition = new Point(0, -panel1.AutoScrollPosition.Y + delta);
-
-            int scrollMax = panel1.DisplayRectangle.Height - panel1.ClientSize.Height;
-
-            siticoneVerticalScrollBar1.Maximum = scrollMax > 0 ? scrollMax : 0;
-            siticoneVerticalScrollBar1.Value = -panel1.AutoScrollPosition.Y;
-        }
-
-        private void Panel2_MouseWheel(object sender, MouseEventArgs e)
-        {
-            int delta = e.Delta > 0 ? -30 : 30;
-
-            panel2.AutoScrollPosition = new Point(0, -panel2.AutoScrollPosition.Y + delta);
-
-            int scrollMax = panel2.DisplayRectangle.Height - panel2.ClientSize.Height;
-
-            siticoneVerticalScrollBar2.Maximum = scrollMax > 0 ? scrollMax : 0;
-            siticoneVerticalScrollBar2.Value = -panel2.AutoScrollPosition.Y;
-        }
-
-        private void Panel3_MouseWheel(object sender, MouseEventArgs e)
-        {
-            int delta = e.Delta > 0 ? -30 : 30;
-
-            panel3.AutoScrollPosition = new Point(0, -panel3.AutoScrollPosition.Y + delta);
-
-            int scrollMax = panel3.DisplayRectangle.Height - panel3.ClientSize.Height;
-
-            siticoneVerticalScrollBar3.Maximum = scrollMax > 0 ? scrollMax : 0;
-            siticoneVerticalScrollBar3.Value = -panel3.AutoScrollPosition.Y;
-        }
-
-        private void Panel6_MouseWheel(object sender, MouseEventArgs e)
-        {
-            int delta = e.Delta > 0 ? -30 : 30;
-
-            panel6.AutoScrollPosition = new Point(0, -panel6.AutoScrollPosition.Y + delta);
-
-            int scrollMax = panel6.DisplayRectangle.Height - panel6.ClientSize.Height;
-
-            siticoneVerticalScrollBar4.Maximum = scrollMax > 0 ? scrollMax : 0;
-            siticoneVerticalScrollBar4.Value = -panel6.AutoScrollPosition.Y;
-        }
-
-        /*
-        private void siticoneVerticalScrollBar1_Scroll(object sender, ScrollEventArgs e)
-        {
-            panel1.AutoScrollPosition = new Point(0, e.NewValue);
-        }
-
-        protected override void OnMouseWheel(MouseEventArgs e)
-        {
-            base.OnMouseWheel(e);
-            Panel1_MouseWheel(panel1, e);
-        }
-
-        private void panel1_MouseEnter(object sender, EventArgs e)
-        {
-            panel1.Focus();
-        }*/
-
         public Form1(string[] args)
         {
 
             InitializeComponent();
             LoadAppxPackages();
-
-            panel1.MouseWheel += Panel1_MouseWheel;
-            panel2.MouseWheel += Panel2_MouseWheel;
-            panel3.MouseWheel += Panel3_MouseWheel;
-            panel6.MouseWheel += Panel6_MouseWheel;
-
 
             this.Opacity = 0;
             this.Enabled = false;
@@ -846,7 +909,7 @@ namespace ET
             this.Load += new EventHandler(Form1_Load);
 
             toolStrip1.Renderer = new MySR();
-            this.Size = new System.Drawing.Size(945, 500);
+            this.Size = new System.Drawing.Size(975, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
 
             System.Diagnostics.Process process = new System.Diagnostics.Process();
@@ -877,19 +940,19 @@ namespace ET
             this.MinimizeBox = false;
             this.MaximizeBox = false;
             button5.Location = new System.Drawing.Point(680, 440);
-            button5.Size = new System.Drawing.Size(120, 50);
+            button5.Size = new System.Drawing.Size(140, 50);
             button5.FlatAppearance.BorderSize = 0;
             button4.Location = new System.Drawing.Point(530, 440);
             button4.Size = new System.Drawing.Size(140, 50);
             button4.FlatAppearance.BorderSize = 0;
             button3.Location = new System.Drawing.Point(400, 440);
-            button3.Size = new System.Drawing.Size(120, 50);
+            button3.Size = new System.Drawing.Size(140, 50);
             button3.FlatAppearance.BorderSize = 0;
             button2.Location = new System.Drawing.Point(270, 440);
-            button2.Size = new System.Drawing.Size(120, 50);
+            button2.Size = new System.Drawing.Size(140, 50);
             button2.FlatAppearance.BorderSize = 0;
             button1.Location = new System.Drawing.Point(130, 440);
-            button1.Size = new System.Drawing.Size(130, 50);
+            button1.Size = new System.Drawing.Size(140, 50);
             button1.FlatAppearance.BorderSize = 0;
             groupBox1.Location = new System.Drawing.Point(10, 70);
             groupBox1.Size = new System.Drawing.Size(305, 180);
@@ -913,7 +976,7 @@ namespace ET
             groupBox6.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
             panel6.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
             panel6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            ColoredGroupBox customGroup6 = new ColoredGroupBox
+            customGroup6 = new ColoredGroupBox
             {
                 Text = groupBox6.Text,
                 InnerBackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor),
@@ -931,7 +994,7 @@ namespace ET
 
             toolStrip1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             toolStrip1.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
-            toolStrip1.Size = new System.Drawing.Size(945, 25);
+            toolStrip1.Size = new Size(this.Width, 25);
             textBox1.Location = new System.Drawing.Point(10, 70);
             textBox1.Size = new System.Drawing.Size(925, 360);
             toolStripButton5.Visible = false;
@@ -955,477 +1018,357 @@ namespace ET
             panel6.VerticalScroll.Visible = false;
 
             CheckBox chck1 = new CheckBox();
-            chck1.Location = new System.Drawing.Point(10, 5);
-            chck1.Size = new System.Drawing.Size(270, 25);
             chck1.Tag = "Disable Edge WebWidget";
             chck1.TabIndex = 1;
             chck1.Checked = true;
             chck1.Click += c_p;
             panel1.Controls.Add(chck1);
             CheckBox chck2 = new CheckBox();
-            chck2.Location = new System.Drawing.Point(10, 30);
-            chck2.Size = new System.Drawing.Size(275, 25);
             chck2.Tag = "Power Option to Ultimate Perform.";
             chck2.Checked = true;
             chck2.Click += c_p;
             chck2.TabIndex = 2;
             panel1.Controls.Add(chck2);
             CheckBox chck3 = new CheckBox();
-            chck3.Location = new System.Drawing.Point(10, 55);
-            chck3.Size = new System.Drawing.Size(250, 25);
             chck3.Tag = "Split Threshold for Svchost";
             chck3.Checked = true;
             chck3.Click += c_p;
             chck3.TabIndex = 3;
             panel4.Controls.Add(chck3);
             CheckBox chck4 = new CheckBox();
-            chck4.Location = new System.Drawing.Point(10, 55);
-            chck4.Size = new System.Drawing.Size(270, 25);
             chck4.Tag = "Dual Boot Timeout 3sec";
             chck4.Checked = true;
             chck4.Click += c_p;
             chck4.TabIndex = 4;
             panel1.Controls.Add(chck4);
             CheckBox chck5 = new CheckBox();
-            chck5.Location = new System.Drawing.Point(10, 80);
-            chck5.Size = new System.Drawing.Size(270, 25);
             chck5.Tag = "Disable Hibernation/Fast Startup";
             chck5.Checked = true;
             chck5.Click += c_p;
             chck5.TabIndex = 5;
             panel1.Controls.Add(chck5);
             CheckBox chck6 = new CheckBox();
-            chck6.Location = new System.Drawing.Point(10, 105);
-            chck6.Size = new System.Drawing.Size(275, 25);
             chck6.Tag = "Disable Windows Insider Experiments";
             chck6.Checked = true;
             chck6.Click += c_p;
             chck6.TabIndex = 6;
             panel1.Controls.Add(chck6);
             CheckBox chck7 = new CheckBox();
-            chck7.Location = new System.Drawing.Point(10, 130);
-            chck7.Size = new System.Drawing.Size(275, 25);
             chck7.Tag = "Disable App Launch Tracking";
             chck7.Checked = true;
             chck7.Click += c_p;
             chck7.TabIndex = 7;
             panel1.Controls.Add(chck7);
             CheckBox chck8 = new CheckBox();
-            chck8.Location = new System.Drawing.Point(10, 155);
-            chck8.Size = new System.Drawing.Size(275, 25);
             chck8.Tag = "Disable Powerthrottling (Intel 6gen+)";
             chck8.Checked = true;
             chck8.Click += c_p;
             chck8.TabIndex = 8;
             panel1.Controls.Add(chck8);
             CheckBox chck9 = new CheckBox();
-            chck9.Location = new System.Drawing.Point(10, 180);
-            chck9.Size = new System.Drawing.Size(275, 25);
             chck9.Tag = "Turn Off Background Apps";
             chck9.Checked = true;
             chck9.Click += c_p;
             chck9.TabIndex = 9;
             panel1.Controls.Add(chck9);
             CheckBox chck10 = new CheckBox();
-            chck10.Location = new System.Drawing.Point(10, 205);
-            chck10.Size = new System.Drawing.Size(275, 25);
             chck10.Tag = "Disable Sticky Keys Prompt";
             chck10.Checked = true;
             chck10.Click += c_p;
             chck10.TabIndex = 10;
             panel1.Controls.Add(chck10);
             CheckBox chck11 = new CheckBox();
-            chck11.Location = new System.Drawing.Point(10, 230);
-            chck11.Size = new System.Drawing.Size(275, 25);
             chck11.Tag = "Disable Activity History";
             chck11.Checked = true;
             chck11.Click += c_p;
             chck11.TabIndex = 11;
             panel1.Controls.Add(chck11);
             CheckBox chck12 = new CheckBox();
-            chck12.Location = new System.Drawing.Point(10, 255);
-            chck12.Size = new System.Drawing.Size(275, 25);
             chck12.Tag = "Disable Updates for MS Store Apps";
             chck12.Checked = true;
             chck12.Click += c_p;
             chck12.TabIndex = 12;
             panel1.Controls.Add(chck12);
             CheckBox chck13 = new CheckBox();
-            chck13.Location = new System.Drawing.Point(10, 280);
-            chck13.Size = new System.Drawing.Size(275, 25);
             chck13.Tag = "SmartScreen Filter for Apps Disable";
             chck13.Checked = true;
             chck13.Click += c_p;
             chck13.TabIndex = 13;
             panel1.Controls.Add(chck13);
             CheckBox chck14 = new CheckBox();
-            chck14.Location = new System.Drawing.Point(10, 305);
-            chck14.Size = new System.Drawing.Size(270, 25);
             chck14.Tag = "Let Websites Provide Locally";
             chck14.Checked = true;
             chck14.Click += c_p;
             chck14.TabIndex = 14;
             panel1.Controls.Add(chck14);
             CheckBox chck15 = new CheckBox();
-            chck15.Location = new System.Drawing.Point(10, 330);
-            chck15.Size = new System.Drawing.Size(270, 25);
             chck15.Tag = "Fix Microsoft Edge Settings";
             chck15.Checked = true;
             chck15.Click += c_p;
             chck15.TabIndex = 15;
             panel1.Controls.Add(chck15);
             CheckBox chck64 = new CheckBox();
-            chck64.Location = new System.Drawing.Point(10, 355);
-            chck64.Size = new System.Drawing.Size(275, 25);
             chck64.Tag = "Disable Nagle's Alg. (Delayed ACKs)";
             chck64.Checked = true;
             chck64.Click += c_p;
             chck64.TabIndex = 64;
             panel1.Controls.Add(chck64);
             CheckBox chck65 = new CheckBox();
-            chck65.Location = new System.Drawing.Point(10, 380);
-            chck65.Size = new System.Drawing.Size(275, 25);
             chck65.Tag = "CPU/GPU Priority Tweaks";
             chck65.Checked = true;
             chck65.Click += c_p;
             chck65.TabIndex = 65;
             panel1.Controls.Add(chck65);
             CheckBox chck16 = new CheckBox();
-            chck16.Location = new System.Drawing.Point(10, 455);
-            chck16.Size = new System.Drawing.Size(260, 25);
             chck16.Tag = "Disable Location Sensors";
             chck16.Checked = true;
             chck16.Click += c_p;
             chck16.TabIndex = 16;
             panel1.Controls.Add(chck16);
             CheckBox chck17 = new CheckBox();
-            chck17.Location = new System.Drawing.Point(10, 480);
-            chck17.Size = new System.Drawing.Size(260, 25);
             chck17.Tag = "Disable WiFi HotSpot Auto-Sharing";
             chck17.Checked = true;
             chck17.Click += c_p;
             chck17.TabIndex = 17;
             panel1.Controls.Add(chck17);
             CheckBox chck18 = new CheckBox();
-            chck18.Location = new System.Drawing.Point(10, 505);
-            chck18.Size = new System.Drawing.Size(260, 25);
             chck18.Tag = "Disable Shared HotSpot Connect";
             chck18.Checked = true;
             chck18.Click += c_p;
             chck18.TabIndex = 18;
             panel1.Controls.Add(chck18);
             CheckBox chck19 = new CheckBox();
-            chck19.Location = new System.Drawing.Point(10, 530);
-            chck19.Size = new System.Drawing.Size(260, 25);
             chck19.Tag = "Updates Notify to Sched. Restart";
             chck19.Checked = true;
             chck19.Click += c_p;
             chck19.TabIndex = 19;
             panel1.Controls.Add(chck19);
             CheckBox chck20 = new CheckBox();
-            chck20.Location = new System.Drawing.Point(10, 555);
-            chck20.Size = new System.Drawing.Size(260, 25);
             chck20.Tag = "P2P Update Setting to LAN (local)";
             chck20.Checked = true;
             chck20.Click += c_p;
             chck20.TabIndex = 20;
             panel1.Controls.Add(chck20);
             CheckBox chck21 = new CheckBox();
-            chck21.Location = new System.Drawing.Point(10, 580);
-            chck21.Size = new System.Drawing.Size(260, 25);
             chck21.Tag = "Set Lower Shutdown Time (2sec)";
             chck21.Checked = true;
             chck21.Click += c_p;
             chck21.TabIndex = 21;
             panel1.Controls.Add(chck21);
             CheckBox chck22 = new CheckBox();
-            chck22.Location = new System.Drawing.Point(10, 605);
-            chck22.Size = new System.Drawing.Size(260, 25);
             chck22.Tag = "Remove Old Device Drivers";
             chck22.Checked = true;
             chck22.Click += c_p;
             chck22.TabIndex = 22;
             panel1.Controls.Add(chck22);
             CheckBox chck23 = new CheckBox();
-            chck23.Location = new System.Drawing.Point(10, 630);
-            chck23.Size = new System.Drawing.Size(260, 25);
             chck23.Tag = "Disable Get Even More Out of...";
             chck23.Checked = true;
             chck23.Click += c_p;
             chck23.TabIndex = 23;
             panel1.Controls.Add(chck23);
             CheckBox chck24 = new CheckBox();
-            chck24.Location = new System.Drawing.Point(10, 655);
-            chck24.Size = new System.Drawing.Size(260, 25);
             chck24.Tag = "Disable Installing Suggested Apps";
             chck24.Checked = true;
             chck24.Click += c_p;
             chck24.TabIndex = 24;
             panel1.Controls.Add(chck24);
             CheckBox chck25 = new CheckBox();
-            chck25.Location = new System.Drawing.Point(10, 680);
-            chck25.Size = new System.Drawing.Size(260, 25);
             chck25.Tag = "Disable Start Menu Ads/Suggestions";
             chck25.Checked = true;
             chck25.Click += c_p;
             chck25.TabIndex = 25;
             panel1.Controls.Add(chck25);
             CheckBox chck26 = new CheckBox();
-            chck26.Location = new System.Drawing.Point(10, 705);
-            chck26.Size = new System.Drawing.Size(260, 25);
             chck26.Tag = "Disable Suggest Apps WindowsInk";
             chck26.Checked = true;
             chck26.Click += c_p;
             chck26.TabIndex = 26;
             panel1.Controls.Add(chck26);
             CheckBox chck27 = new CheckBox();
-            chck27.Location = new System.Drawing.Point(10, 730);
-            chck27.Size = new System.Drawing.Size(260, 25);
             chck27.Tag = "Disable Unnecessary Components";
             chck27.Checked = true;
             chck27.Click += c_p;
             chck27.TabIndex = 27;
             panel1.Controls.Add(chck27);
             CheckBox chck28 = new CheckBox();
-            chck28.Location = new System.Drawing.Point(10, 755);
-            chck28.Size = new System.Drawing.Size(260, 25);
             chck28.Tag = "Defender Scheduled Scan Nerf";
             chck28.Checked = true;
             chck28.Click += c_p;
             chck28.TabIndex = 28;
             panel1.Controls.Add(chck28);
             CheckBox chck29 = new CheckBox();
-            chck29.Location = new System.Drawing.Point(10, 130);
-            chck29.Size = new System.Drawing.Size(260, 25);
             chck29.Tag = "Disable Process Mitigation";
             chck29.Click += c_p;
             chck29.TabIndex = 29;
             panel5.Controls.Add(chck29);
             CheckBox chck30 = new CheckBox();
-            chck30.Location = new System.Drawing.Point(10, 780);
-            chck30.Size = new System.Drawing.Size(260, 25);
             chck30.Tag = "Defragment Indexing Service File";
             chck30.Checked = true;
             chck30.Click += c_p;
             chck30.TabIndex = 30;
             panel1.Controls.Add(chck30);
             CheckBox chck66 = new CheckBox();
-            chck66.Location = new System.Drawing.Point(10, 80);
-            chck66.Size = new System.Drawing.Size(260, 25);
             chck66.Tag = "Disable Spectre/Meltdown";
             chck66.Click += c_p;
             chck66.TabIndex = 66;
             panel5.Controls.Add(chck66);
             CheckBox chck67 = new CheckBox();
-            chck67.Location = new System.Drawing.Point(10, 105);
-            chck67.Size = new System.Drawing.Size(260, 25);
             chck67.Tag = "Disable Windows Defender";
             chck67.Click += c_p;
             chck67.TabIndex = 67;
             panel5.Controls.Add(chck67);
             CheckBox chck31 = new CheckBox();
-            chck31.Location = new System.Drawing.Point(10, 05);
-            chck31.Size = new System.Drawing.Size(270, 25);
             chck31.Tag = "Disable Telemetry Scheduled Tasks";
             chck31.Checked = true;
             chck31.Click += c_p;
             chck31.TabIndex = 31;
             panel2.Controls.Add(chck31);
             CheckBox chck32 = new CheckBox();
-            chck32.Location = new System.Drawing.Point(10, 30);
-            chck32.Size = new System.Drawing.Size(250, 25);
             chck32.Tag = "Remove Telemetry/Data Collection";
             chck32.Checked = true;
             chck32.Click += c_p;
             chck32.TabIndex = 32;
             panel2.Controls.Add(chck32);
             CheckBox chck33 = new CheckBox();
-            chck33.Location = new System.Drawing.Point(10, 55);
-            chck33.Size = new System.Drawing.Size(250, 25);
             chck33.Tag = "Disable PowerShell Telemetry";
             chck33.Checked = true;
             chck33.Click += c_p;
             chck33.TabIndex = 33;
             panel2.Controls.Add(chck33);
             CheckBox chck34 = new CheckBox();
-            chck34.Location = new System.Drawing.Point(10, 80);
-            chck34.Size = new System.Drawing.Size(250, 25);
             chck34.Tag = "Disable Skype Telemetry";
             chck34.Checked = true;
             chck34.Click += c_p;
             chck34.TabIndex = 34;
             panel2.Controls.Add(chck34);
             CheckBox chck35 = new CheckBox();
-            chck35.Location = new System.Drawing.Point(10, 105);
-            chck35.Size = new System.Drawing.Size(270, 25);
             chck35.Tag = "Disable Media Player Usage Reports";
             chck35.Checked = true;
             chck35.Click += c_p;
             chck35.TabIndex = 35;
             panel2.Controls.Add(chck35);
             CheckBox chck36 = new CheckBox();
-            chck36.Location = new System.Drawing.Point(10, 130);
-            chck36.Size = new System.Drawing.Size(250, 25);
             chck36.Tag = "Disable Mozilla Telemetry";
             chck36.Checked = true;
             chck36.Click += c_p;
             chck36.TabIndex = 36;
             panel2.Controls.Add(chck36);
             CheckBox chck37 = new CheckBox();
-            chck37.Location = new System.Drawing.Point(10, 155);
-            chck37.Size = new System.Drawing.Size(250, 25);
             chck37.Tag = "Disable Apps Use My Advertising ID";
             chck37.Checked = true;
             chck37.Click += c_p;
             chck37.TabIndex = 37;
             panel2.Controls.Add(chck37);
             CheckBox chck38 = new CheckBox();
-            chck38.Location = new System.Drawing.Point(10, 180);
-            chck38.Size = new System.Drawing.Size(270, 25);
             chck38.Tag = "Disable Send Info About Writing";
             chck38.Checked = true;
             chck38.Click += c_p;
             chck38.TabIndex = 38;
             panel2.Controls.Add(chck38);
             CheckBox chck39 = new CheckBox();
-            chck39.Location = new System.Drawing.Point(10, 205);
-            chck39.Size = new System.Drawing.Size(250, 25);
             chck39.Tag = "Disable Handwriting Recognition";
             chck39.Checked = true;
             chck39.Click += c_p;
             chck39.TabIndex = 39;
             panel2.Controls.Add(chck39);
             CheckBox chck40 = new CheckBox();
-            chck40.Location = new System.Drawing.Point(10, 230);
-            chck40.Size = new System.Drawing.Size(250, 25);
             chck40.Tag = "Disable Watson Malware Reports";
             chck40.Checked = true;
             chck40.Click += c_p;
             chck40.TabIndex = 40;
             panel2.Controls.Add(chck40);
             CheckBox chck41 = new CheckBox();
-            chck41.Location = new System.Drawing.Point(10, 255);
-            chck41.Size = new System.Drawing.Size(250, 25);
             chck41.Tag = "Disable Malware Diagnostic Data";
             chck41.Checked = true;
             chck41.Click += c_p;
             chck41.TabIndex = 41;
             panel2.Controls.Add(chck41);
             CheckBox chck42 = new CheckBox();
-            chck42.Location = new System.Drawing.Point(10, 280);
-            chck42.Size = new System.Drawing.Size(250, 25);
             chck42.Tag = "Disable Reporting to MS MAPS";
             chck42.Checked = true;
             chck42.Click += c_p;
             chck42.TabIndex = 42;
             panel2.Controls.Add(chck42);
             CheckBox chck43 = new CheckBox();
-            chck43.Location = new System.Drawing.Point(10, 305);
-            chck43.Size = new System.Drawing.Size(270, 25);
             chck43.Tag = "Disable Spynet Defender Reporting";
             chck43.Checked = true;
             chck43.Click += c_p;
             chck43.TabIndex = 43;
             panel2.Controls.Add(chck43);
             CheckBox chck44 = new CheckBox();
-            chck44.Location = new System.Drawing.Point(10, 330);
-            chck44.Size = new System.Drawing.Size(250, 25);
             chck44.Tag = "Do Not Send Malware Samples";
             chck44.Checked = true;
             chck44.Click += c_p;
             chck44.TabIndex = 44;
             panel2.Controls.Add(chck44);
             CheckBox chck45 = new CheckBox();
-            chck45.Location = new System.Drawing.Point(10, 355);
-            chck45.Size = new System.Drawing.Size(250, 25);
             chck45.Tag = "Disable Sending Typing Samples";
             chck45.Checked = true;
             chck45.Click += c_p;
             chck45.TabIndex = 45;
             panel2.Controls.Add(chck45);
             CheckBox chck46 = new CheckBox();
-            chck46.Location = new System.Drawing.Point(10, 380);
-            chck46.Size = new System.Drawing.Size(250, 25);
             chck46.Tag = "Disable Sending Contacts to MS";
             chck46.Checked = true;
             chck46.Click += c_p;
             chck46.TabIndex = 46;
             panel2.Controls.Add(chck46);
             CheckBox chck47 = new CheckBox();
-            chck47.Location = new System.Drawing.Point(10, 405);
-            chck47.Size = new System.Drawing.Size(250, 25);
             chck47.Tag = "Disable Cortana";
             chck47.Checked = true;
             chck47.Click += c_p;
             chck47.TabIndex = 47;
             panel2.Controls.Add(chck47);
             CheckBox chck48 = new CheckBox();
-            chck48.Location = new System.Drawing.Point(10, 05);
-            chck48.Size = new System.Drawing.Size(260, 25);
             chck48.Tag = "Show File Extensions in Explorer";
             chck48.Checked = true;
             chck48.Click += c_p;
             chck48.TabIndex = 48;
             panel3.Controls.Add(chck48);
             CheckBox chck49 = new CheckBox();
-            chck49.Location = new System.Drawing.Point(10, 30);
-            chck49.Size = new System.Drawing.Size(260, 25);
             chck49.Tag = "Disable Transparency on Taskbar";
             chck49.Checked = true;
             chck49.Click += c_p;
             chck49.TabIndex = 49;
             panel3.Controls.Add(chck49);
             CheckBox chck50 = new CheckBox();
-            chck50.Location = new System.Drawing.Point(10, 55);
-            chck50.Size = new System.Drawing.Size(260, 25);
             chck50.Tag = "Disable Windows Animations";
             chck50.Checked = true;
             chck50.Click += c_p;
             chck50.TabIndex = 50;
             panel3.Controls.Add(chck50);
             CheckBox chck51 = new CheckBox();
-            chck51.Location = new System.Drawing.Point(10, 80);
-            chck51.Size = new System.Drawing.Size(260, 25);
             chck51.Tag = "Disable MRU lists (jump lists)";
             chck51.Checked = true;
             chck51.Click += c_p;
             chck51.TabIndex = 51;
             panel3.Controls.Add(chck51);
             CheckBox chck52 = new CheckBox();
-            chck52.Location = new System.Drawing.Point(10, 105);
-            chck52.Size = new System.Drawing.Size(260, 25);
             chck52.Tag = "Set Search Box to Icon Only";
             chck52.Checked = true;
             chck52.Click += c_p;
             chck52.TabIndex = 52;
             panel3.Controls.Add(chck52);
             CheckBox chck53 = new CheckBox();
-            chck53.Location = new System.Drawing.Point(10, 130);
-            chck53.Size = new System.Drawing.Size(260, 25);
             chck53.Tag = "Explorer on Start on This PC";
             chck53.Checked = true;
             chck53.Click += c_p;
             chck53.TabIndex = 53;
             panel3.Controls.Add(chck53);
             CheckBox chck54 = new CheckBox();
-            chck54.Location = new System.Drawing.Point(10, 05);
-            chck54.Size = new System.Drawing.Size(260, 25);
             chck54.Tag = "Remove Windows Game Bar/DVR";
             chck54.Checked = true;
             chck54.Click += c_p;
             chck54.TabIndex = 54;
             panel4.Controls.Add(chck54);
             CheckBox chck55 = new CheckBox();
-            chck55.Location = new System.Drawing.Point(10, 405);
-            chck55.Size = new System.Drawing.Size(260, 25);
             chck55.Tag = "Enable Service Tweaks";
             chck55.Checked = true;
             chck55.Click += c_p;
             chck55.TabIndex = 55;
             panel1.Controls.Add(chck55);
             CheckBox chck56 = new CheckBox();
-            chck56.Location = new System.Drawing.Point(10, 805);
-            chck56.Size = new System.Drawing.Size(260, 25);
             chck56.Tag = "Remove Bloatware (Preinstalled)";
             chck56.Checked = true;
             chck56.Click += c_p;
@@ -1444,111 +1387,90 @@ namespace ET
             chck56.TabIndex = 56;
             panel1.Controls.Add(chck56);
             CheckBox chck57 = new CheckBox();
-            chck57.Location = new System.Drawing.Point(10, 830);
-            chck57.Size = new System.Drawing.Size(260, 25);
             chck57.Tag = "Disable Unnecessary Startup Apps";
             chck57.Checked = true;
             chck57.Click += c_p;
             chck57.TabIndex = 57;
             panel1.Controls.Add(chck57);
             CheckBox chck58 = new CheckBox();
-            chck58.Location = new System.Drawing.Point(10, 30);
-            chck58.Size = new System.Drawing.Size(260, 25);
             chck58.Tag = "Clean Temp/Cache/Prefetch/Logs";
             chck58.Checked = true;
             chck58.Click += c_p;
             chck58.TabIndex = 58;
             panel4.Controls.Add(chck58);
             CheckBox chck59 = new CheckBox();
-            chck59.Location = new System.Drawing.Point(10, 130);
-            chck59.Size = new System.Drawing.Size(263, 25);
             chck59.Tag = "Remove News and Interests/Widgets";
             chck59.Click += c_p;
             chck59.TabIndex = 59;
             panel4.Controls.Add(chck59);
             CheckBox chck60 = new CheckBox();
-            chck60.Location = new System.Drawing.Point(10, 55);
-            chck60.Size = new System.Drawing.Size(255, 25);
             chck60.Tag = "Remove Microsoft OneDrive";
             chck60.Click += c_p;
             chck60.TabIndex = 60;
             panel5.Controls.Add(chck60);
             CheckBox chck61 = new CheckBox();
-            chck61.Location = new System.Drawing.Point(10, 05);
-            chck61.Size = new System.Drawing.Size(255, 25);
             chck61.Tag = "Disable Xbox Services";
             chck61.Click += c_p;
             chck61.TabIndex = 61;
             panel5.Controls.Add(chck61);
             CheckBox chck62 = new CheckBox();
-            chck62.Location = new System.Drawing.Point(10, 30);
-            chck62.Size = new System.Drawing.Size(255, 25);
             chck62.Tag = "Enable Fast/Secure DNS (1.1.1.1)";
             chck62.Click += c_p;
             chck62.TabIndex = 62;
             panel5.Controls.Add(chck62);
             CheckBox chck63 = new CheckBox();
-            chck63.Location = new System.Drawing.Point(10, 80);
-            chck63.Size = new System.Drawing.Size(255, 25);
             chck63.Tag = "Scan for Adware (AdwCleaner)";
             chck63.Click += c_p;
             chck63.TabIndex = 63;
             panel4.Controls.Add(chck63);
             CheckBox chck68 = new CheckBox();
-            chck68.Location = new System.Drawing.Point(10, 105);
-            chck68.Size = new System.Drawing.Size(255, 25);
             chck68.Tag = "Clean WinSxS Folder";
             chck68.Click += c_p;
             chck68.TabIndex = 68;
             panel4.Controls.Add(chck68);
             CheckBox chck69 = new CheckBox();
-            chck69.Location = new System.Drawing.Point(10, 430);
-            chck69.Size = new System.Drawing.Size(250, 25);
             chck69.Tag = "Remove Copilot";
             chck69.Checked = true;
             chck69.Click += c_p;
             chck69.TabIndex = 69;
             panel2.Controls.Add(chck69);
             CheckBox chck70 = new CheckBox();
-            chck70.Location = new System.Drawing.Point(10, 155);
-            chck70.Size = new System.Drawing.Size(260, 25);
             chck70.Tag = "Remove Learn about this photo";
             chck70.Checked = true;
             chck70.Click += c_p;
             chck70.TabIndex = 70;
             panel3.Controls.Add(chck70);
             CheckBox chck71 = new CheckBox();
-            chck71.Location = new System.Drawing.Point(10, 855);
-            chck71.Size = new System.Drawing.Size(260, 25);
             chck71.Tag = "Enable Long Paths";
             chck71.Checked = true;
             chck71.Click += c_p;
             chck71.TabIndex = 71;
             panel1.Controls.Add(chck71);
             CheckBox chck72 = new CheckBox();
-            chck72.Location = new System.Drawing.Point(10, 180);
-            chck72.Size = new System.Drawing.Size(260, 25);
             chck72.Tag = "Enable Old Context Menu";
             chck72.Checked = true;
             chck72.Click += c_p;
             chck72.TabIndex = 72;
             panel3.Controls.Add(chck72);
             CheckBox chck73 = new CheckBox();
-            chck73.Location = new System.Drawing.Point(10, 430);
-            chck73.Size = new System.Drawing.Size(260, 25);
             chck73.Tag = "Disable Fullscreen Optimizations";
             chck73.Checked = true;
             chck73.Click += c_p;
             chck73.TabIndex = 73;
             panel1.Controls.Add(chck73);
             CheckBox chck74 = new CheckBox();
-            chck74.Location = new System.Drawing.Point(10, 880);
-            chck74.Size = new System.Drawing.Size(260, 25);
             chck74.Tag = "RAM Memory Tweaks";
             chck74.Checked = true;
             chck74.Click += c_p;
             chck74.TabIndex = 74;
             panel1.Controls.Add(chck74);
+
+            Relocatecheck(panel1);
+            Relocatecheck(panel2);
+            Relocatecheck(panel3);
+            Relocatecheck(panel4);
+            Relocatecheck(panel5);
+            centergroup();
 
             if (File.Exists(systemDrive + "\\Windows\\System32\\dfrgui.exe")) { diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap(); }
             if (File.Exists(systemDrive + "\\Windows\\System32\\cleanmgr.exe")) { cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap(); }
@@ -1572,10 +1494,6 @@ namespace ET
 
             if (File.Exists(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe")) { restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap(); }
             if (File.Exists(systemDrive + "\\Windows\\regedit.exe")) { registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap(); }
-
-            label2.Left = (this.ClientSize.Width - label2.Width) / 2 / 2;
-            label2.Text = msgend;
-            label2.BringToFront();
 
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
@@ -2312,8 +2230,6 @@ namespace ET
                     toolStripButton3.Text = "정보";
                     toolStripButton4.Text = "기부하기";
 
-                    label2.Left = (this.ClientSize.Width - label2.Width) / 2;
-
                     msgend = "모든 작업이 완료되었습니다. 재부팅을 권장합니다.";
                     msgerror = "선택된 옵션이 없습니다.";
                     msgupdate = "이 애플리케이션의 최신 버전을 GitHub에서 이용할 수 있습니다!";
@@ -2575,104 +2491,6 @@ namespace ET
             customGroup6.ForeColor = System.Drawing.ColorTranslator.FromHtml("#bdc3c7");
 
 
-            panel1.AutoScroll = true;
-            panel1.VerticalScroll.Enabled = true;
-            siticoneVerticalScrollBar1.Minimum = 0;
-            siticoneVerticalScrollBar1.MinimumThumbSize = 30;
-            siticoneVerticalScrollBar1.Location = new System.Drawing.Point(299, 80);
-            siticoneVerticalScrollBar1.Size = new System.Drawing.Size(15, 168);
-            siticoneVerticalScrollBar1.SmallChange = 20;
-            siticoneVerticalScrollBar1.LargeChange = panel1.ClientSize.Height;
-            siticoneVerticalScrollBar1.Maximum = panel1.DisplayRectangle.Height - panel1.ClientSize.Height;
-            siticoneVerticalScrollBar1.Parent = this;
-            siticoneVerticalScrollBar1.BringToFront();
-
-            siticoneVerticalScrollBar1.ValueChanged += (s, e) =>
-            {
-                panel1.AutoScrollPosition = new Point(0, siticoneVerticalScrollBar1.Value);
-            };
-
-            panel1.Scroll += (s, e) =>
-            {
-                siticoneVerticalScrollBar1.Value = -panel1.AutoScrollPosition.Y;
-            };
-
-            panel2.AutoScroll = true;
-            panel2.VerticalScroll.Enabled = true;
-            siticoneVerticalScrollBar2.Minimum = 0;
-            siticoneVerticalScrollBar2.MinimumThumbSize = 30;
-            siticoneVerticalScrollBar2.Location = new System.Drawing.Point(609, 80);
-            siticoneVerticalScrollBar2.Size = new System.Drawing.Size(15, 168);
-            siticoneVerticalScrollBar2.SmallChange = 20;
-            siticoneVerticalScrollBar2.LargeChange = panel2.ClientSize.Height;
-            siticoneVerticalScrollBar2.Maximum = panel2.DisplayRectangle.Height - panel2.ClientSize.Height;
-            siticoneVerticalScrollBar2.Parent = this;
-            siticoneVerticalScrollBar2.BringToFront();
-
-            siticoneVerticalScrollBar2.ValueChanged += (s, e) =>
-            {
-                panel2.AutoScrollPosition = new Point(0, siticoneVerticalScrollBar2.Value);
-            };
-
-            panel2.Scroll += (s, e) =>
-            {
-                siticoneVerticalScrollBar2.Value = -panel2.AutoScrollPosition.Y;
-            };
-
-            panel3.AutoScroll = true;
-            panel3.VerticalScroll.Enabled = true;
-            siticoneVerticalScrollBar3.Minimum = 0;
-            siticoneVerticalScrollBar3.MinimumThumbSize = 30;
-            siticoneVerticalScrollBar3.Location = new System.Drawing.Point(919, 80);
-            siticoneVerticalScrollBar3.Size = new System.Drawing.Size(15, 168);
-            siticoneVerticalScrollBar3.SmallChange = 20;
-            siticoneVerticalScrollBar3.LargeChange = panel3.ClientSize.Height;
-            siticoneVerticalScrollBar3.Maximum = panel3.DisplayRectangle.Height - panel3.ClientSize.Height;
-            siticoneVerticalScrollBar3.Parent = this;
-            siticoneVerticalScrollBar3.BringToFront();
-
-            siticoneVerticalScrollBar3.ValueChanged += (s, e) =>
-            {
-                panel3.AutoScrollPosition = new Point(0, siticoneVerticalScrollBar3.Value);
-            };
-
-            panel3.Scroll += (s, e) =>
-            {
-                siticoneVerticalScrollBar3.Value = -panel3.AutoScrollPosition.Y;
-            };
-
-            panel6.AutoScroll = true;
-            panel6.VerticalScroll.Enabled = true;
-            siticoneVerticalScrollBar4.Location = new System.Drawing.Point(298, 263);
-            siticoneVerticalScrollBar4.Size = new System.Drawing.Size(15, 165);
-            siticoneVerticalScrollBar4.Minimum = 0;
-            siticoneVerticalScrollBar4.MinimumThumbSize = 30;
-            siticoneVerticalScrollBar4.SmallChange = 20;
-            siticoneVerticalScrollBar4.LargeChange = panel6.ClientSize.Height;
-            siticoneVerticalScrollBar4.Maximum = panel6.DisplayRectangle.Height - panel6.ClientSize.Height;
-            siticoneVerticalScrollBar4.Parent = this;
-            siticoneVerticalScrollBar4.BringToFront();
-
-            siticoneVerticalScrollBar4.ValueChanged += (s, e) =>
-            {
-                panel6.AutoScrollPosition = new Point(0, siticoneVerticalScrollBar4.Value);
-            };
-
-            panel6.Scroll += (s, e) =>
-            {
-                siticoneVerticalScrollBar4.Value = -panel6.AutoScrollPosition.Y;
-            };
-
-            int bloatcount = panel6.Controls.OfType<CheckBox>().Count();
-            if (bloatcount >= 7)
-            {
-                siticoneVerticalScrollBar4.Visible = true;
-            }
-            else
-            {
-                siticoneVerticalScrollBar4.Visible = false;
-            }
-
             if (args.Contains("/auto") || args.Contains("-auto") || args.Contains("auto"))
             {
                 isswitch = true;
@@ -2783,6 +2601,8 @@ namespace ET
         private Form splashForm;
         private async void Form1_Load(object sender, EventArgs e)
         {
+            this.panelmain.DoubleClick += Panelmain_DoubleClick;
+
             this.Hide();
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -2909,6 +2729,7 @@ namespace ET
 
         public void doengine()
         {
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -2925,7 +2746,9 @@ namespace ET
             button3.Visible = false;
             button4.Visible = false;
             button5.Visible = false;
+            pictureBox4.Visible = true;
             textBox1.Visible = true;
+            progressBar1.BringToFront();
             textBox1.BringToFront();
 
             int alltodo = 0; //max 74
@@ -4597,6 +4420,7 @@ foreach ($app in $allApps) {
                 button3.Visible = true;
                 button4.Visible = true;
                 button5.Visible = true;
+                pictureBox4.Visible = false;
                 textBox1.Visible = false;
                 Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -4621,9 +4445,6 @@ foreach ($app in $allApps) {
 
                     this.TopMost = true;
 
-                    label2.Visible = true;
-                    label2.Text = msgend;
-
                     if (isswitch == true)
                     {
                         MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -4631,7 +4452,57 @@ foreach ($app in $allApps) {
                     }
                     else
                     {
-                        WaitForMouseClick();
+
+                        Form popup = new Form
+                        {
+                            FormBorderStyle = FormBorderStyle.None,
+                            StartPosition = FormStartPosition.CenterScreen,
+                            TopMost = true,
+                            Size = new Size(this.ClientSize.Width, this.ClientSize.Height),
+                            BackColor = ColorTranslator.FromHtml(menubackcolor),
+                            ForeColor = ColorTranslator.FromHtml(mainforecolor),
+                            Font = new Font("Consolas", 10F, FontStyle.Regular)
+                        };
+                        popup.AllowTransparency = true;
+                        popup.StartPosition = FormStartPosition.Manual;
+                        popup.Location = new Point(
+                            this.Location.X + (this.Width - popup.Width) / 2,
+                            this.Location.Y + (this.Height - popup.Height) / 2
+                        );
+
+                        popup.Opacity = 0.9;
+
+                        Label msgLabel = new Label
+                        {
+                            Text = msgend,
+                            AutoSize = false,
+                            TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                            Dock = DockStyle.Fill,
+                            Font = new Font("Consolas", 13F, FontStyle.Bold),
+                            Padding = new Padding(10),
+                            ForeColor = ColorTranslator.FromHtml(mainforecolor),
+                            BackColor = ColorTranslator.FromHtml(menubackcolor)
+                        };
+
+                        Button okButton = new Button
+                        {
+                            Text = "OK",
+                            FlatStyle = FlatStyle.Flat,
+                            BackColor = ColorTranslator.FromHtml(selectioncolor),
+                            ForeColor = Color.White,
+                            Size = new Size(120, 45),
+                            Font = new Font("Consolas", 13F, FontStyle.Bold),
+                            Anchor = AnchorStyles.Bottom
+                        };
+                        okButton.FlatAppearance.BorderSize = 0;
+                        okButton.Location = new Point((popup.ClientSize.Width - okButton.Width) / 2, popup.ClientSize.Height / 2 + 30);
+                        okButton.Click += (s, e) => popup.Close();
+
+                        popup.Controls.Add(okButton);
+                        popup.Controls.Add(msgLabel);
+                        popup.AcceptButton = okButton;
+
+                        popup.ShowDialog();
                     }
                     c_p(null, null);
                     textBox1.Text = "";
@@ -4648,19 +4519,9 @@ foreach ($app in $allApps) {
                     button3.Visible = true;
                     button4.Visible = true;
                     button5.Visible = true;
+                    pictureBox4.Visible = false;
                     textBox1.Visible = false;
-                    label2.Visible = false;
                     this.TopMost = false;
-
-                    int bloatcount = panel6.Controls.OfType<CheckBox>().Count();
-                    if (bloatcount >= 7)
-                    {
-                        siticoneVerticalScrollBar4.Visible = true;
-                    }
-                    else
-                    {
-                        siticoneVerticalScrollBar4.Visible = false;
-                    }
 
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 }
@@ -5061,7 +4922,7 @@ foreach ($app in $allApps) {
 
         }
 
-        
+
         private void panelmain_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -5285,16 +5146,16 @@ foreach ($app in $allApps) {
             string exeDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             string targetDir = Path.Combine(exeDirectory, "Copy_To_ISO");
-            string targetPath = Path.Combine(targetDir, "ET-Optimizer.exe");
+            string targetPath = Path.Combine(targetDir, "ET.exe");
 
             File.Copy(exePath, targetPath, overwrite: true);
 
-                    FileNameToSave = "HowTo-ISO.png";
+            FileNameToSave = "HowTo-ISO.png";
 
-                    outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
+            outputPath = Path.Combine(exeDir + "Copy_To_ISO/", FileNameToSave);
 
-                    Image img = Properties.Resources.HowTo_ISO;
-                    img.Save(outputPath, ImageFormat.Png);
+            Image img = Properties.Resources.HowTo_ISO;
+            img.Save(outputPath, ImageFormat.Png);
 
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "powershell.exe";
