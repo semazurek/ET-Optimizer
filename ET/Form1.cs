@@ -122,7 +122,7 @@ namespace ET
     };
 
             int spacingB = 10;
-            int buttonWidth = 140;
+            int buttonWidth = 145;
             int buttonHeight = 50;
             int buttonCount = 5;
             int totalWidth = buttonCount * buttonWidth + (buttonCount - 1) * spacingB;
@@ -650,7 +650,13 @@ namespace ET
                                 "Microsoft.NET.Native.Runtime.1.3",
                                 "Microsoft.NET.Native.Framework.1.3",
                                 "Microsoft.NET.Native.Runtime.1.6",
-                                "Microsoft.NET.Native.Framework.1.6"
+                                "Microsoft.NET.Native.Framework.1.6",
+                                "Microsoft.NET.Native.Framework.1.7",
+                                "Microsoft.UI.Xaml.2.1",
+                                "Microsoft.NET.Native.Runtime.1.7",
+                                "Microsoft.UI.Xaml.2.3",
+                                "Microsoft.UI.Xaml.2.4",
+                                "Microsoft.WinJS.2.0"
         };
 
         string mainforecolor = "#eeeeee";
