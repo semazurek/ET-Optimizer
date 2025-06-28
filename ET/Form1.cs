@@ -71,39 +71,44 @@ namespace ET
         private bool isFullscreen = false;
         private Rectangle previousBounds;
 
-        private void Relocatecheck(Panel panelD, int spacing = 10, int minHeightForTwoColumns = 318)
+        private void Relocatecheck(Panel panelD, int spacing = 5)
         {
-            int panelHeight = panelD.Height;
             int panelWidth = panelD.Width;
             int top = spacing;
             int left = spacing;
 
             panelD.AutoScroll = true;
+            panelD.HorizontalScroll.Enabled = false;
+            panelD.HorizontalScroll.Visible = false;
 
             var checkboxes = panelD.Controls.OfType<CheckBox>().ToList();
 
-            int columnWidth = 275;
+            int columnWidth = panelWidth - 3 * 11;
 
-            bool twoColumns = panelWidth >= minHeightForTwoColumns;
-
-            int column = 0;
             foreach (var chb in checkboxes)
             {
-                chb.AutoSize = true;
+                chb.AutoSize = false; 
                 chb.Dock = DockStyle.None;
                 chb.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                 chb.Margin = new Padding(0);
+                chb.TextAlign = System.Drawing.ContentAlignment.TopLeft;
 
-                chb.Location = new Point(left + column * (columnWidth + spacing), top);
+                chb.Width = columnWidth;
+
+                Size proposedSize = new Size(columnWidth, int.MaxValue);
+                Size measured = TextRenderer.MeasureText(
+                    chb.Text,
+                    chb.Font,
+                    proposedSize,
+                    TextFormatFlags.WordBreak | TextFormatFlags.TextBoxControl);
+
+                chb.Height = measured.Height + 6;
+
+                chb.Location = new Point(left, top);
                 top += chb.Height + spacing;
-
-                if (twoColumns && top + chb.Height > panelWidth)
-                {
-                    column++;
-                    top = spacing;
-                }
             }
         }
+
 
         private void centergroup()
         {
@@ -122,7 +127,7 @@ namespace ET
     };
 
             int spacingB = 10;
-            int buttonWidth = 145;
+            int buttonWidth = 150;
             int buttonHeight = 50;
             int buttonCount = 5;
             int totalWidth = buttonCount * buttonWidth + (buttonCount - 1) * spacingB;
@@ -187,7 +192,13 @@ namespace ET
                 groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
                 groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
                 groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                customGroup6.Font = new Font("Consolas", 12, FontStyle.Bold);
                 toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
+                Relocatecheck(panel1);
+                Relocatecheck(panel2);
+                Relocatecheck(panel3);
+                Relocatecheck(panel4);
+                Relocatecheck(panel5);
 
                 isFullscreen = true;
             }
@@ -213,8 +224,15 @@ namespace ET
                     groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
                     groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
                     groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 12, FontStyle.Bold);
                     toolStrip1.Font = new Font("Consolas", 9, FontStyle.Regular);
                 }
+                Relocatecheck(panel1);
+                Relocatecheck(panel2);
+                Relocatecheck(panel3);
+                Relocatecheck(panel4);
+                Relocatecheck(panel5);
+
                 isFullscreen = false;
 
             }
@@ -656,7 +674,8 @@ namespace ET
                                 "Microsoft.NET.Native.Runtime.1.7",
                                 "Microsoft.UI.Xaml.2.3",
                                 "Microsoft.UI.Xaml.2.4",
-                                "Microsoft.WinJS.2.0"
+                                "Microsoft.WinJS.2.0",
+                                "Microsoft.WindowsAppRuntime.1.4"
         };
 
         string mainforecolor = "#eeeeee";
@@ -670,8 +689,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.06.25";
-        string ETBuild = "24.06.2025";
+        string ETVersion = "E.T. ver 6.06.30";
+        string ETBuild = "28.06.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -901,7 +920,9 @@ namespace ET
 
             this.Opacity = 0;
             this.Enabled = false;
-
+            toolStripLabel1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            toolStripLabel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            toolStripLabel3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             button6.Location = new System.Drawing.Point(910, 5);
             button6.FlatAppearance.BorderSize = 0;
             button7.Location = new System.Drawing.Point(845, -2);
@@ -1004,24 +1025,6 @@ namespace ET
             textBox1.Location = new System.Drawing.Point(10, 70);
             textBox1.Size = new System.Drawing.Size(925, 360);
             toolStripButton5.Visible = false;
-
-            panel1.VerticalScroll.Enabled = false;
-            panel1.VerticalScroll.Visible = false;
-
-            panel2.VerticalScroll.Enabled = false;
-            panel2.VerticalScroll.Visible = false;
-
-            panel3.VerticalScroll.Enabled = false;
-            panel3.VerticalScroll.Visible = false;
-
-            panel4.VerticalScroll.Enabled = false;
-            panel4.VerticalScroll.Visible = false;
-
-            panel5.VerticalScroll.Enabled = false;
-            panel5.VerticalScroll.Visible = false;
-
-            panel6.VerticalScroll.Enabled = false;
-            panel6.VerticalScroll.Visible = false;
 
             CheckBox chck1 = new CheckBox();
             chck1.Tag = "Disable Edge WebWidget";
@@ -1471,13 +1474,6 @@ namespace ET
             chck74.TabIndex = 74;
             panel1.Controls.Add(chck74);
 
-            Relocatecheck(panel1);
-            Relocatecheck(panel2);
-            Relocatecheck(panel3);
-            Relocatecheck(panel4);
-            Relocatecheck(panel5);
-            centergroup();
-
             if (File.Exists(systemDrive + "\\Windows\\System32\\dfrgui.exe")) { diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap(); }
             if (File.Exists(systemDrive + "\\Windows\\System32\\cleanmgr.exe")) { cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap(); }
             if (File.Exists(systemDrive + "\\Windows\\System32\\msconfig.exe")) { msconfigToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msconfig.exe").ToBitmap(); }
@@ -1830,6 +1826,82 @@ namespace ET
                     isoinfo = "Сгенерированный ISO-файл будет включать следующие функции: ET-Optimizer.exe /auto, а также обход требований Microsoft путём пропуска сбора данных, создания локальной учётной записи и т. д.";
 
                     toolStripLabel1.Text = "Build: Public | " + ETBuild;
+
+                    chck1.Text = "Отключить виджет Edge WebWidget";
+                    chck2.Text = "Энергопитание: максимальная производительность";
+                    chck3.Text = "Порог разделения процессов Svchost";
+                    chck4.Text = "Время двойной загрузки — 3 секунды";
+                    chck5.Text = "Отключить гибернацию / быструю загрузку";
+                    chck6.Text = "Отключить эксперименты Windows Insider";
+                    chck7.Text = "Отключить отслеживание запуска приложений";
+                    chck8.Text = "Отключить PowerThrottling (6-е поколение и выше)";
+                    chck9.Text = "Отключить фоновые приложения";
+                    chck10.Text = "Отключить уведомление о залипающих клавишах";
+                    chck11.Text = "Отключить журнал активности";
+                    chck12.Text = "Отключить обновления Microsoft Store";
+                    chck13.Text = "Отключить SmartScreen для приложений";
+                    chck14.Text = "Сайты предоставляют локальные данные";
+                    chck15.Text = "Восстановить настройки Microsoft Edge";
+                    chck64.Text = "Отключить алгоритм Nagl (ACK)";
+                    chck65.Text = "Настроить приоритеты CPU/GPU";
+                    chck16.Text = "Отключить датчики геолокации";
+                    chck17.Text = "Отключить автоматический хотспот";
+                    chck18.Text = "Отключить совместное подключение";
+                    chck19.Text = "Уведомления об обновлениях";
+                    chck20.Text = "Раздача обновлений — локально";
+                    chck21.Text = "Сократить время выключения системы";
+                    chck22.Text = "Удалить старые драйверы устройств";
+                    chck23.Text = "Отключить 'Получите ещё больше от...'";
+                    chck24.Text = "Отключить рекомендуемые приложения";
+                    chck25.Text = "Отключить рекламу/предложения в меню 'Пуск'";
+                    chck26.Text = "Отключить предложения Windows Ink";
+                    chck27.Text = "Отключить ненужные компоненты";
+                    chck28.Text = "Ограничить запланированные сканирования Defender";
+                    chck29.Text = "Отключить защиту процессов (Mitigation)";
+                    chck30.Text = "Дефрагментация файла индексации";
+                    chck66.Text = "Отключить защиту Spectre/Meltdown";
+                    chck67.Text = "Отключить Защитник Windows";
+                    chck31.Text = "Отключить задачи телеметрии";
+                    chck32.Text = "Удалить сбор данных / телеметрию";
+                    chck33.Text = "Отключить телеметрию PowerShell";
+                    chck34.Text = "Отключить телеметрию Skype";
+                    chck35.Text = "Отключить отчёты Windows Media Player";
+                    chck36.Text = "Отключить телеметрию Mozilla";
+                    chck37.Text = "Отключить рекламный идентификатор";
+                    chck38.Text = "Отключить отправку информации о вводе текста";
+                    chck39.Text = "Отключить распознавание почерка";
+                    chck40.Text = "Отключить отчёты Watson о вредоносных программах";
+                    chck41.Text = "Отключить диагностические данные о вредоносном ПО";
+                    chck42.Text = "Отключить отчётность в MS MAPS";
+                    chck43.Text = "Отключить отчётность в Spynet";
+                    chck44.Text = "Не отправлять образцы вредоносных программ";
+                    chck45.Text = "Отключить отправку образцов ввода";
+                    chck46.Text = "Отключить отправку контактов в Microsoft";
+                    chck47.Text = "Отключить Кортану";
+                    chck48.Text = "Показать расширения файлов";
+                    chck49.Text = "Отключить прозрачность панели задач";
+                    chck50.Text = "Отключить анимации Windows";
+                    chck51.Text = "Отключить списки быстрого доступа";
+                    chck52.Text = "Заменить поле поиска на иконку";
+                    chck53.Text = "Открывать проводник в 'Этот компьютер'";
+                    chck54.Text = "Удалить игровую панель Windows / DVR";
+                    chck55.Text = "Включить оптимизацию служб";
+                    chck56.Text = "Удалить лишнее ПО (Bloatware)";
+                    chck57.Text = "Отключить лишние автозапускаемые приложения";
+                    chck58.Text = "Очистить Temp / Кэш / Prefetch / Логи";
+                    chck59.Text = "Удалить Новости и Виджеты";
+                    chck60.Text = "Удалить Microsoft OneDrive";
+                    chck61.Text = "Отключить службы Xbox";
+                    chck62.Text = "Включить быстрый и безопасный DNS";
+                    chck63.Text = "Сканирование через AdwCleaner";
+                    chck68.Text = "Очистить папку WinSxS";
+                    chck69.Text = "Удалить Copilot";
+                    chck70.Text = "Отключить 'Узнать об этом изображении'";
+                    chck71.Text = "Включить длинные системные пути";
+                    chck72.Text = "Включить старое контекстное меню";
+                    chck73.Text = "Отключить оптимизации для полноэкранного режима";
+                    chck74.Text = "Включить оптимизацию оперативной памяти";
+
                 }
 
                 if (cinfo.Name == "de-DE")
@@ -2607,6 +2679,14 @@ namespace ET
         private Form splashForm;
         private async void Form1_Load(object sender, EventArgs e)
         {
+            centergroup();
+            Relocatecheck(panel1);
+            Relocatecheck(panel2);
+            Relocatecheck(panel3);
+            Relocatecheck(panel4);
+            Relocatecheck(panel5);
+            Relocatecheck(panel5);
+
             this.panelmain.DoubleClick += Panelmain_DoubleClick;
 
             this.Hide();
@@ -3535,7 +3615,8 @@ foreach ($app in $allApps) {
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|SearchProtect",
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|AnyDesk",
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|TeamViewer",
-@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|EdgeUI"
+@"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|EdgeUI",
+@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run|Discord"
 };
 
                             foreach (var entry in keysToClean)
@@ -4471,6 +4552,8 @@ foreach ($app in $allApps) {
                         };
                         popup.AllowTransparency = true;
                         popup.StartPosition = FormStartPosition.Manual;
+                        popup.ShowIcon = false;
+                        popup.ShowInTaskbar = false;
                         popup.Location = new Point(
                             this.Location.X + (this.Width - popup.Width) / 2,
                             this.Location.Y + (this.Height - popup.Height) / 2
