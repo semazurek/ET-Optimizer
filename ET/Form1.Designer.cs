@@ -74,6 +74,8 @@
             this.vLCMediaPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSIAfterburnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uniGetUIWingetGUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.privacySexyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chrisTitusTechsWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsLicenseKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -479,7 +481,9 @@
             this.microsoftVisualCRedistributableToolStripMenuItem,
             this.vLCMediaPlayerToolStripMenuItem,
             this.mSIAfterburnerToolStripMenuItem,
-            this.uniGetUIWingetGUIToolStripMenuItem});
+            this.uniGetUIWingetGUIToolStripMenuItem,
+            this.privacySexyToolStripMenuItem,
+            this.chrisTitusTechsWinToolStripMenuItem});
             this.downloadSoftwareToolStripMenuItem.Name = "downloadSoftwareToolStripMenuItem";
             this.downloadSoftwareToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
             this.downloadSoftwareToolStripMenuItem.Text = "Download Software";
@@ -554,6 +558,20 @@
             this.uniGetUIWingetGUIToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.uniGetUIWingetGUIToolStripMenuItem.Text = "UniGetUI (Winget GUI)";
             this.uniGetUIWingetGUIToolStripMenuItem.Click += new System.EventHandler(this.uniGetUIWingetGUIToolStripMenuItem_Click);
+            // 
+            // privacySexyToolStripMenuItem
+            // 
+            this.privacySexyToolStripMenuItem.Name = "privacySexyToolStripMenuItem";
+            this.privacySexyToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.privacySexyToolStripMenuItem.Text = "Privacy.Sexy";
+            this.privacySexyToolStripMenuItem.Click += new System.EventHandler(this.privacySexyToolStripMenuItem_Click);
+            // 
+            // chrisTitusTechsWinToolStripMenuItem
+            // 
+            this.chrisTitusTechsWinToolStripMenuItem.Name = "chrisTitusTechsWinToolStripMenuItem";
+            this.chrisTitusTechsWinToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.chrisTitusTechsWinToolStripMenuItem.Text = "Chris Titus Tech\'s WinUtil";
+            this.chrisTitusTechsWinToolStripMenuItem.Click += new System.EventHandler(this.chrisTitusTechsWinToolStripMenuItem_Click);
             // 
             // windowsLicenseKeyToolStripMenuItem
             // 
@@ -744,7 +762,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.06.30";
+            this.label1.Text = "E.T. ver 6.06.35";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -824,6 +842,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "E.T.";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
@@ -915,6 +934,8 @@
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.ToolStripMenuItem privacySexyToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chrisTitusTechsWinToolStripMenuItem;
     }
 }
 

@@ -14,6 +14,7 @@ using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,6 +25,9 @@ namespace ET
 {
     public partial class Form1 : Form
     {
+
+        private ToolTip tooltip = new ToolTip();
+
         public ColoredGroupBox customGroup6;
 
         [DllImport("user32.dll")]
@@ -65,6 +69,47 @@ namespace ET
                 ControlPaint.DrawBorder(e.Graphics, rect, ForeColor, ButtonBorderStyle.Solid);
                 e.Graphics.FillRectangle(new SolidBrush(Parent.BackColor), textRect);
                 TextRenderer.DrawText(e.Graphics, Text, Font, textRect.Location, ForeColor);
+            }
+        }
+
+        private void EditHosts(string[] domains)
+        {
+            string hostsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"drivers\etc\hosts");
+
+            var ipEntries = new[]
+            {
+                "0.0.0.0",
+                "::1"
+            };
+
+            try
+            {
+                if (!File.Exists(hostsPath))
+                {
+                    File.Create(hostsPath).Dispose();
+                }
+
+                string hostsContent = File.ReadAllText(hostsPath, Encoding.UTF8);
+
+                using (StreamWriter writer = File.AppendText(hostsPath))
+                {
+                    foreach (string domain in domains)
+                    {
+                        foreach (string ip in ipEntries)
+                        {
+                            string entry = $"{ip}\t{domain}";
+                            if (!hostsContent.Contains(entry))
+                            {
+                                writer.WriteLine(entry);
+                            }
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error writing to hosts file: {ex.Message}");
             }
         }
 
@@ -182,18 +227,24 @@ namespace ET
                 this.WindowState = FormWindowState.Normal;
                 this.Bounds = Screen.FromHandle(this.Handle).Bounds;
                 centergroup();
-                panel1.Font = new Font("Consolas", 11, FontStyle.Regular);
-                panel2.Font = new Font("Consolas", 11, FontStyle.Regular);
-                panel3.Font = new Font("Consolas", 11, FontStyle.Regular);
-                panel4.Font = new Font("Consolas", 11, FontStyle.Regular);
-                panel5.Font = new Font("Consolas", 11, FontStyle.Regular);
-                groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
-                groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
-                groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
-                groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
-                groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
-                customGroup6.Font = new Font("Consolas", 12, FontStyle.Bold);
-                toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
+                CultureInfo cinfo = CultureInfo.InstalledUICulture;
+                if (cinfo.Name == "ko-KR")
+                { }
+                else
+                {
+                    panel1.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 11, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 12, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
+                }
                 Relocatecheck(panel1);
                 Relocatecheck(panel2);
                 Relocatecheck(panel3);
@@ -689,8 +740,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.06.30";
-        string ETBuild = "28.06.2025";
+        string ETVersion = "E.T. ver 6.06.35";
+        string ETBuild = "30.06.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -812,6 +863,62 @@ namespace ET
             }
         }
 
+        public void PopUpMSG(string messagepopup)
+        {
+            Form popup = new Form
+            {
+                FormBorderStyle = FormBorderStyle.None,
+                StartPosition = FormStartPosition.CenterScreen,
+                TopMost = true,
+                Size = new Size(this.ClientSize.Width, this.ClientSize.Height),
+                BackColor = ColorTranslator.FromHtml(menubackcolor),
+                ForeColor = ColorTranslator.FromHtml(mainforecolor),
+                Font = new Font("Consolas", 10F, FontStyle.Regular)
+            };
+            popup.AllowTransparency = true;
+            popup.StartPosition = FormStartPosition.Manual;
+            popup.ShowIcon = false;
+            popup.ShowInTaskbar = false;
+            popup.Location = new Point(
+                this.Location.X + (this.Width - popup.Width) / 2,
+                this.Location.Y + (this.Height - popup.Height) / 2
+            );
+
+            popup.Opacity = 0.9;
+
+            Label msgLabel = new Label
+            {
+                Text = messagepopup,
+                AutoSize = false,
+                TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Fill,
+                Font = new Font("Consolas", 13F, FontStyle.Bold),
+                Padding = new Padding(10),
+                ForeColor = ColorTranslator.FromHtml(mainforecolor),
+                BackColor = ColorTranslator.FromHtml(menubackcolor)
+            };
+
+            Button okButton = new Button
+            {
+                Text = "OK",
+                FlatStyle = FlatStyle.Flat,
+                BackColor = ColorTranslator.FromHtml(selectioncolor),
+                ForeColor = Color.White,
+                Size = new Size(120, 45),
+                Font = new Font("Consolas", 13F, FontStyle.Bold),
+                Anchor = AnchorStyles.Bottom
+            };
+            okButton.FlatAppearance.BorderSize = 0;
+            okButton.Location = new Point((popup.ClientSize.Width - okButton.Width) / 2, popup.ClientSize.Height / 2 + 30);
+            okButton.Click += (s, e) => popup.Close();
+
+            popup.Controls.Add(okButton);
+            popup.Controls.Add(msgLabel);
+            popup.AcceptButton = okButton;
+
+            popup.ShowDialog();
+        }
+
         public void StopService(string serviceName)
         {
             try
@@ -896,7 +1003,7 @@ namespace ET
             }
             int allc = checkedCi + checkedCu + checkedCy + checkedCt;
 
-            if (allc == 68)
+            if (allc == 71)
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -917,6 +1024,8 @@ namespace ET
 
             InitializeComponent();
             LoadAppxPackages();
+            this.KeyPreview = true; 
+            this.KeyDown += Form1_KeyDown;
 
             this.Opacity = 0;
             this.Enabled = false;
@@ -1473,6 +1582,24 @@ namespace ET
             chck74.Click += c_p;
             chck74.TabIndex = 74;
             panel1.Controls.Add(chck74);
+            CheckBox chck75 = new CheckBox();
+            chck75.Tag = "Block telemetry and user experience hosts";
+            chck75.Checked = true;
+            chck75.Click += c_p;
+            chck75.TabIndex = 75;
+            panel2.Controls.Add(chck75);
+            CheckBox chck76 = new CheckBox();
+            chck76.Tag = "Block location data sharing hosts";
+            chck76.Checked = true;
+            chck76.Click += c_p;
+            chck76.TabIndex = 76;
+            panel2.Controls.Add(chck76);
+            CheckBox chck77 = new CheckBox();
+            chck77.Tag = "Block Windows crash report hosts";
+            chck77.Checked = true;
+            chck77.Click += c_p;
+            chck77.TabIndex = 77;
+            panel2.Controls.Add(chck77);
 
             if (File.Exists(systemDrive + "\\Windows\\System32\\dfrgui.exe")) { diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap(); }
             if (File.Exists(systemDrive + "\\Windows\\System32\\cleanmgr.exe")) { cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap(); }
@@ -1503,7 +1630,7 @@ namespace ET
             {
                 button7.Text = "en-US";
                 groupBox1.Text = "Performance Tweaks (36)";
-                groupBox2.Text = "Privacy (18)";
+                groupBox2.Text = "Privacy (21)";
                 groupBox3.Text = "Visual Tweaks (8)";
                 groupBox4.Text = "Other (6)";
                 groupBox5.Text = "Expert Mode (6)";
@@ -1639,6 +1766,89 @@ namespace ET
                 chck72.Text = "Enable Old Context Menu";
                 chck73.Text = "Disable Fullscreen Optimizations";
                 chck74.Text = "Enable RAM Memory Tweaks";
+                chck75.Text = "Block Telemetry/User experience hosts";
+                chck76.Text = "Block location data sharing hosts";
+                chck77.Text = "Block Windows crash report hosts";
+
+                tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
+                tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
+                tooltip.SetToolTip(chck3, "Allows services to run in separate svchost processes, improving system stability.");
+                tooltip.SetToolTip(chck4, "Shortens dual boot menu timeout to 3 seconds for faster startup.");
+                tooltip.SetToolTip(chck5, "Disables hibernation and fast startup to free disk space and improve shutdown behavior.");
+                tooltip.SetToolTip(chck6, "Turns off experimental features pushed via the Windows Insider program.");
+                tooltip.SetToolTip(chck7, "Prevents Windows from tracking which apps you open to protect privacy.");
+                tooltip.SetToolTip(chck8, "Disables CPU power throttling (Intel 6th gen and newer) for full performance.");
+                tooltip.SetToolTip(chck9, "Prevents background apps from running to improve performance and battery life.");
+                tooltip.SetToolTip(chck10, "Disables Sticky Keys pop-ups that appear when pressing Shift or Ctrl repeatedly.");
+                tooltip.SetToolTip(chck11, "Stops Windows from recording your activity history, protecting privacy.");
+                tooltip.SetToolTip(chck12, "Prevents Microsoft Store apps from updating automatically in the background.");
+                tooltip.SetToolTip(chck13, "Turns off the SmartScreen filter for apps, which checks unknown programs.");
+                tooltip.SetToolTip(chck14, "Blocks websites from requesting your physical location for privacy.");
+                tooltip.SetToolTip(chck15, "Resets Edge browser settings to default to fix broken configuration.");
+                tooltip.SetToolTip(chck16, "Disables all location sensors and services in Windows for maximum privacy.");
+                tooltip.SetToolTip(chck17, "Prevents Windows from automatically sharing your Wi-Fi hotspot with others.");
+                tooltip.SetToolTip(chck18, "Blocks connections to shared hotspots by others, reducing security risks.");
+                tooltip.SetToolTip(chck19, "Makes Windows notify before restarting after updates instead of doing it automatically.");
+                tooltip.SetToolTip(chck20, "Limits Windows Update's peer-to-peer sharing to your local network only.");
+                tooltip.SetToolTip(chck21, "Reduces the system shutdown delay to speed up power-off time.");
+                tooltip.SetToolTip(chck22, "Deletes unused device drivers that take up unnecessary disk space.");
+                tooltip.SetToolTip(chck23, "Removes the 'Get even more out of Windows' setup prompt after login.");
+                tooltip.SetToolTip(chck24, "Disables the automatic installation of suggested or sponsored apps.");
+                tooltip.SetToolTip(chck25, "Removes app ads and suggestions from the Start Menu to declutter it.");
+                tooltip.SetToolTip(chck26, "Disables application suggestions in Windows Ink Workspace.");
+                tooltip.SetToolTip(chck27, "Turns off legacy or unused Windows components that are rarely needed.");
+                tooltip.SetToolTip(chck28, "Lowers Defender’s scheduled scan priority to reduce performance impact.");
+                tooltip.SetToolTip(chck29, "Disables some system mitigations for processes to boost performance (use with caution).");
+                tooltip.SetToolTip(chck30, "Defragments the indexing service file to improve search performance.");
+                tooltip.SetToolTip(chck31, "Disables scheduled tasks related to Microsoft telemetry data collection.");
+                tooltip.SetToolTip(chck32, "Removes telemetry services and tracking components from the system.");
+                tooltip.SetToolTip(chck33, "Prevents PowerShell from sending usage data to Microsoft.");
+                tooltip.SetToolTip(chck34, "Blocks Skype from collecting and sending telemetry data.");
+                tooltip.SetToolTip(chck35, "Disables Windows Media Player’s usage tracking reports.");
+                tooltip.SetToolTip(chck36, "Turns off Firefox’s built-in telemetry features.");
+                tooltip.SetToolTip(chck37, "Prevents apps from using your advertising ID for personalized ads.");
+                tooltip.SetToolTip(chck38, "Stops Windows from collecting info about your writing and typing behavior.");
+                tooltip.SetToolTip(chck39, "Disables handwriting input recognition and its data collection.");
+                tooltip.SetToolTip(chck40, "Blocks automatic malware reports from being sent to Microsoft.");
+                tooltip.SetToolTip(chck41, "Prevents Defender from sending diagnostic info about threats.");
+                tooltip.SetToolTip(chck42, "Disables submissions to Microsoft MAPS cloud protection service.");
+                tooltip.SetToolTip(chck43, "Blocks Windows Defender's 'Spynet' reporting service.");
+                tooltip.SetToolTip(chck44, "Prevents automatic submission of suspicious files to Microsoft.");
+                tooltip.SetToolTip(chck45, "Blocks collection of keyboard usage data used for text prediction.");
+                tooltip.SetToolTip(chck46, "Stops Windows from syncing or sharing your contact information.");
+                tooltip.SetToolTip(chck47, "Completely disables Cortana voice assistant and related services.");
+                tooltip.SetToolTip(chck48, "Forces Windows to show file extensions for known file types in Explorer.");
+                tooltip.SetToolTip(chck49, "Turns off taskbar transparency to reduce GPU usage slightly.");
+                tooltip.SetToolTip(chck50, "Disables animations in the UI for a faster and snappier experience.");
+                tooltip.SetToolTip(chck51, "Prevents Windows from keeping recent items lists (Jump Lists).");
+                tooltip.SetToolTip(chck52, "Changes the Start Menu search box into a compact icon.");
+                tooltip.SetToolTip(chck53, "Sets File Explorer to open on 'This PC' instead of 'Quick Access'.");
+                tooltip.SetToolTip(chck54, "Removes Xbox Game Bar and DVR background services.");
+                tooltip.SetToolTip(chck55, "Applies recommended tweaks to speed up and optimize Windows services.");
+                tooltip.SetToolTip(chck56, "Removes preinstalled apps that are unnecessary or considered bloatware.");
+                tooltip.SetToolTip(chck57, "Disables unnecessary programs that auto-start with Windows.");
+                tooltip.SetToolTip(chck58, "Cleans system cache, temp files, prefetch data, and old logs.");
+                tooltip.SetToolTip(chck59, "Removes 'News and Interests' or Widgets panel from the taskbar.");
+                tooltip.SetToolTip(chck60, "Completely removes OneDrive from the system, including background sync.");
+                tooltip.SetToolTip(chck61, "Turns off Xbox services that are not needed unless you're gaming.");
+                tooltip.SetToolTip(chck62, "Sets system DNS to Cloudflare (1.1.1.1) for better speed and privacy.");
+                tooltip.SetToolTip(chck63, "Launches AdwCleaner to scan and remove adware from the system.");
+                tooltip.SetToolTip(chck64, "Disables Nagle’s algorithm to reduce latency and improve online gaming.");
+                tooltip.SetToolTip(chck65, "Optimizes CPU and GPU scheduling for maximum foreground app performance.");
+                tooltip.SetToolTip(chck66, "Disables Spectre/Meltdown protections for higher speed (reduces security).");
+                tooltip.SetToolTip(chck67, "Fully disables Windows Defender antivirus and all its services.");
+                tooltip.SetToolTip(chck68, "Cleans up the WinSxS folder to reclaim disk space from old system files.");
+                tooltip.SetToolTip(chck69, "Removes the new Copilot AI assistant from Windows.");
+                tooltip.SetToolTip(chck70, "Disables the 'Learn about this photo' feature shown on lock screen.");
+                tooltip.SetToolTip(chck71, "Allows Windows to work with long file paths over 260 characters.");
+                tooltip.SetToolTip(chck72, "Restores the classic right-click context menu from Windows 10.");
+                tooltip.SetToolTip(chck73, "Disables fullscreen optimizations that may interfere with game performance.");
+                tooltip.SetToolTip(chck74, "Applies tweaks to improve RAM usage and system responsiveness.");
+                tooltip.SetToolTip(chck75, "Blocks known Microsoft telemetry and user experience tracking domains.");
+                tooltip.SetToolTip(chck76, "Blocks hostnames related to location data sharing with Microsoft.");
+                tooltip.SetToolTip(chck77, "Prevents the system from sending crash reports to Microsoft servers.");
+
+
 
                 toolStripLabel1.Text = "Build: Public | " + ETBuild;
             }
@@ -1652,7 +1862,7 @@ namespace ET
                     button7.Text = "pl-PL";
                     Console.WriteLine("Wykryto Polski");
                     groupBox1.Text = "Poprawki Wydajności (36)";
-                    groupBox2.Text = "Prywatność (18)";
+                    groupBox2.Text = "Prywatność (21)";
                     groupBox3.Text = "Poprawki Wizualne (8)";
                     groupBox4.Text = "Inne (6)";
                     groupBox5.Text = "Tryb Eksperta (6)";
@@ -1771,6 +1981,87 @@ namespace ET
                     chck72.Text = "Włącz stare menu kontekstowe";
                     chck73.Text = "Wył. optymalizacje pełnoekranowe";
                     chck74.Text = "Włącz optymalizacje pamięci RAM";
+                    chck75.Text = "Blokuj hosty telemetry/UX";
+                    chck76.Text = "Blokuj hosty lokalizacji";
+                    chck77.Text = "Blokuj hosty raportów awarii";
+
+                    tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
+                    tooltip.SetToolTip(chck2, "Ustawia plan zasilania Windows na Ultimate Performance dla lepszej responsywności.");
+                    tooltip.SetToolTip(chck3, "Pozwala usługom działać w oddzielnych procesach svchost, poprawiając stabilność.");
+                    tooltip.SetToolTip(chck4, "Skraca czas oczekiwania w menu rozruchu do 3 sekund dla szybszego startu.");
+                    tooltip.SetToolTip(chck5, "Wyłącza hibernację i szybkie uruchamianie, zwalniając miejsce na dysku.");
+                    tooltip.SetToolTip(chck6, "Wyłącza funkcje eksperymentalne z programu Windows Insider.");
+                    tooltip.SetToolTip(chck7, "Zatrzymuje śledzenie przez system, które aplikacje otwierasz.");
+                    tooltip.SetToolTip(chck8, "Wyłącza ograniczanie mocy CPU (dla Intel 6. gen i nowszych) – pełna wydajność.");
+                    tooltip.SetToolTip(chck9, "Zatrzymuje działanie aplikacji w tle, poprawiając wydajność i oszczędność energii.");
+                    tooltip.SetToolTip(chck10, "Wyłącza wyskakujące okienka z klawiszami trwałymi (Sticky Keys).");
+                    tooltip.SetToolTip(chck11, "Blokuje zapisywanie historii aktywności w systemie Windows.");
+                    tooltip.SetToolTip(chck12, "Zatrzymuje automatyczne aktualizacje aplikacji ze sklepu Microsoft Store.");
+                    tooltip.SetToolTip(chck13, "Wyłącza filtr SmartScreen dla aplikacji, który sprawdza nieznane programy.");
+                    tooltip.SetToolTip(chck14, "Blokuje dostęp stron internetowych do Twojej lokalizacji.");
+                    tooltip.SetToolTip(chck15, "Resetuje ustawienia przeglądarki Edge do domyślnych.");
+                    tooltip.SetToolTip(chck16, "Wyłącza czujniki i usługi lokalizacji – maksymalna prywatność.");
+                    tooltip.SetToolTip(chck17, "Zabrania automatycznego udostępniania Twojego hotspotu Wi-Fi.");
+                    tooltip.SetToolTip(chck18, "Blokuje połączenia z udostępnionymi hotspotami – zwiększa bezpieczeństwo.");
+                    tooltip.SetToolTip(chck19, "Wymusza powiadomienia przed restartem po aktualizacjach.");
+                    tooltip.SetToolTip(chck20, "Ogranicza współdzielenie aktualizacji tylko do sieci lokalnej.");
+                    tooltip.SetToolTip(chck21, "Skraca czas zamykania systemu – szybsze wyłączanie.");
+                    tooltip.SetToolTip(chck22, "Usuwa nieużywane sterowniki urządzeń, zwalniając miejsce.");
+                    tooltip.SetToolTip(chck23, "Usuwa ekran powitalny 'Wydobądź więcej z systemu Windows'.");
+                    tooltip.SetToolTip(chck24, "Blokuje instalowanie sugerowanych i sponsorowanych aplikacji.");
+                    tooltip.SetToolTip(chck25, "Usuwa reklamy i sugestie z menu Start.");
+                    tooltip.SetToolTip(chck26, "Wyłącza sugestie aplikacji w obszarze Windows Ink.");
+                    tooltip.SetToolTip(chck27, "Wyłącza nieużywane składniki systemu Windows.");
+                    tooltip.SetToolTip(chck28, "Zmniejsza priorytet skanów Defendera – mniej wpływu na wydajność.");
+                    tooltip.SetToolTip(chck29, "Wyłącza niektóre zabezpieczenia procesów – zwiększa wydajność (ostrożnie!).");
+                    tooltip.SetToolTip(chck30, "Defragmentuje plik indeksowania – szybsze wyszukiwanie.");
+                    tooltip.SetToolTip(chck31, "Wyłącza zadania zaplanowane związane z telemetrią.");
+                    tooltip.SetToolTip(chck32, "Usuwa usługi i komponenty zbierające dane telemetryczne.");
+                    tooltip.SetToolTip(chck33, "Blokuje PowerShell przed wysyłaniem danych do Microsoftu.");
+                    tooltip.SetToolTip(chck34, "Blokuje Skype przed zbieraniem i wysyłaniem danych telemetrycznych.");
+                    tooltip.SetToolTip(chck35, "Wyłącza raporty o użyciu Windows Media Player.");
+                    tooltip.SetToolTip(chck36, "Wyłącza wbudowaną telemetrię w przeglądarce Firefox.");
+                    tooltip.SetToolTip(chck37, "Blokuje aplikacjom dostęp do Twojego identyfikatora reklamowego.");
+                    tooltip.SetToolTip(chck38, "Zatrzymuje zbieranie informacji o Twoim stylu pisania.");
+                    tooltip.SetToolTip(chck39, "Wyłącza rozpoznawanie pisma odręcznego i jego analizę.");
+                    tooltip.SetToolTip(chck40, "Blokuje automatyczne raporty o złośliwym oprogramowaniu do Microsoftu.");
+                    tooltip.SetToolTip(chck41, "Blokuje Defendera przed wysyłaniem danych diagnostycznych o zagrożeniach.");
+                    tooltip.SetToolTip(chck42, "Wyłącza zgłaszanie do chmurowego systemu MAPS od Microsoftu.");
+                    tooltip.SetToolTip(chck43, "Blokuje usługę raportowania Spynet w Windows Defender.");
+                    tooltip.SetToolTip(chck44, "Zatrzymuje automatyczne wysyłanie podejrzanych plików do Microsoftu.");
+                    tooltip.SetToolTip(chck45, "Blokuje zbieranie danych o wprowadzaniu tekstu przez klawiaturę.");
+                    tooltip.SetToolTip(chck46, "Zatrzymuje synchronizację i udostępnianie Twoich kontaktów.");
+                    tooltip.SetToolTip(chck47, "Całkowicie wyłącza asystenta głosowego Cortana.");
+                    tooltip.SetToolTip(chck48, "Wymusza wyświetlanie rozszerzeń plików w Eksploratorze.");
+                    tooltip.SetToolTip(chck49, "Wyłącza przezroczystość paska zadań – mniejsze zużycie GPU.");
+                    tooltip.SetToolTip(chck50, "Wyłącza animacje interfejsu – przyspiesza reakcje systemu.");
+                    tooltip.SetToolTip(chck51, "Blokuje zapisywanie ostatnio używanych elementów (Jump Lists).");
+                    tooltip.SetToolTip(chck52, "Zmienia pole wyszukiwania menu Start na samą ikonę.");
+                    tooltip.SetToolTip(chck53, "Ustawia Eksplorator plików, aby otwierał się na 'Ten komputer'.");
+                    tooltip.SetToolTip(chck54, "Usuwa pasek gier Xbox i usługi DVR działające w tle.");
+                    tooltip.SetToolTip(chck55, "Stosuje bezpieczne optymalizacje usług Windows.");
+                    tooltip.SetToolTip(chck56, "Usuwa fabrycznie zainstalowane aplikacje (bloatware).");
+                    tooltip.SetToolTip(chck57, "Wyłącza zbędne programy startujące z systemem.");
+                    tooltip.SetToolTip(chck58, "Czyści pamięć podręczną, pliki tymczasowe i logi systemowe.");
+                    tooltip.SetToolTip(chck59, "Usuwa panel 'Wiadomości i zainteresowania' z paska zadań.");
+                    tooltip.SetToolTip(chck60, "Całkowicie usuwa OneDrive z systemu, wraz z synchronizacją.");
+                    tooltip.SetToolTip(chck61, "Wyłącza usługi Xbox – zalecane, jeśli nie grasz.");
+                    tooltip.SetToolTip(chck62, "Ustawia szybki i bezpieczny DNS od Cloudflare (1.1.1.1).");
+                    tooltip.SetToolTip(chck63, "Uruchamia AdwCleaner do wykrywania i usuwania adware.");
+                    tooltip.SetToolTip(chck64, "Wyłącza algorytm Nagle’a – zmniejsza opóźnienia w grach online.");
+                    tooltip.SetToolTip(chck65, "Optymalizuje zarządzanie CPU i GPU dla lepszej wydajności aplikacji.");
+                    tooltip.SetToolTip(chck66, "Wyłącza zabezpieczenia Spectre/Meltdown – zwiększa wydajność (mniej bezpieczne).");
+                    tooltip.SetToolTip(chck67, "Całkowicie wyłącza program antywirusowy Windows Defender.");
+                    tooltip.SetToolTip(chck68, "Czyści folder WinSxS – odzyskuje miejsce zajęte przez stare pliki systemowe.");
+                    tooltip.SetToolTip(chck69, "Usuwa asystenta AI Copilot z systemu Windows.");
+                    tooltip.SetToolTip(chck70, "Wyłącza funkcję 'Dowiedz się więcej o tym zdjęciu' na ekranie blokady.");
+                    tooltip.SetToolTip(chck71, "Umożliwia korzystanie z długich ścieżek plików (>260 znaków).");
+                    tooltip.SetToolTip(chck72, "Przywraca klasyczne menu kontekstowe (jak w Windows 10).");
+                    tooltip.SetToolTip(chck73, "Wyłącza optymalizacje pełnoekranowe – lepsza płynność w grach.");
+                    tooltip.SetToolTip(chck74, "Wprowadza poprawki zwiększające wydajność pamięci RAM.");
+                    tooltip.SetToolTip(chck75, "Blokuje znane adresy telemetryczne i śledzące Microsoftu.");
+                    tooltip.SetToolTip(chck76, "Blokuje hosty udostępniające dane o lokalizacji.");
+                    tooltip.SetToolTip(chck77, "Zatrzymuje wysyłanie raportów o awariach do Microsoftu.");
 
                 }
 
@@ -1779,7 +2070,7 @@ namespace ET
                     button7.Text = "ru-RU";
                     Console.WriteLine("Russian detected");
                     groupBox1.Text = "Настройки производительности (36)";
-                    groupBox2.Text = "Конфиденциальность (18)";
+                    groupBox2.Text = "Конфиденциальность (21)";
                     groupBox3.Text = "Визуальные настройки (8)";
                     groupBox4.Text = "Другие (6)";
                     groupBox5.Text = "Экспертный режим (6)";
@@ -1901,6 +2192,88 @@ namespace ET
                     chck72.Text = "Включить старое контекстное меню";
                     chck73.Text = "Отключить оптимизации для полноэкранного режима";
                     chck74.Text = "Включить оптимизацию оперативной памяти";
+                    chck75.Text = "Блок хостов телеметрии/UX";
+                    chck76.Text = "Блок хостов геоданных";
+                    chck77.Text = "Блок хостов с отчётами сбоев";
+
+                    tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
+                    tooltip.SetToolTip(chck2, "Устанавливает план питания Windows на Ultimate Performance для лучшей отзывчивости.");
+                    tooltip.SetToolTip(chck3, "Позволяет службам работать в отдельных процессах svchost, улучшая стабильность.");
+                    tooltip.SetToolTip(chck4, "Сокращает время ожидания в меню загрузки до 3 секунд для более быстрого старта.");
+                    tooltip.SetToolTip(chck5, "Отключает гибернацию и быстрый запуск, освобождая место на диске.");
+                    tooltip.SetToolTip(chck6, "Отключает экспериментальные функции из программы Windows Insider.");
+                    tooltip.SetToolTip(chck7, "Останавливает отслеживание системой, какие приложения вы открываете.");
+                    tooltip.SetToolTip(chck8, "Отключает ограничение мощности ЦПУ (для Intel 6-го поколения и новее) — полная производительность.");
+                    tooltip.SetToolTip(chck9, "Останавливает работу приложений в фоне, улучшая производительность и экономию энергии.");
+                    tooltip.SetToolTip(chck10, "Отключает всплывающие окна с залипающими клавишами (Sticky Keys).");
+                    tooltip.SetToolTip(chck11, "Блокирует сохранение истории активности в Windows.");
+                    tooltip.SetToolTip(chck12, "Останавливает автоматические обновления приложений из Microsoft Store.");
+                    tooltip.SetToolTip(chck13, "Отключает фильтр SmartScreen для приложений, проверяющий неизвестные программы.");
+                    tooltip.SetToolTip(chck14, "Блокирует доступ веб-сайтов к вашему местоположению.");
+                    tooltip.SetToolTip(chck15, "Сбрасывает настройки браузера Edge к значениям по умолчанию.");
+                    tooltip.SetToolTip(chck16, "Отключает датчики и службы определения местоположения — максимальная приватность.");
+                    tooltip.SetToolTip(chck17, "Запрещает автоматическое совместное использование вашей точки доступа Wi-Fi.");
+                    tooltip.SetToolTip(chck18, "Блокирует подключения к общим точкам доступа — повышает безопасность.");
+                    tooltip.SetToolTip(chck19, "Принуждает к уведомлениям перед перезагрузкой после обновлений.");
+                    tooltip.SetToolTip(chck20, "Ограничивает совместное использование обновлений только локальной сетью.");
+                    tooltip.SetToolTip(chck21, "Сокращает время завершения работы системы — быстрее выключение.");
+                    tooltip.SetToolTip(chck22, "Удаляет неиспользуемые драйверы устройств, освобождая место.");
+                    tooltip.SetToolTip(chck23, "Удаляет приветственный экран 'Получите больше от Windows'.");
+                    tooltip.SetToolTip(chck24, "Блокирует установку рекомендованных и спонсируемых приложений.");
+                    tooltip.SetToolTip(chck25, "Удаляет рекламу и предложения из меню Пуск.");
+                    tooltip.SetToolTip(chck26, "Отключает предложения приложений в области Windows Ink.");
+                    tooltip.SetToolTip(chck27, "Отключает неиспользуемые компоненты Windows.");
+                    tooltip.SetToolTip(chck28, "Уменьшает приоритет сканирования Defender — меньше влияния на производительность.");
+                    tooltip.SetToolTip(chck29, "Отключает некоторые защиты процессов — повышает производительность (осторожно!).");
+                    tooltip.SetToolTip(chck30, "Дефрагментирует файл индексирования — ускоряет поиск.");
+                    tooltip.SetToolTip(chck31, "Отключает запланированные задачи, связанные с телеметрией.");
+                    tooltip.SetToolTip(chck32, "Удаляет службы и компоненты сбора телеметрических данных.");
+                    tooltip.SetToolTip(chck33, "Блокирует PowerShell от отправки данных в Microsoft.");
+                    tooltip.SetToolTip(chck34, "Блокирует Skype от сбора и отправки телеметрических данных.");
+                    tooltip.SetToolTip(chck35, "Отключает отчёты об использовании Windows Media Player.");
+                    tooltip.SetToolTip(chck36, "Отключает встроенную телеметрию в браузере Firefox.");
+                    tooltip.SetToolTip(chck37, "Блокирует приложениям доступ к вашему рекламному идентификатору.");
+                    tooltip.SetToolTip(chck38, "Останавливает сбор информации о вашем стиле печати.");
+                    tooltip.SetToolTip(chck39, "Отключает распознавание рукописного ввода и его анализ.");
+                    tooltip.SetToolTip(chck40, "Блокирует автоматические отчёты о вредоносном ПО в Microsoft.");
+                    tooltip.SetToolTip(chck41, "Блокирует Defender от отправки диагностических данных о угрозах.");
+                    tooltip.SetToolTip(chck42, "Отключает отчёты в облачную систему MAPS от Microsoft.");
+                    tooltip.SetToolTip(chck43, "Блокирует службу отчётов Spynet в Windows Defender.");
+                    tooltip.SetToolTip(chck44, "Останавливает автоматическую отправку подозрительных файлов в Microsoft.");
+                    tooltip.SetToolTip(chck45, "Блокирует сбор данных о вводе текста с клавиатуры.");
+                    tooltip.SetToolTip(chck46, "Останавливает синхронизацию и совместное использование ваших контактов.");
+                    tooltip.SetToolTip(chck47, "Полностью отключает голосового помощника Cortana.");
+                    tooltip.SetToolTip(chck48, "Принуждает отображение расширений файлов в Проводнике.");
+                    tooltip.SetToolTip(chck49, "Отключает прозрачность панели задач — снижает нагрузку на GPU.");
+                    tooltip.SetToolTip(chck50, "Отключает анимации интерфейса — ускоряет отклик системы.");
+                    tooltip.SetToolTip(chck51, "Блокирует сохранение недавно использованных элементов (Jump Lists).");
+                    tooltip.SetToolTip(chck52, "Меняет поле поиска в меню Пуск на иконку.");
+                    tooltip.SetToolTip(chck53, "Настраивает Проводник на открытие на 'Этот компьютер'.");
+                    tooltip.SetToolTip(chck54, "Удаляет панель Xbox Game Bar и фоновые службы DVR.");
+                    tooltip.SetToolTip(chck55, "Применяет безопасные оптимизации служб Windows.");
+                    tooltip.SetToolTip(chck56, "Удаляет предустановленные приложения (bloatware).");
+                    tooltip.SetToolTip(chck57, "Отключает ненужные программы автозагрузки.");
+                    tooltip.SetToolTip(chck58, "Очищает кэш, временные файлы и системные логи.");
+                    tooltip.SetToolTip(chck59, "Удаляет панель 'Новости и интересы' с панели задач.");
+                    tooltip.SetToolTip(chck60, "Полностью удаляет OneDrive из системы вместе с синхронизацией.");
+                    tooltip.SetToolTip(chck61, "Отключает службы Xbox — рекомендуется, если вы не играете.");
+                    tooltip.SetToolTip(chck62, "Настраивает быстрый и безопасный DNS от Cloudflare (1.1.1.1).");
+                    tooltip.SetToolTip(chck63, "Запускает AdwCleaner для обнаружения и удаления рекламного ПО.");
+                    tooltip.SetToolTip(chck64, "Отключает алгоритм Nagle — уменьшает задержки в онлайн-играх.");
+                    tooltip.SetToolTip(chck65, "Оптимизирует управление ЦПУ и GPU для лучшей производительности приложений.");
+                    tooltip.SetToolTip(chck66, "Отключает защиты Spectre/Meltdown — повышает производительность (менее безопасно).");
+                    tooltip.SetToolTip(chck67, "Полностью отключает антивирус Windows Defender.");
+                    tooltip.SetToolTip(chck68, "Очищает папку WinSxS — освобождает место от старых системных файлов.");
+                    tooltip.SetToolTip(chck69, "Удаляет AI помощника Copilot из Windows.");
+                    tooltip.SetToolTip(chck70, "Отключает функцию 'Узнайте больше об этом фото' на экране блокировки.");
+                    tooltip.SetToolTip(chck71, "Позволяет использовать длинные пути файлов (>260 символов).");
+                    tooltip.SetToolTip(chck72, "Восстанавливает классическое контекстное меню (как в Windows 10).");
+                    tooltip.SetToolTip(chck73, "Отключает полноэкранные оптимизации — лучшая плавность в играх.");
+                    tooltip.SetToolTip(chck74, "Внедряет исправления для повышения производительности оперативной памяти.");
+                    tooltip.SetToolTip(chck75, "Блокирует известные адреса телеметрии и слежки Microsoft.");
+                    tooltip.SetToolTip(chck76, "Блокирует хосты, предоставляющие данные о местоположении.");
+                    tooltip.SetToolTip(chck77, "Останавливает отправку отчётов о сбоях в Microsoft.");
+
 
                 }
 
@@ -1909,7 +2282,7 @@ namespace ET
                     button7.Text = "de-DE";
                     Console.WriteLine("German detected");
                     groupBox1.Text = "Leistungs-Optim. (36)";
-                    groupBox2.Text = "Privatsphäre (18)";
+                    groupBox2.Text = "Privatsphäre (21)";
                     groupBox3.Text = "Visuelle Tweaks (8)";
                     groupBox4.Text = "Andere (6)";
                     groupBox5.Text = "Expertenmodus (6)";
@@ -2029,6 +2402,89 @@ namespace ET
                     chck72.Text = "Altes Kontextmenü aktivieren";
                     chck73.Text = "Vollbild-Opt. deaktivieren";
                     chck74.Text = "RAM-Speicheranpassungen";
+                    chck75.Text = "Telemetry/UX-Hosts blockieren";
+                    chck76.Text = "Standortdaten-Hosts blocken";
+                    chck77.Text = "Crashreport-Hosts blockieren";
+
+                    tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
+                    tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
+                    tooltip.SetToolTip(chck3, "Erlaubt Diensten, in separaten svchost-Prozessen zu laufen, verbessert die Stabilität.");
+                    tooltip.SetToolTip(chck4, "Verkürzt die Wartezeit im Boot-Menü auf 3 Sekunden für einen schnelleren Start.");
+                    tooltip.SetToolTip(chck5, "Deaktiviert den Ruhezustand und den Schnellstart, um Speicherplatz freizugeben.");
+                    tooltip.SetToolTip(chck6, "Deaktiviert experimentelle Funktionen aus dem Windows Insider-Programm.");
+                    tooltip.SetToolTip(chck7, "Stoppt die Systemverfolgung, welche Apps Sie öffnen.");
+                    tooltip.SetToolTip(chck8, "Deaktiviert die CPU-Leistungsbegrenzung (für Intel 6. Gen und neuer) – volle Leistung.");
+                    tooltip.SetToolTip(chck9, "Stoppt Hintergrund-Apps, verbessert Leistung und Energieeffizienz.");
+                    tooltip.SetToolTip(chck10, "Deaktiviert Popups für dauerhafte Tasten (Sticky Keys).");
+                    tooltip.SetToolTip(chck11, "Blockiert das Speichern der Aktivitätsverlauf in Windows.");
+                    tooltip.SetToolTip(chck12, "Stoppt automatische Updates von Apps aus dem Microsoft Store.");
+                    tooltip.SetToolTip(chck13, "Deaktiviert den SmartScreen-Filter für Apps, der unbekannte Programme prüft.");
+                    tooltip.SetToolTip(chck14, "Blockiert den Zugriff von Webseiten auf Ihren Standort.");
+                    tooltip.SetToolTip(chck15, "Setzt die Edge-Browsereinstellungen auf Standard zurück.");
+                    tooltip.SetToolTip(chck16, "Deaktiviert Sensoren und Ortungsdienste – maximale Privatsphäre.");
+                    tooltip.SetToolTip(chck17, "Verhindert das automatische Teilen Ihres Wi-Fi-Hotspots.");
+                    tooltip.SetToolTip(chck18, "Blockiert Verbindungen zu geteilten Hotspots – erhöht die Sicherheit.");
+                    tooltip.SetToolTip(chck19, "Erzwingt Benachrichtigungen vor einem Neustart nach Updates.");
+                    tooltip.SetToolTip(chck20, "Begrenzt Update-Freigaben nur auf das lokale Netzwerk.");
+                    tooltip.SetToolTip(chck21, "Verkürzt die Systemabschaltzeit – schnelleres Herunterfahren.");
+                    tooltip.SetToolTip(chck22, "Entfernt ungenutzte Gerätetreiber, gibt Speicher frei.");
+                    tooltip.SetToolTip(chck23, "Entfernt den Begrüßungsbildschirm 'Mehr aus Windows herausholen'.");
+                    tooltip.SetToolTip(chck24, "Blockiert die Installation von empfohlenen und gesponserten Apps.");
+                    tooltip.SetToolTip(chck25, "Entfernt Werbung und Vorschläge aus dem Startmenü.");
+                    tooltip.SetToolTip(chck26, "Deaktiviert App-Vorschläge im Windows Ink-Bereich.");
+                    tooltip.SetToolTip(chck27, "Deaktiviert ungenutzte Windows-Komponenten.");
+                    tooltip.SetToolTip(chck28, "Reduziert die Priorität der Defender-Scans – weniger Einfluss auf die Leistung.");
+                    tooltip.SetToolTip(chck29, "Deaktiviert einige Prozessschutzmaßnahmen – erhöht die Leistung (vorsichtig!).");
+                    tooltip.SetToolTip(chck30, "Defragmentiert die Indexdatei – schnelleres Suchen.");
+                    tooltip.SetToolTip(chck31, "Deaktiviert geplante Aufgaben im Zusammenhang mit Telemetrie.");
+                    tooltip.SetToolTip(chck32, "Entfernt Dienste und Komponenten zur Telemetriedatenerfassung.");
+                    tooltip.SetToolTip(chck33, "Blockiert PowerShell daran, Daten an Microsoft zu senden.");
+                    tooltip.SetToolTip(chck34, "Blockiert Skype beim Sammeln und Senden von Telemetriedaten.");
+                    tooltip.SetToolTip(chck35, "Deaktiviert Nutzungsberichte für den Windows Media Player.");
+                    tooltip.SetToolTip(chck36, "Deaktiviert eingebaute Telemetrie im Firefox-Browser.");
+                    tooltip.SetToolTip(chck37, "Blockiert Apps den Zugriff auf Ihre Werbe-ID.");
+                    tooltip.SetToolTip(chck38, "Stoppt die Erfassung Ihrer Tippgewohnheiten.");
+                    tooltip.SetToolTip(chck39, "Deaktiviert Handschrifterkennung und Analyse.");
+                    tooltip.SetToolTip(chck40, "Blockiert automatische Malware-Berichte an Microsoft.");
+                    tooltip.SetToolTip(chck41, "Blockiert Defender daran, Diagnosedaten zu Bedrohungen zu senden.");
+                    tooltip.SetToolTip(chck42, "Deaktiviert Berichte an das cloudbasierte Microsoft MAPS-System.");
+                    tooltip.SetToolTip(chck43, "Blockiert den Spynet-Berichtsdienst in Windows Defender.");
+                    tooltip.SetToolTip(chck44, "Stoppt das automatische Senden verdächtiger Dateien an Microsoft.");
+                    tooltip.SetToolTip(chck45, "Blockiert die Erfassung von Texteingabedaten über die Tastatur.");
+                    tooltip.SetToolTip(chck46, "Stoppt die Synchronisation und Freigabe Ihrer Kontakte.");
+                    tooltip.SetToolTip(chck47, "Schaltet den Sprachassistenten Cortana komplett aus.");
+                    tooltip.SetToolTip(chck48, "Erzwingt die Anzeige von Dateierweiterungen im Explorer.");
+                    tooltip.SetToolTip(chck49, "Deaktiviert die Transparenz der Taskleiste – geringerer GPU-Verbrauch.");
+                    tooltip.SetToolTip(chck50, "Deaktiviert UI-Animationen – beschleunigt die Systemreaktion.");
+                    tooltip.SetToolTip(chck51, "Blockiert das Speichern der zuletzt verwendeten Elemente (Jump Lists).");
+                    tooltip.SetToolTip(chck52, "Ändert das Suchfeld im Startmenü in ein Symbol.");
+                    tooltip.SetToolTip(chck53, "Stellt den Explorer so ein, dass er 'Dieser PC' öffnet.");
+                    tooltip.SetToolTip(chck54, "Entfernt die Xbox-Spielleiste und Hintergrund-DVR-Dienste.");
+                    tooltip.SetToolTip(chck55, "Wendet sichere Optimierungen für Windows-Dienste an.");
+                    tooltip.SetToolTip(chck56, "Entfernt vorinstallierte Anwendungen (Bloatware).");
+                    tooltip.SetToolTip(chck57, "Deaktiviert unnötige Autostart-Programme.");
+                    tooltip.SetToolTip(chck58, "Reinigt Cache, temporäre Dateien und Systemprotokolle.");
+                    tooltip.SetToolTip(chck59, "Entfernt das 'Nachrichten und Interessen'-Panel von der Taskleiste.");
+                    tooltip.SetToolTip(chck60, "Entfernt OneDrive komplett aus dem System inklusive Synchronisation.");
+                    tooltip.SetToolTip(chck61, "Deaktiviert Xbox-Dienste – empfohlen, wenn Sie nicht spielen.");
+                    tooltip.SetToolTip(chck62, "Setzt schnellen und sicheren DNS von Cloudflare (1.1.1.1).");
+                    tooltip.SetToolTip(chck63, "Startet AdwCleaner zur Erkennung und Entfernung von Adware.");
+                    tooltip.SetToolTip(chck64, "Deaktiviert den Nagle-Algorithmus – reduziert Lags in Online-Spielen.");
+                    tooltip.SetToolTip(chck65, "Optimiert CPU- und GPU-Management für bessere Anwendungsleistung.");
+                    tooltip.SetToolTip(chck66, "Deaktiviert Spectre/Meltdown-Sicherheitsmechanismen – erhöht Leistung (weniger sicher).");
+                    tooltip.SetToolTip(chck67, "Schaltet den Windows Defender Antivirenschutz komplett aus.");
+                    tooltip.SetToolTip(chck68, "Reinigt den WinSxS-Ordner – gibt Speicherplatz durch alte Systemdateien frei.");
+                    tooltip.SetToolTip(chck69, "Entfernt den AI-Assistenten Copilot aus Windows.");
+                    tooltip.SetToolTip(chck70, "Deaktiviert die Funktion 'Mehr über dieses Bild erfahren' auf dem Sperrbildschirm.");
+                    tooltip.SetToolTip(chck71, "Erlaubt die Nutzung langer Dateipfade (>260 Zeichen).");
+                    tooltip.SetToolTip(chck72, "Stellt das klassische Kontextmenü (wie in Windows 10) wieder her.");
+                    tooltip.SetToolTip(chck73, "Deaktiviert Vollbildoptimierungen – bessere Performance in Spielen.");
+                    tooltip.SetToolTip(chck74, "Führt Verbesserungen zur Steigerung der RAM-Leistung ein.");
+                    tooltip.SetToolTip(chck75, "Blockiert bekannte Microsoft-Telemetrie- und Tracking-Adressen.");
+                    tooltip.SetToolTip(chck76, "Blockiert Hosts, die Standortdaten bereitstellen.");
+                    tooltip.SetToolTip(chck77, "Stoppt das Senden von Absturzberichten an Microsoft.");
+
+
                 }
 
                 if (cinfo.Name == "pt-BR")
@@ -2054,7 +2510,7 @@ namespace ET
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
                     groupBox1.Text = "Ajustes de desempenho (36)";
-                    groupBox2.Text = "Privacidade (18)";
+                    groupBox2.Text = "Privacidade (21)";
                     groupBox3.Text = "Ajustes visuais (8)";
                     groupBox4.Text = "Outros (6)";
                     groupBox5.Text = "Modo especialista (6)";
@@ -2138,6 +2594,88 @@ namespace ET
                     chck72.Text = "Habilitar menu de contexto antigo";
                     chck73.Text = "Desat. otim. tela cheia";
                     chck74.Text = "Ajustes de Memória RAM";
+                    chck75.Text = "Bloquear hosts de telemetria/UX";
+                    chck76.Text = "Bloquear hosts de localização";
+                    chck77.Text = "Bloquear hosts de erros do Win";
+
+                    tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
+                    tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
+                    tooltip.SetToolTip(chck3, "Permite que serviços rodem em processos svchost separados, melhorando a estabilidade.");
+                    tooltip.SetToolTip(chck4, "Reduz o tempo de espera no menu de inicialização para 3 segundos, para um boot mais rápido.");
+                    tooltip.SetToolTip(chck5, "Desativa a hibernação e a inicialização rápida, liberando espaço no disco.");
+                    tooltip.SetToolTip(chck6, "Desativa recursos experimentais do programa Windows Insider.");
+                    tooltip.SetToolTip(chck7, "Para o sistema de rastreamento de quais aplicativos você abre.");
+                    tooltip.SetToolTip(chck8, "Desativa o limite de potência da CPU (para Intel 6ª geração e posteriores) – desempenho máximo.");
+                    tooltip.SetToolTip(chck9, "Para aplicativos rodando em segundo plano, melhorando performance e economia de energia.");
+                    tooltip.SetToolTip(chck10, "Desativa janelas pop-up das Teclas de Aderência (Sticky Keys).");
+                    tooltip.SetToolTip(chck11, "Bloqueia o salvamento do histórico de atividades no Windows.");
+                    tooltip.SetToolTip(chck12, "Para atualizações automáticas de aplicativos da Microsoft Store.");
+                    tooltip.SetToolTip(chck13, "Desativa o filtro SmartScreen para apps, que verifica programas desconhecidos.");
+                    tooltip.SetToolTip(chck14, "Bloqueia o acesso de sites à sua localização.");
+                    tooltip.SetToolTip(chck15, "Reseta as configurações do navegador Edge para o padrão.");
+                    tooltip.SetToolTip(chck16, "Desativa sensores e serviços de localização – máxima privacidade.");
+                    tooltip.SetToolTip(chck17, "Impede o compartilhamento automático do seu hotspot Wi-Fi.");
+                    tooltip.SetToolTip(chck18, "Bloqueia conexões a hotspots compartilhados – aumenta a segurança.");
+                    tooltip.SetToolTip(chck19, "Exige notificações antes de reiniciar após atualizações.");
+                    tooltip.SetToolTip(chck20, "Limita o compartilhamento de atualizações apenas para a rede local.");
+                    tooltip.SetToolTip(chck21, "Reduz o tempo de desligamento do sistema – desligamento mais rápido.");
+                    tooltip.SetToolTip(chck22, "Remove drivers de dispositivos não usados, liberando espaço.");
+                    tooltip.SetToolTip(chck23, "Remove a tela de boas-vindas 'Aproveite mais do Windows'.");
+                    tooltip.SetToolTip(chck24, "Bloqueia a instalação de apps sugeridos e patrocinados.");
+                    tooltip.SetToolTip(chck25, "Remove anúncios e sugestões do menu Iniciar.");
+                    tooltip.SetToolTip(chck26, "Desativa sugestões de aplicativos na área do Windows Ink.");
+                    tooltip.SetToolTip(chck27, "Desativa componentes do Windows que não são usados.");
+                    tooltip.SetToolTip(chck28, "Reduz a prioridade das varreduras do Defender – menos impacto na performance.");
+                    tooltip.SetToolTip(chck29, "Desativa algumas proteções de processos – aumenta o desempenho (cuidado!).");
+                    tooltip.SetToolTip(chck30, "Desfragmenta o arquivo de indexação – busca mais rápida.");
+                    tooltip.SetToolTip(chck31, "Desativa tarefas agendadas relacionadas à telemetria.");
+                    tooltip.SetToolTip(chck32, "Remove serviços e componentes que coletam dados de telemetria.");
+                    tooltip.SetToolTip(chck33, "Bloqueia o PowerShell de enviar dados para a Microsoft.");
+                    tooltip.SetToolTip(chck34, "Bloqueia o Skype de coletar e enviar dados de telemetria.");
+                    tooltip.SetToolTip(chck35, "Desativa relatórios de uso do Windows Media Player.");
+                    tooltip.SetToolTip(chck36, "Desativa a telemetria embutida no navegador Firefox.");
+                    tooltip.SetToolTip(chck37, "Bloqueia aplicativos de acessar seu ID de publicidade.");
+                    tooltip.SetToolTip(chck38, "Para a coleta de informações sobre seu estilo de digitação.");
+                    tooltip.SetToolTip(chck39, "Desativa reconhecimento e análise de escrita manual.");
+                    tooltip.SetToolTip(chck40, "Bloqueia relatórios automáticos de malware para a Microsoft.");
+                    tooltip.SetToolTip(chck41, "Bloqueia o Defender de enviar dados diagnósticos de ameaças.");
+                    tooltip.SetToolTip(chck42, "Desativa o envio de relatórios para o sistema em nuvem MAPS da Microsoft.");
+                    tooltip.SetToolTip(chck43, "Bloqueia o serviço de relatório Spynet do Windows Defender.");
+                    tooltip.SetToolTip(chck44, "Para o envio automático de arquivos suspeitos para a Microsoft.");
+                    tooltip.SetToolTip(chck45, "Bloqueia a coleta de dados de entrada de texto via teclado.");
+                    tooltip.SetToolTip(chck46, "Para a sincronização e compartilhamento dos seus contatos.");
+                    tooltip.SetToolTip(chck47, "Desativa completamente a assistente de voz Cortana.");
+                    tooltip.SetToolTip(chck48, "Força a exibição de extensões de arquivos no Explorador.");
+                    tooltip.SetToolTip(chck49, "Desativa a transparência da barra de tarefas – menor uso de GPU.");
+                    tooltip.SetToolTip(chck50, "Desativa animações da interface – acelera respostas do sistema.");
+                    tooltip.SetToolTip(chck51, "Bloqueia o salvamento dos itens usados recentemente (Jump Lists).");
+                    tooltip.SetToolTip(chck52, "Altera a caixa de busca do menu Iniciar para apenas o ícone.");
+                    tooltip.SetToolTip(chck53, "Configura o Explorador de arquivos para abrir em 'Este Computador'.");
+                    tooltip.SetToolTip(chck54, "Remove a barra de jogos Xbox e serviços DVR em segundo plano.");
+                    tooltip.SetToolTip(chck55, "Aplica otimizações seguras nos serviços do Windows.");
+                    tooltip.SetToolTip(chck56, "Remove aplicativos pré-instalados (bloatware).");
+                    tooltip.SetToolTip(chck57, "Desativa programas desnecessários que iniciam com o sistema.");
+                    tooltip.SetToolTip(chck58, "Limpa cache, arquivos temporários e logs do sistema.");
+                    tooltip.SetToolTip(chck59, "Remove o painel 'Notícias e Interesses' da barra de tarefas.");
+                    tooltip.SetToolTip(chck60, "Remove completamente o OneDrive do sistema, junto com a sincronização.");
+                    tooltip.SetToolTip(chck61, "Desativa serviços do Xbox – recomendado se você não joga.");
+                    tooltip.SetToolTip(chck62, "Configura DNS rápido e seguro da Cloudflare (1.1.1.1).");
+                    tooltip.SetToolTip(chck63, "Executa o AdwCleaner para detectar e remover adware.");
+                    tooltip.SetToolTip(chck64, "Desativa o algoritmo de Nagle – reduz atrasos em jogos online.");
+                    tooltip.SetToolTip(chck65, "Otimiza o gerenciamento de CPU e GPU para melhor desempenho de apps.");
+                    tooltip.SetToolTip(chck66, "Desativa proteções Spectre/Meltdown – aumenta desempenho (menos seguro).");
+                    tooltip.SetToolTip(chck67, "Desativa completamente o antivírus Windows Defender.");
+                    tooltip.SetToolTip(chck68, "Limpa a pasta WinSxS – recupera espaço usado por arquivos antigos do sistema.");
+                    tooltip.SetToolTip(chck69, "Remove o assistente AI Copilot do Windows.");
+                    tooltip.SetToolTip(chck70, "Desativa a função 'Saiba mais sobre esta foto' na tela de bloqueio.");
+                    tooltip.SetToolTip(chck71, "Permite o uso de caminhos longos para arquivos (>260 caracteres).");
+                    tooltip.SetToolTip(chck72, "Restaura o menu de contexto clássico (como no Windows 10).");
+                    tooltip.SetToolTip(chck73, "Desativa otimizações de tela cheia – melhora a fluidez nos jogos.");
+                    tooltip.SetToolTip(chck74, "Aplica melhorias para aumentar o desempenho da memória RAM.");
+                    tooltip.SetToolTip(chck75, "Bloqueia endereços conhecidos de telemetria e rastreamento da Microsoft.");
+                    tooltip.SetToolTip(chck76, "Bloqueia hosts que compartilham dados de localização.");
+                    tooltip.SetToolTip(chck77, "Para o envio de relatórios de falhas para a Microsoft.");
+
 
                 }
                 if (cinfo.Name == "fr-FR")
@@ -2145,7 +2683,7 @@ namespace ET
                     button7.Text = "fr-FR";
                     Console.WriteLine("French detected");
                     groupBox1.Text = "Améliorations de Performance (36)";
-                    groupBox2.Text = "Confidentialité (18)";
+                    groupBox2.Text = "Confidentialité (21)";
                     groupBox3.Text = "Améliorations Visuelles (8)";
                     groupBox4.Text = "Autres (6)";
                     groupBox5.Text = "Mode Expert (6)";
@@ -2264,13 +2802,96 @@ namespace ET
                     chck72.Text = "Activer l'ancien menu contextuel";
                     chck73.Text = "Désact. opt. plein écran";
                     chck74.Text = "Optimisations de la RAM";
+                    chck75.Text = "Bloquer hôtes télémétrie/UX";
+                    chck76.Text = "Bloquer hôtes localisation";
+                    chck77.Text = "Bloquer hôtes rapports crash";
+
+                    tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
+                    tooltip.SetToolTip(chck2, "Configure le plan d'alimentation Windows sur Performance Ultime pour une meilleure réactivité.");
+                    tooltip.SetToolTip(chck3, "Permet aux services de fonctionner dans des processus svchost séparés, améliorant la stabilité.");
+                    tooltip.SetToolTip(chck4, "Réduit le temps d'attente dans le menu de démarrage à 3 secondes pour un démarrage plus rapide.");
+                    tooltip.SetToolTip(chck5, "Désactive l'hibernation et le démarrage rapide, libérant de l'espace disque.");
+                    tooltip.SetToolTip(chck6, "Désactive les fonctionnalités expérimentales du programme Windows Insider.");
+                    tooltip.SetToolTip(chck7, "Arrête le suivi par le système des applications que vous ouvrez.");
+                    tooltip.SetToolTip(chck8, "Désactive la limitation de puissance CPU (pour Intel 6ème génération et plus) – performance maximale.");
+                    tooltip.SetToolTip(chck9, "Arrête les applications en arrière-plan, améliorant les performances et l'économie d'énergie.");
+                    tooltip.SetToolTip(chck10, "Désactive les fenêtres contextuelles des touches rémanentes (Sticky Keys).");
+                    tooltip.SetToolTip(chck11, "Bloque l'enregistrement de l'historique des activités dans Windows.");
+                    tooltip.SetToolTip(chck12, "Arrête les mises à jour automatiques des applications du Microsoft Store.");
+                    tooltip.SetToolTip(chck13, "Désactive le filtre SmartScreen pour les applications, qui vérifie les programmes inconnus.");
+                    tooltip.SetToolTip(chck14, "Bloque l'accès des sites web à votre localisation.");
+                    tooltip.SetToolTip(chck15, "Réinitialise les paramètres du navigateur Edge à leurs valeurs par défaut.");
+                    tooltip.SetToolTip(chck16, "Désactive les capteurs et services de localisation – confidentialité maximale.");
+                    tooltip.SetToolTip(chck17, "Empêche le partage automatique de votre hotspot Wi-Fi.");
+                    tooltip.SetToolTip(chck18, "Bloque les connexions aux hotspots partagés – augmente la sécurité.");
+                    tooltip.SetToolTip(chck19, "Force les notifications avant redémarrage après mises à jour.");
+                    tooltip.SetToolTip(chck20, "Limite le partage des mises à jour uniquement au réseau local.");
+                    tooltip.SetToolTip(chck21, "Réduit le temps d'arrêt du système – extinction plus rapide.");
+                    tooltip.SetToolTip(chck22, "Supprime les pilotes de périphériques inutilisés, libérant de l'espace.");
+                    tooltip.SetToolTip(chck23, "Supprime l'écran de bienvenue 'Tirez le meilleur parti de Windows'.");
+                    tooltip.SetToolTip(chck24, "Bloque l'installation d'applications suggérées et sponsorisées.");
+                    tooltip.SetToolTip(chck25, "Supprime les publicités et suggestions dans le menu Démarrer.");
+                    tooltip.SetToolTip(chck26, "Désactive les suggestions d'applications dans la zone Windows Ink.");
+                    tooltip.SetToolTip(chck27, "Désactive les composants Windows inutilisés.");
+                    tooltip.SetToolTip(chck28, "Réduit la priorité des analyses Defender – moins d'impact sur les performances.");
+                    tooltip.SetToolTip(chck29, "Désactive certaines protections des processus – augmente les performances (à utiliser avec précaution!).");
+                    tooltip.SetToolTip(chck30, "Défragmente le fichier d'indexation – recherche plus rapide.");
+                    tooltip.SetToolTip(chck31, "Désactive les tâches planifiées liées à la télémétrie.");
+                    tooltip.SetToolTip(chck32, "Supprime les services et composants collectant des données télémétriques.");
+                    tooltip.SetToolTip(chck33, "Bloque PowerShell d'envoyer des données à Microsoft.");
+                    tooltip.SetToolTip(chck34, "Bloque Skype de collecter et envoyer des données télémétriques.");
+                    tooltip.SetToolTip(chck35, "Désactive les rapports d'utilisation de Windows Media Player.");
+                    tooltip.SetToolTip(chck36, "Désactive la télémétrie intégrée dans le navigateur Firefox.");
+                    tooltip.SetToolTip(chck37, "Bloque les applications d'accéder à votre identifiant publicitaire.");
+                    tooltip.SetToolTip(chck38, "Arrête la collecte d'informations sur votre style de frappe.");
+                    tooltip.SetToolTip(chck39, "Désactive la reconnaissance et l'analyse de l'écriture manuscrite.");
+                    tooltip.SetToolTip(chck40, "Bloque les rapports automatiques de logiciels malveillants à Microsoft.");
+                    tooltip.SetToolTip(chck41, "Bloque Defender d'envoyer des données diagnostiques sur les menaces.");
+                    tooltip.SetToolTip(chck42, "Désactive l'envoi de rapports au système cloud MAPS de Microsoft.");
+                    tooltip.SetToolTip(chck43, "Bloque le service de rapport Spynet dans Windows Defender.");
+                    tooltip.SetToolTip(chck44, "Arrête l'envoi automatique de fichiers suspects à Microsoft.");
+                    tooltip.SetToolTip(chck45, "Bloque la collecte des données de saisie au clavier.");
+                    tooltip.SetToolTip(chck46, "Arrête la synchronisation et le partage de vos contacts.");
+                    tooltip.SetToolTip(chck47, "Désactive complètement l'assistant vocal Cortana.");
+                    tooltip.SetToolTip(chck48, "Force l'affichage des extensions de fichiers dans l'Explorateur.");
+                    tooltip.SetToolTip(chck49, "Désactive la transparence de la barre des tâches – moins d'utilisation du GPU.");
+                    tooltip.SetToolTip(chck50, "Désactive les animations de l'interface – accélère la réactivité du système.");
+                    tooltip.SetToolTip(chck51, "Bloque l'enregistrement des éléments récemment utilisés (Jump Lists).");
+                    tooltip.SetToolTip(chck52, "Change la barre de recherche du menu Démarrer en icône seule.");
+                    tooltip.SetToolTip(chck53, "Configure l'Explorateur de fichiers pour s'ouvrir sur 'Ce PC'.");
+                    tooltip.SetToolTip(chck54, "Supprime la barre de jeu Xbox et les services DVR en arrière-plan.");
+                    tooltip.SetToolTip(chck55, "Applique des optimisations sécurisées aux services Windows.");
+                    tooltip.SetToolTip(chck56, "Supprime les applications préinstallées (bloatware).");
+                    tooltip.SetToolTip(chck57, "Désactive les programmes inutiles au démarrage du système.");
+                    tooltip.SetToolTip(chck58, "Nettoie le cache, fichiers temporaires et journaux système.");
+                    tooltip.SetToolTip(chck59, "Supprime le panneau 'Actualités et intérêts' de la barre des tâches.");
+                    tooltip.SetToolTip(chck60, "Supprime complètement OneDrive du système, y compris la synchronisation.");
+                    tooltip.SetToolTip(chck61, "Désactive les services Xbox – recommandé si vous ne jouez pas.");
+                    tooltip.SetToolTip(chck62, "Configure un DNS rapide et sécurisé de Cloudflare (1.1.1.1).");
+                    tooltip.SetToolTip(chck63, "Lance AdwCleaner pour détecter et supprimer les adwares.");
+                    tooltip.SetToolTip(chck64, "Désactive l'algorithme de Nagle – réduit la latence dans les jeux en ligne.");
+                    tooltip.SetToolTip(chck65, "Optimise la gestion CPU et GPU pour de meilleures performances des applications.");
+                    tooltip.SetToolTip(chck66, "Désactive les protections Spectre/Meltdown – augmente les performances (moins sûr).");
+                    tooltip.SetToolTip(chck67, "Désactive complètement l'antivirus Windows Defender.");
+                    tooltip.SetToolTip(chck68, "Nettoie le dossier WinSxS – récupère de l'espace occupé par d'anciens fichiers système.");
+                    tooltip.SetToolTip(chck69, "Supprime l'assistant AI Copilot de Windows.");
+                    tooltip.SetToolTip(chck70, "Désactive la fonction 'En savoir plus sur cette image' sur l'écran de verrouillage.");
+                    tooltip.SetToolTip(chck71, "Permet l'utilisation de chemins de fichiers longs (>260 caractères).");
+                    tooltip.SetToolTip(chck72, "Restaure le menu contextuel classique (comme sous Windows 10).");
+                    tooltip.SetToolTip(chck73, "Désactive les optimisations plein écran – meilleure fluidité dans les jeux.");
+                    tooltip.SetToolTip(chck74, "Applique des correctifs améliorant la performance de la mémoire RAM.");
+                    tooltip.SetToolTip(chck75, "Bloque les adresses connues de télémétrie et de suivi de Microsoft.");
+                    tooltip.SetToolTip(chck76, "Bloque les hôtes partageant des données de localisation.");
+                    tooltip.SetToolTip(chck77, "Arrête l'envoi des rapports de plantage à Microsoft.");
+
+
                 }
                 if (cinfo.Name == "ko-KR")
                 {
                     button7.Text = "ko-KR";
                     Console.WriteLine("Korean detected");
                     groupBox1.Text = "성능 조정 (36)";
-                    groupBox2.Text = "개인 정보 (18)";
+                    groupBox2.Text = "개인 정보 (21)";
                     groupBox3.Text = "시각 효과 조정 (8)";
                     groupBox4.Text = "기타 (6)";
                     groupBox5.Text = "전문가 모드 (6)";
@@ -2404,6 +3025,88 @@ namespace ET
                     chck72.Text = "이전 컨텍스트 메뉴 활성화";
                     chck73.Text = "전체 화면 최적화 비활성화";
                     chck74.Text = "RAM 메모리 조정 활성화";
+                    chck75.Text = "텔레메트리/UX 호스트 차단";
+                    chck76.Text = "위치 정보 호스트 차단";
+                    chck77.Text = "충돌 보고 호스트 차단";
+
+                    tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
+                    tooltip.SetToolTip(chck2, "Windows 전원 계획을 최고의 성능(Ultimate Performance)으로 설정하여 응답성을 향상시킵니다.");
+                    tooltip.SetToolTip(chck3, "서비스가 별도의 svchost 프로세스에서 실행되도록 하여 안정성을 개선합니다.");
+                    tooltip.SetToolTip(chck4, "부팅 메뉴 대기 시간을 3초로 단축하여 더 빠른 시작을 제공합니다.");
+                    tooltip.SetToolTip(chck5, "최대 절전 모드와 빠른 시작을 비활성화하여 디스크 공간을 확보합니다.");
+                    tooltip.SetToolTip(chck6, "Windows Insider 프로그램의 실험적 기능을 비활성화합니다.");
+                    tooltip.SetToolTip(chck7, "시스템이 열리는 앱을 추적하는 것을 중지합니다.");
+                    tooltip.SetToolTip(chck8, "CPU 전력 제한을 해제합니다(Intel 6세대 이상) – 최대 성능 제공.");
+                    tooltip.SetToolTip(chck9, "백그라운드 앱 실행을 중지하여 성능과 전력 효율을 향상시킵니다.");
+                    tooltip.SetToolTip(chck10, "고정키(Sticky Keys) 팝업 창을 비활성화합니다.");
+                    tooltip.SetToolTip(chck11, "Windows 활동 기록 저장을 차단합니다.");
+                    tooltip.SetToolTip(chck12, "Microsoft Store 앱의 자동 업데이트를 중지합니다.");
+                    tooltip.SetToolTip(chck13, "알 수 없는 프로그램을 검사하는 앱용 SmartScreen 필터를 비활성화합니다.");
+                    tooltip.SetToolTip(chck14, "웹사이트가 위치 정보에 접근하는 것을 차단합니다.");
+                    tooltip.SetToolTip(chck15, "Edge 브라우저 설정을 기본값으로 재설정합니다.");
+                    tooltip.SetToolTip(chck16, "센서와 위치 서비스를 비활성화하여 최대한의 개인정보 보호를 제공합니다.");
+                    tooltip.SetToolTip(chck17, "Wi-Fi 핫스팟 자동 공유를 금지합니다.");
+                    tooltip.SetToolTip(chck18, "공유된 핫스팟 연결을 차단하여 보안을 강화합니다.");
+                    tooltip.SetToolTip(chck19, "업데이트 후 재시작 전에 알림을 강제 표시합니다.");
+                    tooltip.SetToolTip(chck20, "업데이트 공유를 로컬 네트워크로 제한합니다.");
+                    tooltip.SetToolTip(chck21, "시스템 종료 시간을 단축하여 빠른 종료를 가능하게 합니다.");
+                    tooltip.SetToolTip(chck22, "사용하지 않는 장치 드라이버를 제거하여 공간을 확보합니다.");
+                    tooltip.SetToolTip(chck23, "'Windows 더 많이 활용하기' 환영 화면을 제거합니다.");
+                    tooltip.SetToolTip(chck24, "추천 및 스폰서 앱 설치를 차단합니다.");
+                    tooltip.SetToolTip(chck25, "시작 메뉴의 광고 및 제안을 제거합니다.");
+                    tooltip.SetToolTip(chck26, "Windows Ink 영역의 앱 제안을 비활성화합니다.");
+                    tooltip.SetToolTip(chck27, "사용하지 않는 Windows 구성 요소를 비활성화합니다.");
+                    tooltip.SetToolTip(chck28, "Defender 검사 우선순위를 낮춰 성능 영향을 줄입니다.");
+                    tooltip.SetToolTip(chck29, "일부 프로세스 보호 기능을 비활성화하여 성능을 향상시킵니다(주의!).");
+                    tooltip.SetToolTip(chck30, "인덱싱 파일을 조각 모음하여 검색 속도를 높입니다.");
+                    tooltip.SetToolTip(chck31, "텔레메트리 관련 예약 작업을 비활성화합니다.");
+                    tooltip.SetToolTip(chck32, "데이터 수집 텔레메트리 서비스와 구성 요소를 제거합니다.");
+                    tooltip.SetToolTip(chck33, "PowerShell이 Microsoft로 데이터를 전송하는 것을 차단합니다.");
+                    tooltip.SetToolTip(chck34, "Skype가 텔레메트리 데이터를 수집하고 전송하는 것을 차단합니다.");
+                    tooltip.SetToolTip(chck35, "Windows Media Player 사용 보고를 비활성화합니다.");
+                    tooltip.SetToolTip(chck36, "Firefox 브라우저 내장 텔레메트리를 비활성화합니다.");
+                    tooltip.SetToolTip(chck37, "앱이 광고 ID에 접근하는 것을 차단합니다.");
+                    tooltip.SetToolTip(chck38, "타자 스타일 정보 수집을 중지합니다.");
+                    tooltip.SetToolTip(chck39, "필기 인식 및 분석 기능을 비활성화합니다.");
+                    tooltip.SetToolTip(chck40, "악성코드 자동 보고를 Microsoft로 보내는 것을 차단합니다.");
+                    tooltip.SetToolTip(chck41, "Defender가 위협 진단 데이터를 전송하는 것을 차단합니다.");
+                    tooltip.SetToolTip(chck42, "Microsoft 클라우드 MAPS 보고 기능을 비활성화합니다.");
+                    tooltip.SetToolTip(chck43, "Windows Defender의 Spynet 보고 서비스를 차단합니다.");
+                    tooltip.SetToolTip(chck44, "의심 파일을 Microsoft로 자동 전송하는 것을 중지합니다.");
+                    tooltip.SetToolTip(chck45, "키보드 입력 데이터 수집을 차단합니다.");
+                    tooltip.SetToolTip(chck46, "연락처 동기화 및 공유를 중지합니다.");
+                    tooltip.SetToolTip(chck47, "음성 비서 Cortana를 완전히 비활성화합니다.");
+                    tooltip.SetToolTip(chck48, "파일 탐색기에서 파일 확장자를 항상 표시하도록 강제합니다.");
+                    tooltip.SetToolTip(chck49, "작업 표시줄 투명 효과를 비활성화하여 GPU 사용량을 줄입니다.");
+                    tooltip.SetToolTip(chck50, "인터페이스 애니메이션을 비활성화하여 시스템 반응 속도를 높입니다.");
+                    tooltip.SetToolTip(chck51, "최근 사용 항목(Jump Lists) 저장을 차단합니다.");
+                    tooltip.SetToolTip(chck52, "시작 메뉴 검색창을 아이콘만 표시하도록 변경합니다.");
+                    tooltip.SetToolTip(chck53, "파일 탐색기가 '내 PC'에서 열리도록 설정합니다.");
+                    tooltip.SetToolTip(chck54, "Xbox 게임 바와 백그라운드 DVR 서비스를 제거합니다.");
+                    tooltip.SetToolTip(chck55, "Windows 서비스에 안전한 최적화를 적용합니다.");
+                    tooltip.SetToolTip(chck56, "사전 설치된 불필요한 앱(블로트웨어)을 제거합니다.");
+                    tooltip.SetToolTip(chck57, "시작 프로그램에서 불필요한 앱을 비활성화합니다.");
+                    tooltip.SetToolTip(chck58, "캐시, 임시 파일 및 시스템 로그를 정리합니다.");
+                    tooltip.SetToolTip(chck59, "'뉴스 및 관심사' 패널을 작업 표시줄에서 제거합니다.");
+                    tooltip.SetToolTip(chck60, "OneDrive와 동기화를 시스템에서 완전히 제거합니다.");
+                    tooltip.SetToolTip(chck61, "Xbox 서비스를 비활성화합니다 – 게임을 하지 않는 경우 권장.");
+                    tooltip.SetToolTip(chck62, "빠르고 안전한 Cloudflare DNS(1.1.1.1)를 설정합니다.");
+                    tooltip.SetToolTip(chck63, "AdwCleaner를 실행하여 애드웨어를 탐지 및 제거합니다.");
+                    tooltip.SetToolTip(chck64, "Nagle 알고리즘을 비활성화하여 온라인 게임 지연을 줄입니다.");
+                    tooltip.SetToolTip(chck65, "CPU 및 GPU 관리를 최적화하여 앱 성능을 향상시킵니다.");
+                    tooltip.SetToolTip(chck66, "Spectre/Meltdown 보호를 비활성화하여 성능을 높입니다(보안성 감소).");
+                    tooltip.SetToolTip(chck67, "Windows Defender 백신을 완전히 비활성화합니다.");
+                    tooltip.SetToolTip(chck68, "WinSxS 폴더를 정리하여 오래된 시스템 파일 공간을 회복합니다.");
+                    tooltip.SetToolTip(chck69, "Windows AI Copilot 보조 기능을 제거합니다.");
+                    tooltip.SetToolTip(chck70, "잠금 화면의 '이 사진에 대해 자세히 알아보기' 기능을 비활성화합니다.");
+                    tooltip.SetToolTip(chck71, "260자 이상 긴 파일 경로 사용을 가능하게 합니다.");
+                    tooltip.SetToolTip(chck72, "클래식 컨텍스트 메뉴(Windows 10 스타일)를 복원합니다.");
+                    tooltip.SetToolTip(chck73, "전체 화면 최적화를 비활성화하여 게임에서 더 부드러운 화면을 제공합니다.");
+                    tooltip.SetToolTip(chck74, "RAM 성능 향상을 위한 수정 사항을 적용합니다.");
+                    tooltip.SetToolTip(chck75, "Microsoft의 알려진 텔레메트리 및 추적 주소를 차단합니다.");
+                    tooltip.SetToolTip(chck76, "위치 데이터 공유 호스트를 차단합니다.");
+                    tooltip.SetToolTip(chck77, "Microsoft로의 충돌 보고 전송을 중지합니다.");
+
 
                     toolStripLabel1.Text = "빌드: 공개 | " + ETBuild;
                 }
@@ -2413,7 +3116,7 @@ namespace ET
                     Console.WriteLine("Turkish detected");
 
                     groupBox1.Text = "Performans Ayarları(36)";
-                    groupBox2.Text = "Gizlilik(18)";
+                    groupBox2.Text = "Gizlilik(21)";
                     groupBox3.Text = "Görsel Ayarları(8)";
                     groupBox4.Text = "Diğer(6)";
                     groupBox5.Text = "Uzman Modu(6)";
@@ -2532,6 +3235,89 @@ namespace ET
                     chck72.Text = "Eski Bağlam Menüsünü Etkinleştir";
                     chck73.Text = "Tam Ekran Optimizasyonları Kapat";
                     chck74.Text = "RAM Bellek Ayarlarını Etkinleştir";
+                    chck75.Text = "Telemetri ve kullanıcı sunucuları engelle";
+                    chck76.Text = "Konum paylaşım sunucularını engelle";
+                    chck77.Text = "Windows çökme raporu sunucularını engelle";
+
+
+                    tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
+                    tooltip.SetToolTip(chck2, "Windows güç planını Ultimate Performance olarak ayarlayarak daha iyi yanıt süresi sağlar.");
+                    tooltip.SetToolTip(chck3, "Hizmetlerin ayrı svchost süreçlerinde çalışmasına izin vererek kararlılığı artırır.");
+                    tooltip.SetToolTip(chck4, "Önyükleme menüsü bekleme süresini 3 saniyeye indirir, böylece daha hızlı başlatma sağlar.");
+                    tooltip.SetToolTip(chck5, "Hibernasyon ve hızlı başlatmayı devre dışı bırakarak disk alanı boşaltır.");
+                    tooltip.SetToolTip(chck6, "Windows Insider programındaki deneysel özellikleri kapatır.");
+                    tooltip.SetToolTip(chck7, "Sistemin hangi uygulamaları açtığınızı izlemesini durdurur.");
+                    tooltip.SetToolTip(chck8, "CPU güç kısıtlamasını devre dışı bırakır (Intel 6. nesil ve sonrası) – tam performans sağlar.");
+                    tooltip.SetToolTip(chck9, "Arka plandaki uygulamaların çalışmasını durdurarak performans ve enerji tasarrufu sağlar.");
+                    tooltip.SetToolTip(chck10, "Yapışkan Tuşlar (Sticky Keys) açılır pencerelerini kapatır.");
+                    tooltip.SetToolTip(chck11, "Windows etkinlik geçmişinin kaydedilmesini engeller.");
+                    tooltip.SetToolTip(chck12, "Microsoft Store uygulamalarının otomatik güncellemelerini durdurur.");
+                    tooltip.SetToolTip(chck13, "Bilinmeyen programları kontrol eden uygulamalar için SmartScreen filtresini kapatır.");
+                    tooltip.SetToolTip(chck14, "Web sitelerinin konumunuza erişimini engeller.");
+                    tooltip.SetToolTip(chck15, "Edge tarayıcısının ayarlarını varsayılana sıfırlar.");
+                    tooltip.SetToolTip(chck16, "Sensörleri ve konum servislerini kapatarak maksimum gizlilik sağlar.");
+                    tooltip.SetToolTip(chck17, "Wi-Fi hotspot'unuzun otomatik paylaşımını yasaklar.");
+                    tooltip.SetToolTip(chck18, "Paylaşılan hotspot bağlantılarını engelleyerek güvenliği artırır.");
+                    tooltip.SetToolTip(chck19, "Güncellemelerden sonra yeniden başlatma öncesi bildirim zorunlu kılar.");
+                    tooltip.SetToolTip(chck20, "Güncelleme paylaşımını sadece yerel ağ ile sınırlar.");
+                    tooltip.SetToolTip(chck21, "Sistemin kapanma süresini kısaltır – daha hızlı kapanma sağlar.");
+                    tooltip.SetToolTip(chck22, "Kullanılmayan cihaz sürücülerini kaldırarak yer açar.");
+                    tooltip.SetToolTip(chck23, "'Windows'tan Daha Fazlasını Edinin' karşılama ekranını kaldırır.");
+                    tooltip.SetToolTip(chck24, "Önerilen ve sponsorlu uygulamaların kurulmasını engeller.");
+                    tooltip.SetToolTip(chck25, "Başlat menüsündeki reklamları ve önerileri kaldırır.");
+                    tooltip.SetToolTip(chck26, "Windows Ink alanındaki uygulama önerilerini kapatır.");
+                    tooltip.SetToolTip(chck27, "Kullanılmayan Windows bileşenlerini devre dışı bırakır.");
+                    tooltip.SetToolTip(chck28, "Defender taramalarının önceliğini düşürerek performans etkisini azaltır.");
+                    tooltip.SetToolTip(chck29, "Bazı süreç korumalarını kapatarak performansı artırır (dikkat!).");
+                    tooltip.SetToolTip(chck30, "İndeksleme dosyasını birleştirerek aramayı hızlandırır.");
+                    tooltip.SetToolTip(chck31, "Telemetri ile ilgili zamanlanmış görevleri kapatır.");
+                    tooltip.SetToolTip(chck32, "Telemetri verilerini toplayan servisleri ve bileşenleri kaldırır.");
+                    tooltip.SetToolTip(chck33, "PowerShell'in Microsoft'a veri göndermesini engeller.");
+                    tooltip.SetToolTip(chck34, "Skype'ın telemetri verisi toplamasını ve göndermesini engeller.");
+                    tooltip.SetToolTip(chck35, "Windows Media Player kullanım raporlarını kapatır.");
+                    tooltip.SetToolTip(chck36, "Firefox tarayıcısındaki yerleşik telemetriyi kapatır.");
+                    tooltip.SetToolTip(chck37, "Uygulamaların reklam kimliğinize erişimini engeller.");
+                    tooltip.SetToolTip(chck38, "Yazma stilinizle ilgili bilgi toplamasını durdurur.");
+                    tooltip.SetToolTip(chck39, "El yazısı tanıma ve analizini kapatır.");
+                    tooltip.SetToolTip(chck40, "Microsoft'a kötü amaçlı yazılım otomatik raporlarını engeller.");
+                    tooltip.SetToolTip(chck41, "Defender'ın tehdit tanı verilerini göndermesini engeller.");
+                    tooltip.SetToolTip(chck42, "Microsoft'un bulut tabanlı MAPS raporlamasını kapatır.");
+                    tooltip.SetToolTip(chck43, "Windows Defender'daki Spynet raporlama servisini engeller.");
+                    tooltip.SetToolTip(chck44, "Şüpheli dosyaların Microsoft'a otomatik gönderimini durdurur.");
+                    tooltip.SetToolTip(chck45, "Klavye ile yazılan metin verilerinin toplanmasını engeller.");
+                    tooltip.SetToolTip(chck46, "Kişi senkronizasyonu ve paylaşımını durdurur.");
+                    tooltip.SetToolTip(chck47, "Sesli asistan Cortana'yı tamamen kapatır.");
+                    tooltip.SetToolTip(chck48, "Dosya Gezgini'nde dosya uzantılarının gösterilmesini zorunlu kılar.");
+                    tooltip.SetToolTip(chck49, "Görev çubuğu şeffaflığını kapatarak GPU kullanımını azaltır.");
+                    tooltip.SetToolTip(chck50, "Arayüz animasyonlarını kapatarak sistem tepkisini hızlandırır.");
+                    tooltip.SetToolTip(chck51, "Son kullanılan öğeler (Jump Lists) kaydedilmesini engeller.");
+                    tooltip.SetToolTip(chck52, "Başlat menüsü arama kutusunu sadece simge olarak değiştirir.");
+                    tooltip.SetToolTip(chck53, "Dosya Gezgini'nin 'Bu Bilgisayar' klasöründe açılmasını sağlar.");
+                    tooltip.SetToolTip(chck54, "Xbox oyun çubuğu ve arka plandaki DVR servislerini kaldırır.");
+                    tooltip.SetToolTip(chck55, "Windows servislerine güvenli optimizasyonlar uygular.");
+                    tooltip.SetToolTip(chck56, "Önceden yüklenmiş gereksiz uygulamaları (bloatware) kaldırır.");
+                    tooltip.SetToolTip(chck57, "Başlangıçta gereksiz programları devre dışı bırakır.");
+                    tooltip.SetToolTip(chck58, "Önbellek, geçici dosyalar ve sistem günlüklerini temizler.");
+                    tooltip.SetToolTip(chck59, "Görev çubuğundaki 'Haberler ve İlgi Alanları' panelini kaldırır.");
+                    tooltip.SetToolTip(chck60, "OneDrive'ı ve senkronizasyonu sistemden tamamen kaldırır.");
+                    tooltip.SetToolTip(chck61, "Xbox servislerini kapatır – oyun oynamıyorsanız önerilir.");
+                    tooltip.SetToolTip(chck62, "Hızlı ve güvenli Cloudflare DNS (1.1.1.1) ayarlar.");
+                    tooltip.SetToolTip(chck63, "AdwCleaner'ı başlatarak reklam yazılımlarını tespit ve kaldırır.");
+                    tooltip.SetToolTip(chck64, "Nagle algoritmasını kapatarak çevrimiçi oyun gecikmesini azaltır.");
+                    tooltip.SetToolTip(chck65, "CPU ve GPU yönetimini optimize ederek uygulama performansını artırır.");
+                    tooltip.SetToolTip(chck66, "Spectre/Meltdown korumalarını kapatarak performansı artırır (daha az güvenli).");
+                    tooltip.SetToolTip(chck67, "Windows Defender antivirüsünü tamamen kapatır.");
+                    tooltip.SetToolTip(chck68, "WinSxS klasörünü temizleyerek eski sistem dosyalarının kapladığı alanı boşaltır.");
+                    tooltip.SetToolTip(chck69, "Windows AI Copilot asistanını sistemden kaldırır.");
+                    tooltip.SetToolTip(chck70, "Kilit ekranındaki 'Bu fotoğraf hakkında daha fazla bilgi edin' özelliğini kapatır.");
+                    tooltip.SetToolTip(chck71, "260 karakterden uzun dosya yollarını kullanmanıza izin verir.");
+                    tooltip.SetToolTip(chck72, "Klasik bağlam menüsünü (Windows 10 tarzı) geri getirir.");
+                    tooltip.SetToolTip(chck73, "Tam ekran optimizasyonlarını kapatarak oyunlarda daha akıcı performans sağlar.");
+                    tooltip.SetToolTip(chck74, "RAM performansını artıran düzeltmeleri uygular.");
+                    tooltip.SetToolTip(chck75, "Microsoft'un bilinen telemetri ve takip adreslerini engeller.");
+                    tooltip.SetToolTip(chck76, "Konum verisi paylaşan sunucuları engeller.");
+                    tooltip.SetToolTip(chck77, "Microsoft'a çökme raporu gönderimini durdurur.");
+
 
                     toolStripLabel1.Text = "Derleme: Genel | " + ETBuild;
                 }
@@ -2687,6 +3473,7 @@ namespace ET
             Relocatecheck(panel5);
             Relocatecheck(panel5);
 
+
             this.panelmain.DoubleClick += Panelmain_DoubleClick;
 
             this.Hide();
@@ -2837,7 +3624,7 @@ namespace ET
             progressBar1.BringToFront();
             textBox1.BringToFront();
 
-            int alltodo = 0; //max 74
+            int alltodo = 0; //max 77
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -3999,6 +4786,61 @@ foreach ($app in $allApps) {
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
+                        case "Block telemetry and user experience hosts":
+                            done++;
+                            string[] domains1 = new[]
+                            {
+                "functional.events.data.microsoft.com",
+                "browser.events.data.msn.com",
+                "self.events.data.microsoft.com",
+                "v10.events.data.microsoft.com",
+                "v10c.events.data.microsoft.com",
+                "us-v10c.events.data.microsoft.com",
+                "eu-v10c.events.data.microsoft.com",
+                "v10.vortex-win.data.microsoft.com",
+                "vortex-win.data.microsoft.com",
+                "telecommand.telemetry.microsoft.com",
+                "www.telecommandsvc.microsoft.com",
+                "umwatson.events.data.microsoft.com",
+                "watsonc.events.data.microsoft.com",
+                "eu-watsonc.events.data.microsoft.com"
+            };
+
+              EditHosts(domains1);
+                            break;
+                        case "Block location data sharing hosts":
+                            done++;
+                            string[] domains2 = new[]
+                            {
+                "inference.location.live.net",
+                "location-inference-westus.cloudapp.nets"
+            };
+
+                            EditHosts(domains2);
+                            break;
+                        case "Block Windows crash report hosts":
+                            done++;
+                            string[] domains3 = new[]
+                            {
+                "oca.telemetry.microsoft.com",
+                "oca.microsoft.com",
+                "kmwatsonc.events.data.microsoft.com",
+                "watson.telemetry.microsoft.com",
+                "umwatsonc.events.data.microsoft.com",
+                "ceuswatcab01.blob.core.windows.net",
+                "ceuswatcab02.blob.core.windows.net",
+                "eaus2watcab01.blob.core.windows.net",
+                "eaus2watcab02.blob.core.windows.net",
+                "weus2watcab01.blob.core.windows.net",
+                "weus2watcab02.blob.core.windows.net",
+                "co4.telecommand.telemetry.microsoft.com",
+                "cs11.wpc.v0cdn.net",
+                "cs1137.wpc.gammacdn.net",
+                "modern.watson.data.microsoft.com"
+            };
+
+                            EditHosts(domains3);
+                            break;
 
                     }
                 }
@@ -4518,6 +5360,8 @@ foreach ($app in $allApps) {
                 {
                     if (issillent == true)
                     {
+                        SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation", "Manufacturer", @"ET-Optimizer", RegistryValueKind.String);
+                        SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\OEMInformation", "SupportURL", @"https://github.com/semazurek/ET-Optimizer", RegistryValueKind.String);
                         Environment.Exit(0);
                         this.Close();
                         String my_name_process = Process.GetCurrentProcess().ProcessName;
@@ -4539,59 +5383,7 @@ foreach ($app in $allApps) {
                     }
                     else
                     {
-
-                        Form popup = new Form
-                        {
-                            FormBorderStyle = FormBorderStyle.None,
-                            StartPosition = FormStartPosition.CenterScreen,
-                            TopMost = true,
-                            Size = new Size(this.ClientSize.Width, this.ClientSize.Height),
-                            BackColor = ColorTranslator.FromHtml(menubackcolor),
-                            ForeColor = ColorTranslator.FromHtml(mainforecolor),
-                            Font = new Font("Consolas", 10F, FontStyle.Regular)
-                        };
-                        popup.AllowTransparency = true;
-                        popup.StartPosition = FormStartPosition.Manual;
-                        popup.ShowIcon = false;
-                        popup.ShowInTaskbar = false;
-                        popup.Location = new Point(
-                            this.Location.X + (this.Width - popup.Width) / 2,
-                            this.Location.Y + (this.Height - popup.Height) / 2
-                        );
-
-                        popup.Opacity = 0.9;
-
-                        Label msgLabel = new Label
-                        {
-                            Text = msgend,
-                            AutoSize = false,
-                            TextAlign = System.Drawing.ContentAlignment.MiddleCenter,
-                            Dock = DockStyle.Fill,
-                            Font = new Font("Consolas", 13F, FontStyle.Bold),
-                            Padding = new Padding(10),
-                            ForeColor = ColorTranslator.FromHtml(mainforecolor),
-                            BackColor = ColorTranslator.FromHtml(menubackcolor)
-                        };
-
-                        Button okButton = new Button
-                        {
-                            Text = "OK",
-                            FlatStyle = FlatStyle.Flat,
-                            BackColor = ColorTranslator.FromHtml(selectioncolor),
-                            ForeColor = Color.White,
-                            Size = new Size(120, 45),
-                            Font = new Font("Consolas", 13F, FontStyle.Bold),
-                            Anchor = AnchorStyles.Bottom
-                        };
-                        okButton.FlatAppearance.BorderSize = 0;
-                        okButton.Location = new Point((popup.ClientSize.Width - okButton.Width) / 2, popup.ClientSize.Height / 2 + 30);
-                        okButton.Click += (s, e) => popup.Close();
-
-                        popup.Controls.Add(okButton);
-                        popup.Controls.Add(msgLabel);
-                        popup.AcceptButton = okButton;
-
-                        popup.ShowDialog();
+                        PopUpMSG(msgend);
                     }
                     c_p(null, null);
                     textBox1.Text = "";
@@ -5299,6 +6091,38 @@ foreach ($app in $allApps) {
         private void panel1_Scroll(object sender, ScrollEventArgs e)
         {
 
+        }
+
+        private void privacySexyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=undergroundwires.privacy.sexy --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void chrisTitusTechsWinToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command irm \"https://christitus.com/win\" | iex";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F12)
+            {
+                Process.Start("https://github.com/semazurek/ET-Optimizer/blob/master/ET/Form1.cs");
+            }
         }
     }
 }
