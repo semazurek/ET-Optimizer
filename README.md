@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.30-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.35-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -180,6 +180,12 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <li>Disable Cortana – disables Microsoft’s digital assistant.</li>
 
 <li>Remove Copilot – removes the AI-powered assistant introduced in newer Windows builds.</li>
+
+<li>Block telemetry and user experience hosts</li>
+
+<li>Block location data sharing hosts</li>
+
+<li>Block Windows crash report hosts</li>
   </ol>
 </details>
 <details>
