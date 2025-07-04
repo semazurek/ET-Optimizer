@@ -347,14 +347,14 @@
             // restorePointToolStripMenuItem
             // 
             this.restorePointToolStripMenuItem.Name = "restorePointToolStripMenuItem";
-            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.restorePointToolStripMenuItem.Text = "Restore Point";
             this.restorePointToolStripMenuItem.Click += new System.EventHandler(this.restorePointToolStripMenuItem_Click);
             // 
             // registryRestoreToolStripMenuItem
             // 
             this.registryRestoreToolStripMenuItem.Name = "registryRestoreToolStripMenuItem";
-            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.registryRestoreToolStripMenuItem.Text = "Registry Restore";
             this.registryRestoreToolStripMenuItem.Click += new System.EventHandler(this.registryRestoreToolStripMenuItem_Click);
             // 
@@ -641,6 +641,7 @@
             this.toolStripLabel3.Size = new System.Drawing.Size(104, 22);
             this.toolStripLabel3.Text = "Battery: 0 %";
             this.toolStripLabel3.Visible = false;
+            this.toolStripLabel3.DoubleClick += new System.EventHandler(this.toolStripLabel3_DoubleClick);
             // 
             // toolStripLabel2
             // 

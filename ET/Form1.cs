@@ -232,18 +232,18 @@ namespace ET
                 { }
                 else
                 {
-                    panel1.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel2.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel3.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel4.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel5.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    customGroup6.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
+                    panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 11, FontStyle.Regular);
                 }
                 Relocatecheck(panel1);
                 Relocatecheck(panel2);
@@ -261,8 +261,22 @@ namespace ET
                 this.MaximizeBox = false;
                 centergroup();
                 CultureInfo cinfo = CultureInfo.InstalledUICulture;
+                Console.WriteLine(cinfo.Name);
                 if (cinfo.Name == "ko-KR")
-                { }
+                {
+                    panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                }
                 else
                 {
                     panel1.Font = new Font("Consolas", 9, FontStyle.Regular);
@@ -478,6 +492,7 @@ namespace ET
                                 "Microsoft.UI.Xaml.2.7",
                                 "Microsoft.UI.Xaml.2.0",
                                 "Microsoft.WindowsAppRuntime.1.3",
+                                "Microsoft.WindowsAppRuntime.1.2",
                                 "Microsoft.NET.Native.Framework.1.7",
                                 "MicrosoftWindows.Client.Core",
                                 "Microsoft.LockApp",
@@ -741,7 +756,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.06.35";
-        string ETBuild = "30.06.2025";
+        string ETBuild = "04.07.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -750,6 +765,7 @@ namespace ET
         public string msgerror = "No option selected.";
         public string msgupdate = "A newer version of the application is available on GitHub!";
         public string isoinfo = "The generated ISO image will contain the following features: ET-Optimizer.exe /auto and bypassing Microsoft requirements by bypassing data collection, local account creation, etc.";
+
         public void CreateRestorePoint(string description, int restorePointType)
         {
             try
@@ -942,9 +958,13 @@ namespace ET
             { }
         }
 
+        public int ct;
+        public int cy;
+        public int cu;
+        public int ci;
         public void c_p(object sender, EventArgs e)
         {
-            int ct = panel1.Controls.OfType<CheckBox>().Count();
+            ct = panel1.Controls.OfType<CheckBox>().Count();
             int checkedCt = panel1.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
             if (checkedCt == ct)
             {
@@ -961,7 +981,7 @@ namespace ET
                 button1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
             }
 
-            int cy = panel2.Controls.OfType<CheckBox>().Count();
+            cy = panel2.Controls.OfType<CheckBox>().Count();
             int checkedCy = panel2.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
             if (checkedCy == cy)
             {
@@ -976,7 +996,7 @@ namespace ET
                 button3.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
             }
 
-            int cu = panel3.Controls.OfType<CheckBox>().Count();
+            cu = panel3.Controls.OfType<CheckBox>().Count();
             int checkedCu = panel3.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
             if (checkedCu == cu)
             {
@@ -991,7 +1011,7 @@ namespace ET
                 button2.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainbackcolor);
             }
 
-            int ci = panel4.Controls.OfType<CheckBox>().Count();
+            ci = panel4.Controls.OfType<CheckBox>().Count();
             int checkedCi = panel4.Controls.OfType<CheckBox>().Count(cb => cb.Checked);
             if (checkedCi == ci)
             {
@@ -1003,7 +1023,7 @@ namespace ET
             }
             int allc = checkedCi + checkedCu + checkedCy + checkedCt;
 
-            if (allc == 71)
+            if (allc == 72)
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -1018,6 +1038,58 @@ namespace ET
                 button4.Text = selectall0;
             }
         }
+
+        void SetToolstripIcons()
+        {
+            TrySetIcon("dfrgui.exe", diskDefragmenterToolStripMenuItem);
+            TrySetIcon("cleanmgr.exe", cleanmgrToolStripMenuItem);
+            TrySetIcon("msconfig.exe", msconfigToolStripMenuItem);
+            TrySetIcon("control.exe", controlPanelToolStripMenuItem);
+            TrySetIcon("devmgmt.msc", deviceManagerToolStripMenuItem);
+            TrySetIcon("UserAccountControlSettings.exe", uACSettingsToolStripMenuItem);
+            TrySetIcon("msinfo32.exe", msinfo32ToolStripMenuItem);
+            TrySetIcon("services.msc", servicesToolStripMenuItem);
+            TrySetIcon("mstsc.exe", remoteDesktopToolStripMenuItem);
+            TrySetIcon("eventvwr.exe", eventViewerToolStripMenuItem);
+            TrySetIcon("control.exe", resetNetworkToolStripMenuItem);
+            TrySetIcon(@"oobe\Setup.exe", makeETISOToolStripMenuItem);
+            TrySetIcon("ComputerDefaults.exe", updateApplicationsToolStripMenuItem);
+            TrySetIcon("ComputerDefaults.exe", downloadSoftwareToolStripMenuItem);
+            TrySetIcon("slui.exe", windowsLicenseKeyToolStripMenuItem);
+            TrySetIcon("cmd.exe", rebootToBIOSToolStripMenuItem);
+            TrySetIcon("cmd.exe", rebootToSafeModeToolStripMenuItem);
+            TrySetIcon(@"..\explorer.exe", restartExplorerexeToolStripMenuItem);
+            TrySetIcon(@"RecoveryDrive.exe", restorePointToolStripMenuItem);
+            TrySetIcon(@"..\regedit.exe", registryRestoreToolStripMenuItem);
+        }
+
+        void TrySetIcon(string relativePath, ToolStripMenuItem menuItem)
+        {
+            try
+            {
+                string fullPath;
+
+                if (relativePath.Contains("\\"))
+                {
+                    // Subfolder like oobe\Setup.exe or ..\regedit.exe
+                    fullPath = Path.GetFullPath(Path.Combine(Environment.SystemDirectory, relativePath));
+                }
+                else
+                {
+                    fullPath = Path.Combine(Environment.SystemDirectory, relativePath);
+                }
+
+                if (File.Exists(fullPath))
+                {
+                    menuItem.Image = Icon.ExtractAssociatedIcon(fullPath)?.ToBitmap();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Icon load failed for {relativePath}: {ex.Message}");
+            }
+        }
+
 
         public Form1(string[] args)
         {
@@ -1600,40 +1672,25 @@ namespace ET
             chck77.Click += c_p;
             chck77.TabIndex = 77;
             panel2.Controls.Add(chck77);
+            CheckBox chck78 = new CheckBox();
+            chck78.Tag = "Disable Logon Background Image";
+            chck78.Checked = true;
+            chck78.Click += c_p;
+            chck78.TabIndex = 78;
+            panel3.Controls.Add(chck78);
 
-            if (File.Exists(systemDrive + "\\Windows\\System32\\dfrgui.exe")) { diskDefragmenterToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\dfrgui.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\cleanmgr.exe")) { cleanmgrToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cleanmgr.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\msconfig.exe")) { msconfigToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msconfig.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\control.exe")) { controlPanelToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\devmgmt.msc")) { deviceManagerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\devmgmt.msc").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\UserAccountControlSettings.exe")) { uACSettingsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\UserAccountControlSettings.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\msinfo32.exe")) { msinfo32ToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\msinfo32.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\services.msc")) { servicesToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\services.msc").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\mstsc.exe")) { remoteDesktopToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\mstsc.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\eventvwr.exe")) { eventViewerToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\eventvwr.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\control.exe")) { resetNetworkToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\control.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\oobe\\Setup.exe")) { makeETISOToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\oobe\\Setup.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe")) { updateApplicationsToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe")) { downloadSoftwareToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\ComputerDefaults.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\slui.exe")) { windowsLicenseKeyToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\slui.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\cmd.exe")) { rebootToBIOSToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\System32\\cmd.exe")) { rebootToSafeModeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\System32\\cmd.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\explorer.exe")) { restartExplorerexeToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\explorer.exe").ToBitmap(); }
-
-
-            if (File.Exists(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe")) { restorePointToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\system32\\RecoveryDrive.exe").ToBitmap(); }
-            if (File.Exists(systemDrive + "\\Windows\\regedit.exe")) { registryRestoreToolStripMenuItem.Image = Icon.ExtractAssociatedIcon(systemDrive + "\\Windows\\regedit.exe").ToBitmap(); }
+            SetToolstripIcons();
 
             CultureInfo cinfo = CultureInfo.InstalledUICulture;
 
             void DefaultLang()
             {
                 button7.Text = "en-US";
-                groupBox1.Text = "Performance Tweaks (36)";
-                groupBox2.Text = "Privacy (21)";
-                groupBox3.Text = "Visual Tweaks (8)";
-                groupBox4.Text = "Other (6)";
-                groupBox5.Text = "Expert Mode (6)";
+                groupBox1.Text = "Performance Tweaks ("+panel1.Controls.OfType<CheckBox>().Count()+")";
+                groupBox2.Text = "Privacy (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                groupBox3.Text = "Visual Tweaks (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                groupBox4.Text = "Other (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                groupBox5.Text = "Expert Mode (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                 button1.Text = "Performance";
                 button2.Text = "Visual";
@@ -1769,6 +1826,7 @@ namespace ET
                 chck75.Text = "Block Telemetry/User experience hosts";
                 chck76.Text = "Block location data sharing hosts";
                 chck77.Text = "Block Windows crash report hosts";
+                chck78.Text = "Disable Logon Background Image";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -1861,11 +1919,11 @@ namespace ET
                 {
                     button7.Text = "pl-PL";
                     Console.WriteLine("Wykryto Polski");
-                    groupBox1.Text = "Poprawki Wydajności (36)";
-                    groupBox2.Text = "Prywatność (21)";
-                    groupBox3.Text = "Poprawki Wizualne (8)";
-                    groupBox4.Text = "Inne (6)";
-                    groupBox5.Text = "Tryb Eksperta (6)";
+                    groupBox1.Text = "Poprawki Wydajności (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "Prywatność (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "Poprawki Wizualne (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "Inne (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "Tryb Eksperta (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     button1.Text = "Wydajność";
                     button2.Text = "Wizualne";
@@ -1984,6 +2042,7 @@ namespace ET
                     chck75.Text = "Blokuj hosty telemetry/UX";
                     chck76.Text = "Blokuj hosty lokalizacji";
                     chck77.Text = "Blokuj hosty raportów awarii";
+                    chck78.Text = "Wyłącz tło ekranu logowania";
 
                     tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
                     tooltip.SetToolTip(chck2, "Ustawia plan zasilania Windows na Ultimate Performance dla lepszej responsywności.");
@@ -2069,11 +2128,11 @@ namespace ET
                 {
                     button7.Text = "ru-RU";
                     Console.WriteLine("Russian detected");
-                    groupBox1.Text = "Настройки производительности (36)";
-                    groupBox2.Text = "Конфиденциальность (21)";
-                    groupBox3.Text = "Визуальные настройки (8)";
-                    groupBox4.Text = "Другие (6)";
-                    groupBox5.Text = "Экспертный режим (6)";
+                    groupBox1.Text = "Настройки производительности (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "Конфиденциальность (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "Визуальные настройки (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "Другие (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "Экспертный режим (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     button1.Text = "Производительность";
                     button1.Font = new Font("Consolas", 12, FontStyle.Regular);
@@ -2195,6 +2254,7 @@ namespace ET
                     chck75.Text = "Блок хостов телеметрии/UX";
                     chck76.Text = "Блок хостов геоданных";
                     chck77.Text = "Блок хостов с отчётами сбоев";
+                    chck78.Text = "Отключить фоновое изображение входа";
 
                     tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
                     tooltip.SetToolTip(chck2, "Устанавливает план питания Windows на Ultimate Performance для лучшей отзывчивости.");
@@ -2281,11 +2341,11 @@ namespace ET
                 {
                     button7.Text = "de-DE";
                     Console.WriteLine("German detected");
-                    groupBox1.Text = "Leistungs-Optim. (36)";
-                    groupBox2.Text = "Privatsphäre (21)";
-                    groupBox3.Text = "Visuelle Tweaks (8)";
-                    groupBox4.Text = "Andere (6)";
-                    groupBox5.Text = "Expertenmodus (6)";
+                    groupBox1.Text = "Leistungs-Optim. (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "Privatsphäre (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "Visuelle Tweaks (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "Andere (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "Expertenmodus (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     button1.Text = "Leistung";
                     button1.Font = new Font("Consolas", 11, FontStyle.Regular);
@@ -2405,6 +2465,7 @@ namespace ET
                     chck75.Text = "Telemetry/UX-Hosts blockieren";
                     chck76.Text = "Standortdaten-Hosts blocken";
                     chck77.Text = "Crashreport-Hosts blockieren";
+                    chck78.Text = "Anmeldehintergrund ausblenden";
 
                     tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
                     tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
@@ -2509,11 +2570,11 @@ namespace ET
                     button4.Text = "Selecione Tudo";
                     button4.Font = new Font("Consolas", 12, FontStyle.Regular);
 
-                    groupBox1.Text = "Ajustes de desempenho (36)";
-                    groupBox2.Text = "Privacidade (21)";
-                    groupBox3.Text = "Ajustes visuais (8)";
-                    groupBox4.Text = "Outros (6)";
-                    groupBox5.Text = "Modo especialista (6)";
+                    groupBox1.Text = "Ajustes de desempenho (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "Privacidade (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "Ajustes visuais (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "Outros (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "Modo especialista (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     msgend = "Tudo foi concluído. É recomendável reiniciar.";
                     msgerror = "Nenhuma opção selecionada.";
@@ -2597,6 +2658,7 @@ namespace ET
                     chck75.Text = "Bloquear hosts de telemetria/UX";
                     chck76.Text = "Bloquear hosts de localização";
                     chck77.Text = "Bloquear hosts de erros do Win";
+                    chck78.Text = "Desativar imagem de fundo da tela de login";
 
                     tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
                     tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
@@ -2682,11 +2744,11 @@ namespace ET
                 {
                     button7.Text = "fr-FR";
                     Console.WriteLine("French detected");
-                    groupBox1.Text = "Améliorations de Performance (36)";
-                    groupBox2.Text = "Confidentialité (21)";
-                    groupBox3.Text = "Améliorations Visuelles (8)";
-                    groupBox4.Text = "Autres (6)";
-                    groupBox5.Text = "Mode Expert (6)";
+                    groupBox1.Text = "Améliorations de Performance (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "Confidentialité (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "Améliorations Visuelles (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "Autres (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "Mode Expert (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     button1.Text = "Performance";
                     button2.Text = "Visuel";
@@ -2805,6 +2867,8 @@ namespace ET
                     chck75.Text = "Bloquer hôtes télémétrie/UX";
                     chck76.Text = "Bloquer hôtes localisation";
                     chck77.Text = "Bloquer hôtes rapports crash";
+                    chck78.Text = "Désactiver fond de connexion";
+
 
                     tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
                     tooltip.SetToolTip(chck2, "Configure le plan d'alimentation Windows sur Performance Ultime pour une meilleure réactivité.");
@@ -2890,11 +2954,11 @@ namespace ET
                 {
                     button7.Text = "ko-KR";
                     Console.WriteLine("Korean detected");
-                    groupBox1.Text = "성능 조정 (36)";
-                    groupBox2.Text = "개인 정보 (21)";
-                    groupBox3.Text = "시각 효과 조정 (8)";
-                    groupBox4.Text = "기타 (6)";
-                    groupBox5.Text = "전문가 모드 (6)";
+                    groupBox1.Text = "성능 조정 (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "개인 정보 (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "시각 효과 조정 (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "기타 (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "전문가 모드 (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     button1.Text = "성능";
                     button2.Text = "시각 효과";
@@ -2910,17 +2974,18 @@ namespace ET
                     button3.Font = new Font("Consolas", 16, FontStyle.Regular);
                     button4.Font = new Font("Consolas", 16, FontStyle.Regular);
                     button5.Font = new Font("Consolas", 16, FontStyle.Regular);
-                    panel1.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel2.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel3.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel4.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    panel5.Font = new Font("Consolas", 11, FontStyle.Regular);
-                    groupBox1.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox2.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox3.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox4.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    groupBox5.Font = new Font("Consolas", 12, FontStyle.Bold);
-                    toolStrip1.Font = new Font("Consolas", 10, FontStyle.Regular);
+                    panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font= new Font("Consolas", 13, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
 
                     toolStripButton2.Text = "백업";
                     toolStripDropDownButton2.Text = "복원";
@@ -3028,6 +3093,7 @@ namespace ET
                     chck75.Text = "텔레메트리/UX 호스트 차단";
                     chck76.Text = "위치 정보 호스트 차단";
                     chck77.Text = "충돌 보고 호스트 차단";
+                    chck78.Text = "로그인 배경 끄기";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
                     tooltip.SetToolTip(chck2, "Windows 전원 계획을 최고의 성능(Ultimate Performance)으로 설정하여 응답성을 향상시킵니다.");
@@ -3115,11 +3181,11 @@ namespace ET
                     button7.Text = "tr-TR";
                     Console.WriteLine("Turkish detected");
 
-                    groupBox1.Text = "Performans Ayarları(36)";
-                    groupBox2.Text = "Gizlilik(21)";
-                    groupBox3.Text = "Görsel Ayarları(8)";
-                    groupBox4.Text = "Diğer(6)";
-                    groupBox5.Text = "Uzman Modu(6)";
+                    groupBox1.Text = "Performans Ayarları (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "Gizlilik (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "Görsel Ayarları (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "Diğer (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "Uzman Modu (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     button1.Text = "Performans";
                     button2.Text = "Görsel";
@@ -3238,6 +3304,7 @@ namespace ET
                     chck75.Text = "Telemetri ve kullanıcı sunucuları engelle";
                     chck76.Text = "Konum paylaşım sunucularını engelle";
                     chck77.Text = "Windows çökme raporu sunucularını engelle";
+                    chck78.Text = "Giriş arka planını kapat";
 
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
@@ -3544,11 +3611,21 @@ namespace ET
                 this.ShowInTaskbar = true;
             }
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C bcdedit /deletevalue {current} safeboot";
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "bcdedit.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "bcdedit.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                Arguments = "/deletevalue {current} safeboot",
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
 
             await CheckUpdateET();
 
@@ -3624,7 +3701,7 @@ namespace ET
             progressBar1.BringToFront();
             textBox1.BringToFront();
 
-            int alltodo = 0; //max 77
+            int alltodo = 0; //max 78
             int done = 0;
             foreach (CheckBox checkbox in panel1.Controls)
             {
@@ -3730,10 +3807,21 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C bcdedit /timeout 3";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
+                            string msconfigPath2 = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "bcdedit.exe"
+);
+
+                            if (!File.Exists(msconfigPath2))
+                            {
+                                msconfigPath2 = Path.Combine(Environment.SystemDirectory, "bcdedit.exe");
+                            }
+                            Process.Start(new ProcessStartInfo
+                            {
+                                Arguments = "/set timeout 3",
+                                FileName = msconfigPath2,
+                                UseShellExecute = true
+                            });
                             break;
                         case "Disable Hibernation/Fast Startup":
                             done++;
@@ -3866,13 +3954,26 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Parameters\", "ThreadPriority", 31, RegistryValueKind.DWord);
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-                            startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C bcdedit /set {current} numproc %NUMBER_OF_PROCESSORS%";
-                            process.StartInfo = startInfo;
-                            process.Start(); process.WaitForExit();
+                            string numProc = Environment.GetEnvironmentVariable("NUMBER_OF_PROCESSORS");
 
-                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "bcdedit.exe"
+);
+
+                            if (!File.Exists(msconfigPath))
+                            {
+                                msconfigPath = Path.Combine(Environment.SystemDirectory, "bcdedit.exe");
+                            }
+                            Process.Start(new ProcessStartInfo
+                            {
+                                Arguments = $"/set {{current}} numproc {numProc}",
+                                FileName = msconfigPath,
+                                UseShellExecute = true
+                            });
+                    
+
+                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command Get-WmiObject win32_Processor | findstr /r \"Intel\" > NOLPi.txt";
                             process.StartInfo = startInfo;
@@ -4923,6 +5024,11 @@ foreach ($app in $allApps) {
 
                             SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", @"", @"", RegistryValueKind.String);
                             break;
+                        case "Disable Logon Background Image":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\Software\Policies\Microsoft\Windows\System\", "DisableLogonBackgroundImage", 1, RegistryValueKind.DWord);
+                            break;
 
                     }
                 }
@@ -5622,7 +5728,20 @@ foreach ($app in $allApps) {
 
         private void diskDefragmenterToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("dfrgui.exe");
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "dfrgui.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "dfrgui.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
         }
 
         private void cleanmgrToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5632,7 +5751,20 @@ foreach ($app in $allApps) {
 
         private void msconfigToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("msconfig.exe");
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "msconfig.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "msconfig.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
         }
 
         private void controlPanelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5846,11 +5978,21 @@ foreach ($app in $allApps) {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C bcdedit /set {current} safeboot network";
-            process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "bcdedit.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "bcdedit.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                Arguments = "/set {current} safeboot network",
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
             RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
             reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
 
@@ -5860,10 +6002,25 @@ foreach ($app in $allApps) {
 
         private void restartExplorerexeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("taskkill", "/f /im explorer.exe");
-            System.Threading.Thread.Sleep(1000);
-            Process.Start("explorer.exe");
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "taskkill",
+                Arguments = "/f /im explorer.exe",
+                Verb = "runas",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true
+            })?.WaitForExit();
+
+            System.Threading.Thread.Sleep(1000); // odczekaj na zamknięcie
+
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "explorer.exe",
+                CreateNoWindow = true
+            })?.WaitForExit();
         }
+
+
 
         private void downloadSoftwareToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -6059,7 +6216,20 @@ foreach ($app in $allApps) {
 
         private void restorePointToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start(Path.Combine(Environment.SystemDirectory, "rstrui.exe"));
+            string msconfigPath = Path.Combine(
+Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+"rstrui.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "rstrui.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
         }
 
         private void registryRestoreToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6124,5 +6294,11 @@ foreach ($app in $allApps) {
                 Process.Start("https://github.com/semazurek/ET-Optimizer/blob/master/ET/Form1.cs");
             }
         }
+
+        private void toolStripLabel3_DoubleClick(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
