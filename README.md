@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.35-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.37-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -37,7 +37,9 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <a href="#"><img src="https://github.com/user-attachments/assets/63bd6170-82ec-49cc-b798-a6b0f3a90a8d"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/c188ac6f-dc5e-4f7b-9e01-90575167ebd1"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/9c6fab87-adfe-4a05-9484-f6d64537b13e"width="48"></a>
-
+<a href="#"><img src="https://github.com/user-attachments/assets/0ef6c1c0-addb-4f01-a734-f34b14b5142b"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/e71da507-b8bb-423d-a2cf-b8d877857c77"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/44d74824-3f31-4ffb-aa63-e20f1de90afd"width="48"></a>
 
 </p>
 
