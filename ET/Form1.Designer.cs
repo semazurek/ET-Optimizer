@@ -347,14 +347,14 @@
             // restorePointToolStripMenuItem
             // 
             this.restorePointToolStripMenuItem.Name = "restorePointToolStripMenuItem";
-            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.restorePointToolStripMenuItem.Text = "Restore Point";
             this.restorePointToolStripMenuItem.Click += new System.EventHandler(this.restorePointToolStripMenuItem_Click);
             // 
             // registryRestoreToolStripMenuItem
             // 
             this.registryRestoreToolStripMenuItem.Name = "registryRestoreToolStripMenuItem";
-            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
             this.registryRestoreToolStripMenuItem.Text = "Registry Restore";
             this.registryRestoreToolStripMenuItem.Click += new System.EventHandler(this.registryRestoreToolStripMenuItem_Click);
             // 
@@ -763,7 +763,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.06.35";
+            this.label1.Text = "E.T. ver 6.06.37";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1

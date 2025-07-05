@@ -228,7 +228,7 @@ namespace ET
                 this.Bounds = Screen.FromHandle(this.Handle).Bounds;
                 centergroup();
                 CultureInfo cinfo = CultureInfo.InstalledUICulture;
-                if (cinfo.Name == "ko-KR")
+                if (cinfo.Name == "ko-KR" || cinfo.Name == "zh-CHS" || cinfo.Name == "zh-CN" || cinfo.Name == "ar-SA" || cinfo.Name == "hi-IN")
                 { }
                 else
                 {
@@ -262,7 +262,7 @@ namespace ET
                 centergroup();
                 CultureInfo cinfo = CultureInfo.InstalledUICulture;
                 Console.WriteLine(cinfo.Name);
-                if (cinfo.Name == "ko-KR")
+                if (cinfo.Name == "ko-KR" || cinfo.Name == "zh-CHS" || cinfo.Name == "zh-CN" || cinfo.Name == "ar-SA" || cinfo.Name == "hi-IN")
                 {
                     panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
                     panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
@@ -755,8 +755,8 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.06.35";
-        string ETBuild = "04.07.2025";
+        string ETVersion = "E.T. ver 6.06.37";
+        string ETBuild = "05.07.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -3176,6 +3176,233 @@ namespace ET
 
                     toolStripLabel1.Text = "빌드: 공개 | " + ETBuild;
                 }
+                if (cinfo.Name == "zh-CHS" || cinfo.Name == "zh-CN")
+                {
+                    button7.Text = "zh-CN";
+                    Console.WriteLine("Chinese (Simplified) detected");
+
+                    groupBox1.Text = "性能优化 (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "隐私设置 (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "视觉优化 (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "其他 (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "专家模式 (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
+
+                    button1.Text = "性能";
+                    button2.Text = "视觉";
+                    button3.Text = "隐私";
+                    selectall0 = "全选";
+                    selectall1 = "取消全选";
+
+                    button5.Text = "开始";
+                    button4.Text = "全选";
+
+                    toolStripButton2.Text = "备份";
+                    toolStripDropDownButton2.Text = "还原";
+                    registryRestoreToolStripMenuItem.Text = "注册表还原";
+                    restorePointToolStripMenuItem.Text = "系统还原点";
+                    toolStripButton3.Text = "关于";
+                    toolStripButton4.Text = "捐赠";
+
+                    msgend = "所有操作已完成。建议重启系统。";
+                    msgerror = "未选择任何选项。";
+                    msgupdate = "GitHub 上有新版本可用！";
+                    isoinfo = "生成的 ISO 映像将包含以下功能：ET-Optimizer.exe /auto，并跳过微软要求（如数据收集、本地账户创建等）。";
+
+                    button1.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button2.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button3.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button4.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button5.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    rebootToSafeModeToolStripMenuItem.Text = "重启进入安全模式";
+                    restartExplorerexeToolStripMenuItem.Text = "重启资源管理器";
+                    downloadSoftwareToolStripMenuItem.Text = "下载软件";
+                    toolStripDropDownButton1.Text = "附加功能";
+                    diskDefragmenterToolStripMenuItem.Text = "磁盘碎片整理";
+                    controlPanelToolStripMenuItem.Text = "控制面板";
+                    deviceManagerToolStripMenuItem.Text = "设备管理器";
+                    uACSettingsToolStripMenuItem.Text = "UAC 设置";
+                    servicesToolStripMenuItem.Text = "服务";
+                    remoteDesktopToolStripMenuItem.Text = "远程桌面";
+                    eventViewerToolStripMenuItem.Text = "事件查看器";
+                    resetNetworkToolStripMenuItem.Text = "重置网络";
+                    updateApplicationsToolStripMenuItem.Text = "更新应用";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Windows 密钥";
+                    rebootToBIOSToolStripMenuItem.Text = "重启进入 BIOS";
+                    makeETISOToolStripMenuItem.Text = "创建 ET 优化版 .ISO";
+
+                    chck1.Text = "禁用 Edge WebWidget";
+                    chck2.Text = "电源选项设为终极性能模式";
+                    chck3.Text = "设置 Svchost 分割阈值";
+                    chck4.Text = "双系统启动超时设为3秒";
+                    chck5.Text = "禁用休眠/快速启动";
+                    chck6.Text = "禁用 Windows 预览体验计划实验功能";
+                    chck7.Text = "禁用应用启动追踪";
+                    chck8.Text = "禁用电源节流（Intel 第六代及以上）";
+                    chck9.Text = "关闭后台应用";
+                    chck10.Text = "禁用粘滞键提示";
+                    chck11.Text = "禁用活动历史记录";
+                    chck12.Text = "禁用 Microsoft 商店应用自动更新";
+                    chck13.Text = "禁用应用的 SmartScreen 筛选器";
+                    chck14.Text = "阻止网站访问本地信息";
+                    chck15.Text = "修复 Microsoft Edge 设置";
+                    chck64.Text = "禁用 Nagle 算法（延迟 ACK）";
+                    chck65.Text = "优化 CPU/GPU 优先级";
+                    chck16.Text = "禁用定位传感器";
+                    chck17.Text = "禁用 WiFi 热点自动共享";
+                    chck18.Text = "禁用共享热点连接";
+                    chck19.Text = "更新时通知安排重启";
+                    chck20.Text = "P2P 更新仅限本地网络";
+                    chck21.Text = "设置关机等待时间为2秒";
+                    chck22.Text = "移除旧设备驱动程序";
+                    chck23.Text = "禁用“充分利用 Windows”提示";
+                    chck24.Text = "禁用建议应用的自动安装";
+                    chck25.Text = "禁用开始菜单广告/建议";
+                    chck26.Text = "禁用 Windows Ink 的应用建议";
+                    chck27.Text = "禁用不必要的组件";
+                    chck28.Text = "降低 Defender 计划扫描优先级";
+                    chck29.Text = "禁用进程缓解措施";
+                    chck30.Text = "碎片整理索引服务文件";
+                    chck66.Text = "禁用 Spectre/Meltdown 缓解";
+                    chck67.Text = "禁用 Windows Defender";
+                    chck31.Text = "禁用遥测相关的计划任务";
+                    chck32.Text = "移除遥测/数据收集功能";
+                    chck33.Text = "禁用 PowerShell 遥测";
+                    chck34.Text = "禁用 Skype 遥测";
+                    chck35.Text = "禁用媒体播放器使用报告";
+                    chck36.Text = "禁用 Mozilla 遥测";
+                    chck37.Text = "禁用广告 ID 的个性化广告";
+                    chck38.Text = "禁用书写信息发送";
+                    chck39.Text = "禁用手写识别";
+                    chck40.Text = "禁用 Watson 恶意软件报告";
+                    chck41.Text = "禁用恶意软件诊断数据";
+                    chck42.Text = "禁用向 MS MAPS 报告";
+                    chck43.Text = "禁用 Spynet Defender 报告";
+                    chck44.Text = "不发送恶意软件样本";
+                    chck45.Text = "禁用键入数据的发送";
+                    chck46.Text = "禁用联系人信息发送至微软";
+                    chck47.Text = "禁用 Cortana";
+                    chck48.Text = "资源管理器中显示文件扩展名";
+                    chck49.Text = "禁用任务栏透明效果";
+                    chck50.Text = "禁用 Windows 动画效果";
+                    chck51.Text = "禁用最近使用列表（跳转列表）";
+                    chck52.Text = "将搜索框设为图标模式";
+                    chck53.Text = "资源管理器默认打开“此电脑”";
+                    chck54.Text = "移除 Xbox 游戏栏/DVR";
+                    chck55.Text = "启用服务优化";
+                    chck56.Text = "移除预装软件（臃肿软件）";
+                    chck57.Text = "禁用不必要的启动项";
+                    chck58.Text = "清理临时/缓存/预取/日志文件";
+                    chck59.Text = "移除新闻和兴趣/小部件";
+                    chck60.Text = "移除 Microsoft OneDrive";
+                    chck61.Text = "禁用 Xbox 服务";
+                    chck62.Text = "启用快速/安全 DNS（1.1.1.1）";
+                    chck63.Text = "使用 AdwCleaner 扫描广告软件";
+                    chck68.Text = "清理 WinSxS 文件夹";
+                    chck69.Text = "移除 Copilot";
+                    chck70.Text = "移除“了解此图片”提示";
+                    chck71.Text = "启用长路径支持";
+                    chck72.Text = "启用旧版右键菜单";
+                    chck73.Text = "禁用全屏优化";
+                    chck74.Text = "启用内存优化";
+                    chck75.Text = "屏蔽遥测/用户体验相关主机";
+                    chck76.Text = "屏蔽位置数据共享主机";
+                    chck77.Text = "屏蔽 Windows 崩溃报告主机";
+                    chck78.Text = "禁用登录背景图像";
+
+                    tooltip.SetToolTip(chck1, "禁用 Edge WebWidget，减少后台资源占用并释放内存。");
+                    tooltip.SetToolTip(chck2, "将电源计划切换为终极性能模式，提高系统响应速度。");
+                    tooltip.SetToolTip(chck3, "允许服务在独立的 svchost 进程中运行，提升系统稳定性。");
+                    tooltip.SetToolTip(chck4, "将双系统启动菜单超时时间缩短为3秒，加快启动速度。");
+                    tooltip.SetToolTip(chck5, "禁用休眠和快速启动，释放磁盘空间并改善关机行为。");
+                    tooltip.SetToolTip(chck6, "关闭通过 Windows Insider 推送的实验性功能。");
+                    tooltip.SetToolTip(chck7, "防止 Windows 跟踪你打开的应用程序，以保护隐私。");
+                    tooltip.SetToolTip(chck8, "禁用 CPU 电源节流（Intel 第六代及以上）以获得最佳性能。");
+                    tooltip.SetToolTip(chck9, "防止后台应用运行，提高性能和电池续航。");
+                    tooltip.SetToolTip(chck10, "禁用重复按 Shift 或 Ctrl 键时弹出的粘滞键提示。");
+                    tooltip.SetToolTip(chck11, "阻止 Windows 记录你的活动历史，保护隐私。");
+                    tooltip.SetToolTip(chck12, "阻止 Microsoft 商店应用在后台自动更新。");
+                    tooltip.SetToolTip(chck13, "关闭应用程序的 SmartScreen 筛选器，不再检查未知程序。");
+                    tooltip.SetToolTip(chck14, "阻止网站请求你的物理位置，增强隐私保护。");
+                    tooltip.SetToolTip(chck15, "重置 Edge 浏览器设置以修复配置错误。");
+                    tooltip.SetToolTip(chck16, "禁用所有定位传感器和服务，最大限度保护隐私。");
+                    tooltip.SetToolTip(chck17, "防止 Windows 自动共享你的 Wi-Fi 热点。");
+                    tooltip.SetToolTip(chck18, "阻止其他人连接共享热点，降低安全风险。");
+                    tooltip.SetToolTip(chck19, "让 Windows 在更新后重启前通知你，而不是自动重启。");
+                    tooltip.SetToolTip(chck20, "将 Windows 更新的 P2P 共享限制为本地网络。");
+                    tooltip.SetToolTip(chck21, "减少关机延迟，加快关机速度。");
+                    tooltip.SetToolTip(chck22, "删除占用空间但未使用的旧设备驱动。");
+                    tooltip.SetToolTip(chck23, "移除登录后出现的“充分利用 Windows”提示。");
+                    tooltip.SetToolTip(chck24, "禁用建议或赞助应用的自动安装。");
+                    tooltip.SetToolTip(chck25, "清理开始菜单中的广告和建议，提升整洁度。");
+                    tooltip.SetToolTip(chck26, "禁用 Windows Ink 工作区中的应用推荐。");
+                    tooltip.SetToolTip(chck27, "关闭不常用的旧组件或系统功能。");
+                    tooltip.SetToolTip(chck28, "降低 Defender 定期扫描优先级，减少性能影响。");
+                    tooltip.SetToolTip(chck29, "禁用部分系统进程缓解措施，以提升性能（请谨慎使用）。");
+                    tooltip.SetToolTip(chck30, "对索引服务文件进行碎片整理，提高搜索性能。");
+                    tooltip.SetToolTip(chck31, "禁用与 Microsoft 遥测相关的计划任务。");
+                    tooltip.SetToolTip(chck32, "删除系统中的遥测和追踪组件。");
+                    tooltip.SetToolTip(chck33, "阻止 PowerShell 向 Microsoft 发送使用数据。");
+                    tooltip.SetToolTip(chck34, "阻止 Skype 收集和发送遥测数据。");
+                    tooltip.SetToolTip(chck35, "禁用 Windows Media Player 的使用追踪报告功能。");
+                    tooltip.SetToolTip(chck36, "关闭 Firefox 浏览器内置的遥测功能。");
+                    tooltip.SetToolTip(chck37, "阻止应用使用你的广告 ID 来个性化广告。");
+                    tooltip.SetToolTip(chck38, "停止 Windows 收集有关你输入行为的信息。");
+                    tooltip.SetToolTip(chck39, "禁用手写输入识别及其数据收集功能。");
+                    tooltip.SetToolTip(chck40, "阻止自动向 Microsoft 发送恶意软件报告。");
+                    tooltip.SetToolTip(chck41, "防止 Defender 发送有关威胁的诊断数据。");
+                    tooltip.SetToolTip(chck42, "禁用向 Microsoft MAPS 云防护服务提交信息。");
+                    tooltip.SetToolTip(chck43, "阻止 Windows Defender 的 Spynet 报告服务。");
+                    tooltip.SetToolTip(chck44, "阻止自动将可疑文件提交给 Microsoft。");
+                    tooltip.SetToolTip(chck45, "阻止收集键盘使用数据（用于文本预测）。");
+                    tooltip.SetToolTip(chck46, "阻止 Windows 同步或共享你的联系人信息。");
+                    tooltip.SetToolTip(chck47, "完全禁用 Cortana 语音助手及其相关服务。");
+                    tooltip.SetToolTip(chck48, "强制资源管理器显示已知文件类型的扩展名。");
+                    tooltip.SetToolTip(chck49, "关闭任务栏透明效果，稍微降低 GPU 使用率。");
+                    tooltip.SetToolTip(chck50, "禁用用户界面中的动画，提升流畅度和响应速度。");
+                    tooltip.SetToolTip(chck51, "阻止 Windows 保留最近项目列表（跳转列表）。");
+                    tooltip.SetToolTip(chck52, "将开始菜单搜索框设为图标模式，节省空间。");
+                    tooltip.SetToolTip(chck53, "将资源管理器的默认启动位置设置为“此电脑”。");
+                    tooltip.SetToolTip(chck54, "移除 Xbox 游戏栏及其后台服务。");
+                    tooltip.SetToolTip(chck55, "应用推荐服务优化设置，提升系统性能。");
+                    tooltip.SetToolTip(chck56, "删除不需要的预装软件（臃肿应用）。");
+                    tooltip.SetToolTip(chck57, "禁用不必要的自启动程序，加快启动速度。");
+                    tooltip.SetToolTip(chck58, "清理系统缓存、临时文件、预取数据和旧日志。");
+                    tooltip.SetToolTip(chck59, "移除任务栏中的“新闻和兴趣”或小部件面板。");
+                    tooltip.SetToolTip(chck60, "完全移除 OneDrive 及其后台同步功能。");
+                    tooltip.SetToolTip(chck61, "关闭不玩游戏时不需要的 Xbox 服务。");
+                    tooltip.SetToolTip(chck62, "将 DNS 设置为 Cloudflare（1.1.1.1），提升速度和隐私。");
+                    tooltip.SetToolTip(chck63, "启动 AdwCleaner，扫描并清理广告软件。");
+                    tooltip.SetToolTip(chck64, "禁用 Nagle 算法，减少延迟，改善网络游戏体验。");
+                    tooltip.SetToolTip(chck65, "优化 CPU 和 GPU 的调度，提高前台应用性能。");
+                    tooltip.SetToolTip(chck66, "禁用 Spectre/Meltdown 漏洞缓解以提升速度（可能降低安全性）。");
+                    tooltip.SetToolTip(chck67, "完全禁用 Windows Defender 防病毒及相关服务。");
+                    tooltip.SetToolTip(chck68, "清理 WinSxS 文件夹，释放旧系统文件占用的磁盘空间。");
+                    tooltip.SetToolTip(chck69, "从系统中移除新的 Copilot AI 助手。");
+                    tooltip.SetToolTip(chck70, "禁用锁屏界面上的“了解这张照片”功能。");
+                    tooltip.SetToolTip(chck71, "允许 Windows 支持超过 260 字符的长路径。");
+                    tooltip.SetToolTip(chck72, "恢复 Windows 10 版本的经典右键菜单。");
+                    tooltip.SetToolTip(chck73, "禁用全屏优化，防止影响游戏性能。");
+                    tooltip.SetToolTip(chck74, "应用内存优化设置，提高系统响应速度。");
+                    tooltip.SetToolTip(chck75, "阻止已知的微软遥测和用户体验追踪域名。");
+                    tooltip.SetToolTip(chck76, "阻止与位置数据共享相关的主机名。");
+                    tooltip.SetToolTip(chck77, "防止系统将崩溃报告发送到微软服务器。");
+
+                    toolStripLabel1.Text = "版本：公开 | " + ETBuild;
+
+                }
                 if (cinfo.Name == "tr-TR")
                 {
                     button7.Text = "tr-TR";
@@ -3388,6 +3615,461 @@ namespace ET
 
                     toolStripLabel1.Text = "Derleme: Genel | " + ETBuild;
                 }
+                if (cinfo.Name == "ar-SA")
+                {
+                    button7.Text = "ar-SA";
+                    Console.WriteLine("Arabic - Saudi Arabia detected");
+
+                    groupBox1.Text = "تحسينات الأداء (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "الخصوصية (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "تحسينات العرض (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "أخرى (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "الوضع المتقدم (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
+
+                    button1.Text = "الأداء";
+                    button2.Text = "العرض";
+                    button3.Text = "الخصوصية";
+                    selectall0 = "تحديد الكل";
+                    selectall1 = "إلغاء تحديد الكل";
+
+                    button5.Text = "ابدأ";
+
+                    button4.Text = "تحديد الكل";
+
+                    toolStripButton2.Text = "نسخ احتياطي";
+                    toolStripDropDownButton2.Text = "استعادة";
+                    registryRestoreToolStripMenuItem.Text = "استعادة السجل";
+                    restorePointToolStripMenuItem.Text = "نقطة استعادة";
+                    toolStripButton3.Text = "حول";
+                    toolStripButton4.Text = "تبرع";
+
+                    msgend = "تم تنفيذ جميع الإجراءات. يُنصح بإعادة التشغيل.";
+                    msgerror = "لم يتم اختيار أي خيار.";
+                    msgupdate = "يتوفر إصدار أحدث من التطبيق على GitHub!";
+                    isoinfo = "ستحتوي صورة ISO التي تم إنشاؤها على الميزات التالية: ET-Optimizer.exe /auto وتجاوز متطلبات Microsoft مثل جمع البيانات وإنشاء حساب محلي، إلخ.";
+
+                    button1.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button2.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button3.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button4.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button5.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    rebootToSafeModeToolStripMenuItem.Text = "إعادة التشغيل إلى الوضع الآمن";
+                    restartExplorerexeToolStripMenuItem.Text = "إعادة تشغيل Explorer.exe";
+                    downloadSoftwareToolStripMenuItem.Text = "تنزيل البرامج";
+                    toolStripDropDownButton1.Text = "إضافات";
+                    diskDefragmenterToolStripMenuItem.Text = "إلغاء تجزئة القرص";
+                    controlPanelToolStripMenuItem.Text = "لوحة التحكم";
+                    deviceManagerToolStripMenuItem.Text = "إدارة الأجهزة";
+                    uACSettingsToolStripMenuItem.Text = "إعدادات التحكم بالمستخدم (UAC)";
+                    servicesToolStripMenuItem.Text = "الخدمات";
+                    remoteDesktopToolStripMenuItem.Text = "سطح المكتب البعيد";
+                    eventViewerToolStripMenuItem.Text = "عارض الأحداث";
+                    resetNetworkToolStripMenuItem.Text = "إعادة تعيين الشبكة";
+                    updateApplicationsToolStripMenuItem.Text = "تحديث التطبيقات";
+                    windowsLicenseKeyToolStripMenuItem.Text = "مفتاح ترخيص Windows";
+                    rebootToBIOSToolStripMenuItem.Text = "إعادة التشغيل إلى BIOS";
+                    makeETISOToolStripMenuItem.Text = "إنشاء ملف .ISO مُحسن لـ ET";
+
+                    chck1.Text = "تعطيل Edge WebWidget";
+                    chck2.Text = "ضبط الطاقة على الأداء النهائي";
+                    chck3.Text = "تقسيم حد Svchost";
+                    chck4.Text = "مهلة الإقلاع الثنائي 3 ثوانٍ";
+                    chck5.Text = "تعطيل الإسبات / التشغيل السريع";
+                    chck6.Text = "تعطيل ميزات Windows Insider التجريبية";
+                    chck7.Text = "تعطيل تتبع تشغيل التطبيقات";
+                    chck8.Text = "تعطيل تقليل طاقة المعالج (Intel الجيل السادس وما بعده)";
+                    chck9.Text = "إيقاف التطبيقات في الخلفية";
+                    chck10.Text = "تعطيل نافذة مفاتيح التثبيت";
+                    chck11.Text = "تعطيل سجل النشاطات";
+                    chck12.Text = "تعطيل تحديثات تطبيقات متجر مايكروسوفت";
+                    chck13.Text = "تعطيل فلتر SmartScreen للتطبيقات";
+                    chck14.Text = "عدم السماح للمواقع بطلب الموقع الجغرافي";
+                    chck15.Text = "إصلاح إعدادات Microsoft Edge";
+                    chck64.Text = "تعطيل خوارزمية Nagle (تأخير ACK)";
+                    chck65.Text = "تحسينات أولوية CPU/GPU";
+                    chck16.Text = "تعطيل مستشعرات الموقع";
+                    chck17.Text = "تعطيل المشاركة التلقائية لنقطة الاتصال اللاسلكية";
+                    chck18.Text = "تعطيل الاتصال بنقاط الاتصال المشتركة";
+                    chck19.Text = "تنبيه قبل إعادة التشغيل بعد التحديثات";
+                    chck20.Text = "تقييد تحديث P2P إلى الشبكة المحلية فقط";
+                    chck21.Text = "تعيين وقت إيقاف التشغيل إلى 2 ثانية";
+                    chck22.Text = "إزالة برامج تشغيل الأجهزة القديمة";
+                    chck23.Text = "تعطيل رسالة \"استفد أكثر من Windows\"";
+                    chck24.Text = "تعطيل تثبيت التطبيقات المقترحة تلقائيًا";
+                    chck25.Text = "تعطيل إعلانات/اقتراحات قائمة البداية";
+                    chck26.Text = "تعطيل اقتراح التطبيقات في Windows Ink";
+                    chck27.Text = "تعطيل المكونات غير الضرورية";
+                    chck28.Text = "تقليل أولوية فحص Defender المجدول";
+                    chck29.Text = "تعطيل تخفيف العمليات";
+                    chck30.Text = "إلغاء تجزئة ملف خدمة الفهرسة";
+                    chck66.Text = "تعطيل حماية Spectre/Meltdown";
+                    chck67.Text = "تعطيل Windows Defender";
+                    chck31.Text = "تعطيل مهام التتبع المجدولة (Telemetry)";
+                    chck32.Text = "إزالة جمع البيانات والتتبع (Telemetry)";
+                    chck33.Text = "تعطيل تتبع PowerShell";
+                    chck34.Text = "تعطيل تتبع Skype";
+                    chck35.Text = "تعطيل تقارير استخدام مشغل الوسائط";
+                    chck36.Text = "تعطيل تتبع Firefox (Mozilla)";
+                    chck37.Text = "تعطيل استخدام التطبيقات لمعرف الإعلان الخاص بي";
+                    chck38.Text = "تعطيل إرسال معلومات حول الكتابة";
+                    chck39.Text = "تعطيل التعرف على الكتابة اليدوية";
+                    chck40.Text = "تعطيل تقارير البرامج الضارة (Watson)";
+                    chck41.Text = "تعطيل بيانات تشخيص البرامج الضارة";
+                    chck42.Text = "تعطيل تقارير MS MAPS";
+                    chck43.Text = "تعطيل تقارير Defender Spynet";
+                    chck44.Text = "عدم إرسال عينات البرامج الضارة";
+                    chck45.Text = "تعطيل إرسال عينات من الكتابة";
+                    chck46.Text = "تعطيل إرسال جهات الاتصال إلى مايكروسوفت";
+                    chck47.Text = "تعطيل كورتانا";
+                    chck48.Text = "إظهار امتدادات الملفات في Explorer";
+                    chck49.Text = "تعطيل شفافية شريط المهام";
+                    chck50.Text = "تعطيل الرسوم المتحركة في Windows";
+                    chck51.Text = "تعطيل قوائم MRU (القوائم المتكررة)";
+                    chck52.Text = "تعيين مربع البحث كأيقونة فقط";
+                    chck53.Text = "فتح Explorer على \"هذا الكمبيوتر\" عند البدء";
+                    chck54.Text = "إزالة شريط ألعاب Windows / DVR";
+                    chck55.Text = "تمكين تحسينات الخدمة";
+                    chck56.Text = "إزالة البرامج المثبتة مسبقًا (Bloatware)";
+                    chck57.Text = "تعطيل تطبيقات بدء التشغيل غير الضرورية";
+                    chck58.Text = "تنظيف الملفات المؤقتة / الذاكرة المخبأة / Prefetch / السجلات";
+                    chck59.Text = "إزالة الأخبار والاهتمامات / الأدوات المصغّرة";
+                    chck60.Text = "إزالة OneDrive من النظام";
+                    chck61.Text = "تعطيل خدمات Xbox";
+                    chck62.Text = "تمكين DNS سريع وآمن (1.1.1.1)";
+                    chck63.Text = "فحص البرامج الإعلانية (AdwCleaner)";
+                    chck68.Text = "تنظيف مجلد WinSxS";
+                    chck69.Text = "إزالة Copilot";
+                    chck70.Text = "إزالة ميزة \"تعرّف على هذه الصورة\"";
+                    chck71.Text = "تمكين مسارات النظام الطويلة";
+                    chck72.Text = "تمكين قائمة السياق القديمة (Classic)";
+                    chck73.Text = "تعطيل تحسينات ملء الشاشة";
+                    chck74.Text = "تمكين تحسينات الذاكرة العشوائية (RAM)";
+                    chck75.Text = "حظر خوادم تتبع البيانات وتجربة المستخدم";
+                    chck76.Text = "حظر خوادم مشاركة بيانات الموقع";
+                    chck77.Text = "حظر خوادم تقارير أعطال Windows";
+                    chck78.Text = "تعطيل صورة خلفية شاشة تسجيل الدخول";
+
+                    tooltip.SetToolTip(chck1, "يعطّل Edge WebWidget لتقليل استهلاك الموارد في الخلفية وتحرير الذاكرة.");
+                    tooltip.SetToolTip(chck2, "يحوّل خطة الطاقة إلى الأداء النهائي (Ultimate Performance) لتحسين استجابة النظام.");
+                    tooltip.SetToolTip(chck3, "يسمح بتشغيل الخدمات في عمليات svchost مستقلة، مما يحسّن استقرار النظام.");
+                    tooltip.SetToolTip(chck4, "يقصر مهلة قائمة التمهيد الثنائي إلى 3 ثوانٍ لتسريع التشغيل.");
+                    tooltip.SetToolTip(chck5, "يعطّل الإسبات والتشغيل السريع لتوفير مساحة القرص وتحسين سلوك الإغلاق.");
+                    tooltip.SetToolTip(chck6, "يوقف الميزات التجريبية المُضافة عبر برنامج Windows Insider.");
+                    tooltip.SetToolTip(chck7, "يمنع Windows من تتبع التطبيقات التي تفتحها لحماية الخصوصية.");
+                    tooltip.SetToolTip(chck8, "يعطّل تقليل طاقة المعالج (Intel الجيل السادس وما بعده) لتحقيق أداء كامل.");
+                    tooltip.SetToolTip(chck9, "يمنع تشغيل التطبيقات في الخلفية لتحسين الأداء وعمر البطارية.");
+                    tooltip.SetToolTip(chck10, "يعطّل النوافذ المنبثقة لمفاتيح Sticky تظهر عند الضغط المتكرر على Shift أو Ctrl.");
+                    tooltip.SetToolTip(chck11, "يوقف Windows عن تسجيل سجل النشاطات، لحماية الخصوصية.");
+                    tooltip.SetToolTip(chck12, "يمنع تطبيقات متجر Microsoft من التحديث التلقائي في الخلفية.");
+                    tooltip.SetToolTip(chck13, "يوقف فلتر SmartScreen للتطبيقات الذي يفحص البرامج غير المعروفة.");
+                    tooltip.SetToolTip(chck14, "يمنع المواقع من طلب موقعك الجغرافي لحماية الخصوصية.");
+                    tooltip.SetToolTip(chck15, "يعيد إعدادات Edge إلى الافتراضية لإصلاح مشاكل التكوين.");
+                    tooltip.SetToolTip(chck16, "يعطّل جميع أجهزة الاستشعار والخدمات المتعلقة بالموقع لتحقيق أكبر قدر من الخصوصية.");
+                    tooltip.SetToolTip(chck17, "يمنع Windows من مشاركة نقطة اتصال Wi‑Fi تلقائيًا مع الآخرين.");
+                    tooltip.SetToolTip(chck18, "يحظر اتصالات الآخرين بنقاط الاتصال المشتركة لتقليل المخاطر الأمنية.");
+                    tooltip.SetToolTip(chck19, "يجعل Windows ينبهك قبل إعادة التشغيل بعد التحديث بدلاً من إعادة التشغيل تلقائيًا.");
+                    tooltip.SetToolTip(chck20, "يقيد مشاركة التحديثات بنظام P2P ضمن الشبكة المحلية فقط.");
+                    tooltip.SetToolTip(chck21, "يقلل من تأخير إيقاف النظام لتسريع الإغلاق.");
+                    tooltip.SetToolTip(chck22, "يحذف برامج تشغيل الأجهزة غير المستخدمة التي تشغل مساحة على القرص.");
+                    tooltip.SetToolTip(chck23, "يزيل رسالة \"استفد أكثر من Windows\" التي تظهر بعد تسجيل الدخول.");
+                    tooltip.SetToolTip(chck24, "يمنع التثبيت التلقائي للتطبيقات المقترحة أو المدعومة.");
+                    tooltip.SetToolTip(chck25, "يزيل الإعلانات والاقتراحات من قائمة ابدأ لتنظيفها.");
+                    tooltip.SetToolTip(chck26, "يعطّل اقتراح التطبيقات في Windows Ink Workspace.");
+                    tooltip.SetToolTip(chck27, "يوقف المكونات القديمة أو غير الضرورية في Windows.");
+                    tooltip.SetToolTip(chck28, "يخفض أولوية فحص Defender المجدول لتقليل تأثيره على الأداء.");
+                    tooltip.SetToolTip(chck29, "يعطّل بعض إجراءات الحماية في العمليات لتعزيز الأداء (استخدم بحذر).");
+                    tooltip.SetToolTip(chck30, "يفكك تجزئة ملف خدمة الفهرسة لتحسين أداء البحث.");
+                    tooltip.SetToolTip(chck31, "يعطّل مهام الجدولة المتعلقة بجمع بيانات Telemetry من Microsoft.");
+                    tooltip.SetToolTip(chck32, "يزيل خدمات التتبع وTelemtry من النظام.");
+                    tooltip.SetToolTip(chck33, "يمنع PowerShell من إرسال بيانات الاستخدام إلى Microsoft.");
+                    tooltip.SetToolTip(chck34, "يحجب Skype من جمع وإرسال بيانات Telemetry.");
+                    tooltip.SetToolTip(chck35, "يعطّل تقارير استخدام Windows Media Player.");
+                    tooltip.SetToolTip(chck36, "يزيل ميزات Telemetry المدمجة في Firefox.");
+                    tooltip.SetToolTip(chck37, "يمنع التطبيقات من استخدام معرّف الإعلانات لديك للإعلانات المخصصة.");
+                    tooltip.SetToolTip(chck38, "يوقف Windows عن جمع معلومات حول سلوك الكتابة لديك.");
+                    tooltip.SetToolTip(chck39, "يعطّل التعرف على الكتابة اليدوية وتخزين بياناتها.");
+                    tooltip.SetToolTip(chck40, "يحجب إرسال تقارير البرامج الضارة تلقائيًا إلى Microsoft.");
+                    tooltip.SetToolTip(chck41, "يمنع Defender من إرسال بيانات تشخيصية عن التهديدات.");
+                    tooltip.SetToolTip(chck42, "يعطّل إرسال البيانات إلى خدمة حماية السحابة Microsoft MAPS.");
+                    tooltip.SetToolTip(chck43, "يحجب خدمة تقارير Spynet في Windows Defender.");
+                    tooltip.SetToolTip(chck44, "يمنع إرسال عينات البرامج الضارة بشكل تلقائي.");
+                    tooltip.SetToolTip(chck45, "يعطّل جمع بيانات المفاتيح المستخدمة للتنبؤ النصي.");
+                    tooltip.SetToolTip(chck46, "يوقف Windows عن مزامنة أو مشاركة بيانات جهات الاتصال لديك.");
+                    tooltip.SetToolTip(chck47, "يعطّل Cortana بالكامل، بما في ذلك خدمات المساعد الصوتي.");
+                    tooltip.SetToolTip(chck48, "يجبر Explorer على إظهار امتدادات الملفات للنوعيات المعروفة.");
+                    tooltip.SetToolTip(chck49, "يغلق شفافية شريط المهام لتقليل استخدام GPU قليلاً.");
+                    tooltip.SetToolTip(chck50, "يعطّل الرسوم المتحركة في الواجهة لتجربة أنعم وأسرع.");
+                    tooltip.SetToolTip(chck51, "يمنع Windows من الاحتفاظ بقائمة العناصر المستخدمة مؤخرًا (Jump Lists).");
+                    tooltip.SetToolTip(chck52, "يغيّر مربع بحث قائمة ابدأ إلى رمز فقط لتوفير المساحة.");
+                    tooltip.SetToolTip(chck53, "يضبط File Explorer ليبدأ على \"هذا الكمبيوتر\" بدلًا من \"الوصول السريع\".");
+                    tooltip.SetToolTip(chck54, "يزيل Xbox Game Bar وخدمات DVR في الخلفية.");
+                    tooltip.SetToolTip(chck55, "يطبق تحسينات مقترحة لخدمات Windows لتسريع النظام وتحسينه.");
+                    tooltip.SetToolTip(chck56, "يزيل التطبيقات المثبتة مسبقًا وغير الضرورية (Bloatware).");
+                    tooltip.SetToolTip(chck57, "يعطّل البرامج غير الضرورية من بدء التشغيل تلقائيًا.");
+                    tooltip.SetToolTip(chck58, "ينظف ذاكرة التخزين المؤقت وTemp وPrefetch وملفات السجلات القديمة.");
+                    tooltip.SetToolTip(chck59, "يزيل لوحة الأخبار والاهتمامات أو الأدوات المصغّرة من شريط المهام.");
+                    tooltip.SetToolTip(chck60, "يزيل OneDrive تمامًا من النظام، بما في ذلك المزامنة الخلفية.");
+                    tooltip.SetToolTip(chck61, "يعطّل خدمات Xbox التي لا تحتاجها إذا لم تكن تلعب.");
+                    tooltip.SetToolTip(chck62, "يضبط DNS للنظام على Cloudflare (1.1.1.1) لسرعة وخصوصية أفضل.");
+                    tooltip.SetToolTip(chck63, "يشغّل AdwCleaner لفحص وإزالة البرامج الإعلانية.");
+                    tooltip.SetToolTip(chck64, "يعطّل خوارزمية Nagle لتقليل التأخير وتحسين تجربة الألعاب أونلاين.");
+                    tooltip.SetToolTip(chck65, "يحسن جدولة CPU وGPU لأقصى أداء للتطبيقات الأمامية.");
+                    tooltip.SetToolTip(chck66, "يعطّل حماية Spectre/Meltdown لسرعة أعلى (مع احتمالية تقليل الأمان).");
+                    tooltip.SetToolTip(chck67, "يعطّل Windows Defender وكل خدماته التابعة.");
+                    tooltip.SetToolTip(chck68, "ينظف مجلد WinSxS لاسترجاع مساحة من ملفات النظام القديمة.");
+                    tooltip.SetToolTip(chck69, "يزيل مساعد Copilot الجديد المدعوم بالذكاء الاصطناعي من Windows.");
+                    tooltip.SetToolTip(chck70, "يعطّل ميزة \"تعرّف على هذه الصورة\" في شاشة القفل.");
+                    tooltip.SetToolTip(chck71, "يسمح لـ Windows بدعم مسارات ملفات طويلة أكثر من 260 حرفًا.");
+                    tooltip.SetToolTip(chck72, "يعيد قائمة السياق القديمة (اليمين) من Windows 10.");
+                    tooltip.SetToolTip(chck73, "يعطّل تحسينات ملء الشاشة التي قد تؤثر على أداء الألعاب.");
+                    tooltip.SetToolTip(chck74, "يطبق تحسينات الذاكرة لتحسين استخدام RAM واستجابة النظام.");
+                    tooltip.SetToolTip(chck75, "يحجب أسماء النطاقات المعروفة بجمع Telemetry وتجربة المستخدم من Microsoft.");
+                    tooltip.SetToolTip(chck76, "يحجب أسماء الخوادم المرتبطة بمشاركة بيانات الموقع مع Microsoft.");
+                    tooltip.SetToolTip(chck77, "يمنع النظام من إرسال تقارير الأعطال إلى خوادم Microsoft.");
+
+                    toolStripLabel1.Text = "البنية: عامة | " + ETBuild;
+
+                }
+                if (cinfo.Name == "hi-IN")
+                {
+                    button7.Text = "hi-IN";
+                    Console.WriteLine("Hindi - India detected");
+
+                    groupBox1.Text = "प्रदर्शन टवीक (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox2.Text = "गोपनीयता (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox3.Text = "दृश्य टवीक (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox4.Text = "अन्य (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
+                    groupBox5.Text = "विशेषज्ञ मोड (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
+
+                    button1.Text = "प्रदर्शन";
+                    button2.Text = "दृश्य";
+                    button3.Text = "गोपनीयता";
+                    selectall0 = "सभी चुनें";
+                    selectall1 = "चयन हटाएं";
+
+                    button5.Text = "शुरू करें";
+                    button4.Text = "सभी चुनें";
+
+                    toolStripButton2.Text = "बैकअप";
+                    toolStripDropDownButton2.Text = "पुनर्स्थापित करें";
+                    registryRestoreToolStripMenuItem.Text = "रजिस्ट्री पुनर्स्थापन";
+                    restorePointToolStripMenuItem.Text = "पुनर्स्थापना बिंदु";
+                    toolStripButton3.Text = "बारे में";
+                    toolStripButton4.Text = "दान करें";
+
+                    msgend = "सभी कार्य पूरे हो गए हैं। पुनः आरंभ करना सुझावित है।";
+                    msgerror = "कोई विकल्प चयनित नहीं किया गया।";
+                    msgupdate = "ऐप्लिकेशन का नया संस्करण GitHub पर उपलब्ध है!";
+                    isoinfo = "जनरेट की गई ISO छवि में निम्नलिखित विशेषताएँ शामिल होंगी: ET-Optimizer.exe /auto और Microsoft की आवश्यकताओं को बायपास करना जैसे डेटा संग्रह और स्थानीय खाता निर्माण आदि।";
+
+                    rebootToSafeModeToolStripMenuItem.Text = "सेफ मोड में पुनः आरंभ करें";
+                    restartExplorerexeToolStripMenuItem.Text = "Explorer.exe पुनः आरंभ करें";
+                    downloadSoftwareToolStripMenuItem.Text = "सॉफ़्टवेयर डाउनलोड करें";
+                    toolStripDropDownButton1.Text = "एक्सट्रा";
+                    diskDefragmenterToolStripMenuItem.Text = "डिस्क डीफ़्रेगमेंट";
+                    controlPanelToolStripMenuItem.Text = "कंट्रोल पैनल";
+                    deviceManagerToolStripMenuItem.Text = "डिवाइस मैनेजर";
+                    uACSettingsToolStripMenuItem.Text = "UAC सेटिंग्स";
+                    servicesToolStripMenuItem.Text = "सर्विसेज";
+                    remoteDesktopToolStripMenuItem.Text = "रिमोट डेस्कटॉप";
+                    eventViewerToolStripMenuItem.Text = "इवेंट व्यूअर";
+                    resetNetworkToolStripMenuItem.Text = "नेटवर्क रीसेट करें";
+                    updateApplicationsToolStripMenuItem.Text = "ऐप्लिकेशन अपडेट करें";
+                    windowsLicenseKeyToolStripMenuItem.Text = "Windows लाइसेंस कुंजी";
+                    rebootToBIOSToolStripMenuItem.Text = "BIOS में पुनः आरंभ करें";
+                    makeETISOToolStripMenuItem.Text = "ET-संशोधित .ISO बनाएं";
+
+                    button1.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button2.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button3.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button4.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    button5.Font = new Font("Consolas", 16, FontStyle.Regular);
+                    panel1.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel2.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel3.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel4.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    panel5.Font = new Font("Consolas", 12, FontStyle.Regular);
+                    groupBox1.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox2.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
+                    toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
+
+                    chck1.Text = "Edge वेब विजेट अक्षम करें";
+                    chck2.Text = "पावर विकल्प को अल्टीमेट प्रदर्शन पर सेट करें";
+                    chck3.Text = "Svchost के लिए स्प्लिट थ्रेशोल्ड";
+                    chck4.Text = "डुअल बूट टाइमआउट 3 सेकंड";
+                    chck5.Text = "हाइबरनेशन/फास्ट स्टार्टअप अक्षम करें";
+                    chck6.Text = "Windows Insider प्रयोग अक्षम करें";
+                    chck7.Text = "ऐप लॉन्च ट्रैकिंग अक्षम करें";
+                    chck8.Text = "पावर थ्रॉटलिंग अक्षम करें (Intel 6th जनरेशन+)";
+                    chck9.Text = "पृष्ठभूमि ऐप्स बंद करें";
+                    chck10.Text = "Sticky Keys प्रॉम्प्ट अक्षम करें";
+                    chck11.Text = "गतिविधि इतिहास अक्षम करें";
+                    chck12.Text = "MS स्टोर ऐप्स के अपडेट अक्षम करें";
+                    chck13.Text = "Apps के लिए SmartScreen फ़िल्टर अक्षम करें";
+                    chck14.Text = "वेबसाइट्स को स्थानीय जानकारी देने दें";
+                    chck15.Text = "Microsoft Edge सेटिंग्स ठीक करें";
+                    chck64.Text = "Nagle का एल्गोरिदम अक्षम करें (डिले्ड ACKs)";
+                    chck65.Text = "CPU/GPU प्राथमिकता टवीक";
+                    chck16.Text = "लोकेशन सेंसर अक्षम करें";
+                    chck17.Text = "WiFi हॉटस्पॉट ऑटो-शेयरिंग अक्षम करें";
+                    chck18.Text = "शेयर किए गए हॉटस्पॉट कनेक्शन अक्षम करें";
+                    chck19.Text = "अपडेट्स पर पुनः शुरू करने की सूचना दें";
+                    chck20.Text = "P2P अपडेट सेटिंग को स्थानीय LAN तक सीमित करें";
+                    chck21.Text = "शटडाउन टाइम कम करें (2 सेकंड)";
+                    chck22.Text = "पुराने डिवाइस ड्राइवर हटाएं";
+                    chck23.Text = "'और भी ज्यादा उपयोग करें...' अक्षम करें";
+                    chck24.Text = "सुझाए गए ऐप्स की इंस्टॉलेशन अक्षम करें";
+                    chck25.Text = "स्टार्ट मेनू विज्ञापन/सुझाव अक्षम करें";
+                    chck26.Text = "Windows Ink ऐप सुझाव अक्षम करें";
+                    chck27.Text = "अनावश्यक कंपोनेंट्स अक्षम करें";
+                    chck28.Text = "Defender की शेड्यूल्ड स्कैन प्राथमिकता कम करें";
+                    chck29.Text = "प्रोसेस मिटीगेशन अक्षम करें";
+                    chck30.Text = "इंडेक्सिंग सर्विस फाइल का डिफ्रैगमेंट करें";
+                    chck66.Text = "Spectre/Meltdown सुरक्षा अक्षम करें";
+                    chck67.Text = "Windows Defender अक्षम करें";
+                    chck31.Text = "Telemetry शेड्यूल्ड टास्क अक्षम करें";
+                    chck32.Text = "Telemetry/डेटा संग्रह हटाएं";
+                    chck33.Text = "PowerShell Telemetry अक्षम करें";
+                    chck34.Text = "Skype Telemetry अक्षम करें";
+                    chck35.Text = "Media Player उपयोग रिपोर्ट अक्षम करें";
+                    chck36.Text = "Mozilla Telemetry अक्षम करें";
+                    chck37.Text = "ऐप्स को मेरा विज्ञापन ID उपयोग करने से रोकें";
+                    chck38.Text = "लिखने की जानकारी भेजना अक्षम करें";
+                    chck39.Text = "हैंडराइटिंग रिकॉग्निशन अक्षम करें";
+                    chck40.Text = "Watson मैलवेयर रिपोर्ट अक्षम करें";
+                    chck41.Text = "मैलवेयर डायग्नोस्टिक डेटा अक्षम करें";
+                    chck42.Text = "Microsoft MAPS को रिपोर्टिंग अक्षम करें";
+                    chck43.Text = "Spynet Defender रिपोर्टिंग अक्षम करें";
+                    chck44.Text = "मैलवेयर सैंपल भेजना बंद करें";
+                    chck45.Text = "टाइपिंग सैंपल भेजना अक्षम करें";
+                    chck46.Text = "Microsoft को संपर्क भेजना अक्षम करें";
+                    chck47.Text = "Cortana अक्षम करें";
+                    chck48.Text = "एक्सप्लोरर में फ़ाइल एक्सटेंशन्स दिखाएं";
+                    chck49.Text = "टास्कबार की पारदर्शिता अक्षम करें";
+                    chck50.Text = "Windows एनिमेशन अक्षम करें";
+                    chck51.Text = "MRU लिस्ट्स (जंप लिस्ट्स) अक्षम करें";
+                    chck52.Text = "सर्च बॉक्स को केवल आइकन पर सेट करें";
+                    chck53.Text = "एक्सप्लोरर को 'This PC' पर खोलें";
+                    chck54.Text = "Windows गेम बार/DVR हटाएं";
+                    chck55.Text = "सर्विस टवीक सक्षम करें";
+                    chck56.Text = "प्रि-इंस्टॉल्ड बloatware हटाएं";
+                    chck57.Text = "अनावश्यक स्टार्टअप ऐप्स अक्षम करें";
+                    chck58.Text = "टेम्प/कैश/प्रिफेच/लॉग्स साफ़ करें";
+                    chck59.Text = "न्यूज़ और इंटरेस्ट/विजेट्स हटाएं";
+                    chck60.Text = "Microsoft OneDrive हटाएं";
+                    chck61.Text = "Xbox सर्विसेस अक्षम करें";
+                    chck62.Text = "फास्ट/सिक्योर DNS सक्षम करें (1.1.1.1)";
+                    chck63.Text = "AdwCleaner से एडवेयर स्कैन करें";
+                    chck68.Text = "WinSxS फ़ोल्डर साफ़ करें";
+                    chck69.Text = "Copilot हटाएं";
+                    chck70.Text = "'इस फोटो के बारे में जानें' फीचर हटाएं";
+                    chck71.Text = "लंबे सिस्टम पाथ्स सक्षम करें";
+                    chck72.Text = "पुराना कॉन्टेक्स्ट मेन्यू सक्षम करें";
+                    chck73.Text = "फुलस्क्रीन ऑप्टिमाइज़ेशन अक्षम करें";
+                    chck74.Text = "RAM मेमोरी टवीक सक्षम करें";
+                    chck75.Text = "Telemetry/यूजर एक्सपीरियंस होस्ट ब्लॉक करें";
+                    chck76.Text = "लोकेशन डेटा शेयरिंग होस्ट ब्लॉक करें";
+                    chck77.Text = "Windows क्रैश रिपोर्ट होस्ट ब्लॉक करें";
+                    chck78.Text = "लॉगऑन बैकग्राउंड इमेज अक्षम करें";
+
+                    tooltip.SetToolTip(chck1, "Edge वेब विजेट को अक्षम करता है जिससे बैकग्राउंड संसाधन उपयोग कम होता है और मेमोरी मुक्त होती है।");
+                    tooltip.SetToolTip(chck2, "Windows पावर प्लान को Ultimate Performance पर स्विच करता है जिससे सिस्टम तेजी से प्रतिक्रिया देता है।");
+                    tooltip.SetToolTip(chck3, "सर्विसेज़ को अलग-अलग svchost प्रक्रियाओं में चलाने की अनुमति देता है, जिससे सिस्टम स्थिरता बढ़ती है।");
+                    tooltip.SetToolTip(chck4, "डुअल बूट मेनू का टाइमआउट 3 सेकंड तक घटाता है ताकि तेजी से स्टार्टअप हो।");
+                    tooltip.SetToolTip(chck5, "हाइबरनेशन और फास्ट स्टार्टअप को अक्षम करता है जिससे डिस्क स्पेस मुक्त होता है और शटडाउन बेहतर होता है।");
+                    tooltip.SetToolTip(chck6, "Windows Insider प्रोग्राम द्वारा भेजे गए एक्सपेरिमेंटल फीचर्स को बंद करता है।");
+                    tooltip.SetToolTip(chck7, "Windows को यह ट्रैक करने से रोकता है कि आप कौन से ऐप खोलते हैं, जिससे प्राइवेसी सुरक्षित रहती है।");
+                    tooltip.SetToolTip(chck8, "CPU पावर थ्रॉटलिंग (Intel 6th जनरेशन और नए) को अक्षम करता है ताकि पूरा प्रदर्शन मिल सके।");
+                    tooltip.SetToolTip(chck9, "पृष्ठभूमि ऐप्स को चलने से रोकता है जिससे प्रदर्शन और बैटरी लाइफ बेहतर होती है।");
+                    tooltip.SetToolTip(chck10, "Sticky Keys के पॉप-अप्स को अक्षम करता है जो Shift या Ctrl बार-बार दबाने पर आते हैं।");
+                    tooltip.SetToolTip(chck11, "Windows को आपकी गतिविधि इतिहास रिकॉर्ड करने से रोकता है, जिससे प्राइवेसी बनी रहती है।");
+                    tooltip.SetToolTip(chck12, "Microsoft Store ऐप्स को बैकग्राउंड में ऑटो अपडेट होने से रोकता है।");
+                    tooltip.SetToolTip(chck13, "Apps के लिए SmartScreen फ़िल्टर को बंद करता है जो अनजान प्रोग्राम चेक करता है।");
+                    tooltip.SetToolTip(chck14, "वेबसाइट्स को आपकी भौतिक लोकेशन मांगने से रोकता है, जिससे प्राइवेसी सुरक्षित रहती है।");
+                    tooltip.SetToolTip(chck15, "Edge ब्राउज़र सेटिंग्स को डिफ़ॉल्ट पर रीसेट करता है ताकि टूटे हुए कॉन्फ़िगरेशन ठीक हो सकें।");
+                    tooltip.SetToolTip(chck16, "Windows में सभी लोकेशन सेंसर और सर्विसेज़ को अक्षम करता है ताकि अधिकतम प्राइवेसी बनी रहे।");
+                    tooltip.SetToolTip(chck17, "Windows को आपके Wi-Fi हॉटस्पॉट को ऑटोमेटिकली शेयर करने से रोकता है।");
+                    tooltip.SetToolTip(chck18, "अन्य लोगों द्वारा शेयर किए गए हॉटस्पॉट से कनेक्शन ब्लॉक करता है, जिससे सुरक्षा बढ़ती है।");
+                    tooltip.SetToolTip(chck19, "अपडेट के बाद स्वचालित पुनः प्रारंभ के बजाय पुनः प्रारंभ से पहले सूचना देता है।");
+                    tooltip.SetToolTip(chck20, "Windows Update के पीयर-टू-पीयर शेयरिंग को केवल आपके स्थानीय नेटवर्क तक सीमित करता है।");
+                    tooltip.SetToolTip(chck21, "सिस्टम शटडाउन डिले को कम करता है जिससे बिजली बंद करने का समय तेज होता है।");
+                    tooltip.SetToolTip(chck22, "अप्रयुक्त डिवाइस ड्राइवरों को हटाता है जो अनावश्यक डिस्क स्पेस ले रहे हैं।");
+                    tooltip.SetToolTip(chck23, "'Windows से और अधिक प्राप्त करें' सेटअप प्रॉम्प्ट को लॉगिन के बाद हटाता है।");
+                    tooltip.SetToolTip(chck24, "सुझाए गए या प्रायोजित ऐप्स की स्वचालित इंस्टॉलेशन को अक्षम करता है।");
+                    tooltip.SetToolTip(chck25, "स्टार्ट मेनू से ऐप विज्ञापन और सुझाव हटाता है ताकि यह साफ़-सुथरा दिखे।");
+                    tooltip.SetToolTip(chck26, "Windows Ink वर्कस्पेस में ऐप सुझावों को अक्षम करता है।");
+                    tooltip.SetToolTip(chck27, "पुराने या उपयोग नहीं किए जाने वाले Windows कंपोनेंट्स को बंद करता है।");
+                    tooltip.SetToolTip(chck28, "Defender के शेड्यूल्ड स्कैन की प्राथमिकता कम करता है ताकि प्रदर्शन पर असर कम हो।");
+                    tooltip.SetToolTip(chck29, "प्रोसेस के लिए कुछ सिस्टम मिटीगेशन को अक्षम करता है ताकि प्रदर्शन बढ़े (सावधानी से उपयोग करें)।");
+                    tooltip.SetToolTip(chck30, "इंडेक्सिंग सर्विस फाइल का डिफ्रैगमेंट करता है ताकि खोज प्रदर्शन बेहतर हो।");
+                    tooltip.SetToolTip(chck31, "Microsoft टेलीमेट्री डेटा संग्रह से जुड़े शेड्यूल्ड टास्क को अक्षम करता है।");
+                    tooltip.SetToolTip(chck32, "सिस्टम से टेलीमेट्री सर्विसेज़ और ट्रैकिंग कंपोनेंट्स हटाता है।");
+                    tooltip.SetToolTip(chck33, "PowerShell को Microsoft को उपयोग डेटा भेजने से रोकता है।");
+                    tooltip.SetToolTip(chck34, "Skype को टेलीमेट्री डेटा इकट्ठा करने और भेजने से रोकता है।");
+                    tooltip.SetToolTip(chck35, "Windows Media Player के उपयोग ट्रैकिंग रिपोर्ट को अक्षम करता है।");
+                    tooltip.SetToolTip(chck36, "Firefox की बिल्ट-इन टेलीमेट्री सुविधाओं को बंद करता है।");
+                    tooltip.SetToolTip(chck37, "ऐप्स को आपका विज्ञापन ID उपयोग करने से रोकता है ताकि पर्सनलाइज्ड विज्ञापन न आएं।");
+                    tooltip.SetToolTip(chck38, "Windows को आपकी लिखावट और टाइपिंग व्यवहार की जानकारी एकत्र करने से रोकता है।");
+                    tooltip.SetToolTip(chck39, "हैंडराइटिंग इनपुट रिकॉग्निशन और उसके डेटा संग्रह को अक्षम करता है।");
+                    tooltip.SetToolTip(chck40, "Microsoft को स्वतः मैलवेयर रिपोर्ट भेजने को ब्लॉक करता है।");
+                    tooltip.SetToolTip(chck41, "Defender को खतरों की डायग्नोस्टिक जानकारी भेजने से रोकता है।");
+                    tooltip.SetToolTip(chck42, "Microsoft MAPS क्लाउड सुरक्षा सेवा को रिपोर्टिंग को बंद करता है।");
+                    tooltip.SetToolTip(chck43, "Windows Defender के 'Spynet' रिपोर्टिंग सेवा को ब्लॉक करता है।");
+                    tooltip.SetToolTip(chck44, "Microsoft को संदिग्ध फाइलें भेजने से रोकता है।");
+                    tooltip.SetToolTip(chck45, "टेक्स्ट प्रेडिक्शन के लिए कीबोर्ड उपयोग डेटा संग्रह को ब्लॉक करता है।");
+                    tooltip.SetToolTip(chck46, "Windows को आपके संपर्क जानकारी को सिंक या साझा करने से रोकता है।");
+                    tooltip.SetToolTip(chck47, "Cortana वॉइस असिस्टेंट और संबंधित सेवाओं को पूरी तरह अक्षम करता है।");
+                    tooltip.SetToolTip(chck48, "Explorer में ज्ञात फ़ाइल प्रकारों के लिए फ़ाइल एक्सटेंशन्स दिखाने पर मजबूर करता है।");
+                    tooltip.SetToolTip(chck49, "GPU उपयोग कम करने के लिए टास्कबार की पारदर्शिता बंद करता है।");
+                    tooltip.SetToolTip(chck50, "UI में एनिमेशन को अक्षम करता है जिससे अनुभव तेज़ और स्मूथ होता है।");
+                    tooltip.SetToolTip(chck51, "Windows को हाल की आइटम सूची (Jump Lists) रखने से रोकता है।");
+                    tooltip.SetToolTip(chck52, "स्टार्ट मेनू के सर्च बॉक्स को केवल आइकन में बदल देता है।");
+                    tooltip.SetToolTip(chck53, "फाइल एक्सप्लोरर को 'This PC' पर खोलता है न कि 'Quick Access' पर।");
+                    tooltip.SetToolTip(chck54, "Xbox गेम बार और DVR बैकग्राउंड सेवाएं हटाता है।");
+                    tooltip.SetToolTip(chck55, "Windows सेवाओं को तेज़ और ऑप्टिमाइज़ करने के लिए अनुशंसित टवीक लागू करता है।");
+                    tooltip.SetToolTip(chck56, "प्रि-इंस्टॉल्ड अनावश्यक ऐप्स और बloatware को हटाता है।");
+                    tooltip.SetToolTip(chck57, "अनावश्यक स्वचालित स्टार्टअप प्रोग्राम्स को अक्षम करता है।");
+                    tooltip.SetToolTip(chck58, "सिस्टम कैश, टेम्प फाइल्स, प्रिफेच डेटा और पुराने लॉग्स को साफ करता है।");
+                    tooltip.SetToolTip(chck59, "'News and Interests' या विजेट्स पैनल को टास्कबार से हटाता है।");
+                    tooltip.SetToolTip(chck60, "OneDrive को पूरी तरह से सिस्टम से हटा देता है, जिसमें बैकग्राउंड सिंक भी शामिल है।");
+                    tooltip.SetToolTip(chck61, "Xbox सेवाओं को बंद करता है जो गेमिंग के बिना जरूरी नहीं हैं।");
+                    tooltip.SetToolTip(chck62, "सिस्टम DNS को Cloudflare (1.1.1.1) पर सेट करता है ताकि स्पीड और प्राइवेसी बेहतर हो।");
+                    tooltip.SetToolTip(chck63, "AdwCleaner लॉन्च करता है ताकि सिस्टम से एडवेयर स्कैन और हटाया जा सके।");
+                    tooltip.SetToolTip(chck64, "Nagle के एल्गोरिदम को अक्षम करता है ताकि विलंब कम हो और ऑनलाइन गेमिंग बेहतर हो।");
+                    tooltip.SetToolTip(chck65, "CPU और GPU शेड्यूलिंग को ऑप्टिमाइज़ करता है ताकि अग्रभूमि ऐप प्रदर्शन बेहतर हो।");
+                    tooltip.SetToolTip(chck66, "Spectre/Meltdown सुरक्षा को अक्षम करता है जिससे गति बढ़ती है (सुरक्षा कम होती है)।");
+                    tooltip.SetToolTip(chck67, "Windows Defender एंटीवायरस और उसकी सभी सेवाओं को पूरी तरह अक्षम करता है।");
+                    tooltip.SetToolTip(chck68, "WinSxS फ़ोल्डर को साफ करता है ताकि पुराने सिस्टम फाइल से डिस्क स्पेस वापस मिले।");
+                    tooltip.SetToolTip(chck69, "Windows से नया Copilot AI असिस्टेंट हटाता है।");
+                    tooltip.SetToolTip(chck70, "लॉक स्क्रीन पर दिखने वाले 'इस फोटो के बारे में जानें' फीचर को अक्षम करता है।");
+                    tooltip.SetToolTip(chck71, "Windows को 260 कैरेक्टर से लंबी फाइल पाथ्स के साथ काम करने देता है।");
+                    tooltip.SetToolTip(chck72, "Windows 10 का क्लासिक राइट-क्लिक कॉन्टेक्स्ट मेनू पुनर्स्थापित करता है।");
+                    tooltip.SetToolTip(chck73, "फुलस्क्रीन ऑप्टिमाइज़ेशन को अक्षम करता है जो गेम प्रदर्शन में बाधा डाल सकता है।");
+                    tooltip.SetToolTip(chck74, "RAM उपयोग और सिस्टम प्रतिक्रिया को बेहतर बनाने के लिए टवीक लागू करता है।");
+                    tooltip.SetToolTip(chck75, "ज्ञात Microsoft टेलीमेट्री और उपयोगकर्ता अनुभव ट्रैकिंग डोमेन को ब्लॉक करता है।");
+                    tooltip.SetToolTip(chck76, "Microsoft के साथ स्थान डेटा साझा करने से जुड़े होस्टनाम को ब्लॉक करता है।");
+                    tooltip.SetToolTip(chck77, "Microsoft सर्वर को क्रैश रिपोर्ट भेजने से सिस्टम को रोकता है।");
+
+                    toolStripLabel1.Text = "बिल्ड: पब्लिक | " + ETBuild;
+
+                }
                 if (args != null && args.Length > 0)
                 {
                     if (args.Contains("/english") || args.Contains("/eng") || args.Contains("-english") || args.Contains("-eng"))
@@ -3396,7 +4078,7 @@ namespace ET
                         DefaultLang();
                     }
                 }
-                if (cinfo.Name != "pl-PL" && cinfo.Name != "ru-RU" && cinfo.Name != "be-BY" && cinfo.Name != "de-DE" && cinfo.Name != "pt-BR" && cinfo.Name != "fr-FR" && cinfo.Name != "ko-KR" && cinfo.Name != "tr-TR")
+                if (cinfo.Name != "pl-PL" && cinfo.Name != "ru-RU" && cinfo.Name != "be-BY" && cinfo.Name != "de-DE" && cinfo.Name != "pt-BR" && cinfo.Name != "fr-FR" && cinfo.Name != "ko-KR" && cinfo.Name != "tr-TR" && cinfo.Name != "ar-SA" && cinfo.Name != "zh-CHS" && cinfo.Name != "zh-CN" && cinfo.Name != "hi-IN")
                 {
                     button7.Enabled = false;
                     button7.Visible = false;
@@ -3624,7 +4306,9 @@ namespace ET
             {
                 Arguments = "/deletevalue {current} safeboot",
                 FileName = msconfigPath,
-                UseShellExecute = true
+                UseShellExecute = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true
             });
 
             await CheckUpdateET();
@@ -5991,7 +6675,9 @@ foreach ($app in $allApps) {
             {
                 Arguments = "/set {current} safeboot network",
                 FileName = msconfigPath,
-                UseShellExecute = true
+                UseShellExecute = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true
             });
             RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
             reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
