@@ -756,7 +756,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.06.37";
-        string ETBuild = "05.07.2025";
+        string ETBuild = "06.07.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -940,11 +940,32 @@ namespace ET
             try
             {
                 ServiceController sc = new ServiceController(serviceName);
-                if (sc.Status != ServiceControllerStatus.Stopped && sc.CanStop)
+
+                Console.WriteLine($"Service '{serviceName}' status: {sc.Status}, CanStop: {sc.CanStop}");
+
+                if (sc.Status == ServiceControllerStatus.Running && sc.CanStop)
+                {
                     sc.Stop();
+                    sc.WaitForStatus(ServiceControllerStatus.Stopped, TimeSpan.FromSeconds(10));
+                    Console.WriteLine($"Service '{serviceName}' stopped.");
+                }
+                else
+                {
+                    Console.WriteLine($"Cannot stop service '{serviceName}'.");
+                }
             }
-            catch { }
+            catch (InvalidOperationException ex)
+            {
+                Console.WriteLine($"InvalidOperationException: {ex.Message}");
+                if (ex.InnerException != null)
+                    Console.WriteLine($"Inner: {ex.InnerException.Message}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception stopping service '{serviceName}': {ex.Message}");
+            }
         }
+
 
         public void StartService(string serviceName)
         {
@@ -1023,7 +1044,7 @@ namespace ET
             }
             int allc = checkedCi + checkedCu + checkedCy + checkedCt;
 
-            if (allc == 72)
+            if (allc == ct+cy+cu+ci)
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -1071,7 +1092,6 @@ namespace ET
 
                 if (relativePath.Contains("\\"))
                 {
-                    // Subfolder like oobe\Setup.exe or ..\regedit.exe
                     fullPath = Path.GetFullPath(Path.Combine(Environment.SystemDirectory, relativePath));
                 }
                 else
@@ -1678,6 +1698,12 @@ namespace ET
             chck78.Click += c_p;
             chck78.TabIndex = 78;
             panel3.Controls.Add(chck78);
+            CheckBox chck79 = new CheckBox();
+            chck79.Tag = "End Task in Taskbar by Right Click";
+            chck79.Checked = true;
+            chck79.Click += c_p;
+            chck79.TabIndex = 79;
+            panel3.Controls.Add(chck79);
 
             SetToolstripIcons();
 
@@ -1827,6 +1853,7 @@ namespace ET
                 chck76.Text = "Block location data sharing hosts";
                 chck77.Text = "Block Windows crash report hosts";
                 chck78.Text = "Disable Logon Background Image";
+                chck79.Text = "End Task in Taskbar by Right Click";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -2043,6 +2070,7 @@ namespace ET
                     chck76.Text = "Blokuj hosty lokalizacji";
                     chck77.Text = "Blokuj hosty raportów awarii";
                     chck78.Text = "Wyłącz tło ekranu logowania";
+                    chck79.Text = "Zakończ zadanie na pasku zadań PPM";
 
                     tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
                     tooltip.SetToolTip(chck2, "Ustawia plan zasilania Windows na Ultimate Performance dla lepszej responsywności.");
@@ -2255,6 +2283,7 @@ namespace ET
                     chck76.Text = "Блок хостов геоданных";
                     chck77.Text = "Блок хостов с отчётами сбоев";
                     chck78.Text = "Отключить фоновое изображение входа";
+                    chck79.Text = "Завершить задачу с панели (ПКМ)";
 
                     tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
                     tooltip.SetToolTip(chck2, "Устанавливает план питания Windows на Ultimate Performance для лучшей отзывчивости.");
@@ -2466,6 +2495,7 @@ namespace ET
                     chck76.Text = "Standortdaten-Hosts blocken";
                     chck77.Text = "Crashreport-Hosts blockieren";
                     chck78.Text = "Anmeldehintergrund ausblenden";
+                    chck79.Text = "Task per Rechtsklick beenden";
 
                     tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
                     tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
@@ -2659,6 +2689,7 @@ namespace ET
                     chck76.Text = "Bloquear hosts de localização";
                     chck77.Text = "Bloquear hosts de erros do Win";
                     chck78.Text = "Desativar imagem de fundo da tela de login";
+                    chck79.Text = "Encerrar tarefa (clique dir.)";
 
                     tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
                     tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
@@ -2868,7 +2899,7 @@ namespace ET
                     chck76.Text = "Bloquer hôtes localisation";
                     chck77.Text = "Bloquer hôtes rapports crash";
                     chck78.Text = "Désactiver fond de connexion";
-
+                    chck79.Text = "Fin tâche barre via clic droit";
 
                     tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
                     tooltip.SetToolTip(chck2, "Configure le plan d'alimentation Windows sur Performance Ultime pour une meilleure réactivité.");
@@ -3094,6 +3125,7 @@ namespace ET
                     chck76.Text = "위치 정보 호스트 차단";
                     chck77.Text = "충돌 보고 호스트 차단";
                     chck78.Text = "로그인 배경 끄기";
+                    chck79.Text = "작업표시줄 우클릭 종료";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
                     tooltip.SetToolTip(chck2, "Windows 전원 계획을 최고의 성능(Ultimate Performance)으로 설정하여 응답성을 향상시킵니다.");
@@ -3321,6 +3353,7 @@ namespace ET
                     chck76.Text = "屏蔽位置数据共享主机";
                     chck77.Text = "屏蔽 Windows 崩溃报告主机";
                     chck78.Text = "禁用登录背景图像";
+                    chck79.Text = "任务栏右键结束任务";
 
                     tooltip.SetToolTip(chck1, "禁用 Edge WebWidget，减少后台资源占用并释放内存。");
                     tooltip.SetToolTip(chck2, "将电源计划切换为终极性能模式，提高系统响应速度。");
@@ -3532,7 +3565,7 @@ namespace ET
                     chck76.Text = "Konum paylaşım sunucularını engelle";
                     chck77.Text = "Windows çökme raporu sunucularını engelle";
                     chck78.Text = "Giriş arka planını kapat";
-
+                    chck79.Text = "Görevi sağ tıkla sonlandır";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
                     tooltip.SetToolTip(chck2, "Windows güç planını Ultimate Performance olarak ayarlayarak daha iyi yanıt süresi sağlar.");
@@ -3761,6 +3794,7 @@ namespace ET
                     chck76.Text = "حظر خوادم مشاركة بيانات الموقع";
                     chck77.Text = "حظر خوادم تقارير أعطال Windows";
                     chck78.Text = "تعطيل صورة خلفية شاشة تسجيل الدخول";
+                    chck79.Text = "إنهاء من الشريط (زر أيمن)";
 
                     tooltip.SetToolTip(chck1, "يعطّل Edge WebWidget لتقليل استهلاك الموارد في الخلفية وتحرير الذاكرة.");
                     tooltip.SetToolTip(chck2, "يحوّل خطة الطاقة إلى الأداء النهائي (Ultimate Performance) لتحسين استجابة النظام.");
@@ -3988,6 +4022,7 @@ namespace ET
                     chck76.Text = "लोकेशन डेटा शेयरिंग होस्ट ब्लॉक करें";
                     chck77.Text = "Windows क्रैश रिपोर्ट होस्ट ब्लॉक करें";
                     chck78.Text = "लॉगऑन बैकग्राउंड इमेज अक्षम करें";
+                    chck79.Text = "टास्कबार→राइट-क्लिक→समाप्त";
 
                     tooltip.SetToolTip(chck1, "Edge वेब विजेट को अक्षम करता है जिससे बैकग्राउंड संसाधन उपयोग कम होता है और मेमोरी मुक्त होती है।");
                     tooltip.SetToolTip(chck2, "Windows पावर प्लान को Ultimate Performance पर स्विच करता है जिससे सिस्टम तेजी से प्रतिक्रिया देता है।");
@@ -5679,7 +5714,8 @@ foreach ($app in $allApps) {
 
                             SetRegistryValue(@"HKCU\Control Panel\Desktop\", "AnimationDuration", 0, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKCU\Control Panel\Desktop\", "UserPreferencesMask", 9012038010000000, RegistryValueKind.Binary);
+                            byte[] userPreferencesMask = new byte[] { 0x90, 0x12, 0x03, 0x80, 0x10, 0x00, 0x00, 0x00 };
+                            SetRegistryValue(@"HKCU\Control Panel\Desktop\", "UserPreferencesMask", userPreferencesMask, RegistryValueKind.Binary);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "TaskbarAnimations", 0, RegistryValueKind.DWord);
                             break;
@@ -5712,6 +5748,11 @@ foreach ($app in $allApps) {
                             done++;
 
                             SetRegistryValue(@"HKLM\Software\Policies\Microsoft\Windows\System\", "DisableLogonBackgroundImage", 1, RegistryValueKind.DWord);
+                            break;
+                        case "End Task in Taskbar by Right Click":
+                            done++;
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings\", "TaskbarEndTask", 1, RegistryValueKind.DWord);
                             break;
 
                     }
