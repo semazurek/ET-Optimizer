@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.37-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.06.40-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -26,7 +26,7 @@ Application developed from many sources found on the Internet, tested and update
 Originally ET was a batch script file then evolved into a .bat file with vbs and powershell implemented, then was rewritten entirely to powershell, and over the years became a mostly fully-fledged C# application.
 
 The first version appeared in a simple version for personal use in 2021.
-So far the project has grown to: 5000+ lines of code, 900+ commits, translated into 8 languages ​​and is being developed further with love ❤️
+So far the project has grown to: 5000+ lines of code, 900+ commits, translated into 13 languages ​​and is being developed further with love ❤️
 
 <p align="center">
 <a href="#"><img src="https://github.com/user-attachments/assets/909786ca-b8b4-4124-b342-3debc6ec8a0e"width="48"></a>
@@ -40,6 +40,9 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <a href="#"><img src="https://github.com/user-attachments/assets/0ef6c1c0-addb-4f01-a734-f34b14b5142b"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/e71da507-b8bb-423d-a2cf-b8d877857c77"width="48"></a>
 <a href="#"><img src="https://github.com/user-attachments/assets/44d74824-3f31-4ffb-aa63-e20f1de90afd"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/d9c1f36a-caaf-406b-83af-a177855586d5"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/cf40cd0e-dec1-4702-b4db-7a5cea0a1202"width="48"></a>
+<a href="#"><img src="https://github.com/user-attachments/assets/8e1f28bc-893e-4567-9ab2-067a930418a6"width="48"></a>
 
 </p>
 
