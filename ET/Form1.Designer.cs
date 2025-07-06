@@ -763,7 +763,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.06.37";
+            this.label1.Text = "E.T. ver 6.06.40";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
