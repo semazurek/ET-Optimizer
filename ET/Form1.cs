@@ -5223,6 +5223,7 @@ foreach ($app in $allApps) {
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|AnyDesk",
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|TeamViewer",
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|EdgeUI",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|RiotClient",
 @"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run|Discord"
 };
 
