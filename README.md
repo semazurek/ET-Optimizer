@@ -208,6 +208,10 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <li>Remove “Learn about this photo” Feature – cleaner photo viewer interface.</li>
 
 <li>Enable Old Context Menu – restores classic right-click menu (Windows 11 style fix).</li>
+
+<li>Disable Logon Background Image</li>
+
+<li>End Task in Taskbar by Right Click</li>
   </ol>
 </details>
 <details>
