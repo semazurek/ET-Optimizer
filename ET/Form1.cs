@@ -756,7 +756,7 @@ namespace ET
         public bool engforced = false;
 
         string ETVersion = "E.T. ver 6.06.40";
-        string ETBuild = "06.07.2025";
+        string ETBuild = "08.07.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -5326,7 +5326,6 @@ namespace ET
                                 FileName = msconfigPath,
                                 UseShellExecute = true
                             });
-                    
 
                     startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -5612,9 +5611,9 @@ namespace ET
                         case "Enable Service Tweaks":
                             done++;
 
-                            string[] toDisable = { "DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr" };
-                            string[] toManuall = { "BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService" };
-
+                            string[] toDisable = { "DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr", "AppVClient", "AssignedAccessManagerSvc", "UevAgentService", "shpamsvc", "tzautoupdate", "uhssvc" };
+                            string[] toManuall = { "BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService", "ALG", "AppIDSvc", "AppMgmt", "AppReadiness", "AppXSvc", "CDPSvc", "RmSvc", "RpcLocator", "SDRSVC", "SNMPTRAP", "SSDPSRV", "ScDeviceEnum", "SecurityHealthService", "Sense", "SensorDataService", "SensorService", "SensrSvc", "SessionEnv", "SharedAccess", "SharedRealitySvc", "SmsRouter", "SstpSvc", "StateRepository", "StiSvc", "StorSvc", "TabletInputService", "TapiSrv", "TextInputManagementService", "TieringEngineService", "TimeBroker", "TimeBrokerSvc", "TokenBroker", "TroubleshootingSvc", "UI0Detect", "UmRdpService", "UsoSvc", "WebClient", "Wecsvc", "smphost" };
+                            
                             foreach (string s in toDisable)
                             {
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -6379,7 +6378,7 @@ foreach ($app in $allApps) {
                         case "Enable Old Context Menu":
                             done++;
 
-                            SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32\", @"", @"", RegistryValueKind.String);
+                            SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", "", "", RegistryValueKind.String);
                             break;
                         case "Disable Logon Background Image":
                             done++;
