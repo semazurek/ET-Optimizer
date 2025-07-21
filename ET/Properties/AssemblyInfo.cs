@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
 [assembly: AssemblyTitle("ET-Optimizer")]
-[assembly: AssemblyDescription("Optimize performance, improve privacy, and remove bloatware.")]
+[assembly: AssemblyDescription("Windows application designed to improve system performance by removing unnecessary files, optimizing startup processes, and managing system resources efficiently. It helps your PC run faster and more smoothly with minimal user effort.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sebastian Mazurek")]
 [assembly: AssemblyProduct("ET-Optimizer")]
@@ -29,6 +29,6 @@ using System.Runtime.InteropServices;
 //      Numer kompilacji
 //      Poprawka
 //
-[assembly: AssemblyVersion("6.06.40.0")]
-[assembly: AssemblyFileVersion("6.06.40.0")]
+[assembly: AssemblyVersion("6.06.55.0")]
+[assembly: AssemblyFileVersion("6.06.55.0")]
 [assembly: NeutralResourcesLanguage("en")]

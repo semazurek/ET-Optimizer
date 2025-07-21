@@ -72,6 +72,36 @@ namespace ET
             }
         }
 
+        static string GetAdwCleanerExePath()
+        {
+            string baseWingetPath = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Microsoft", "WinGet", "Packages");
+
+            if (!Directory.Exists(baseWingetPath))
+                return null;
+
+            string[] adwFolders = Directory.GetDirectories(baseWingetPath, "Malwarebytes.AdwCleaner*", SearchOption.TopDirectoryOnly);
+
+            foreach (var folder in adwFolders)
+            {
+                try
+                {
+                    string[] exeFiles = Directory.GetFiles(folder, "*.exe", SearchOption.AllDirectories);
+                    foreach (string exe in exeFiles)
+                    {
+                        if (Path.GetFileName(exe).ToLower().Contains("adwcleaner"))
+                        {
+                            return exe;
+                        }
+                    }
+                }
+                catch (Exception) { }
+            }
+
+            return null;
+        }
+
         private void EditHosts(string[] domains)
         {
             string hostsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"drivers\etc\hosts");
@@ -755,8 +785,55 @@ namespace ET
         public bool issillent = false;
         public bool engforced = false;
 
-        string ETVersion = "E.T. ver 6.06.40";
-        string ETBuild = "08.07.2025";
+        [StructLayout(LayoutKind.Sequential)]
+        struct OSVERSIONINFOEX
+        {
+            public int dwOSVersionInfoSize;
+            public int dwMajorVersion;
+            public int dwMinorVersion;
+            public int dwBuildNumber;
+            public int dwPlatformId;
+
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string szCSDVersion;
+
+            public ushort wServicePackMajor;
+            public ushort wServicePackMinor;
+            public ushort wSuiteMask;
+            public byte wProductType;
+            public byte wReserved;
+        }
+
+        [DllImport("ntdll.dll", SetLastError = true)]
+        static extern int RtlGetVersion(ref OSVERSIONINFOEX versionInfo);
+
+        static string GetWindowsVersion()
+        {
+            OSVERSIONINFOEX osVersion = new OSVERSIONINFOEX();
+            osVersion.dwOSVersionInfoSize = Marshal.SizeOf(typeof(OSVERSIONINFOEX));
+            int result = RtlGetVersion(ref osVersion);
+
+            if (result == 0)
+            {
+                if (osVersion.dwMajorVersion == 10 && osVersion.dwBuildNumber >= 22000)
+                    return "Windows 11";
+                else if (osVersion.dwMajorVersion == 10)
+                    return "Windows 10";
+                else if (osVersion.dwMajorVersion == 6 && osVersion.dwMinorVersion == 3)
+                    return "Windows 8.1";
+                else if (osVersion.dwMajorVersion == 6 && osVersion.dwMinorVersion == 2)
+                    return "Windows 8";
+                else if (osVersion.dwMajorVersion == 6 && osVersion.dwMinorVersion == 1)
+                    return "Windows 7";
+                else
+                    return $"Windows: {osVersion.dwMajorVersion}.{osVersion.dwMinorVersion}";
+            }
+
+            return "Failed to read system version";
+        }
+
+        string ETVersion = "E.T. ver 6.06.55";
+        string ETBuild = "21.07.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1117,7 +1194,6 @@ namespace ET
             InitializeComponent();
             LoadAppxPackages();
             this.KeyPreview = true; 
-            this.KeyDown += Form1_KeyDown;
 
             this.Opacity = 0;
             this.Enabled = false;
@@ -1451,7 +1527,7 @@ namespace ET
             chck34.Checked = true;
             chck34.Click += c_p;
             chck34.TabIndex = 34;
-            panel2.Controls.Add(chck34);
+            if (GetWindowsVersion() != "Windows 11"){ panel2.Controls.Add(chck34); }
             CheckBox chck35 = new CheckBox();
             chck35.Tag = "Disable Media Player Usage Reports";
             chck35.Checked = true;
@@ -1643,7 +1719,7 @@ namespace ET
             chck69.Checked = true;
             chck69.Click += c_p;
             chck69.TabIndex = 69;
-            panel2.Controls.Add(chck69);
+            if (GetWindowsVersion() == "Windows 11") { panel2.Controls.Add(chck69); }
             CheckBox chck70 = new CheckBox();
             chck70.Tag = "Remove Learn about this photo";
             chck70.Checked = true;
@@ -1661,7 +1737,7 @@ namespace ET
             chck72.Checked = true;
             chck72.Click += c_p;
             chck72.TabIndex = 72;
-            panel3.Controls.Add(chck72);
+            if (GetWindowsVersion() == "Windows 11"){ panel3.Controls.Add(chck72); }
             CheckBox chck73 = new CheckBox();
             chck73.Tag = "Disable Fullscreen Optimizations";
             chck73.Checked = true;
@@ -1703,7 +1779,7 @@ namespace ET
             chck79.Checked = true;
             chck79.Click += c_p;
             chck79.TabIndex = 79;
-            panel3.Controls.Add(chck79);
+            if (GetWindowsVersion() == "Windows 11") {panel3.Controls.Add(chck79);}
 
             SetToolstripIcons();
 
@@ -6559,18 +6635,29 @@ foreach ($app in $allApps) {
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
-                            startInfo.Arguments = "-Command winget install --id=Malwarebytes.AdwCleaner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements; adwcleaner.exe /eula /clean /noreboot";
+                            startInfo.Arguments = "-Command winget install --id=Malwarebytes.AdwCleaner --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
-                            System.Threading.Thread.Sleep(2000);
+                            string adwCleanerExePath = GetAdwCleanerExePath();
 
+                            if (!string.IsNullOrEmpty(adwCleanerExePath))
+                            {
+                                Console.WriteLine(adwCleanerExePath);
+                            }
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C start /WAIT "+GetAdwCleanerExePath()+" /eula /clean /noreboot";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+                            
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command winget uninstall --id=Malwarebytes.AdwCleaner --disable-interactivity --silent";
                             process.StartInfo = startInfo;
                             process.Start();
-
+                            
                             break;
                         case "Clean WinSxS Folder":
                             done++;
@@ -7200,7 +7287,7 @@ foreach ($app in $allApps) {
                 {
                     Clipboard.SetText(productKeycopy);
                 }
-                MessageBox.Show(" " + obj["OA3xOriginalProductKey"], "Windows Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(" " + obj["OA3xOriginalProductKey"], GetWindowsVersion()+" Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
