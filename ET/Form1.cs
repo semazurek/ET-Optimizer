@@ -832,8 +832,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.06.55";
-        string ETBuild = "21.07.2025";
+        string ETVersion = "E.T. ver 6.07.15";
+        string ETBuild = "05.08.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1154,6 +1154,7 @@ namespace ET
             TrySetIcon("ComputerDefaults.exe", updateApplicationsToolStripMenuItem);
             TrySetIcon("ComputerDefaults.exe", downloadSoftwareToolStripMenuItem);
             TrySetIcon("slui.exe", windowsLicenseKeyToolStripMenuItem);
+            TrySetIcon("slui.exe", activateWindowsToolStripMenuItem);
             TrySetIcon("cmd.exe", rebootToBIOSToolStripMenuItem);
             TrySetIcon("cmd.exe", rebootToSafeModeToolStripMenuItem);
             TrySetIcon(@"..\explorer.exe", restartExplorerexeToolStripMenuItem);
@@ -1850,6 +1851,7 @@ namespace ET
                 windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
                 rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
                 makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
+                activateWindowsToolStripMenuItem.Text = "Get.Activated.Win";
 
                 chck1.Text = "Disable Edge WebWidget";
                 chck2.Text = "Power Option to Ultimate Perform.";
@@ -7734,7 +7736,7 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             startInfo.FileName = "powershell.exe";
             startInfo.Arguments = "-Command irm \"https://christitus.com/win\" | iex";
             process.StartInfo = startInfo;
-            process.Start(); process.WaitForExit();
+            process.Start();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -7750,5 +7752,17 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
 
         }
 
+        private void activateWindowsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command irm https://get.activated.win | iex";
+            process.StartInfo = startInfo;
+            process.Start();
+
+        }
     }
 }

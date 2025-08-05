@@ -101,6 +101,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.activateWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -378,7 +379,8 @@
             this.rebootToBIOSToolStripMenuItem,
             this.rebootToSafeModeToolStripMenuItem,
             this.restartExplorerexeToolStripMenuItem,
-            this.makeETISOToolStripMenuItem});
+            this.makeETISOToolStripMenuItem,
+            this.activateWindowsToolStripMenuItem});
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
             this.toolStripDropDownButton1.Size = new System.Drawing.Size(70, 22);
@@ -814,6 +816,13 @@
             this.pictureBox5.TabIndex = 13;
             this.pictureBox5.TabStop = false;
             // 
+            // activateWindowsToolStripMenuItem
+            // 
+            this.activateWindowsToolStripMenuItem.Name = "activateWindowsToolStripMenuItem";
+            this.activateWindowsToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            this.activateWindowsToolStripMenuItem.Text = "Activate Windows";
+            this.activateWindowsToolStripMenuItem.Click += new System.EventHandler(this.activateWindowsToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
@@ -937,6 +946,7 @@
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.ToolStripMenuItem privacySexyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chrisTitusTechsWinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem activateWindowsToolStripMenuItem;
     }
 }
 
