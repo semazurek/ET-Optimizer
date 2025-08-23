@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.07.15-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.07.20-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/4.8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/github/downloads/semazurek/ET-Optimizer/total?style=for-the-badge"></a>
@@ -57,15 +57,15 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 ## 📷 Screenshots
 <details>
   <summary> <b>First Look</b> </summary>
-  <img src="https://github.com/user-attachments/assets/83e82f09-82bd-4869-8bea-80599c2aca40" width="750"/>
+  <img src="https://github.com/user-attachments/assets/a3534525-79ab-4527-9daa-ec413b56e46b" width="750"/>
 </details>
 <details>
   <summary> <b>During Operation</b> </summary>
-  <img src="https://github.com/user-attachments/assets/23b1deca-b877-4f3c-95de-19da8ee662c6" width="750"/>
+  <img src="https://github.com/user-attachments/assets/a8c9225c-f986-40a0-8cbd-45c83b0fd247" width="750"/>
 </details>
 <details>
   <summary> <b>Extras</b> </summary>
-  <img src="https://github.com/user-attachments/assets/78a36c74-060a-48ac-9133-50c3d5fcf724" width="750"/>
+  <img src="https://github.com/user-attachments/assets/6f9efcfd-a4fd-4865-8861-781a08af8d32" width="750"/>
 </details>
 
 ## 🛠 What it does 
@@ -145,6 +145,8 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <li>Enable Long System Paths – supports deeper folder structures.</li>
 
 <li>Disable Fullscreen Optimizations + Enable RAM Tweaks – improves game and system responsiveness.</li>
+
+<li>Disable Windows PC Health Check</li>
 </ol>
 </details>
 <details>
@@ -231,6 +233,10 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <li>Remove News & Interests / Widgets – removes taskbar widgets in Windows 10/11.</li>
 
 <li>Tweak Unnecessary Services Behavior – disables or adjusts unused system services.</li>
+
+<li>Show seconds in Taskbar clock</li>
+
+<li>Enable detailed info startup/shutdown (Verbose Status)</li>
   </ol>
 </details>
 <details>
