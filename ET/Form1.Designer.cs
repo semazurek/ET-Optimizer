@@ -81,6 +81,7 @@
             this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.makeETISOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activateWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -101,7 +102,6 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.activateWindowsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -610,6 +610,13 @@
             this.makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
             this.makeETISOToolStripMenuItem.Click += new System.EventHandler(this.makeETISOToolStripMenuItem_Click);
             // 
+            // activateWindowsToolStripMenuItem
+            // 
+            this.activateWindowsToolStripMenuItem.Name = "activateWindowsToolStripMenuItem";
+            this.activateWindowsToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
+            this.activateWindowsToolStripMenuItem.Text = "Activate Windows";
+            this.activateWindowsToolStripMenuItem.Click += new System.EventHandler(this.activateWindowsToolStripMenuItem_Click);
+            // 
             // toolStripButton3
             // 
             this.toolStripButton3.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
@@ -765,7 +772,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.06.55";
+            this.label1.Text = "E.T. ver 6.07.20";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -815,13 +822,6 @@
             this.pictureBox5.Size = new System.Drawing.Size(959, 5);
             this.pictureBox5.TabIndex = 13;
             this.pictureBox5.TabStop = false;
-            // 
-            // activateWindowsToolStripMenuItem
-            // 
-            this.activateWindowsToolStripMenuItem.Name = "activateWindowsToolStripMenuItem";
-            this.activateWindowsToolStripMenuItem.Size = new System.Drawing.Size(266, 26);
-            this.activateWindowsToolStripMenuItem.Text = "Activate Windows";
-            this.activateWindowsToolStripMenuItem.Click += new System.EventHandler(this.activateWindowsToolStripMenuItem_Click);
             // 
             // Form1
             // 

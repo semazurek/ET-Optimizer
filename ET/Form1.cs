@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,21 +6,20 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Linq;
 using System.Management;
 using System.Media;
-using System.Net.Http;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ProgressBar = System.Windows.Forms.ProgressBar;
 
-namespace ET
+namespace ET    
 {
     public partial class Form1 : Form
     {
@@ -209,11 +207,11 @@ namespace ET
             int startX = (this.ClientSize.Width - totalWidth) / 2;
             int buttonY = this.ClientSize.Height - buttonHeight - 5;
 
-            Button[] buttons = { button1, button2, button3, button4, button5 };
+            Button[] buttons = { button1, button3, button2, button4, button5 };
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].Size = new Size(buttonWidth, buttonHeight);
-                buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY);
+                buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY-5);
             }
 
             int topY = toolStrip1.Bottom + 10;
@@ -234,16 +232,16 @@ namespace ET
                 layout[i].Location = new Point(x, y);
                 layout[i].Size = new Size(groupBoxWidth, groupBoxHeight);
             }
-
-            progressBar1.Location = new Point(0, this.ClientSize.Height - progressBar1.Height);
-            progressBar1.Width = this.ClientSize.Width;
+            progressBar1.Location = new Point(-5, this.ClientSize.Height - progressBar1.Height+5);
+            progressBar1.Width = this.ClientSize.Width+10;
             toolStrip1.Size = new Size(this.Width, 25);
             pictureBox4.Size = new Size(this.Width, 5);
             pictureBox5.Size = new Size(this.Width, 5);
             pictureBox4.Location = new Point(0, this.Height - progressBar1.Height - 5);
             panelmain.Size = new Size(this.Width, 40);
-            textBox1.Size = new Size(this.ClientSize.Width, this.ClientSize.Height - progressBar1.Height - 50);
-            textBox1.Location = new Point(0, toolStrip1.Bottom);
+            textBox1.Size = new Size(this.ClientSize.Width+4, this.ClientSize.Height - progressBar1.Height - 55);
+            textBox1.BorderStyle = BorderStyle.None;
+            textBox1.Location = new Point(-2, toolStrip1.Bottom);
 
         }
 
@@ -504,6 +502,7 @@ namespace ET
             public MySR() { }
 
         }
+
 
         public string systemDrive = Environment.GetEnvironmentVariable("SystemDrive");
 
@@ -771,7 +770,8 @@ namespace ET
                                 "Microsoft.UI.Xaml.2.3",
                                 "Microsoft.UI.Xaml.2.4",
                                 "Microsoft.WinJS.2.0",
-                                "Microsoft.WindowsAppRuntime.1.4"
+                                "Microsoft.WindowsAppRuntime.1.4",
+                                "microsoft.624F8B84B80"
         };
 
         string mainforecolor = "#eeeeee";
@@ -832,15 +832,14 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.07.15";
-        string ETBuild = "05.08.2025";
+        string ETVersion = "E.T. ver 6.07.20";
+        string ETBuild = "23.08.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
 
         public string msgend = "Everything has been done. Reboot is recommended.";
         public string msgerror = "No option selected.";
-        public string msgupdate = "A newer version of the application is available on GitHub!";
         public string isoinfo = "The generated ISO image will contain the following features: ET-Optimizer.exe /auto and bypassing Microsoft requirements by bypassing data collection, local account creation, etc.";
 
         public void CreateRestorePoint(string description, int restorePointType)
@@ -880,42 +879,13 @@ namespace ET
                     Console.WriteLine("Error enabling System Restore: " + ex.Message);
                 }
 
-
-                string backupPath = System.IO.Path.Combine(systemDrive + @"\", @"Backup");
-
-                if (!Directory.Exists(backupPath))
-                {
-                    Directory.CreateDirectory(backupPath);
-                }
-
-                string backupPathcmd = Environment.ExpandEnvironmentVariables(@"%SystemDrive%\Backup\");
-
-                string[] commands = new[]
-        {
-            $"reg export \"HKLM\\SOFTWARE\" \"{backupPathcmd}HKLM_SOFTWARE.reg\" /y",
-            $"reg export \"HKLM\\SYSTEM\" \"{backupPathcmd}HKLM_SYSTEM.reg\" /y",
-            $"reg export \"HKCU\\Software\" \"{backupPathcmd}HKCU_SOFTWARE.reg\" /y",
-            $"reg export \"HKCU\\System\" \"{backupPathcmd}HKCU_SYSTEM.reg\" /y",
-            $"reg export \"HKCU\\Control Panel\" \"{backupPathcmd}HKCU_ControlPanel.reg\" /y"
-        };
-
-                foreach (string command in commands)
-                {
-                    process.StartInfo.FileName = "cmd.exe";
-                    process.StartInfo.Arguments = "/c " + command;
-                    process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-
-                    process.Start();
-                    process.WaitForExit();
-                }
-
                 CreateRestorePoint("ET_BACKUP-APPLICATION_INSTALL", 0);
                 CreateRestorePoint("ET_BACKUP-DEVICE_DRIVER_INSTALL", 10);
                 CreateRestorePoint("ET_BACKUP-MODIFY_SETTINGS", 12);
             });
         }
+
+        string backupFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ET-RegistryBackup.txt");
 
         public void SetRegistryValue(string hivePath, string name, object value, RegistryValueKind kind)
         {
@@ -944,6 +914,21 @@ namespace ET
                     Console.WriteLine($"Uknown registry tree: {hivePath}");
                     return;
                 }
+
+                    using (RegistryKey key = baseKey.OpenSubKey(subKeyPath, writable: false))
+                    {
+                        if (key != null)
+                        {
+                            object currentValue = key.GetValue(name);
+                            string line = $"SetRegistryValue(@\"{hivePath}\", \"{name}\", {(currentValue ?? "null")}, RegistryValueKind.{kind});";
+
+                        if (!File.Exists(backupFile) || !File.ReadLines(backupFile).Any(l => l.Contains($"@\"{hivePath}\"") && l.Contains($"\"{name}\"")))
+                        {
+                            File.AppendAllText(backupFile, line + Environment.NewLine, Encoding.UTF8);
+                        }
+                    }
+                    }
+                
 
                 using (RegistryKey key = baseKey.CreateSubKey(subKeyPath, true))
                 {
@@ -1781,6 +1766,24 @@ namespace ET
             chck79.Click += c_p;
             chck79.TabIndex = 79;
             if (GetWindowsVersion() == "Windows 11") {panel3.Controls.Add(chck79);}
+            CheckBox chck80 = new CheckBox();
+            chck80.Tag = "Diable Windows PC Health Check";
+            chck80.Checked = true;
+            chck80.Click += c_p;
+            chck80.TabIndex = 80;
+            panel1.Controls.Add(chck80);
+            CheckBox chck81 = new CheckBox();
+            chck81.Tag = "Enable detailed info startup/shutdown";
+            chck81.Checked = false;
+            chck81.Click += c_p;
+            chck81.TabIndex = 81;
+            panel4.Controls.Add(chck81);
+            CheckBox chck82 = new CheckBox();
+            chck82.Tag = "Show seconds in Taskbar clock";
+            chck82.Checked = false;
+            chck82.Click += c_p;
+            chck82.TabIndex = 82;
+            panel4.Controls.Add(chck82);
 
             SetToolstripIcons();
 
@@ -1832,7 +1835,6 @@ namespace ET
 
                 msgend = "Everything has been done. Reboot is recommended.";
                 msgerror = "No option selected.";
-                msgupdate = "A newer version of the application is available on GitHub!";
                 isoinfo = "The generated ISO image will contain the following features: ET-Optimizer.exe /auto and bypassing Microsoft requirements by bypassing data collection, local account creation, etc.";
 
                 rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
@@ -1932,6 +1934,9 @@ namespace ET
                 chck77.Text = "Block Windows crash report hosts";
                 chck78.Text = "Disable Logon Background Image";
                 chck79.Text = "End Task in Taskbar by Right Click";
+                chck80.Text = "Disable Windows PC Health Check";
+                chck81.Text = "Enable detailed Startup/Shutdown";
+                chck82.Text = "Show seconds in Taskbar clock";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -2010,6 +2015,7 @@ namespace ET
                 tooltip.SetToolTip(chck75, "Blocks known Microsoft telemetry and user experience tracking domains.");
                 tooltip.SetToolTip(chck76, "Blocks hostnames related to location data sharing with Microsoft.");
                 tooltip.SetToolTip(chck77, "Prevents the system from sending crash reports to Microsoft servers.");
+                tooltip.SetToolTip(chck81, "Displays detailed, step-by-step information about Windows startup and shutdown events.");
 
 
 
@@ -2065,7 +2071,6 @@ namespace ET
 
                     msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
                     msgerror = "Nie wybrano żadnej opcji.";
-                    msgupdate = "Jest nowsza wersja aplikacji na GitHubie!";
                     isoinfo = "Generowany obraz ISO będzie zawierał następujące funkcje: ET-Optimizer.exe /auto oraz pominięcie wymagań Microsoftu poprzez ominięcie zbierania danych, tworzenia konta lokalnego itp.";
 
                     toolStripLabel1.Text = "Wersja: Publiczna | " + ETBuild;
@@ -2149,6 +2154,10 @@ namespace ET
                     chck77.Text = "Blokuj hosty raportów awarii";
                     chck78.Text = "Wyłącz tło ekranu logowania";
                     chck79.Text = "Zakończ zadanie na pasku zadań PPM";
+                    chck80.Text = "Wyłącz Windows PC Health Check";
+                    chck81.Text = "Włącz szczegółowe start/zamknięcie";
+                    chck82.Text = "Pokaż sekundy w zegarze paska";
+
 
                     tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
                     tooltip.SetToolTip(chck2, "Ustawia plan zasilania Windows na Ultimate Performance dla lepszej responsywności.");
@@ -2227,6 +2236,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Blokuje znane adresy telemetryczne i śledzące Microsoftu.");
                     tooltip.SetToolTip(chck76, "Blokuje hosty udostępniające dane o lokalizacji.");
                     tooltip.SetToolTip(chck77, "Zatrzymuje wysyłanie raportów o awariach do Microsoftu.");
+                    tooltip.SetToolTip(chck81, "Wyświetla szczegółowe informacje krok po kroku o uruchamianiu i zamykaniu Windows.");
 
                 }
 
@@ -2278,7 +2288,6 @@ namespace ET
 
                     msgend = "Завершено. Рекомендуется перезапуск.";
                     msgerror = "Ни один вариант не был выбран.";
-                    msgupdate = "На GitHub доступна более новая версия приложения!";
                     isoinfo = "Сгенерированный ISO-файл будет включать следующие функции: ET-Optimizer.exe /auto, а также обход требований Microsoft путём пропуска сбора данных, создания локальной учётной записи и т. д.";
 
                     toolStripLabel1.Text = "Build: Public | " + ETBuild;
@@ -2362,6 +2371,10 @@ namespace ET
                     chck77.Text = "Блок хостов с отчётами сбоев";
                     chck78.Text = "Отключить фоновое изображение входа";
                     chck79.Text = "Завершить задачу с панели (ПКМ)";
+                    chck80.Text = "Откл Windows PC Health Check";
+                    chck81.Text = "Вкл детали запуска/выключения";
+                    chck82.Text = "Показывать сек. в часах панели";
+
 
                     tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
                     tooltip.SetToolTip(chck2, "Устанавливает план питания Windows на Ultimate Performance для лучшей отзывчивости.");
@@ -2440,6 +2453,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Блокирует известные адреса телеметрии и слежки Microsoft.");
                     tooltip.SetToolTip(chck76, "Блокирует хосты, предоставляющие данные о местоположении.");
                     tooltip.SetToolTip(chck77, "Останавливает отправку отчётов о сбоях в Microsoft.");
+                    tooltip.SetToolTip(chck81, "Показывает подробную пошаговую информацию о запуске и выключении Windows.");
 
 
                 }
@@ -2492,7 +2506,6 @@ namespace ET
 
                     msgend = "Abgeschlossen. Neustart empfohlen.";
                     msgerror = "Keine Option gewählt.";
-                    msgupdate = "Eine neuere Version der Anwendung ist auf GitHub verfügbar!";
                     isoinfo = "Die erstellte ISO-Datei wird folgende Funktionen enthalten: ET-Optimizer.exe /auto und das Umgehen der Microsoft-Anforderungen durch Überspringen der Datenerfassung, lokales Konto usw.";
 
                     chck1.Text = "Edge-WebWidget aus";
@@ -2574,6 +2587,10 @@ namespace ET
                     chck77.Text = "Crashreport-Hosts blockieren";
                     chck78.Text = "Anmeldehintergrund ausblenden";
                     chck79.Text = "Task per Rechtsklick beenden";
+                    chck80.Text = "Windows PC Health Check ausschalten";
+                    chck81.Text = "Detaill. Start/Stop aktivieren";
+                    chck82.Text = "Sekunden in Taskleisten-Uhr";
+
 
                     tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
                     tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
@@ -2652,6 +2669,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Blockiert bekannte Microsoft-Telemetrie- und Tracking-Adressen.");
                     tooltip.SetToolTip(chck76, "Blockiert Hosts, die Standortdaten bereitstellen.");
                     tooltip.SetToolTip(chck77, "Stoppt das Senden von Absturzberichten an Microsoft.");
+                    tooltip.SetToolTip(chck81, "Zeigt detaillierte Schritt-für-Schritt-Infos zum Windows-Start und -Herunterfahren an.");
 
 
                 }
@@ -2686,7 +2704,6 @@ namespace ET
 
                     msgend = "Tudo foi concluído. É recomendável reiniciar.";
                     msgerror = "Nenhuma opção selecionada.";
-                    msgupdate = "Uma nova versão do aplicativo está disponível no GitHub!";
                     isoinfo = "A ISO gerada terá os seguintes recursos: ET-Optimizer.exe /auto e ignorará os requisitos da Microsoft, pulando a coleta de dados, conta local, etc.";
 
                     chck1.Text = "Desabilitar WebWidget Edge";
@@ -2768,6 +2785,10 @@ namespace ET
                     chck77.Text = "Bloquear hosts de erros do Win";
                     chck78.Text = "Desativar imagem de fundo da tela de login";
                     chck79.Text = "Encerrar tarefa (clique dir.)";
+                    chck80.Text = "Desativar Windows PC Health Check";
+                    chck81.Text = "Ativar detalhes início/deslig";
+                    chck82.Text = "Mostrar segundos na barra";
+
 
                     tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
                     tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
@@ -2846,6 +2867,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Bloqueia endereços conhecidos de telemetria e rastreamento da Microsoft.");
                     tooltip.SetToolTip(chck76, "Bloqueia hosts que compartilham dados de localização.");
                     tooltip.SetToolTip(chck77, "Para o envio de relatórios de falhas para a Microsoft.");
+                    tooltip.SetToolTip(chck81, "Exibe informações detalhadas passo a passo sobre inicialização e desligamento do Windows.");
 
 
                 }
@@ -2894,7 +2916,6 @@ namespace ET
 
                     msgend = "Terminé. Un redémarrage est recommandé.";
                     msgerror = "Aucune option sélectionnée.";
-                    msgupdate = "Une nouvelle version de l'application est disponible sur GitHub !";
                     isoinfo = "L’image ISO générée comportera les fonctionnalités suivantes : ET-Optimizer.exe /auto et contournement des exigences de Microsoft en évitant la collecte de données, le compte local, etc.";
 
                     toolStripLabel1.Text = "Version : Publique | " + ETBuild;
@@ -2978,6 +2999,10 @@ namespace ET
                     chck77.Text = "Bloquer hôtes rapports crash";
                     chck78.Text = "Désactiver fond de connexion";
                     chck79.Text = "Fin tâche barre via clic droit";
+                    chck80.Text = "Désactiver Windows PC Health Check";
+                    chck81.Text = "Activer détails démarrage/arrêt";
+                    chck82.Text = "Afficher secondes dans horloge";
+
 
                     tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
                     tooltip.SetToolTip(chck2, "Configure le plan d'alimentation Windows sur Performance Ultime pour une meilleure réactivité.");
@@ -3056,6 +3081,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Bloque les adresses connues de télémétrie et de suivi de Microsoft.");
                     tooltip.SetToolTip(chck76, "Bloque les hôtes partageant des données de localisation.");
                     tooltip.SetToolTip(chck77, "Arrête l'envoi des rapports de plantage à Microsoft.");
+                    tooltip.SetToolTip(chck81, "Affiche des informations détaillées étape par étape sur le démarrage et l’arrêt de Windows.");
 
 
                 }
@@ -3105,7 +3131,6 @@ namespace ET
 
                     msgend = "모든 작업이 완료되었습니다. 재부팅을 권장합니다.";
                     msgerror = "선택된 옵션이 없습니다.";
-                    msgupdate = "이 애플리케이션의 최신 버전을 GitHub에서 이용할 수 있습니다!";
                     isoinfo = "생성된 ISO에는 다음 기능이 포함됩니다: ET-Optimizer.exe /auto 및 데이터 수집, 로컬 계정 등을 건너뛰어 Microsoft 요구 사항을 우회합니다.";
 
                     rebootToSafeModeToolStripMenuItem.Text = "안전 모드로 재부팅";
@@ -3204,6 +3229,10 @@ namespace ET
                     chck77.Text = "충돌 보고 호스트 차단";
                     chck78.Text = "로그인 배경 끄기";
                     chck79.Text = "작업표시줄 우클릭 종료";
+                    chck80.Text = "Windows PC Health Check 끄기";
+                    chck81.Text = "상세 시작/종료 활성화";
+                    chck82.Text = "작업표시줄 초 표시";
+
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
                     tooltip.SetToolTip(chck2, "Windows 전원 계획을 최고의 성능(Ultimate Performance)으로 설정하여 응답성을 향상시킵니다.");
@@ -3282,6 +3311,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Microsoft의 알려진 텔레메트리 및 추적 주소를 차단합니다.");
                     tooltip.SetToolTip(chck76, "위치 데이터 공유 호스트를 차단합니다.");
                     tooltip.SetToolTip(chck77, "Microsoft로의 충돌 보고 전송을 중지합니다.");
+                    tooltip.SetToolTip(chck81, "Windows 시작 및 종료 과정에 대한 단계별 자세한 정보를 표시합니다.");
 
 
                     toolStripLabel1.Text = "빌드: 공개 | " + ETBuild;
@@ -3315,7 +3345,6 @@ namespace ET
 
                     msgend = "所有操作已完成。建议重启系统。";
                     msgerror = "未选择任何选项。";
-                    msgupdate = "GitHub 上有新版本可用！";
                     isoinfo = "生成的 ISO 映像将包含以下功能：ET-Optimizer.exe /auto，并跳过微软要求（如数据收集、本地账户创建等）。";
 
                     button1.Font = new Font("Consolas", 16, FontStyle.Regular);
@@ -3432,6 +3461,10 @@ namespace ET
                     chck77.Text = "屏蔽 Windows 崩溃报告主机";
                     chck78.Text = "禁用登录背景图像";
                     chck79.Text = "任务栏右键结束任务";
+                    chck80.Text = "禁用 Windows PC Health Check";
+                    chck81.Text = "启用启动/关闭详细信息";
+                    chck82.Text = "任务栏显示秒数";
+
 
                     tooltip.SetToolTip(chck1, "禁用 Edge WebWidget，减少后台资源占用并释放内存。");
                     tooltip.SetToolTip(chck2, "将电源计划切换为终极性能模式，提高系统响应速度。");
@@ -3510,6 +3543,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "阻止已知的微软遥测和用户体验追踪域名。");
                     tooltip.SetToolTip(chck76, "阻止与位置数据共享相关的主机名。");
                     tooltip.SetToolTip(chck77, "防止系统将崩溃报告发送到微软服务器。");
+                    tooltip.SetToolTip(chck81, "显示有关 Windows 启动和关闭过程的详细逐步信息。");
 
                     toolStripLabel1.Text = "版本：公开 | " + ETBuild;
 
@@ -3543,7 +3577,6 @@ namespace ET
 
                     msgend = "Her şey tamamlandı.Yeniden başlatmanız önerilir.";
                     msgerror = "Hiçbir seçenek seçilmedi.";
-                    msgupdate = "GitHub'da uygulamanın daha yeni bir sürümü mevcut!";
                     isoinfo = "Oluşturulan ISO aşağıdaki özelliklere sahip olacaktır: ET-Optimizer.exe /auto ve veri toplama, yerel hesap vb. adımları atlayarak Microsoft gereksinimlerini baypas etme.";
 
                     rebootToSafeModeToolStripMenuItem.Text = "Güvenli Modda Yeniden Başlat";
@@ -3644,6 +3677,10 @@ namespace ET
                     chck77.Text = "Windows çökme raporu sunucularını engelle";
                     chck78.Text = "Giriş arka planını kapat";
                     chck79.Text = "Görevi sağ tıkla sonlandır";
+                    chck80.Text = "Windows PC Health Check kapat";
+                    chck81.Text = "Başlat/Kapat detayları aç";
+                    chck82.Text = "Saatte saniyeleri göster";
+
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
                     tooltip.SetToolTip(chck2, "Windows güç planını Ultimate Performance olarak ayarlayarak daha iyi yanıt süresi sağlar.");
@@ -3722,6 +3759,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Microsoft'un bilinen telemetri ve takip adreslerini engeller.");
                     tooltip.SetToolTip(chck76, "Konum verisi paylaşan sunucuları engeller.");
                     tooltip.SetToolTip(chck77, "Microsoft'a çökme raporu gönderimini durdurur.");
+                    tooltip.SetToolTip(chck81, "Windows başlatma ve kapatma işlemleri hakkında ayrıntılı adım adım bilgi gösterir.");
 
 
                     toolStripLabel1.Text = "Derleme: Genel | " + ETBuild;
@@ -3756,7 +3794,6 @@ namespace ET
 
                     msgend = "تم تنفيذ جميع الإجراءات. يُنصح بإعادة التشغيل.";
                     msgerror = "لم يتم اختيار أي خيار.";
-                    msgupdate = "يتوفر إصدار أحدث من التطبيق على GitHub!";
                     isoinfo = "ستحتوي صورة ISO التي تم إنشاؤها على الميزات التالية: ET-Optimizer.exe /auto وتجاوز متطلبات Microsoft مثل جمع البيانات وإنشاء حساب محلي، إلخ.";
 
                     button1.Font = new Font("Consolas", 16, FontStyle.Regular);
@@ -3873,6 +3910,10 @@ namespace ET
                     chck77.Text = "حظر خوادم تقارير أعطال Windows";
                     chck78.Text = "تعطيل صورة خلفية شاشة تسجيل الدخول";
                     chck79.Text = "إنهاء من الشريط (زر أيمن)";
+                    chck80.Text = "تعطيل Windows PC Health Check";
+                    chck81.Text = "تفعيل تفاصيل بدء/إيقاف";
+                    chck82.Text = "عرض الثواني في الساعة";
+
 
                     tooltip.SetToolTip(chck1, "يعطّل Edge WebWidget لتقليل استهلاك الموارد في الخلفية وتحرير الذاكرة.");
                     tooltip.SetToolTip(chck2, "يحوّل خطة الطاقة إلى الأداء النهائي (Ultimate Performance) لتحسين استجابة النظام.");
@@ -3951,6 +3992,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "يحجب أسماء النطاقات المعروفة بجمع Telemetry وتجربة المستخدم من Microsoft.");
                     tooltip.SetToolTip(chck76, "يحجب أسماء الخوادم المرتبطة بمشاركة بيانات الموقع مع Microsoft.");
                     tooltip.SetToolTip(chck77, "يمنع النظام من إرسال تقارير الأعطال إلى خوادم Microsoft.");
+                    tooltip.SetToolTip(chck81, "يعرض معلومات مفصلة خطوة بخطوة عن بدء وإيقاف تشغيل Windows.");
 
                     toolStripLabel1.Text = "البنية: عامة | " + ETBuild;
 
@@ -3984,7 +4026,6 @@ namespace ET
 
                     msgend = "सभी कार्य पूरे हो गए हैं। पुनः आरंभ करना सुझावित है।";
                     msgerror = "कोई विकल्प चयनित नहीं किया गया।";
-                    msgupdate = "ऐप्लिकेशन का नया संस्करण GitHub पर उपलब्ध है!";
                     isoinfo = "जनरेट की गई ISO छवि में निम्नलिखित विशेषताएँ शामिल होंगी: ET-Optimizer.exe /auto और Microsoft की आवश्यकताओं को बायपास करना जैसे डेटा संग्रह और स्थानीय खाता निर्माण आदि।";
 
                     rebootToSafeModeToolStripMenuItem.Text = "सेफ मोड में पुनः आरंभ करें";
@@ -4101,6 +4142,10 @@ namespace ET
                     chck77.Text = "Windows क्रैश रिपोर्ट होस्ट ब्लॉक करें";
                     chck78.Text = "लॉगऑन बैकग्राउंड इमेज अक्षम करें";
                     chck79.Text = "टास्कबार→राइट-क्लिक→समाप्त";
+                    chck80.Text = "Windows PC Health Check बंद करें";
+                    chck81.Text = "स्टार्ट/शटडाउन विवरण सक्रिय";
+                    chck82.Text = "टास्कबार में सेकंड दिखाएं";
+
 
                     tooltip.SetToolTip(chck1, "Edge वेब विजेट को अक्षम करता है जिससे बैकग्राउंड संसाधन उपयोग कम होता है और मेमोरी मुक्त होती है।");
                     tooltip.SetToolTip(chck2, "Windows पावर प्लान को Ultimate Performance पर स्विच करता है जिससे सिस्टम तेजी से प्रतिक्रिया देता है।");
@@ -4179,6 +4224,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "ज्ञात Microsoft टेलीमेट्री और उपयोगकर्ता अनुभव ट्रैकिंग डोमेन को ब्लॉक करता है।");
                     tooltip.SetToolTip(chck76, "Microsoft के साथ स्थान डेटा साझा करने से जुड़े होस्टनाम को ब्लॉक करता है।");
                     tooltip.SetToolTip(chck77, "Microsoft सर्वर को क्रैश रिपोर्ट भेजने से सिस्टम को रोकता है।");
+                    tooltip.SetToolTip(chck81, "Windows स्टार्टअप और शटडाउन प्रक्रियाओं के बारे में चरण-दर-चरण विस्तृत जानकारी दिखाता है।");
 
                     toolStripLabel1.Text = "बिल्ड: पब्लिक | " + ETBuild;
 
@@ -4214,7 +4260,6 @@ namespace ET
 
                     msgend = "Tutto è stato completato. Si consiglia di riavviare.";
                     msgerror = "Nessuna opzione selezionata.";
-                    msgupdate = "È disponibile una nuova versione dell'applicazione su GitHub!";
                     isoinfo = "L'immagine ISO generata conterrà le seguenti funzionalità: ET-Optimizer.exe /auto e l'aggiramento dei requisiti Microsoft tramite l'elusione della raccolta dati, la creazione di un account locale, ecc.";
 
                     rebootToSafeModeToolStripMenuItem.Text = "Riavvia in Modalità Provvisoria";
@@ -4314,6 +4359,10 @@ namespace ET
                     chck77.Text = "Blocca host Crash Report";
                     chck78.Text = "No Sfondo alla Schermata Login";
                     chck79.Text = "Termina App dal Taskbar";
+                    chck80.Text = "Disattiva Windows PC Health Check";
+                    chck81.Text = "Abilita dettagli avvio/arresto";
+                    chck82.Text = "Mostra secondi nella barra";
+
 
                     tooltip.SetToolTip(chck1, "Disattiva Edge WebWidget per ridurre l’uso di risorse in background.");
                     tooltip.SetToolTip(chck2, "Attiva il piano energia Massime Prestazioni per migliorare la reattività.");
@@ -4392,6 +4441,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Blocca domini noti per la telemetria e tracciamento utente.");
                     tooltip.SetToolTip(chck76, "Blocca host usati per la condivisione dati di posizione con Microsoft.");
                     tooltip.SetToolTip(chck77, "Impedisce l’invio di report crash ai server Microsoft.");
+                    tooltip.SetToolTip(chck81, "Mostra informazioni dettagliate passo passo sull’avvio e spegnimento di Windows.");
 
                     toolStripLabel1.Text = "Build: Pubblica | " + ETBuild;
 
@@ -4445,7 +4495,6 @@ namespace ET
 
                     msgend = "Усе виконано. Рекомендується перезавантаження.";
                     msgerror = "Не вибрано жодної опції.";
-                    msgupdate = "Доступна нова версія програми на GitHub!";
                     isoinfo = "Створений ISO-образ міститиме такі функції: запуск ET-Optimizer.exe /auto та обхід вимог Microsoft (збір даних, створення локального облікового запису тощо).";
 
                     toolStripLabel1.Text = "Збірка: Публічна | " + ETBuild;
@@ -4529,6 +4578,10 @@ namespace ET
                     chck77.Text = "Блокувати хости звітів про збої";
                     chck78.Text = "Вимкнути фон екрану входу";
                     chck79.Text = "Завершити задачу ПКМ на панелі";
+                    chck80.Text = "Вимкнути Windows PC Health Check";
+                    chck81.Text = "Увімкнути деталі старт/вимк";
+                    chck82.Text = "Показати сек. на панелі";
+
 
                     tooltip.SetToolTip(chck1, "Вимикає Edge WebWidget, щоб зменшити використання ресурсів та пам’яті.");
                     tooltip.SetToolTip(chck2, "Установлює план живлення Windows на Ultimate Performance для кращої чутливості.");
@@ -4607,6 +4660,8 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Блокує відомі домени телеметрії та UX‑відстеження.");
                     tooltip.SetToolTip(chck76, "Блокує хости, що надсилають дані локації.");
                     tooltip.SetToolTip(chck77, "Зупиняє відправку звітів про збої до Microsoft.");
+                    tooltip.SetToolTip(chck81, "Показує детальну покрокову інформацію про запуск і вимкнення Windows.");
+
                 }
                 if (cinfo.Name == "es-ES")
                 {
@@ -4655,7 +4710,6 @@ namespace ET
 
                     msgend = "Completado. Se recomienda reiniciar.";
                     msgerror = "No se ha seleccionado ninguna opción.";
-                    msgupdate = "¡Hay una versión más reciente de la aplicación en GitHub!";
                     isoinfo = "La imagen ISO generada incluirá las siguientes funciones: ET-Optimizer.exe /auto y omisión de los requisitos de Microsoft, como recopilación de datos, creación de cuenta local, etc.";
 
                     toolStripLabel1.Text = "Versión: Pública | " + ETBuild;
@@ -4739,6 +4793,10 @@ namespace ET
                     chck77.Text = "Bloq. informes fallos";
                     chck78.Text = "No fondo inicio sesión";
                     chck79.Text = "Terminar tarea con clic derecho";
+                    chck80.Text = "Desactivar Windows PC Health Check";
+                    chck81.Text = "Activar detalles inicio/apagado";
+                    chck82.Text = "Mostrar segundos en barra";
+
 
                     tooltip.SetToolTip(chck1, "Desactiva el widget de Edge para reducir el uso de memoria.");
                     tooltip.SetToolTip(chck2, "Activa el plan de energía 'Máximo rendimiento' para mayor fluidez.");
@@ -4817,6 +4875,7 @@ namespace ET
                     tooltip.SetToolTip(chck75, "Bloquea dominios de telemetría y experiencia de usuario.");
                     tooltip.SetToolTip(chck76, "Bloquea dominios que comparten datos de ubicación.");
                     tooltip.SetToolTip(chck77, "Evita el envío de reportes de fallos a Microsoft.");
+                    tooltip.SetToolTip(chck81, "Muestra información detallada paso a paso sobre el inicio y apagado de Windows.");
 
                 }
                 if (args != null && args.Length > 0)
@@ -4895,36 +4954,6 @@ namespace ET
                 }
             }
         }
-
-        private async Task CheckUpdateET()
-        {
-            using (var client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.UserAgent.ParseAdd("check-app");
-
-                try
-                {
-                    var response = await client.GetStringAsync("https://api.github.com/repos/semazurek/ET-Optimizer");
-                    var json = JObject.Parse(response);
-
-                    var updatedAt = DateTime.Parse(json["pushed_at"]?.ToString() ?? "").ToLocalTime();
-                    var localDate = File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location);
-
-                    if (updatedAt > localDate)
-                    {
-                        var resultUET = MessageBox.Show(msgupdate, ETVersion, MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                        if (resultUET == DialogResult.OK)
-                        {
-                            Process.Start("https://github.com/semazurek/ET-Optimizer/releases/latest");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("Update check failed: " + ex.Message);
-                }
-            }
-        }
         public Form BuildSplashForm()
         {
             Form splash = new Form();
@@ -4984,7 +5013,7 @@ namespace ET
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
             string programDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            string fileName = "ET-lunched.txt";
+            string fileName = "ET-lunched-log.txt";
             string fullPath = Path.Combine(programDataPath, fileName);
             if (!File.Exists(fullPath))
             {
@@ -5060,8 +5089,6 @@ namespace ET
                 CreateNoWindow = true
             });
 
-            await CheckUpdateET();
-
         }
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
@@ -5112,7 +5139,7 @@ namespace ET
 
         public void doengine()
         {
-
+            Cursor.Current = Cursors.WaitCursor;
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -5642,6 +5669,8 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Explorer\", "HideRecommendedSection", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Policies\Microsoft\Windows\Explorer\", "HideRecommendedSection", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\", "AllowOnlineTips", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Suggest Apps WindowsInk":
                             done++;
@@ -5766,6 +5795,14 @@ namespace ET
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "TrackPtes", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager", "AlpcWakePolicy", 1, RegistryValueKind.DWord);
+
+                            break;
+                        case "Diable Windows PC Health Check":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PCHC\", "PreviousUninstall", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PCHealthCheck\", "installed", 1, RegistryValueKind.DWord);
 
                             break;
                         case "Remove Bloatware (Preinstalled)":
@@ -6670,6 +6707,18 @@ foreach ($app in $allApps) {
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
+                        case "Enable detailed info startup/shutdown":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\", "VerboseStatus", 1, RegistryValueKind.DWord);
+
+                            break;
+                        case "Show seconds in Taskbar clock":
+                            done++;
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "ShowSecondsInSystemClock", 1, RegistryValueKind.DWord);
+
+                            break;
                     }
                 }
             }
@@ -6963,6 +7012,7 @@ foreach ($app in $allApps) {
                     Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
                 }
             }
+            Cursor.Current = Cursors.Default;
         }
         private void button5_Click(object sender, EventArgs e)
         {
@@ -7155,7 +7205,7 @@ foreach ($app in $allApps) {
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             string programDataPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-            string fileName = "ET-lunched.txt";
+            string fileName = "ET-lunched-log.txt";
             string fullPath = Path.Combine(programDataPath, fileName);
             if (File.Exists(fullPath))
             {
@@ -7295,7 +7345,7 @@ foreach ($app in $allApps) {
 
         private void toolStripButton3_Click(object sender, EventArgs e)
         {
-            Process.Start("https://semazurek.github.io");
+            Process.Start("https://github.com/semazurek/ET-Optimizer");
         }
 
         public static string GetUsedRAM()
@@ -7686,23 +7736,104 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
 
         private void registryRestoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            string backupPath = System.IO.Path.Combine(systemDrive + @"\", "Backup");
-            if (Directory.Exists(backupPath))
+            Cursor.Current = Cursors.WaitCursor;
+            if (File.Exists(backupFile))
             {
-                startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-                startInfo.FileName = "powershell.exe";
-                startInfo.Arguments = "-Command Get-ChildItem -Path \"$env:SystemDrive\\backup\" -Filter *.reg | ForEach-Object { reg import $_.FullName }";
-                process.StartInfo = startInfo;
-                process.Start();
+                Application.VisualStyleState = VisualStyleState.NonClientAreaEnabled;
+                button5.Enabled = false;
+                groupBox1.Visible = false;
+                groupBox2.Visible = false;
+                groupBox3.Visible = false;
+                groupBox4.Visible = false;
+                groupBox5.Visible = false;
+                groupBox6.Visible = false;
+                button1.Visible = false;
+                button2.Visible = false;
+                button3.Visible = false;
+                button4.Visible = false;
+                button5.Visible = false;
+                pictureBox4.Visible = true;
+                textBox1.Visible = true;
+                progressBar1.BringToFront();
+                textBox1.BringToFront();
+
+                int lineCount = 0;
+                int doneR = 0;
+
+                lineCount = File.ReadAllLines(backupFile).Length-1;
+                foreach (var line in File.ReadLines(backupFile, Encoding.UTF8))
+                {
+                    progressBar1.Visible = true;
+                    progressBar1.Minimum = 0;
+                    progressBar1.Maximum = lineCount;
+                    progressBar1.Value = doneR;
+                    string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
+                    textBox1.Text += timelog + line + Environment.NewLine;
+                    textBox1.SelectionStart = textBox1.TextLength;
+                    textBox1.ScrollToCaret();
+                    doneR++;
+                    if (string.IsNullOrWhiteSpace(line)) continue;
+                    if (!line.Trim().StartsWith("SetRegistryValue")) continue;
+
+                    try
+                    {
+                        int start = line.IndexOf('(');
+                        int end = line.LastIndexOf(')');
+                        if (start < 0 || end < 0) continue;
+
+                        string args = line.Substring(start + 1, end - start - 1);
+
+                        string[] parts = args.Split(new[] { ',' }, 4, StringSplitOptions.None);
+                        if (parts.Length != 4) continue;
+
+                        string hivePath = parts[0].Trim().TrimStart('@').Trim('"');
+                        string name = parts[1].Trim().Trim('"');
+                        string rawValue = parts[2].Trim();
+                        string rawKind = parts[3].Trim().Replace("RegistryValueKind.", "").Trim(' ', ')', ';');
+
+                        object value = null;
+                        if (!rawValue.Equals("null", StringComparison.OrdinalIgnoreCase))
+                        {
+                            if (int.TryParse(rawValue, out int intVal))
+                                value = intVal;
+                            else
+                                value = rawValue.Trim('"');
+                        }
+
+                        RegistryValueKind kind = (RegistryValueKind)Enum.Parse(typeof(RegistryValueKind), rawKind, true);
+
+                        SetRegistryValue(hivePath, name, value, kind);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Restore error: {ex.Message}");
+                    }
+                }
+                Cursor.Current = Cursors.Default;
+                PopUpMSG(msgend);
+                textBox1.Text = "";
+                button5.Enabled = true;
+                progressBar1.Visible = false;
+                groupBox1.Visible = true;
+                groupBox2.Visible = true;
+                groupBox3.Visible = true;
+                groupBox4.Visible = true;
+                groupBox5.Visible = true;
+                groupBox6.Visible = true;
+                button1.Visible = true;
+                button2.Visible = true;
+                button3.Visible = true;
+                button4.Visible = true;
+                button5.Visible = true;
+                pictureBox4.Visible = false;
+                textBox1.Visible = false;
+                this.TopMost = false;
+                Application.VisualStyleState = VisualStyleState.ClientAndNonClientAreasEnabled;
             }
             else
             {
                 MessageBox.Show(msgerror, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
