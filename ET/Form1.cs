@@ -833,7 +833,7 @@ namespace ET
         }
 
         string ETVersion = "E.T. ver 6.07.20";
-        string ETBuild = "23.08.2025";
+        string ETBuild = "25.08.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -7801,6 +7801,12 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                         }
 
                         RegistryValueKind kind = (RegistryValueKind)Enum.Parse(typeof(RegistryValueKind), rawKind, true);
+
+                        if (name == "UserPreferencesMask")
+                        {
+                            byte[] userPreferencesMask2 = new byte[] { 0x9E, 0x1E, 0x07, 0x80, 0x12, 0x00, 0x00, 0x00 };
+                            SetRegistryValue(@"HKCU\Control Panel\Desktop\", "UserPreferencesMask", userPreferencesMask2, RegistryValueKind.Binary);
+                        }
 
                         SetRegistryValue(hivePath, name, value, kind);
                     }
