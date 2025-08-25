@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Linq;
 using System.Management;
 using System.Media;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.ServiceProcess;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -917,7 +918,19 @@ namespace ET
 
                     using (RegistryKey key = baseKey.OpenSubKey(subKeyPath, writable: false))
                     {
-                        if (key != null)
+
+                    if (key.GetValue(name) == null)
+                    {
+                        object currentValue = key.GetValue(name);
+                        string line = $"DelRegistryValue(@\"{hivePath}\", \"{name}\");";
+
+                        if (!File.Exists(backupFile) || !File.ReadLines(backupFile).Any(l => l.Contains($"@\"{hivePath}\"") && l.Contains($"\"{name}\"")))
+                        {
+                            File.AppendAllText(backupFile, line + Environment.NewLine, Encoding.UTF8);
+                        }
+                    }
+
+                    if (key != null)
                         {
                             object currentValue = key.GetValue(name);
                             string line = $"SetRegistryValue(@\"{hivePath}\", \"{name}\", {(currentValue ?? "null")}, RegistryValueKind.{kind});";
@@ -928,7 +941,7 @@ namespace ET
                         }
                     }
                     }
-                
+
 
                 using (RegistryKey key = baseKey.CreateSubKey(subKeyPath, true))
                 {
@@ -938,6 +951,81 @@ namespace ET
             catch (Exception ex)
             {
                 Console.WriteLine($"Settings Error: {hivePath}\\{name}: {ex.Message}");
+            }
+        }
+
+        public void DelRegistryValue(string hivePath, string name, RegistryView view = RegistryView.Default)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(hivePath))
+                {
+                    Console.WriteLine("Registry path missing.");
+                    return;
+                }
+
+                var hp = hivePath.Trim().Trim('"');
+                int firstSlash = hp.IndexOf('\\');
+                if (firstSlash < 0)
+                {
+                    Console.WriteLine($"Invalid registry path: {hivePath}");
+                    return;
+                }
+
+                string hivePrefix = hp.Substring(0, firstSlash).ToUpperInvariant();
+                string subKeyPath = hp.Substring(firstSlash + 1);
+
+                RegistryHive hive;
+                switch (hivePrefix)
+                {
+                    case "HKLM":
+                    case "HKEY_LOCAL_MACHINE":
+                        hive = RegistryHive.LocalMachine; break;
+                    case "HKCU":
+                    case "HKEY_CURRENT_USER":
+                        hive = RegistryHive.CurrentUser; break;
+                    case "HKU":
+                    case "HKEY_USERS":
+                        hive = RegistryHive.Users; break;
+                    default:
+                        Console.WriteLine($"Nieznane drzewo rejestru: {hivePrefix}");
+                        return;
+                }
+
+                using (var baseKey = RegistryKey.OpenBaseKey(hive, view))
+                using (var key = baseKey.OpenSubKey(subKeyPath, writable: true))
+                {
+                    if (key == null)
+                    {
+                        Console.WriteLine($"Klucz nie istnieje: {hivePath}");
+                        return;
+                    }
+
+                    string valueName = name?.Trim().Trim('"');
+                    if (string.Equals(valueName, "@", StringComparison.Ordinal)) valueName = "";
+                    if (valueName is null) valueName = "";
+
+                    if (!key.GetValueNames().Contains(valueName))
+                    {
+                        Console.WriteLine($"Value does not exist: {hivePath}\\{(valueName == "" ? "(Default)" : valueName)}");
+                        return;
+                    }
+
+                    key.DeleteValue(valueName, throwOnMissingValue: false);
+                    Console.WriteLine($"Removed: {hivePath}\\{(valueName == "" ? "(Default)" : valueName)}");
+                }
+            }
+            catch (UnauthorizedAccessException)
+            {
+                Console.WriteLine("No permissions: run the program as Administrator (HKLM/HKU).");
+            }
+            catch (SecurityException)
+            {
+                Console.WriteLine("Operation blocked by permissions/policies.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error removing {hivePath}\\{name}: {ex.Message}");
             }
         }
 
@@ -7773,6 +7861,29 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                     textBox1.ScrollToCaret();
                     doneR++;
                     if (string.IsNullOrWhiteSpace(line)) continue;
+                    if (line.Trim().StartsWith("DelRegistryValue"))
+                    {
+                        try
+                        {
+                            int start = line.IndexOf('(');
+                            int end = line.LastIndexOf(')');
+                            if (start < 0 || end < 0) continue;
+
+                            string args = line.Substring(start + 1, end - start - 1);
+
+                            string[] parts = args.Split(new[] { ',' }, 2, StringSplitOptions.None);
+                            if (parts.Length != 2) continue;
+
+                            string hivePath = parts[0].Trim().TrimStart('@').Trim('"');
+                            string name = parts[1].Trim().Trim('"');
+
+                            DelRegistryValue(hivePath, name);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Remove error: {ex.Message}");
+                        }
+                    }
                     if (!line.Trim().StartsWith("SetRegistryValue")) continue;
 
                     try
