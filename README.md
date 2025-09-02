@@ -147,6 +147,10 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <li>Disable Fullscreen Optimizations + Enable RAM Tweaks – improves game and system responsiveness.</li>
 
 <li>Disable Windows PC Health Check</li>
+
+<li>DirectX 11-12 Tweaks</li>
+  
+<li>Win32 Priority Separation Tweak</li>
 </ol>
 </details>
 <details>
