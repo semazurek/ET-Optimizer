@@ -260,6 +260,20 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
   </ol>
 </details>
 
+## 💡 Useful
+
+| Switches  | Description  |
+| ------------- | ------------- |
+| `/auto`  | will run in background default checked options | 
+| `/sillent`  | will run in background default checked options but without END message | 
+| `/all`  | will run in background ALL marked options by "Select All" Button | 
+| `/expert`  | will run sillent ALL options + Expert options | 
+
+| Key  | Function  |
+| ------------- | ------------- |
+| `F11`  | Switches between full screen mode | 
+| `F12`  | Redirects to the source code page | 
+
 *<p align="center">The application has a function to restore to the previous settings.</p>*
 
 ## 👏 Community Shares
