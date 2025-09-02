@@ -101,6 +101,161 @@ namespace ET
             return null;
         }
 
+        public void ApplyAmdGpuTweaks()
+        {
+            try
+            {
+                bool amdFound = false;
+                using (var searcher = new ManagementObjectSearcher("SELECT Name,PNPDeviceID FROM Win32_VideoController"))
+                {
+                    foreach (ManagementObject obj in searcher.Get())
+                    {
+                        string name = obj["Name"]?.ToString() ?? "";
+                        string pnpId = obj["PNPDeviceID"]?.ToString() ?? "";
+                        if ((name.ToLower().Contains("amd") || name.ToLower().Contains("radeon")) &&
+                            pnpId.StartsWith("PCI\\VEN_1002"))
+                        {
+                            amdFound = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (!amdFound)
+                    return;
+
+                SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\Winmgmt",
+                    "Start", 2, RegistryValueKind.DWord);
+                StartService("Winmgmt");
+
+                SetRegistryValue(@"HKCU\Software\AMD\CN",
+                    "WizardProfile", "PROFILE_CUSTOM", RegistryValueKind.String);
+
+                using (var searcher = new ManagementObjectSearcher("SELECT PNPDeviceID FROM Win32_VideoController"))
+                {
+                    foreach (ManagementObject obj in searcher.Get())
+                    {
+                        string pnpId = obj["PNPDeviceID"]?.ToString();
+                        if (string.IsNullOrEmpty(pnpId) || !pnpId.StartsWith("PCI\\VEN_1002"))
+                            continue;
+
+                        string regPath = $@"SYSTEM\ControlSet001\Enum\{pnpId}";
+                        using (var driverKey = Registry.LocalMachine.OpenSubKey(regPath))
+                        {
+                            string driverGuid = driverKey?.GetValue("Driver")?.ToString();
+                            if (string.IsNullOrEmpty(driverGuid) || !driverGuid.Contains("{"))
+                                continue;
+
+                            string baseKey = $@"HKLM\SYSTEM\CurrentControlSet\Control\Class\{driverGuid}";
+                            string umdKey = baseKey + @"\UMD";
+
+                            SetRegistryValue(baseKey, "AdvancedMetrics_NA", "false", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AdvancedMetrics_DEF", "false", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AreaAniso_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AreaAniso_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "ASTT_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "ASTT_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AAF_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AAF_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "ATMS_NA", "-1", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "ATMS_DEF", "-1", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "ASE_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "ASE_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "ASD_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "ASD_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AutoColorDepthReduction_NA", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(umdKey, "AutoColorDepthReduction_DEF", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(baseKey, "EQAA_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "EQAA_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "GI_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "GI_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "KMD_RadeonBoostEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(baseKey, "KMD_RadeonUpscalingEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(baseKey, "MLF_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "MLF_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "TFQ_NA", "2", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "TFQ_DEF", "2", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "MVPU_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "MVPU_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AAAMethod_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AAAMethod_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AnisoDegree_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AnisoDegree_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AnisoType_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AnisoType_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AntiAlias_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AntiAlias_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "AntiAliasSamples_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "AntiAliasSamples_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "TemporalAAMultiplier", "0", RegistryValueKind.String);
+                            SetRegistryValue(baseKey, "TemporalAAMultiplier_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "TemporalAAMultiplier_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "CatalystAI_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "CatalystAI_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "EnableTripleBuffering_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "EnableTripleBuffering_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "GLPBMode_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "GLPBMode_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "SurfaceFormatReplacements_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "SurfaceFormatReplacements_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "Tessellation_OPTION_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "Tessellation_OPTION_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "Tessellation_NA", "1", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "Tessellation_DEF", "1", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "TextureOpt_NA", "1", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "TextureOpt_DEF", "1", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "TextureLod_NA", "3", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "TextureLod_DEF", "3", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "VSyncControl_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "VSyncControl_DEF", "0", RegistryValueKind.String);
+
+                            SetRegistryValue(baseKey, "TruformMode_NA", "0", RegistryValueKind.String);
+                            SetRegistryValue(umdKey, "TruformMode_DEF", "0", RegistryValueKind.String);
+                        }
+                    }
+                }
+
+                string[] amdServices = { "amdkmdag", "amdkmdap", "amdkmpfd", "amdwddmg", "amdgpuv", "atikmdag" };
+                foreach (var svc in amdServices)
+                {
+                    string svcPath = $@"HKLM\SYSTEM\CurrentControlSet\Services\{svc}";
+                    SetRegistryValue(svcPath, "TemporalAAMultiplier", "0", RegistryValueKind.String);
+                    SetRegistryValue(svcPath, "TemporalAAMultiplier_DEF", "0", RegistryValueKind.String);
+                    SetRegistryValue(svcPath, "TemporalAAMultiplier_NA", "0", RegistryValueKind.String);
+                }
+            }
+            catch { }
+        }
+
+
         private void EditHosts(string[] domains)
         {
             string hostsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.System), @"drivers\etc\hosts");
@@ -213,6 +368,7 @@ namespace ET
             {
                 buttons[i].Size = new Size(buttonWidth, buttonHeight);
                 buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY-5);
+                buttons[i].FlatAppearance.BorderSize = 0;
             }
 
             int topY = toolStrip1.Bottom + 10;
@@ -521,6 +677,7 @@ namespace ET
                                 "Microsoft.NET.Native.Runtime.2.0",
                                 "Microsoft.UI.Xaml.2.7",
                                 "Microsoft.UI.Xaml.2.0",
+                                "Microsoft.UI.Xaml.2.6",
                                 "Microsoft.WindowsAppRuntime.1.3",
                                 "Microsoft.WindowsAppRuntime.1.2",
                                 "Microsoft.NET.Native.Framework.1.7",
@@ -757,11 +914,13 @@ namespace ET
                                 "MicrosoftWindows.55182690.Taskbar",
                                 "Microsoft.WindowsAppRuntime.1.7",
                                 "Microsoft.VCLibs.120.00",
+                                "Microsoft.VCLibs.120.00.Universal",
                                 "Microsoft.ApplicationComatibilityEnhanced",
                                 "Microsoft.AV1VideoExtension",
                                 "Microsoft.AVCEncoderVideoExtension",
                                 "Microsoft.MPEG2VideoExtension",
                                 "Microsoft.NET.Native.Runtime.1.3",
+                                "Microsoft.NET.Native.Runtime.1.4",
                                 "Microsoft.NET.Native.Framework.1.3",
                                 "Microsoft.NET.Native.Runtime.1.6",
                                 "Microsoft.NET.Native.Framework.1.6",
@@ -833,8 +992,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.07.20";
-        string ETBuild = "25.08.2025";
+        string ETVersion = "E.T. ver 6.07.35";
+        string ETBuild = "02.09.2025";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1317,39 +1476,11 @@ namespace ET
             this.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             this.MinimizeBox = false;
             this.MaximizeBox = false;
-            button5.Location = new System.Drawing.Point(680, 440);
-            button5.Size = new System.Drawing.Size(140, 50);
-            button5.FlatAppearance.BorderSize = 0;
-            button4.Location = new System.Drawing.Point(530, 440);
-            button4.Size = new System.Drawing.Size(140, 50);
-            button4.FlatAppearance.BorderSize = 0;
-            button3.Location = new System.Drawing.Point(400, 440);
-            button3.Size = new System.Drawing.Size(140, 50);
-            button3.FlatAppearance.BorderSize = 0;
-            button2.Location = new System.Drawing.Point(270, 440);
-            button2.Size = new System.Drawing.Size(140, 50);
-            button2.FlatAppearance.BorderSize = 0;
-            button1.Location = new System.Drawing.Point(130, 440);
-            button1.Size = new System.Drawing.Size(140, 50);
-            button1.FlatAppearance.BorderSize = 0;
-            groupBox1.Location = new System.Drawing.Point(10, 70);
-            groupBox1.Size = new System.Drawing.Size(305, 180);
             groupBox1.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox2.Location = new System.Drawing.Point(320, 70);
-            groupBox2.Size = new System.Drawing.Size(305, 180);
             groupBox2.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox3.Location = new System.Drawing.Point(630, 70);
-            groupBox3.Size = new System.Drawing.Size(305, 180);
             groupBox3.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox4.Location = new System.Drawing.Point(320, 250);
-            groupBox4.Size = new System.Drawing.Size(305, 180);
             groupBox4.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-            groupBox5.Location = new System.Drawing.Point(630, 250);
-            groupBox5.Size = new System.Drawing.Size(305, 180);
             groupBox5.ForeColor = System.Drawing.ColorTranslator.FromHtml(expercolor);
-
-            groupBox6.Location = new System.Drawing.Point(10, 250);
-            groupBox6.Size = new System.Drawing.Size(305, 180);
             groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
             groupBox6.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
             panel6.BackColor = System.Drawing.ColorTranslator.FromHtml(menubackcolor);
@@ -1872,6 +2003,18 @@ namespace ET
             chck82.Click += c_p;
             chck82.TabIndex = 82;
             panel4.Controls.Add(chck82);
+            CheckBox chck83 = new CheckBox();
+            chck83.Tag = "DirectX 11-12 Tweaks";
+            chck83.Checked = true;
+            chck83.Click += c_p;
+            chck83.TabIndex = 83;
+            panel1.Controls.Add(chck83);
+            CheckBox chck84 = new CheckBox();
+            chck84.Tag = "Win32PrioritySeparation";
+            chck84.Checked = true;
+            chck84.Click += c_p;
+            chck84.TabIndex = 84;
+            panel1.Controls.Add(chck84);
 
             SetToolstripIcons();
 
@@ -2025,6 +2168,8 @@ namespace ET
                 chck80.Text = "Disable Windows PC Health Check";
                 chck81.Text = "Enable detailed Startup/Shutdown";
                 chck82.Text = "Show seconds in Taskbar clock";
+                chck83.Text = "DirectX D3D11 - D3D12 Tweaks";
+                chck84.Text = "Win32 Priority Separation Tweak";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -2203,7 +2348,7 @@ namespace ET
                     chck34.Text = "Wyłącz telemetrię Skype";
                     chck35.Text = "Wyłącz raporty Media Playera";
                     chck36.Text = "Wyłącz telemetrię Mozilla";
-                    chck37.Text = "Wyłącz używanie mojego ID reklamowego";
+                    chck37.Text = "Wyłącz używanie mojego ID (reklamy)";
                     chck38.Text = "Wyłącz wysyłanie inform. o pisaniu";
                     chck39.Text = "Wyłącz rozpoznawanie pisma";
                     chck40.Text = "Wyłącz raporty Watsona o malware";
@@ -2245,6 +2390,8 @@ namespace ET
                     chck80.Text = "Wyłącz Windows PC Health Check";
                     chck81.Text = "Włącz szczegółowe start/zamknięcie";
                     chck82.Text = "Pokaż sekundy w zegarze paska";
+                    chck83.Text = "DirectX D3D11 - D3D12 Optymalizacje";
+                    chck84.Text = "Optymal. podziału priorytetów Win32";
 
 
                     tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
@@ -2462,6 +2609,8 @@ namespace ET
                     chck80.Text = "Откл Windows PC Health Check";
                     chck81.Text = "Вкл детали запуска/выключения";
                     chck82.Text = "Показывать сек. в часах панели";
+                    chck83.Text = "DirectX D3D11–D3D12 твики";
+                    chck84.Text = "Твик приор. Win32";
 
 
                     tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
@@ -2678,7 +2827,8 @@ namespace ET
                     chck80.Text = "Windows PC Health Check ausschalten";
                     chck81.Text = "Detaill. Start/Stop aktivieren";
                     chck82.Text = "Sekunden in Taskleisten-Uhr";
-
+                    chck83.Text = "DirectX D3D11–D3D12 Tweaks";
+                    chck84.Text = "Win32 Prior.-Tweaks";
 
                     tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
                     tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
@@ -2876,7 +3026,8 @@ namespace ET
                     chck80.Text = "Desativar Windows PC Health Check";
                     chck81.Text = "Ativar detalhes início/deslig";
                     chck82.Text = "Mostrar segundos na barra";
-
+                    chck83.Text = "DirectX D3D11–D3D12 ajustes";
+                    chck84.Text = "Ajuste prioridade Win32";
 
                     tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
                     tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
@@ -3090,6 +3241,8 @@ namespace ET
                     chck80.Text = "Désactiver Windows PC Health Check";
                     chck81.Text = "Activer détails démarrage/arrêt";
                     chck82.Text = "Afficher secondes dans horloge";
+                    chck83.Text = "Tweaks DirectX D3D11–D3D12";
+                    chck84.Text = "Ajuste priorité Win32";
 
 
                     tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
@@ -3320,6 +3473,8 @@ namespace ET
                     chck80.Text = "Windows PC Health Check 끄기";
                     chck81.Text = "상세 시작/종료 활성화";
                     chck82.Text = "작업표시줄 초 표시";
+                    chck83.Text = "DirectX D3D11–D3D12 최적화";
+                    chck84.Text = "Win32 우선순위 최적화";
 
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
@@ -3552,7 +3707,8 @@ namespace ET
                     chck80.Text = "禁用 Windows PC Health Check";
                     chck81.Text = "启用启动/关闭详细信息";
                     chck82.Text = "任务栏显示秒数";
-
+                    chck83.Text = "DirectX D3D11-D3D12 调整";
+                    chck84.Text = "Win32 优先级分离调节";
 
                     tooltip.SetToolTip(chck1, "禁用 Edge WebWidget，减少后台资源占用并释放内存。");
                     tooltip.SetToolTip(chck2, "将电源计划切换为终极性能模式，提高系统响应速度。");
@@ -3768,7 +3924,8 @@ namespace ET
                     chck80.Text = "Windows PC Health Check kapat";
                     chck81.Text = "Başlat/Kapat detayları aç";
                     chck82.Text = "Saatte saniyeleri göster";
-
+                    chck83.Text = "DirectX D3D11-D3D12 Ayarları";
+                    chck84.Text = "Win32 Öncelik Ayrımı Ayarı";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
                     tooltip.SetToolTip(chck2, "Windows güç planını Ultimate Performance olarak ayarlayarak daha iyi yanıt süresi sağlar.");
@@ -4001,7 +4158,8 @@ namespace ET
                     chck80.Text = "تعطيل Windows PC Health Check";
                     chck81.Text = "تفعيل تفاصيل بدء/إيقاف";
                     chck82.Text = "عرض الثواني في الساعة";
-
+                    chck83.Text = "تعديلات DirectX D3D11-D3D12";
+                    chck84.Text = "تعديل فصل أولوية Win32";
 
                     tooltip.SetToolTip(chck1, "يعطّل Edge WebWidget لتقليل استهلاك الموارد في الخلفية وتحرير الذاكرة.");
                     tooltip.SetToolTip(chck2, "يحوّل خطة الطاقة إلى الأداء النهائي (Ultimate Performance) لتحسين استجابة النظام.");
@@ -4233,7 +4391,8 @@ namespace ET
                     chck80.Text = "Windows PC Health Check बंद करें";
                     chck81.Text = "स्टार्ट/शटडाउन विवरण सक्रिय";
                     chck82.Text = "टास्कबार में सेकंड दिखाएं";
-
+                    chck83.Text = "DirectX D3D11-D3D12 समायोजन";
+                    chck84.Text = "Win32 प्राथमिकता विभाजन सेटिंग";
 
                     tooltip.SetToolTip(chck1, "Edge वेब विजेट को अक्षम करता है जिससे बैकग्राउंड संसाधन उपयोग कम होता है और मेमोरी मुक्त होती है।");
                     tooltip.SetToolTip(chck2, "Windows पावर प्लान को Ultimate Performance पर स्विच करता है जिससे सिस्टम तेजी से प्रतिक्रिया देता है।");
@@ -4450,7 +4609,8 @@ namespace ET
                     chck80.Text = "Disattiva Windows PC Health Check";
                     chck81.Text = "Abilita dettagli avvio/arresto";
                     chck82.Text = "Mostra secondi nella barra";
-
+                    chck83.Text = "DirectX D3D11-D3D12 Mod";
+                    chck84.Text = "Win32 Separazione Priorità";
 
                     tooltip.SetToolTip(chck1, "Disattiva Edge WebWidget per ridurre l’uso di risorse in background.");
                     tooltip.SetToolTip(chck2, "Attiva il piano energia Massime Prestazioni per migliorare la reattività.");
@@ -4669,7 +4829,8 @@ namespace ET
                     chck80.Text = "Вимкнути Windows PC Health Check";
                     chck81.Text = "Увімкнути деталі старт/вимк";
                     chck82.Text = "Показати сек. на панелі";
-
+                    chck83.Text = "DirectX D3D11-D3D12 Налашт.";
+                    chck84.Text = "Win32 Розділ Пріоритету";
 
                     tooltip.SetToolTip(chck1, "Вимикає Edge WebWidget, щоб зменшити використання ресурсів та пам’яті.");
                     tooltip.SetToolTip(chck2, "Установлює план живлення Windows на Ultimate Performance для кращої чутливості.");
@@ -4884,7 +5045,8 @@ namespace ET
                     chck80.Text = "Desactivar Windows PC Health Check";
                     chck81.Text = "Activar detalles inicio/apagado";
                     chck82.Text = "Mostrar segundos en barra";
-
+                    chck83.Text = "DirectX D3D11-D3D12 Ajustes";
+                    chck84.Text = "Win32 Separación Prioridad";
 
                     tooltip.SetToolTip(chck1, "Desactiva el widget de Edge para reducir el uso de memoria.");
                     tooltip.SetToolTip(chck2, "Activa el plan de energía 'Máximo rendimiento' para mayor fluidez.");
@@ -5631,6 +5793,68 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\mlx4_bus\Parameters", "ThreadDpcEnable", 4, RegistryValueKind.DWord);
 
+                            ApplyAmdGpuTweaks();
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "CpuPriorityClass", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "IoPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "PagePriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "CpuPriorityClass", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "IoPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\lsass.exe\PerfOptions", "PagePriority", 1, RegistryValueKind.DWord);
+
+                            var games = new List<string>
+                            {
+                            "csgo.exe",
+                            "cs2.exe",
+                            "hl.exe",
+                            "hl2.exe",
+                            "left4dead2.exe",
+                            "svencoop.exe",
+                            "starwarsbattlefrontii.exe",
+                            "starwarsbattlefront.exe",
+                            "BF2042.exe",
+                            "BF6.exe",
+                            "BF4.exe",
+                            "BF5.exe",
+                            "BFV.exe",
+                            "BF3.exe",
+                            "BF1.exe",
+                            "cod.exe",
+                            "witcher3.exe",
+                            "eldenring.exe",
+                            "cyberpunk2077.exe",
+                            "fallout4.exe",
+                            "fortniteclient-win64-shipping.exe",
+                            "pubg.exe",
+                            "robloxplayerbeta.exe",
+                            "rdr2.exe",
+                            "leagueclient.exe",
+                            "leagueoflegends.exe",
+                            "GTA5.exe"
+                            };
+
+                            foreach (var game in games)
+                            {
+                                string[] paths =
+                                {
+                $@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\{game}\PerfOptions",
+                $@"SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\{game}\PerfOptions"
+            };
+
+                                foreach (var path in paths)
+                                {
+                                    using (RegistryKey key = Registry.LocalMachine.CreateSubKey(path, true))
+                                    {
+                                        if (key != null)
+                                        {
+                                            key.SetValue("CpuPriorityClass", 6, RegistryValueKind.DWord);
+                                            key.SetValue("IoPriority", 6, RegistryValueKind.DWord);
+                                            key.SetValue("PagePriority", 6, RegistryValueKind.DWord);
+                                        }
+                                    }
+                                }
+                            }
+
                             break;
                         case "Disable Location Sensors":
                             done++;
@@ -5891,6 +6115,45 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PCHC\", "PreviousUninstall", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PCHealthCheck\", "installed", 1, RegistryValueKind.DWord);
+
+                            break;
+                        case "DirectX 11-12 Tweaks":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_ENABLE_UNSAFE_COMMAND_BUFFER_REUSE", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_ENABLE_RUNTIME_DRIVER_OPTIMIZATIONS", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_RESOURCE_ALIGNMENT", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D11_MULTITHREADED", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_MULTITHREADED", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D11_DEFERRED_CONTEXTS", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_DEFERRED_CONTEXTS", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D11_ALLOW_TILING", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D11_ENABLE_DYNAMIC_CODEGEN", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_ALLOW_TILING", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_CPU_PAGE_TABLE_ENABLED", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_HEAP_SERIALIZATION_ENABLED", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_MAP_HEAP_ALLOCATIONS", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\DirectX", "D3D12_RESIDENCY_MANAGEMENT_ENABLED", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "CreateGdiPrimaryOnSlaveGPU", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DriverSupportsCddDwmInterop", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkCddSyncDxAccess", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkCddSyncGPUAccess", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkCddWaitForVerticalBlankEvent", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkCreateSwapChain", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkFreeGpuVirtualAddress", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkOpenSwapChain", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkShareSwapChainObject", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkWaitForVerticalBlankEvent", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "DxgkWaitForVerticalBlankEvent2", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "SwapChainBackBuffer", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\DXGKrnl", "TdrResetFromTimeoutAsync", 1, RegistryValueKind.DWord);
+
+                            break;
+                        case "Win32PrioritySeparation":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl", "Win32PrioritySeparation", 0x2A, RegistryValueKind.DWord);
 
                             break;
                         case "Remove Bloatware (Preinstalled)":
@@ -6621,6 +6884,15 @@ foreach ($app in $allApps) {
                             startInfo.Arguments = "-Command $ram = (Get-CimInstance -ClassName Win32_PhysicalMemory | Measure-Object -Property Capacity -Sum).Sum / 1kb; Set-ItemProperty -Path 'HKLM:\\SYSTEM\\CurrentControlSet\\Control' -Name 'SvcHostSplitThresholdInKB' -Type DWord -Value $ram -Force ";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "CpuPriorityClass", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "IoPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "PagePriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "CpuPriorityClass", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "IoPriority", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\svchost.exe\PerfOptions", "PagePriority", 1, RegistryValueKind.DWord);
+
+
                             break;
                         case "Remove Windows Game Bar/DVR":
                             done++;
@@ -7992,6 +8264,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             if (e.KeyCode == Keys.F12)
             {
                 Process.Start("https://github.com/semazurek/ET-Optimizer/blob/master/ET/Form1.cs");
+            }
+            if (e.KeyCode ==Keys.F11)
+            {
+                Panelmain_DoubleClick(sender, e);
             }
         }
 
