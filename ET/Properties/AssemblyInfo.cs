@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sebastian Mazurek")]
 [assembly: AssemblyProduct("ET-Optimizer")]
-[assembly: AssemblyCopyright("Sebastian Mazurek Copyright ©  2025")]
+[assembly: AssemblyCopyright("Sebastian Mazurek Copyright ©  2026")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,6 +29,6 @@ using System.Runtime.InteropServices;
 //      Numer kompilacji
 //      Poprawka
 //
-[assembly: AssemblyVersion("6.07.35.0")]
-[assembly: AssemblyFileVersion("6.07.35.0")]
+[assembly: AssemblyVersion("6.08.10.0")]
+[assembly: AssemblyFileVersion("6.08.10.0")]
 [assembly: NeutralResourcesLanguage("en")]

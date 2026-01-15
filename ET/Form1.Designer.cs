@@ -64,15 +64,18 @@
             this.resetNetworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.googleChromeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.braveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mozillaFirefoxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.webBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.googleChromeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.braveToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mozillaFirefoxToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.operaGXToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.zipToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.javaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notepadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.microsoftVisualCRedistributableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vLCMediaPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSIAfterburnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.wizTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uniGetUIWingetGUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.privacySexyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chrisTitusTechsWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -102,6 +105,7 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.hWiNFOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -315,7 +319,7 @@
             this.toolStripLabel2,
             this.toolStripLabel1});
             this.toolStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.toolStrip1.Location = new System.Drawing.Point(0, 40);
+            this.toolStrip1.Location = new System.Drawing.Point(1, 40);
             this.toolStrip1.MinimumSize = new System.Drawing.Size(940, 25);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Padding = new System.Windows.Forms.Padding(0);
@@ -474,15 +478,15 @@
             // downloadSoftwareToolStripMenuItem
             // 
             this.downloadSoftwareToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.googleChromeToolStripMenuItem,
-            this.braveToolStripMenuItem,
-            this.mozillaFirefoxToolStripMenuItem,
+            this.webBrowserToolStripMenuItem,
             this.zipToolStripMenuItem,
             this.javaToolStripMenuItem,
             this.notepadToolStripMenuItem,
             this.microsoftVisualCRedistributableToolStripMenuItem,
             this.vLCMediaPlayerToolStripMenuItem,
             this.mSIAfterburnerToolStripMenuItem,
+            this.hWiNFOToolStripMenuItem,
+            this.wizTreeToolStripMenuItem,
             this.uniGetUIWingetGUIToolStripMenuItem,
             this.privacySexyToolStripMenuItem,
             this.chrisTitusTechsWinToolStripMenuItem});
@@ -491,26 +495,44 @@
             this.downloadSoftwareToolStripMenuItem.Text = "Download Software";
             this.downloadSoftwareToolStripMenuItem.Click += new System.EventHandler(this.downloadSoftwareToolStripMenuItem_Click);
             // 
-            // googleChromeToolStripMenuItem
+            // webBrowserToolStripMenuItem
             // 
-            this.googleChromeToolStripMenuItem.Name = "googleChromeToolStripMenuItem";
-            this.googleChromeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.googleChromeToolStripMenuItem.Text = "Google Chrome";
-            this.googleChromeToolStripMenuItem.Click += new System.EventHandler(this.googleChromeToolStripMenuItem_Click);
+            this.webBrowserToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.googleChromeToolStripMenuItem1,
+            this.braveToolStripMenuItem1,
+            this.mozillaFirefoxToolStripMenuItem1,
+            this.operaGXToolStripMenuItem1});
+            this.webBrowserToolStripMenuItem.Name = "webBrowserToolStripMenuItem";
+            this.webBrowserToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.webBrowserToolStripMenuItem.Text = "Web Browser";
             // 
-            // braveToolStripMenuItem
+            // googleChromeToolStripMenuItem1
             // 
-            this.braveToolStripMenuItem.Name = "braveToolStripMenuItem";
-            this.braveToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.braveToolStripMenuItem.Text = "Brave";
-            this.braveToolStripMenuItem.Click += new System.EventHandler(this.braveToolStripMenuItem_Click);
+            this.googleChromeToolStripMenuItem1.Name = "googleChromeToolStripMenuItem1";
+            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.googleChromeToolStripMenuItem1.Text = "Google Chrome";
+            this.googleChromeToolStripMenuItem1.Click += new System.EventHandler(this.googleChromeToolStripMenuItem1_Click);
             // 
-            // mozillaFirefoxToolStripMenuItem
+            // braveToolStripMenuItem1
             // 
-            this.mozillaFirefoxToolStripMenuItem.Name = "mozillaFirefoxToolStripMenuItem";
-            this.mozillaFirefoxToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.mozillaFirefoxToolStripMenuItem.Text = "Mozilla Firefox";
-            this.mozillaFirefoxToolStripMenuItem.Click += new System.EventHandler(this.mozillaFirefoxToolStripMenuItem_Click);
+            this.braveToolStripMenuItem1.Name = "braveToolStripMenuItem1";
+            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.braveToolStripMenuItem1.Text = "Brave";
+            this.braveToolStripMenuItem1.Click += new System.EventHandler(this.braveToolStripMenuItem1_Click);
+            // 
+            // mozillaFirefoxToolStripMenuItem1
+            // 
+            this.mozillaFirefoxToolStripMenuItem1.Name = "mozillaFirefoxToolStripMenuItem1";
+            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.mozillaFirefoxToolStripMenuItem1.Text = "Mozilla Firefox";
+            this.mozillaFirefoxToolStripMenuItem1.Click += new System.EventHandler(this.mozillaFirefoxToolStripMenuItem1_Click);
+            // 
+            // operaGXToolStripMenuItem1
+            // 
+            this.operaGXToolStripMenuItem1.Name = "operaGXToolStripMenuItem1";
+            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.operaGXToolStripMenuItem1.Text = "Opera GX";
+            this.operaGXToolStripMenuItem1.Click += new System.EventHandler(this.operaGXToolStripMenuItem1_Click);
             // 
             // zipToolStripMenuItem
             // 
@@ -553,6 +575,13 @@
             this.mSIAfterburnerToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.mSIAfterburnerToolStripMenuItem.Text = "MSI Afterburner";
             this.mSIAfterburnerToolStripMenuItem.Click += new System.EventHandler(this.mSIAfterburnerToolStripMenuItem_Click);
+            // 
+            // wizTreeToolStripMenuItem
+            // 
+            this.wizTreeToolStripMenuItem.Name = "wizTreeToolStripMenuItem";
+            this.wizTreeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.wizTreeToolStripMenuItem.Text = "WizTree";
+            this.wizTreeToolStripMenuItem.Click += new System.EventHandler(this.wizTreeToolStripMenuItem_Click);
             // 
             // uniGetUIWingetGUIToolStripMenuItem
             // 
@@ -645,12 +674,17 @@
             // 
             // toolStripLabel3
             // 
+            this.toolStripLabel3.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.toolStripLabel3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel3.IsLink = true;
+            this.toolStripLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
+            this.toolStripLabel3.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.toolStripLabel3.Name = "toolStripLabel3";
             this.toolStripLabel3.Size = new System.Drawing.Size(104, 22);
             this.toolStripLabel3.Text = "Battery: 0 %";
             this.toolStripLabel3.Visible = false;
-            this.toolStripLabel3.DoubleClick += new System.EventHandler(this.toolStripLabel3_DoubleClick);
+            this.toolStripLabel3.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.toolStripLabel3.Click += new System.EventHandler(this.toolStripLabel3_Click);
             // 
             // toolStripLabel2
             // 
@@ -772,7 +806,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.07.35";
+            this.label1.Text = "E.T. ver 6.08.10";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -822,6 +856,13 @@
             this.pictureBox5.Size = new System.Drawing.Size(959, 5);
             this.pictureBox5.TabIndex = 13;
             this.pictureBox5.TabStop = false;
+            // 
+            // hWiNFOToolStripMenuItem
+            // 
+            this.hWiNFOToolStripMenuItem.Name = "hWiNFOToolStripMenuItem";
+            this.hWiNFOToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.hWiNFOToolStripMenuItem.Text = "HWiNFO";
+            this.hWiNFOToolStripMenuItem.Click += new System.EventHandler(this.hWiNFOToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -925,9 +966,6 @@
         private System.Windows.Forms.ToolStripMenuItem rebootToSafeModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restartExplorerexeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadSoftwareToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem googleChromeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem braveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mozillaFirefoxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zipToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem javaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notepadToolStripMenuItem;
@@ -947,6 +985,13 @@
         private System.Windows.Forms.ToolStripMenuItem privacySexyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chrisTitusTechsWinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activateWindowsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem wizTreeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem webBrowserToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem googleChromeToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem braveToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mozillaFirefoxToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem operaGXToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem hWiNFOToolStripMenuItem;
     }
 }
 

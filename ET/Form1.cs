@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ProgressBar = System.Windows.Forms.ProgressBar;
+using System.Text.RegularExpressions;
 
 namespace ET    
 {
@@ -615,7 +616,20 @@ namespace ET
 
                         if (string.IsNullOrWhiteSpace(appName)) continue;
 
-                        if (whitelistapps.Contains(appName)) continue;
+                        bool MatchesWildcard(string text, string pattern)
+                        {
+                            if (!pattern.Contains("*"))
+                                return string.Equals(text, pattern, StringComparison.OrdinalIgnoreCase);
+
+                            var regex = "^" + Regex.Escape(pattern).Replace("\\*", ".*") + "$";
+                            return Regex.IsMatch(text, regex, RegexOptions.IgnoreCase);
+                        }
+
+
+
+                        //if (whitelistapps.Contains(appName)) continue;
+                        if (whitelistapps.Any(pattern => MatchesWildcard(appName, pattern)))
+                            continue;
 
                         CheckBox cb = new CheckBox
                         {
@@ -666,21 +680,22 @@ namespace ET
         public HashSet<string> whitelistapps = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {
             "Microsoft.MicrosoftOfficeHub",
+            "XBMCFoundation.*",
+            "Microsoft.WindowsAppRuntime.*",
+            "Microsoft.WinAppRuntime.*",
+            "MicrosoftCorporationII.*",
+            "MicrosoftCorporation.*",
+            "Microsoft.NET.Native.Framework.*",
+            "Microsoft.WinJS.*",
+            "Microsoft.UI.Xaml.*",
+            "Microsoft.NET.Native.Runtime.*",
+            "Microsoft.LanguageExperiencePack*",
+            "Microsoft.VCLibs.*",
                                 "Microsoft.Office.OneNote",
                                 "Microsoft.WindowsAlarms",
                                 "Microsoft.WindowsCalculator",
                                 "Microsoft.WindowsCamera",
                                 "microsoft.windowscommunicationsapps",
-                                "Microsoft.NET.Native.Framework.2.2",
-                                "Microsoft.NET.Native.Framework.2.0",
-                                "Microsoft.NET.Native.Runtime.2.2",
-                                "Microsoft.NET.Native.Runtime.2.0",
-                                "Microsoft.UI.Xaml.2.7",
-                                "Microsoft.UI.Xaml.2.0",
-                                "Microsoft.UI.Xaml.2.6",
-                                "Microsoft.WindowsAppRuntime.1.3",
-                                "Microsoft.WindowsAppRuntime.1.2",
-                                "Microsoft.NET.Native.Framework.1.7",
                                 "MicrosoftWindows.Client.Core",
                                 "Microsoft.LockApp",
                                 "Microsoft.ECApp",
@@ -689,10 +704,6 @@ namespace ET
                                 "Microsoft.Windows.OOBENetworkCaptivePortal",
                                 "Microsoft.Windows.SecHealthUI",
                                 "Microsoft.SecHealthUI",
-                                "Microsoft.WindowsAppRuntime.CBS",
-                                "Microsoft.VCLibs.140.00.UWPDesktop",
-                                "Microsoft.VCLibs.120.00.UWPDesktop",
-                                "Microsoft.VCLibs.110.00.UWPDesktop",
                                 "Microsoft.DirectXRuntime",
                                 "Microsoft.XboxGameOverlay",
                                 "Microsoft.XboxGamingOverlay",
@@ -755,23 +766,26 @@ namespace ET
                                 "MicrosoftWindows.CrossDevice",
                                 "NotepadPlusPlus",
                                 "MicrosoftCorporationII.WinAppRuntime.Main.1.5",
-                                "Microsoft.WindowsAppRuntime.1.5",
                                 "MicrosoftCorporationII.WinAppRuntime.Singleton",
                                 "Microsoft.WindowsSoundRecorder",
                                 "MicrosoftCorporationII.WinAppRuntime.Main.1.4",
                                 "MicrosoftWindows.Client.LKG",
                                 "MicrosoftWindows.Client.CBS",
-                                "Microsoft.VCLibs.140.00",
                                 "Microsoft.Windows.CloudExperienceHost",
                                 "SpotifyAB.SpotifyMusic",
                                 "Microsoft.SkypeApp",
                                 "5319275A.WhatsAppDesktop",
                                 "FACEBOOK.317180B0BB486",
+                                "FACEBOOK*",
                                 "TelegramMessengerLLP.TelegramDesktop",
+                                "TelegramMessenger*",
                                 "4DF9E0F8.Netflix",
                                 "Discord",
+                                "Discord*",
                                 "Paint",
+                                "Paint*",
                                 "mspaint",
+                                "mspaint*",
                                 "Microsoft.Windows.Paint",
                                 "Microsoft.MicrosoftEdge.Stable",
                                 "1527c705-839a-4832-9118-54d4Bd6a0c89",
@@ -786,7 +800,6 @@ namespace ET
                                 "Microsoft.ECApp",
                                 "Microsoft.LockApp",
                                 "Microsoft.MicrosoftEdgeDevToolsClient",
-                                "Microsoft.UI.Xaml.CBS",
                                 "Microsoft.Win32WebViewHost",
                                 "Microsoft.Windows.Apprep.ChxApp",
                                 "Microsoft.Windows.AssignedAccessLockApp",
@@ -812,32 +825,17 @@ namespace ET
                                 "Windows.CBSPreview",
                                 "windows.immersivecontrolpanel",
                                 "Windows.PrintDialog",
-                                "Microsoft.NET.Native.Framework.2.2",
-                                "Microsoft.NET.Native.Framework.2.2",
-                                "Microsoft.NET.Native.Runtime.2.2",
-                                "Microsoft.NET.Native.Runtime.2.2",
                                 "Microsoft.SecHealthUI",
                                 "Microsoft.Services.Store.Engagement",
-                                "Microsoft.UI.Xaml.2.8",
-                                "Microsoft.VCLibs.140.00.UWPDesktop",
-                                "Microsoft.VCLibs.140.00",
-                                "Microsoft.VCLibs.140.00",
-                                "Microsoft.WindowsAppRuntime.1.3",
                                 "Microsoft.WindowsCamera",
                                 "Microsoft.XboxIdentityProvider",
                                 "Microsoft.ZuneMusic",
                                 "RealtekSemiconductorCorp.RealtekAudioControl",
                                 "DolbyLaboratories.DolbyAudioPremium",
-                                "Microsoft.NET.Native.Framework.2.0",
-                                "Microsoft.NET.Native.Framework.2.0",
-                                "Microsoft.NET.Native.Runtime.2.0",
                                 "AppUp.IntelGraphicsExperience",
-                                "Microsoft.NET.Native.Runtime.2.0",
                                 "Microsoft.Windows.AugLoop.CBS",
                                 "Microsoft.Windows.ShellExperienceHost",
                                 "Microsoft.Windows.StartMenuExperienceHost",
-                                "Microsoft.WindowsAppRuntime.CBS.1.6",
-                                "Microsoft.WindowsAppRuntime.CBS",
                                 "MicrosoftWindows.Client.CBS",
                                 "MicrosoftWindows.Client.Core",
                                 "MicrosoftWindows.Client.Photon",
@@ -847,16 +845,10 @@ namespace ET
                                 "MicrosoftWindows.LKG.RulesEngine",
                                 "MicrosoftWindows.LKG.SpeechRuntime",
                                 "MicrosoftWindows.LKG.TwinSxS",
-                                "Microsoft.VCLibs.140.00",
                                 "Microsoft.Copilot",
                                 "Microsoft.OneDriveSync",
                                 "Microsoft.OutlookForWindows",
-                                "Microsoft.VCLibs.140.00.UWPDesktop",
-                                "Microsoft.WindowsAppRuntime.1.5",
-                                "Microsoft.WindowsAppRuntime.1.5",
-                                "Microsoft.VCLibs.140.00.UWPDesktop",
                                 "Microsoft.Windows.DevHome",
-                                "Microsoft.UI.Xaml.2.8",
                                 "Microsoft.Paint",
                                 "MicrosoftWindows.Client.WebExperience",
                                 "Microsoft.WindowsStore",
@@ -874,31 +866,34 @@ namespace ET
                                 "Microsoft.StorePurchaseApp",
                                 "Microsoft.GamingApp",
                                 "Microsoft.VP9VideoExtensions",
-                                "Microsoft.UI.Xaml.2.7",
-                                "Microsoft.UI.Xaml.2.7",
                                 "Microsoft.XboxGamingOverlay",
                                 "Microsoft.WindowsCalculator",
                                 "Microsoft.WindowsSoundRecorder",
                                 "Microsoft.WindowsAlarms",
                                 "Microsoft.MicrosoftOfficeHub",
-                                "Microsoft.WindowsAppRuntime.1.6",
-                                "Microsoft.WindowsAppRuntime.1.6",
                                 "MicrosoftWindows.CrossDevice",
                                 "Microsoft.Windows.Photos",
                                 "Microsoft.MinecraftUWP",
                                 "minecraft",
+                                "minecraft*",
                                 "Linux",
+                                "Linux*",
                                 "Ubuntu",
+                                "Ubuntu*",
                                 "Kali",
+                                "Kali*",
                                 "Debian",
+                                "Debian*",
                                 "kali-linux",
+                                "kali-linux*",
                                 "WSL",
+                                "WSL*",
                                 "WSL2",
+                                "WSL2*",
                                 "Docker",
+                                "Docker*",
                                 "Xbox",
-                                "Microsoft.LanguageExperiencePack",
-                                "Microsoft.LanguageExperiencePacken-US",
-                                "Microsoft.LanguageExperiencePackpl-PL",
+                                "Xbox*",
                                 "Microsoft.Lovika",
                                 "Microsoft.4297127D64EC6",
                                 "Microsoft.Winget.Source",
@@ -912,25 +907,10 @@ namespace ET
                                 "5319275A.WhatsAppDesktop",
                                 "FACEBOOK.317180B0BB486",
                                 "MicrosoftWindows.55182690.Taskbar",
-                                "Microsoft.WindowsAppRuntime.1.7",
-                                "Microsoft.VCLibs.120.00",
-                                "Microsoft.VCLibs.120.00.Universal",
                                 "Microsoft.ApplicationComatibilityEnhanced",
                                 "Microsoft.AV1VideoExtension",
                                 "Microsoft.AVCEncoderVideoExtension",
                                 "Microsoft.MPEG2VideoExtension",
-                                "Microsoft.NET.Native.Runtime.1.3",
-                                "Microsoft.NET.Native.Runtime.1.4",
-                                "Microsoft.NET.Native.Framework.1.3",
-                                "Microsoft.NET.Native.Runtime.1.6",
-                                "Microsoft.NET.Native.Framework.1.6",
-                                "Microsoft.NET.Native.Framework.1.7",
-                                "Microsoft.UI.Xaml.2.1",
-                                "Microsoft.NET.Native.Runtime.1.7",
-                                "Microsoft.UI.Xaml.2.3",
-                                "Microsoft.UI.Xaml.2.4",
-                                "Microsoft.WinJS.2.0",
-                                "Microsoft.WindowsAppRuntime.1.4",
                                 "microsoft.624F8B84B80"
         };
 
@@ -992,8 +972,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.07.35";
-        string ETBuild = "02.09.2025";
+        string ETVersion = "E.T. ver 6.08.10";
+        string ETBuild = "15.01.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1385,6 +1365,7 @@ namespace ET
             TrySetIcon(@"oobe\Setup.exe", makeETISOToolStripMenuItem);
             TrySetIcon("ComputerDefaults.exe", updateApplicationsToolStripMenuItem);
             TrySetIcon("ComputerDefaults.exe", downloadSoftwareToolStripMenuItem);
+            TrySetIcon("ComputerDefaults.exe", webBrowserToolStripMenuItem);
             TrySetIcon("slui.exe", windowsLicenseKeyToolStripMenuItem);
             TrySetIcon("slui.exe", activateWindowsToolStripMenuItem);
             TrySetIcon("cmd.exe", rebootToBIOSToolStripMenuItem);
@@ -1420,12 +1401,50 @@ namespace ET
             }
         }
 
+        private async Task SetRemoteIcon(ToolStripMenuItem menuItem, string url)
+        {
+            try
+            {
+                using (System.Net.Http.HttpClient client = new System.Net.Http.HttpClient())
+                {
+                    byte[] imageBytes = await client.GetByteArrayAsync(url);
+                    using (MemoryStream ms = new MemoryStream(imageBytes))
+                    {
+                        Bitmap bmp = new Bitmap(Image.FromStream(ms));
+                        menuItem.Image = bmp;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error icon download for {menuItem.Text}: {ex.Message}");
+            }
+        }
 
         public Form1(string[] args)
         {
-
             InitializeComponent();
             LoadAppxPackages();
+
+            List<Task> iconTasks = new List<Task>();
+
+            iconTasks.Add(SetRemoteIcon(googleChromeToolStripMenuItem1, "https://www.google.com/chrome/static/images/favicons/favicon-96x96.png"));
+            iconTasks.Add(SetRemoteIcon(braveToolStripMenuItem1, "https://brave.com/favicon.ico"));
+            iconTasks.Add(SetRemoteIcon(mozillaFirefoxToolStripMenuItem1, "https://www.firefox.com/media/img/favicons/firefox/browser/favicon.f093404c0135.ico"));
+            iconTasks.Add(SetRemoteIcon(operaGXToolStripMenuItem1, "https://cdn-production-opera-website.operacdn.com/staticfiles/assets/gx/images/welcomeGx/favicon/favicon.6e8da31be579.ico"));
+            iconTasks.Add(SetRemoteIcon(zipToolStripMenuItem, "https://images.icon-icons.com/5/PNG/256/7zip_135.png"));
+            iconTasks.Add(SetRemoteIcon(javaToolStripMenuItem, "https://images.icon-icons.com/2415/PNG/512/java_original_wordmark_logo_icon_146459.png"));
+            iconTasks.Add(SetRemoteIcon(notepadToolStripMenuItem, "https://notepad-plus-plus.org/favicon.ico"));
+            iconTasks.Add(SetRemoteIcon(microsoftVisualCRedistributableToolStripMenuItem, "https://icons.iconarchive.com/icons/dakirby309/simply-styled/256/Microsoft-Visual-Studio-icon.png"));
+            iconTasks.Add(SetRemoteIcon(vLCMediaPlayerToolStripMenuItem, "https://images.videolan.org/images/VLC-IconSmall.png"));
+            iconTasks.Add(SetRemoteIcon(mSIAfterburnerToolStripMenuItem, "https://cdn2.steamgriddb.com/icon/0366cd91ea30dd83c73415b64afda334/32/48x48.png"));
+            iconTasks.Add(SetRemoteIcon(hWiNFOToolStripMenuItem, "https://images.icon-icons.com/39/PNG/128/hwinfo_info_hardare_6211.png"));
+            iconTasks.Add(SetRemoteIcon(wizTreeToolStripMenuItem, "https://diskanalyzer.com/apple-touch-icon.png"));
+            iconTasks.Add(SetRemoteIcon(uniGetUIWingetGUIToolStripMenuItem, "https://raw.githubusercontent.com/marticliment/UniGetUI/main/media/icon.png"));
+            iconTasks.Add(SetRemoteIcon(privacySexyToolStripMenuItem, "https://privacy.sexy/favicon.ico"));
+            iconTasks.Add(SetRemoteIcon(chrisTitusTechsWinToolStripMenuItem, "https://raw.githubusercontent.com/ChrisTitusTech/winutil/refs/heads/main/docs/assets/favicon.png"));
+
+
             this.KeyPreview = true; 
 
             this.Opacity = 0;
@@ -2071,6 +2090,7 @@ namespace ET
                 rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
                 restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                 downloadSoftwareToolStripMenuItem.Text = "Download Software";
+                webBrowserToolStripMenuItem.Text = "Web Browser";
                 toolStripDropDownButton1.Text = "Extras";
                 diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
                 controlPanelToolStripMenuItem.Text = "Control Panel";
@@ -2288,6 +2308,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
                     restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
+                    webBrowserToolStripMenuItem.Text = "Przeglądarka Internetowa";
                     toolStripDropDownButton1.Text = "Dodatki";
                     diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
                     controlPanelToolStripMenuItem.Text = "Panel Sterowania";
@@ -2507,6 +2528,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
+                    webBrowserToolStripMenuItem.Text = "веб-браузер";
                     toolStripDropDownButton1.Text = "Дополнительно";
                     diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
                     controlPanelToolStripMenuItem.Text = "Панель управления";
@@ -2727,6 +2749,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Im abges. Modus starten";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe neu starten";
                     downloadSoftwareToolStripMenuItem.Text = "Die Software herunterladen";
+                    webBrowserToolStripMenuItem.Text = "Webbrowser";
                     toolStripDropDownButton1.Text = "Extras";
                     diskDefragmenterToolStripMenuItem.Text = "Defragmentierung";
                     controlPanelToolStripMenuItem.Text = "Systemsteuerung";
@@ -3139,6 +3162,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Redémarrer en Mode Sans Échec";
                     restartExplorerexeToolStripMenuItem.Text = "Redémarrer Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Télécharger le Logiciel";
+                    webBrowserToolStripMenuItem.Text = "navigateur Internet";
                     toolStripDropDownButton1.Text = "Compléments";
                     diskDefragmenterToolStripMenuItem.Text = "Défragmentation du Disque";
                     controlPanelToolStripMenuItem.Text = "Panneau de Configuration";
@@ -3377,6 +3401,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "안전 모드로 재부팅";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe 재시작";
                     downloadSoftwareToolStripMenuItem.Text = "소프트웨어 다운로드";
+                    webBrowserToolStripMenuItem.Text = "웹 브라우저";
                     toolStripDropDownButton1.Text = "추가 기능";
                     diskDefragmenterToolStripMenuItem.Text = "디스크 조각 모음";
                     controlPanelToolStripMenuItem.Text = "제어판";
@@ -3611,6 +3636,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "重启进入安全模式";
                     restartExplorerexeToolStripMenuItem.Text = "重启资源管理器";
                     downloadSoftwareToolStripMenuItem.Text = "下载软件";
+                    webBrowserToolStripMenuItem.Text = "网络浏览器";
                     toolStripDropDownButton1.Text = "附加功能";
                     diskDefragmenterToolStripMenuItem.Text = "磁盘碎片整理";
                     controlPanelToolStripMenuItem.Text = "控制面板";
@@ -3826,7 +3852,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Güvenli Modda Yeniden Başlat";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe'yi Yeniden Başlat";
                     downloadSoftwareToolStripMenuItem.Text = "Yazılımı İndir";
-
+                    webBrowserToolStripMenuItem.Text = "web tarayıcısı";
                     toolStripDropDownButton1.Text = "Ekstralar";
                     diskDefragmenterToolStripMenuItem.Text = "Disk Birleştirici";
                     controlPanelToolStripMenuItem.Text = "Denetim Masası";
@@ -4062,6 +4088,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "إعادة التشغيل إلى الوضع الآمن";
                     restartExplorerexeToolStripMenuItem.Text = "إعادة تشغيل Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "تنزيل البرامج";
+                    webBrowserToolStripMenuItem.Text = "متصفح الويب";
                     toolStripDropDownButton1.Text = "إضافات";
                     diskDefragmenterToolStripMenuItem.Text = "إلغاء تجزئة القرص";
                     controlPanelToolStripMenuItem.Text = "لوحة التحكم";
@@ -4277,6 +4304,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "सेफ मोड में पुनः आरंभ करें";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe पुनः आरंभ करें";
                     downloadSoftwareToolStripMenuItem.Text = "सॉफ़्टवेयर डाउनलोड करें";
+                    webBrowserToolStripMenuItem.Text = "वेब ब्राउज़र";
                     toolStripDropDownButton1.Text = "एक्सट्रा";
                     diskDefragmenterToolStripMenuItem.Text = "डिस्क डीफ़्रेगमेंट";
                     controlPanelToolStripMenuItem.Text = "कंट्रोल पैनल";
@@ -4512,6 +4540,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Riavvia in Modalità Provvisoria";
                     restartExplorerexeToolStripMenuItem.Text = "Riavvia Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Scarica Software";
+                    webBrowserToolStripMenuItem.Text = "browser web";
                     toolStripDropDownButton1.Text = "Extra";
                     diskDefragmenterToolStripMenuItem.Text = "Deframmentazione Disco";
                     controlPanelToolStripMenuItem.Text = "Pannello di Controllo";
@@ -4727,6 +4756,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Перезавантажити в безпечному режимі";
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустити Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Завантажити програму";
+                    webBrowserToolStripMenuItem.Text = "веб-браузер";
                     toolStripDropDownButton1.Text = "Додатково";
                     diskDefragmenterToolStripMenuItem.Text = "Дефрагментація диска";
                     controlPanelToolStripMenuItem.Text = "Панель керування";
@@ -4943,6 +4973,7 @@ namespace ET
                     rebootToSafeModeToolStripMenuItem.Text = "Reiniciar en Modo Seguro";
                     restartExplorerexeToolStripMenuItem.Text = "Reiniciar Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Descargar Software";
+                    webBrowserToolStripMenuItem.Text = "navegador web";
                     toolStripDropDownButton1.Text = "Extras";
                     diskDefragmenterToolStripMenuItem.Text = "Desfragmentador de Disco";
                     controlPanelToolStripMenuItem.Text = "Panel de Control";
@@ -6172,20 +6203,27 @@ namespace ET
                             }
 
                             string psCommand = @"
-$allApps = Get-AppxPackage -AllUsers | Select-Object -ExpandProperty Name;
-$whitelist = @(" + string.Join(",", whitelistapps.Select(w => "'" + w.Replace("'", "''") + "'")) + @");
-$whitelist = $whitelist | ForEach-Object { $_.ToLowerInvariant().Trim() };
+    $allApps = Get-AppxPackage -AllUsers | Select-Object -ExpandProperty Name;
+    $whitelist = @(" + string.Join(",", whitelistapps.Select(w => "'" + w.Replace("'", "''") + "'")) + @");
+    
+    foreach ($app in $allApps) {
+        $isWhitelisted = $false;
+        foreach ($pattern in $whitelist) {
+            if ($app -like $pattern) {
+                $isWhitelisted = $true;
+                break;
+            }
+        }
 
-foreach ($app in $allApps) {
-    if ($whitelist -notcontains $app.ToLowerInvariant().Trim()) {
-        try {
-            Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue;
-        } catch {}
-        try {
-            Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue;
-        } catch {}
+        if (-not $isWhitelisted) {
+            try {
+                Get-AppxPackage -Name $app -AllUsers | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue;
+            } catch {}
+            try {
+                Get-AppxProvisionedPackage -Online | Where-Object { $_.DisplayName -eq $app } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue;
+            } catch {}
+        }
     }
-}
 ";
 
                             ProcessStartInfo startInfoB = new ProcessStartInfo()
@@ -6844,7 +6882,13 @@ foreach ($app in $allApps) {
                         case "Enable Old Context Menu":
                             done++;
 
-                            SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", "", "", RegistryValueKind.String);
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32 /ve /d '' /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\CLASSES\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32", null, "", RegistryValueKind.String);
                             break;
                         case "Disable Logon Background Image":
                             done++;
@@ -7292,6 +7336,7 @@ foreach ($app in $allApps) {
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C ipconfig /flushdns && netsh interface ipv4 add dnsservers \"Ethernet\" address=1.1.1.1 index=1 && netsh interface ipv4 add dnsservers \"Ethernet\" address=8.8.8.8 index=2 && netsh interface ipv4 add dnsservers \"Wi-Fi\" address=1.1.1.1 index=1 && netsh interface ipv4 add dnsservers \"Wi-Fi\" address=8.8.8.8 index=2";
+                            startInfo.Arguments = "/C ipconfig /flushdns && netsh interface ipv4 add dnsservers \"Ethernet\" address=94.140.14.14 index=1 && netsh interface ipv4 add dnsservers \"Ethernet\" address=8.8.8.8 index=2 && netsh interface ipv4 add dnsservers \"Wi-Fi\" address=94.140.14.14 index=1 && netsh interface ipv4 add dnsservers \"Wi-Fi\" address=8.8.8.8 index=2";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
                             break;
@@ -7821,6 +7866,10 @@ foreach ($app in $allApps) {
 
         private void button6_Click(object sender, EventArgs e)
         {
+            if (File.Exists("battery-report.html"))
+            {
+                File.Delete("battery-report.html");
+            }
             this.Close();
         }
 
@@ -7957,42 +8006,6 @@ foreach ($app in $allApps) {
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=7zip.7zip --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
-            process.StartInfo = startInfo;
-            process.Start();
-        }
-
-        private void mozillaFirefoxToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
-            process.StartInfo = startInfo;
-            process.Start();
-        }
-
-        private void braveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Brave.Brave --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
-            process.StartInfo = startInfo;
-            process.Start();
-        }
-
-        private void googleChromeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-            startInfo.FileName = "cmd.exe";
-            startInfo.Arguments = "/C winget install --id=Google.Chrome --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -8271,11 +8284,6 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             }
         }
 
-        private void toolStripLabel3_DoubleClick(object sender, EventArgs e)
-        {
-
-        }
-
         private void activateWindowsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
@@ -8287,6 +8295,96 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.StartInfo = startInfo;
             process.Start();
 
+        }
+
+        private void toolStripLabel3_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C powercfg /batteryreport /output \"battery-report.html\"";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C start battery-report.html";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+        }
+
+        private void wizTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=AntibodySoftware.WizTree --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void googleChromeToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Google.Chrome --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void braveToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Brave.Brave --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void mozillaFirefoxToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Mozilla.Firefox --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void operaGXToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Opera.OperaGX --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void hWiNFOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=REALiX.HWiNFO --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
         }
     }
 }
