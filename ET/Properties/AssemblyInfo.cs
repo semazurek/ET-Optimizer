@@ -29,6 +29,6 @@ using System.Runtime.InteropServices;
 //      Numer kompilacji
 //      Poprawka
 //
-[assembly: AssemblyVersion("6.08.10.0")]
-[assembly: AssemblyFileVersion("6.08.10.0")]
+[assembly: AssemblyVersion("6.08.15.0")]
+[assembly: AssemblyFileVersion("6.08.15.0")]
 [assembly: NeutralResourcesLanguage("en")]

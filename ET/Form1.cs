@@ -972,8 +972,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.08.10";
-        string ETBuild = "15.01.2026";
+        string ETVersion = "E.T. ver 6.08.15";
+        string ETBuild = "17.01.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1366,10 +1366,14 @@ namespace ET
             TrySetIcon("ComputerDefaults.exe", updateApplicationsToolStripMenuItem);
             TrySetIcon("ComputerDefaults.exe", downloadSoftwareToolStripMenuItem);
             TrySetIcon("ComputerDefaults.exe", webBrowserToolStripMenuItem);
+            TrySetIcon("ComputerDefaults.exe", gamesToolStripMenuItem);
             TrySetIcon("slui.exe", windowsLicenseKeyToolStripMenuItem);
             TrySetIcon("slui.exe", activateWindowsToolStripMenuItem);
             TrySetIcon("cmd.exe", rebootToBIOSToolStripMenuItem);
             TrySetIcon("cmd.exe", rebootToSafeModeToolStripMenuItem);
+            TrySetIcon("cmd.exe", scanRestoreHealthToolStripMenuItem);
+            TrySetIcon("cmd.exe", powerShellRunScriptFixToolStripMenuItem);
+            TrySetIcon("cmd.exe", bypassWin11RequirementsToolStripMenuItem);
             TrySetIcon(@"..\explorer.exe", restartExplorerexeToolStripMenuItem);
             TrySetIcon(@"RecoveryDrive.exe", restorePointToolStripMenuItem);
             TrySetIcon(@"..\regedit.exe", registryRestoreToolStripMenuItem);
@@ -1443,6 +1447,12 @@ namespace ET
             iconTasks.Add(SetRemoteIcon(uniGetUIWingetGUIToolStripMenuItem, "https://raw.githubusercontent.com/marticliment/UniGetUI/main/media/icon.png"));
             iconTasks.Add(SetRemoteIcon(privacySexyToolStripMenuItem, "https://privacy.sexy/favicon.ico"));
             iconTasks.Add(SetRemoteIcon(chrisTitusTechsWinToolStripMenuItem, "https://raw.githubusercontent.com/ChrisTitusTech/winutil/refs/heads/main/docs/assets/favicon.png"));
+
+            iconTasks.Add(SetRemoteIcon(eAAppToolStripMenuItem, "http://ea.com/assets/images/favicon.png"));
+            iconTasks.Add(SetRemoteIcon(ubisoftConnectToolStripMenuItem, "https://static-dm.ubisoft.com/ubisoft/prod/favicon.ico"));
+            iconTasks.Add(SetRemoteIcon(gOGToolStripMenuItem, "https://store-static-modular.gog-statics.com/pl/assets/favicons/favicon.ico"));
+            iconTasks.Add(SetRemoteIcon(epicGamesStoreToolStripMenuItem, "https://static-assets-prod.epicgames.com/epic-store/static/favicon.ico"));
+            iconTasks.Add(SetRemoteIcon(steamToolStripMenuItem, "https://steamcommunity.com/favicon.ico"));
 
 
             this.KeyPreview = true; 
@@ -2091,6 +2101,7 @@ namespace ET
                 restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                 downloadSoftwareToolStripMenuItem.Text = "Download Software";
                 webBrowserToolStripMenuItem.Text = "Web Browser";
+                gamesToolStripMenuItem.Text = "Games";
                 toolStripDropDownButton1.Text = "Extras";
                 diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
                 controlPanelToolStripMenuItem.Text = "Control Panel";
@@ -2309,6 +2320,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
                     webBrowserToolStripMenuItem.Text = "Przeglądarka Internetowa";
+                    gamesToolStripMenuItem.Text = "Gry";
                     toolStripDropDownButton1.Text = "Dodatki";
                     diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
                     controlPanelToolStripMenuItem.Text = "Panel Sterowania";
@@ -2529,6 +2541,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
                     webBrowserToolStripMenuItem.Text = "веб-браузер";
+                    gamesToolStripMenuItem.Text = "игры";
                     toolStripDropDownButton1.Text = "Дополнительно";
                     diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
                     controlPanelToolStripMenuItem.Text = "Панель управления";
@@ -2750,6 +2763,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe neu starten";
                     downloadSoftwareToolStripMenuItem.Text = "Die Software herunterladen";
                     webBrowserToolStripMenuItem.Text = "Webbrowser";
+                    gamesToolStripMenuItem.Text = "Spiele";
                     toolStripDropDownButton1.Text = "Extras";
                     diskDefragmenterToolStripMenuItem.Text = "Defragmentierung";
                     controlPanelToolStripMenuItem.Text = "Systemsteuerung";
@@ -3163,6 +3177,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Redémarrer Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Télécharger le Logiciel";
                     webBrowserToolStripMenuItem.Text = "navigateur Internet";
+                    gamesToolStripMenuItem.Text = "jeux";
                     toolStripDropDownButton1.Text = "Compléments";
                     diskDefragmenterToolStripMenuItem.Text = "Défragmentation du Disque";
                     controlPanelToolStripMenuItem.Text = "Panneau de Configuration";
@@ -3402,6 +3417,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe 재시작";
                     downloadSoftwareToolStripMenuItem.Text = "소프트웨어 다운로드";
                     webBrowserToolStripMenuItem.Text = "웹 브라우저";
+                    gamesToolStripMenuItem.Text = "계략";
                     toolStripDropDownButton1.Text = "추가 기능";
                     diskDefragmenterToolStripMenuItem.Text = "디스크 조각 모음";
                     controlPanelToolStripMenuItem.Text = "제어판";
@@ -3637,6 +3653,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "重启资源管理器";
                     downloadSoftwareToolStripMenuItem.Text = "下载软件";
                     webBrowserToolStripMenuItem.Text = "网络浏览器";
+                    gamesToolStripMenuItem.Text = "游戏";
                     toolStripDropDownButton1.Text = "附加功能";
                     diskDefragmenterToolStripMenuItem.Text = "磁盘碎片整理";
                     controlPanelToolStripMenuItem.Text = "控制面板";
@@ -3853,6 +3870,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe'yi Yeniden Başlat";
                     downloadSoftwareToolStripMenuItem.Text = "Yazılımı İndir";
                     webBrowserToolStripMenuItem.Text = "web tarayıcısı";
+                    gamesToolStripMenuItem.Text = "oyunlar";
                     toolStripDropDownButton1.Text = "Ekstralar";
                     diskDefragmenterToolStripMenuItem.Text = "Disk Birleştirici";
                     controlPanelToolStripMenuItem.Text = "Denetim Masası";
@@ -4089,6 +4107,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "إعادة تشغيل Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "تنزيل البرامج";
                     webBrowserToolStripMenuItem.Text = "متصفح الويب";
+                    gamesToolStripMenuItem.Text = "ألعاب";
                     toolStripDropDownButton1.Text = "إضافات";
                     diskDefragmenterToolStripMenuItem.Text = "إلغاء تجزئة القرص";
                     controlPanelToolStripMenuItem.Text = "لوحة التحكم";
@@ -4305,6 +4324,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe पुनः आरंभ करें";
                     downloadSoftwareToolStripMenuItem.Text = "सॉफ़्टवेयर डाउनलोड करें";
                     webBrowserToolStripMenuItem.Text = "वेब ब्राउज़र";
+                    gamesToolStripMenuItem.Text = "खेल";
                     toolStripDropDownButton1.Text = "एक्सट्रा";
                     diskDefragmenterToolStripMenuItem.Text = "डिस्क डीफ़्रेगमेंट";
                     controlPanelToolStripMenuItem.Text = "कंट्रोल पैनल";
@@ -4541,6 +4561,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Riavvia Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Scarica Software";
                     webBrowserToolStripMenuItem.Text = "browser web";
+                    gamesToolStripMenuItem.Text = "giochi";
                     toolStripDropDownButton1.Text = "Extra";
                     diskDefragmenterToolStripMenuItem.Text = "Deframmentazione Disco";
                     controlPanelToolStripMenuItem.Text = "Pannello di Controllo";
@@ -4757,6 +4778,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустити Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Завантажити програму";
                     webBrowserToolStripMenuItem.Text = "веб-браузер";
+                    gamesToolStripMenuItem.Text = "ігри";
                     toolStripDropDownButton1.Text = "Додатково";
                     diskDefragmenterToolStripMenuItem.Text = "Дефрагментація диска";
                     controlPanelToolStripMenuItem.Text = "Панель керування";
@@ -4974,6 +4996,7 @@ namespace ET
                     restartExplorerexeToolStripMenuItem.Text = "Reiniciar Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Descargar Software";
                     webBrowserToolStripMenuItem.Text = "navegador web";
+                    gamesToolStripMenuItem.Text = "juegos";
                     toolStripDropDownButton1.Text = "Extras";
                     diskDefragmenterToolStripMenuItem.Text = "Desfragmentador de Disco";
                     controlPanelToolStripMenuItem.Text = "Panel de Control";
@@ -8383,6 +8406,158 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=REALiX.HWiNFO --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void steamToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Valve.Steam --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void epicGamesStoreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=EpicGames.EpicGamesLauncher --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void gOGToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=GOG.Galaxy --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void ubisoftConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=Ubisoft.Connect --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void eAAppToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C winget install --id=ElectronicArts.EADesktop --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void bypassWin11RequirementsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            //win11 requir bypass
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\CompatMarkers\" /f";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\Shared\" /f";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\TargetVersionUpgradeExperienceIndicators\" /f";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe add \"HKLM\\SYSTEM\\Setup\\MoSetup\" /f /v AllowUpgradesWithUnsupportedTPMOrCPU /t REG_DWORD /d 1";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /f /v BypassSecureBootCheck /t REG_DWORD /d 1";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /f /v BypassRAMCheck /t REG_DWORD /d 1";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /f /v BypassCPUCheck /t REG_DWORD /d 1";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+            MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void powerShellRunScriptFixToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned -Force";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command Set-ExecutionPolicy -Scope LocalMachine -ExecutionPolicy RemoteSigned -Force";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C powershell.exe -NoExit -Command \"Set-ExecutionPolicy Unrestricted; Set-ExecutionPolicy RemoteSigned -Scope CurrentUser; cls;echo Status:;Get-ExecutionPolicy; pause; exit\"";
+            process.StartInfo = startInfo;
+            process.Start();
+        }
+
+        private void scanRestoreHealthToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command sfc /scannow; DISM /Online /Cleanup-Image /RestoreHealth; pause";
             process.StartInfo = startInfo;
             process.Start();
         }

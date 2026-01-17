@@ -75,6 +75,7 @@
             this.microsoftVisualCRedistributableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vLCMediaPlayerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mSIAfterburnerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hWiNFOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wizTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uniGetUIWingetGUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.privacySexyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +106,15 @@
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.hWiNFOToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gamesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steamToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.epicGamesStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gOGToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ubisoftConnectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eAAppToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.powerShellRunScriptFixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.scanRestoreHealthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bypassWin11RequirementsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -383,6 +392,9 @@
             this.rebootToBIOSToolStripMenuItem,
             this.rebootToSafeModeToolStripMenuItem,
             this.restartExplorerexeToolStripMenuItem,
+            this.scanRestoreHealthToolStripMenuItem,
+            this.powerShellRunScriptFixToolStripMenuItem,
+            this.bypassWin11RequirementsToolStripMenuItem,
             this.makeETISOToolStripMenuItem,
             this.activateWindowsToolStripMenuItem});
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
@@ -479,6 +491,7 @@
             // 
             this.downloadSoftwareToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.webBrowserToolStripMenuItem,
+            this.gamesToolStripMenuItem,
             this.zipToolStripMenuItem,
             this.javaToolStripMenuItem,
             this.notepadToolStripMenuItem,
@@ -509,28 +522,28 @@
             // googleChromeToolStripMenuItem1
             // 
             this.googleChromeToolStripMenuItem1.Name = "googleChromeToolStripMenuItem1";
-            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
             this.googleChromeToolStripMenuItem1.Text = "Google Chrome";
             this.googleChromeToolStripMenuItem1.Click += new System.EventHandler(this.googleChromeToolStripMenuItem1_Click);
             // 
             // braveToolStripMenuItem1
             // 
             this.braveToolStripMenuItem1.Name = "braveToolStripMenuItem1";
-            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
             this.braveToolStripMenuItem1.Text = "Brave";
             this.braveToolStripMenuItem1.Click += new System.EventHandler(this.braveToolStripMenuItem1_Click);
             // 
             // mozillaFirefoxToolStripMenuItem1
             // 
             this.mozillaFirefoxToolStripMenuItem1.Name = "mozillaFirefoxToolStripMenuItem1";
-            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
             this.mozillaFirefoxToolStripMenuItem1.Text = "Mozilla Firefox";
             this.mozillaFirefoxToolStripMenuItem1.Click += new System.EventHandler(this.mozillaFirefoxToolStripMenuItem1_Click);
             // 
             // operaGXToolStripMenuItem1
             // 
             this.operaGXToolStripMenuItem1.Name = "operaGXToolStripMenuItem1";
-            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
             this.operaGXToolStripMenuItem1.Text = "Opera GX";
             this.operaGXToolStripMenuItem1.Click += new System.EventHandler(this.operaGXToolStripMenuItem1_Click);
             // 
@@ -575,6 +588,13 @@
             this.mSIAfterburnerToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.mSIAfterburnerToolStripMenuItem.Text = "MSI Afterburner";
             this.mSIAfterburnerToolStripMenuItem.Click += new System.EventHandler(this.mSIAfterburnerToolStripMenuItem_Click);
+            // 
+            // hWiNFOToolStripMenuItem
+            // 
+            this.hWiNFOToolStripMenuItem.Name = "hWiNFOToolStripMenuItem";
+            this.hWiNFOToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.hWiNFOToolStripMenuItem.Text = "HWiNFO";
+            this.hWiNFOToolStripMenuItem.Click += new System.EventHandler(this.hWiNFOToolStripMenuItem_Click);
             // 
             // wizTreeToolStripMenuItem
             // 
@@ -806,7 +826,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.08.10";
+            this.label1.Text = "E.T. ver 6.08.15";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -857,12 +877,73 @@
             this.pictureBox5.TabIndex = 13;
             this.pictureBox5.TabStop = false;
             // 
-            // hWiNFOToolStripMenuItem
+            // gamesToolStripMenuItem
             // 
-            this.hWiNFOToolStripMenuItem.Name = "hWiNFOToolStripMenuItem";
-            this.hWiNFOToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.hWiNFOToolStripMenuItem.Text = "HWiNFO";
-            this.hWiNFOToolStripMenuItem.Click += new System.EventHandler(this.hWiNFOToolStripMenuItem_Click);
+            this.gamesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.steamToolStripMenuItem,
+            this.epicGamesStoreToolStripMenuItem,
+            this.gOGToolStripMenuItem,
+            this.ubisoftConnectToolStripMenuItem,
+            this.eAAppToolStripMenuItem});
+            this.gamesToolStripMenuItem.Name = "gamesToolStripMenuItem";
+            this.gamesToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.gamesToolStripMenuItem.Text = "Games";
+            // 
+            // steamToolStripMenuItem
+            // 
+            this.steamToolStripMenuItem.Name = "steamToolStripMenuItem";
+            this.steamToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.steamToolStripMenuItem.Text = "Steam";
+            this.steamToolStripMenuItem.Click += new System.EventHandler(this.steamToolStripMenuItem_Click);
+            // 
+            // epicGamesStoreToolStripMenuItem
+            // 
+            this.epicGamesStoreToolStripMenuItem.Name = "epicGamesStoreToolStripMenuItem";
+            this.epicGamesStoreToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.epicGamesStoreToolStripMenuItem.Text = "Epic Games Store";
+            this.epicGamesStoreToolStripMenuItem.Click += new System.EventHandler(this.epicGamesStoreToolStripMenuItem_Click);
+            // 
+            // gOGToolStripMenuItem
+            // 
+            this.gOGToolStripMenuItem.Name = "gOGToolStripMenuItem";
+            this.gOGToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.gOGToolStripMenuItem.Text = "GOG Galaxy";
+            this.gOGToolStripMenuItem.Click += new System.EventHandler(this.gOGToolStripMenuItem_Click);
+            // 
+            // ubisoftConnectToolStripMenuItem
+            // 
+            this.ubisoftConnectToolStripMenuItem.Name = "ubisoftConnectToolStripMenuItem";
+            this.ubisoftConnectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.ubisoftConnectToolStripMenuItem.Text = "Ubisoft Connect";
+            this.ubisoftConnectToolStripMenuItem.Click += new System.EventHandler(this.ubisoftConnectToolStripMenuItem_Click);
+            // 
+            // eAAppToolStripMenuItem
+            // 
+            this.eAAppToolStripMenuItem.Name = "eAAppToolStripMenuItem";
+            this.eAAppToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.eAAppToolStripMenuItem.Text = "EA App";
+            this.eAAppToolStripMenuItem.Click += new System.EventHandler(this.eAAppToolStripMenuItem_Click);
+            // 
+            // powerShellRunScriptFixToolStripMenuItem
+            // 
+            this.powerShellRunScriptFixToolStripMenuItem.Name = "powerShellRunScriptFixToolStripMenuItem";
+            this.powerShellRunScriptFixToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.powerShellRunScriptFixToolStripMenuItem.Text = "PowerShell Allow Script Fix";
+            this.powerShellRunScriptFixToolStripMenuItem.Click += new System.EventHandler(this.powerShellRunScriptFixToolStripMenuItem_Click);
+            // 
+            // scanRestoreHealthToolStripMenuItem
+            // 
+            this.scanRestoreHealthToolStripMenuItem.Name = "scanRestoreHealthToolStripMenuItem";
+            this.scanRestoreHealthToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.scanRestoreHealthToolStripMenuItem.Text = "Scan && Restore Health (DISM+SFC)";
+            this.scanRestoreHealthToolStripMenuItem.Click += new System.EventHandler(this.scanRestoreHealthToolStripMenuItem_Click);
+            // 
+            // bypassWin11RequirementsToolStripMenuItem
+            // 
+            this.bypassWin11RequirementsToolStripMenuItem.Name = "bypassWin11RequirementsToolStripMenuItem";
+            this.bypassWin11RequirementsToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.bypassWin11RequirementsToolStripMenuItem.Text = "Bypass Win11 Requirements";
+            this.bypassWin11RequirementsToolStripMenuItem.Click += new System.EventHandler(this.bypassWin11RequirementsToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -992,6 +1073,15 @@
         private System.Windows.Forms.ToolStripMenuItem mozillaFirefoxToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem operaGXToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hWiNFOToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gamesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem steamToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem epicGamesStoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gOGToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ubisoftConnectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem eAAppToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem scanRestoreHealthToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem powerShellRunScriptFixToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bypassWin11RequirementsToolStripMenuItem;
     }
 }
 
