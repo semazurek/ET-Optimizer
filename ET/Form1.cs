@@ -20,6 +20,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using ProgressBar = System.Windows.Forms.ProgressBar;
 using System.Text.RegularExpressions;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 
 namespace ET    
 {
@@ -972,13 +973,14 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.08.15";
-        string ETBuild = "17.01.2026";
+        string ETVersion = "E.T. ver 6.08.20";
+        string ETBuild = "23.01.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
 
         public string msgend = "Everything has been done. Reboot is recommended.";
+        public string msgISO = "Would you like to upgrade to Win11 via ISO now?";
         public string msgerror = "No option selected.";
         public string isoinfo = "The generated ISO image will contain the following features: ET-Optimizer.exe /auto and bypassing Microsoft requirements by bypassing data collection, local account creation, etc.";
 
@@ -2094,6 +2096,7 @@ namespace ET
                 toolStrip1.Font = new Font("Consolas", 9, FontStyle.Regular);
 
                 msgend = "Everything has been done. Reboot is recommended.";
+                msgISO = "Would you like to upgrade to Win11 via ISO now?";
                 msgerror = "No option selected.";
                 isoinfo = "The generated ISO image will contain the following features: ET-Optimizer.exe /auto and bypassing Microsoft requirements by bypassing data collection, local account creation, etc.";
 
@@ -2336,6 +2339,7 @@ namespace ET
                     makeETISOToolStripMenuItem.Text = "Stwórz Zoptymalizowane .ISO z ET";
 
                     msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
+                    msgISO = "Czy chcesz teraz dokonać aktualizacji do Win11 za pomocą ISO?";
                     msgerror = "Nie wybrano żadnej opcji.";
                     isoinfo = "Generowany obraz ISO będzie zawierał następujące funkcje: ET-Optimizer.exe /auto oraz pominięcie wymagań Microsoftu poprzez ominięcie zbierania danych, tworzenia konta lokalnego itp.";
 
@@ -2557,6 +2561,7 @@ namespace ET
                     makeETISOToolStripMenuItem.Text = "Сделать ET-оптимизированный .ISO";
 
                     msgend = "Завершено. Рекомендуется перезапуск.";
+                    msgISO = "Вы хотите обновиться до Windows 11 прямо сейчас с помощью ISO-образа?";
                     msgerror = "Ни один вариант не был выбран.";
                     isoinfo = "Сгенерированный ISO-файл будет включать следующие функции: ET-Optimizer.exe /auto, а также обход требований Microsoft путём пропуска сбора данных, создания локальной учётной записи и т. д.";
 
@@ -2779,6 +2784,7 @@ namespace ET
                     makeETISOToolStripMenuItem.Text = "Erstellen Sie eine ET-optimierte .ISO-Datei";
 
                     msgend = "Abgeschlossen. Neustart empfohlen.";
+                    msgISO = "Möchten Sie jetzt mithilfe einer ISO-Datei auf Windows 11 aktualisieren?";
                     msgerror = "Keine Option gewählt.";
                     isoinfo = "Die erstellte ISO-Datei wird folgende Funktionen enthalten: ET-Optimizer.exe /auto und das Umgehen der Microsoft-Anforderungen durch Überspringen der Datenerfassung, lokales Konto usw.";
 
@@ -2978,6 +2984,7 @@ namespace ET
                     groupBox5.Text = "Modo especialista (" + panel5.Controls.OfType<CheckBox>().Count() + ")";
 
                     msgend = "Tudo foi concluído. É recomendável reiniciar.";
+                    msgISO = "Você deseja atualizar para o Windows 11 agora usando um arquivo ISO?";
                     msgerror = "Nenhuma opção selecionada.";
                     isoinfo = "A ISO gerada terá os seguintes recursos: ET-Optimizer.exe /auto e ignorará os requisitos da Microsoft, pulando a coleta de dados, conta local, etc.";
 
@@ -3193,6 +3200,7 @@ namespace ET
                     makeETISOToolStripMenuItem.Text = "Créer un fichier ISO optimisé avec ET";
 
                     msgend = "Terminé. Un redémarrage est recommandé.";
+                    msgISO = "Souhaitez-vous passer à Windows 11 dès maintenant via un fichier ISO ?";
                     msgerror = "Aucune option sélectionnée.";
                     isoinfo = "L’image ISO générée comportera les fonctionnalités suivantes : ET-Optimizer.exe /auto et contournement des exigences de Microsoft en évitant la collecte de données, le compte local, etc.";
 
@@ -3410,6 +3418,7 @@ namespace ET
                     toolStripButton4.Text = "기부하기";
 
                     msgend = "모든 작업이 완료되었습니다. 재부팅을 권장합니다.";
+                    msgISO = "지금 ISO 파일을 사용하여 Windows 11로 업그레이드하시겠습니까?";
                     msgerror = "선택된 옵션이 없습니다.";
                     isoinfo = "생성된 ISO에는 다음 기능이 포함됩니다: ET-Optimizer.exe /auto 및 데이터 수집, 로컬 계정 등을 건너뛰어 Microsoft 요구 사항을 우회합니다.";
 
@@ -3628,6 +3637,7 @@ namespace ET
                     toolStripButton4.Text = "捐赠";
 
                     msgend = "所有操作已完成。建议重启系统。";
+                    msgISO = "您想現在使用 ISO 檔案升級到 Windows 11 嗎？";
                     msgerror = "未选择任何选项。";
                     isoinfo = "生成的 ISO 映像将包含以下功能：ET-Optimizer.exe /auto，并跳过微软要求（如数据收集、本地账户创建等）。";
 
@@ -3863,6 +3873,7 @@ namespace ET
                     toolStripButton4.Text = "Bağış Yap";
 
                     msgend = "Her şey tamamlandı.Yeniden başlatmanız önerilir.";
+                    msgISO = "Şimdi bir ISO dosyası kullanarak Windows 11'e yükseltmek ister misiniz?";
                     msgerror = "Hiçbir seçenek seçilmedi.";
                     isoinfo = "Oluşturulan ISO aşağıdaki özelliklere sahip olacaktır: ET-Optimizer.exe /auto ve veri toplama, yerel hesap vb. adımları atlayarak Microsoft gereksinimlerini baypas etme.";
 
@@ -4082,6 +4093,7 @@ namespace ET
                     toolStripButton4.Text = "تبرع";
 
                     msgend = "تم تنفيذ جميع الإجراءات. يُنصح بإعادة التشغيل.";
+                    msgISO = "هل ترغب في الترقية إلى Windows 11 الآن باستخدام ملف ISO؟";
                     msgerror = "لم يتم اختيار أي خيار.";
                     isoinfo = "ستحتوي صورة ISO التي تم إنشاؤها على الميزات التالية: ET-Optimizer.exe /auto وتجاوز متطلبات Microsoft مثل جمع البيانات وإنشاء حساب محلي، إلخ.";
 
@@ -4317,6 +4329,7 @@ namespace ET
                     toolStripButton4.Text = "दान करें";
 
                     msgend = "सभी कार्य पूरे हो गए हैं। पुनः आरंभ करना सुझावित है।";
+                    msgISO = "क्या आप अभी ISO फ़ाइल का उपयोग करके Windows 11 पर अपग्रेड करना चाहते हैं?";
                     msgerror = "कोई विकल्प चयनित नहीं किया गया।";
                     isoinfo = "जनरेट की गई ISO छवि में निम्नलिखित विशेषताएँ शामिल होंगी: ET-Optimizer.exe /auto और Microsoft की आवश्यकताओं को बायपास करना जैसे डेटा संग्रह और स्थानीय खाता निर्माण आदि।";
 
@@ -4554,6 +4567,7 @@ namespace ET
                     toolStripButton4.Text = "Dona";
 
                     msgend = "Tutto è stato completato. Si consiglia di riavviare.";
+                    msgISO = "Vuoi passare a Windows 11 ora usando un file ISO?";
                     msgerror = "Nessuna opzione selezionata.";
                     isoinfo = "L'immagine ISO generata conterrà le seguenti funzionalità: ET-Optimizer.exe /auto e l'aggiramento dei requisiti Microsoft tramite l'elusione della raccolta dati, la creazione di un account locale, ecc.";
 
@@ -4794,6 +4808,7 @@ namespace ET
                     makeETISOToolStripMenuItem.Text = "Створити оптимізований ISO з ET";
 
                     msgend = "Усе виконано. Рекомендується перезавантаження.";
+                    msgISO = "Бажаєте оновитися до Windows 11 прямо зараз за допомогою ISO-образу?";
                     msgerror = "Не вибрано жодної опції.";
                     isoinfo = "Створений ISO-образ міститиме такі функції: запуск ET-Optimizer.exe /auto та обхід вимог Microsoft (збір даних, створення локального облікового запису тощо).";
 
@@ -5012,6 +5027,7 @@ namespace ET
                     makeETISOToolStripMenuItem.Text = "Crear ISO Optimizado con ET";
 
                     msgend = "Completado. Se recomienda reiniciar.";
+                    msgISO = "¿Quieres actualizar a Windows 11 ahora usando un archivo ISO?";
                     msgerror = "No se ha seleccionado ninguna opción.";
                     isoinfo = "La imagen ISO generada incluirá las siguientes funciones: ET-Optimizer.exe /auto y omisión de los requisitos de Microsoft, como recopilación de datos, creación de cuenta local, etc.";
 
@@ -6386,6 +6402,10 @@ namespace ET
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|TeamViewer",
 @"HKLM\Software\Microsoft\Windows\CurrentVersion\Run|EdgeUI",
 @"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|RiotClient",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|GogGalaxy",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|GalaxyClient",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|ScreenRec",
+@"HKCU\Software\Microsoft\Windows\CurrentVersion\Run|MicrosoftEdgeAutoLaunch_31CF12C7FD715D87B15C2DF57BBF8D3Es",
 @"HKLM\SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run|Discord"
 };
 
@@ -8470,12 +8490,31 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
+        public string isoupgrade;
         private void bypassWin11RequirementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
-            //win11 requir bypass
+            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PCHC\", "PreviousUninstall", 1, RegistryValueKind.DWord);
+
+            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PCHealthCheck\", "installed", 1, RegistryValueKind.DWord);
+
+            SetRegistryValue(@"HKCU\Software\Microsoft\PCHC\", "UpgradeEligibility", 1, RegistryValueKind.DWord);
+
+            //win11 requir bypass creates if not exist force old
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command Get-WmiObject -Class Win32_Product | Where-Object{$_.Name -eq \"Windows PC Health Check\"} | ForEach-Object{$_.Uninstall()}";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "powershell.exe";
+            startInfo.Arguments = "-Command winget uninstall --id Microsoft.PChealthCheck";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C reg.exe delete \"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\AppCompatFlags\\CompatMarkers\" /f";
@@ -8517,7 +8556,74 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             startInfo.Arguments = "/C reg.exe add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /f /v BypassCPUCheck /t REG_DWORD /d 1";
             process.StartInfo = startInfo;
             process.Start(); process.WaitForExit();
-            MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/C reg.exe add \"HKLM\\SYSTEM\\Setup\\LabConfig\" /f /v BypassTPMCheck /t REG_DWORD /d 1";
+            process.StartInfo = startInfo;
+            process.Start(); process.WaitForExit();
+
+            {
+                DialogResult result = MessageBox.Show(
+                    msgISO,
+                    ETVersion,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Information
+                );
+                if (result == DialogResult.Yes)
+                {
+
+                    using (OpenFileDialog ofd = new OpenFileDialog())
+                    {
+                        ofd.Filter = "(*.iso)|*.iso";
+
+                        if (ofd.ShowDialog() == DialogResult.OK)
+                        {
+                            isoupgrade = ofd.FileName;
+                        }
+                    }
+                    if (isoupgrade != null)
+                    {
+                        System.Diagnostics.Process.Start("explorer.exe", $"\"{isoupgrade}\"");
+
+                    string wheremountedISO()
+                    {
+                        return DriveInfo.GetDrives()
+                            .Where(d => d.DriveType == DriveType.CDRom && d.IsReady)
+                            .Select(d => d.RootDirectory.FullName)
+                            .LastOrDefault();
+                    }
+                    isoupgrade = wheremountedISO();
+                    
+                    Thread.Sleep(1000);
+                        while (!Directory.Exists(isoupgrade))
+                        {
+                            Thread.Sleep(1000);
+                            if (File.Exists(isoupgrade))
+                            {
+                                break;
+                            }
+                        }
+                            var startInfo2 = new ProcessStartInfo
+                        {
+                            FileName = "powershell.exe",
+                            Arguments =
+                             "-NoProfile -Command " +
+                            "\"Start-Process -FilePath '" +
+                            Path.Combine(isoupgrade, @"sources\setupprep.exe") +
+                            "' -ArgumentList '/product server' -Verb RunAs\"",
+                            UseShellExecute = true
+                        };
+
+                        Process.Start(startInfo2);
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(msgend, ETVersion, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void powerShellRunScriptFixToolStripMenuItem_Click(object sender, EventArgs e)
