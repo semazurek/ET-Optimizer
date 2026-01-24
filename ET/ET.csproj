@@ -222,6 +222,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app.ico" />
+    <Content Include="Resources\Code.txt" />
     <None Include="Resources\cpu-tower.png" />
     <None Include="Resources\ram.png" />
     <None Include="Resources\battery-charge.png" />

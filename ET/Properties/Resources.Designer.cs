@@ -89,6 +89,34 @@ namespace ET.Properties {
         }
         
         /// <summary>
+        /// Wyszukuje zlokalizowany ciąg podobny do ciągu using Microsoft.Win32;
+        ///using System;
+        ///using System.Collections.Generic;
+        ///using System.Diagnostics;
+        ///using System.Drawing;
+        ///using System.Drawing.Imaging;
+        ///using System.Globalization;
+        ///using System.IO;
+        ///using System.Linq;
+        ///using System.Management;
+        ///using System.Media;
+        ///using System.Reflection;
+        ///using System.Runtime.InteropServices;
+        ///using System.Security;
+        ///using System.ServiceProcess;
+        ///using System.Text;
+        ///using System.Threading;
+        ///using System.Threading.Tasks;
+        ///using System.Windows.Forms;
+        ///using System.Window [obcięto pozostałą część ciągu]&quot;;.
+        /// </summary>
+        internal static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap cpu_tower {
