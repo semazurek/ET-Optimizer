@@ -257,6 +257,60 @@ namespace ET
             catch { }
         }
 
+        bool IsWingetInstalled()
+        {
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "winget",
+                    Arguments = "--version",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process p = Process.Start(psi))
+                {
+                    p.WaitForExit();
+                    return p.ExitCode == 0;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        async Task InstallWingetAsync()
+        {
+            string url = "https://aka.ms/getwinget";
+            string installerPath = Path.Combine(Path.GetTempPath(), "winget.msixbundle");
+
+            using (var client = new System.Net.WebClient())
+            {
+                await client.DownloadFileTaskAsync(url, installerPath);
+            }
+
+            var psi = new ProcessStartInfo
+            {
+                FileName = "powershell",
+                Arguments = $"Add-AppxPackage -Path \"{installerPath}\"",
+                Verb = "runas",
+                UseShellExecute = true
+            };
+
+            await Task.Run(() =>
+            {
+                using (Process p = Process.Start(psi))
+                {
+                    p.WaitForExit();
+                }
+            });
+        }
+
+
 
         private void EditHosts(string[] domains)
         {
@@ -973,8 +1027,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.08.20";
-        string ETBuild = "24.01.2026";
+        string ETVersion = "E.T. ver 6.08.25";
+        string ETBuild = "08.02.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1468,6 +1522,13 @@ namespace ET
             button6.FlatAppearance.BorderSize = 0;
             button7.Location = new System.Drawing.Point(845, -2);
             button7.FlatAppearance.BorderSize = 0;
+            button8.FlatAppearance.BorderSize = 0;
+            button8.Location = new System.Drawing.Point(785, -2);
+            button8.Image = Properties.Resources.Remote_Assistance_Icon;
+            button8.ImageAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            button8.Image = new Bitmap(Properties.Resources.Remote_Assistance_Icon, button8.Size);
+            button8.Image = new Bitmap(Properties.Resources.Remote_Assistance_Icon, button8.Width - 25, button8.Height - 25);
+            button8.Visible = Registry.ClassesRoot.OpenSubKey("ms-quick-assist") != null;
 
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
             this.MouseDown += new MouseEventHandler(ToolStrip1_MouseDown);
@@ -1737,6 +1798,20 @@ namespace ET
             panel5.Controls.Add(chck66);
             CheckBox chck67 = new CheckBox();
             chck67.Tag = "Disable Windows Defender";
+            chck67.Click += (s, e) =>
+            {
+                if (chck67.Checked)
+                {
+                    DialogResult warningdef = MessageBox.Show(
+                    chck67.Text,
+                    ETVersion,
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                    );
+                    if (warningdef == DialogResult.Yes) { }
+                    if (warningdef == DialogResult.No) { chck67.Checked = false; }
+                }
+            };
             chck67.Click += c_p;
             chck67.TabIndex = 67;
             panel5.Controls.Add(chck67);
@@ -5722,6 +5797,8 @@ namespace ET
                         case "CPU/GPU Priority Tweaks":
                             done++;
 
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", 1, RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKCU\Software\Microsoft\DirectX\GraphicsSettings\", "SwapEffectUpgradeCache", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\DirectX\UserGpuPreferences\", "DirectXUserGlobalSettings", @"SwapEffectUpgradeEnable=1", RegistryValueKind.String);
@@ -5994,6 +6071,14 @@ namespace ET
                             break;
                         case "Disable Installing Suggested Apps":
                             done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableCloudOptimizedContent", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableSoftLanding", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableThirdPartySuggestions", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableWelcomeExperience", 1, RegistryValueKind.DWord);
 
                             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions", false);
 
@@ -6496,6 +6581,10 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableTailoredExperiencesWithDiagnosticData", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo\", "DisabledByGroupPolicy", 1, RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)SoftwareUpdaterIpm", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Piriform\CCleaner\", @"(Cfg)SoftwareUpdater", 0, RegistryValueKind.DWord);
@@ -6763,6 +6852,33 @@ namespace ET
                         case "Remove Copilot":
                             done++;
 
+                            DelRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\Copilot", "CopilotLogonTelemetryTime");
+                            
+                            DelRegistryValue(@"HKCU\Software\Microsoft\Copilot", "WakeApp");
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Reg.exe delete 'HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\WindowsAI\\LastConfiguration' /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C Reg.exe delete 'HKCU\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppModel\\SystemAppData\\Microsoft.Copilot_8wekyb3d8bbwe\\Copilot.StartupTaskId' /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C HKCU\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppModel\\SystemAppData\\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe\\WebViewHostStartupId' /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\WindowsNotepad", "DisableAIFeatures", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoInstalledPWAs", "CopilotPWAPreinstallCompleted", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\AutoInstalledPWAs", "Microsoft.Copilot_8wekyb3d8bbwe", 1, RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat\", "IsUserEligible", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\", "AutoOpenCopilotLargeScreens", 0, RegistryValueKind.DWord);
@@ -6780,8 +6896,163 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\Explorer\", "DisableSearchBoxSuggestions", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Policies\Microsoft\Windows\WindowsAI\", "DisableAIDataAnalysis", 1, RegistryValueKind.DWord);
-
                             SetRegistryValue(@"HKLM\Software\Policies\Microsoft\Windows\WindowsAI\", "DisableAIDataAnalysis", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "AllowRecallEnablement", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "AllowRecallEnablement", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableClickToDo", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableClickToDo", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "TurnOffSavingSnapshots", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "TurnOffSavingSnapshots", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableSettingsAgent", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableSettingsAgent", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentConnectors", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentConnectors", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentWorkspaces", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentWorkspaces", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableRemoteAgentConnectors", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableRemoteAgentConnectors", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\Shell\Copilot\", "IsCopilotAvailable", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\Shell\Copilot\", "IsCopilotAvailable", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\Shell\Copilot\", "CopilotDisabledReason", "FeatureIsDisabled", RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone\Microsoft.Copilot_8wekyb3d8bbwe", "Value", "Deny", RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe", "Value", "Deny", RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\systemAIModels", "Value", "Deny", RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\Capabilities\systemAIModels", "RecordUsageData", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps", "AgentActivationEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\input\Settings", "InsightsEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\ClickToDo", "DisableClickToDo", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "CopilotCDPPageContext", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "CopilotPageContext", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "EdgeEntraCopilotPageContext", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "Microsoft365CopilotChatIconEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "EdgeHistoryAISearchEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "GenAILocalFoundationalModelSettings", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "BuiltInAIAPIsEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "AIGenThemesEnabled", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "DevToolsGenAiSettings", 2, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "ShareBrowsingHistoryWithCopilotSearchAllowed", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\training\general", "disabletraining", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\training\specific\adaptivefloatie", "disabletrainingofadaptivefloatie", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Policies\Microsoft\office\16.0\common\privacy", "controllerconnectedservicesenabled", 2, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Policies\Microsoft\office\16.0\common\privacy", "usercontentdisabled", 2, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Office\16.0\Word\Options", "EnableCopilot", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Office\16.0\Excel\Options", "EnableCopilot", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Office\16.0\OneNote\Options\Copilot", "CopilotEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Office\16.0\OneNote\Options\Copilot", "CopilotNotebooksEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Office\16.0\OneNote\Options\Copilot", "CopilotSkittleEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\general", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\alternativetext", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\imagequestionandanswering", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\promptassistance", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\rewrite", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\summarization", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\summarizationwithreferences", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\contentsafety\specific\texttotable", "disablecontentsafety", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Notifications\Settings", "AutoOpenCopilotLargeScreens", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\generativeAI", "Value", "Deny", RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\systemAIModels", "Value", "Deny", RegistryValueKind.String);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessGenerativeAI", 2, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessSystemAIModels", 2, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsCopilot", "AllowCopilotRuntime", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband\AuxilliaryPins", "CopilotPWAPin", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Taskband\AuxilliaryPins", "RecallPin", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.Copilot_8wekyb3d8bbwe", "DisabledByUser", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.Copilot_8wekyb3d8bbwe", "Disabled", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.Copilot_8wekyb3d8bbwe", "SleepDisabled", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe", "DisabledByUser", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe", "Disabled", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe", "SleepDisabled", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1853569164", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\4098520719", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\929719951", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1646260367", "EnabledState", 2, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\1546588812", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\203105932", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2381287564", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\3189581453", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\3552646797", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\3389499533", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\4027803789", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\450471565", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\2283032206", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Control\FeatureManagement\Overrides\8\502943886", "EnabledState", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced", "TaskbarCompanion", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\BrandedKey", "BrandedKeyChoiceType", "Search", RegistryValueKind.String);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\BrandedKey", "AppAumid", " ", RegistryValueKind.String);
+                            SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\CopilotKey", "SetCopilotHardwareKey", " ", RegistryValueKind.String);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\InputPersonalization", "RestrictImplicitInkCollection", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\InputPersonalization", "RestrictImplicitTextCollection", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore", "HarvestContacts", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\InkingAndTypingPersonalization", "Value", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent", "DisableConsumerAccountStateContent", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\AppModel\SystemAppData\Microsoft.MicrosoftOfficeHub_8wekyb3d8bbwe\WebViewHostStartupId", "State", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Paint", "DisableImageCreator", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Paint", "DisableCocreator", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Paint", "DisableGenerativeFill", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Paint", "DisableGenerativeErase", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Paint", "DisableRemoveBackground", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\VoiceAccess", "RunningState", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\VoiceAccess", "TextCorrection", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows NT\CurrentVersion\AccessibilityTemp", "0", 0, RegistryValueKind.DWord);
+
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
@@ -7187,6 +7458,37 @@ namespace ET
                     {
                         case "Disable Windows Defender":
                             done++;
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Set-MpPreference -DisableRealtimeMonitoring $true";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Set-MpPreference -DisableCloudProtection $true";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Set-MpPreference -SubmitSamplesConsent 2";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Set-MpPreference -DisableBehaviorMonitoring $true";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "-Command Set-MpPreference -DisableIOAVProtection $true";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
 
                             SetRegistryValue(@"HKLM\SYSTEM\ControlSet001\Services\MsSecFlt\", "Start", 4, RegistryValueKind.DWord);
 
@@ -7761,8 +8063,10 @@ namespace ET
             process.Start();
         }
 
-        private void updateApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void updateApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
@@ -7775,6 +8079,8 @@ namespace ET
         private void rebootToBIOSToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("shutdown", "/r /fw /t 1");
+            this.Close();
+
         }
 
         private void windowsLicenseKeyToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7981,8 +8287,10 @@ namespace ET
 
         }
 
-        private void mSIAfterburnerToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void mSIAfterburnerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -7993,8 +8301,10 @@ namespace ET
             process.Start();
         }
 
-        private void vLCMediaPlayerToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void vLCMediaPlayerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8005,8 +8315,10 @@ namespace ET
             process.Start();
         }
 
-        private void microsoftVisualCRedistributableToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void microsoftVisualCRedistributableToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8017,8 +8329,10 @@ namespace ET
             process.Start();
         }
 
-        private void notepadToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void notepadToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8029,8 +8343,10 @@ namespace ET
             process.Start();
         }
 
-        private void javaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void javaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8041,8 +8357,10 @@ namespace ET
             process.Start();
         }
 
-        private void zipToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void zipToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8120,8 +8438,10 @@ namespace ET
             process.Start(); process.WaitForExit();
         }
 
-        private void uniGetUIWingetGUIToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void uniGetUIWingetGUIToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8291,8 +8611,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
 
         }
 
-        private void privacySexyToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void privacySexyToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8303,8 +8625,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void chrisTitusTechsWinToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void chrisTitusTechsWinToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8459,7 +8783,6 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
         {
             if (e.KeyCode == Keys.F12)
             {
-                //Process.Start("https://github.com/semazurek/ET-Optimizer/blob/master/ET/Form1.cs");
                 ShowSourceCode();
 
             }
@@ -8500,8 +8823,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start(); process.WaitForExit();
         }
 
-        private void wizTreeToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void wizTreeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8512,8 +8837,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void googleChromeToolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void googleChromeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8524,8 +8851,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void braveToolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void braveToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8536,8 +8865,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void mozillaFirefoxToolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void mozillaFirefoxToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8548,8 +8879,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void operaGXToolStripMenuItem1_Click(object sender, EventArgs e)
+        private async void operaGXToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8560,8 +8893,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void hWiNFOToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void hWiNFOToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8572,8 +8907,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void steamToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void steamToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8584,8 +8921,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void epicGamesStoreToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void epicGamesStoreToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8596,8 +8935,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void gOGToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void gOGToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8608,8 +8949,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void ubisoftConnectToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void ubisoftConnectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8620,8 +8963,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             process.Start();
         }
 
-        private void eAAppToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void eAAppToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
 
@@ -8633,8 +8978,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
         }
 
         public string isoupgrade;
-        private void bypassWin11RequirementsToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void bypassWin11RequirementsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
+
             Cursor.Current = Cursors.WaitCursor;
             System.Diagnostics.Process process = new System.Diagnostics.Process();
             System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
@@ -8809,6 +9156,11 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             startInfo.Arguments = "-Command sfc /scannow; DISM /Online /Cleanup-Image /RestoreHealth; pause";
             process.StartInfo = startInfo;
             process.Start();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("ms-quick-assist:") { UseShellExecute = true });
         }
     }
 }

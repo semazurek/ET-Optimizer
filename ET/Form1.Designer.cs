@@ -105,6 +105,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelmain = new System.Windows.Forms.Panel();
+            this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -218,9 +219,9 @@
             this.panel1.AutoScroll = true;
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel1.Location = new System.Drawing.Point(3, 25);
+            this.panel1.Location = new System.Drawing.Point(3, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(563, 219);
+            this.panel1.Size = new System.Drawing.Size(563, 215);
             this.panel1.TabIndex = 0;
             this.panel1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.panel1_Scroll);
             // 
@@ -240,9 +241,9 @@
             this.panel2.AutoScroll = true;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel2.Location = new System.Drawing.Point(3, 25);
+            this.panel2.Location = new System.Drawing.Point(3, 29);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(194, 219);
+            this.panel2.Size = new System.Drawing.Size(194, 215);
             this.panel2.TabIndex = 0;
             // 
             // groupBox3
@@ -261,9 +262,9 @@
             this.panel3.AutoScroll = true;
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel3.Location = new System.Drawing.Point(3, 25);
+            this.panel3.Location = new System.Drawing.Point(3, 29);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(267, 72);
+            this.panel3.Size = new System.Drawing.Size(267, 68);
             this.panel3.TabIndex = 0;
             // 
             // groupBox4
@@ -282,9 +283,9 @@
             this.panel4.AutoScroll = true;
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel4.Location = new System.Drawing.Point(3, 25);
+            this.panel4.Location = new System.Drawing.Point(3, 29);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(284, 72);
+            this.panel4.Size = new System.Drawing.Size(284, 68);
             this.panel4.TabIndex = 0;
             // 
             // groupBox5
@@ -303,9 +304,9 @@
             this.panel5.AutoScroll = true;
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel5.Location = new System.Drawing.Point(3, 25);
+            this.panel5.Location = new System.Drawing.Point(3, 29);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(194, 72);
+            this.panel5.Size = new System.Drawing.Size(194, 68);
             this.panel5.TabIndex = 0;
             // 
             // toolStrip1
@@ -343,7 +344,7 @@
             // 
             this.toolStripButton2.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton2.Size = new System.Drawing.Size(74, 20);
             this.toolStripButton2.Text = "Backup";
             this.toolStripButton2.ToolTipText = "Backup";
             this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
@@ -355,20 +356,20 @@
             this.registryRestoreToolStripMenuItem});
             this.toolStripDropDownButton2.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton2.Name = "toolStripDropDownButton2";
-            this.toolStripDropDownButton2.Size = new System.Drawing.Size(78, 22);
+            this.toolStripDropDownButton2.Size = new System.Drawing.Size(98, 20);
             this.toolStripDropDownButton2.Text = "Restore";
             // 
             // restorePointToolStripMenuItem
             // 
             this.restorePointToolStripMenuItem.Name = "restorePointToolStripMenuItem";
-            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.restorePointToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.restorePointToolStripMenuItem.Text = "Restore Point";
             this.restorePointToolStripMenuItem.Click += new System.EventHandler(this.restorePointToolStripMenuItem_Click);
             // 
             // registryRestoreToolStripMenuItem
             // 
             this.registryRestoreToolStripMenuItem.Name = "registryRestoreToolStripMenuItem";
-            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.registryRestoreToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.registryRestoreToolStripMenuItem.Text = "Registry Restore";
             this.registryRestoreToolStripMenuItem.Click += new System.EventHandler(this.registryRestoreToolStripMenuItem_Click);
             // 
@@ -399,91 +400,91 @@
             this.activateWindowsToolStripMenuItem});
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
-            this.toolStripDropDownButton1.Size = new System.Drawing.Size(70, 22);
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(88, 20);
             this.toolStripDropDownButton1.Text = "Extras";
             this.toolStripDropDownButton1.ToolTipText = "Extras";
             // 
             // diskDefragmenterToolStripMenuItem
             // 
             this.diskDefragmenterToolStripMenuItem.Name = "diskDefragmenterToolStripMenuItem";
-            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
             this.diskDefragmenterToolStripMenuItem.Click += new System.EventHandler(this.diskDefragmenterToolStripMenuItem_Click);
             // 
             // cleanmgrToolStripMenuItem
             // 
             this.cleanmgrToolStripMenuItem.Name = "cleanmgrToolStripMenuItem";
-            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.cleanmgrToolStripMenuItem.Text = "Cleanmgr";
             this.cleanmgrToolStripMenuItem.Click += new System.EventHandler(this.cleanmgrToolStripMenuItem_Click);
             // 
             // msconfigToolStripMenuItem
             // 
             this.msconfigToolStripMenuItem.Name = "msconfigToolStripMenuItem";
-            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.msconfigToolStripMenuItem.Text = "Msconfig";
             this.msconfigToolStripMenuItem.Click += new System.EventHandler(this.msconfigToolStripMenuItem_Click);
             // 
             // controlPanelToolStripMenuItem
             // 
             this.controlPanelToolStripMenuItem.Name = "controlPanelToolStripMenuItem";
-            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.controlPanelToolStripMenuItem.Text = "Control Panel";
             this.controlPanelToolStripMenuItem.Click += new System.EventHandler(this.controlPanelToolStripMenuItem_Click);
             // 
             // deviceManagerToolStripMenuItem
             // 
             this.deviceManagerToolStripMenuItem.Name = "deviceManagerToolStripMenuItem";
-            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.deviceManagerToolStripMenuItem.Text = "Device Manager";
             this.deviceManagerToolStripMenuItem.Click += new System.EventHandler(this.deviceManagerToolStripMenuItem_Click);
             // 
             // uACSettingsToolStripMenuItem
             // 
             this.uACSettingsToolStripMenuItem.Name = "uACSettingsToolStripMenuItem";
-            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.uACSettingsToolStripMenuItem.Text = "UAC Settings";
             this.uACSettingsToolStripMenuItem.Click += new System.EventHandler(this.uACSettingsToolStripMenuItem_Click);
             // 
             // msinfo32ToolStripMenuItem
             // 
             this.msinfo32ToolStripMenuItem.Name = "msinfo32ToolStripMenuItem";
-            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.msinfo32ToolStripMenuItem.Text = "Msinfo32";
             this.msinfo32ToolStripMenuItem.Click += new System.EventHandler(this.msinfo32ToolStripMenuItem_Click);
             // 
             // servicesToolStripMenuItem
             // 
             this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
-            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.servicesToolStripMenuItem.Text = "Services";
             this.servicesToolStripMenuItem.Click += new System.EventHandler(this.servicesToolStripMenuItem_Click);
             // 
             // remoteDesktopToolStripMenuItem
             // 
             this.remoteDesktopToolStripMenuItem.Name = "remoteDesktopToolStripMenuItem";
-            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.remoteDesktopToolStripMenuItem.Text = "Remote Desktop";
             this.remoteDesktopToolStripMenuItem.Click += new System.EventHandler(this.remoteDesktopToolStripMenuItem_Click);
             // 
             // eventViewerToolStripMenuItem
             // 
             this.eventViewerToolStripMenuItem.Name = "eventViewerToolStripMenuItem";
-            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.eventViewerToolStripMenuItem.Text = "Event Viewer";
             this.eventViewerToolStripMenuItem.Click += new System.EventHandler(this.eventViewerToolStripMenuItem_Click);
             // 
             // resetNetworkToolStripMenuItem
             // 
             this.resetNetworkToolStripMenuItem.Name = "resetNetworkToolStripMenuItem";
-            this.resetNetworkToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.resetNetworkToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.resetNetworkToolStripMenuItem.Text = "Reset  Network";
             this.resetNetworkToolStripMenuItem.Click += new System.EventHandler(this.resetNetworkToolStripMenuItem_Click);
             // 
             // updateApplicationsToolStripMenuItem
             // 
             this.updateApplicationsToolStripMenuItem.Name = "updateApplicationsToolStripMenuItem";
-            this.updateApplicationsToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.updateApplicationsToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.updateApplicationsToolStripMenuItem.Text = "Update Applications";
             this.updateApplicationsToolStripMenuItem.Click += new System.EventHandler(this.updateApplicationsToolStripMenuItem_Click);
             // 
@@ -504,7 +505,7 @@
             this.privacySexyToolStripMenuItem,
             this.chrisTitusTechsWinToolStripMenuItem});
             this.downloadSoftwareToolStripMenuItem.Name = "downloadSoftwareToolStripMenuItem";
-            this.downloadSoftwareToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.downloadSoftwareToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.downloadSoftwareToolStripMenuItem.Text = "Download Software";
             this.downloadSoftwareToolStripMenuItem.Click += new System.EventHandler(this.downloadSoftwareToolStripMenuItem_Click);
             // 
@@ -516,34 +517,34 @@
             this.mozillaFirefoxToolStripMenuItem1,
             this.operaGXToolStripMenuItem1});
             this.webBrowserToolStripMenuItem.Name = "webBrowserToolStripMenuItem";
-            this.webBrowserToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.webBrowserToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.webBrowserToolStripMenuItem.Text = "Web Browser";
             // 
             // googleChromeToolStripMenuItem1
             // 
             this.googleChromeToolStripMenuItem1.Name = "googleChromeToolStripMenuItem1";
-            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(260, 34);
             this.googleChromeToolStripMenuItem1.Text = "Google Chrome";
             this.googleChromeToolStripMenuItem1.Click += new System.EventHandler(this.googleChromeToolStripMenuItem1_Click);
             // 
             // braveToolStripMenuItem1
             // 
             this.braveToolStripMenuItem1.Name = "braveToolStripMenuItem1";
-            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(260, 34);
             this.braveToolStripMenuItem1.Text = "Brave";
             this.braveToolStripMenuItem1.Click += new System.EventHandler(this.braveToolStripMenuItem1_Click);
             // 
             // mozillaFirefoxToolStripMenuItem1
             // 
             this.mozillaFirefoxToolStripMenuItem1.Name = "mozillaFirefoxToolStripMenuItem1";
-            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(260, 34);
             this.mozillaFirefoxToolStripMenuItem1.Text = "Mozilla Firefox";
             this.mozillaFirefoxToolStripMenuItem1.Click += new System.EventHandler(this.mozillaFirefoxToolStripMenuItem1_Click);
             // 
             // operaGXToolStripMenuItem1
             // 
             this.operaGXToolStripMenuItem1.Name = "operaGXToolStripMenuItem1";
-            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(260, 34);
             this.operaGXToolStripMenuItem1.Text = "Opera GX";
             this.operaGXToolStripMenuItem1.Click += new System.EventHandler(this.operaGXToolStripMenuItem1_Click);
             // 
@@ -556,181 +557,181 @@
             this.ubisoftConnectToolStripMenuItem,
             this.eAAppToolStripMenuItem});
             this.gamesToolStripMenuItem.Name = "gamesToolStripMenuItem";
-            this.gamesToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.gamesToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.gamesToolStripMenuItem.Text = "Games";
             // 
             // steamToolStripMenuItem
             // 
             this.steamToolStripMenuItem.Name = "steamToolStripMenuItem";
-            this.steamToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.steamToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.steamToolStripMenuItem.Text = "Steam";
             this.steamToolStripMenuItem.Click += new System.EventHandler(this.steamToolStripMenuItem_Click);
             // 
             // epicGamesStoreToolStripMenuItem
             // 
             this.epicGamesStoreToolStripMenuItem.Name = "epicGamesStoreToolStripMenuItem";
-            this.epicGamesStoreToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.epicGamesStoreToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.epicGamesStoreToolStripMenuItem.Text = "Epic Games Store";
             this.epicGamesStoreToolStripMenuItem.Click += new System.EventHandler(this.epicGamesStoreToolStripMenuItem_Click);
             // 
             // gOGToolStripMenuItem
             // 
             this.gOGToolStripMenuItem.Name = "gOGToolStripMenuItem";
-            this.gOGToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.gOGToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.gOGToolStripMenuItem.Text = "GOG Galaxy";
             this.gOGToolStripMenuItem.Click += new System.EventHandler(this.gOGToolStripMenuItem_Click);
             // 
             // ubisoftConnectToolStripMenuItem
             // 
             this.ubisoftConnectToolStripMenuItem.Name = "ubisoftConnectToolStripMenuItem";
-            this.ubisoftConnectToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.ubisoftConnectToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.ubisoftConnectToolStripMenuItem.Text = "Ubisoft Connect";
             this.ubisoftConnectToolStripMenuItem.Click += new System.EventHandler(this.ubisoftConnectToolStripMenuItem_Click);
             // 
             // eAAppToolStripMenuItem
             // 
             this.eAAppToolStripMenuItem.Name = "eAAppToolStripMenuItem";
-            this.eAAppToolStripMenuItem.Size = new System.Drawing.Size(218, 26);
+            this.eAAppToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             this.eAAppToolStripMenuItem.Text = "EA App";
             this.eAAppToolStripMenuItem.Click += new System.EventHandler(this.eAAppToolStripMenuItem_Click);
             // 
             // zipToolStripMenuItem
             // 
             this.zipToolStripMenuItem.Name = "zipToolStripMenuItem";
-            this.zipToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.zipToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.zipToolStripMenuItem.Text = "7zip";
             this.zipToolStripMenuItem.Click += new System.EventHandler(this.zipToolStripMenuItem_Click);
             // 
             // javaToolStripMenuItem
             // 
             this.javaToolStripMenuItem.Name = "javaToolStripMenuItem";
-            this.javaToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.javaToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.javaToolStripMenuItem.Text = "Java";
             this.javaToolStripMenuItem.Click += new System.EventHandler(this.javaToolStripMenuItem_Click);
             // 
             // notepadToolStripMenuItem
             // 
             this.notepadToolStripMenuItem.Name = "notepadToolStripMenuItem";
-            this.notepadToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.notepadToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.notepadToolStripMenuItem.Text = "Notepad++";
             this.notepadToolStripMenuItem.Click += new System.EventHandler(this.notepadToolStripMenuItem_Click);
             // 
             // microsoftVisualCRedistributableToolStripMenuItem
             // 
             this.microsoftVisualCRedistributableToolStripMenuItem.Name = "microsoftVisualCRedistributableToolStripMenuItem";
-            this.microsoftVisualCRedistributableToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.microsoftVisualCRedistributableToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.microsoftVisualCRedistributableToolStripMenuItem.Text = "Microsoft C++ Redistributable";
             this.microsoftVisualCRedistributableToolStripMenuItem.Click += new System.EventHandler(this.microsoftVisualCRedistributableToolStripMenuItem_Click);
             // 
             // vLCMediaPlayerToolStripMenuItem
             // 
             this.vLCMediaPlayerToolStripMenuItem.Name = "vLCMediaPlayerToolStripMenuItem";
-            this.vLCMediaPlayerToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.vLCMediaPlayerToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.vLCMediaPlayerToolStripMenuItem.Text = "VLC Media Player";
             this.vLCMediaPlayerToolStripMenuItem.Click += new System.EventHandler(this.vLCMediaPlayerToolStripMenuItem_Click);
             // 
             // mSIAfterburnerToolStripMenuItem
             // 
             this.mSIAfterburnerToolStripMenuItem.Name = "mSIAfterburnerToolStripMenuItem";
-            this.mSIAfterburnerToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.mSIAfterburnerToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.mSIAfterburnerToolStripMenuItem.Text = "MSI Afterburner";
             this.mSIAfterburnerToolStripMenuItem.Click += new System.EventHandler(this.mSIAfterburnerToolStripMenuItem_Click);
             // 
             // hWiNFOToolStripMenuItem
             // 
             this.hWiNFOToolStripMenuItem.Name = "hWiNFOToolStripMenuItem";
-            this.hWiNFOToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.hWiNFOToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.hWiNFOToolStripMenuItem.Text = "HWiNFO";
             this.hWiNFOToolStripMenuItem.Click += new System.EventHandler(this.hWiNFOToolStripMenuItem_Click);
             // 
             // wizTreeToolStripMenuItem
             // 
             this.wizTreeToolStripMenuItem.Name = "wizTreeToolStripMenuItem";
-            this.wizTreeToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.wizTreeToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.wizTreeToolStripMenuItem.Text = "WizTree";
             this.wizTreeToolStripMenuItem.Click += new System.EventHandler(this.wizTreeToolStripMenuItem_Click);
             // 
             // uniGetUIWingetGUIToolStripMenuItem
             // 
             this.uniGetUIWingetGUIToolStripMenuItem.Name = "uniGetUIWingetGUIToolStripMenuItem";
-            this.uniGetUIWingetGUIToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.uniGetUIWingetGUIToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.uniGetUIWingetGUIToolStripMenuItem.Text = "UniGetUI (Winget GUI)";
             this.uniGetUIWingetGUIToolStripMenuItem.Click += new System.EventHandler(this.uniGetUIWingetGUIToolStripMenuItem_Click);
             // 
             // privacySexyToolStripMenuItem
             // 
             this.privacySexyToolStripMenuItem.Name = "privacySexyToolStripMenuItem";
-            this.privacySexyToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.privacySexyToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.privacySexyToolStripMenuItem.Text = "Privacy.Sexy";
             this.privacySexyToolStripMenuItem.Click += new System.EventHandler(this.privacySexyToolStripMenuItem_Click);
             // 
             // chrisTitusTechsWinToolStripMenuItem
             // 
             this.chrisTitusTechsWinToolStripMenuItem.Name = "chrisTitusTechsWinToolStripMenuItem";
-            this.chrisTitusTechsWinToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
+            this.chrisTitusTechsWinToolStripMenuItem.Size = new System.Drawing.Size(400, 34);
             this.chrisTitusTechsWinToolStripMenuItem.Text = "Chris Titus Tech\'s WinUtil";
             this.chrisTitusTechsWinToolStripMenuItem.Click += new System.EventHandler(this.chrisTitusTechsWinToolStripMenuItem_Click);
             // 
             // windowsLicenseKeyToolStripMenuItem
             // 
             this.windowsLicenseKeyToolStripMenuItem.Name = "windowsLicenseKeyToolStripMenuItem";
-            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.windowsLicenseKeyToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
             this.windowsLicenseKeyToolStripMenuItem.Click += new System.EventHandler(this.windowsLicenseKeyToolStripMenuItem_Click);
             // 
             // rebootToBIOSToolStripMenuItem
             // 
             this.rebootToBIOSToolStripMenuItem.Name = "rebootToBIOSToolStripMenuItem";
-            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
             this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
             // 
             // rebootToSafeModeToolStripMenuItem
             // 
             this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
-            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
             this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
             // 
             // restartExplorerexeToolStripMenuItem
             // 
             this.restartExplorerexeToolStripMenuItem.Name = "restartExplorerexeToolStripMenuItem";
-            this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.restartExplorerexeToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
             this.restartExplorerexeToolStripMenuItem.Click += new System.EventHandler(this.restartExplorerexeToolStripMenuItem_Click);
             // 
             // scanRestoreHealthToolStripMenuItem
             // 
             this.scanRestoreHealthToolStripMenuItem.Name = "scanRestoreHealthToolStripMenuItem";
-            this.scanRestoreHealthToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.scanRestoreHealthToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.scanRestoreHealthToolStripMenuItem.Text = "Scan && Restore Health (DISM+SFC)";
             this.scanRestoreHealthToolStripMenuItem.Click += new System.EventHandler(this.scanRestoreHealthToolStripMenuItem_Click);
             // 
             // powerShellRunScriptFixToolStripMenuItem
             // 
             this.powerShellRunScriptFixToolStripMenuItem.Name = "powerShellRunScriptFixToolStripMenuItem";
-            this.powerShellRunScriptFixToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.powerShellRunScriptFixToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.powerShellRunScriptFixToolStripMenuItem.Text = "PowerShell Allow Script Fix";
             this.powerShellRunScriptFixToolStripMenuItem.Click += new System.EventHandler(this.powerShellRunScriptFixToolStripMenuItem_Click);
             // 
             // bypassWin11RequirementsToolStripMenuItem
             // 
             this.bypassWin11RequirementsToolStripMenuItem.Name = "bypassWin11RequirementsToolStripMenuItem";
-            this.bypassWin11RequirementsToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.bypassWin11RequirementsToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.bypassWin11RequirementsToolStripMenuItem.Text = "Bypass Win11 Requirements";
             this.bypassWin11RequirementsToolStripMenuItem.Click += new System.EventHandler(this.bypassWin11RequirementsToolStripMenuItem_Click);
             // 
             // makeETISOToolStripMenuItem
             // 
             this.makeETISOToolStripMenuItem.Name = "makeETISOToolStripMenuItem";
-            this.makeETISOToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.makeETISOToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
             this.makeETISOToolStripMenuItem.Click += new System.EventHandler(this.makeETISOToolStripMenuItem_Click);
             // 
             // activateWindowsToolStripMenuItem
             // 
             this.activateWindowsToolStripMenuItem.Name = "activateWindowsToolStripMenuItem";
-            this.activateWindowsToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
+            this.activateWindowsToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
             this.activateWindowsToolStripMenuItem.Text = "Activate Windows";
             this.activateWindowsToolStripMenuItem.Click += new System.EventHandler(this.activateWindowsToolStripMenuItem_Click);
             // 
@@ -738,7 +739,7 @@
             // 
             this.toolStripButton3.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton3.Name = "toolStripButton3";
-            this.toolStripButton3.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButton3.Size = new System.Drawing.Size(64, 20);
             this.toolStripButton3.Text = "About";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
@@ -746,7 +747,7 @@
             // 
             this.toolStripButton4.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton4.Size = new System.Drawing.Size(74, 20);
             this.toolStripButton4.Text = "Donate";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
@@ -756,7 +757,7 @@
             this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
             this.toolStripButton5.ImageTransparentColor = System.Drawing.SystemColors.ButtonShadow;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(44, 22);
+            this.toolStripButton5.Size = new System.Drawing.Size(54, 20);
             this.toolStripButton5.Text = "Exit";
             this.toolStripButton5.Click += new System.EventHandler(this.toolStripButton5_Click);
             // 
@@ -768,7 +769,7 @@
             this.toolStripLabel3.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.toolStripLabel3.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
             this.toolStripLabel3.Name = "toolStripLabel3";
-            this.toolStripLabel3.Size = new System.Drawing.Size(104, 22);
+            this.toolStripLabel3.Size = new System.Drawing.Size(130, 20);
             this.toolStripLabel3.Text = "Battery: 0 %";
             this.toolStripLabel3.Visible = false;
             this.toolStripLabel3.VisitedLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
@@ -778,7 +779,7 @@
             // 
             this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel2.Name = "toolStripLabel2";
-            this.toolStripLabel2.Size = new System.Drawing.Size(72, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(90, 20);
             this.toolStripLabel2.Text = "RAM: 0 %";
             this.toolStripLabel2.Visible = false;
             // 
@@ -786,7 +787,7 @@
             // 
             this.toolStripLabel1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(136, 22);
+            this.toolStripLabel1.Size = new System.Drawing.Size(170, 20);
             this.toolStripLabel1.Text = "Build: Public | ";
             // 
             // progressBar1
@@ -823,6 +824,7 @@
             // panelmain
             // 
             this.panelmain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.panelmain.Controls.Add(this.button8);
             this.panelmain.Controls.Add(this.button7);
             this.panelmain.Controls.Add(this.button6);
             this.panelmain.Controls.Add(this.pictureBox3);
@@ -835,6 +837,20 @@
             this.panelmain.TabIndex = 9;
             this.panelmain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseMove);
             this.panelmain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panelmain_MouseUp);
+            // 
+            // button8
+            // 
+            this.button8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Consolas", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.button8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(238)))));
+            this.button8.Location = new System.Drawing.Point(628, 0);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(53, 47);
+            this.button8.TabIndex = 12;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button7
             // 
@@ -892,9 +908,9 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Location = new System.Drawing.Point(47, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(130, 25);
+            this.label1.Size = new System.Drawing.Size(159, 30);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.08.20";
+            this.label1.Text = "E.T. ver 6.08.25";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -932,9 +948,9 @@
             this.panel6.AutoScroll = true;
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.panel6.Location = new System.Drawing.Point(3, 25);
+            this.panel6.Location = new System.Drawing.Point(3, 29);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(148, 72);
+            this.panel6.Size = new System.Drawing.Size(148, 68);
             this.panel6.TabIndex = 0;
             // 
             // pictureBox5
@@ -947,7 +963,7 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
             this.ClientSize = new System.Drawing.Size(915, 506);
@@ -1082,6 +1098,7 @@
         private System.Windows.Forms.ToolStripMenuItem scanRestoreHealthToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem powerShellRunScriptFixToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bypassWin11RequirementsToolStripMenuItem;
+        private System.Windows.Forms.Button button8;
     }
 }
 

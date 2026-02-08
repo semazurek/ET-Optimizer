@@ -118,25 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="autounattend" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\autounattend.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
-  </data>
-  <data name="battery_charge" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\battery-charge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Code" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Code.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="cpu_tower" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cpu-tower.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="HowTo_ISO" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\HowTo-ISO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="ET_LOGO_BIG" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\ET-LOGO-BIG.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="HowTo_ISO" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\HowTo-ISO.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="battery_charge" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\battery-charge.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="autounattend" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\autounattend.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
+  <data name="cpu_tower" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cpu-tower.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Code" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Code.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="ram" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ram.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Remote_Assistance_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Remote_Assistance_Icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

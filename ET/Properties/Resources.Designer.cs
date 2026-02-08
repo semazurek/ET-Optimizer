@@ -155,5 +155,15 @@ namespace ET.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Wyszukuje zlokalizowany zasób typu System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Remote_Assistance_Icon {
+            get {
+                object obj = ResourceManager.GetObject("Remote_Assistance_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
