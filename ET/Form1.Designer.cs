@@ -51,16 +51,18 @@
             this.restorePointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registryRestoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-            this.diskDefragmenterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cleanmgrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.msconfigToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.controlPanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deviceManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.uACSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.msinfo32ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.remoteDesktopToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventViewerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.diskDefragmenterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.cleanmgrToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.msconfigToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.controlPanelToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deviceManagerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.uACSettingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.msinfo32ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.servicesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.remoteDesktopToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.eventViewerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.godModToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resetNetworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.updateApplicationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.downloadSoftwareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -88,7 +90,9 @@
             this.chrisTitusTechsWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsLicenseKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rebootToSafeModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebootToBIOSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.rebootToSafeModeToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.advancedStartupWinREToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restartExplorerexeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.scanRestoreHealthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.powerShellRunScriptFixToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -376,22 +380,12 @@
             // toolStripDropDownButton1
             // 
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.diskDefragmenterToolStripMenuItem,
-            this.cleanmgrToolStripMenuItem,
-            this.msconfigToolStripMenuItem,
-            this.controlPanelToolStripMenuItem,
-            this.deviceManagerToolStripMenuItem,
-            this.uACSettingsToolStripMenuItem,
-            this.msinfo32ToolStripMenuItem,
-            this.servicesToolStripMenuItem,
-            this.remoteDesktopToolStripMenuItem,
-            this.eventViewerToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.resetNetworkToolStripMenuItem,
             this.updateApplicationsToolStripMenuItem,
             this.downloadSoftwareToolStripMenuItem,
             this.windowsLicenseKeyToolStripMenuItem,
             this.rebootToBIOSToolStripMenuItem,
-            this.rebootToSafeModeToolStripMenuItem,
             this.restartExplorerexeToolStripMenuItem,
             this.scanRestoreHealthToolStripMenuItem,
             this.powerShellRunScriptFixToolStripMenuItem,
@@ -404,75 +398,100 @@
             this.toolStripDropDownButton1.Text = "Extras";
             this.toolStripDropDownButton1.ToolTipText = "Extras";
             // 
-            // diskDefragmenterToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.diskDefragmenterToolStripMenuItem.Name = "diskDefragmenterToolStripMenuItem";
-            this.diskDefragmenterToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
-            this.diskDefragmenterToolStripMenuItem.Click += new System.EventHandler(this.diskDefragmenterToolStripMenuItem_Click);
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.diskDefragmenterToolStripMenuItem1,
+            this.cleanmgrToolStripMenuItem1,
+            this.msconfigToolStripMenuItem1,
+            this.controlPanelToolStripMenuItem1,
+            this.deviceManagerToolStripMenuItem1,
+            this.uACSettingsToolStripMenuItem1,
+            this.msinfo32ToolStripMenuItem1,
+            this.servicesToolStripMenuItem1,
+            this.remoteDesktopToolStripMenuItem1,
+            this.eventViewerToolStripMenuItem1,
+            this.godModToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(430, 34);
+            this.toolStripMenuItem1.Text = "System Tools";
             // 
-            // cleanmgrToolStripMenuItem
+            // diskDefragmenterToolStripMenuItem1
             // 
-            this.cleanmgrToolStripMenuItem.Name = "cleanmgrToolStripMenuItem";
-            this.cleanmgrToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.cleanmgrToolStripMenuItem.Text = "Cleanmgr";
-            this.cleanmgrToolStripMenuItem.Click += new System.EventHandler(this.cleanmgrToolStripMenuItem_Click);
+            this.diskDefragmenterToolStripMenuItem1.Name = "diskDefragmenterToolStripMenuItem1";
+            this.diskDefragmenterToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.diskDefragmenterToolStripMenuItem1.Text = "Disk Defragmenter";
+            this.diskDefragmenterToolStripMenuItem1.Click += new System.EventHandler(this.diskDefragmenterToolStripMenuItem1_Click);
             // 
-            // msconfigToolStripMenuItem
+            // cleanmgrToolStripMenuItem1
             // 
-            this.msconfigToolStripMenuItem.Name = "msconfigToolStripMenuItem";
-            this.msconfigToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.msconfigToolStripMenuItem.Text = "Msconfig";
-            this.msconfigToolStripMenuItem.Click += new System.EventHandler(this.msconfigToolStripMenuItem_Click);
+            this.cleanmgrToolStripMenuItem1.Name = "cleanmgrToolStripMenuItem1";
+            this.cleanmgrToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.cleanmgrToolStripMenuItem1.Text = "Cleanmgr";
+            this.cleanmgrToolStripMenuItem1.Click += new System.EventHandler(this.cleanmgrToolStripMenuItem1_Click);
             // 
-            // controlPanelToolStripMenuItem
+            // msconfigToolStripMenuItem1
             // 
-            this.controlPanelToolStripMenuItem.Name = "controlPanelToolStripMenuItem";
-            this.controlPanelToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.controlPanelToolStripMenuItem.Text = "Control Panel";
-            this.controlPanelToolStripMenuItem.Click += new System.EventHandler(this.controlPanelToolStripMenuItem_Click);
+            this.msconfigToolStripMenuItem1.Name = "msconfigToolStripMenuItem1";
+            this.msconfigToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.msconfigToolStripMenuItem1.Text = "Msconfig";
+            this.msconfigToolStripMenuItem1.Click += new System.EventHandler(this.msconfigToolStripMenuItem1_Click);
             // 
-            // deviceManagerToolStripMenuItem
+            // controlPanelToolStripMenuItem1
             // 
-            this.deviceManagerToolStripMenuItem.Name = "deviceManagerToolStripMenuItem";
-            this.deviceManagerToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.deviceManagerToolStripMenuItem.Text = "Device Manager";
-            this.deviceManagerToolStripMenuItem.Click += new System.EventHandler(this.deviceManagerToolStripMenuItem_Click);
+            this.controlPanelToolStripMenuItem1.Name = "controlPanelToolStripMenuItem1";
+            this.controlPanelToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.controlPanelToolStripMenuItem1.Text = "Control Panel";
+            this.controlPanelToolStripMenuItem1.Click += new System.EventHandler(this.controlPanelToolStripMenuItem1_Click);
             // 
-            // uACSettingsToolStripMenuItem
+            // deviceManagerToolStripMenuItem1
             // 
-            this.uACSettingsToolStripMenuItem.Name = "uACSettingsToolStripMenuItem";
-            this.uACSettingsToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.uACSettingsToolStripMenuItem.Text = "UAC Settings";
-            this.uACSettingsToolStripMenuItem.Click += new System.EventHandler(this.uACSettingsToolStripMenuItem_Click);
+            this.deviceManagerToolStripMenuItem1.Name = "deviceManagerToolStripMenuItem1";
+            this.deviceManagerToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.deviceManagerToolStripMenuItem1.Text = "Device Manager";
+            this.deviceManagerToolStripMenuItem1.Click += new System.EventHandler(this.deviceManagerToolStripMenuItem1_Click);
             // 
-            // msinfo32ToolStripMenuItem
+            // uACSettingsToolStripMenuItem1
             // 
-            this.msinfo32ToolStripMenuItem.Name = "msinfo32ToolStripMenuItem";
-            this.msinfo32ToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.msinfo32ToolStripMenuItem.Text = "Msinfo32";
-            this.msinfo32ToolStripMenuItem.Click += new System.EventHandler(this.msinfo32ToolStripMenuItem_Click);
+            this.uACSettingsToolStripMenuItem1.Name = "uACSettingsToolStripMenuItem1";
+            this.uACSettingsToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.uACSettingsToolStripMenuItem1.Text = "UAC Settings";
+            this.uACSettingsToolStripMenuItem1.Click += new System.EventHandler(this.uACSettingsToolStripMenuItem1_Click);
             // 
-            // servicesToolStripMenuItem
+            // msinfo32ToolStripMenuItem1
             // 
-            this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
-            this.servicesToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.servicesToolStripMenuItem.Text = "Services";
-            this.servicesToolStripMenuItem.Click += new System.EventHandler(this.servicesToolStripMenuItem_Click);
+            this.msinfo32ToolStripMenuItem1.Name = "msinfo32ToolStripMenuItem1";
+            this.msinfo32ToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.msinfo32ToolStripMenuItem1.Text = "Msinfo32";
+            this.msinfo32ToolStripMenuItem1.Click += new System.EventHandler(this.msinfo32ToolStripMenuItem1_Click);
             // 
-            // remoteDesktopToolStripMenuItem
+            // servicesToolStripMenuItem1
             // 
-            this.remoteDesktopToolStripMenuItem.Name = "remoteDesktopToolStripMenuItem";
-            this.remoteDesktopToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.remoteDesktopToolStripMenuItem.Text = "Remote Desktop";
-            this.remoteDesktopToolStripMenuItem.Click += new System.EventHandler(this.remoteDesktopToolStripMenuItem_Click);
+            this.servicesToolStripMenuItem1.Name = "servicesToolStripMenuItem1";
+            this.servicesToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.servicesToolStripMenuItem1.Text = "Services";
+            this.servicesToolStripMenuItem1.Click += new System.EventHandler(this.servicesToolStripMenuItem1_Click);
             // 
-            // eventViewerToolStripMenuItem
+            // remoteDesktopToolStripMenuItem1
             // 
-            this.eventViewerToolStripMenuItem.Name = "eventViewerToolStripMenuItem";
-            this.eventViewerToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.eventViewerToolStripMenuItem.Text = "Event Viewer";
-            this.eventViewerToolStripMenuItem.Click += new System.EventHandler(this.eventViewerToolStripMenuItem_Click);
+            this.remoteDesktopToolStripMenuItem1.Name = "remoteDesktopToolStripMenuItem1";
+            this.remoteDesktopToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.remoteDesktopToolStripMenuItem1.Text = "Remote Desktop";
+            this.remoteDesktopToolStripMenuItem1.Click += new System.EventHandler(this.remoteDesktopToolStripMenuItem1_Click);
+            // 
+            // eventViewerToolStripMenuItem1
+            // 
+            this.eventViewerToolStripMenuItem1.Name = "eventViewerToolStripMenuItem1";
+            this.eventViewerToolStripMenuItem1.Size = new System.Drawing.Size(280, 34);
+            this.eventViewerToolStripMenuItem1.Text = "Event Viewer";
+            this.eventViewerToolStripMenuItem1.Click += new System.EventHandler(this.eventViewerToolStripMenuItem1_Click);
+            // 
+            // godModToolStripMenuItem
+            // 
+            this.godModToolStripMenuItem.Name = "godModToolStripMenuItem";
+            this.godModToolStripMenuItem.Size = new System.Drawing.Size(280, 34);
+            this.godModToolStripMenuItem.Text = "God Mode";
+            this.godModToolStripMenuItem.Click += new System.EventHandler(this.godModToolStripMenuItem_Click);
             // 
             // resetNetworkToolStripMenuItem
             // 
@@ -681,17 +700,35 @@
             // 
             // rebootToBIOSToolStripMenuItem
             // 
+            this.rebootToBIOSToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.rebootToBIOSToolStripMenuItem1,
+            this.rebootToSafeModeToolStripMenuItem1,
+            this.advancedStartupWinREToolStripMenuItem});
             this.rebootToBIOSToolStripMenuItem.Name = "rebootToBIOSToolStripMenuItem";
             this.rebootToBIOSToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
+            this.rebootToBIOSToolStripMenuItem.Text = "Reboot";
             this.rebootToBIOSToolStripMenuItem.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem_Click);
             // 
-            // rebootToSafeModeToolStripMenuItem
+            // rebootToBIOSToolStripMenuItem1
             // 
-            this.rebootToSafeModeToolStripMenuItem.Name = "rebootToSafeModeToolStripMenuItem";
-            this.rebootToSafeModeToolStripMenuItem.Size = new System.Drawing.Size(430, 34);
-            this.rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
-            this.rebootToSafeModeToolStripMenuItem.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem_Click);
+            this.rebootToBIOSToolStripMenuItem1.Name = "rebootToBIOSToolStripMenuItem1";
+            this.rebootToBIOSToolStripMenuItem1.Size = new System.Drawing.Size(350, 34);
+            this.rebootToBIOSToolStripMenuItem1.Text = "Reboot to BIOS";
+            this.rebootToBIOSToolStripMenuItem1.Click += new System.EventHandler(this.rebootToBIOSToolStripMenuItem1_Click_1);
+            // 
+            // rebootToSafeModeToolStripMenuItem1
+            // 
+            this.rebootToSafeModeToolStripMenuItem1.Name = "rebootToSafeModeToolStripMenuItem1";
+            this.rebootToSafeModeToolStripMenuItem1.Size = new System.Drawing.Size(350, 34);
+            this.rebootToSafeModeToolStripMenuItem1.Text = "Reboot to Safe Mode";
+            this.rebootToSafeModeToolStripMenuItem1.Click += new System.EventHandler(this.rebootToSafeModeToolStripMenuItem1_Click);
+            // 
+            // advancedStartupWinREToolStripMenuItem
+            // 
+            this.advancedStartupWinREToolStripMenuItem.Name = "advancedStartupWinREToolStripMenuItem";
+            this.advancedStartupWinREToolStripMenuItem.Size = new System.Drawing.Size(350, 34);
+            this.advancedStartupWinREToolStripMenuItem.Text = "Advanced Startup (WinRE)";
+            this.advancedStartupWinREToolStripMenuItem.Click += new System.EventHandler(this.advancedStartupWinREToolStripMenuItem_Click);
             // 
             // restartExplorerexeToolStripMenuItem
             // 
@@ -910,7 +947,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(159, 30);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.08.25";
+            this.label1.Text = "E.T. ver 6.09.15";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -1028,16 +1065,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         public System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripMenuItem diskDefragmenterToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem cleanmgrToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem msconfigToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem controlPanelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deviceManagerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem uACSettingsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem msinfo32ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem servicesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem remoteDesktopToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eventViewerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resetNetworkToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem updateApplicationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem windowsLicenseKeyToolStripMenuItem;
@@ -1060,7 +1087,6 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripMenuItem rebootToSafeModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem restartExplorerexeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem downloadSoftwareToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zipToolStripMenuItem;
@@ -1099,6 +1125,21 @@
         private System.Windows.Forms.ToolStripMenuItem powerShellRunScriptFixToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bypassWin11RequirementsToolStripMenuItem;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.ToolStripMenuItem rebootToBIOSToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem rebootToSafeModeToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem advancedStartupWinREToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem diskDefragmenterToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem cleanmgrToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem msconfigToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem controlPanelToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem deviceManagerToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem uACSettingsToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem msinfo32ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem servicesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem remoteDesktopToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem eventViewerToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem godModToolStripMenuItem;
     }
 }
 

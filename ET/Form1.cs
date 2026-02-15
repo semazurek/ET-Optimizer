@@ -1027,8 +1027,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.08.25";
-        string ETBuild = "08.02.2026";
+        string ETVersion = "E.T. ver 6.09.15";
+        string ETBuild = "15.02.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1407,16 +1407,18 @@ namespace ET
 
         void SetToolstripIcons()
         {
-            TrySetIcon("dfrgui.exe", diskDefragmenterToolStripMenuItem);
-            TrySetIcon("cleanmgr.exe", cleanmgrToolStripMenuItem);
-            TrySetIcon("msconfig.exe", msconfigToolStripMenuItem);
-            TrySetIcon("control.exe", controlPanelToolStripMenuItem);
-            TrySetIcon("devmgmt.msc", deviceManagerToolStripMenuItem);
-            TrySetIcon("UserAccountControlSettings.exe", uACSettingsToolStripMenuItem);
-            TrySetIcon("msinfo32.exe", msinfo32ToolStripMenuItem);
-            TrySetIcon("services.msc", servicesToolStripMenuItem);
-            TrySetIcon("mstsc.exe", remoteDesktopToolStripMenuItem);
-            TrySetIcon("eventvwr.exe", eventViewerToolStripMenuItem);
+            TrySetIcon("dfrgui.exe", diskDefragmenterToolStripMenuItem1);
+            TrySetIcon("cleanmgr.exe", cleanmgrToolStripMenuItem1);
+            TrySetIcon("msconfig.exe", msconfigToolStripMenuItem1);
+            TrySetIcon("control.exe", controlPanelToolStripMenuItem1);
+            TrySetIcon("control.exe", toolStripMenuItem1);
+            TrySetIcon("control.exe", godModToolStripMenuItem);
+            TrySetIcon("devmgmt.msc", deviceManagerToolStripMenuItem1);
+            TrySetIcon("UserAccountControlSettings.exe", uACSettingsToolStripMenuItem1);
+            TrySetIcon("msinfo32.exe", msinfo32ToolStripMenuItem1);
+            TrySetIcon("services.msc", servicesToolStripMenuItem1);
+            TrySetIcon("mstsc.exe", remoteDesktopToolStripMenuItem1);
+            TrySetIcon("eventvwr.exe", eventViewerToolStripMenuItem1);
             TrySetIcon("control.exe", resetNetworkToolStripMenuItem);
             TrySetIcon(@"oobe\Setup.exe", makeETISOToolStripMenuItem);
             TrySetIcon("ComputerDefaults.exe", updateApplicationsToolStripMenuItem);
@@ -1425,8 +1427,10 @@ namespace ET
             TrySetIcon("ComputerDefaults.exe", gamesToolStripMenuItem);
             TrySetIcon("slui.exe", windowsLicenseKeyToolStripMenuItem);
             TrySetIcon("slui.exe", activateWindowsToolStripMenuItem);
+            TrySetIcon("cmd.exe", rebootToBIOSToolStripMenuItem1);
             TrySetIcon("cmd.exe", rebootToBIOSToolStripMenuItem);
-            TrySetIcon("cmd.exe", rebootToSafeModeToolStripMenuItem);
+            TrySetIcon("cmd.exe", rebootToSafeModeToolStripMenuItem1);
+            TrySetIcon("cmd.exe", advancedStartupWinREToolStripMenuItem);
             TrySetIcon("cmd.exe", scanRestoreHealthToolStripMenuItem);
             TrySetIcon("cmd.exe", powerShellRunScriptFixToolStripMenuItem);
             TrySetIcon("cmd.exe", bypassWin11RequirementsToolStripMenuItem);
@@ -2121,6 +2125,12 @@ namespace ET
             chck84.Click += c_p;
             chck84.TabIndex = 84;
             panel1.Controls.Add(chck84);
+            CheckBox chck85 = new CheckBox();
+            chck85.Tag = "Battery Percentage Enabled";
+            chck85.Checked = false;
+            chck85.Click += c_p;
+            chck85.TabIndex = 85;
+            panel4.Controls.Add(chck85);
 
             SetToolstripIcons();
 
@@ -2175,23 +2185,25 @@ namespace ET
                 msgerror = "No option selected.";
                 isoinfo = "The generated ISO image will contain the following features: ET-Optimizer.exe /auto and bypassing Microsoft requirements by bypassing data collection, local account creation, etc.";
 
-                rebootToSafeModeToolStripMenuItem.Text = "Reboot to Safe Mode";
+                rebootToSafeModeToolStripMenuItem1.Text = "Reboot to Safe Mode";
                 restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                 downloadSoftwareToolStripMenuItem.Text = "Download Software";
                 webBrowserToolStripMenuItem.Text = "Web Browser";
                 gamesToolStripMenuItem.Text = "Games";
                 toolStripDropDownButton1.Text = "Extras";
-                diskDefragmenterToolStripMenuItem.Text = "Disk Defragmenter";
-                controlPanelToolStripMenuItem.Text = "Control Panel";
-                deviceManagerToolStripMenuItem.Text = "Device Manager";
-                uACSettingsToolStripMenuItem.Text = "UAC Settings";
-                servicesToolStripMenuItem.Text = "Services";
-                remoteDesktopToolStripMenuItem.Text = "Remote Desktop";
-                eventViewerToolStripMenuItem.Text = "Event Viewer";
+                diskDefragmenterToolStripMenuItem1.Text = "Disk Defragmenter";
+                controlPanelToolStripMenuItem1.Text = "Control Panel";
+                toolStripMenuItem1.Text = "System Tools";
+                deviceManagerToolStripMenuItem1.Text = "Device Manager";
+                uACSettingsToolStripMenuItem1.Text = "UAC Settings";
+                servicesToolStripMenuItem1.Text = "Services";
+                remoteDesktopToolStripMenuItem1.Text = "Remote Desktop";
+                eventViewerToolStripMenuItem1.Text = "Event Viewer";
                 resetNetworkToolStripMenuItem.Text = "Reset Network";
                 updateApplicationsToolStripMenuItem.Text = "Update Applications";
                 windowsLicenseKeyToolStripMenuItem.Text = "Windows License Key";
-                rebootToBIOSToolStripMenuItem.Text = "Reboot to BIOS";
+                rebootToBIOSToolStripMenuItem1.Text = "Reboot to BIOS";
+                rebootToBIOSToolStripMenuItem.Text = "Reboot";
                 makeETISOToolStripMenuItem.Text = "Make ET-Optimized .ISO";
                 activateWindowsToolStripMenuItem.Text = "Get.Activated.Win";
 
@@ -2279,6 +2291,7 @@ namespace ET
                 chck82.Text = "Show seconds in Taskbar clock";
                 chck83.Text = "DirectX D3D11 - D3D12 Tweaks";
                 chck84.Text = "Win32 Priority Separation Tweak";
+                chck85.Text = "Enable Battery Percentage";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -2394,23 +2407,25 @@ namespace ET
                     toolStripButton3.Text = "O mnie";
                     toolStripButton4.Text = "Wesprzyj";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Uruchom w Trybie Awaryjnym";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Uruchom w Trybie Awaryjnym";
                     restartExplorerexeToolStripMenuItem.Text = "Restart Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Pobierz Oprogramowanie";
                     webBrowserToolStripMenuItem.Text = "Przeglądarka Internetowa";
                     gamesToolStripMenuItem.Text = "Gry";
                     toolStripDropDownButton1.Text = "Dodatki";
-                    diskDefragmenterToolStripMenuItem.Text = "Defragmentacja Dysku";
-                    controlPanelToolStripMenuItem.Text = "Panel Sterowania";
-                    deviceManagerToolStripMenuItem.Text = "Menedżer Urządzeń";
-                    uACSettingsToolStripMenuItem.Text = "Ustawienia UAC";
-                    servicesToolStripMenuItem.Text = "Usługi";
-                    remoteDesktopToolStripMenuItem.Text = "Pulpit Zdalny";
-                    eventViewerToolStripMenuItem.Text = "Podgląd Zdarzeń";
+                    diskDefragmenterToolStripMenuItem1.Text = "Defragmentacja Dysku";
+                    controlPanelToolStripMenuItem1.Text = "Panel Sterowania";
+                    toolStripMenuItem1.Text = "Narzędzia Systemowe";
+                    deviceManagerToolStripMenuItem1.Text = "Menedżer Urządzeń";
+                    uACSettingsToolStripMenuItem1.Text = "Ustawienia UAC";
+                    servicesToolStripMenuItem1.Text = "Usługi";
+                    remoteDesktopToolStripMenuItem1.Text = "Pulpit Zdalny";
+                    eventViewerToolStripMenuItem1.Text = "Podgląd Zdarzeń";
                     resetNetworkToolStripMenuItem.Text = "Reset Ustawień Sieci";
                     updateApplicationsToolStripMenuItem.Text = "Aktualizuj Aplikacje";
                     windowsLicenseKeyToolStripMenuItem.Text = "Pokaż Klucz Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "Uruchom do BIOSu";
+                    rebootToBIOSToolStripMenuItem1.Text = "Uruchom do BIOSu";
+                    rebootToBIOSToolStripMenuItem.Text = "Uruchom Ponownie";
                     makeETISOToolStripMenuItem.Text = "Stwórz Zoptymalizowane .ISO z ET";
 
                     msgend = "Zakończono. Zalecane jest ponowne uruchomienie.";
@@ -2504,7 +2519,7 @@ namespace ET
                     chck82.Text = "Pokaż sekundy w zegarze paska";
                     chck83.Text = "DirectX D3D11 - D3D12 Optymalizacje";
                     chck84.Text = "Optymal. podziału priorytetów Win32";
-
+                    chck85.Text = "Włącz procent baterii";
 
                     tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
                     tooltip.SetToolTip(chck2, "Ustawia plan zasilania Windows na Ultimate Performance dla lepszej responsywności.");
@@ -2616,23 +2631,25 @@ namespace ET
                     restorePointToolStripMenuItem.Text = "Точка восстановления";
                     toolStripButton3.Text = "О программе";
                     toolStripButton4.Text = "Пожертвовать";
-                    rebootToSafeModeToolStripMenuItem.Text = "Загрузитесь в безопасном режиме";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Загрузитесь в безопасном режиме";
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустите Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Загрузите программу";
                     webBrowserToolStripMenuItem.Text = "веб-браузер";
                     gamesToolStripMenuItem.Text = "игры";
                     toolStripDropDownButton1.Text = "Дополнительно";
-                    diskDefragmenterToolStripMenuItem.Text = "Дефрагментация диска";
-                    controlPanelToolStripMenuItem.Text = "Панель управления";
-                    deviceManagerToolStripMenuItem.Text = "Диспетчер устройств";
-                    uACSettingsToolStripMenuItem.Text = "Настройки UAC";
-                    servicesToolStripMenuItem.Text = "Услуги";
-                    remoteDesktopToolStripMenuItem.Text = "Удаленный рабочий стол";
-                    eventViewerToolStripMenuItem.Text = "Просмотр событий";
+                    diskDefragmenterToolStripMenuItem1.Text = "Дефрагментация диска";
+                    controlPanelToolStripMenuItem1.Text = "Панель управления";
+                    toolStripMenuItem1.Text = "Системные инструменты";
+                    deviceManagerToolStripMenuItem1.Text = "Диспетчер устройств";
+                    uACSettingsToolStripMenuItem1.Text = "Настройки UAC";
+                    servicesToolStripMenuItem1.Text = "Услуги";
+                    remoteDesktopToolStripMenuItem1.Text = "Удаленный рабочий стол";
+                    eventViewerToolStripMenuItem1.Text = "Просмотр событий";
                     resetNetworkToolStripMenuItem.Text = "Сброс сетевых настроек";
                     updateApplicationsToolStripMenuItem.Text = "Обновление приложений";
                     windowsLicenseKeyToolStripMenuItem.Text = "Показать лицензионный ключ Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "Запуск BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "Запуск BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "Перезагрузить";
                     makeETISOToolStripMenuItem.Text = "Сделать ET-оптимизированный .ISO";
 
                     msgend = "Завершено. Рекомендуется перезапуск.";
@@ -2726,7 +2743,7 @@ namespace ET
                     chck82.Text = "Показывать сек. в часах панели";
                     chck83.Text = "DirectX D3D11–D3D12 твики";
                     chck84.Text = "Твик приор. Win32";
-
+                    chck85.Text = "Включить отображение процента заряда батареи";
 
                     tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
                     tooltip.SetToolTip(chck2, "Устанавливает план питания Windows на Ultimate Performance для лучшей отзывчивости.");
@@ -2839,23 +2856,25 @@ namespace ET
                     toolStripButton3.Text = "Über mich";
                     toolStripButton4.Text = "Support";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Im abges. Modus starten";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Im abges. Modus starten";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe neu starten";
                     downloadSoftwareToolStripMenuItem.Text = "Die Software herunterladen";
                     webBrowserToolStripMenuItem.Text = "Webbrowser";
                     gamesToolStripMenuItem.Text = "Spiele";
                     toolStripDropDownButton1.Text = "Extras";
-                    diskDefragmenterToolStripMenuItem.Text = "Defragmentierung";
-                    controlPanelToolStripMenuItem.Text = "Systemsteuerung";
-                    deviceManagerToolStripMenuItem.Text = "Geräte-Manager";
-                    uACSettingsToolStripMenuItem.Text = "UAC-Einstell.";
-                    servicesToolStripMenuItem.Text = "Dienste";
-                    remoteDesktopToolStripMenuItem.Text = "Remotedesktop";
-                    eventViewerToolStripMenuItem.Text = "Ereignisanzeige";
+                    diskDefragmenterToolStripMenuItem1.Text = "Defragmentierung";
+                    controlPanelToolStripMenuItem1.Text = "Systemsteuerung";
+                    toolStripMenuItem1.Text = "Systemtools";
+                    deviceManagerToolStripMenuItem1.Text = "Geräte-Manager";
+                    uACSettingsToolStripMenuItem1.Text = "UAC-Einstell.";
+                    servicesToolStripMenuItem1.Text = "Dienste";
+                    remoteDesktopToolStripMenuItem1.Text = "Remotedesktop";
+                    eventViewerToolStripMenuItem1.Text = "Ereignisanzeige";
                     resetNetworkToolStripMenuItem.Text = "Netzwerk zurücksetzen";
                     updateApplicationsToolStripMenuItem.Text = "Apps aktualis.";
                     windowsLicenseKeyToolStripMenuItem.Text = "Windows-Key anzeigen";
-                    rebootToBIOSToolStripMenuItem.Text = "In BIOS starten";
+                    rebootToBIOSToolStripMenuItem1.Text = "In BIOS starten";
+                    rebootToBIOSToolStripMenuItem.Text = "Neustart";
                     makeETISOToolStripMenuItem.Text = "Erstellen Sie eine ET-optimierte .ISO-Datei";
 
                     msgend = "Abgeschlossen. Neustart empfohlen.";
@@ -2947,6 +2966,7 @@ namespace ET
                     chck82.Text = "Sekunden in Taskleisten-Uhr";
                     chck83.Text = "DirectX D3D11–D3D12 Tweaks";
                     chck84.Text = "Win32 Prior.-Tweaks";
+                    chck85.Text = "Akkuprozentanzeige aktivieren";
 
                     tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
                     tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
@@ -3147,6 +3167,7 @@ namespace ET
                     chck82.Text = "Mostrar segundos na barra";
                     chck83.Text = "DirectX D3D11–D3D12 ajustes";
                     chck84.Text = "Ajuste prioridade Win32";
+                    chck85.Text = "Ativar a porcentagem da bateria";
 
                     tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
                     tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
@@ -3255,23 +3276,25 @@ namespace ET
                     toolStripButton3.Text = "À propos";
                     toolStripButton4.Text = "Support";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Redémarrer en Mode Sans Échec";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Redémarrer en Mode Sans Échec";
                     restartExplorerexeToolStripMenuItem.Text = "Redémarrer Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Télécharger le Logiciel";
                     webBrowserToolStripMenuItem.Text = "navigateur Internet";
                     gamesToolStripMenuItem.Text = "jeux";
                     toolStripDropDownButton1.Text = "Compléments";
-                    diskDefragmenterToolStripMenuItem.Text = "Défragmentation du Disque";
-                    controlPanelToolStripMenuItem.Text = "Panneau de Configuration";
-                    deviceManagerToolStripMenuItem.Text = "Gestionnaire de Périphériques";
-                    uACSettingsToolStripMenuItem.Text = "Paramètres UAC";
-                    servicesToolStripMenuItem.Text = "Services";
-                    remoteDesktopToolStripMenuItem.Text = "Bureau à Distance";
-                    eventViewerToolStripMenuItem.Text = "Observateur d'Événements";
+                    diskDefragmenterToolStripMenuItem1.Text = "Défragmentation du Disque";
+                    controlPanelToolStripMenuItem1.Text = "Panneau de Configuration";
+                    toolStripMenuItem1.Text = "Outils système";
+                    deviceManagerToolStripMenuItem1.Text = "Gestionnaire de Périphériques";
+                    uACSettingsToolStripMenuItem1.Text = "Paramètres UAC";
+                    servicesToolStripMenuItem1.Text = "Services";
+                    remoteDesktopToolStripMenuItem1.Text = "Bureau à Distance";
+                    eventViewerToolStripMenuItem1.Text = "Observateur d'Événements";
                     resetNetworkToolStripMenuItem.Text = "Réinitialiser le Réseau";
                     updateApplicationsToolStripMenuItem.Text = "Mettre à Jour les Applications";
                     windowsLicenseKeyToolStripMenuItem.Text = "Afficher la Clé Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "Démarrer dans le BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "Démarrer dans le BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "Redémarrer";
                     makeETISOToolStripMenuItem.Text = "Créer un fichier ISO optimisé avec ET";
 
                     msgend = "Terminé. Un redémarrage est recommandé.";
@@ -3365,7 +3388,7 @@ namespace ET
                     chck82.Text = "Afficher secondes dans horloge";
                     chck83.Text = "Tweaks DirectX D3D11–D3D12";
                     chck84.Text = "Ajuste priorité Win32";
-
+                    chck85.Text = "Activer l'affichage du pourcentage de batterie";
 
                     tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
                     tooltip.SetToolTip(chck2, "Configure le plan d'alimentation Windows sur Performance Ultime pour une meilleure réactivité.");
@@ -3497,23 +3520,25 @@ namespace ET
                     msgerror = "선택된 옵션이 없습니다.";
                     isoinfo = "생성된 ISO에는 다음 기능이 포함됩니다: ET-Optimizer.exe /auto 및 데이터 수집, 로컬 계정 등을 건너뛰어 Microsoft 요구 사항을 우회합니다.";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "안전 모드로 재부팅";
+                    rebootToSafeModeToolStripMenuItem1.Text = "안전 모드로 재부팅";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe 재시작";
                     downloadSoftwareToolStripMenuItem.Text = "소프트웨어 다운로드";
                     webBrowserToolStripMenuItem.Text = "웹 브라우저";
                     gamesToolStripMenuItem.Text = "계략";
                     toolStripDropDownButton1.Text = "추가 기능";
-                    diskDefragmenterToolStripMenuItem.Text = "디스크 조각 모음";
-                    controlPanelToolStripMenuItem.Text = "제어판";
-                    deviceManagerToolStripMenuItem.Text = "장치 관리자";
-                    uACSettingsToolStripMenuItem.Text = "UAC 설정";
-                    servicesToolStripMenuItem.Text = "서비스";
-                    remoteDesktopToolStripMenuItem.Text = "원격 데스크톱";
-                    eventViewerToolStripMenuItem.Text = "이벤트 뷰어";
+                    diskDefragmenterToolStripMenuItem1.Text = "디스크 조각 모음";
+                    controlPanelToolStripMenuItem1.Text = "제어판";
+                    toolStripMenuItem1.Text = "시스템 도구";
+                    deviceManagerToolStripMenuItem1.Text = "장치 관리자";
+                    uACSettingsToolStripMenuItem1.Text = "UAC 설정";
+                    servicesToolStripMenuItem1.Text = "서비스";
+                    remoteDesktopToolStripMenuItem1.Text = "원격 데스크톱";
+                    eventViewerToolStripMenuItem1.Text = "이벤트 뷰어";
                     resetNetworkToolStripMenuItem.Text = "네트워크 재설정";
                     updateApplicationsToolStripMenuItem.Text = "애플리케이션 업데이트";
                     windowsLicenseKeyToolStripMenuItem.Text = "Windows 라이선스 키";
-                    rebootToBIOSToolStripMenuItem.Text = "BIOS로 재부팅";
+                    rebootToBIOSToolStripMenuItem1.Text = "BIOS로 재부팅";
+                    rebootToBIOSToolStripMenuItem.Text = "재부팅";
                     makeETISOToolStripMenuItem.Text = "ET-최적화된 .ISO 만들기";
 
                     chck1.Text = "Edge WebWidget 비활성화";
@@ -3600,7 +3625,7 @@ namespace ET
                     chck82.Text = "작업표시줄 초 표시";
                     chck83.Text = "DirectX D3D11–D3D12 최적화";
                     chck84.Text = "Win32 우선순위 최적화";
-
+                    chck85.Text = "배터리 잔량 표시를 활성화하세요";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
                     tooltip.SetToolTip(chck2, "Windows 전원 계획을 최고의 성능(Ultimate Performance)으로 설정하여 응답성을 향상시킵니다.");
@@ -3734,23 +3759,25 @@ namespace ET
                     customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
                     toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
 
-                    rebootToSafeModeToolStripMenuItem.Text = "重启进入安全模式";
+                    rebootToSafeModeToolStripMenuItem1.Text = "重启进入安全模式";
                     restartExplorerexeToolStripMenuItem.Text = "重启资源管理器";
                     downloadSoftwareToolStripMenuItem.Text = "下载软件";
                     webBrowserToolStripMenuItem.Text = "网络浏览器";
                     gamesToolStripMenuItem.Text = "游戏";
                     toolStripDropDownButton1.Text = "附加功能";
-                    diskDefragmenterToolStripMenuItem.Text = "磁盘碎片整理";
-                    controlPanelToolStripMenuItem.Text = "控制面板";
-                    deviceManagerToolStripMenuItem.Text = "设备管理器";
-                    uACSettingsToolStripMenuItem.Text = "UAC 设置";
-                    servicesToolStripMenuItem.Text = "服务";
-                    remoteDesktopToolStripMenuItem.Text = "远程桌面";
-                    eventViewerToolStripMenuItem.Text = "事件查看器";
+                    diskDefragmenterToolStripMenuItem1.Text = "磁盘碎片整理";
+                    controlPanelToolStripMenuItem1.Text = "控制面板";
+                    toolStripMenuItem1.Text = "系统工具";
+                    deviceManagerToolStripMenuItem1.Text = "设备管理器";
+                    uACSettingsToolStripMenuItem1.Text = "UAC 设置";
+                    servicesToolStripMenuItem1.Text = "服务";
+                    remoteDesktopToolStripMenuItem1.Text = "远程桌面";
+                    eventViewerToolStripMenuItem1.Text = "事件查看器";
                     resetNetworkToolStripMenuItem.Text = "重置网络";
                     updateApplicationsToolStripMenuItem.Text = "更新应用";
                     windowsLicenseKeyToolStripMenuItem.Text = "Windows 密钥";
-                    rebootToBIOSToolStripMenuItem.Text = "重启进入 BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "重启进入 BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "重新启动";
                     makeETISOToolStripMenuItem.Text = "创建 ET 优化版 .ISO";
 
                     chck1.Text = "禁用 Edge WebWidget";
@@ -3837,6 +3864,7 @@ namespace ET
                     chck82.Text = "任务栏显示秒数";
                     chck83.Text = "DirectX D3D11-D3D12 调整";
                     chck84.Text = "Win32 优先级分离调节";
+                    chck85.Text = "启用电池百分比";
 
                     tooltip.SetToolTip(chck1, "禁用 Edge WebWidget，减少后台资源占用并释放内存。");
                     tooltip.SetToolTip(chck2, "将电源计划切换为终极性能模式，提高系统响应速度。");
@@ -3952,24 +3980,26 @@ namespace ET
                     msgerror = "Hiçbir seçenek seçilmedi.";
                     isoinfo = "Oluşturulan ISO aşağıdaki özelliklere sahip olacaktır: ET-Optimizer.exe /auto ve veri toplama, yerel hesap vb. adımları atlayarak Microsoft gereksinimlerini baypas etme.";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Güvenli Modda Yeniden Başlat";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Güvenli Modda Yeniden Başlat";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe'yi Yeniden Başlat";
                     downloadSoftwareToolStripMenuItem.Text = "Yazılımı İndir";
                     webBrowserToolStripMenuItem.Text = "web tarayıcısı";
                     gamesToolStripMenuItem.Text = "oyunlar";
                     toolStripDropDownButton1.Text = "Ekstralar";
-                    diskDefragmenterToolStripMenuItem.Text = "Disk Birleştirici";
-                    controlPanelToolStripMenuItem.Text = "Denetim Masası";
-                    deviceManagerToolStripMenuItem.Text = "Aygıt Yöneticisi";
-                    uACSettingsToolStripMenuItem.Text = "UAC Ayarları";
-                    servicesToolStripMenuItem.Text = "Hizmetler";
-                    remoteDesktopToolStripMenuItem.Text = "Uzak Masaüstü";
-                    eventViewerToolStripMenuItem.Text = "Olay Görüntüleyicisi";
+                    diskDefragmenterToolStripMenuItem1.Text = "Disk Birleştirici";
+                    controlPanelToolStripMenuItem1.Text = "Denetim Masası";
+                    toolStripMenuItem1.Text = "Sistem Araçları";
+                    deviceManagerToolStripMenuItem1.Text = "Aygıt Yöneticisi";
+                    uACSettingsToolStripMenuItem1.Text = "UAC Ayarları";
+                    servicesToolStripMenuItem1.Text = "Hizmetler";
+                    remoteDesktopToolStripMenuItem1.Text = "Uzak Masaüstü";
+                    eventViewerToolStripMenuItem1.Text = "Olay Görüntüleyicisi";
                     resetNetworkToolStripMenuItem.Text = "Ağı Sıfırla";
 
                     updateApplicationsToolStripMenuItem.Text = "Uygulamaları Güncelle";
                     windowsLicenseKeyToolStripMenuItem.Text = "Windows Lisans Anahtarı";
-                    rebootToBIOSToolStripMenuItem.Text = "BIOS Yeniden Başlat";
+                    rebootToBIOSToolStripMenuItem1.Text = "BIOS Yeniden Başlat";
+                    rebootToBIOSToolStripMenuItem.Text = "Yeniden başlat";
                     makeETISOToolStripMenuItem.Text = "ET Optimizer Uygulanmış.ISO Oluştur";
 
                     chck1.Text = "Edge WebWidget'ı Devre Dışı Bırak";
@@ -4056,6 +4086,7 @@ namespace ET
                     chck82.Text = "Saatte saniyeleri göster";
                     chck83.Text = "DirectX D3D11-D3D12 Ayarları";
                     chck84.Text = "Win32 Öncelik Ayrımı Ayarı";
+                    chck85.Text = "Pil Yüzdesini Etkinleştir";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
                     tooltip.SetToolTip(chck2, "Windows güç planını Ultimate Performance olarak ayarlayarak daha iyi yanıt süresi sağlar.");
@@ -4190,23 +4221,25 @@ namespace ET
                     customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
                     toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
 
-                    rebootToSafeModeToolStripMenuItem.Text = "إعادة التشغيل إلى الوضع الآمن";
+                    rebootToSafeModeToolStripMenuItem1.Text = "إعادة التشغيل إلى الوضع الآمن";
                     restartExplorerexeToolStripMenuItem.Text = "إعادة تشغيل Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "تنزيل البرامج";
                     webBrowserToolStripMenuItem.Text = "متصفح الويب";
                     gamesToolStripMenuItem.Text = "ألعاب";
                     toolStripDropDownButton1.Text = "إضافات";
-                    diskDefragmenterToolStripMenuItem.Text = "إلغاء تجزئة القرص";
-                    controlPanelToolStripMenuItem.Text = "لوحة التحكم";
-                    deviceManagerToolStripMenuItem.Text = "إدارة الأجهزة";
-                    uACSettingsToolStripMenuItem.Text = "إعدادات التحكم بالمستخدم (UAC)";
-                    servicesToolStripMenuItem.Text = "الخدمات";
-                    remoteDesktopToolStripMenuItem.Text = "سطح المكتب البعيد";
-                    eventViewerToolStripMenuItem.Text = "عارض الأحداث";
+                    diskDefragmenterToolStripMenuItem1.Text = "إلغاء تجزئة القرص";
+                    controlPanelToolStripMenuItem1.Text = "لوحة التحكم";
+                    toolStripMenuItem1.Text = "أدوات النظام";
+                    deviceManagerToolStripMenuItem1.Text = "إدارة الأجهزة";
+                    uACSettingsToolStripMenuItem1.Text = "إعدادات التحكم بالمستخدم (UAC)";
+                    servicesToolStripMenuItem1.Text = "الخدمات";
+                    remoteDesktopToolStripMenuItem1.Text = "سطح المكتب البعيد";
+                    eventViewerToolStripMenuItem1.Text = "عارض الأحداث";
                     resetNetworkToolStripMenuItem.Text = "إعادة تعيين الشبكة";
                     updateApplicationsToolStripMenuItem.Text = "تحديث التطبيقات";
                     windowsLicenseKeyToolStripMenuItem.Text = "مفتاح ترخيص Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "إعادة التشغيل إلى BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "إعادة التشغيل إلى BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "إعادة التشغيل";
                     makeETISOToolStripMenuItem.Text = "إنشاء ملف .ISO مُحسن لـ ET";
 
                     chck1.Text = "تعطيل Edge WebWidget";
@@ -4293,6 +4326,7 @@ namespace ET
                     chck82.Text = "عرض الثواني في الساعة";
                     chck83.Text = "تعديلات DirectX D3D11-D3D12";
                     chck84.Text = "تعديل فصل أولوية Win32";
+                    chck85.Text = "تفعيل نسبة البطارية";
 
                     tooltip.SetToolTip(chck1, "يعطّل Edge WebWidget لتقليل استهلاك الموارد في الخلفية وتحرير الذاكرة.");
                     tooltip.SetToolTip(chck2, "يحوّل خطة الطاقة إلى الأداء النهائي (Ultimate Performance) لتحسين استجابة النظام.");
@@ -4408,23 +4442,25 @@ namespace ET
                     msgerror = "कोई विकल्प चयनित नहीं किया गया।";
                     isoinfo = "जनरेट की गई ISO छवि में निम्नलिखित विशेषताएँ शामिल होंगी: ET-Optimizer.exe /auto और Microsoft की आवश्यकताओं को बायपास करना जैसे डेटा संग्रह और स्थानीय खाता निर्माण आदि।";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "सेफ मोड में पुनः आरंभ करें";
+                    rebootToSafeModeToolStripMenuItem1.Text = "सेफ मोड में पुनः आरंभ करें";
                     restartExplorerexeToolStripMenuItem.Text = "Explorer.exe पुनः आरंभ करें";
                     downloadSoftwareToolStripMenuItem.Text = "सॉफ़्टवेयर डाउनलोड करें";
                     webBrowserToolStripMenuItem.Text = "वेब ब्राउज़र";
                     gamesToolStripMenuItem.Text = "खेल";
                     toolStripDropDownButton1.Text = "एक्सट्रा";
-                    diskDefragmenterToolStripMenuItem.Text = "डिस्क डीफ़्रेगमेंट";
-                    controlPanelToolStripMenuItem.Text = "कंट्रोल पैनल";
-                    deviceManagerToolStripMenuItem.Text = "डिवाइस मैनेजर";
-                    uACSettingsToolStripMenuItem.Text = "UAC सेटिंग्स";
-                    servicesToolStripMenuItem.Text = "सर्विसेज";
-                    remoteDesktopToolStripMenuItem.Text = "रिमोट डेस्कटॉप";
-                    eventViewerToolStripMenuItem.Text = "इवेंट व्यूअर";
+                    diskDefragmenterToolStripMenuItem1.Text = "डिस्क डीफ़्रेगमेंट";
+                    controlPanelToolStripMenuItem1.Text = "कंट्रोल पैनल";
+                    toolStripMenuItem1.Text = "सिस्टम टूल्स";
+                    deviceManagerToolStripMenuItem1.Text = "डिवाइस मैनेजर";
+                    uACSettingsToolStripMenuItem1.Text = "UAC सेटिंग्स";
+                    servicesToolStripMenuItem1.Text = "सर्विसेज";
+                    remoteDesktopToolStripMenuItem1.Text = "रिमोट डेस्कटॉप";
+                    eventViewerToolStripMenuItem1.Text = "इवेंट व्यूअर";
                     resetNetworkToolStripMenuItem.Text = "नेटवर्क रीसेट करें";
                     updateApplicationsToolStripMenuItem.Text = "ऐप्लिकेशन अपडेट करें";
                     windowsLicenseKeyToolStripMenuItem.Text = "Windows लाइसेंस कुंजी";
-                    rebootToBIOSToolStripMenuItem.Text = "BIOS में पुनः आरंभ करें";
+                    rebootToBIOSToolStripMenuItem1.Text = "BIOS में पुनः आरंभ करें";
+                    rebootToBIOSToolStripMenuItem.Text = "रीबूट";
                     makeETISOToolStripMenuItem.Text = "ET-संशोधित .ISO बनाएं";
 
                     button1.Font = new Font("Consolas", 16, FontStyle.Regular);
@@ -4529,6 +4565,7 @@ namespace ET
                     chck82.Text = "टास्कबार में सेकंड दिखाएं";
                     chck83.Text = "DirectX D3D11-D3D12 समायोजन";
                     chck84.Text = "Win32 प्राथमिकता विभाजन सेटिंग";
+                    chck85.Text = "बैटरी प्रतिशत सक्षम करें";
 
                     tooltip.SetToolTip(chck1, "Edge वेब विजेट को अक्षम करता है जिससे बैकग्राउंड संसाधन उपयोग कम होता है और मेमोरी मुक्त होती है।");
                     tooltip.SetToolTip(chck2, "Windows पावर प्लान को Ultimate Performance पर स्विच करता है जिससे सिस्टम तेजी से प्रतिक्रिया देता है।");
@@ -4646,23 +4683,25 @@ namespace ET
                     msgerror = "Nessuna opzione selezionata.";
                     isoinfo = "L'immagine ISO generata conterrà le seguenti funzionalità: ET-Optimizer.exe /auto e l'aggiramento dei requisiti Microsoft tramite l'elusione della raccolta dati, la creazione di un account locale, ecc.";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Riavvia in Modalità Provvisoria";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Riavvia in Modalità Provvisoria";
                     restartExplorerexeToolStripMenuItem.Text = "Riavvia Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Scarica Software";
                     webBrowserToolStripMenuItem.Text = "browser web";
                     gamesToolStripMenuItem.Text = "giochi";
                     toolStripDropDownButton1.Text = "Extra";
-                    diskDefragmenterToolStripMenuItem.Text = "Deframmentazione Disco";
-                    controlPanelToolStripMenuItem.Text = "Pannello di Controllo";
-                    deviceManagerToolStripMenuItem.Text = "Gestione Dispositivi";
-                    uACSettingsToolStripMenuItem.Text = "Impostazioni UAC";
-                    servicesToolStripMenuItem.Text = "Servizi";
-                    remoteDesktopToolStripMenuItem.Text = "Desktop Remoto";
-                    eventViewerToolStripMenuItem.Text = "Visualizzatore Eventi";
+                    diskDefragmenterToolStripMenuItem1.Text = "Deframmentazione Disco";
+                    controlPanelToolStripMenuItem1.Text = "Pannello di Controllo";
+                    toolStripMenuItem1.Text = "Strumenti di sistema";
+                    deviceManagerToolStripMenuItem1.Text = "Gestione Dispositivi";
+                    uACSettingsToolStripMenuItem1.Text = "Impostazioni UAC";
+                    servicesToolStripMenuItem1.Text = "Servizi";
+                    remoteDesktopToolStripMenuItem1.Text = "Desktop Remoto";
+                    eventViewerToolStripMenuItem1.Text = "Visualizzatore Eventi";
                     resetNetworkToolStripMenuItem.Text = "Ripristina Rete";
                     updateApplicationsToolStripMenuItem.Text = "Aggiorna Applicazioni";
                     windowsLicenseKeyToolStripMenuItem.Text = "Chiave di Licenza Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "Riavvia nel BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "Riavvia nel BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "Riavviare";
                     makeETISOToolStripMenuItem.Text = "Crea ISO Ottimizzata con ET-Optimizer";
 
 
@@ -4750,6 +4789,7 @@ namespace ET
                     chck82.Text = "Mostra secondi nella barra";
                     chck83.Text = "DirectX D3D11-D3D12 Mod";
                     chck84.Text = "Win32 Separazione Priorità";
+                    chck85.Text = "Abilita percentuale batteria";
 
                     tooltip.SetToolTip(chck1, "Disattiva Edge WebWidget per ridurre l’uso di risorse in background.");
                     tooltip.SetToolTip(chck2, "Attiva il piano energia Massime Prestazioni per migliorare la reattività.");
@@ -4863,23 +4903,25 @@ namespace ET
                     toolStripButton3.Text = "Про програму";
                     toolStripButton4.Text = "Підтримати";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Перезавантажити в безпечному режимі";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Перезавантажити в безпечному режимі";
                     restartExplorerexeToolStripMenuItem.Text = "Перезапустити Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Завантажити програму";
                     webBrowserToolStripMenuItem.Text = "веб-браузер";
                     gamesToolStripMenuItem.Text = "ігри";
                     toolStripDropDownButton1.Text = "Додатково";
-                    diskDefragmenterToolStripMenuItem.Text = "Дефрагментація диска";
-                    controlPanelToolStripMenuItem.Text = "Панель керування";
-                    deviceManagerToolStripMenuItem.Text = "Диспетчер пристроїв";
-                    uACSettingsToolStripMenuItem.Text = "Налаштування UAC";
-                    servicesToolStripMenuItem.Text = "Служби";
-                    remoteDesktopToolStripMenuItem.Text = "Віддалений робочий стіл";
-                    eventViewerToolStripMenuItem.Text = "Перегляд подій";
+                    diskDefragmenterToolStripMenuItem1.Text = "Дефрагментація диска";
+                    controlPanelToolStripMenuItem1.Text = "Панель керування";
+                    toolStripMenuItem1.Text = "Системні засоби";
+                    deviceManagerToolStripMenuItem1.Text = "Диспетчер пристроїв";
+                    uACSettingsToolStripMenuItem1.Text = "Налаштування UAC";
+                    servicesToolStripMenuItem1.Text = "Служби";
+                    remoteDesktopToolStripMenuItem1.Text = "Віддалений робочий стіл";
+                    eventViewerToolStripMenuItem1.Text = "Перегляд подій";
                     resetNetworkToolStripMenuItem.Text = "Скинути мережу";
                     updateApplicationsToolStripMenuItem.Text = "Оновити програми";
                     windowsLicenseKeyToolStripMenuItem.Text = "Ключ ліцензії Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "Завантаження в BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "Завантаження в BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "Перезавантаження";
                     makeETISOToolStripMenuItem.Text = "Створити оптимізований ISO з ET";
 
                     msgend = "Усе виконано. Рекомендується перезавантаження.";
@@ -4973,6 +5015,7 @@ namespace ET
                     chck82.Text = "Показати сек. на панелі";
                     chck83.Text = "DirectX D3D11-D3D12 Налашт.";
                     chck84.Text = "Win32 Розділ Пріоритету";
+                    chck85.Text = "Увімкнути відсоток заряду батареї";
 
                     tooltip.SetToolTip(chck1, "Вимикає Edge WebWidget, щоб зменшити використання ресурсів та пам’яті.");
                     tooltip.SetToolTip(chck2, "Установлює план живлення Windows на Ultimate Performance для кращої чутливості.");
@@ -5082,23 +5125,25 @@ namespace ET
                     toolStripButton3.Text = "Acerca de Mí";
                     toolStripButton4.Text = "Apóyame";
 
-                    rebootToSafeModeToolStripMenuItem.Text = "Reiniciar en Modo Seguro";
+                    rebootToSafeModeToolStripMenuItem1.Text = "Reiniciar en Modo Seguro";
                     restartExplorerexeToolStripMenuItem.Text = "Reiniciar Explorer.exe";
                     downloadSoftwareToolStripMenuItem.Text = "Descargar Software";
                     webBrowserToolStripMenuItem.Text = "navegador web";
                     gamesToolStripMenuItem.Text = "juegos";
                     toolStripDropDownButton1.Text = "Extras";
-                    diskDefragmenterToolStripMenuItem.Text = "Desfragmentador de Disco";
-                    controlPanelToolStripMenuItem.Text = "Panel de Control";
-                    deviceManagerToolStripMenuItem.Text = "Administrador de Dispositivos";
-                    uACSettingsToolStripMenuItem.Text = "Configuración de UAC";
-                    servicesToolStripMenuItem.Text = "Servicios";
-                    remoteDesktopToolStripMenuItem.Text = "Escritorio Remoto";
-                    eventViewerToolStripMenuItem.Text = "Visor de Eventos";
+                    diskDefragmenterToolStripMenuItem1.Text = "Desfragmentador de Disco";
+                    controlPanelToolStripMenuItem1.Text = "Panel de Control";
+                    toolStripMenuItem1.Text = "Herramientas del sistema";
+                    deviceManagerToolStripMenuItem1.Text = "Administrador de Dispositivos";
+                    uACSettingsToolStripMenuItem1.Text = "Configuración de UAC";
+                    servicesToolStripMenuItem1.Text = "Servicios";
+                    remoteDesktopToolStripMenuItem1.Text = "Escritorio Remoto";
+                    eventViewerToolStripMenuItem1.Text = "Visor de Eventos";
                     resetNetworkToolStripMenuItem.Text = "Restablecer Red";
                     updateApplicationsToolStripMenuItem.Text = "Actualizar Aplicaciones";
                     windowsLicenseKeyToolStripMenuItem.Text = "Mostrar Clave de Windows";
-                    rebootToBIOSToolStripMenuItem.Text = "Reiniciar al BIOS";
+                    rebootToBIOSToolStripMenuItem1.Text = "Reiniciar al BIOS";
+                    rebootToBIOSToolStripMenuItem.Text = "Reiniciar";
                     makeETISOToolStripMenuItem.Text = "Crear ISO Optimizado con ET";
 
                     msgend = "Completado. Se recomienda reiniciar.";
@@ -5192,6 +5237,7 @@ namespace ET
                     chck82.Text = "Mostrar segundos en barra";
                     chck83.Text = "DirectX D3D11-D3D12 Ajustes";
                     chck84.Text = "Win32 Separación Prioridad";
+                    chck85.Text = "Habilitar porcentaje de batería";
 
                     tooltip.SetToolTip(chck1, "Desactiva el widget de Edge para reducir el uso de memoria.");
                     tooltip.SetToolTip(chck2, "Activa el plan de energía 'Máximo rendimiento' para mayor fluidez.");
@@ -6574,12 +6620,50 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "$taskPathPattern='\\'; $taskNamePattern='NvTmRep_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}'; Write-Output \"^\"\"Disabling tasks matching pattern `\"^\"\"$taskNamePattern`\"^\"\".\"^\"\"; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) { Write-Output \"^\"\"Skipping, no tasks matching pattern `\"^\"\"$taskNamePattern`\"^\"\" found, no action needed.\"^\"\"; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) { $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) { Write-Output \"^\"\"Skipping, task `\"^\"\"$taskName`\"^\"\" is already disabled, no action needed.\"^\"\"; continue; }; try { $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output \"^\"\"Successfully disabled task `\"^\"\"$taskName`\"^\"\".\"^\"\"; } catch { Write-Error \"^\"\"Failed to disable task `\"^\"\"$taskName`\"^\"\": $($_.Exception.Message)\"^\"\"; $operationFailed = $true; }; }; if ($operationFailed) { Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }\r\n";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "$taskPathPattern='\\'; $taskNamePattern='NvTmRepOnLogon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}'; Write-Output \"^\"\"Disabling tasks matching pattern `\"^\"\"$taskNamePattern`\"^\"\".\"^\"\"; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) { Write-Output \"^\"\"Skipping, no tasks matching pattern `\"^\"\"$taskNamePattern`\"^\"\" found, no action needed.\"^\"\"; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) { $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) { Write-Output \"^\"\"Skipping, task `\"^\"\"$taskName`\"^\"\" is already disabled, no action needed.\"^\"\"; continue; }; try { $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output \"^\"\"Successfully disabled task `\"^\"\"$taskName`\"^\"\".\"^\"\"; } catch { Write-Error \"^\"\"Failed to disable task `\"^\"\"$taskName`\"^\"\": $($_.Exception.Message)\"^\"\"; $operationFailed = $true; }; }; if ($operationFailed) { Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }\r\n";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "powershell.exe";
+                            startInfo.Arguments = "$taskPathPattern='\\'; $taskNamePattern='NvTmMon_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}'; Write-Output \"^\"\"Disabling tasks matching pattern `\"^\"\"$taskNamePattern`\"^\"\".\"^\"\"; $tasks = @(Get-ScheduledTask -TaskPath $taskPathPattern -TaskName $taskNamePattern -ErrorAction Ignore); if (-Not $tasks) { Write-Output \"^\"\"Skipping, no tasks matching pattern `\"^\"\"$taskNamePattern`\"^\"\" found, no action needed.\"^\"\"; exit 0; }; $operationFailed = $false; foreach ($task in $tasks) { $taskName = $task.TaskName; if ($task.State -eq [Microsoft.PowerShell.Cmdletization.GeneratedTypes.ScheduledTask.StateEnum]::Disabled) { Write-Output \"^\"\"Skipping, task `\"^\"\"$taskName`\"^\"\" is already disabled, no action needed.\"^\"\"; continue; }; try { $task | Disable-ScheduledTask -ErrorAction Stop | Out-Null; Write-Output \"^\"\"Successfully disabled task `\"^\"\"$taskName`\"^\"\".\"^\"\"; } catch { Write-Error \"^\"\"Failed to disable task `\"^\"\"$taskName`\"^\"\": $($_.Exception.Message)\"^\"\"; $operationFailed = $true; }; }; if ($operationFailed) { Write-Output 'Failed to disable some tasks. Check error messages above.'; exit 1; }\r\n";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            string programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
+                            string dllPath = Path.Combine(programFiles,
+                                @"NVIDIA Corporation\Installer2\InstallerCore\NVI2.DLL");
+
+                            if (File.Exists(dllPath))
+                            {
+                                Process.Start("rundll32.exe",
+                                    $"\"{dllPath}\",UninstallPackage NvTelemetryContainer");
+
+                                Process.Start("rundll32.exe",
+                                    $"\"{dllPath}\",UninstallPackage NvTelemetry");
+                            }
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C sc stop VSStandardCollectorService150 && sc config VSStandardCollectorService150 start= disabled && taskkill /f /im ccleaner.exe && cmd /c taskkill /f /im ccleaner64.exe";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C setx DOTNET_CLI_TELEMETRY_OPTOUT 1";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Services\nvlddmkm\Global\Startup\", "SendTelemetryData", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableTailoredExperiencesWithDiagnosticData", 1, RegistryValueKind.DWord);
 
@@ -7437,6 +7521,12 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "ShowSecondsInSystemClock", 1, RegistryValueKind.DWord);
 
                             break;
+                        case "Battery Percentage Enabled":
+                            done++;
+
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\", "IsBatteryPercentageEnabled", 1, RegistryValueKind.DWord);
+
+                            break;
                     }
                 }
             }
@@ -7975,81 +8065,24 @@ namespace ET
             Close();
         }
 
-
-        private void diskDefragmenterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string msconfigPath = Path.Combine(
-    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
-    "dfrgui.exe"
-);
-
-            if (!File.Exists(msconfigPath))
-            {
-                msconfigPath = Path.Combine(Environment.SystemDirectory, "dfrgui.exe");
-            }
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = msconfigPath,
-                UseShellExecute = true
-            });
-        }
-
-        private void cleanmgrToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("cleanmgr.exe");
-        }
-
-        private void msconfigToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            string msconfigPath = Path.Combine(
-    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
-    "msconfig.exe"
-);
-
-            if (!File.Exists(msconfigPath))
-            {
-                msconfigPath = Path.Combine(Environment.SystemDirectory, "msconfig.exe");
-            }
-            Process.Start(new ProcessStartInfo
-            {
-                FileName = msconfigPath,
-                UseShellExecute = true
-            });
-        }
-
-        private void controlPanelToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("control.exe");
-        }
-
-        private void deviceManagerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("devmgmt.msc");
-        }
-
-        private void uACSettingsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Process.Start("UserAccountControlSettings.exe");
-        }
-
         private void msinfo32ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("msinfo32");
+            
         }
 
         private void servicesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("services.msc");
+            
         }
 
         private void remoteDesktopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("mstsc");
+            
         }
 
         private void eventViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("eventvwr.msc");
+            
         }
 
         private void resetNetworkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -8078,8 +8111,6 @@ namespace ET
 
         private void rebootToBIOSToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Process.Start("shutdown", "/r /fw /t 1");
-            this.Close();
 
         }
 
@@ -8231,33 +8262,9 @@ namespace ET
             }
         }
 
-        private void rebootToSafeModeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void rebootToSafeModeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            string msconfigPath = Path.Combine(
-    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
-    "bcdedit.exe"
-);
-
-            if (!File.Exists(msconfigPath))
-            {
-                msconfigPath = Path.Combine(Environment.SystemDirectory, "bcdedit.exe");
-            }
-            Process.Start(new ProcessStartInfo
-            {
-                Arguments = "/set {current} safeboot network",
-                FileName = msconfigPath,
-                UseShellExecute = true,
-                WindowStyle = ProcessWindowStyle.Hidden,
-                CreateNoWindow = true
-            });
-            RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
-            reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
-
-            Process.Start("shutdown", "/r /t 5");
-            this.Close();
+            
         }
 
         private void restartExplorerexeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -9161,6 +9168,128 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
         private void button8_Click(object sender, EventArgs e)
         {
             Process.Start(new ProcessStartInfo("ms-quick-assist:") { UseShellExecute = true });
+        }
+
+        private void rebootToSafeModeToolStripMenuItem11_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "bcdedit.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "bcdedit.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                Arguments = "/set {current} safeboot network",
+                FileName = msconfigPath,
+                UseShellExecute = true,
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true
+            });
+            RegistryKey reg = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\RunOnce", true);
+            reg.SetValue("ET-Optimizer", Application.ExecutablePath.ToString());
+
+            Process.Start("shutdown", "/r /t 5");
+            this.Close();
+        }
+
+        private void rebootToBIOSToolStripMenuItem1_Click_1(object sender, EventArgs e)
+        {
+            Process.Start("shutdown", "/r /fw /t 1");
+            this.Close();
+        }
+
+        private void advancedStartupWinREToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("shutdown", "/r /o /f /t 1");
+            this.Close();
+        }
+
+        private void diskDefragmenterToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "dfrgui.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "dfrgui.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
+        }
+
+        private void cleanmgrToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("cleanmgr.exe");
+        }
+
+        private void msconfigToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            string msconfigPath = Path.Combine(
+    Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
+    "msconfig.exe"
+);
+
+            if (!File.Exists(msconfigPath))
+            {
+                msconfigPath = Path.Combine(Environment.SystemDirectory, "msconfig.exe");
+            }
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = msconfigPath,
+                UseShellExecute = true
+            });
+        }
+
+        private void controlPanelToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("control.exe");
+        }
+
+        private void deviceManagerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("devmgmt.msc");
+        }
+
+        private void uACSettingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("UserAccountControlSettings.exe");
+        }
+
+        private void msinfo32ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("msinfo32");
+        }
+
+        private void servicesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("services.msc");
+        }
+
+        private void remoteDesktopToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("mstsc");
+        }
+
+        private void eventViewerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Process.Start("eventvwr.msc");
+        }
+
+        private void godModToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("shell:::{ED7BA470-8E54-465E-825C-99712043E01C}");
         }
     }
 }
