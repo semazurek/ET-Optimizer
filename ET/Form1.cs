@@ -1027,8 +1027,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.09.15";
-        string ETBuild = "15.02.2026";
+        string ETVersion = "E.T. ver 6.10.05";
+        string ETBuild = "21.05.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1107,16 +1107,14 @@ namespace ET
                 }
                 else
                 {
-                    Console.WriteLine($"Uknown registry tree: {hivePath}");
+                    Console.WriteLine($"Unknown registry tree: {hivePath}");
                     return;
                 }
 
-                    using (RegistryKey key = baseKey.OpenSubKey(subKeyPath, writable: false))
+                using (RegistryKey key = baseKey.OpenSubKey(subKeyPath, writable: false))
+                {
+                    if (key == null)
                     {
-
-                    if (key.GetValue(name) == null)
-                    {
-                        object currentValue = key.GetValue(name);
                         string line = $"DelRegistryValue(@\"{hivePath}\", \"{name}\");";
 
                         if (!File.Exists(backupFile) || !File.ReadLines(backupFile).Any(l => l.Contains($"@\"{hivePath}\"") && l.Contains($"\"{name}\"")))
@@ -1124,23 +1122,41 @@ namespace ET
                             File.AppendAllText(backupFile, line + Environment.NewLine, Encoding.UTF8);
                         }
                     }
+                    else
+                    {
+                        object currentValue = key.GetValue(name);
 
-                    if (key != null)
+                        if (currentValue == null)
                         {
-                            object currentValue = key.GetValue(name);
-                            string line = $"SetRegistryValue(@\"{hivePath}\", \"{name}\", {(currentValue ?? "null")}, RegistryValueKind.{kind});";
+                            string line = $"DelRegistryValue(@\"{hivePath}\", \"{name}\");";
 
-                        if (!File.Exists(backupFile) || !File.ReadLines(backupFile).Any(l => l.Contains($"@\"{hivePath}\"") && l.Contains($"\"{name}\"")))
+                            if (!File.Exists(backupFile) || !File.ReadLines(backupFile).Any(l => l.Contains($"@\"{hivePath}\"") && l.Contains($"\"{name}\"")))
+                            {
+                                File.AppendAllText(backupFile, line + Environment.NewLine, Encoding.UTF8);
+                            }
+                        }
+                        else
                         {
-                            File.AppendAllText(backupFile, line + Environment.NewLine, Encoding.UTF8);
+                            string line = $"SetRegistryValue(@\"{hivePath}\", \"{name}\", {currentValue}, RegistryValueKind.{kind});";
+
+                            if (!File.Exists(backupFile) || !File.ReadLines(backupFile).Any(l => l.Contains($"@\"{hivePath}\"") && l.Contains($"\"{name}\"")))
+                            {
+                                File.AppendAllText(backupFile, line + Environment.NewLine, Encoding.UTF8);
+                            }
                         }
                     }
-                    }
+                }
 
-
-                using (RegistryKey key = baseKey.CreateSubKey(subKeyPath, true))
+                using (RegistryKey key = baseKey.CreateSubKey(subKeyPath, writable: true))
                 {
-                    key?.SetValue(name, value, kind);
+                    if (key != null)
+                    {
+                        key.SetValue(name, value, kind);
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed to create or open subkey: {hivePath}");
+                    }
                 }
             }
             catch (Exception ex)
@@ -2131,6 +2147,11 @@ namespace ET
             chck85.Click += c_p;
             chck85.TabIndex = 85;
             panel4.Controls.Add(chck85);
+            CheckBox chck86 = new CheckBox();
+            chck86.Tag = "Disable Automatic Driver Install";
+            chck86.Click += c_p;
+            chck86.TabIndex = 86;
+            panel5.Controls.Add(chck86);
 
             SetToolstripIcons();
 
@@ -2292,6 +2313,7 @@ namespace ET
                 chck83.Text = "DirectX D3D11 - D3D12 Tweaks";
                 chck84.Text = "Win32 Priority Separation Tweak";
                 chck85.Text = "Enable Battery Percentage";
+                chck86.Text = "Disable Automatic Driver Install";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -5698,6 +5720,13 @@ namespace ET
                             startInfo.Arguments = "/C powercfg /X standby-timeout-dc 0";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C powercfg -SETACVALUEINDEX SCHEME_CURRENT 501a4d13-42af-4429-9fd1-a8218c268e20 ee12f906-d277-404b-b6da-e5fa1a558def 000";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+                            Process.Start("powercfg.exe", "-SETACTIVE SCHEME_CURRENT");
                             break;
                         case "Dual Boot Timeout 3sec":
                             done++;
@@ -5758,10 +5787,12 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\", "GlobalUserDisabled", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Search\", "BackgroundAppGlobalToggle", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Search\", "BackgroundAppGlobalAccount", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\", "BackgroundServicesPriority", 10, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\", "SystemResponsiveness", 10, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\", "SystemResponsiveness", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Sticky Keys Prompt":
                             done++;
@@ -5881,6 +5912,31 @@ namespace ET
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
 
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "bcdedit.exe";
+                            startInfo.Arguments = "/set disabledynamictick yes";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "bcdedit.exe";
+                            startInfo.Arguments = "/set useplatformclock false";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "bcdedit.exe";
+                            startInfo.Arguments = "/set tscsyncpolicy Enhanced";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
+
+                            //(Executive Worker Threads)
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive", "AdditionalCriticalWorkerThreads", 16, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive", "AdditionalDelayedWorkerThreads", 16, RegistryValueKind.DWord);
+
+                            //IoPageLockLimit
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "IoPageLockLimit", 67108864, RegistryValueKind.DWord);
 
                             string NOLPi = File.ReadAllText("NOLPi.txt");
                             if (NOLPi is null)
@@ -5959,7 +6015,7 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "AlwaysOn", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "IdleDetectionCycles", 4, RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", 4, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NoLazyMode", 4, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "LazyModeTimeout", 10000, RegistryValueKind.DWord);
 
@@ -6282,15 +6338,14 @@ namespace ET
                             process.Start(); process.WaitForExit();
 
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingExecutive", 1, RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager", "DisablePagingExecutive", 1, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "LargeSystemCache", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "SystemPages", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\Software\Microsoft\FTH", "Enabled", 0, RegistryValueKind.DWord);
                             Registry.LocalMachine.DeleteSubKeyTree(@"SOFTWARE\Microsoft\FTH\State\", false);
 
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePageCombining", 1, RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "DisablePagingCombining", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager", "HeapDeCommitFreeBlockThreshold", 40000, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "CacheUnmapBehindLengthInMB", 100, RegistryValueKind.DWord);
@@ -6301,8 +6356,6 @@ namespace ET
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "NonPagedPoolSize", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "PagedPoolQuota", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "PagedPoolSize", 0, RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "SecondLevelDataCache", 0, RegistryValueKind.DWord);
-                            SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "PhysicalAddressExtension", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "SimulateCommitSavings", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "TrackLockedPages", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management", "TrackPtes", 0, RegistryValueKind.DWord);
@@ -7295,8 +7348,20 @@ namespace ET
                             break;
                         case "End Task in Taskbar by Right Click":
                             done++;
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowAllTrustedApps", 1, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings\", "TaskbarEndTask", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\DeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\Software\Microsoft\Windows\CurrentVersion\DeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
+                            
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.FileName = "cmd.exe";
+                            startInfo.Arguments = "/C reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings\" /v TaskbarEndTask /t REG_DWORD /d 1 /f";
+                            process.StartInfo = startInfo;
+                            process.Start(); process.WaitForExit();
                             break;
 
                     }
@@ -7648,6 +7713,8 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\", "SmartScreenEnabled", @"Off", RegistryValueKind.String);
 
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "SmartScreenEnabled", "0", RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen\", "ConfigureAppInstallControlEnabled", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen\", "ConfigureAppInstallControl", 0, RegistryValueKind.DWord);
@@ -7706,6 +7773,9 @@ namespace ET
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Services\WdNisSvc\", "Start", 4, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\System\CurrentControlSet\Services\WinDefend\", "Start", 4, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Virus and threat protection\", "UILockdown", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\App and Browser protection\", "UILockdown", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows Defender Security Center\Notifications\", "DisableEnhancedNotifications", 1, RegistryValueKind.DWord);
                             break;
@@ -7774,6 +7844,25 @@ namespace ET
                             startInfo.Arguments = "/C ipconfig /flushdns && netsh interface ipv4 add dnsservers \"Ethernet\" address=94.140.14.14 index=1 && netsh interface ipv4 add dnsservers \"Ethernet\" address=8.8.8.8 index=2 && netsh interface ipv4 add dnsservers \"Wi-Fi\" address=94.140.14.14 index=1 && netsh interface ipv4 add dnsservers \"Wi-Fi\" address=8.8.8.8 index=2";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
+                            break;
+                        case "Disable Automatic Driver Install":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\current\device\Update\", "ExcludeWUDriversInQualityUpdate", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\", "ExcludeWUDriversInQualityUpdate", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\WindowsUpdate\UX\Settings\", "ExcludeWUDriversInQualityUpdate", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\", "ExcludeWUDriversInQualityUpdate", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\PolicyManager\default\Update\ExcludeWUDriversInQualityUpdate\", "value", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata\", "PreventDeviceMetadataFromNetwork", 1, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching\", "SearchOrderConfig", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching\", "DontSearchWindowsUpdate", 1, RegistryValueKind.DWord);
                             break;
                     }
                 }
