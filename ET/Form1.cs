@@ -1027,8 +1027,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.10.05";
-        string ETBuild = "21.05.2026";
+        string ETVersion = "E.T. ver 6.10.25";
+        string ETBuild = "30.05.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -2152,6 +2152,12 @@ namespace ET
             chck86.Click += c_p;
             chck86.TabIndex = 86;
             panel5.Controls.Add(chck86);
+            CheckBox chck87 = new CheckBox();
+            chck87.Tag = "Debloat Brave Browser";
+            chck87.Checked = true;
+            chck87.Click += c_p;
+            chck87.TabIndex = 87;
+            panel1.Controls.Add(chck87);
 
             SetToolstripIcons();
 
@@ -2314,6 +2320,7 @@ namespace ET
                 chck84.Text = "Win32 Priority Separation Tweak";
                 chck85.Text = "Enable Battery Percentage";
                 chck86.Text = "Disable Automatic Driver Install";
+                chck87.Text = "Debloat Brave Browser";
 
                 tooltip.SetToolTip(chck1, "Disables the Edge WebWidget to reduce background resource usage and free up memory.");
                 tooltip.SetToolTip(chck2, "Switches Windows power plan to Ultimate Performance for better system responsiveness.");
@@ -2542,6 +2549,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11 - D3D12 Optymalizacje";
                     chck84.Text = "Optymal. podziału priorytetów Win32";
                     chck85.Text = "Włącz procent baterii";
+                    chck86.Text = "Wyłącz autoinstalację sterowników";
+                    chck87.Text = "Debloat przeglądarki Brave";
 
                     tooltip.SetToolTip(chck1, "Wyłącza Edge WebWidget, aby zmniejszyć użycie zasobów i pamięci.");
                     tooltip.SetToolTip(chck2, "Ustawia plan zasilania Windows na Ultimate Performance dla lepszej responsywności.");
@@ -2766,6 +2775,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11–D3D12 твики";
                     chck84.Text = "Твик приор. Win32";
                     chck85.Text = "Включить отображение процента заряда батареи";
+                    chck86.Text = "Откл. автоустановку драйверов";
+                    chck87.Text = "Очистить браузер Brave";
 
                     tooltip.SetToolTip(chck1, "Отключает Edge WebWidget для снижения использования ресурсов и памяти.");
                     tooltip.SetToolTip(chck2, "Устанавливает план питания Windows на Ultimate Performance для лучшей отзывчивости.");
@@ -2989,6 +3000,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11–D3D12 Tweaks";
                     chck84.Text = "Win32 Prior.-Tweaks";
                     chck85.Text = "Akkuprozentanzeige aktivieren";
+                    chck86.Text = "Autom. Treiber-Inst. deaktivieren";
+                    chck87.Text = "Brave Browser debloaten";
 
                     tooltip.SetToolTip(chck1, "Deaktiviert Edge WebWidget, um Ressourcennutzung und Speicherverbrauch zu reduzieren.");
                     tooltip.SetToolTip(chck2, "Setzt den Windows-Energieplan auf Ultimate Performance für bessere Reaktionsfähigkeit.");
@@ -3190,6 +3203,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11–D3D12 ajustes";
                     chck84.Text = "Ajuste prioridade Win32";
                     chck85.Text = "Ativar a porcentagem da bateria";
+                    chck86.Text = "Desat. inst. automática de driver";
+                    chck87.Text = "Otimizar o navegador Brave";
 
                     tooltip.SetToolTip(chck1, "Desativa o Edge WebWidget para reduzir o uso de recursos e memória.");
                     tooltip.SetToolTip(chck2, "Define o plano de energia do Windows para Desempenho Máximo para melhor responsividade.");
@@ -3411,6 +3426,8 @@ namespace ET
                     chck83.Text = "Tweaks DirectX D3D11–D3D12";
                     chck84.Text = "Ajuste priorité Win32";
                     chck85.Text = "Activer l'affichage du pourcentage de batterie";
+                    chck86.Text = "Désact. l'inst. auto des pilotes";
+                    chck87.Text = "Nettoyer le navigateur Brave";
 
                     tooltip.SetToolTip(chck1, "Désactive Edge WebWidget pour réduire l'utilisation des ressources et de la mémoire.");
                     tooltip.SetToolTip(chck2, "Configure le plan d'alimentation Windows sur Performance Ultime pour une meilleure réactivité.");
@@ -3648,6 +3665,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11–D3D12 최적화";
                     chck84.Text = "Win32 우선순위 최적화";
                     chck85.Text = "배터리 잔량 표시를 활성화하세요";
+                    chck86.Text = "드라이버 자동 설치 비활성화";
+                    chck87.Text = "Brave 브라우저 최적화";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget를 비활성화하여 리소스와 메모리 사용을 줄입니다.");
                     tooltip.SetToolTip(chck2, "Windows 전원 계획을 최고의 성능(Ultimate Performance)으로 설정하여 응답성을 향상시킵니다.");
@@ -3887,6 +3906,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11-D3D12 调整";
                     chck84.Text = "Win32 优先级分离调节";
                     chck85.Text = "启用电池百分比";
+                    chck86.Text = "禁用驱动自动安装";
+                    chck87.Text = "优化/精简 Brave 浏览器";
 
                     tooltip.SetToolTip(chck1, "禁用 Edge WebWidget，减少后台资源占用并释放内存。");
                     tooltip.SetToolTip(chck2, "将电源计划切换为终极性能模式，提高系统响应速度。");
@@ -4109,6 +4130,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11-D3D12 Ayarları";
                     chck84.Text = "Win32 Öncelik Ayrımı Ayarı";
                     chck85.Text = "Pil Yüzdesini Etkinleştir";
+                    chck86.Text = "Otomatik Sürücü Yüklemeyi Kapat";
+                    chck87.Text = "Brave Tarayıcıyı Temizle";
 
                     tooltip.SetToolTip(chck1, "Edge WebWidget'i devre dışı bırakarak kaynak ve bellek kullanımını azaltır.");
                     tooltip.SetToolTip(chck2, "Windows güç planını Ultimate Performance olarak ayarlayarak daha iyi yanıt süresi sağlar.");
@@ -4349,6 +4372,8 @@ namespace ET
                     chck83.Text = "تعديلات DirectX D3D11-D3D12";
                     chck84.Text = "تعديل فصل أولوية Win32";
                     chck85.Text = "تفعيل نسبة البطارية";
+                    chck86.Text = "تعطيل التثبيت التلقائي لبرامج التشغيل";
+                    chck87.Text = "تنظيف متصفح Brave";
 
                     tooltip.SetToolTip(chck1, "يعطّل Edge WebWidget لتقليل استهلاك الموارد في الخلفية وتحرير الذاكرة.");
                     tooltip.SetToolTip(chck2, "يحوّل خطة الطاقة إلى الأداء النهائي (Ultimate Performance) لتحسين استجابة النظام.");
@@ -4588,6 +4613,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11-D3D12 समायोजन";
                     chck84.Text = "Win32 प्राथमिकता विभाजन सेटिंग";
                     chck85.Text = "बैटरी प्रतिशत सक्षम करें";
+                    chck86.Text = "ऑटो ड्राइवर इंस्टॉलेशन बंद करें";
+                    chck87.Text = "Brave ब्राउज़र को डिब्लोट करें";
 
                     tooltip.SetToolTip(chck1, "Edge वेब विजेट को अक्षम करता है जिससे बैकग्राउंड संसाधन उपयोग कम होता है और मेमोरी मुक्त होती है।");
                     tooltip.SetToolTip(chck2, "Windows पावर प्लान को Ultimate Performance पर स्विच करता है जिससे सिस्टम तेजी से प्रतिक्रिया देता है।");
@@ -4812,6 +4839,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11-D3D12 Mod";
                     chck84.Text = "Win32 Separazione Priorità";
                     chck85.Text = "Abilita percentuale batteria";
+                    chck86.Text = "Disat. inst. automatica driver";
+                    chck87.Text = "Ottimizza browser Brave";
 
                     tooltip.SetToolTip(chck1, "Disattiva Edge WebWidget per ridurre l’uso di risorse in background.");
                     tooltip.SetToolTip(chck2, "Attiva il piano energia Massime Prestazioni per migliorare la reattività.");
@@ -5038,6 +5067,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11-D3D12 Налашт.";
                     chck84.Text = "Win32 Розділ Пріоритету";
                     chck85.Text = "Увімкнути відсоток заряду батареї";
+                    chck86.Text = "Вимк. автоінсталяцію драйверів";
+                    chck87.Text = "Очистити браузер Brave";
 
                     tooltip.SetToolTip(chck1, "Вимикає Edge WebWidget, щоб зменшити використання ресурсів та пам’яті.");
                     tooltip.SetToolTip(chck2, "Установлює план живлення Windows на Ultimate Performance для кращої чутливості.");
@@ -5260,6 +5291,8 @@ namespace ET
                     chck83.Text = "DirectX D3D11-D3D12 Ajustes";
                     chck84.Text = "Win32 Separación Prioridad";
                     chck85.Text = "Habilitar porcentaje de batería";
+                    chck86.Text = "Desact. inst. automática de driver";
+                    chck87.Text = "Optimizar el navegador Brave";
 
                     tooltip.SetToolTip(chck1, "Desactiva el widget de Edge para reducir el uso de memoria.");
                     tooltip.SetToolTip(chck2, "Activa el plan de energía 'Máximo rendimiento' para mayor fluidez.");
@@ -5803,6 +5836,8 @@ namespace ET
                             done++;
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System\", "PublishUserActivities", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System\", "EnableActivityFeed", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\System\", "UploadUserActivities", 0, RegistryValueKind.DWord);
                             break;
                         case "Disable Updates for MS Store Apps":
                             done++;
@@ -5822,9 +5857,15 @@ namespace ET
                         case "Fix Microsoft Edge Settings":
                             done++;
 
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\EdgeUpdate\", "CreateDesktopShortcutDefault", 0, RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\MicrosoftEdge\Main\", "AllowPrelaunch", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "WalletDonationEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "DefaultBrowserSettingsCampaignEnabled", 0, RegistryValueKind.DWord);
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\ExtensionInstallBlocklist", "ofefcgjbeghpigppfmkologfjadafddi", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge\", "CryptoWalletEnabled", 0, RegistryValueKind.DWord);
 
@@ -6410,6 +6451,23 @@ namespace ET
                             SetRegistryValue(@"HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl", "Win32PrioritySeparation", 0x2A, RegistryValueKind.DWord);
 
                             break;
+                        case "Debloat Brave Browser":
+                            done++;
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveRewardsDisabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveWalletDisabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveVPNDisabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveAIChatEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveStatsPingEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveNewsDisabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveTalkDisabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "TorDisabled", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "BraveP3AEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "UrlKeyedAnonymizedDataCollectionEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "SafeBrowsingExtendedReportingEnabled", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\BraveSoftware\Brave", "MetricsReportingEnabled", 0, RegistryValueKind.DWord);
+
+                            break;
                         case "Remove Bloatware (Preinstalled)":
                             done++;
                             SaveUncheckedToWhitelist();
@@ -6992,6 +7050,8 @@ namespace ET
                             DelRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\Copilot", "CopilotLogonTelemetryTime");
                             
                             DelRegistryValue(@"HKCU\Software\Microsoft\Copilot", "WakeApp");
+
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\", "SettingsPageVisibility", "hide:aicomponents", RegistryValueKind.String);
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
@@ -7677,11 +7737,28 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "DisableRealtimeMonitoring", 1, RegistryValueKind.DWord);
 
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableRealtimeMonitoring", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableBehaviorMonitoring", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableOnAccessProtection", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableScanOnRealtimeEnable", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableIOAVProtection", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableRoutinelyTakingAction", 1, RegistryValueKind.DWord);
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "DisableSpecialRunningModes", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "DisableRoutinelyTakingAction", 1, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "ServiceKeepAlive", 0, RegistryValueKind.DWord);
+                            
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "PUAProtection", 0, RegistryValueKind.DWord);
 
-                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates\", "ForceUpdateFromMU", 1, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates\", "ForceUpdateFromMU", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates\", "ForceUpdateFromMU", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet\", "DisableBlockAtFirstSeen", 1, RegistryValueKind.DWord);
 
