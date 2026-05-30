@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.10.05-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.10.25-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/4.8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
@@ -150,6 +150,8 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 <li>DirectX 11-12 Tweaks</li>
   
 <li>Win32 Priority Separation Tweak</li>
+
+<li>Debloat Brave Browser</li>
 </ol>
 </details>
 <details>
