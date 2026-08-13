@@ -3,9 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Printing;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Management;
 using System.Media;
@@ -14,16 +17,14 @@ using System.Runtime.InteropServices;
 using System.Security;
 using System.ServiceProcess;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
-using ProgressBar = System.Windows.Forms.ProgressBar;
-using System.Text.RegularExpressions;
-using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
-using System.Drawing.Drawing2D;
-using System.IO.Compression;
 using System.Xml.Linq;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using ProgressBar = System.Windows.Forms.ProgressBar;
 
 namespace ET
 {
@@ -359,6 +360,11 @@ namespace ET
         private bool isFullscreen = false;
         private Rectangle previousBounds;
 
+        // Checkbox sterujący widocznością listy Bloatware.
+        // Jest polem klasy, ponieważ centergroup() musi wiedzieć,
+        // czy ma ułożyć formularz w trybie 2-rzędowym czy rozszerzyć groupBox1.
+        private CheckBox bloatwareCheckBox;
+
         private void Relocatecheck(Panel panelD, int spacing = 5)
         {
             int panelWidth = panelD.Width;
@@ -402,17 +408,10 @@ namespace ET
         {
             int margin = 5;
             int spacing = 5;
-
             int columns = 3;
 
             int formWidth = this.ClientSize.Width;
             int groupBoxWidth = (formWidth - ((columns + 1) * margin)) / columns;
-
-            GroupBox[] layout =
-            {
-        groupBox1, groupBox2, groupBox3,
-        customGroup6, groupBox4, groupBox5
-    };
 
             int spacingB = 10;
             int buttonWidth = 150;
@@ -423,44 +422,120 @@ namespace ET
             int buttonY = this.ClientSize.Height - buttonHeight - 5;
 
             Button[] buttons = { button1, button3, button2, button4, button5 };
+
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].Size = new Size(buttonWidth, buttonHeight);
-                buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY - 5);
+                buttons[i].Location = new Point(
+                    startX + i * (buttonWidth + spacingB),
+                    buttonY - 5);
+
                 buttons[i].FlatAppearance.BorderSize = 0;
             }
 
             int topY = toolStrip1.Bottom + 10;
             int bottomY = buttons[0].Top - 10;
-            int availableHeight = bottomY - topY;
+            int availableHeight = Math.Max(0, bottomY - topY);
 
-            int rows = (int)Math.Ceiling(layout.Length / (float)columns);
-            int groupBoxHeight = (availableHeight - (rows - 1) * spacing) / rows;
+            // Standardowa wysokość jednego rzędu przy widocznym customGroup6.
+            int groupBoxHeight = Math.Max(
+                1,
+                (availableHeight - spacing) / 2);
 
-            for (int i = 0; i < layout.Length; i++)
+            bool showBloatwareGroup =
+                bloatwareCheckBox == null || bloatwareCheckBox.Checked;
+
+            this.SuspendLayout();
+
+            try
             {
-                int col = i % columns;
-                int row = i / columns;
+                int row1Y = topY;
+                int row2Y = topY + groupBoxHeight + spacing;
 
-                int x = margin + col * (groupBoxWidth + margin);
-                int y = topY + row * (groupBoxHeight + spacing);
+                // Rząd 1
+                groupBox1.Location = new Point(margin, row1Y);
+                groupBox1.Size = new Size(groupBoxWidth, groupBoxHeight);
 
-                layout[i].Location = new Point(x, y);
-                layout[i].Size = new Size(groupBoxWidth, groupBoxHeight);
+                groupBox2.Location = new Point(
+                    margin + groupBoxWidth + margin,
+                    row1Y);
+                groupBox2.Size = new Size(groupBoxWidth, groupBoxHeight);
+
+                groupBox3.Location = new Point(
+                    margin + 2 * (groupBoxWidth + margin),
+                    row1Y);
+                groupBox3.Size = new Size(groupBoxWidth, groupBoxHeight);
+
+                if (showBloatwareGroup)
+                {
+                    // Bloatware włączone: normalny układ 3 x 2.
+                    customGroup6.Show();
+
+                    customGroup6.Location = new Point(margin, row2Y);
+                    customGroup6.Size = new Size(groupBoxWidth, groupBoxHeight);
+
+                    groupBox4.Location = new Point(
+                        margin + groupBoxWidth + margin,
+                        row2Y);
+                    groupBox4.Size = new Size(groupBoxWidth, groupBoxHeight);
+
+                    groupBox5.Location = new Point(
+                        margin + 2 * (groupBoxWidth + margin),
+                        row2Y);
+                    groupBox5.Size = new Size(groupBoxWidth, groupBoxHeight);
+                }
+                else
+                {
+                    // Bloatware wyłączone: customGroup6 znika,
+                    // a groupBox1 zajmuje dokładnie jego miejsce.
+                    customGroup6.Hide();
+
+                    groupBox1.Size = new Size(
+                        groupBoxWidth,
+                        Math.Max(1, availableHeight));
+
+                    // groupBox4 i groupBox5 pozostają w drugim rzędzie.
+                    // Dzięki temu nic nie nachodzi na siebie.
+                    groupBox4.Location = new Point(
+                        margin + groupBoxWidth + margin,
+                        row2Y);
+                    groupBox4.Size = new Size(groupBoxWidth, groupBoxHeight);
+
+                    groupBox5.Location = new Point(
+                        margin + 2 * (groupBoxWidth + margin),
+                        row2Y);
+                    groupBox5.Size = new Size(groupBoxWidth, groupBoxHeight);
+                }
+
+                progressBar1.Location = new Point(
+                    -5,
+                    this.ClientSize.Height - progressBar1.Height + 5);
+
+                progressBar1.Width = this.ClientSize.Width + 10;
+
+                toolStrip1.Size = new Size(this.Width, 25);
+
+                pictureBox4.Size = new Size(this.Width, 5);
+                pictureBox5.Size = new Size(this.Width, 5);
+
+                pictureBox4.Location = new Point(
+                    0,
+                    this.Height - progressBar1.Height - 5);
+
+                panelmain.Size = new Size(this.Width, 40);
+
+                textBox1.Size = new Size(
+                    this.ClientSize.Width + 4,
+                    this.ClientSize.Height - progressBar1.Height - 55);
+
+                textBox1.BorderStyle = BorderStyle.None;
+                textBox1.Location = new Point(-2, toolStrip1.Bottom);
             }
-            progressBar1.Location = new Point(-5, this.ClientSize.Height - progressBar1.Height + 5);
-            progressBar1.Width = this.ClientSize.Width + 10;
-            toolStrip1.Size = new Size(this.Width, 25);
-            pictureBox4.Size = new Size(this.Width, 5);
-            pictureBox5.Size = new Size(this.Width, 5);
-            pictureBox4.Location = new Point(0, this.Height - progressBar1.Height - 5);
-            panelmain.Size = new Size(this.Width, 40);
-            textBox1.Size = new Size(this.ClientSize.Width + 4, this.ClientSize.Height - progressBar1.Height - 55);
-            textBox1.BorderStyle = BorderStyle.None;
-            textBox1.Location = new Point(-2, toolStrip1.Bottom);
-
+            finally
+            {
+                this.ResumeLayout(true);
+            }
         }
-
 
         private void Panelmain_DoubleClick(object sender, EventArgs e)
         {
@@ -736,14 +811,8 @@ namespace ET
                     }
                 }
 
-                // Dopasuj szerokość WSZYSTKICH elementów do aktualnej (finalnej) szerokości panelu.
-                // To naprawia sytuację, w której panel6.ClientSize.Width w trakcie pętli był inny
-                // niż jest naprawdę (np. przez DPI scaling / pasek przewijania, który dopiero
-                // się pojawił po dodaniu kilkudziesięciu elementów).
                 ReflowAppxCheckBoxes();
 
-                // Podłącz się pod zmianę rozmiaru panelu tylko raz, żeby przy każdym kolejnym
-                // resize'ie (np. zmiana rozmiaru okna) elementy same się dopasowały.
                 if (!panel6ResizeHooked)
                 {
                     panel6.Resize += (s, e) => ReflowAppxCheckBoxes();
@@ -1577,10 +1646,6 @@ namespace ET
         {
             InitializeComponent();
 
-            // WAŻNE: nie wywołujemy LoadAppxPackages() tutaj bezpośrednio.
-            // W tym miejscu okno jeszcze nie przeszło pełnego layoutu/skalowania DPI,
-            // więc panel6.ClientSize.Width bywa inny niż realny - stąd ucięty tekst.
-            // Uruchamiamy to dopiero gdy formularz jest w pełni pokazany i ma finalny rozmiar.
             this.Shown += (s, e) => LoadAppxPackages();
 
             List<Task> iconTasks = new List<Task>();
@@ -1599,7 +1664,6 @@ namespace ET
             iconTasks.Add(SetRemoteIcon(wizTreeToolStripMenuItem, "https://diskanalyzer.com/apple-touch-icon.png"));
             iconTasks.Add(SetRemoteIcon(uniGetUIWingetGUIToolStripMenuItem, "https://raw.githubusercontent.com/marticliment/UniGetUI/main/media/icon.png"));
             iconTasks.Add(SetRemoteIcon(privacySexyToolStripMenuItem, "https://privacy.sexy/favicon.ico"));
-            iconTasks.Add(SetRemoteIcon(chrisTitusTechsWinToolStripMenuItem, "https://raw.githubusercontent.com/ChrisTitusTech/winutil/refs/heads/main/docs/assets/favicon.png"));
 
             iconTasks.Add(SetRemoteIcon(eAAppToolStripMenuItem, "http://ea.com/assets/images/favicon.png"));
             iconTasks.Add(SetRemoteIcon(ubisoftConnectToolStripMenuItem, "https://static-dm.ubisoft.com/ubisoft/prod/favicon.ico"));
@@ -2062,21 +2126,36 @@ namespace ET
             chck55.Click += c_p;
             chck55.TabIndex = 55;
             panel1.Controls.Add(chck55);
+
+
             CheckBox chck56 = new CheckBox();
+            bloatwareCheckBox = chck56;
+
             chck56.Tag = "Remove Bloatware (Preinstalled)";
             chck56.Checked = true;
             chck56.Click += c_p;
             chck56.CheckedChanged += (s, e) =>
             {
                 panel6.Enabled = chck56.Checked;
+
                 if (chck56.Checked)
                 {
-                    groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor);
+                    groupBox6.ForeColor =
+                        System.Drawing.ColorTranslator.FromHtml(selectioncolor);
+
+                    customGroup6.Show();
                 }
                 else
                 {
-                    groupBox6.ForeColor = System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+                    groupBox6.ForeColor =
+                        System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+
+                    customGroup6.Hide();
                 }
+
+                // Przeliczamy układ po każdej zmianie checkboxa.
+                // groupBox1 zajmuje/zwalnia miejsce customGroup6.
+                centergroup();
             };
             chck56.TabIndex = 56;
             panel1.Controls.Add(chck56);
@@ -8521,7 +8600,7 @@ namespace ET
                 CreateNoWindow = true
             })?.WaitForExit();
 
-            System.Threading.Thread.Sleep(1000); // odczekaj na zamknięcie
+            System.Threading.Thread.Sleep(1000);
 
             Process.Start(new ProcessStartInfo
             {
@@ -8871,20 +8950,6 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
             startInfo.FileName = "cmd.exe";
             startInfo.Arguments = "/C winget install --id=undergroundwires.privacy.sexy --disable-interactivity --silent --accept-source-agreements --accept-package-agreements";
-            process.StartInfo = startInfo;
-            process.Start();
-        }
-
-        private async void chrisTitusTechsWinToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!IsWingetInstalled()) { await InstallWingetAsync(); }
-
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
-
-            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
-            startInfo.FileName = "powershell.exe";
-            startInfo.Arguments = "-Command irm \"https://christitus.com/win\" | iex";
             process.StartInfo = startInfo;
             process.Start();
         }
@@ -9552,14 +9617,12 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             public AppxCheckBox(string appName, Image icon)
             {
                 Height = 26;
-                Width = 300; // wartość startowa - i tak zostanie nadpisana przez wywołującego / Anchor
+                Width = 300;
 
                 BackColor = Color.Transparent;
                 Margin = new Padding(0);
                 Padding = new Padding(0);
 
-                // KLUCZ DO NAPRAWY: kontrolka rozciąga się razem z rodzicem (panel6),
-                // więc gdy panel/groupbox zmieni szerokość, my też ją dostaniemy.
                 Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
 
                 checkBox = new CheckBox
@@ -9594,11 +9657,10 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                     Text = appName,
                     TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
                     BackColor = Color.Transparent,
-                    AutoEllipsis = true, // gdy naprawdę zabraknie miejsca, pokaże "..." zamiast brzydkiego obcięcia
+                    AutoEllipsis = true,
                     Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
                 };
 
-                // pełna nazwa dostępna po najechaniu myszką - przydatne, gdy nazwa i tak jest bardzo długa
                 toolTip.SetToolTip(label, appName);
 
                 Controls.Add(checkBox);
@@ -9622,9 +9684,6 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                     checkBox.Font = Font;
                 };
             }
-
-            // wywoływane z zewnątrz po każdej zmianie rozmiaru panelu-rodzica,
-            // żeby wszystkie już dodane elementy dopasowały szerokość natychmiast
             public void SyncWidthToParent(int parentClientWidth, int rightMargin = 20)
             {
                 int newWidth = parentClientWidth - rightMargin;
@@ -9642,91 +9701,107 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "powershell.exe",
-                    Arguments =
-                        "-NoProfile -NonInteractive -Command " +
-                        "\"$p = Get-AppxPackage -AllUsers -Name '" +
-                        appName.Replace("'", "''") +
-                        "' -ErrorAction SilentlyContinue; " +
-                        "if ($p) { " +
-                        "Write-Output $p.InstallLocation; " +
-                        "Write-Output $p.Logo " +
-                        "}\"",
-
+                    Arguments = "-NoProfile -NonInteractive -Command " +
+                                "\"$p = Get-AppxPackage -AllUsers | Where-Object { $_.Name -eq '" + appName.Replace("'", "''") + "' -or $_.PackageFamilyName -like '*" + appName.Replace("'", "''") + "*' } | Select-Object -First 1; " +
+                                "if ($p) { Write-Output $p.InstallLocation; Write-Output $p.Logo }\"",
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
 
+                string installLocation = null;
+                string logoRelativePath = null;
+
                 using (Process process = Process.Start(psi))
                 {
                     string output = process.StandardOutput.ReadToEnd();
                     process.WaitForExit();
 
-                    string[] lines = output
-                        .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    string[] lines = output.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                    if (lines.Length > 0) installLocation = lines[0].Trim();
+                    if (lines.Length > 1) logoRelativePath = lines[1].Trim();
+                }
 
-                    if (lines.Length < 1)
-                        return null;
-
-                    string installLocation = lines[0].Trim();
-
-                    if (string.IsNullOrWhiteSpace(installLocation))
-                        return null;
-
-                    string logo = lines.Length > 1
-                        ? lines[1].Trim()
-                        : null;
-
-                    // logo Appx getch
-                    if (!string.IsNullOrWhiteSpace(logo))
+                if (!string.IsNullOrWhiteSpace(installLocation) && Directory.Exists(installLocation))
+                {
+                    if (!string.IsNullOrWhiteSpace(logoRelativePath))
                     {
-                        string logoPath = Path.Combine(installLocation, logo);
+                        string exactPath = Path.Combine(installLocation, logoRelativePath);
 
-                        if (File.Exists(logoPath))
+                        if (File.Exists(exactPath))
                         {
-                            using (FileStream fs = new FileStream(
-                                logoPath,
-                                FileMode.Open,
-                                FileAccess.Read))
+                            return LoadBitmapFromFile(exactPath);
+                        }
+
+                        string dirName = Path.GetDirectoryName(exactPath);
+                        string fileNameWithoutExt = Path.GetFileNameWithoutExtension(exactPath);
+
+                        if (Directory.Exists(dirName))
+                        {
+                            string[] matchingFiles = Directory.GetFiles(dirName, $"{fileNameWithoutExt}*.png");
+                            if (matchingFiles.Length > 0)
                             {
-                                return Image.FromStream(fs).Clone() as Image;
+                                return LoadBitmapFromFile(matchingFiles[0]);
                             }
                         }
                     }
 
-                    // no logo looking for other patterns
-                    string[] possibleFiles =
+                    string assetsFolder = Path.Combine(installLocation, "Assets");
+                    if (Directory.Exists(assetsFolder))
                     {
-                "Assets\\StoreLogo.png",
-                "Assets\\Square44x44Logo.png",
-                "Assets\\Square150x150Logo.png",
-                "Assets\\Square310x310Logo.png",
-                "Assets\\Logo.png"
-            };
-
-                    foreach (string relativePath in possibleFiles)
-                    {
-                        string path = Path.Combine(
-                            installLocation,
-                            relativePath);
-
-                        if (!File.Exists(path))
-                            continue;
-
-                        using (FileStream fs = new FileStream(
-                            path,
-                            FileMode.Open,
-                            FileAccess.Read))
+                        string[] patterns = { "*Square44x44Logo*", "*Square150x150Logo*", "*StoreLogo*", "*Logo*" };
+                        foreach (string pattern in patterns)
                         {
-                            return Image.FromStream(fs).Clone() as Image;
+                            string[] files = Directory.GetFiles(assetsFolder, $"{pattern}.png", SearchOption.AllDirectories);
+                            if (files.Length > 0)
+                            {
+                                return LoadBitmapFromFile(files[0]);
+                            }
                         }
                     }
                 }
             }
             catch
             {
-                // No icon continue
+                // ignore error go to default icon set
+            }
+
+            return GetComputerDefaultsIcon();
+        }
+
+        private Image LoadBitmapFromFile(string filePath)
+        {
+            using (FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                using (Image original = Image.FromStream(fs))
+                {
+                    return new Bitmap(original);
+                }
+            }
+        }
+
+        private Image GetComputerDefaultsIcon()
+        {
+            try
+            {
+                string systemPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
+                string exePath = Path.Combine(systemPath, "ComputerDefaults.exe");
+
+                if (File.Exists(exePath))
+                {
+                    using (Icon sysIcon = Icon.ExtractAssociatedIcon(exePath))
+                    {
+                        if (sysIcon != null)
+                        {
+                            return sysIcon.ToBitmap();
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // In the event of a lack of access or a system failure
             }
 
             return null;
