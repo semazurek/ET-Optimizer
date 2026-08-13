@@ -2,7 +2,7 @@
 ET Optimizer
 </h1>
 <p align="center">
-<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.10.25-blue?style=for-the-badge&"></a>
+<a href="https://github.com/semazurek/ET-All-in-One-Optimizer/releases/latest"><img src="https://img.shields.io/badge/RELEASE-v6.11.00-blue?style=for-the-badge&"></a>
 <a href="#"><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"></a>
 <a href="#"><img src="https://img.shields.io/badge/4.8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white"></a>
 <a href="https://www.buymeacoffee.com/semazurek" target="_blank"><img src="https://img.shields.io/badge/buymeacoffee-27ae60?style=for-the-badge&logo=buymeacoffee&logoColor=white"></a>
@@ -56,15 +56,15 @@ So far the project has grown to: 5000+ lines of code, 900+ commits, translated i
 ## 📷 Screenshots
 <details>
   <summary> <b>First Look</b> </summary>
-  <img src="https://github.com/user-attachments/assets/fef3a80f-0641-4893-ae37-5e33873add68" width="750"/>
+  <img src="https://github.com/user-attachments/assets/b0bfe4f0-c291-4517-9c9a-716e8f93247a" width="750"/>
 </details>
 <details>
   <summary> <b>During Operation</b> </summary>
-  <img src="https://github.com/user-attachments/assets/3660134d-b41c-48a8-9252-f97d42bc7605" width="750"/>
+  <img src="https://github.com/user-attachments/assets/5adff7f9-8edf-4cdc-9e63-918744516c18" width="750"/>
 </details>
 <details>
   <summary> <b>Extras</b> </summary>
-  <img src="https://github.com/user-attachments/assets/6ae87f69-6f23-4297-9752-978008da4f88" width="750"/>
+  <img src="https://github.com/user-attachments/assets/53c578e6-8858-4625-9712-ea9974f52cbd" width="750"/>
 </details>
 
 ## 🛠 What it does 
