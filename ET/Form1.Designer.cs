@@ -87,7 +87,6 @@
             this.wizTreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uniGetUIWingetGUIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.privacySexyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chrisTitusTechsWinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.windowsLicenseKeyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToBIOSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.rebootToBIOSToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -521,8 +520,7 @@
             this.hWiNFOToolStripMenuItem,
             this.wizTreeToolStripMenuItem,
             this.uniGetUIWingetGUIToolStripMenuItem,
-            this.privacySexyToolStripMenuItem,
-            this.chrisTitusTechsWinToolStripMenuItem});
+            this.privacySexyToolStripMenuItem});
             this.downloadSoftwareToolStripMenuItem.Name = "downloadSoftwareToolStripMenuItem";
             this.downloadSoftwareToolStripMenuItem.Size = new System.Drawing.Size(346, 26);
             this.downloadSoftwareToolStripMenuItem.Text = "Download Software";
@@ -542,28 +540,28 @@
             // googleChromeToolStripMenuItem1
             // 
             this.googleChromeToolStripMenuItem1.Name = "googleChromeToolStripMenuItem1";
-            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.googleChromeToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.googleChromeToolStripMenuItem1.Text = "Google Chrome";
             this.googleChromeToolStripMenuItem1.Click += new System.EventHandler(this.googleChromeToolStripMenuItem1_Click);
             // 
             // braveToolStripMenuItem1
             // 
             this.braveToolStripMenuItem1.Name = "braveToolStripMenuItem1";
-            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.braveToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.braveToolStripMenuItem1.Text = "Brave";
             this.braveToolStripMenuItem1.Click += new System.EventHandler(this.braveToolStripMenuItem1_Click);
             // 
             // mozillaFirefoxToolStripMenuItem1
             // 
             this.mozillaFirefoxToolStripMenuItem1.Name = "mozillaFirefoxToolStripMenuItem1";
-            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.mozillaFirefoxToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.mozillaFirefoxToolStripMenuItem1.Text = "Mozilla Firefox";
             this.mozillaFirefoxToolStripMenuItem1.Click += new System.EventHandler(this.mozillaFirefoxToolStripMenuItem1_Click);
             // 
             // operaGXToolStripMenuItem1
             // 
             this.operaGXToolStripMenuItem1.Name = "operaGXToolStripMenuItem1";
-            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(210, 26);
+            this.operaGXToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
             this.operaGXToolStripMenuItem1.Text = "Opera GX";
             this.operaGXToolStripMenuItem1.Click += new System.EventHandler(this.operaGXToolStripMenuItem1_Click);
             // 
@@ -683,13 +681,6 @@
             this.privacySexyToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
             this.privacySexyToolStripMenuItem.Text = "Privacy.Sexy";
             this.privacySexyToolStripMenuItem.Click += new System.EventHandler(this.privacySexyToolStripMenuItem_Click);
-            // 
-            // chrisTitusTechsWinToolStripMenuItem
-            // 
-            this.chrisTitusTechsWinToolStripMenuItem.Name = "chrisTitusTechsWinToolStripMenuItem";
-            this.chrisTitusTechsWinToolStripMenuItem.Size = new System.Drawing.Size(322, 26);
-            this.chrisTitusTechsWinToolStripMenuItem.Text = "Chris Titus Tech\'s WinUtil";
-            this.chrisTitusTechsWinToolStripMenuItem.Click += new System.EventHandler(this.chrisTitusTechsWinToolStripMenuItem_Click);
             // 
             // windowsLicenseKeyToolStripMenuItem
             // 
@@ -947,7 +938,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(130, 25);
             this.label1.TabIndex = 1;
-            this.label1.Text = "E.T. ver 6.10.25";
+            this.label1.Text = "E.T. ver 6.11.00";
             this.label1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.label1_MouseMove_1);
             // 
             // pictureBox1
@@ -1106,7 +1097,6 @@
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.ToolStripMenuItem privacySexyToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem chrisTitusTechsWinToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem activateWindowsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem wizTreeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem webBrowserToolStripMenuItem;

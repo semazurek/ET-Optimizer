@@ -360,9 +360,6 @@ namespace ET
         private bool isFullscreen = false;
         private Rectangle previousBounds;
 
-        // Checkbox sterujący widocznością listy Bloatware.
-        // Jest polem klasy, ponieważ centergroup() musi wiedzieć,
-        // czy ma ułożyć formularz w trybie 2-rzędowym czy rozszerzyć groupBox1.
         private CheckBox bloatwareCheckBox;
 
         private void Relocatecheck(Panel panelD, int spacing = 5)
@@ -437,7 +434,6 @@ namespace ET
             int bottomY = buttons[0].Top - 10;
             int availableHeight = Math.Max(0, bottomY - topY);
 
-            // Standardowa wysokość jednego rzędu przy widocznym customGroup6.
             int groupBoxHeight = Math.Max(
                 1,
                 (availableHeight - spacing) / 2);
@@ -452,7 +448,6 @@ namespace ET
                 int row1Y = topY;
                 int row2Y = topY + groupBoxHeight + spacing;
 
-                // Rząd 1
                 groupBox1.Location = new Point(margin, row1Y);
                 groupBox1.Size = new Size(groupBoxWidth, groupBoxHeight);
 
@@ -468,7 +463,7 @@ namespace ET
 
                 if (showBloatwareGroup)
                 {
-                    // Bloatware włączone: normalny układ 3 x 2.
+
                     customGroup6.Show();
 
                     customGroup6.Location = new Point(margin, row2Y);
@@ -486,16 +481,13 @@ namespace ET
                 }
                 else
                 {
-                    // Bloatware wyłączone: customGroup6 znika,
-                    // a groupBox1 zajmuje dokładnie jego miejsce.
+
                     customGroup6.Hide();
 
                     groupBox1.Size = new Size(
                         groupBoxWidth,
                         Math.Max(1, availableHeight));
 
-                    // groupBox4 i groupBox5 pozostają w drugim rzędzie.
-                    // Dzięki temu nic nie nachodzi na siebie.
                     groupBox4.Location = new Point(
                         margin + groupBoxWidth + margin,
                         row2Y);
@@ -1168,8 +1160,8 @@ namespace ET
             return "Failed to read system version";
         }
 
-        string ETVersion = "E.T. ver 6.10.25";
-        string ETBuild = "30.05.2026";
+        string ETVersion = "E.T. ver 6.11.00";
+        string ETBuild = "13.08.2026";
 
         public string selectall0 = "Select All";
         public string selectall1 = "Unselect All";
@@ -1761,6 +1753,34 @@ namespace ET
             textBox1.Size = new System.Drawing.Size(925, 360);
             toolStripButton5.Visible = false;
 
+            CheckBox chck56 = new CheckBox();
+            bloatwareCheckBox = chck56;
+            chck56.Tag = "Remove Bloatware (Preinstalled)";
+            chck56.Checked = true;
+            chck56.Click += c_p;
+            chck56.CheckedChanged += (s, e) =>
+            {
+                panel6.Enabled = chck56.Checked;
+
+                if (chck56.Checked)
+                {
+                    groupBox6.ForeColor =
+                        System.Drawing.ColorTranslator.FromHtml(selectioncolor);
+
+                    customGroup6.Show();
+                }
+                else
+                {
+                    groupBox6.ForeColor =
+                        System.Drawing.ColorTranslator.FromHtml(mainforecolor);
+
+                    customGroup6.Hide();
+                }
+
+                centergroup();
+            };
+            chck56.TabIndex = 56;
+            panel1.Controls.Add(chck56);
             CheckBox chck1 = new CheckBox();
             chck1.Tag = "Disable Edge WebWidget";
             chck1.TabIndex = 1;
@@ -2126,39 +2146,7 @@ namespace ET
             chck55.Click += c_p;
             chck55.TabIndex = 55;
             panel1.Controls.Add(chck55);
-
-
-            CheckBox chck56 = new CheckBox();
-            bloatwareCheckBox = chck56;
-
-            chck56.Tag = "Remove Bloatware (Preinstalled)";
-            chck56.Checked = true;
-            chck56.Click += c_p;
-            chck56.CheckedChanged += (s, e) =>
-            {
-                panel6.Enabled = chck56.Checked;
-
-                if (chck56.Checked)
-                {
-                    groupBox6.ForeColor =
-                        System.Drawing.ColorTranslator.FromHtml(selectioncolor);
-
-                    customGroup6.Show();
-                }
-                else
-                {
-                    groupBox6.ForeColor =
-                        System.Drawing.ColorTranslator.FromHtml(mainforecolor);
-
-                    customGroup6.Hide();
-                }
-
-                // Przeliczamy układ po każdej zmianie checkboxa.
-                // groupBox1 zajmuje/zwalnia miejsce customGroup6.
-                centergroup();
-            };
-            chck56.TabIndex = 56;
-            panel1.Controls.Add(chck56);
+            
             CheckBox chck57 = new CheckBox();
             chck57.Tag = "Disable Unnecessary Startup Apps";
             chck57.Checked = true;
@@ -5862,7 +5850,7 @@ namespace ET
                 progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
-                    checkBox.Checked = false;
+                    //checkBox.Checked = false;
                     string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
                     textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
                     textBox1.SelectionStart = textBox1.TextLength;
@@ -6860,7 +6848,7 @@ namespace ET
                 progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
-                    checkBox.Checked = false;
+                    //checkBox.Checked = false;
                     string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
                     textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
                     textBox1.SelectionStart = textBox1.TextLength;
@@ -7479,7 +7467,7 @@ namespace ET
                 progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
-                    checkBox.Checked = false;
+                    //checkBox.Checked = false;
                     string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
                     textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
                     textBox1.SelectionStart = textBox1.TextLength;
@@ -7590,7 +7578,7 @@ namespace ET
                 progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
-                    checkBox.Checked = false;
+                    //checkBox.Checked = false;
                     string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
                     textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
                     textBox1.SelectionStart = textBox1.TextLength;
@@ -7818,7 +7806,7 @@ namespace ET
                 progressBar1.Value = done;
                 if (checkBox.Checked)
                 {
-                    checkBox.Checked = false;
+                    //checkBox.Checked = false;
                     string timelog = DateTime.Now.ToString("[HH:mm:ss] ");
                     textBox1.Text += timelog + checkBox.Text + Environment.NewLine;
                     textBox1.SelectionStart = textBox1.TextLength;
