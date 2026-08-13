@@ -21,8 +21,11 @@ using System.Windows.Forms.VisualStyles;
 using ProgressBar = System.Windows.Forms.ProgressBar;
 using System.Text.RegularExpressions;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using System.Drawing.Drawing2D;
+using System.IO.Compression;
+using System.Xml.Linq;
 
-namespace ET    
+namespace ET
 {
     public partial class Form1 : Form
     {
@@ -372,7 +375,7 @@ namespace ET
 
             foreach (var chb in checkboxes)
             {
-                chb.AutoSize = false; 
+                chb.AutoSize = false;
                 chb.Dock = DockStyle.None;
                 chb.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                 chb.Margin = new Padding(0);
@@ -423,7 +426,7 @@ namespace ET
             for (int i = 0; i < buttons.Length; i++)
             {
                 buttons[i].Size = new Size(buttonWidth, buttonHeight);
-                buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY-5);
+                buttons[i].Location = new Point(startX + i * (buttonWidth + spacingB), buttonY - 5);
                 buttons[i].FlatAppearance.BorderSize = 0;
             }
 
@@ -445,14 +448,14 @@ namespace ET
                 layout[i].Location = new Point(x, y);
                 layout[i].Size = new Size(groupBoxWidth, groupBoxHeight);
             }
-            progressBar1.Location = new Point(-5, this.ClientSize.Height - progressBar1.Height+5);
-            progressBar1.Width = this.ClientSize.Width+10;
+            progressBar1.Location = new Point(-5, this.ClientSize.Height - progressBar1.Height + 5);
+            progressBar1.Width = this.ClientSize.Width + 10;
             toolStrip1.Size = new Size(this.Width, 25);
             pictureBox4.Size = new Size(this.Width, 5);
             pictureBox5.Size = new Size(this.Width, 5);
             pictureBox4.Location = new Point(0, this.Height - progressBar1.Height - 5);
             panelmain.Size = new Size(this.Width, 40);
-            textBox1.Size = new Size(this.ClientSize.Width+4, this.ClientSize.Height - progressBar1.Height - 55);
+            textBox1.Size = new Size(this.ClientSize.Width + 4, this.ClientSize.Height - progressBar1.Height - 55);
             textBox1.BorderStyle = BorderStyle.None;
             textBox1.Location = new Point(-2, toolStrip1.Bottom);
 
@@ -646,14 +649,21 @@ namespace ET
 
         private void LoadAppxPackages()
         {
-
             try
             {
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     FileName = "powershell.exe",
-                    Arguments = "-Command \"Get-AppxPackage -AllUsers | Where-Object { $_.NonRemovable -eq $false } | Select -ExpandProperty Name\"",
+
+                    Arguments =
+                        "-NoProfile -NonInteractive -Command " +
+                        "\"Get-AppxPackage -AllUsers | " +
+                        "Where-Object { $_.NonRemovable -eq $false } | " +
+                        "Select-Object -ExpandProperty Name\"",
+
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+
                     UseShellExecute = false,
                     CreateNoWindow = true
                 };
@@ -662,6 +672,7 @@ namespace ET
                 using (StreamReader reader = p.StandardOutput)
                 {
                     string line;
+
                     int top = 5;
                     int tabIndex = 0;
 
@@ -669,41 +680,96 @@ namespace ET
                     {
                         string appName = line.Trim();
 
-                        if (string.IsNullOrWhiteSpace(appName)) continue;
+                        if (string.IsNullOrWhiteSpace(appName))
+                            continue;
 
                         bool MatchesWildcard(string text, string pattern)
                         {
                             if (!pattern.Contains("*"))
-                                return string.Equals(text, pattern, StringComparison.OrdinalIgnoreCase);
+                            {
+                                return string.Equals(
+                                    text,
+                                    pattern,
+                                    StringComparison.OrdinalIgnoreCase);
+                            }
 
-                            var regex = "^" + Regex.Escape(pattern).Replace("\\*", ".*") + "$";
-                            return Regex.IsMatch(text, regex, RegexOptions.IgnoreCase);
+                            var regex = "^" +
+                                        Regex.Escape(pattern)
+                                            .Replace("\\*", ".*") +
+                                        "$";
+
+                            return Regex.IsMatch(
+                                text,
+                                regex,
+                                RegexOptions.IgnoreCase);
                         }
 
-
-
-                        //if (whitelistapps.Contains(appName)) continue;
-                        if (whitelistapps.Any(pattern => MatchesWildcard(appName, pattern)))
-                            continue;
-
-                        CheckBox cb = new CheckBox
+                        if (whitelistapps.Any(
+                            pattern => MatchesWildcard(appName, pattern)))
                         {
-                            Text = appName,
-                            AutoSize = true,
-                            Top = top,
-                            Left = 10,
-                            Checked = true,
-                            TabIndex = tabIndex++
-                        };
+                            continue;
+                        }
 
-                        panel6.Controls.Add(cb);
-                        top += 25;
+                        Image appIcon = GetAppxIcon(appName);
+
+                        if (appIcon == null)
+                        {
+                            appIcon = new Bitmap(20, 20);
+                        }
+
+                        AppxCheckBox appControl =
+                            new AppxCheckBox(appName, appIcon)
+                            {
+                                Left = 10,
+                                Top = top,
+                                Width = panel6.ClientSize.Width - 20,
+                                Height = 26,
+
+                                TabIndex = tabIndex++
+                            };
+
+                        appControl.Font = panel6.Font;
+
+                        panel6.Controls.Add(appControl);
+
+                        top += 28;
                     }
+                }
+
+                // Dopasuj szerokość WSZYSTKICH elementów do aktualnej (finalnej) szerokości panelu.
+                // To naprawia sytuację, w której panel6.ClientSize.Width w trakcie pętli był inny
+                // niż jest naprawdę (np. przez DPI scaling / pasek przewijania, który dopiero
+                // się pojawił po dodaniu kilkudziesięciu elementów).
+                ReflowAppxCheckBoxes();
+
+                // Podłącz się pod zmianę rozmiaru panelu tylko raz, żeby przy każdym kolejnym
+                // resize'ie (np. zmiana rozmiaru okna) elementy same się dopasowały.
+                if (!panel6ResizeHooked)
+                {
+                    panel6.Resize += (s, e) => ReflowAppxCheckBoxes();
+                    panel6ResizeHooked = true;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error getching packets:\n" + ex.Message);
+                MessageBox.Show(
+                    "Error fetching packages:\n\n" + ex.Message,
+                    ETVersion,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+            }
+        }
+
+        private bool panel6ResizeHooked = false;
+
+        private void ReflowAppxCheckBoxes()
+        {
+            foreach (Control ctrl in panel6.Controls)
+            {
+                if (ctrl is AppxCheckBox appxControl)
+                {
+                    appxControl.SyncWidthToParent(panel6.ClientSize.Width);
+                }
             }
         }
 
@@ -711,13 +777,19 @@ namespace ET
         {
             string whitelistPath = "whitelist.txt";
 
-            using (StreamWriter writer = new StreamWriter(whitelistPath, false, System.Text.Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(
+                whitelistPath,
+                false,
+                System.Text.Encoding.UTF8))
             {
                 foreach (Control ctrl in panel6.Controls)
                 {
-                    if (ctrl is CheckBox cb && !cb.Checked)
+                    if (ctrl is AppxCheckBox appxControl)
                     {
-                        writer.WriteLine(cb.Text.Trim());
+                        if (!appxControl.CheckBox.Checked)
+                        {
+                            writer.WriteLine(appxControl.AppName.Trim());
+                        }
                     }
                 }
             }
@@ -1405,7 +1477,7 @@ namespace ET
             }
             int allc = checkedCi + checkedCu + checkedCy + checkedCt;
 
-            if (allc == ct+cy+cu+ci)
+            if (allc == ct + cy + cu + ci)
             {
                 selecall++;
                 button4.BackColor = System.Drawing.ColorTranslator.FromHtml(selectioncolor2);
@@ -1504,7 +1576,12 @@ namespace ET
         public Form1(string[] args)
         {
             InitializeComponent();
-            LoadAppxPackages();
+
+            // WAŻNE: nie wywołujemy LoadAppxPackages() tutaj bezpośrednio.
+            // W tym miejscu okno jeszcze nie przeszło pełnego layoutu/skalowania DPI,
+            // więc panel6.ClientSize.Width bywa inny niż realny - stąd ucięty tekst.
+            // Uruchamiamy to dopiero gdy formularz jest w pełni pokazany i ma finalny rozmiar.
+            this.Shown += (s, e) => LoadAppxPackages();
 
             List<Task> iconTasks = new List<Task>();
 
@@ -1531,7 +1608,7 @@ namespace ET
             iconTasks.Add(SetRemoteIcon(steamToolStripMenuItem, "https://steamcommunity.com/favicon.ico"));
 
 
-            this.KeyPreview = true; 
+            this.KeyPreview = true;
 
             this.Opacity = 0;
             this.Enabled = false;
@@ -1858,7 +1935,7 @@ namespace ET
             chck34.Checked = true;
             chck34.Click += c_p;
             chck34.TabIndex = 34;
-            if (GetWindowsVersion() != "Windows 11"){ panel2.Controls.Add(chck34); }
+            if (GetWindowsVersion() != "Windows 11") { panel2.Controls.Add(chck34); }
             CheckBox chck35 = new CheckBox();
             chck35.Tag = "Disable Media Player Usage Reports";
             chck35.Checked = true;
@@ -2068,7 +2145,7 @@ namespace ET
             chck72.Checked = true;
             chck72.Click += c_p;
             chck72.TabIndex = 72;
-            if (GetWindowsVersion() == "Windows 11"){ panel3.Controls.Add(chck72); }
+            if (GetWindowsVersion() == "Windows 11") { panel3.Controls.Add(chck72); }
             CheckBox chck73 = new CheckBox();
             chck73.Tag = "Disable Fullscreen Optimizations";
             chck73.Checked = true;
@@ -2110,7 +2187,7 @@ namespace ET
             chck79.Checked = true;
             chck79.Click += c_p;
             chck79.TabIndex = 79;
-            if (GetWindowsVersion() == "Windows 11") {panel3.Controls.Add(chck79);}
+            if (GetWindowsVersion() == "Windows 11") { panel3.Controls.Add(chck79); }
             CheckBox chck80 = new CheckBox();
             chck80.Tag = "Diable Windows PC Health Check";
             chck80.Checked = true;
@@ -2166,7 +2243,7 @@ namespace ET
             void DefaultLang()
             {
                 button7.Text = "en-US";
-                groupBox1.Text = "Performance Tweaks ("+panel1.Controls.OfType<CheckBox>().Count()+")";
+                groupBox1.Text = "Performance Tweaks (" + panel1.Controls.OfType<CheckBox>().Count() + ")";
                 groupBox2.Text = "Privacy (" + panel2.Controls.OfType<CheckBox>().Count() + ")";
                 groupBox3.Text = "Visual Tweaks (" + panel3.Controls.OfType<CheckBox>().Count() + ")";
                 groupBox4.Text = "Other (" + panel4.Controls.OfType<CheckBox>().Count() + ")";
@@ -3544,7 +3621,7 @@ namespace ET
                     groupBox3.Font = new Font("Consolas", 13, FontStyle.Bold);
                     groupBox4.Font = new Font("Consolas", 13, FontStyle.Bold);
                     groupBox5.Font = new Font("Consolas", 13, FontStyle.Bold);
-                    customGroup6.Font= new Font("Consolas", 13, FontStyle.Bold);
+                    customGroup6.Font = new Font("Consolas", 13, FontStyle.Bold);
                     toolStrip1.Font = new Font("Consolas", 12, FontStyle.Regular);
 
                     toolStripButton2.Text = "백업";
@@ -5820,7 +5897,7 @@ namespace ET
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications\", "GlobalUserDisabled", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Search\", "BackgroundAppGlobalToggle", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\Search\", "BackgroundAppGlobalAccount", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\", "BackgroundServicesPriority", 10, RegistryValueKind.DWord);
@@ -5947,7 +6024,7 @@ namespace ET
                                 UseShellExecute = true
                             });
 
-                    startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+                            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command Get-WmiObject win32_Processor | findstr /r \"Intel\" > NOLPi.txt";
                             process.StartInfo = startInfo;
@@ -6218,9 +6295,9 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableCloudOptimizedContent", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableSoftLanding", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableThirdPartySuggestions", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent\", "DisableWelcomeExperience", 1, RegistryValueKind.DWord);
 
                             Registry.CurrentUser.DeleteSubKeyTree(@"Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions", false);
@@ -6330,7 +6407,7 @@ namespace ET
 
                             string[] toDisable = { "DiagTrack", "diagnosticshub.standardcollector.service", "dmwappushservice", "RemoteRegistry", "RemoteAccess", "SCardSvr", "SCPolicySvc", "fax", "WerSvc", "NvTelemetryContainer", "gadjservice", "AdobeARMservice", "PSI_SVC_2", "lfsvc", "WalletService", "RetailDemo", "SEMgrSvc", "diagsvc", "AJRouter", "amdfendr", "amdfendrmgr", "AppVClient", "AssignedAccessManagerSvc", "UevAgentService", "shpamsvc", "tzautoupdate", "uhssvc" };
                             string[] toManuall = { "BITS", "SamSs", "TapiSrv", "seclogon", "wuauserv", "PhoneSvc", "lmhosts", "iphlpsvc", "gupdate", "gupdatem", "edgeupdate", "edgeupdatem", "MapsBroker", "PnkBstrA", "brave", "bravem", "asus", "asusm", "adobeupdateservice", "adobeflashplayerupdatesvc", "WSearch", "CCleanerPerformanceOptimizerService", "ALG", "AppIDSvc", "AppMgmt", "AppReadiness", "AppXSvc", "CDPSvc", "RmSvc", "RpcLocator", "SDRSVC", "SNMPTRAP", "SSDPSRV", "ScDeviceEnum", "SecurityHealthService", "Sense", "SensorDataService", "SensorService", "SensrSvc", "SessionEnv", "SharedAccess", "SharedRealitySvc", "SmsRouter", "SstpSvc", "StateRepository", "StiSvc", "StorSvc", "TabletInputService", "TapiSrv", "TextInputManagementService", "TieringEngineService", "TimeBroker", "TimeBrokerSvc", "TokenBroker", "TroubleshootingSvc", "UI0Detect", "UmRdpService", "UsoSvc", "WebClient", "Wecsvc", "smphost" };
-                            
+
                             foreach (string s in toDisable)
                             {
                                 startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
@@ -6471,7 +6548,7 @@ namespace ET
                         case "Remove Bloatware (Preinstalled)":
                             done++;
                             SaveUncheckedToWhitelist();
-                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications\", "ConfigureChatAutoInstall", 0, RegistryValueKind.DWord);
+                            SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Communications", "ConfigureChatAutoInstall", 0, RegistryValueKind.DWord);
 
                             string whitelistFile = "whitelist.txt";
                             if (File.Exists(whitelistFile))
@@ -7048,7 +7125,7 @@ namespace ET
                             done++;
 
                             DelRegistryValue(@"HKCU\Software\Microsoft\Windows\Shell\Copilot", "CopilotLogonTelemetryTime");
-                            
+
                             DelRegistryValue(@"HKCU\Software\Microsoft\Copilot", "WakeApp");
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer\", "SettingsPageVisibility", "hide:aicomponents", RegistryValueKind.String);
@@ -7097,22 +7174,22 @@ namespace ET
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "AllowRecallEnablement", 0, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "AllowRecallEnablement", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableClickToDo", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableClickToDo", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "TurnOffSavingSnapshots", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "TurnOffSavingSnapshots", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableSettingsAgent", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableSettingsAgent", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentConnectors", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentConnectors", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentWorkspaces", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableAgentWorkspaces", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableRemoteAgentConnectors", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKCU\SOFTWARE\Policies\Microsoft\Windows\WindowsAI\", "DisableRemoteAgentConnectors", 1, RegistryValueKind.DWord);
 
@@ -7138,25 +7215,25 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "CopilotCDPPageContext", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "CopilotPageContext", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "HubsSidebarEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "EdgeEntraCopilotPageContext", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "Microsoft365CopilotChatIconEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "EdgeHistoryAISearchEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "ComposeInlineEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "GenAILocalFoundationalModelSettings", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "BuiltInAIAPIsEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "AIGenThemesEnabled", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "DevToolsGenAiSettings", 2, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Edge", "ShareBrowsingHistoryWithCopilotSearchAllowed", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\office\16.0\common\ai\training\general", "disabletraining", 1, RegistryValueKind.DWord);
@@ -7277,7 +7354,7 @@ namespace ET
                 "eu-watsonc.events.data.microsoft.com"
             };
 
-              EditHosts(domains1);
+                            EditHosts(domains1);
                             break;
                         case "Block location data sharing hosts":
                             done++;
@@ -7416,7 +7493,7 @@ namespace ET
                             SetRegistryValue(@"HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\TaskbarDeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKCU\Software\Microsoft\Windows\CurrentVersion\DeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
                             SetRegistryValue(@"HKLM\Software\Microsoft\Windows\CurrentVersion\DeveloperSettings", "TaskbarEndTask", 1, RegistryValueKind.DWord);
-                            
+
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
                             startInfo.Arguments = "/C reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\TaskbarDeveloperSettings\" /v TaskbarEndTask /t REG_DWORD /d 1 /f";
@@ -7614,16 +7691,16 @@ namespace ET
 
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "cmd.exe";
-                            startInfo.Arguments = "/C start /WAIT "+GetAdwCleanerExePath()+" /eula /clean /noreboot";
+                            startInfo.Arguments = "/C start /WAIT " + GetAdwCleanerExePath() + " /eula /clean /noreboot";
                             process.StartInfo = startInfo;
                             process.Start(); process.WaitForExit();
-                            
+
                             startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
                             startInfo.FileName = "powershell.exe";
                             startInfo.Arguments = "-Command winget uninstall --id=Malwarebytes.AdwCleaner --disable-interactivity --silent";
                             process.StartInfo = startInfo;
                             process.Start();
-                            
+
                             break;
                         case "Clean WinSxS Folder":
                             done++;
@@ -7738,23 +7815,23 @@ namespace ET
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "DisableRealtimeMonitoring", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableRealtimeMonitoring", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableBehaviorMonitoring", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableOnAccessProtection", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableScanOnRealtimeEnable", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableIOAVProtection", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection\", "DisableRoutinelyTakingAction", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "DisableSpecialRunningModes", 1, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "DisableRoutinelyTakingAction", 1, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "ServiceKeepAlive", 0, RegistryValueKind.DWord);
-                            
+
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\", "PUAProtection", 0, RegistryValueKind.DWord);
 
                             SetRegistryValue(@"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Signature Updates\", "ForceUpdateFromMU", 0, RegistryValueKind.DWord);
@@ -8233,22 +8310,22 @@ namespace ET
 
         private void msinfo32ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void servicesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void remoteDesktopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void eventViewerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void resetNetworkToolStripMenuItem_Click(object sender, EventArgs e)
@@ -8290,7 +8367,7 @@ namespace ET
                 {
                     Clipboard.SetText(productKeycopy);
                 }
-                MessageBox.Show(" " + obj["OA3xOriginalProductKey"], GetWindowsVersion()+" Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(" " + obj["OA3xOriginalProductKey"], GetWindowsVersion() + " Product Key", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -8430,7 +8507,7 @@ namespace ET
 
         private void rebootToSafeModeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void restartExplorerexeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -8669,7 +8746,7 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                 int lineCount = 0;
                 int doneR = 0;
 
-                lineCount = File.ReadAllLines(backupFile).Length-1;
+                lineCount = File.ReadAllLines(backupFile).Length - 1;
                 foreach (var line in File.ReadLines(backupFile, Encoding.UTF8))
                 {
                     progressBar1.Visible = true;
@@ -8842,15 +8919,15 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
             {
                 Width = 60,
                 Dock = DockStyle.Left,
-                ReadOnly = true,        
-                Enabled = true,         
+                ReadOnly = true,
+                Enabled = true,
                 ScrollBars = RichTextBoxScrollBars.None,
                 BackColor = Color.FromArgb(45, 45, 48),
                 ForeColor = Color.FromArgb(220, 220, 220),
                 BorderStyle = BorderStyle.None,
                 Font = new Font("Consolas", 10.5f),
                 SelectionAlignment = HorizontalAlignment.Right,
-                Cursor = Cursors.Arrow 
+                Cursor = Cursors.Arrow
             };
 
 
@@ -8959,7 +9036,7 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                 ShowSourceCode();
 
             }
-            if (e.KeyCode ==Keys.F11)
+            if (e.KeyCode == Keys.F11)
             {
                 Panelmain_DoubleClick(sender, e);
             }
@@ -9253,7 +9330,7 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
                         System.Diagnostics.Process.Start("explorer.exe", $"\"{isoupgrade}\"");
 
                         DriveInfo isodrive = null;
-                        
+
                         Thread.Sleep(1000);
                         while (isodrive == null)
                         {
@@ -9457,5 +9534,203 @@ Environment.ExpandEnvironmentVariables("%windir%\\Sysnative"),
         {
             Process.Start("shell:::{ED7BA470-8E54-465E-825C-99712043E01C}");
         }
+
+        public class AppxCheckBox : UserControl
+        {
+            private readonly CheckBox checkBox;
+            private readonly PictureBox pictureBox;
+            private readonly Label label;
+            private readonly ToolTip toolTip = new ToolTip();
+
+            public CheckBox CheckBox => checkBox;
+
+            public string AppName
+            {
+                get { return label.Text; }
+            }
+
+            public AppxCheckBox(string appName, Image icon)
+            {
+                Height = 26;
+                Width = 300; // wartość startowa - i tak zostanie nadpisana przez wywołującego / Anchor
+
+                BackColor = Color.Transparent;
+                Margin = new Padding(0);
+                Padding = new Padding(0);
+
+                // KLUCZ DO NAPRAWY: kontrolka rozciąga się razem z rodzicem (panel6),
+                // więc gdy panel/groupbox zmieni szerokość, my też ją dostaniemy.
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+
+                checkBox = new CheckBox
+                {
+                    AutoSize = false,
+                    Width = 20,
+                    Height = 20,
+                    Left = 0,
+                    Top = 3,
+                    Checked = true,
+                    BackColor = Color.Transparent
+                };
+
+                pictureBox = new PictureBox
+                {
+                    Width = 20,
+                    Height = 20,
+                    Left = 23,
+                    Top = 3,
+                    SizeMode = PictureBoxSizeMode.Zoom,
+                    BackColor = Color.Transparent,
+                    Image = icon
+                };
+
+                label = new Label
+                {
+                    AutoSize = false,
+                    Left = 48,
+                    Top = 1,
+                    Height = 24,
+                    Width = Math.Max(this.Width - 48, 10),
+                    Text = appName,
+                    TextAlign = System.Drawing.ContentAlignment.MiddleLeft,
+                    BackColor = Color.Transparent,
+                    AutoEllipsis = true, // gdy naprawdę zabraknie miejsca, pokaże "..." zamiast brzydkiego obcięcia
+                    Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+                };
+
+                // pełna nazwa dostępna po najechaniu myszką - przydatne, gdy nazwa i tak jest bardzo długa
+                toolTip.SetToolTip(label, appName);
+
+                Controls.Add(checkBox);
+                Controls.Add(pictureBox);
+                Controls.Add(label);
+
+                this.Resize += (s, e) =>
+                {
+                    int newWidth = this.ClientSize.Width - label.Left;
+                    label.Width = newWidth > 0 ? newWidth : 0;
+                };
+
+                label.Click += (s, e) =>
+                {
+                    checkBox.Checked = !checkBox.Checked;
+                };
+
+                FontChanged += (s, e) =>
+                {
+                    label.Font = Font;
+                    checkBox.Font = Font;
+                };
+            }
+
+            // wywoływane z zewnątrz po każdej zmianie rozmiaru panelu-rodzica,
+            // żeby wszystkie już dodane elementy dopasowały szerokość natychmiast
+            public void SyncWidthToParent(int parentClientWidth, int rightMargin = 20)
+            {
+                int newWidth = parentClientWidth - rightMargin;
+                if (newWidth > 0)
+                {
+                    Width = newWidth;
+                }
+            }
+        }
+
+        private Image GetAppxIcon(string appName)
+        {
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments =
+                        "-NoProfile -NonInteractive -Command " +
+                        "\"$p = Get-AppxPackage -AllUsers -Name '" +
+                        appName.Replace("'", "''") +
+                        "' -ErrorAction SilentlyContinue; " +
+                        "if ($p) { " +
+                        "Write-Output $p.InstallLocation; " +
+                        "Write-Output $p.Logo " +
+                        "}\"",
+
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = Process.Start(psi))
+                {
+                    string output = process.StandardOutput.ReadToEnd();
+                    process.WaitForExit();
+
+                    string[] lines = output
+                        .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    if (lines.Length < 1)
+                        return null;
+
+                    string installLocation = lines[0].Trim();
+
+                    if (string.IsNullOrWhiteSpace(installLocation))
+                        return null;
+
+                    string logo = lines.Length > 1
+                        ? lines[1].Trim()
+                        : null;
+
+                    // logo Appx getch
+                    if (!string.IsNullOrWhiteSpace(logo))
+                    {
+                        string logoPath = Path.Combine(installLocation, logo);
+
+                        if (File.Exists(logoPath))
+                        {
+                            using (FileStream fs = new FileStream(
+                                logoPath,
+                                FileMode.Open,
+                                FileAccess.Read))
+                            {
+                                return Image.FromStream(fs).Clone() as Image;
+                            }
+                        }
+                    }
+
+                    // no logo looking for other patterns
+                    string[] possibleFiles =
+                    {
+                "Assets\\StoreLogo.png",
+                "Assets\\Square44x44Logo.png",
+                "Assets\\Square150x150Logo.png",
+                "Assets\\Square310x310Logo.png",
+                "Assets\\Logo.png"
+            };
+
+                    foreach (string relativePath in possibleFiles)
+                    {
+                        string path = Path.Combine(
+                            installLocation,
+                            relativePath);
+
+                        if (!File.Exists(path))
+                            continue;
+
+                        using (FileStream fs = new FileStream(
+                            path,
+                            FileMode.Open,
+                            FileAccess.Read))
+                        {
+                            return Image.FromStream(fs).Clone() as Image;
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                // No icon continue
+            }
+
+            return null;
+        }
+
     }
 }
